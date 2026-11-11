@@ -23,6 +23,10 @@ error = "Live2D 未加载：{msg}"
 
 [main.messages]
 empty = "还没有消息"
+thinking = "正在输入…"
+no_key = "还没填 API Key。打开 设置 → API KEY 填好，再回来发消息。"
+failed = "请求失败：{msg}"
+empty_reply = "（模型没有返回内容）"
 
 [main.input]
 placeholder = "说点什么…（Enter 发送，Shift+Enter 换行）"
@@ -60,6 +64,9 @@ api = "API"
 api_placeholder = "例：https://api.deepseek.com"
 token = "Token"
 token_placeholder = "粘贴你的 API Token"
+model = "模型"
+model_placeholder = "默认 deepseek-chat（可换 deepseek-reasoner）"
+key_hint = '改完就自动保存，没有「保存」按钮。Key 以明文存在本机 settings.ini 里（不会上传到别处），但别把这份配置发给别人。'
 
 [settings.personality]
 title = "人格编辑"
@@ -77,6 +84,10 @@ files_placeholder = "人格文件所在目录"
 file_list = "FileList"
 preview = "Preview"
 save = "Save"
+rescan = "重新扫描"
+dir_ok = "目录可用：勾选的文件会拼成 system 提示词"
+dir_missing = "目录不存在：{path}（下面的清单是演示数据）"
+preview_empty = "（没有内容可发：一个文件都没勾，或者文件读不出来）"
 
 [settings.rag]
 title = "Retrieval-Augmented Generation"
@@ -90,6 +101,8 @@ file_list = "FileList"
 file_empty = "（还没有索引文件）"
 rebuild = "Full rebuild"
 status = "索引状态：未构建"
+status_files = "索引状态：未构建（{n} 个文件）"
+rebuild_todo = "索引还没实现：路径先存好，按钮以后再接"
 
 [settings.live2d]
 title = "Live2D model"

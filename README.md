@@ -204,7 +204,26 @@ python -m dsai4431_chatbot.core.gui
     所以 en 少翻译一条只会显示中文，不会空白
   - 加新语言：往 `asset/language/` 丢一个 `<code>.toml`（带 `[meta]` 的 `code`/`name`），
     重启后自动出现在下拉里
-- `settings_store.py`：配置文件的读写位置（`settings.ini`），theme / i18n / live2d 共用
+- `settings_store.py`：配置文件的读写位置（`settings.ini`），theme / i18n / live2d / chat 共用
+- `chat_config.py`：对话配置（API 地址 / Key / 模型 / 人格目录与勾选文件 / RAG 三条路径），
+  存 `settings.ini` 的 `[chat]` 段；设置页改完即存，启动后按它发请求
+- `chat_client.py`：对话后端。OpenAI 兼容 `/chat/completions`，**流式 SSE**，
+  用 Qt 自带的 `QNetworkAccessManager`（不引第三方库、不开线程）
+
+### 接上对话（需要自己填 Key）
+
+```powershell
+python -m dsai4431_chatbot.core.gui
+# 点右上角齿轮 → API KEY：填地址（默认 https://api.deepseek.com）、Key、模型（默认 deepseek-chat）
+# 再点 Personality：选人格文件目录，勾上要发给模型的 .md（拼成 system 提示词）
+# 回主界面输入框打字 → Enter
+```
+
+- Key 是**明文**存在本机 `settings.ini` 里的；那个文件不要发给别人
+- 回复是流式的：先出现「正在输入…」的气泡，然后逐字填进去
+- 等回复时按 Enter 不会发、也不会清空你正在敲的内容
+- 出错时气泡里直接写原因（`HTTP 401 · Authentication Fails…` 这类）
+- `Preview` 按钮能看到当前勾选的文件拼出来的 system 提示词全文
 
 > 截图和线框图在 `asset/plan/` 下，原图是竖排的，**需要顺时针旋转 90° 才是正的**。
 

@@ -20,17 +20,17 @@ API KEY 和 Personality 两张图写的是「Other」。这里按出现两次的
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
-from PySide6.QtCore import QEvent, QSize, QSignalBlocker, Qt, Signal
-from PySide6.QtGui import QColor
+from PySide6.QtCore import QEvent, QSize, QSignalBlocker, Qt, QUrl, Signal
+from PySide6.QtGui import QColor, QDesktopServices
 from PySide6.QtWidgets import (
     QApplication,
     QButtonGroup,
     QCheckBox,
     QComboBox,
     QDialog,
+    QFileDialog,
     QFrame,
     QGraphicsDropShadowEffect,
     QHBoxLayout,
@@ -38,6 +38,7 @@ from PySide6.QtWidgets import (
     QLineEdit,
     QListWidget,
     QListWidgetItem,
+    QMessageBox,
     QPushButton,
     QSlider,
     QStackedWidget,
@@ -45,7 +46,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import i18n, live2d_embed, relaunch, theme, themes
+from dsai4431_chatbot.core.gui import chat_config, i18n, live2d_embed, relaunch, theme, themes
 from dsai4431_chatbot.core.gui.i18n import t
 
 SHADOW = 18  # 圆角窗外留给投影的透明边距（窗口本身比可见卡片大一圈）
@@ -53,10 +54,9 @@ DIALOG_W, DIALOG_H = 980 + 2 * SHADOW, 660 + 2 * SHADOW
 NAV_W = 172
 ICON = 16
 
-# 人格文件目录：默认指向 DSH 那套 persona（大肥鲸），可用环境变量改写。
-# 目录不存在时用演示数据 —— 这一页目前只有布局，不接业务。
-PERSONA_DIR = Path(os.environ.get("DSAI_PERSONA_DIR", r"P:\.dsh\agentsoul"))
-PERSONA_DEFAULT_CHECKED = {"IDENTITY.md", "SOUL.md", "USER.md"}
+# 人格文件目录 / 默认勾选：和对话配置用同一份定义（chat_config），别再各写一套
+PERSONA_DIR = chat_config.DEFAULT_PERSONA_DIR
+PERSONA_DEFAULT_CHECKED = set(chat_config.DEFAULT_PERSONA_FILES)
 PERSONA_DEMO_FILES = [("IDENTITY.md", 619), ("SOUL.md", 1298), ("USER.md", 374)]
 
 
@@ -108,8 +108,11 @@ def scan_persona_files(directory: Path) -> list[tuple[str, int]]:
 class FileCheckList(QFrame):
     """文件清单：每行 = 勾选框（文件名）+ 右侧字符数。
 
-    勾选状态只存在控件里，暂不落盘（这一页是布局）。
+    勾选结果会发 `changed`（set[str]），由 Personality 页存进配置 ——
+    勾了哪些文件，对话时就把哪些文件拼成 system 提示词。
     """
+
+    changed = Signal(object)          # set[str]
 
     def __init__(
         self,
@@ -121,13 +124,27 @@ class FileCheckList(QFrame):
         self.setObjectName("fileList")
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
 
-        checked = checked if checked is not None else PERSONA_DEFAULT_CHECKED
         self.boxes: dict[str, QCheckBox] = {}
+        self._building = False
 
-        lay = QVBoxLayout(self)
-        lay.setContentsMargins(6, 6, 6, 6)
-        lay.setSpacing(1)
+        self._lay = QVBoxLayout(self)
+        self._lay.setContentsMargins(6, 6, 6, 6)
+        self._lay.setSpacing(1)
 
+        self.set_rows(rows, checked)
+
+    # --- 内容 -----------------------------------------------------------
+    def set_rows(self, rows: list[tuple[str, int]], checked: set[str] | None = None) -> None:
+        """重建列表（换目录后重新扫描时用）。"""
+        self._building = True
+        while self._lay.count():
+            item = self._lay.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+        self.boxes.clear()
+
+        names = checked if checked is not None else PERSONA_DEFAULT_CHECKED
         for name, chars in rows:
             row = QFrame()
             row.setObjectName("fileRow")
@@ -138,8 +155,9 @@ class FileCheckList(QFrame):
 
             box = QCheckBox(name)
             box.setObjectName("fileCheck")
-            box.setChecked(name in checked)
+            box.setChecked(name in names)
             box.setCursor(Qt.CursorShape.PointingHandCursor)
+            box.toggled.connect(self._on_toggled)
             self.boxes[name] = box
 
             size = QLabel(t("common.chars", n=f"{chars:,}"))
@@ -147,9 +165,18 @@ class FileCheckList(QFrame):
 
             row_lay.addWidget(box, 1)
             row_lay.addWidget(size)
-            lay.addWidget(row)
+            self._lay.addWidget(row)
 
-        lay.addStretch(1)
+        self._lay.addStretch(1)
+        self._building = False
+
+    def checked_names(self) -> set[str]:
+        return {name for name, box in self.boxes.items() if box.isChecked()}
+
+    def _on_toggled(self, _on: bool) -> None:
+        if self._building:          # 建列表时 setChecked 的噪声不要往外发
+            return
+        self.changed.emit(self.checked_names())
 
 
 def small_button(text: str, *, primary: bool = False) -> QPushButton:
@@ -199,13 +226,18 @@ def card() -> tuple[QFrame, QVBoxLayout]:
 # 三个分页
 # ---------------------------------------------------------------------------
 class ApiKeyPage(QWidget):
-    """API KEY 页。
+    """API KEY 页：API 地址 / Key / 模型。
 
-    草图只有两个字段：API、Token（没有页面标题，标题是这边补的，为了三页对齐）。
+    草图只有「API」「Token」两个字段；模型名是本项目加的（不填就默认
+    deepseek-chat，但换成 deepseek-reasoner 时得有个地方写）。
+
+    改完**自动存**进 settings.ini（和换肤、Live2D 一样的做法），没有"保存"按钮。
     """
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._cfg = chat_config.load()
+
         lay = QVBoxLayout(self)
         lay.setContentsMargins(28, 24, 28, 24)
         lay.setSpacing(10)
@@ -214,20 +246,54 @@ class ApiKeyPage(QWidget):
         lay.addSpacing(6)
 
         lay.addWidget(field_label(t("settings.api_key.api")))
-        lay.addWidget(field_input(t("settings.api_key.api_placeholder")))
+        self.ed_base = field_input(t("settings.api_key.api_placeholder"))
+        self.ed_base.setText(self._cfg.base_url)
+        self.ed_base.editingFinished.connect(self.save)
+        lay.addWidget(self.ed_base)
 
         lay.addSpacing(6)
         lay.addWidget(field_label(t("settings.api_key.token")))
-        lay.addWidget(field_input(t("settings.api_key.token_placeholder")))
+        self.ed_key = field_input(t("settings.api_key.token_placeholder"))
+        self.ed_key.setEchoMode(QLineEdit.EchoMode.Password)   # 别开着窗口就把 Key 晾在屏幕上
+        self.ed_key.setText(self._cfg.api_key)
+        self.ed_key.editingFinished.connect(self.save)
+        lay.addWidget(self.ed_key)
+
+        lay.addSpacing(6)
+        lay.addWidget(field_label(t("settings.api_key.model")))
+        self.ed_model = field_input(t("settings.api_key.model_placeholder"))
+        self.ed_model.setText(self._cfg.model)
+        self.ed_model.editingFinished.connect(self.save)
+        lay.addWidget(self.ed_model)
+
+        hint = QLabel(t("settings.api_key.key_hint"))
+        hint.setObjectName("hintText")
+        hint.setWordWrap(True)
+        lay.addWidget(hint)
 
         lay.addStretch(1)
 
+    def save(self) -> None:
+        # 现读再改自己那几个字段：三个页面共用一份配置，谁都不能拿构造时的
+        # 旧快照整体写回去（否则会把别的页刚存的值覆盖掉 —— 实测踩过）
+        cfg = chat_config.load()
+        cfg.base_url = self.ed_base.text().strip() or chat_config.DEFAULT_BASE_URL
+        cfg.api_key = self.ed_key.text().strip()
+        cfg.model = self.ed_model.text().strip() or chat_config.DEFAULT_MODEL
+        chat_config.save(cfg)
+
 
 class PersonalityPage(QWidget):
-    """人格编辑页：左「Persona 列表」，右「New Persona」表单。"""
+    """人格编辑页：左「Persona 列表」，右「New Persona」表单。
+
+    这一页真正会被对话用到的是两样：**人格文件目录** + **勾选了哪些文件**。
+    勾选的文件内容会拼成 system 提示词（见 `chat_config.system_prompt`）。
+    左边那个 Persona 列表仍是演示数据 —— 多套人格的切换还没做。
+    """
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._cfg = chat_config.load()
 
         lay = QVBoxLayout(self)
         lay.setContentsMargins(28, 24, 28, 24)
@@ -269,33 +335,123 @@ class PersonalityPage(QWidget):
         right.addWidget(field_input(t("settings.personality.name_placeholder")))
 
         right.addWidget(field_label(t("settings.personality.files")))
-        right.addWidget(field_input(t("settings.personality.files_placeholder")))
+        self.ed_dir = field_input(t("settings.personality.files_placeholder"))
+        self.ed_dir.setText(str(self._cfg.persona_path()))
+        self.ed_dir.editingFinished.connect(self._on_dir_edited)
+        right.addWidget(self.ed_dir)
 
         path_row = QHBoxLayout()
         path_row.setSpacing(8)
-        path_row.addWidget(small_button(t("common.choose")))
-        path_row.addWidget(small_button(t("common.edit")))
+        btn_pick = small_button(t("common.choose"))
+        btn_pick.clicked.connect(self._pick_dir)
+        btn_open = small_button(t("common.edit"))
+        btn_open.clicked.connect(self._open_dir)
+        btn_rescan = small_button(t("settings.personality.rescan"))
+        btn_rescan.clicked.connect(self._load_files)
+        path_row.addWidget(btn_pick)
+        path_row.addWidget(btn_open)
+        path_row.addWidget(btn_rescan)
         path_row.addStretch(1)
         right.addLayout(path_row)
 
+        self.lb_dir_state = QLabel("")
+        self.lb_dir_state.setObjectName("hintText")
+        self.lb_dir_state.setWordWrap(True)
+        right.addWidget(self.lb_dir_state)
+
         right.addWidget(field_label(t("settings.personality.file_list")))
-        right.addWidget(FileCheckList(scan_persona_files(PERSONA_DIR)), 1)
+        self.file_list = FileCheckList(
+            scan_persona_files(self.persona_dir()),
+            checked=set(self._cfg.persona_files),
+        )
+        self.file_list.changed.connect(self._save_files)
+        right.addWidget(self.file_list, 1)
 
         footer = QHBoxLayout()
         footer.addStretch(1)
-        footer.addWidget(small_button(t("settings.personality.preview")))
-        footer.addWidget(small_button(t("settings.personality.save"), primary=True))
+        btn_preview = small_button(t("settings.personality.preview"))
+        btn_preview.clicked.connect(self._preview)
+        btn_save = small_button(t("settings.personality.save"), primary=True)
+        btn_save.clicked.connect(self.save)
+        footer.addWidget(btn_preview)
+        footer.addWidget(btn_save)
         right.addLayout(footer)
 
         body.addWidget(right_card, 1)
         lay.addLayout(body, 1)
 
+        self._load_files()
+
+    # --- 路径 -----------------------------------------------------------
+    def persona_dir(self) -> Path:
+        raw = self.ed_dir.text().strip()
+        return Path(raw).expanduser() if raw else Path(chat_config.DEFAULT_PERSONA_DIR)
+
+    def _on_dir_edited(self) -> None:
+        self.save()
+        self._load_files()
+
+    def _pick_dir(self) -> None:
+        chosen = QFileDialog.getExistingDirectory(
+            self, t("settings.personality.files"), str(self.persona_dir())
+        )
+        if chosen:
+            self.ed_dir.setText(chosen)
+            self._on_dir_edited()
+
+    def _open_dir(self) -> None:
+        target = self.persona_dir()
+        if target.is_dir():
+            QDesktopServices.openUrl(QUrl.fromLocalFile(str(target)))
+
+    # --- 文件清单 -------------------------------------------------------
+    def _load_files(self) -> None:
+        directory = self.persona_dir()
+        exists = directory.is_dir()
+        if exists:
+            # 路径本身上面那个输入框已经显示了，这里只说状态（长路径会折行，难看）
+            self.lb_dir_state.setText(t("settings.personality.dir_ok"))
+        else:
+            self.lb_dir_state.setText(
+                t("settings.personality.dir_missing", path=str(directory))
+            )
+        self.file_list.set_rows(
+            scan_persona_files(directory), checked=set(self._cfg.persona_files)
+        )
+
+    def _save_files(self, names) -> None:
+        cfg = chat_config.load()          # 同上：现读，只改自己这一项
+        cfg.persona_files = sorted(str(name) for name in names)
+        self._cfg.persona_files = cfg.persona_files
+        chat_config.save(cfg)
+
+    # --- 存盘 -----------------------------------------------------------
+    def save(self) -> None:
+        raw = self.ed_dir.text().strip()
+        cfg = chat_config.load()
+        # 存空串表示"用默认目录"，这样换机器不改配置也能跑
+        cfg.persona_dir = "" if raw == chat_config.DEFAULT_PERSONA_DIR else raw
+        self._cfg.persona_dir = cfg.persona_dir
+        chat_config.save(cfg)
+
+    def _preview(self) -> None:
+        """看一眼拼出来的 system 提示词 —— 排查"模型不按人格说话"用。"""
+        self.save()
+        cfg = chat_config.load()
+        body = cfg.system_prompt() or t("settings.personality.preview_empty")
+        QMessageBox.information(self, t("settings.personality.preview"), body[:4000])
+
 
 class RagPage(QWidget):
-    """RAG 页：上图检索配置，下图知识库。"""
+    """RAG 页：上图检索配置，下图知识库。
+
+    路径都会存进 settings.ini（下一个版本接检索时直接读），但**索引还没做**：
+    「Full rebuild」是灰的，状态栏老实写着"未构建"，不做假动作。
+    """
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._cfg = chat_config.load()
 
         lay = QVBoxLayout(self)
         lay.setContentsMargins(28, 24, 28, 24)
@@ -308,15 +464,27 @@ class RagPage(QWidget):
         top.addWidget(field_label(t("settings.rag.ollama")))
         row = QHBoxLayout()
         row.setSpacing(8)
-        row.addWidget(field_input(t("settings.rag.ollama_placeholder")), 1)
-        row.addWidget(icon_button("folder", t("common.browse")))
+        self.ed_ollama = field_input(t("settings.rag.ollama_placeholder"))
+        self.ed_ollama.setText(self._cfg.rag_ollama)
+        self.ed_ollama.editingFinished.connect(self.save)
+        row.addWidget(self.ed_ollama, 1)
+        btn_ollama = icon_button("folder", t("common.browse"))
+        btn_ollama.clicked.connect(lambda: self._pick_file(self.ed_ollama))
+        row.addWidget(btn_ollama)
         top.addLayout(row)
 
         top.addWidget(field_label(t("settings.rag.embedding")))
         row = QHBoxLayout()
         row.setSpacing(8)
-        row.addWidget(field_input(t("settings.rag.embedding_placeholder")), 1)
-        row.addWidget(icon_button("folder", t("common.browse")))
+        self.ed_embedding = field_input(t("settings.rag.embedding_placeholder"))
+        self.ed_embedding.setText(self._cfg.rag_embedding)
+        self.ed_embedding.editingFinished.connect(self.save)
+        row.addWidget(self.ed_embedding, 1)
+        btn_embedding = icon_button("folder", t("common.browse"))
+        btn_embedding.clicked.connect(
+            lambda: self._pick_dir_into(self.ed_embedding)
+        )
+        row.addWidget(btn_embedding)
         top.addLayout(row)
 
         lay.addWidget(top_card)
@@ -327,24 +495,109 @@ class RagPage(QWidget):
 
         folder_row = QHBoxLayout()
         folder_row.setSpacing(8)
-        folder_row.addWidget(field_input(t("settings.rag.folder_placeholder")), 1)
-        folder_row.addWidget(small_button(t("common.choose")))
-        folder_row.addWidget(small_button(t("common.edit")))
+        self.ed_folder = field_input(t("settings.rag.folder_placeholder"))
+        self.ed_folder.setText(self._cfg.rag_dir)
+        self.ed_folder.editingFinished.connect(self._on_folder_edited)
+        folder_row.addWidget(self.ed_folder, 1)
+        btn_choose = small_button(t("common.choose"))
+        btn_choose.clicked.connect(self._pick_folder)
+        btn_open = small_button(t("common.edit"))
+        btn_open.clicked.connect(self._open_folder)
+        folder_row.addWidget(btn_choose)
+        folder_row.addWidget(btn_open)
         bottom.addLayout(folder_row)
 
         bottom.addWidget(field_label(t("settings.rag.file_list")))
-        bottom.addWidget(field_list([t("settings.rag.file_empty")]), 1)
+        self.file_list = field_list()
+        bottom.addWidget(self.file_list, 1)
 
         rebuild_row = QHBoxLayout()
         rebuild_row.setSpacing(10)
-        rebuild_row.addWidget(small_button(t("settings.rag.rebuild")))
+        btn_rebuild = small_button(t("settings.rag.rebuild"))
+        btn_rebuild.setEnabled(False)              # 索引尚未实现，别做假按钮
+        btn_rebuild.setToolTip(t("settings.rag.rebuild_todo"))
+        rebuild_row.addWidget(btn_rebuild)
         rebuild_row.addStretch(1)
-        status = QLabel(t("settings.rag.status"))
-        status.setObjectName("hintText")
-        rebuild_row.addWidget(status)
+        self.lb_status = QLabel(t("settings.rag.status"))
+        self.lb_status.setObjectName("hintText")
+        rebuild_row.addWidget(self.lb_status)
         bottom.addLayout(rebuild_row)
 
         lay.addWidget(bottom_card, 1)
+
+        self._refresh_files()
+
+    # --- 路径 -----------------------------------------------------------
+    def _pick_file(self, edit: QLineEdit) -> None:
+        chosen, _filter = QFileDialog.getOpenFileName(
+            self, edit.placeholderText(), str(Path.home())
+        )
+        if chosen:
+            edit.setText(chosen)
+            self.save()
+
+    def _pick_dir_into(self, edit: QLineEdit) -> None:
+        chosen = QFileDialog.getExistingDirectory(
+            self, edit.placeholderText(), str(Path.home())
+        )
+        if chosen:
+            edit.setText(chosen)
+            self.save()
+
+    def _pick_folder(self) -> None:
+        self._pick_dir_into(self.ed_folder)
+        self._on_folder_edited()
+
+    def _open_folder(self) -> None:
+        raw = self.ed_folder.text().strip()
+        if raw and Path(raw).expanduser().is_dir():
+            QDesktopServices.openUrl(QUrl.fromLocalFile(str(Path(raw).expanduser())))
+
+    def _on_folder_edited(self) -> None:
+        self.save()
+        self._refresh_files()
+
+    # --- 文件清单 -------------------------------------------------------
+    def _refresh_files(self) -> None:
+        self.file_list.clear()
+        raw = self.ed_folder.text().strip()
+        directory = Path(raw).expanduser() if raw else None
+        files: list[Path] = []
+        if directory is not None and directory.is_dir():
+            try:
+                files = sorted(p for p in directory.iterdir() if p.is_file())
+            except OSError:
+                files = []
+
+        if not files:
+            self.file_list.addItem(t("settings.rag.file_empty"))
+            self.lb_status.setText(t("settings.rag.status"))
+            return
+
+        for path in files[:200]:        # 目录里东西太多就只列前 200 个
+            try:
+                size = path.stat().st_size
+            except OSError:
+                size = 0
+            self.file_list.addItem(f"{path.name}    ({_human_size(size)})")
+        self.lb_status.setText(t("settings.rag.status_files", n=len(files)))
+
+    # --- 存盘 -----------------------------------------------------------
+    def save(self) -> None:
+        cfg = chat_config.load()          # 现读，只改自己这三个字段
+        cfg.rag_ollama = self.ed_ollama.text().strip()
+        cfg.rag_embedding = self.ed_embedding.text().strip()
+        cfg.rag_dir = self.ed_folder.text().strip()
+        chat_config.save(cfg)
+
+
+def _human_size(size: int) -> str:
+    value = float(size)
+    for unit in ("B", "KB", "MB", "GB"):
+        if value < 1024 or unit == "GB":
+            return f"{value:.0f} {unit}" if unit == "B" else f"{value:.1f} {unit}"
+        value /= 1024
+    return f"{value:.1f} GB"
 
 
 class Live2DModelPage(QWidget):

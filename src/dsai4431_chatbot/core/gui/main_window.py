@@ -44,10 +44,20 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import i18n, live2d_config, live2d_embed, theme, themes
+from dsai4431_chatbot.core.gui import (
+    chat_client,
+    chat_config,
+    i18n,
+    live2d_config,
+    live2d_embed,
+    theme,
+    themes,
+)
 from dsai4431_chatbot.core.gui.i18n import t
 
 ICON_DIR = theme.ICON_DIR
+# 发给模型的历史上限（条）。太多会拖 token、太短又记不住上下文。
+MAX_HISTORY_MESSAGES = 20
 
 
 def load_icon(name: str, role: str = "icon") -> QIcon:
@@ -320,16 +330,20 @@ class MessageArea(QScrollArea):
         self._has_messages = False
         self.setWidget(self._body)
 
-    def add_message(self, role: Literal["user", "bot"], text: str) -> None:
-        """追加一条消息。
+    def add_message(self, role: Literal["user", "bot"], text: str) -> QLabel:
+        """追加一条完整消息，返回气泡（流式回复也可以先用它占位）。"""
+        bubble = self.begin_message(role)
+        bubble.setText(text)
+        self.scroll_to_end()
+        return bubble
 
-        TODO(业务)：接入真实对话后由后端调用；现在只做展示骨架。
-        """
+    def begin_message(self, role: Literal["user", "bot"]) -> QLabel:
+        """先建一个空气泡，等流式内容一点点填进来。"""
         if not self._has_messages:
             self._empty.hide()
             self._has_messages = True
 
-        bubble = QLabel(text)
+        bubble = QLabel("")
         bubble.setObjectName("bubbleUser" if role == "user" else "bubbleBot")
         bubble.setWordWrap(True)
         bubble.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
@@ -349,7 +363,10 @@ class MessageArea(QScrollArea):
         box = QWidget()
         box.setLayout(row)
         self._lay.insertWidget(self._lay.count() - 1, box)
+        self.scroll_to_end()
+        return bubble
 
+    def scroll_to_end(self) -> None:
         bar = self.verticalScrollBar()
         bar.setValue(bar.maximum())
 
@@ -370,6 +387,8 @@ class _InputEdit(QPlainTextEdit):
     """
 
     submitted = Signal(str)
+    # 由外层注入：返回 False 时 Enter 不发也不清空（等回复时用）
+    can_submit = None
 
     def keyPressEvent(self, event):  # noqa: N802 (Qt 命名)
         if event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter):
@@ -382,6 +401,10 @@ class _InputEdit(QPlainTextEdit):
     def submit(self) -> None:
         text = self.toPlainText().strip()
         if not text:
+            return
+        # 外层（ChatColumn）会在等回复时把 can_submit 设成 False：
+        # 这时候不发、也**不清空**输入框，用户敲的字不会丢
+        if self.can_submit is not None and not self.can_submit():
             return
         self.clear()
         self.submitted.emit(text)
@@ -472,12 +495,80 @@ class ChatColumn(QWidget):
         self.input = InputCard()
         lay.addWidget(self.input)
 
-        # 业务接线：输入框回车 → 先回显一条用户消息（真实后端接入后替换）
+        # --- 对话后端 ---------------------------------------------------
+        self.client = chat_client.ChatClient(self)
+        self.client.delta.connect(self._on_delta)
+        self.client.finished_ok.connect(self._on_reply_done)
+        self.client.failed.connect(self._on_reply_failed)
+
+        self._history: list[dict] = []   # OpenAI 格式：{"role": ..., "content": ...}
+        self._bubble: QLabel | None = None   # 正在流式写入的那个气泡
+        self._bubble_fresh = True            # 还没写过内容（要替换占位文字）
+
+        # 等回复时按 Enter 不发也不清空输入框
+        self.input.edit.can_submit = lambda: not self.client.busy()
         self.input.submitted.connect(self._on_submit)
 
+    # --- 发消息 ---------------------------------------------------------
     def _on_submit(self, text: str) -> None:
+        # 每次都现读配置：设置页里刚填的 Key / 刚改的模型立刻生效
+        cfg = chat_config.load()
         self.messages.add_message("user", text)
-        # TODO(业务)：把 text 交给对话后端，再把回复 add_message("bot", ...)
+
+        ok, _reason = cfg.ready()
+        if not ok:
+            self.messages.add_message("bot", t("main.messages.no_key"))
+            return
+
+        self._history.append({"role": "user", "content": text})
+        self._bubble = self.messages.begin_message("bot")
+        self._bubble.setText(t("main.messages.thinking"))
+        self._bubble_fresh = True
+
+        if not self.client.send(cfg, self._payload(cfg)):
+            self._finish_bubble(t("main.messages.failed", msg="请求没能发出去"))
+
+    def _payload(self, cfg) -> list[dict]:
+        """人格文件 → system 消息；再加最近若干轮对话。"""
+        messages: list[dict] = []
+        system = cfg.system_prompt()
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.extend(self._history[-MAX_HISTORY_MESSAGES:])
+        return messages
+
+    # --- 流式回填 -------------------------------------------------------
+    def _on_delta(self, piece: str) -> None:
+        if self._bubble is None:
+            return
+        if self._bubble_fresh:
+            self._bubble.setText(piece)
+            self._bubble_fresh = False
+        else:
+            self._bubble.setText(self._bubble.text() + piece)
+        self.messages.scroll_to_end()
+
+    def _on_reply_done(self, full: str) -> None:
+        self._finish_bubble(full or t("main.messages.empty_reply"))
+        self._history.append({"role": "assistant", "content": full})
+
+    def _on_reply_failed(self, reason: str) -> None:
+        # 已经收到的部分保留（chat_client 会把它当成功发出来），这里只处理空回复
+        self._finish_bubble(t("main.messages.failed", msg=reason))
+
+    def _finish_bubble(self, text: str) -> None:
+        if self._bubble is not None:
+            self._bubble.setText(text)
+            self._bubble = None
+        self.messages.scroll_to_end()
+
+    # --- 新对话 ---------------------------------------------------------
+    def reset_conversation(self) -> None:
+        """清空当前对话（会话列表接入后由「新建会话」调用）。"""
+        self.client.abort()
+        self._bubble = None
+        self._history.clear()
+        self.messages.clear_messages()
 
 
 class MainWindow(QMainWindow):

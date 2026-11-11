@@ -24,6 +24,10 @@ error = "Live2D failed to load: {msg}"
 
 [main.messages]
 empty = "No messages yet"
+thinking = "Typing…"
+no_key = "No API key yet. Open Settings → API KEY, fill it in, then send again."
+failed = "Request failed: {msg}"
+empty_reply = "(the model returned nothing)"
 
 [main.input]
 placeholder = "Say something… (Enter to send, Shift+Enter for a new line)"
@@ -61,6 +65,9 @@ api = "API"
 api_placeholder = "e.g. https://api.deepseek.com"
 token = "Token"
 token_placeholder = "Paste your API token"
+model = "Model"
+model_placeholder = "defaults to deepseek-chat (or deepseek-reasoner)"
+key_hint = "Saved as you edit — there is no Save button. The key is stored in plain text in the local settings.ini (it is not sent anywhere else), but do not hand that file to anyone."
 
 [settings.personality]
 title = "Persona"
@@ -78,6 +85,10 @@ files_placeholder = "Folder holding the persona files"
 file_list = "FileList"
 preview = "Preview"
 save = "Save"
+rescan = "Rescan"
+dir_ok = "Directory OK — checked files become the system prompt"
+dir_missing = "Directory not found: {path} (the list below is demo data)"
+preview_empty = "(nothing to send: no files checked, or they could not be read)"
 
 [settings.rag]
 title = "Retrieval-Augmented Generation"
@@ -91,6 +102,8 @@ file_list = "FileList"
 file_empty = "(no indexed files yet)"
 rebuild = "Full rebuild"
 status = "Index status: not built"
+status_files = "Index status: not built ({n} files)"
+rebuild_todo = "Indexing is not implemented yet — the path is saved, the button comes later"
 
 [settings.live2d]
 title = "Live2D model"

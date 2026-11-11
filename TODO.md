@@ -25,11 +25,16 @@
   所以这些图标是按同一视觉语言（细描边、圆角端点）手绘的等价件
 - **待办**：如果拿到正式素材，替换同名 SVG 即可，代码不用动（`load_icon()` 按名字加载）
 
-### 3. 设置窗口 —— 布局已完成，待接功能
+### 3. 设置窗口 —— 三页已接配置落盘（Live2D / Theme / 其他页早就完成）
 
-- **状态**：`core/gui/settings_dialog.py` 已渲染出**六个分页**的布局，
-  `MainWindow.open_settings()` 已改为打开这个弹窗。**没有任何业务逻辑**：
-  所有按钮都是空壳，唯一的行为是左侧导航切换分页
+- **状态（2026-11-11 更新）**：六个分页都能用。API KEY / Personality / RAG 三页
+  **改完自动存**进 `settings.ini`（没有"保存"按钮，和换肤、Live2D 页一个套路）；
+  Live2D model 页、Theme 页之前就接了
+  - API KEY：地址 / Key（密码框）/ 模型；Key 明文存在本机 ini（用户在选项里确认过）
+  - Personality：人格目录（可 choose 选目录 / edit 打开目录 / 重新扫描）+ 勾选文件，
+    勾选结果落盘并作为对话的 system 提示词；Preview 直接看拼出来的全文
+  - RAG：三条路径落盘 + 目录里的文件清单（带大小）；「Full rebuild」是灰的 ——
+    索引还没实现，不做假按钮
 - **外观与交互（2026-11-11 照 DSH 改）**
   - 无边框 + 圆角（`#settingsShell` 16px）+ 外投影；窗口本身透明，四周留 18px 给投影
   - 顶部有「设置」标题 + `×` 关闭按钮（`icons/close.svg`）
@@ -93,10 +98,31 @@
 `#characterPanel[state="model"] { border: none; }` 处理，
 失败时自动退回虚线态。改这个属性必须 `unpolish/polish`，见第六节的坑。
 
-### 5. 对话后端
+### 5. 对话后端 —— 已完成（流式）
 
-- **现状**：`ChatColumn._on_submit()` 只把用户输入回显成气泡，没有回复
-- **要做**：接真实对话后端，回复用 `messages.add_message("bot", ...)` 追加
+- **用户要求（2026-11-11）**：「接对话后端」+「设置页的输入落盘」
+- **已完成**
+  - `chat_config.py`：`base_url` / `api_key` / `model` / 人格目录 / 人格文件 / RAG 三条路径，
+    全部存 `settings.ini` 的 `[chat]` 段。`endpoint()` 认三种填法
+    （`…/`、`…/v1`、`…/v1/chat/completions`）
+  - `chat_client.py`：OpenAI 兼容 `/chat/completions`，**流式 SSE**，用
+    `QNetworkAccessManager`（不引第三方库、不开线程）。三种收尾都处理：
+    正常流式 / 网关直接回整包 JSON / 出错（HTTP 状态 + 服务端 `error.message` 一起给）
+  - 主窗：用户气泡 → 空机器人气泡（先显示「正在输入…」）→ 逐字回填 → 收尾；
+    失败时气泡写「请求失败：…」。等回复时按 Enter **不发也不清空输入框**（不丢字）
+  - 人格文件（勾选的那些）拼成 `system` 消息一起发；设置页的「Preview」能看拼出来的全文
+  - 历史保留最近 20 条（`MAX_HISTORY_MESSAGES`）
+- **实测（本地假 SSE 服务器，不烧真额度）**
+  - 请求体：model / stream / Authorization 头 / messages 顺序全对，system 里含勾选文件内容
+  - 流式拼接成一个气泡；历史两条；401 显示「HTTP 401 · Authentication Fails (no such user)」
+  - 没配 Key 时**不发请求**，直接提示去设置
+- **两个 bug 是测试抓出来的，已修**
+  1. 401 的响应体被流式解析提前 `readAll()` 吃掉，错误信息退化成 Qt 的通用文案
+     → 另存一份 `_raw_text` 专门用来抠错误
+  2. 设置三页各自持有构造时的配置**快照**，存盘时互相覆盖（改完 API 页再动 RAG 页，
+     API 的值被写回默认）→ 改成「存盘前现读，只改自己那几个字段」
+- **待做**：真 Key 的端到端（要用户自己填进设置页）；`deepseek-reasoner` 的
+  `reasoning_content` 目前不单独展示（只取 `content`）；没有「停止生成」按钮（`abort()` 已备好）
 
 ### 6. 主题 / 换肤系统 + 一套蓝色皮 —— 已完成
 
