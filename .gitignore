@@ -1,0 +1,44 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Packaging / build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# 模型权重与运行时资源：体积大（几百 MB ~ 数 GB），不入库。
+# 目录本身用 .gitkeep 占位，详见 README「资源目录 asset/」。
+asset/embedding/*
+!asset/embedding/.gitkeep
+asset/ollama/*
+!asset/ollama/.gitkeep
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Editors & OS
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+desktop.ini
+.DS_Store
