@@ -44,7 +44,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import theme
+from dsai4431_chatbot.core.gui import live2d_embed, theme
 
 ICON_DIR = Path(__file__).resolve().parent / "icons"
 
@@ -85,10 +85,10 @@ def round_button(
 class CharacterPanel(QWidget):
     """左侧 Live2D 角色区。
 
-    TODO(接入 Live2D)：这里最终要放一个 QWebEngineView，加载
-    asset/live2d 下的渲染页。可参考 core/live2d/demo_interactive.py 的
-    Stage（本地 HTTP + 静态服务映射），注意它那两个环境变量必须在
-    创建 QApplication 之前设置好，见该文件顶部注释。
+    内嵌 core/live2d 的渲染页：QWebEngineView + 本地静态服务（HTTP 与就绪
+    探测的实现都在 gui/live2d_embed.py，接口与 core/live2d/demo_interactive.py
+    的 Stage 一致）。渲染页就绪后显示模型；页面加载失败或超时要**优雅降级**
+    回原来的占位文字，不白屏、不崩溃。
     """
 
     def __init__(self, parent=None):
@@ -98,13 +98,93 @@ class CharacterPanel(QWidget):
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setMinimumWidth(280)
 
-        lay = QVBoxLayout(self)
-        lay.setContentsMargins(16, 16, 16, 16)
+        self._lay = QVBoxLayout(self)
+        self._lay.setContentsMargins(16, 16, 16, 16)
 
-        hint = QLabel("Live2D 角色区\n（框架占位，待接入渲染页）")
-        hint.setObjectName("characterHint")
-        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        lay.addWidget(hint)
+        self._hint = QLabel("Live2D 角色区\n（框架占位，待接入渲染页）")
+        self._hint.setObjectName("characterHint")
+        self._hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._lay.addWidget(self._hint, 1)
+
+        # 只在失败时出现的一行诊断；正常情况隐藏，不改变原有外观
+        self._status = QLabel("")
+        self._status.setObjectName("characterHint")
+        self._status.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._status.setWordWrap(True)
+        self._status.hide()
+        self._lay.addWidget(self._status, 0)
+
+        self._view: live2d_embed.Live2DView | None = None
+        self._start_embed()
+
+    def _start_embed(self) -> None:
+        """有模型就嵌进来；没有模型/素材就安静地保持占位，不报错。"""
+        model = live2d_embed.default_model()
+        if model is None:
+            print("[character] 没有找到 *.demo.model3.json，保持占位", file=sys.stderr, flush=True)
+            return
+
+        view = live2d_embed.Live2DView(self, model_json=model)
+        view.ready.connect(self._on_live2d_ready)
+        view.failed.connect(self._on_live2d_failed)
+        self._lay.insertWidget(0, view, 1)
+        self._view = view
+        view.start()
+
+    def _set_state(self, value: str) -> None:
+        """切换 QSS 状态。
+
+        改完动态属性必须 unpolish/polish，否则样式不会重算 —— 这个坑在
+        TODO.md 第六节记着。
+        """
+        self.setProperty("state", value)
+        style = self.style()
+        style.unpolish(self)
+        style.polish(self)
+
+    def _on_live2d_ready(self) -> None:
+        self._hint.hide()
+        self._status.hide()
+        # 模型出来了，去掉占位用的虚线框
+        self._set_state("model")
+
+    def _on_live2d_failed(self, msg: str) -> None:
+        view, self._view = self._view, None
+        if view is not None:
+            self._lay.removeWidget(view)
+            view.hide()
+            view.shutdown()
+            view.deleteLater()
+        self._hint.show()
+        self._status.setText(f"Live2D 未加载：{msg}")
+        self._status.show()
+        # 退回占位态，虚线框回来
+        self._set_state("")
+
+    # --- 对外：给未来的业务调用（对话/情绪驱动角色） ---------------------
+    def react(self, name: str) -> bool:
+        """透传到渲染页的 window.l2d.react(name)；页面没起来就返回 False。"""
+        if self._view is None:
+            return False
+        self._view.call("react", name)
+        return True
+
+    def stop_reaction(self) -> bool:
+        if self._view is None:
+            return False
+        self._view.call("stopReaction")
+        return True
+
+    def snapshot(self, callback) -> bool:
+        """从页面导出 canvas（dataURL）；没起来返回 False。"""
+        if self._view is None:
+            return False
+        self._view.snapshot(callback)
+        return True
+
+    def shutdown(self) -> None:
+        if self._view is not None:
+            self._view.shutdown()
 
 
 class MessageArea(QScrollArea):
@@ -338,11 +418,16 @@ def main(argv: list[str] | None = None) -> int:
     """启动主界面。"""
     # Qt6 默认开启 HiDPI 缩放，AA_EnableHighDpiScaling / AA_UseHighDpiPixmaps
     # 已废弃（setAttribute 会告警甚至无效），这里不再设置。
-    # AA_ShareOpenGLContexts 保留：后面嵌 QWebEngineView 时必须在 QApplication
+    # AA_ShareOpenGLContexts 保留：嵌了 QWebEngineView，必须在 QApplication
     # 之前打开，否则 WebEngine 起不来（见 core/live2d 的踩坑记录）。
     QApplication.setAttribute(
         Qt.ApplicationAttribute.AA_ShareOpenGLContexts, True
     )
+
+    # QtWebEngine 的环境变量也必须在 QApplication 之前落地。
+    # live2d_embed 被 import 时已经设过一次，这里再显式调一次（幂等），
+    # 让"必须在 QApplication 之前"这件事在入口处也看得见。
+    live2d_embed.apply_webengine_env()
 
     app = QApplication(sys.argv if argv is None else argv)
     app.setApplicationName("DSAI4431 Chatbot")

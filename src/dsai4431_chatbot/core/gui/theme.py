@@ -52,6 +52,10 @@ QSplitter::handle {{
     border: 1px dashed {COLOR_BORDER_DASH};
     border-radius: {RADIUS_PANEL}px;
 }}
+/* 模型已加载：虚线占位框去掉，只留白卡 */
+#characterPanel[state="model"] {{
+    border: none;
+}}
 #characterHint {{
     color: {COLOR_TEXT_WEAK};
     font-size: 13px;

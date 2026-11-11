@@ -44,13 +44,27 @@
   （人格编辑页含 New Persona 表单：ID / NAME / Persona Files / Both-Close-Edit / FileList，
   以及 Persona 列表 + `+New`、Save / Preview）
 
-### 4. Live2D 角色区接入
+### 4. Live2D 角色区接入 —— 已完成（内嵌并实测渲染成功）
 
-- **现状**：`CharacterPanel` 只有一行提示文字，是空占位
-- **要做**：嵌入 `QWebEngineView`，加载 `asset/live2d` 的渲染页
-- **参考**：`core/live2d/demo_interactive.py` 的 `Stage`（本地 HTTP + `/vendor/` `/model/` 路由）
-- **注意**：`--no-sandbox` 等环境变量必须在创建 `QApplication` **之前**设置，
-  见 `core/live2d/HANDOFF.md` §3.1
+- **状态**：`CharacterPanel` 已内嵌 `Live2DView`（`core/gui/live2d_embed.py`，458 行），
+  加载 `asset/live2d` 的渲染页并显示大肥鱼；模型就绪后虚线占位框自动去掉
+  （`#characterPanel[state="model"]`）。加载失败/超时会摘掉 view、退回占位文字 + 一行诊断
+- **实测数据**（Qt6.12）：`loadFinished` 0.4–1.2s，`window.l2dReady` 2.2–3.0s，
+  console 无报错（只有黑层修复的预期 warn）
+- **⚠ `--no-sandbox` 在 Qt6 下仍然必需**：不加就渲染进程 `code=18` 死掉、
+  `loadFinished` 永不触发（与 Qt5 同症状）；只加 `--disable-gpu` 也没用。
+  现在模块默认设置它，想收回控制用 `L2D_KEEP_SANDBOX=1`，
+  额外加 flag 用 `L2D_CHROMIUM_FLAGS`
+- **Qt6 顺带解决了的老坑**：`HANDOFF.md` §3.4「Chromium 83 没有顶层 await」在
+  Chromium 140 下已不成立；§4.1 的 Core6 `renderOrders` 崩溃也不会触发
+  （vendor 里实际是 Cubism Core 5.1）
+- **对外接口备好但未接业务**：`CharacterPanel.react() / stop_reaction() / snapshot()`
+
+### 4b. 角色区虚线边框（已解决，记录用）
+
+模型加载成功后不再需要占位虚线框，已用 QSS 状态属性
+`#characterPanel[state="model"] { border: none; }` 处理，
+失败时自动退回虚线态。改这个属性必须 `unpolish/polish`，见第六节的坑。
 
 ### 5. 对话后端
 
