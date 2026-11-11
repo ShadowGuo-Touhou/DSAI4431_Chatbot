@@ -7,6 +7,7 @@
 
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -54,23 +55,37 @@ def _get(settings, key: str, default, kind):
         return default
 
 
+def _as_list(raw) -> list[str]:
+    """QSettings 存空列表时读回来可能是 None 或空串，这里统一成 list。"""
+    if raw is None:
+        return []
+    if isinstance(raw, str):
+        return [part for part in raw.split(",") if part]
+    try:
+        return [str(part) for part in raw if str(part)]
+    except TypeError:
+        return []
+
+
 def load() -> Live2DConfig:
-    s = themes.app_settings()
-    hidden = s.value(f"{GROUP}/hidden_parts", [])
-    if isinstance(hidden, str):
-        hidden = [h for h in hidden.split(",") if h]
-    return Live2DConfig(
-        model=str(s.value(f"{GROUP}/model", "") or ""),
-        framing="full" if str(s.value(f"{GROUP}/framing", "bust")) == "full" else "bust",
-        scale=_get(s, "scale", 1.0, float),
-        offset_x=_get(s, "offset_x", 0, int),
-        offset_y=_get(s, "offset_y", 0, int),
-        physics=_get(s, "physics", True, bool),
-        blink=_get(s, "blink", True, bool),
-        breath=_get(s, "breath", True, bool),
-        follow=_get(s, "follow", True, bool),
-        hidden_parts=[str(h) for h in hidden],
-    )
+    """读配置。**任何异常都退回默认值** —— 配置坏了也不能让程序起不来。"""
+    try:
+        s = themes.app_settings()
+        return Live2DConfig(
+            model=str(s.value(f"{GROUP}/model", "") or ""),
+            framing="full" if str(s.value(f"{GROUP}/framing", "bust")) == "full" else "bust",
+            scale=_get(s, "scale", 1.0, float),
+            offset_x=_get(s, "offset_x", 0, int),
+            offset_y=_get(s, "offset_y", 0, int),
+            physics=_get(s, "physics", True, bool),
+            blink=_get(s, "blink", True, bool),
+            breath=_get(s, "breath", True, bool),
+            follow=_get(s, "follow", True, bool),
+            hidden_parts=_as_list(s.value(f"{GROUP}/hidden_parts", None)),
+        )
+    except Exception as exc:  # noqa: BLE001 - 配置读挂了就退回默认，不能挡启动
+        print(f"[live2d] 配置读取失败，用默认值：{exc}", file=sys.stderr, flush=True)
+        return Live2DConfig()
 
 
 def save(cfg: Live2DConfig) -> None:
