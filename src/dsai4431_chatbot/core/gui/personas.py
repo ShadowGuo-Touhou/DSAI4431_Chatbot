@@ -39,6 +39,24 @@ PROMPT_LIMIT = 20000
 ID_RE = re.compile(r"^[A-Za-z0-9_-]{1,40}$")
 
 
+# 新建人格时先塞这几个模板，用户再往里写内容
+TEMPLATES = {
+    "IDENTITY.md": (
+        "# IDENTITY\n\n"
+        "（这个人格是谁：名字、身份、会做什么、说话什么风格。\n"
+        " 勾选它之后，这些文字会被拼进 system 提示词。）\n"
+    ),
+    "SOUL.md": (
+        "# SOUL\n\n"
+        "（这个人格的判断方式和底线：先做什么后做什么、什么情况下宁可停下来问。）\n"
+    ),
+    "USER.md": (
+        "# USER\n\n"
+        "（服务对象是谁、有什么长期偏好。只写长期有效的信息，别写一次性的。）\n"
+    ),
+}
+
+
 @dataclass
 class Persona:
     id: str
@@ -208,6 +226,24 @@ def upsert(persona: Persona) -> Path:
 def remove(persona_id: str) -> None:
     items = [p for p in _read_manifest() if p.id != persona_id]
     save_personas(items)
+
+
+def create_persona_dir(persona_id: str, templates: dict[str, str] | None = None) -> Path:
+    """在人格根目录下建一个以 id 命名的目录，缺哪个文件补一个模板。
+
+    已经有同名目录就复用（不覆盖用户写过的内容）。
+    """
+    target = personality_dir() / persona_id
+    target.mkdir(parents=True, exist_ok=True)
+    for name, body in (templates or TEMPLATES).items():
+        path = target / name
+        if path.exists():
+            continue
+        try:
+            path.write_text(body, encoding="utf-8")
+        except OSError as exc:
+            print(f"[persona] 模板写不进去 {path}：{exc}", file=sys.stderr, flush=True)
+    return target
 
 
 # ---------------------------------------------------------------------------

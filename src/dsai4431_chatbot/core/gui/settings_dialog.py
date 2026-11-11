@@ -23,7 +23,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from PySide6.QtCore import QEvent, QSize, QSignalBlocker, Qt, QUrl, Signal
-from PySide6.QtGui import QColor, QDesktopServices
+from PySide6.QtGui import QColor, QDesktopServices, QFont
 from PySide6.QtWidgets import (
     QApplication,
     QButtonGroup,
@@ -39,6 +39,7 @@ from PySide6.QtWidgets import (
     QListWidget,
     QListWidgetItem,
     QMessageBox,
+    QPlainTextEdit,
     QPushButton,
     QScrollArea,
     QSlider,
@@ -293,6 +294,139 @@ class ApiKeyPage(QWidget):
         chat_config.save(cfg)
 
 
+class _TextDialog(QDialog):
+    """只读文本窗（Preview 用）：可滚动、可复制。
+
+    以前直接弹 QMessageBox.information —— 提示框不能滚，提示词一长就只能
+    看到开头那几行。
+    """
+
+    def __init__(self, title: str, body: str, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle(title)
+        self.resize(760, 540)
+
+        lay = QVBoxLayout(self)
+        lay.setContentsMargins(18, 16, 18, 14)
+        lay.setSpacing(10)
+
+        view = QPlainTextEdit(body)
+        view.setObjectName("field")
+        view.setReadOnly(True)
+        view.setLineWrapMode(QPlainTextEdit.LineWrapMode.WidgetWidth)
+        # QPlainTextEdit 的正文用的是文档默认字体，QSS 只改控件字体、改不到文档，
+        # 不显式设一遍会渲染成宋体（和界面其它地方不一致）
+        doc_font = QFont("Microsoft YaHei UI")
+        doc_font.setPixelSize(14)
+        view.setFont(doc_font)
+        view.document().setDefaultFont(doc_font)
+        lay.addWidget(view, 1)
+
+        row = QHBoxLayout()
+        info = QLabel(t("settings.personality.preview_chars", n=f"{len(body):,}"))
+        info.setObjectName("hintText")
+        row.addWidget(info, 1)
+        btn = small_button(t("common.ok"), primary=True)
+        btn.clicked.connect(self.accept)
+        row.addWidget(btn)
+        lay.addLayout(row)
+
+        view.setFocus()
+
+
+class _DirPicker(QDialog):
+    """选人格目录：子目录能进，`.md` 列出来给你看（双击用系统程序打开）。
+
+    不用 QFileDialog.getExistingDirectory 是因为它**只显示目录**，
+    `data/personality` 明明有 .md 却是一片空白（用户就是这么被迷惑的）。
+    """
+
+    def __init__(self, start: Path, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle(t("settings.personality.files"))
+        self.resize(660, 480)
+        start = Path(start)
+        self._dir = start if start.is_dir() else start.parent
+        self.chosen: Path | None = None
+
+        lay = QVBoxLayout(self)
+        lay.setContentsMargins(18, 16, 18, 14)
+        lay.setSpacing(10)
+
+        self.lb_path = QLabel("")
+        self.lb_path.setObjectName("hintText")
+        self.lb_path.setWordWrap(True)
+        self.lb_path.setTextInteractionFlags(
+            Qt.TextInteractionFlag.TextSelectableByMouse
+        )
+        lay.addWidget(self.lb_path)
+
+        self.lst = QListWidget()
+        self.lst.setObjectName("fieldList")
+        self.lst.itemDoubleClicked.connect(self._on_activate)
+        lay.addWidget(self.lst, 1)
+
+        row = QHBoxLayout()
+        btn_up = small_button(t("settings.personality.dir_up"))
+        btn_up.clicked.connect(lambda: self._enter(self._dir.parent))
+        row.addWidget(btn_up)
+        row.addStretch(1)
+        btn_use = small_button(t("settings.personality.dir_use"), primary=True)
+        btn_use.clicked.connect(self._accept_current)
+        row.addWidget(btn_use)
+        btn_cancel = small_button(t("common.cancel"))
+        btn_cancel.clicked.connect(self.reject)
+        row.addWidget(btn_cancel)
+        lay.addLayout(row)
+
+        self._reload()
+
+    # --- 内容 -----------------------------------------------------------
+    def _reload(self) -> None:
+        self.lb_path.setText(str(self._dir))
+        self.lst.clear()
+        try:
+            entries = sorted(
+                self._dir.iterdir(),
+                key=lambda p: (not p.is_dir(), p.name.lower()),
+            )
+        except OSError:
+            entries = []
+        for path in entries:
+            if path.is_dir():
+                item = QListWidgetItem(t("settings.personality.dir_item", name=path.name))
+                item.setData(Qt.ItemDataRole.UserRole, ("dir", str(path)))
+                self.lst.addItem(item)
+            elif path.suffix.lower() == ".md":
+                try:
+                    chars = len(path.read_text(encoding="utf-8", errors="ignore"))
+                except OSError:
+                    chars = 0
+                item = QListWidgetItem(
+                    t("settings.personality.file_item", name=path.name, n=f"{chars:,}")
+                )
+                item.setData(Qt.ItemDataRole.UserRole, ("file", str(path)))
+                item.setForeground(QColor("#8a9099"))
+                self.lst.addItem(item)
+
+    def _enter(self, path: Path) -> None:
+        if path.is_dir():
+            self._dir = path
+            self._reload()
+
+    def _on_activate(self, item: QListWidgetItem) -> None:
+        kind, raw = item.data(Qt.ItemDataRole.UserRole)
+        path = Path(raw)
+        if kind == "dir":
+            self._enter(path)
+        elif path.is_file():
+            QDesktopServices.openUrl(QUrl.fromLocalFile(str(path)))
+
+    def _accept_current(self) -> None:
+        self.chosen = self._dir
+        self.accept()
+
+
 class PersonalityPage(QWidget):
     """人格编辑页：左「Persona 列表」、右表单。
 
@@ -304,10 +438,14 @@ class PersonalityPage(QWidget):
     改名等于新建一条。
     """
 
+    saved = Signal()               # 写进清单了（主窗拿去刷新首页的人格下拉）
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self._persona_id = ""      # 正在编辑哪一条；空 = 新建中
         self._order = 0
+        # 新建时目录跟着 ID 走：<人格根目录>/<id>，用户自己挑过就不跟了
+        self._dir_follows_id = True
 
         lay = QVBoxLayout(self)
         lay.setContentsMargins(28, 24, 28, 24)
@@ -337,6 +475,7 @@ class PersonalityPage(QWidget):
 
         right.addWidget(field_label(t("settings.personality.id")))
         self.ed_id = field_input(t("settings.personality.id_placeholder"))
+        self.ed_id.textEdited.connect(self._on_id_edited)
         right.addWidget(self.ed_id)
 
         right.addWidget(field_label(t("settings.personality.name")))
@@ -345,19 +484,16 @@ class PersonalityPage(QWidget):
 
         right.addWidget(field_label(t("settings.personality.files")))
         self.ed_dir = field_input(t("settings.personality.files_placeholder"))
-        self.ed_dir.editingFinished.connect(lambda: self._rescan())
+        self.ed_dir.editingFinished.connect(lambda: self._on_dir_edited())
         right.addWidget(self.ed_dir)
 
         path_row = QHBoxLayout()
         path_row.setSpacing(8)
         btn_pick = small_button(t("common.choose"))
         btn_pick.clicked.connect(lambda: self._pick_dir())
-        btn_open = small_button(t("common.edit"))
-        btn_open.clicked.connect(lambda: self._open_dir())
         btn_rescan = small_button(t("settings.personality.rescan"))
         btn_rescan.clicked.connect(lambda: self._rescan())
         path_row.addWidget(btn_pick)
-        path_row.addWidget(btn_open)
         path_row.addWidget(btn_rescan)
         path_row.addStretch(1)
         right.addLayout(path_row)
@@ -425,6 +561,7 @@ class PersonalityPage(QWidget):
     def _load(self, persona: personas.Persona) -> None:
         self._persona_id = persona.id
         self._order = persona.order
+        self._dir_follows_id = False
         self.ed_id.setText(persona.id)
         self.ed_id.setReadOnly(True)
         self.ed_name.setText(persona.label)
@@ -435,12 +572,26 @@ class PersonalityPage(QWidget):
     def _clear_form(self) -> None:
         self._persona_id = ""
         self._order = 0
+        self._dir_follows_id = True
         self.ed_id.setReadOnly(False)
         self.ed_id.clear()
         self.ed_name.clear()
         self.ed_dir.setText(str(personas.personality_dir()))
         self._rescan(checked=set())
         self.lb_status.setText("")
+
+    def _on_id_edited(self, text: str) -> None:
+        """新建时目录跟着 ID 走（`<人格根目录>/<id>`），用户自己挑过就不跟。"""
+        if not self._dir_follows_id:
+            return
+        name = text.strip()
+        root = personas.personality_dir()
+        self.ed_dir.setText(str(root / name) if name else str(root))
+
+    def _on_dir_edited(self) -> None:
+        """用户手改了路径：说明他想自己指目录，别再跟着 ID 覆盖他。"""
+        self._dir_follows_id = False
+        self._rescan()
 
     # --- 按钮 -----------------------------------------------------------
     def _new(self) -> None:
@@ -455,17 +606,11 @@ class PersonalityPage(QWidget):
         return Path(raw).expanduser() if raw else personas.personality_dir()
 
     def _pick_dir(self) -> None:
-        chosen = QFileDialog.getExistingDirectory(
-            self, t("settings.personality.files"), str(self._dir())
-        )
-        if chosen:
-            self.ed_dir.setText(chosen)
+        picker = _DirPicker(self._dir(), self)
+        if picker.exec() == QDialog.DialogCode.Accepted and picker.chosen is not None:
+            self.ed_dir.setText(str(picker.chosen))
+            self._dir_follows_id = False      # 自己挑过了，别再跟着 ID 跑
             self._rescan()
-
-    def _open_dir(self) -> None:
-        target = self._dir()
-        if target.is_dir():
-            QDesktopServices.openUrl(QUrl.fromLocalFile(str(target)))
 
     def _rescan(self, checked: set[str] | None = None) -> None:
         directory = self._dir()
@@ -501,6 +646,13 @@ class PersonalityPage(QWidget):
         if self._persona_id != persona_id and personas.by_id(persona_id) is not None:
             self._complain(t("settings.personality.err_id_dup", id=persona_id))
             return False
+        # 新建、且目录还跟着 ID 走：直接把 <人格根目录>/<id> 建出来，塞一份模板，
+        # 这样"新建"得到的是**属于这个人的一套 .md**，而不是共享默认目录里的文件
+        if self._dir_follows_id:
+            created = personas.create_persona_dir(persona_id)
+            self.ed_dir.setText(str(created))
+            self._dir_follows_id = False
+            self._rescan(checked=set(personas.TEMPLATES))
         directory = self._dir()
         if not directory.is_dir():
             self._complain(t("settings.personality.err_dir", path=str(directory)))
@@ -527,16 +679,17 @@ class PersonalityPage(QWidget):
         self._persona_id = persona_id
         self.refresh(select_id=persona_id)
         self.lb_status.setText(t("settings.personality.saved"))
+        self.saved.emit()
         return True
 
     def _preview(self) -> None:
         """看一眼拼出来的 system 提示词 —— 排查"模型不按人格说话"用。"""
         body = personas.build_system_prompt(str(self._dir()), self._selected_files())
-        QMessageBox.information(
-            self,
+        _TextDialog(
             t("settings.personality.preview"),
-            body[:4000] or t("settings.personality.preview_empty"),
-        )
+            body or t("settings.personality.preview_empty"),
+            self,
+        ).exec()
 
     def _complain(self, message: str) -> None:
         self.lb_status.setText(message)
@@ -1161,6 +1314,9 @@ class SettingsDialog(QDialog):
     Other 用齿轮（gear.svg），现在六项都有图标。
     """
 
+    # 人格清单被改了（新建/改名/换目录），主窗拿去刷新首页下拉
+    personas_changed = Signal()
+
     # (图标, 文案 key, 页面类)
     PAGES = [
         ("key", "settings.nav.api_key", ApiKeyPage),
@@ -1259,9 +1415,13 @@ class SettingsDialog(QDialog):
         self.stack = QStackedWidget()
         for _icon, _text_key, page_cls in self.PAGES:
             if page_cls is Live2DModelPage:
-                self.stack.addWidget(page_cls(character))
+                page = page_cls(character)
             else:
-                self.stack.addWidget(page_cls())
+                page = page_cls()
+            # 人格页保存后主窗要刷新首页的下拉，别让人新建完还看不到
+            if isinstance(page, PersonalityPage):
+                page.saved.connect(self.personas_changed)
+            self.stack.addWidget(page)
         content.addWidget(self.stack, 1)
 
         # 唯一的行为：切页（否则其余两页看不到）

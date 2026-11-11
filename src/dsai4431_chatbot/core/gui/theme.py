@@ -318,6 +318,18 @@ QLineEdit#field {{
 QLineEdit#field:focus {{
     border-color: {accent};
 }}
+/* Preview 的只读文本框：和 QLineEdit 同一套外观。
+   font-size 必须显式写 —— QPlainTextEdit 不认 #field 里继承来的字号，
+   不写会落回系统默认（实测渲染成宋体、比别的控件大一号）。 */
+QPlainTextEdit#field {{
+    background: {surface};
+    border: 1px solid {border_soft};
+    border-radius: 9px;
+    padding: 8px 11px;
+    color: {text};
+    font-size: 14px;
+    selection-background-color: {accent};
+}}
 
 QListWidget#fieldList {{
     background: {surface_alt};

@@ -12,6 +12,18 @@
       ],
       "enabled": true,
       "order": 10
+    },
+    {
+      "id": "banki",
+      "label": "赤蛮奇",
+      "dir": "P:\\Deekseek_playground\\DSAI4431_Chatbot\\data\\personality\\banki",
+      "files": [
+        "IDENTITY.md",
+        "SOUL.md",
+        "USER.md"
+      ],
+      "enabled": true,
+      "order": 20
     }
   ]
 }
