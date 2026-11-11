@@ -41,6 +41,17 @@ cancel = "Cancel"
 empty = "No chats yet"
 close = "Close (Esc)"
 untitled = "(untitled chat)"
+rename = "Rename"
+delete = "Delete"
+rename_title = "Rename chat"
+delete_title = "Delete chat"
+delete_ask = "Delete “{name}”? Its files go with it and cannot be recovered."
+delete_many_ask = "Delete the {n} selected chats? Their files go with them and cannot be recovered."
+select = "Select"
+select_done = "Done"
+select_all = "All"
+select_none = "None"
+delete_selected = "Delete selected ({n})"
 
 [main.input]
 placeholder = "Say something… (Enter to send, Shift+Enter for a new line)"
@@ -58,6 +69,8 @@ browse = "Browse (placeholder)"
 choose = "Choose"
 edit = "Edit"
 chars = "{n} chars"
+ok = "OK"
+cancel = "Cancel"
 
 # --- Settings window ------------------------------------------------
 [settings]

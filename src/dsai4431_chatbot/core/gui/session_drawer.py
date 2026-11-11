@@ -28,9 +28,12 @@ from PySide6.QtWidgets import (
     QComboBox,
     QFrame,
     QHBoxLayout,
+    QInputDialog,
     QLabel,
     QListWidget,
     QListWidgetItem,
+    QMenu,
+    QMessageBox,
     QPushButton,
     QVBoxLayout,
     QWidget,
@@ -130,6 +133,7 @@ class SessionDrawer(QFrame):
 
     session_created = Signal(str)     # session id
     session_opened = Signal(str)
+    session_deleted = Signal(str)
     close_requested = Signal()
 
     def __init__(self, parent=None):
@@ -182,6 +186,8 @@ class SessionDrawer(QFrame):
         self.list.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.list.itemDoubleClicked.connect(self._on_double_click)
         self.list.itemActivated.connect(self._on_double_click)
+        self.list.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.list.customContextMenuRequested.connect(self._on_context_menu)
         lay.addWidget(self.list, 1)
 
         self.lb_empty = QLabel(t("session.empty"))
@@ -250,3 +256,59 @@ class SessionDrawer(QFrame):
         self._current_id = session_id
         self.reload()
         self.session_opened.emit(session_id)
+
+    # --- 右键：重命名 / 删除（第 14 条）---------------------------------
+    def _on_context_menu(self, pos) -> None:
+        item = self.list.itemAt(pos)
+        if item is None:
+            return
+        session_id = item.data(Qt.ItemDataRole.UserRole)
+        if not session_id:
+            return
+        menu = QMenu(self)
+        act_rename = menu.addAction(t("session.rename"))
+        act_delete = menu.addAction(t("session.delete"))
+        chosen = menu.exec(self.list.viewport().mapToGlobal(pos))
+        if chosen is act_rename:
+            self.ask_rename(str(session_id))
+        elif chosen is act_delete:
+            self.ask_delete(str(session_id))
+
+    def ask_rename(self, session_id: str) -> None:
+        meta = session_store.get_meta(session_id)
+        if meta is None:
+            return
+        text, accepted = QInputDialog.getText(
+            self, t("session.rename_title"), t("session.rename_title"), text=meta.title
+        )
+        if accepted:
+            self.do_rename(session_id, text)
+
+    def do_rename(self, session_id: str, title: str) -> None:
+        if session_store.rename_session(session_id, title) is not None:
+            self.reload()
+
+    def ask_delete(self, session_id: str) -> None:
+        meta = session_store.get_meta(session_id)
+        name = meta.display_title if meta is not None else session_id
+        if self._confirm(t("session.delete_ask", name=name)):
+            self.do_delete(session_id)
+
+    def do_delete(self, session_id: str) -> bool:
+        if not session_store.delete_session(session_id):
+            return False
+        if session_id == self._current_id:
+            self._current_id = ""
+        self.reload()
+        self.session_deleted.emit(session_id)
+        return True
+
+    def _confirm(self, text: str) -> bool:
+        box = QMessageBox(self)
+        box.setIcon(QMessageBox.Icon.Warning)
+        box.setWindowTitle(t("session.delete_title"))
+        box.setText(text)
+        ok_btn = box.addButton(t("common.ok"), QMessageBox.ButtonRole.DestructiveRole)
+        box.addButton(t("common.cancel"), QMessageBox.ButtonRole.RejectRole)
+        box.exec()
+        return box.clickedButton() is ok_btn

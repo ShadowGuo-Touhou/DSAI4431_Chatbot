@@ -564,6 +564,10 @@ class ChatColumn(QWidget):
         return cfg.system_prompt()
 
     # --- 会话 -----------------------------------------------------------
+    @property
+    def current_session_id(self) -> str:
+        return self._session_id
+
     def _ensure_session(self, cfg) -> session_store.SessionMeta:
         if self._session is not None:
             return self._session
@@ -682,6 +686,7 @@ class MainWindow(QMainWindow):
         self._drawer.hide()
         self._drawer.session_created.connect(self._on_session_switch)
         self._drawer.session_opened.connect(self._on_session_switch)
+        self._drawer.session_deleted.connect(self._on_session_deleted)
         self._drawer.close_requested.connect(self.hide_drawer)
         self.chat.menu_requested.connect(self.toggle_drawer)
         self.chat.session_updated.connect(self._on_session_updated)
@@ -728,6 +733,11 @@ class MainWindow(QMainWindow):
         if self._drawer.isVisible():
             self._drawer.reload()
             self._drawer.set_current(session_id)
+
+    def _on_session_deleted(self, session_id: str) -> None:
+        """删掉的正好是当前打开的会话 → 聊天区清空（文件已没了）。"""
+        if self.chat.current_session_id == session_id:
+            self.chat.reset_conversation()
 
     def resizeEvent(self, event):  # noqa: N802 - Qt 命名
         super().resizeEvent(event)
