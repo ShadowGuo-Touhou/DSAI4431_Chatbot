@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Live2D in Python (QtWebEngine)</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #1b1f24; overflow: hidden; }
+  #c { display: block; width: 100%; height: 100%; }
+  #err { position: fixed; left: 12px; top: 12px; color: #ff9b9b; font: 13px/1.5 Consolas, monospace; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="err"></div>
+
+<!-- Cubism Core 必须最先加载；pixi-live2d-display 的 cubism4 包依赖全局 PIXI 与 Live2DCubismCore -->
+<script src="vendor/live2dcubismcore.min.js"></script>
+<script src="vendor/pixi.min.js"></script>
+<script src="vendor/cubism4.min.js"></script>
+
+<script type="module">
+const err = (m) => { document.getElementById('err').textContent = String(m); console.error(m); };
+
+// QtWebEngine 5.15 内核是 Chromium 83，不支持顶层 await（Chrome 89 才有），
+// 必须包进 async IIFE，否则整页 "Uncaught SyntaxError: Unexpected reserved word"。
+(async () => {
+try {
+  if (!window.Live2DCubismCore?.Moc) throw new Error('缺少 vendor/live2dcubismcore.min.js（需从 Live2D 官网下载 Cubism SDK for Web 的 Core）');
+  if (!window.PIXI?.Application) throw new Error('缺少 vendor/pixi.min.js');
+  if (!window.PIXI.live2d?.Live2DModel) throw new Error('缺少 vendor/cubism4.min.js');
+
+  // Python 侧把模型相对路径通过 ?m= 传进来，模型目录由本地 HTTP 服务挂在 /model/
+  const params = new URLSearchParams(location.search);
+  const modelPath = '/model/' + (params.get('m') || '');
+  if (!params.get('m')) throw new Error('缺少 ?m=xxx.model3.json 参数');
+
+  const app = new PIXI.Application({
+    view: document.getElementById('c'),
+    backgroundAlpha: 0,
+    antialias: true,
+    autoDensity: true,
+    resolution: Math.min(devicePixelRatio || 1, 2),
+    resizeTo: window,
+  });
+
+  // 让 pixi 的 Ticker 驱动模型（模型内部自带物理、眨眼、呼吸、表情）
+  PIXI.live2d.Live2DModel.registerTicker(PIXI.Ticker);
+
+  const model = await PIXI.live2d.Live2DModel.from(modelPath, { autoInteract: false });
+  app.stage.addChild(model);
+
+  // Cubism Core 6 兼容垫片（与 demo_live2d.html 同一处修复）：
+  // Core 6 不再在 drawables 上提供 renderOrders，pixi-live2d-display 0.4.0 读旧名字
+  // 会拿到 undefined，导致每帧 doDrawModel 抛错、画面全白。用 Model.getRenderOrders() 补回。
+  try {
+    const rawModel = model.internalModel.coreModel && model.internalModel.coreModel._model;
+    if (rawModel && rawModel.drawables && rawModel.drawables.renderOrders === undefined) {
+      let ro = null;
+      try { ro = rawModel.getRenderOrders && rawModel.getRenderOrders(); } catch (_) {}
+      if (!ro || !ro.length) ro = rawModel.drawables.drawOrders;
+      if (ro) rawModel.drawables.renderOrders = ro;
+    }
+  } catch (e) {
+    console.warn('[compat] 垫片失败:', e && e.message);
+  }
+
+  const fit = () => {
+    const w = app.renderer.width / app.renderer.resolution;
+    const h = app.renderer.height / app.renderer.resolution;
+    const k = Math.min(w / model.internalModel.width, h / model.internalModel.height) * 0.95;
+    model.scale.set(k);
+    model.anchor.set(0.5, 0.5);
+    model.position.set(w / 2, h / 2);
+  };
+  fit();
+  new ResizeObserver(fit).observe(document.body);
+
+  // 鼠标视线跟随
+  document.addEventListener('mousemove', (e) => model.focus(e.clientX, e.clientY));
+
+  // 暴露给 Python 侧 executeJavaScript 操作：换表情 / 播动作 / 改参数
+  window.l2d = {
+    model,
+    motion: (group, index = 0) => model.motion(group, index),
+    expression: (name) => model.expression(name),
+    set: (id, v) => model.internalModel.coreModel.setParameterValueById(id, v),
+    get: (id) => model.internalModel.coreModel.getParameterValueById(id),
+  };
+  window.l2dReady = true;
+} catch (e) {
+  err(e?.message || e);
+  window.l2dError = String(e?.message || e);
+}
+})();
+</script>
+</body>
+</html>

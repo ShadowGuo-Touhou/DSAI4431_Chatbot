@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Live2D probe (no assets needed)</title>
+<style>
+  html, body { margin:0; height:100%; background:#12161b; overflow:hidden; }
+  #c { display:block; width:100%; height:100%; cursor:crosshair; }
+  #tag {
+    position:fixed; left:12px; top:12px; color:#5c6b7a;
+    font:12px/1.6 Consolas, "Cascadia Mono", monospace; pointer-events:none;
+  }
+  #tag b { color:#8fb4d8; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="tag">
+  <b>PROBE MODE</b> — 无需 Cubism Core / 模型文件<br>
+  这一页是为了验证「Qt ↔ 本地服务 ↔ 网页 ↔ JS 回控」整条链路。<br>
+  拖动鼠标看视线跟随；改右侧滑块看画面实时响应；点动作/表情也有反馈。
+</div>
+
+<script type="module">
+// ---------------------------------------------------------------------------
+// 与 demo_live2d.html 完全同构的 window.l2d API 面（只是假实现），
+// 这样 Python 端不需要为 probe 模式写任何分支代码。
+// ---------------------------------------------------------------------------
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d', { alpha: true });
+
+const P = {
+  ParamAngleX: 0, ParamAngleY: 0, ParamAngleZ: 0,
+  ParamBodyAngleX: 0, ParamBodyAngleY: 0,
+  ParamEyeLOpen: 1, ParamEyeROpen: 1,
+  ParamEyeBallX: 0, ParamEyeBallY: 0,
+  ParamMouthOpenY: 0, ParamMouthForm: 0.5,
+  ParamBrowLY: 0, ParamBrowRY: 0,
+  ParamBreath: 0,
+  ParamArmLA: 0, ParamArmRA: 0,
+};
+
+let followOn = true;
+let userScale = 1;
+let autoBlink = true;
+let autoBreath = true;
+let physicsOn = true;
+let expressionName = '';
+let focusX = 0, focusY = 0;
+let motionPulse = 0;         // 动作触发后的点头量 0..1
+let motionLabel = '';
+
+const GROUPS = [
+  { name: 'Idle',     count: 2 },
+  { name: 'TapBody',  count: 3 },
+  { name: 'TapHead',  count: 2 },
+  { name: 'Shake',    count: 1 },
+];
+const EXPRESSIONS = ['normal', 'smile', 'angry', 'sad', 'surprised'];
+
+// --- 尺寸自适应 ------------------------------------------------------------
+let dpr = 1, W = 0, H = 0;
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = cv.clientWidth; H = cv.clientHeight;
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+new ResizeObserver(resize).observe(document.body);
+resize();
+
+// --- 交互 ------------------------------------------------------------------
+cv.addEventListener('mousemove', (e) => {
+  const r = cv.getBoundingClientRect();
+  if (followOn) focusAt(e.clientX - r.left, e.clientY - r.top);
+});
+cv.addEventListener('mousedown', () => { motion('TapHead', 0); });
+
+// --- 绘制 ------------------------------------------------------------------
+const t0 = performance.now();
+let blinkPhase = 0, nextBlink = 2.0;
+
+function draw(now) {
+  const t = (now - t0) / 1000;
+  const dt = Math.min(0.05, (now - (draw._last || now)) / 1000);
+  draw._last = now;
+
+  // 自动眨眼：每 2~5 秒眨一下
+  let blinkL = P.ParamEyeLOpen, blinkR = P.ParamEyeROpen;
+  if (autoBlink) {
+    nextBlink -= dt;
+    if (nextBlink <= 0) { blinkPhase = 1; nextBlink = 2 + Math.random() * 3; }
+    if (blinkPhase > 0) {
+      blinkPhase = Math.max(0, blinkPhase - dt * 7);
+      const k = Math.sin(blinkPhase * Math.PI);       // 0→1→0
+      blinkL *= (1 - k); blinkR *= (1 - k);
+    }
+  }
+
+  // 自动呼吸：缓慢正弦
+  const breath = autoBreath ? (0.5 + 0.5 * Math.sin(t * 1.6)) : 0;
+  const breathScale = 1 + breath * 0.012;
+
+  // 动作脉冲衰减
+  motionPulse = Math.max(0, motionPulse - dt * 2.2);
+  const nod = Math.sin(motionPulse * Math.PI) * 14;
+
+  ctx.clearRect(0, 0, W, H);
+
+  const cx = W / 2 + P.ParamAngleX * 1.4;
+  const cy = H / 2 + P.ParamAngleY * 1.4 + nod;
+  const base = Math.min(W, H) * 0.30 * userScale * breathScale;
+  const rot = (P.ParamAngleZ * Math.PI / 180) * 0.6;
+
+  // 身体
+  ctx.save();
+  ctx.translate(cx, cy + base * 1.15);
+  ctx.rotate((P.ParamBodyAngleX * Math.PI / 180) * 0.5);
+  ctx.fillStyle = '#22303d';
+  ctx.beginPath();
+  ctx.ellipse(0, base * 0.55, base * 0.78, base * 0.62, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // 头
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(rot);
+
+  ctx.fillStyle = '#2e4152';
+  ctx.beginPath();
+  ctx.ellipse(0, 0, base * 0.92, base, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = '#4b6b88'; ctx.lineWidth = Math.max(1, base * 0.02); ctx.stroke();
+
+  // 表情决定眉眼形状
+  const happy   = expressionName === 'smile' || expressionName === 'surprised';
+  const angry   = expressionName === 'angry';
+  const sad     = expressionName === 'sad';
+  const browY   = (P.ParamBrowLY + P.ParamBrowRY) * 0.5 * base * 0.10;
+  const browTilt = angry ? 0.30 : (sad ? -0.26 : 0);
+
+  const eyeDX = base * 0.34, eyeY = -base * 0.10;
+  const eyeW = base * 0.18, eyeH = base * 0.22 * Math.min(1, Math.max(0, Math.min(blinkL, blinkR)));
+
+  // 眉
+  ctx.strokeStyle = '#7fa8c8'; ctx.lineWidth = Math.max(1.5, base * 0.035);
+  for (const s of [-1, 1]) {
+    ctx.beginPath();
+    ctx.moveTo(s * eyeDX - eyeW, eyeY - base * 0.42 + browY + s * browTilt * base * 0.1);
+    ctx.lineTo(s * eyeDX + eyeW, eyeY - base * 0.42 + browY - s * browTilt * base * 0.1);
+    ctx.stroke();
+  }
+
+  // 眼白
+  for (const s of [-1, 1]) {
+    ctx.fillStyle = '#e8f1f8';
+    ctx.beginPath();
+    ctx.ellipse(s * eyeDX, eyeY, eyeW, Math.max(0.6, eyeH), 0, 0, Math.PI * 2);
+    ctx.fill();
+    // 瞳孔
+    if (eyeH > base * 0.04) {
+      ctx.fillStyle = '#16222e';
+      ctx.beginPath();
+      ctx.ellipse(
+        s * eyeDX + P.ParamEyeBallX * eyeW * 0.45,
+        eyeY + P.ParamEyeBallY * eyeH * 0.40,
+        eyeW * 0.42, Math.max(0.4, eyeH * 0.5), 0, 0, Math.PI * 2
+      );
+      ctx.fill();
+    }
+  }
+
+  // 嘴
+  const mo = Math.min(1, Math.max(0, P.ParamMouthOpenY));
+  const mouthY = base * 0.46;
+  ctx.strokeStyle = '#7fa8c8'; ctx.lineWidth = Math.max(1.5, base * 0.03);
+  ctx.beginPath();
+  if (mo > 0.02) {
+    ctx.ellipse(0, mouthY, base * 0.20, base * 0.05 + mo * base * 0.16, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#0e1620';
+    ctx.fill();
+    ctx.stroke();
+  } else {
+    const curve = (P.ParamMouthForm - 0.5) * base * 0.28 * (happy ? 1.9 : (sad ? -1.6 : 1));
+    ctx.moveTo(-base * 0.19, mouthY);
+    ctx.quadraticCurveTo(0, mouthY + curve, base * 0.19, mouthY);
+    ctx.stroke();
+  }
+
+  // 手臂（简单两条）
+  ctx.strokeStyle = '#22303d'; ctx.lineWidth = Math.max(3, base * 0.13); ctx.lineCap = 'round';
+  for (const s of [-1, 1]) {
+    const arm = s < 0 ? P.ParamArmLA : P.ParamArmRA;
+    ctx.beginPath();
+    ctx.moveTo(s * base * 0.62, base * 0.72);
+    ctx.quadraticCurveTo(s * base * (0.95 + arm * 0.20), base * 0.95, s * base * (0.78 + arm * 0.30), base * (1.30 - arm * 0.30));
+    ctx.stroke();
+  }
+
+  ctx.restore();
+
+  // 状态文字
+  ctx.fillStyle = '#41566b';
+  ctx.font = `${Math.round(12 * dpr) / dpr}px Consolas, monospace`;
+  ctx.fillText(`scale ${userScale.toFixed(2)}  blink ${autoBlink ? 'on' : 'off'}  breath ${autoBreath ? 'on' : 'off'}  physics ${physicsOn ? 'on' : 'off'}  follow ${followOn ? 'on' : 'off'}`, 12, H - 14);
+  if (motionLabel) {
+    ctx.fillStyle = '#8fb4d8';
+    ctx.fillText(`motion: ${motionLabel}`, 12, H - 32);
+  }
+}
+
+function tick(now) { draw(now); requestAnimationFrame(tick); }
+requestAnimationFrame(tick);
+
+// ---------------------------------------------------------------------------
+// 对外 API —— 与 demo_live2d.html 保持一致
+// ---------------------------------------------------------------------------
+window.l2d = {
+  probe: true,
+  groups: GROUPS,
+  expressions: EXPRESSIONS,
+
+  motion(group, index = 0) {
+    motionPulse = 1;
+    motionLabel = `${group} #${index}`;
+    return true;
+  },
+  randomMotion() {
+    const g = GROUPS[Math.floor(Math.random() * GROUPS.length)];
+    return this.motion(g.name, Math.floor(Math.random() * g.count));
+  },
+  expression(name) { expressionName = String(name); return true; },
+  randomExpression() {
+    return this.expression(EXPRESSIONS[Math.floor(Math.random() * EXPRESSIONS.length)]);
+  },
+  resetExpression() { expressionName = ''; return true; },
+
+  set(id, v) { if (id in P) P[id] = Number(v); else P[id] = Number(v); return true; },
+  get(id) { return id in P ? P[id] : null; },
+
+  autoBlink(on) { autoBlink = !!on; return autoBlink; },
+  autoBreath(on) { autoBreath = !!on; return autoBreath; },
+  physics(on) { physicsOn = !!on; return physicsOn; },
+  scale(k) { userScale = Math.max(0.2, Math.min(4, Number(k) || 1)); return userScale; },
+  follow(on) { followOn = !!on; return followOn; },
+  focus(x, y) { return this.focusAt(x, y); },
+  focusAt(x, y) {
+    focusX = x; focusY = y;
+    const nx = (x - W / 2) / (W / 2 || 1);
+    const ny = (y - H / 2) / (H / 2 || 1);
+    P.ParamEyeBallX = Math.max(-1, Math.min(1, nx));
+    P.ParamEyeBallY = Math.max(-1, Math.min(1, ny));
+    P.ParamAngleX = Math.max(-30, Math.min(30, nx * 22));
+    P.ParamAngleY = Math.max(-30, Math.min(30, ny * 18));
+    return true;
+  },
+  snapshot() { return cv.toDataURL('image/png'); },
+  info() {
+    return { mode: 'probe', groups: GROUPS, expressions: EXPRESSIONS, size: [W, H] };
+  },
+};
+
+window.l2dReady = true;
+window.probeInfo = window.l2d.info();
+</script>
+</body>
+</html>

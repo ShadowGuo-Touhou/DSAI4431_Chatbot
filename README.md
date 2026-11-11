@@ -40,7 +40,13 @@ DSAI4431_Chatbot/
 ├── .venv/                      # 本地虚拟环境（不入库）
 ├── asset/                      # 资源：数据、模型、素材（见下节）
 │   ├── persona/                # 人格设定文本
-│   ├── live2d/                 # Live2D 模型与贴图
+│   ├── live2d/                 # Live2D 依赖库、Cubism Core、模型
+│   │   ├── vendor/             # pixi / cubism4 / cubismcore 三件套（入库）
+│   │   ├── cubism-core/        # 官方 Cubism Core 原始文件（入库）
+│   │   ├── models/             # 全部模型
+│   │   │   ├── Hiyori/         # 示例模型（入库）
+│   │   │   ├── Natori/         # 示例模型（入库）
+│   │   │   └── DeepSeek免费公皮/ # 大肥鱼模型 + PSD 源文件（**不入库**）
 │   ├── RAG/                    # 检索用的知识库原始文件
 │   ├── embedding/              # 向量模型权重（不入库）
 │   └── ollama/                 # Ollama 本地模型（不入库）
@@ -51,7 +57,15 @@ DSAI4431_Chatbot/
         ├── main.py             # CLI 入口与 reply() 占位实现
         ├── py.typed            # 声明本包带类型标注
         └── core/               # 核心业务逻辑（随包安装）
-            └── __init__.py
+            ├── __init__.py
+            └── live2d/         # Live2D 桌面演示（PyQt5 + QWebEngineView）
+                ├── demo_interactive.py   # 主程序
+                ├── demo_live2d.html      # 渲染页
+                ├── demo_probe.html       # 无素材时的占位页
+                ├── make_demo_model.py    # 生成 *.demo.model3.json
+                ├── 启动.bat                # 启动器（纯 ASCII 内容）
+                ├── HANDOFF.md            # 开发交接笔记与全部踩坑记录
+                └── legacy/               # 早期版本，保留备查
 ```
 
 ## 资源目录 `asset/`
@@ -59,24 +73,29 @@ DSAI4431_Chatbot/
 | 目录 | 放什么 | 是否入库 |
 |---|---|---|
 | `asset/persona/` | 人格设定文本（`.md` / `.json`） | 入库 |
-| `asset/live2d/` | Live2D 模型、贴图、动作文件 | 视体积而定，模型本体建议不入库 |
+| `asset/live2d/vendor/` | `pixi.min.js`、`cubism4.min.js`、`live2dcubismcore.min.js` | 入库 |
+| `asset/live2d/cubism-core/` | 官方 Cubism SDK for Web 的 Core 原始文件 | 入库 |
+| `asset/live2d/models/Hiyori/`、`Natori/` | 示例模型 | 入库 |
+| `asset/live2d/models/DeepSeek免费公皮/` | 大肥鱼模型 + 125 MB PSD 源文件 | **不入库** |
 | `asset/RAG/` | 检索知识库的原始文档 | 入库 |
 | `asset/embedding/` | 向量模型权重 | **不入库** |
 | `asset/ollama/` | Ollama 拉取的本地模型 | **不入库** |
 
 ### 关于模型文件不入库
 
-`asset/embedding/` 和 `asset/ollama/` 里放的是模型权重，单个动辄几百 MB 到数 GB，
-提交进 git 会让仓库变得极难维护（clone 慢、历史不可回收）。因此 `.gitignore` 中已排除这两个目录：
+`asset/embedding/`、`asset/ollama/`、`asset/live2d/models/DeepSeek免费公皮/` 里放的是模型权重和
+大体积素材，单个动辄几百 MB 到数 GB，提交进 git 会让仓库变得极难维护（clone 慢、
+历史不可回收）。因此 `.gitignore` 中已排除这些目录：
 
 ```gitignore
 asset/embedding/*
 !asset/embedding/.gitkeep
 asset/ollama/*
 !asset/ollama/.gitkeep
+asset/live2d/models/DeepSeek免费公皮/
 ```
 
-每个目录保留一个 `.gitkeep` 只是为了 git 能记录空目录本身。
+前两个目录保留 `.gitkeep` 是因为 git 记录不了空目录；`DeepSeek免费公皮/` 整个目录不需要占位。
 
 **换机器或重新 clone 之后，模型需要自己重新准备**，例如：
 
@@ -89,6 +108,65 @@ ollama pull bge-m3
 
 空目录在 git 里不会被追踪，所以新建空文件夹时同样要放一个 `.gitkeep`，
 否则别人 clone 下来会看不到这个目录。
+
+## Live2D 桌面演示
+
+`src/dsai4431_chatbot/core/live2d/` 是一个在 PyQt5 里渲染 Live2D 的可交互演示
+（大肥鱼模型，8 组换装/手势动作 + 23 个表情、戳一下、摸头、头部跟随）。
+
+### 依赖
+
+Qt 相关依赖是可选组，核心包不依赖它们：
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+pip install -e ".[live2d]"        # 或手动：
+# pip install -i https://pypi.tuna.tsinghua.edu.cn/simple PyQt5 PyQtWebEngine
+```
+
+实际版本：PyQt5 5.15.11 / PyQtWebEngine 5.15.7 / Qt 5.15.2（内嵌 Chromium 83）。
+
+### 启动
+
+```powershell
+# 方式一：双击启动器（自动找模型）
+src\dsai4431_chatbot\core\live2d\启动.bat
+
+# 方式二：显式指定模型
+.\.venv\Scripts\python.exe -m dsai4431_chatbot.core.live2d.demo_interactive `
+  --model "asset\live2d\models\DeepSeek免费公皮\DeepSeek\大肥鱼.demo.model3.json"
+
+# 方式三：无素材自检（不加载 Core 和模型）
+.\.venv\Scripts\python.exe -m dsai4431_chatbot.core.live2d.demo_interactive --probe
+```
+
+> **必须用 `.demo.model3.json`，不能用原始 `.model3.json`。** 这是 VTS 风格模型，
+> 动作/表情不在 model3.json 里；`make_demo_model.py` 扫描 `Animation/` 与 `Exp3/`
+> 后生成带 `Motions` + `Expressions` 的版本。原始文件不要改。
+> 因为模型目录已排除出 git，clone 后需要重新生成一次：
+>
+> ```powershell
+> .\.venv\Scripts\python.exe src\dsai4431_chatbot\core\live2d\make_demo_model.py `
+>   "asset\live2d\models\DeepSeek免费公皮\DeepSeek\大肥鱼.model3.json"
+> ```
+
+### 资源位置如何解析
+
+代码在 `src/`，资源在 `asset/live2d/`，所以 `demo_interactive.py` 会从自身所在目录
+逐级向上找 `<repo>/asset/live2d`；目录结构变了用环境变量指定：
+
+```powershell
+$env:L2D_ASSET_DIR = "D:\somewhere\live2d"
+```
+
+本地静态服务把 `/vendor/` 和 `/model/` 分别映射到 `asset/live2d/vendor` 和模型目录，
+因此 HTML 里的相对引用不需要改。
+
+### 踩坑记录
+
+`src/dsai4431_chatbot/core/live2d/HANDOFF.md` 记了全部技术细节：黑块是 drawable 级问题、
+参数写入的唯一有效位置、物理会锁死头部角度、`--no-sandbox` 必须开、Chromium 83 没有
+顶层 await 等。改这个演示之前先读它。
 
 ## 后续可以加
 

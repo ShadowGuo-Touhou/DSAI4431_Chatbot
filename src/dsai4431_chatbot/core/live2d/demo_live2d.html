@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Live2D demo (Cubism Web)</title>
+<style>
+  html, body { margin:0; height:100%; background:#12161b; overflow:hidden; }
+  #c { display:block; width:100%; height:100%; }
+  #err {
+    position:fixed; left:12px; top:12px; right:12px; color:#ff9b9b;
+    font:13px/1.6 Consolas, "Cascadia Mono", monospace; white-space:pre-wrap;
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="err"></div>
+
+<!-- 顺序不能动：Core → PIXI → pixi-live2d-display 的 cubism4 包 -->
+<script src="vendor/live2dcubismcore.min.js"></script>
+<script src="vendor/pixi.min.js"></script>
+<script src="vendor/cubism4.min.js"></script>
+
+<script type="module">
+window.__l2dErrors = [];
+window.addEventListener('error', function (ev) {
+  var stack = (ev.error && ev.error.stack) ? String(ev.error.stack).slice(0, 1500) : '';
+  window.__l2dErrors.push(ev.message + ' @ ' + (ev.filename || '?') + ':' + (ev.lineno || 0) + '\n' + stack);
+  console.error('[captured]', ev.message, stack);
+});
+
+const errEl = document.getElementById('err');
+function fail(m) {
+  errEl.textContent = String(m);
+  window.l2dError = String(m);
+  console.error(m);
+}
+
+// QtWebEngine 5.15 内核是 Chromium 83，**不支持顶层 await**（Chrome 89 才有）。
+// 所以整段必须包进 async IIFE，否则会报 "Uncaught SyntaxError: Unexpected reserved word" 整页作废。
+(async () => {
+try {
+  if (!window.Live2DCubismCore?.Moc)
+    throw new Error('缺少 vendor/live2dcubismcore.min.js\n从 https://www.live2d.com/en/sdk/download/web/ 下 Cubism SDK for Web，取出 Core 改名后放进 vendor/');
+  if (!window.PIXI?.Application) throw new Error('缺少 vendor/pixi.min.js');
+  if (!window.PIXI.live2d?.Live2DModel) throw new Error('缺少 vendor/cubism4.min.js');
+
+  const qs = new URLSearchParams(location.search);
+  const modelName = qs.get('m');
+  if (!modelName) throw new Error('URL 缺少 ?m=xxx.model3.json 参数');
+
+  const app = new PIXI.Application({
+    view: document.getElementById('c'),
+    backgroundAlpha: 0,
+    antialias: true,
+    autoDensity: true,
+    resolution: Math.min(devicePixelRatio || 1, 2),
+    resizeTo: window,
+  });
+  PIXI.live2d.Live2DModel.registerTicker(PIXI.Ticker);
+
+  const model = await PIXI.live2d.Live2DModel.from('/model/' + modelName, { autoInteract: false });
+  app.stage.addChild(model);
+
+  const im = model.internalModel;
+  const mm = im.motionManager || null;
+
+  // -------------------------------------------------------------------------
+  // Cubism Core 6 兼容垫片（关键！）
+  //
+  // Cubism SDK for Web 5-r.5 自带的 Core 是 6.x，它把每个 drawable 的渲染顺序
+  // 从 drawables.renderOrders 改名成了 drawables.drawOrders（数据本身没变，
+  // 仍是 Int32Array，长度 = drawableCount）。
+  //
+  // 而 pixi-live2d-display 0.4.0 的 renderer 是：
+  //     getDrawableRenderOrders() { return this._model.drawables.renderOrders }
+  // 于是拿到 undefined，下一行 e[0] 就抛
+  //     TypeError: Cannot read property '0' of undefined
+  // 而这是每帧渲染里抛的 —— 页面不白等，画面则一帧都画不出来（全白）。
+  //
+  // 补一个别名即可，物理/表情/动作全都不受影响。
+  // -------------------------------------------------------------------------
+  try {
+    const rawModel = im.coreModel && im.coreModel._model;
+    if (rawModel && rawModel.drawables) {
+      const d = rawModel.drawables;
+      if (d.renderOrders === undefined) {
+        // Core 6 把这条数据挪走了。优先用 Model.getRenderOrders()（正确的 0..N-1 排列），
+        // 退而求其次才用 drawables.drawOrders。
+        let ro = null;
+        try { ro = rawModel.getRenderOrders && rawModel.getRenderOrders(); } catch (_) {}
+        if (!ro || !ro.length) ro = d.drawOrders;
+        if (ro) {
+          d.renderOrders = ro;
+          window.__l2dCompat = 'core6: renderOrders restored, len=' + ro.length;
+          console.warn('[compat] Core 6：已恢复 drawables.renderOrders，长度', ro.length);
+        }
+      } else {
+        window.__l2dCompat = 'core4/5: native renderOrders';
+      }
+    }
+  } catch (e) {
+    console.warn('[compat] 垫片执行失败（不影响其他功能）:', e && e.message);
+  }
+
+
+  // -------------------------------------------------------------------------
+  // 画黑层修正
+  //
+  // 有些模型的「表情切换层」（比如黑脸、换装覆盖）是靠 multiplyColor=(0,0,0)
+  // 把贴图乘成纯黑来实现的，配套的 Part 里同时还有正常颜色的部件。
+  // VTS 会按 pose / 表情把它们藏起来；这类模型没有 pose3.json，于是黑层直接
+  // 画在脸上，变成一个纯黑方块。
+  //
+  // ⚠ 别整个 Part 一起隐藏 —— 那会把同 Part 里的正常部件（本例是鼻子）也删掉。
+  //   必须精确到具体 drawable。
+  //
+  // 大肥鱼实测：Part46 有 5 个 drawable
+  //   #513 #514  mul=(0,0,0)  ← 黑脸覆盖层，要藏
+  //   #515 #516 #517 mul=(1,1,1) ← 正常的鼻子，保留
+  //
+  // 定位方法：遍历 drawables.multiplyColors，找值为 (0,0,0) 的；
+  // 再核对它们和正常部件的 parentPartIndices 是否相同。
+  // -------------------------------------------------------------------------
+  const HIDDEN_DRAWABLES_BY_MODEL = {
+    '大肥鱼': [513, 514],
+  };
+
+  // -------------------------------------------------------------------------
+  // 反应动作系统
+  //
+  // 模型自带的 motion3 全是换装 / 手势（举手、竖手指、狗尾草、脱捕），没有
+  // 「被点一下」「被摸头」这类交互反馈。所以这里用参数时间轴自己编排，
+  // 不依赖模型资源，换任何 Cubism 4 模型都能用。
+  //
+  // 原理：在 Core 的 update 之前写入参数，Core 这一帧就按新值重算。
+  // 用到的都是 Cubism 标准参数，模型没有的会自动跳过（setParameterValueById
+  // 不存在该参数时抛错，包在 try 里）。
+  //
+  // 对外接口：window.l2d.react('tap' | 'headpat')，返回 true 表示已触发。
+  // -------------------------------------------------------------------------
+  const REACTIONS = {
+    // 被点一下：瞬间闭紧眼 + 歪头 + 眉心皱一下
+    tap: {
+      duration: 1050,
+      tracks: {
+        ParamEyeLOpen: [[0, 1], [110, 0], [430, 0], [720, 1], [1050, 1]],
+        ParamEyeROpen: [[0, 1], [110, 0], [430, 0], [720, 1], [1050, 1]],
+        ParamAngleZ:   [[0, 0], [150, 13], [520, 8], [1050, 0]],
+        ParamAngleY:   [[0, 0], [150, -5], [600, -2], [1050, 0]],
+        ParamAngleX:   [[0, 0], [150, 4], [600, 1], [1050, 0]],
+        ParamBrowLY:   [[0, 0], [150, -0.35], [600, -0.1], [1050, 0]],
+        ParamBrowRY:   [[0, 0], [150, -0.35], [600, -0.1], [1050, 0]],
+      },
+    },
+
+    // 被摸头：> < 眼睛 + 小张嘴 + 头微低偏一点 + 脸红
+    //
+    // ★ 眼睛的 >< 不是参数组合出来的，是这个模型自带的表达式「＞＜」：
+    //     Exp3/＞＜.exp3.json 里只做一件事 —— 把 key5 加到 1.0。
+    //   所以直接写 key5=1 就行，比调 EyeSmile 准得多。
+    //   嘴按需求只要"小张"：MouthOpenY 微开 + MouthForm 轻微上扬。
+    headpat: {
+      duration: 1950,
+      tracks: {
+        key5:            [[0, 0], [200, 1], [1450, 1], [1950, 0]],
+        ParamMouthOpenY: [[0, 0], [240, 0.35], [1450, 0.3], [1950, 0]],
+        ParamMouthForm:  [[0, 0], [240, 0.5], [1450, 0.5], [1950, 0]],
+        ParamAngleY:     [[0, 0], [260, 7], [1450, 5], [1950, 0]],
+        ParamAngleZ:     [[0, 0], [300, 8], [950, 3], [1950, 0]],
+        ParamAngleX:     [[0, 0], [300, -3], [950, -2], [1950, 0]],
+        ParamBodyAngleZ: [[0, 0], [300, 3], [1450, 2], [1950, 0]],
+        ParamCheek:      [[0, 0], [300, 0.7], [1450, 0.6], [1950, 0]],
+      },
+    },
+
+    // 摸头（循环版）：像 GIF 一样不停循环，直到调用 stopReaction()
+    // 首尾值必须相等，否则循环接缝会跳一下。
+    headpatLoop: {
+      duration: 2200,
+      loop: true,
+      tracks: {
+        key5:            [[0, 1], [2200, 1]],
+        ParamMouthOpenY: [[0, 0.3], [2200, 0.3]],
+        ParamMouthForm:  [[0, 0.5], [2200, 0.5]],
+        ParamCheek:      [[0, 0.65], [2200, 0.65]],
+        // 头像是被一下一下顺着，左右轻轻晃
+        ParamAngleZ:     [[0, 5], [550, 10], [1100, 4], [1650, 10], [2200, 5]],
+        ParamAngleX:     [[0, -2], [550, 3], [1100, -2], [1650, 3], [2200, -2]],
+        ParamAngleY:     [[0, 6], [1100, 3], [2200, 6]],
+        ParamBodyAngleZ: [[0, 3], [1100, 1], [2200, 3]],
+      },
+    },
+  };
+
+  let _rx = null;                    // 正在播放的反应：{ def, start }
+  let _blinkBefore = '__none__';     // 反应前保存的自动眨眼实例
+  let _physicsBefore = '__none__';   // 反应前保存的物理实例
+  let _resumeMotion = null;          // 反应结束后要接回的动作组名
+
+  // 鼠标跟随状态（-1 ~ 1 的归一化坐标）
+  let _aimX = 0, _aimY = 0;          // 鼠标目标
+  let _curX = 0, _curY = 0;          // 平滑后的实际值
+  let _physSaved = null;             // 跟随期间被摘掉的物理实例
+  let _physSuspended = false;
+
+  function _ease(k) { return k * k * (3 - 2 * k); }   // smoothstep
+
+  function _sample(keys, t) {
+    if (!keys || !keys.length) return 0;
+    if (t <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      if (t <= keys[i][0]) {
+        const t0 = keys[i - 1][0], v0 = keys[i - 1][1];
+        const t1 = keys[i][0],     v1 = keys[i][1];
+        return v0 + (v1 - v0) * _ease((t - t0) / Math.max(1, t1 - t0));
+      }
+    }
+    return keys[keys.length - 1][1];
+  }
+
+  // 鼠标跟随：整个头 + 眼珠 + 身体一起转，不只是眼珠。
+  // 必须在 im.update 进入前写（Core 会在 update 内部重置 beforeModelUpdate 里写的东西）。
+  //
+  // ★ 这个模型的物理会把头部角度"锁死"：物理开着时 ParamAngleX 从 -24 扫到 +30，
+  //   头部画面纹丝不动；物理一关立刻正常转。所以跟随期间临时摘掉物理。
+  //   代价是头发/裙摆的晃动暂停 —— 跟着鼠标转头比物理晃动重要。
+  function _tickFollow() {
+    if (!followOn) {
+      if (_physSuspended) {
+        try { im.physics = _physSaved; } catch (_) {}
+        _physSaved = null;
+        _physSuspended = false;
+      }
+      return;
+    }
+
+    if (!_physSuspended && im.physics) {
+      _physSaved = im.physics;
+      try { im.physics = null; } catch (_) {}
+      _physSuspended = true;
+    }
+    // 阻尼趋近，避免鼠标一动模型就抽搐
+    _curX += (_aimX - _curX) * 0.13;
+    _curY += (_aimY - _curY) * 0.13;
+
+    const cm = im.coreModel;
+    try { cm.setParameterValueById('ParamAngleX', _curX * 30); } catch (_) {}
+    try { cm.setParameterValueById('ParamAngleY', -_curY * 30); } catch (_) {}
+    try { cm.setParameterValueById('ParamEyeBallX', _curX); } catch (_) {}
+    try { cm.setParameterValueById('ParamEyeBallY', -_curY); } catch (_) {}
+    try { cm.setParameterValueById('ParamBodyAngleX', _curX * 12); } catch (_) {}
+  }
+
+  function _stopReaction() {
+    const dying = _rx;
+    _rx = null;
+
+    // 把反应碰过的参数写回默认值，否则会卡在最后一帧的样子
+    if (dying) {
+      const cmx = im.coreModel;
+      for (const pid in dying.def.tracks) {
+        try {
+          const idx = cmx.getParameterIndex(pid);
+          if (typeof idx === 'number' && idx >= 0) {
+            cmx.setParameterValueById(pid, cmx.getParameterDefaultValue(idx));
+          }
+        } catch (_) {}
+      }
+    }
+
+    if (_blinkBefore !== '__none__') {
+      im.eyeBlink = _blinkBefore;
+      _blinkBefore = '__none__';
+    }
+    if (_physicsBefore !== '__none__') {
+      im.physics = _physicsBefore;
+      _physicsBefore = '__none__';
+    }
+    // 把待机动作接回去
+    if (_resumeMotion) {
+      const g = _resumeMotion;
+      _resumeMotion = null;
+      try { model.motion(g, 0, 3); } catch (_) {}
+    }
+  }
+
+  function _tickReaction(now) {
+    if (!_rx) return;
+
+    // 循环：到点了就把起点往后推，接着播（首尾值相等，所以看不出接缝）
+    let t = now - _rx.start;
+    if (t >= _rx.def.duration) {
+      if (_rx.def.loop) {
+        _rx.start += _rx.def.duration;
+        t = now - _rx.start;
+        if (t < 0) t = 0;
+      } else {
+        _stopReaction();
+        return;
+      }
+    }
+
+    const cm = im.coreModel;
+    const tracks = _rx.def.tracks;
+    for (const pid in tracks) {
+      try { cm.setParameterValueById(pid, _sample(tracks[pid], t)); } catch (_) {}
+    }
+  }
+
+  function react(name) {
+    const def = REACTIONS[name];
+    if (!def) return false;
+
+    // 反应期间暂停自动眨眼，否则会和闭眼 / 眯眼打架
+    if (_blinkBefore === '__none__') {
+      _blinkBefore = im.eyeBlink ?? null;
+      im.eyeBlink = null;
+    }
+
+    // ★ 关键：大肥鱼这类模型的物理把 ParamEyeLOpen 等表情参数当成 OUTPUT，
+    //   每帧重算并覆盖我们写的值（实测：物理开着时写 0，眼睛纹丝不动）。
+    //   所以反应期间临时摘掉物理，播完立刻装回去。
+    if (_physicsBefore === '__none__') {
+      _physicsBefore = im.physics ?? null;
+      im.physics = null;
+    }
+
+    // ★ 同样地，正在播放的动作（待机 Idle）每帧也在写全参数，
+    //   不掐掉的话反应值会被它覆盖。
+    const mm0 = im.motionManager;
+    if (mm0 && typeof mm0.stopAllMotions === 'function') {
+      if (!_resumeMotion) {
+        _resumeMotion = (groups && groups.length) ? groups[0].name : 'Idle';
+      }
+      try { mm0.stopAllMotions(); } catch (_) {}
+    }
+
+    _rx = { def, start: performance.now() };
+    return true;
+  }
+
+  // -------------------------------------------------------------------------
+  // 统一挂到 Core 的 update 上
+  //   参数 → 必须在 update 之前写
+  //   黑层 → 必须在 update 之后抹（Core 每帧重算 opacities）
+  // -------------------------------------------------------------------------
+  (function installCoreHooks() {
+    const cm = im.coreModel;
+
+    // 先算出本模型要藏的画黑层
+    const hidden = [];
+    (function resolveHidden() {
+      const base = modelName.replace(/\.model3\.json$/i, '').replace(/\.demo$/i, '');
+      const idxs = HIDDEN_DRAWABLES_BY_MODEL[base];
+      if (!idxs || !idxs.length) return;
+      const dr = cm._model && cm._model.drawables;
+      if (!dr || !dr.opacities) return;
+      hidden.push(...idxs);
+      for (let i = 0; i < hidden.length; i++) {
+        try { dr.opacities[hidden[i]] = 0; } catch (_) {}
+      }
+      window.__l2dHiddenDrawables = hidden;
+      console.warn('[fix] 已隐藏画黑层 drawable:', hidden.join(', '));
+    })();
+
+    const orig = cm.update.bind(cm);
+    cm.update = function () {
+      const out = orig.apply(cm, arguments);
+      // 黑层必须在 update 之后抹（Core 每帧重算 opacities）
+      if (hidden.length) {
+        const dr = cm._model && cm._model.drawables;
+        if (dr && dr.opacities) {
+          for (let i = 0; i < hidden.length; i++) {
+            try { dr.opacities[hidden[i]] = 0; } catch (_) {}
+          }
+        }
+      }
+      return out;
+    };
+
+    // 参数写入：包住 internalModel.update 整个函数，在它进入之前写。
+    // 试过的位置都不行 —— beforeModelUpdate 事件太晚（Core 会重置），
+    // cm.update 里也太晚。实测只有"update 之前写"能保持住。
+    if (typeof im.update === 'function') {
+      const origIMUpdate = im.update.bind(im);
+      im.update = function () {
+        // 反应优先；没有反应时才做鼠标跟随（否则会抢反应里的头角度）
+        if (_rx) _tickReaction(performance.now());
+        else _tickFollow();
+        return origIMUpdate.apply(im, arguments);
+      };
+    }
+  })();
+
+  // 点击 / 摸头的区域判定：点在头顶那块算摸头，点别处算戳一下
+  (function installPointer() {
+    const host = app.renderer.view;
+    if (!host) return;
+
+    host.addEventListener('click', (ev) => {
+      const rect = host.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const px = (ev.clientX - rect.left) * (app.renderer.width / rect.width);
+      const py = (ev.clientY - rect.top) * (app.renderer.height / rect.height);
+
+      let onHead = false;
+      try {
+        const local = model.toLocal(new PIXI.Point(px, py));
+        const hits = model.hitTest(local.x, local.y) || [];
+        onHead = hits.some((n) => n === 'Head' || /头/.test(n));
+      } catch (_) {}
+
+      // hitTest 拿不到时按纵向位置兜底：模型上部 28% 当头部
+      if (!onHead) {
+        try {
+          const b = model.getBounds();
+          const headTop = b.y;
+          const headBottom = b.y + b.height * 0.28;
+          onHead = py >= headTop && py <= headBottom;
+        } catch (_) {}
+      }
+
+      react(onHead ? 'headpat' : 'tap');
+    });
+  })();
+
+  // 原始自动行为实例，用于开关后还原
+  const saved = {
+    eyeBlink: im.eyeBlink ?? null,
+    breath:   im.breath   ?? null,
+    physics:  im.physics  ?? null,
+  };
+
+  // --- 从运行时的模型里读出动作组与表情名 -------------------------------
+  const motionDefs = (mm && mm.definitions) || {};
+  const groups = Object.keys(motionDefs).map((k) => ({
+    name: k,
+    count: Array.isArray(motionDefs[k]) ? motionDefs[k].length : 0,
+  }));
+
+  const em = mm && mm.expressionManager ? mm.expressionManager : null;
+  const exprDefs = (em && em.definitions) || [];
+  const expressions = exprDefs
+    .map((d) => d && (d.Name || d.name || d.Id || d.id))
+    .filter((s) => typeof s === 'string' && s.length);
+
+  // --- 布局 -------------------------------------------------------------
+  // 注意：不能用 app.renderer.width/resolution 当视口尺寸。QWebEngineView 里
+  // 窗口最大化/全屏时 pixi 的 renderer 未必立刻跟上，而 resized 之后 fit 又不再
+  // 触发，结果就是模型停在按旧尺寸算出的位置（偏左上、不再放大）。
+  // 直接读 canvas 的 CSS 尺寸，最贴合真实可视区域。
+  let fitScale = 1;
+  let userScale = 1;
+  let followOn = true;
+
+  function viewport() {
+    const cv = app.view;
+    const vw = (cv && cv.clientWidth) || window.innerWidth || 1;
+    const vh = (cv && cv.clientHeight) || window.innerHeight || 1;
+    return [vw, vh];
+  }
+
+  function fit() {
+    const [vw, vh] = viewport();
+    const w = im.width || 1;
+    const h = im.height || 1;
+    fitScale = Math.min(vw / w, vh / h) * 0.94;
+    applyScale();
+    model.anchor.set(0.5, 0.5);
+    model.position.set(vw / 2, vh / 2);
+  }
+
+  function applyScale() {
+    model.scale.set(fitScale * userScale);
+  }
+
+  fit();
+
+  // resize 之后 pixi 的 renderer 可能晚一帧才更新，所以延迟再算一次
+  let fitTimer = 0;
+  function scheduleFit() {
+    fit();
+    if (fitTimer) clearTimeout(fitTimer);
+    fitTimer = setTimeout(fit, 60);
+  }
+  window.addEventListener('resize', scheduleFit);
+  document.addEventListener('fullscreenchange', scheduleFit);
+  // ResizeObserver 同时盯着 canvas 自身，任何 CSS 尺寸变化都能兜住
+  try {
+    new ResizeObserver(scheduleFit).observe(app.view);
+  } catch (_) {
+    new ResizeObserver(scheduleFit).observe(document.body);
+  }
+
+  // --- 调试读数（左上角） -------------------------------------------------
+  // 排查"跟随不生效"用：能直接看到 Qt 推过来的 aim 和实际写进模型的角度。
+  // 不需要时把 DEBUG_HUD 改成 false。
+  const DEBUG_HUD = true;
+  if (DEBUG_HUD) {
+    const hud = document.createElement('div');
+    hud.style.cssText = 'position:fixed;left:10px;top:10px;z-index:9999;' +
+      'pointer-events:none;font:13px/1.5 Consolas,monospace;color:#7ec8ff;' +
+      'background:rgba(10,14,20,.72);padding:8px 12px;border-radius:6px;' +
+      'border:1px solid #2a3a4a;white-space:pre';
+    document.body.appendChild(hud);
+    setInterval(() => {
+      let ax = 0, ay = 0;
+      try {
+        const c = im.coreModel;
+        ax = Number(c.getParameterValueById('ParamAngleX')) || 0;
+        ay = Number(c.getParameterValueById('ParamAngleY')) || 0;
+      } catch (_) {}
+      hud.textContent =
+        `aim  ${_aimX.toFixed(2)}, ${_aimY.toFixed(2)}\n` +
+        `平滑 ${_curX.toFixed(2)}, ${_curY.toFixed(2)}\n` +
+        `角度 ${ax.toFixed(1)}, ${ay.toFixed(1)}`;
+    }, 150);
+  }
+
+  // --- 视线跟随 ---------------------------------------------------------
+  // 只记录鼠标的归一化位置，真正的参数写入在 _tickFollow() 里（每帧一次）。
+  // 原来的 model.focus() 在这个配置下不工作（实测一个参数都改不动）。
+  document.addEventListener('mousemove', (e) => {
+    if (!followOn) return;
+    const r = app.view.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    const nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+    const ny = ((e.clientY - r.top) / r.height) * 2 - 1;
+    _aimX = Math.max(-1, Math.min(1, nx));
+    _aimY = Math.max(-1, Math.min(1, ny));
+  });
+
+  // -----------------------------------------------------------------------
+  // 对外 API —— 与 demo_probe.html 保持同一套方法名与签名
+  // -----------------------------------------------------------------------
+  window.l2d = {
+    probe: false,
+    app,
+    model,
+    groups,
+    expressions,
+
+    // 触发反应动作：'tap'（被戳）| 'headpat'（被摸头）| 'headpatLoop'（循环摸头）
+    // 给外部（PyQt 端 / 用户软件）调用，返回 true 表示已开始播放
+    react,
+    // 停止当前反应（循环版必须靠它停）
+    stopReaction() { _stopReaction(); return true; },
+    // 当前是否正在播反应
+    get reacting() { return !!_rx; },
+    reactions: Object.keys(REACTIONS),
+
+    motion(group, index = 0) {
+      try { model.motion(group, index); return true; }
+      catch (e) { fail(e.message); return false; }
+    },
+    randomMotion() {
+      try { model.motion(); return true; }
+      catch (e) { fail(e.message); return false; }
+    },
+    expression(name) {
+      try { model.expression(name); return true; }
+      catch (e) { fail(e.message); return false; }
+    },
+    randomExpression() {
+      try { model.expression(); return true; }
+      catch (e) { fail(e.message); return false; }
+    },
+    resetExpression() {
+      try { em && em.resetExpression && em.resetExpression(); return true; }
+      catch (e) { fail(e.message); return false; }
+    },
+
+    set(id, v) {
+      try { im.coreModel.setParameterValueById(id, Number(v)); return true; }
+      catch (e) { fail(e.message); return false; }
+    },
+    get(id) {
+      try { return im.coreModel.getParameterValueById(id); }
+      catch (e) { return null; }
+    },
+
+    autoBlink(on) {
+      im.eyeBlink = on ? saved.eyeBlink : null;
+      return !!im.eyeBlink;
+    },
+    autoBreath(on) {
+      im.breath = on ? saved.breath : null;
+      return !!im.breath;
+    },
+    physics(on) {
+      im.physics = on ? saved.physics : null;
+      return !!im.physics;
+    },
+
+    scale(k) {
+      userScale = Math.max(0.2, Math.min(4, Number(k) || 1));
+      applyScale();
+      return userScale;
+    },
+    follow(on) { followOn = !!on; return followOn; },
+    focus(x, y) {
+      try { model.focus(x, y); return true; } catch (e) { return false; }
+    },
+    focusAt(x, y) { return this.focus(x, y); },
+
+    // 外部直接推鼠标位置（归一化 -1~1）。
+    // Qt 那边用轮询喂进来，比依赖 mousemove 事件可靠：
+    // QWebEngineView 不一定会把鼠标事件转发到页面里。
+    setAim(nx, ny) {
+      _aimX = Math.max(-1, Math.min(1, Number(nx) || 0));
+      _aimY = Math.max(-1, Math.min(1, Number(ny) || 0));
+      return true;
+    },
+    get aim() { return { x: _aimX, y: _aimY, cx: _curX, cy: _curY, follow: followOn }; },
+
+    snapshot() {
+      // 优先用 pixi 的 extract（不受 WebGL drawingBuffer 被清空的影响）
+      try {
+        const url = app.renderer.extract.base64(app.stage);
+        if (typeof url === 'string' && url.startsWith('data:')) return url;
+      } catch (_) {}
+      try { return app.view.toDataURL('image/png'); }
+      catch (e) { fail('截图失败: ' + e.message); return null; }
+    },
+
+    info() {
+      return {
+        mode: 'live2d',
+        groups,
+        expressions,
+        size: [im.width, im.height],
+        hasPhysics: !!saved.physics,
+        hasEyeBlink: !!saved.eyeBlink,
+        hasBreath: !!saved.breath,
+      };
+    },
+  };
+
+  window.l2dReady = true;
+  window.l2dInfo = window.l2d.info();
+} catch (e) {
+  fail((e && e.message) || e);
+}
+})();
+</script>
+</body>
+</html>
