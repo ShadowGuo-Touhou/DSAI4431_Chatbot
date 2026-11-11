@@ -20,10 +20,14 @@ API KEY 和 Personality 两张图写的是「Other」。这里按出现两次的
 
 from __future__ import annotations
 
+import os
+from pathlib import Path
+
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QButtonGroup,
+    QCheckBox,
     QDialog,
     QFrame,
     QHBoxLayout,
@@ -42,6 +46,12 @@ from dsai4431_chatbot.core.gui.main_window import ICON_DIR, load_icon
 DIALOG_W, DIALOG_H = 980, 660
 NAV_W = 172
 ICON = 16
+
+# 人格文件目录：默认指向 DSH 那套 persona（大肥鲸），可用环境变量改写。
+# 目录不存在时用演示数据 —— 这一页目前只有布局，不接业务。
+PERSONA_DIR = Path(os.environ.get("DSAI_PERSONA_DIR", r"P:\.dsh\agentsoul"))
+PERSONA_DEFAULT_CHECKED = {"IDENTITY.md", "SOUL.md", "USER.md"}
+PERSONA_DEMO_FILES = [("IDENTITY.md", 619), ("SOUL.md", 1298), ("USER.md", 374)]
 
 
 # ---------------------------------------------------------------------------
@@ -68,6 +78,72 @@ def field_list(items: list[str] | None = None, min_height: int = 0) -> QListWidg
     if min_height:
         lst.setMinimumHeight(min_height)
     return lst
+
+
+def scan_persona_files(directory: Path) -> list[tuple[str, int]]:
+    """扫描人格目录下的 .md，返回 [(文件名, 字符数)]。
+
+    目录不存在（或空）时退回演示数据 —— Personality 页目前只有布局。
+    """
+    try:
+        paths = sorted(p for p in directory.iterdir() if p.suffix.lower() == ".md")
+    except OSError:
+        return list(PERSONA_DEMO_FILES)
+
+    rows: list[tuple[str, int]] = []
+    for path in paths:
+        try:
+            rows.append((path.name, len(path.read_text(encoding="utf-8", errors="ignore"))))
+        except OSError:
+            rows.append((path.name, 0))
+    return rows or list(PERSONA_DEMO_FILES)
+
+
+class FileCheckList(QFrame):
+    """文件清单：每行 = 勾选框（文件名）+ 右侧字符数。
+
+    勾选状态只存在控件里，暂不落盘（这一页是布局）。
+    """
+
+    def __init__(
+        self,
+        rows: list[tuple[str, int]],
+        checked: set[str] | None = None,
+        parent=None,
+    ):
+        super().__init__(parent)
+        self.setObjectName("fileList")
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+
+        checked = checked if checked is not None else PERSONA_DEFAULT_CHECKED
+        self.boxes: dict[str, QCheckBox] = {}
+
+        lay = QVBoxLayout(self)
+        lay.setContentsMargins(6, 6, 6, 6)
+        lay.setSpacing(1)
+
+        for name, chars in rows:
+            row = QFrame()
+            row.setObjectName("fileRow")
+            row.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+            row_lay = QHBoxLayout(row)
+            row_lay.setContentsMargins(6, 3, 10, 3)
+            row_lay.setSpacing(8)
+
+            box = QCheckBox(name)
+            box.setObjectName("fileCheck")
+            box.setChecked(name in checked)
+            box.setCursor(Qt.CursorShape.PointingHandCursor)
+            self.boxes[name] = box
+
+            size = QLabel(f"{chars:,} 字符")
+            size.setObjectName("fileSize")
+
+            row_lay.addWidget(box, 1)
+            row_lay.addWidget(size)
+            lay.addWidget(row)
+
+        lay.addStretch(1)
 
 
 def small_button(text: str, *, primary: bool = False) -> QPushButton:
@@ -188,7 +264,7 @@ class PersonalityPage(QWidget):
         right.addLayout(path_row)
 
         right.addWidget(field_label("FileList"))
-        right.addWidget(field_list(["IDENTITY.md", "SOUL.md", "USER.md"]), 1)
+        right.addWidget(FileCheckList(scan_persona_files(PERSONA_DIR)), 1)
 
         footer = QHBoxLayout()
         footer.addStretch(1)

@@ -34,6 +34,10 @@
   `API KEY` / `Personality` / `RAG` / `Live2D model` / `Theme` / `Other`
   - 前四项带图标，`Theme` 和 `Other` 草图没画图标 → 目前是纯文字
 - **已完成内容的页**：API KEY、Personality、RAG（按三张草图铺好字段）
+- **Personality 页文件清单（2026-11-11 补）**：改成「勾选框 + 文件名 + 字符数」的
+  `FileCheckList`，数据从 `P:\.dsh\agentsoul` 实扫（可用环境变量
+  `DSAI_PERSONA_DIR` 改目录），目录不存在时退回演示数据。
+  勾选状态目前只存在控件里，不落盘
 - **空占位页**：Live2D model、Theme、Other（草图只有 tab，没有内容）
 - **待办**：
   - RAG 页底部草图还画着两个小控件（一串点和一个小圆角框），看不清是什么，

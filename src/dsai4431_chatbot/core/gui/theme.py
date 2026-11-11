@@ -6,6 +6,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 # 设计基准：参考 asset/plan/main interface.png 的手绘线框
 COLOR_BG = "#f2f3f5"          # 窗口底色
 COLOR_SURFACE = "#ffffff"      # 卡片/面板
@@ -16,6 +18,10 @@ COLOR_TEXT_WEAK = "#8a9099"
 COLOR_ACCENT = "#3b7ddd"       # 强调色：发送按钮等
 COLOR_ACCENT_HOVER = "#2f6bc4"
 COLOR_HOVER = "#f0f1f3"        # 圆形按钮悬停底色
+
+# QSS 里的 url() 只吃路径，不吃 data URI，所以打勾的图案做成一个 svg 文件引用
+_ICON_DIR = Path(__file__).resolve().parent / "icons"
+_CHECK_SVG = (_ICON_DIR / "check.svg").as_posix()
 
 RADIUS_PANEL = 14
 RADIUS_SMALL = 8
@@ -192,6 +198,43 @@ QListWidget#fieldList::item {{
 QListWidget#fieldList::item:selected {{
     background: #e8f1ff;
     color: {COLOR_ACCENT};
+}}
+
+/* 勾选式文件清单（Personality 页）：勾选框 + 文件名 + 字符数 */
+QFrame#fileList {{
+    background: #fafbfc;
+    border: 1px solid #f0f1f3;
+    border-radius: 9px;
+}}
+QFrame#fileList > QFrame#fileRow {{
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+}}
+QFrame#fileList > QFrame#fileRow:hover {{
+    background: {COLOR_HOVER};
+}}
+QCheckBox#fileCheck {{
+    spacing: 10px;
+}}
+QCheckBox#fileCheck::indicator {{
+    width: 15px;
+    height: 15px;
+    border: 1px solid #cdd3db;
+    border-radius: 4px;
+    background: {COLOR_SURFACE};
+}}
+QCheckBox#fileCheck::indicator:hover {{
+    border-color: {COLOR_ACCENT};
+}}
+QCheckBox#fileCheck::indicator:checked {{
+    background: {COLOR_ACCENT};
+    border-color: {COLOR_ACCENT};
+    image: url("{_CHECK_SVG}");
+}}
+QLabel#fileSize {{
+    color: {COLOR_TEXT_WEAK};
+    font-size: 12px;
 }}
 
 QPushButton#smallButton {{
