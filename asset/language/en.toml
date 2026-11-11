@@ -164,6 +164,8 @@ language = "Language"
 language_label = "Interface language"
 language_hint = "Switching restarts the app right away — that is when the text changes. Your settings are already saved."
 language_restarting = "Restarting, please wait…"
+show_reasoning = "Show reasoning"
+show_reasoning_hint = "Off by default. Only deepseek-reasoner returns reasoning; deepseek-chat has none. Either way it is saved in the session file."
 
 # --- Theme cards (the label/note in each theme toml is the fallback) ---
 [theme.light]

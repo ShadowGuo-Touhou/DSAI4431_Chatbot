@@ -33,6 +33,7 @@ class ChatClient(QObject):
     """一次一把：正在回复时再 send 会返回 False（调用方负责提示）。"""
 
     delta = Signal(str)            # 增量文本
+    reasoning_delta = Signal(str)  # 增量思考链（reasoner 才有）
     finished_ok = Signal(str)      # 完整文本
     failed = Signal(str)           # 人话版的错误
 
@@ -43,6 +44,7 @@ class ChatClient(QObject):
         self._buffer = ""          # 还没凑成整行的 SSE 残留
         self._raw_text = ""        # 收到的全部原始文本（出错时要从里面抠错误信息）
         self._text = ""            # 已经收到的完整回复文本
+        self._reasoning = ""       # 已经收到的思考链（reasoner 才有）
         self._got_delta = False
         self._server_error = ""    # 服务端在流里塞的 error
         self._aborted = False
@@ -55,6 +57,10 @@ class ChatClient(QObject):
     def last_usage(self) -> dict:
         """最近一次请求的 token 用量；网关没给就是空字典。"""
         return dict(self._usage)
+
+    def last_reasoning(self) -> str:
+        """最近一次回复的思考链（reasoner 才有；chat 模型是空串）。"""
+        return self._reasoning
 
     # --- 发请求 ---------------------------------------------------------
     def send(self, cfg, messages: list[dict], model: str | None = None) -> bool:
@@ -89,6 +95,7 @@ class ChatClient(QObject):
         self._buffer = ""
         self._raw_text = ""
         self._text = ""
+        self._reasoning = ""
         self._got_delta = False
         self._server_error = ""
         self._aborted = False
@@ -155,7 +162,17 @@ class ChatClient(QObject):
         if not choices:
             return
         choice = choices[0] or {}
-        piece = (choice.get("delta") or {}).get("content")
+        delta = choice.get("delta") or {}
+
+        # 思考链先到（reasoner）：单独发，别和正文混在一起
+        think = delta.get("reasoning_content") or (choice.get("message") or {}).get(
+            "reasoning_content"
+        )
+        if think:
+            self._reasoning += str(think)
+            self.reasoning_delta.emit(str(think))
+
+        piece = delta.get("content")
         if not piece:
             # 非流式网关：整条消息放在 message.content 里
             piece = (choice.get("message") or {}).get("content")

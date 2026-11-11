@@ -340,14 +340,22 @@ class MessageArea(QScrollArea):
         self.scroll_to_end()
         return bubble
 
-    def begin_message(self, role: Literal["user", "bot"]) -> QLabel:
-        """先建一个空气泡，等流式内容一点点填进来。"""
+    # 角色 → QSS 里用的 objectName
+    ROLE_NAMES = {"user": "bubbleUser", "bot": "bubbleBot", "reasoning": "bubbleReasoning"}
+
+    def begin_message(
+        self, role: Literal["user", "bot", "reasoning"], before: QWidget | None = None
+    ) -> QLabel:
+        """先建一个空气泡，等流式内容一点点填进来。
+
+        `before` 给「思考链气泡要插在回答气泡上面」用。
+        """
         if not self._has_messages:
             self._empty.hide()
             self._has_messages = True
 
         bubble = QLabel("")
-        bubble.setObjectName("bubbleUser" if role == "user" else "bubbleBot")
+        bubble.setObjectName(self.ROLE_NAMES.get(role, "bubbleBot"))
         bubble.setWordWrap(True)
         bubble.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
         bubble.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
@@ -365,7 +373,12 @@ class MessageArea(QScrollArea):
 
         box = QWidget()
         box.setLayout(row)
-        self._lay.insertWidget(self._lay.count() - 1, box)
+        index = self._lay.count() - 1
+        if before is not None:
+            found = self._lay.indexOf(before)
+            if found >= 0:
+                index = found
+        self._lay.insertWidget(index, box)
         self.scroll_to_end()
         return bubble
 
@@ -503,12 +516,15 @@ class ChatColumn(QWidget):
         # --- 对话后端 ---------------------------------------------------
         self.client = chat_client.ChatClient(self)
         self.client.delta.connect(self._on_delta)
+        self.client.reasoning_delta.connect(self._on_reasoning_delta)
         self.client.finished_ok.connect(self._on_reply_done)
         self.client.failed.connect(self._on_reply_failed)
 
         self._history: list[dict] = []   # OpenAI 格式：{"role": ..., "content": ...}
         self._bubble: QLabel | None = None   # 正在流式写入的那个气泡
         self._bubble_fresh = True            # 还没写过内容（要替换占位文字）
+        self._reasoning_text = ""            # 本轮思考链全文（reasoner 才有）
+        self._reasoning_bubble: QLabel | None = None
         # 当前会话（data/session 里的一条）；没建会话就直接发消息时自动建一条
         self._session_id = ""
         self._session: session_store.SessionMeta | None = None
@@ -537,6 +553,8 @@ class ChatColumn(QWidget):
         self._bubble = self.messages.begin_message("bot")
         self._bubble.setText(t("main.messages.thinking"))
         self._bubble_fresh = True
+        self._reasoning_text = ""
+        self._reasoning_bubble = None
 
         model = session.model or cfg.model
         if not self.client.send(cfg, self._payload(cfg), model=model):
@@ -590,7 +608,13 @@ class ChatColumn(QWidget):
         self._session = session_store.get_meta(session_id)
         self.messages.clear_messages()
         self._history.clear()
+        self._reasoning_bubble = None
+        self._reasoning_text = ""
+        show_reasoning = chat_config.load().show_reasoning
         for row in session_store.load_messages(session_id):
+            if row["role"] == "bot" and row["reasoning"] and show_reasoning:
+                thought = self.messages.begin_message("reasoning")
+                thought.setText(row["reasoning"])
             bubble = self.messages.begin_message(row["role"])
             bubble.setText(row["text"] or t("main.messages.empty_reply"))
             self._history.append(
@@ -602,6 +626,19 @@ class ChatColumn(QWidget):
         self.messages.scroll_to_end()
 
     # --- 流式回填 -------------------------------------------------------
+    def _on_reasoning_delta(self, piece: str) -> None:
+        """思考链：**总是收**（要存进会话），只有开关打开才往界面上画。"""
+        self._reasoning_text += piece
+        if not chat_config.load().show_reasoning:
+            return
+        if self._reasoning_bubble is None:
+            before = self._bubble.parentWidget() if self._bubble is not None else None
+            self._reasoning_bubble = self.messages.begin_message("reasoning", before=before)
+            self._reasoning_bubble.setText(piece)
+        else:
+            self._reasoning_bubble.setText(self._reasoning_bubble.text() + piece)
+        self.messages.scroll_to_end()
+
     def _on_delta(self, piece: str) -> None:
         if self._bubble is None:
             return
@@ -619,10 +656,11 @@ class ChatColumn(QWidget):
             session_store.append_assistant_message(
                 self._session.id,
                 full,
-                reasoning="",
+                reasoning=self._reasoning_text or self.client.last_reasoning(),
                 usage=self.client.last_usage(),
             )
             self.session_updated.emit(self._session.id)
+        self._reasoning_bubble = None
 
     def _on_reply_failed(self, reason: str) -> None:
         # 已经收到的部分保留（chat_client 会把它当成功发出来），这里只处理空回复

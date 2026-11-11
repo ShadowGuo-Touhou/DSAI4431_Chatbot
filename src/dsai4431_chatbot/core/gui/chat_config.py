@@ -38,6 +38,8 @@ class ChatConfig:
     rag_dir: str = ""
     rag_ollama: str = ""
     rag_embedding: str = ""
+    # 显示思考链（deepseek-reasoner 才有 reasoning_content）；默认关
+    show_reasoning: bool = False
 
     # --- 派生信息 -------------------------------------------------------
     def persona_path(self) -> Path:
@@ -91,6 +93,16 @@ def _get(settings, key: str, default: str) -> str:
     return default if raw is None else str(raw)
 
 
+def _get_bool(settings, key: str, default: bool) -> bool:
+    """INI 里 bool 存成 true/false（也可能被手改成 1/yes），都要认。"""
+    raw = settings.value(f"{GROUP}/{key}", default)
+    if raw is None:
+        return default
+    if isinstance(raw, bool):
+        return raw
+    return str(raw).strip().lower() in ("1", "true", "yes", "on")
+
+
 def _as_list(raw) -> list[str]:
     """QSettings 存空列表时读回来可能是 None 或空串，这里统一成 list。"""
     if raw is None:
@@ -118,6 +130,7 @@ def load() -> ChatConfig:
             rag_dir=_get(s, "rag_dir", ""),
             rag_ollama=_get(s, "rag_ollama", ""),
             rag_embedding=_get(s, "rag_embedding", ""),
+            show_reasoning=_get_bool(s, "show_reasoning", False),
         )
     except Exception as exc:  # noqa: BLE001 - 配置读挂了就退回默认，不能挡启动
         print(f"[chat] 配置读取失败，用默认值：{exc}", file=sys.stderr, flush=True)
@@ -134,4 +147,5 @@ def save(cfg: ChatConfig) -> None:
     s.setValue(f"{GROUP}/rag_dir", cfg.rag_dir)
     s.setValue(f"{GROUP}/rag_ollama", cfg.rag_ollama)
     s.setValue(f"{GROUP}/rag_embedding", cfg.rag_embedding)
+    s.setValue(f"{GROUP}/show_reasoning", bool(cfg.show_reasoning))
     s.sync()      # 立刻落盘

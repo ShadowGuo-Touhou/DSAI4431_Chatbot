@@ -1013,6 +1013,20 @@ class OtherPage(QWidget):
         self.hint.setWordWrap(True)
         body.addWidget(self.hint)
 
+        body.addSpacing(10)
+        cfg = chat_config.load()
+        self.cb_reasoning = QCheckBox(t("settings.other.show_reasoning"))
+        self.cb_reasoning.setObjectName("fileCheck")
+        self.cb_reasoning.setChecked(bool(cfg.show_reasoning))
+        self.cb_reasoning.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.cb_reasoning.toggled.connect(self._on_reasoning_toggled)
+        body.addWidget(self.cb_reasoning)
+
+        hint2 = QLabel(t("settings.other.show_reasoning_hint"))
+        hint2.setObjectName("hintText")
+        hint2.setWordWrap(True)
+        body.addWidget(hint2)
+
         lay.addWidget(card_frame)
         lay.addStretch(1)
 
@@ -1024,6 +1038,12 @@ class OtherPage(QWidget):
         blocker = QSignalBlocker(self.cbo_language)
         self.cbo_language.setCurrentIndex(index)
         del blocker
+
+    def _on_reasoning_toggled(self, on: bool) -> None:
+        """显示思考链：现读配置、只改这一项（别把别的页刚存的覆盖掉）。"""
+        cfg = chat_config.load()
+        cfg.show_reasoning = bool(on)
+        chat_config.save(cfg)
 
     def _on_language(self, index: int) -> None:
         code = self.cbo_language.itemData(index)

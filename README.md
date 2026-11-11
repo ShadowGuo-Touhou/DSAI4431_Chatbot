@@ -239,6 +239,21 @@ python -m dsai4431_chatbot.core.gui
 - 等回复时按 Enter 不会发、也不会清空你正在敲的内容
 - 出错时气泡里直接写原因（`HTTP 401 · Authentication Fails…` 这类）
 - `Preview` 按钮能看到当前勾选的文件拼出来的 system 提示词全文
+- 点左上角 `≡` 打开会话列表：新建对话要选**人格**（读 DSH 的 `personas.json`）和**模型**；
+  右键可以改名/删除，标题栏「选择」进批量删除
+- 设置 → Other 里有「显示思考链」（默认关）：只有 `deepseek-reasoner` 会返回思考内容
+
+### 会话数据 `data/session/`
+
+结构照 DSH（头 + 逐行事件），只是不压缩：
+
+```
+data/session/index.json                       # 列表索引（标题/时间/人格/模型/token）
+data/session/<workspace-slug>/<session-id>/session.v1.jsonl
+```
+
+每行事件：`{"type","seq","time","data"}`，类型有 `session`（头）、`user/message`、
+`assistant/message`（content 块含 `text` / `reasoning`，带 `usage`）、`session/title`、`turn/*`。
 
 > 截图和线框图在 `asset/plan/` 下，原图是竖排的，**需要顺时针旋转 90° 才是正的**。
 

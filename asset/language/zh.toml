@@ -163,6 +163,8 @@ language = "语言"
 language_label = "界面语言"
 language_hint = "换语言会立即重启程序才能生效（配置已经存好，不会丢）。"
 language_restarting = "正在重启，请稍候…"
+show_reasoning = "显示思考链"
+show_reasoning_hint = "默认关闭。只有 deepseek-reasoner 会返回思考内容；deepseek-chat 没有。不管开不开，思考内容都会存进会话文件。"
 
 # --- 主题卡上的文字（主题 toml 里的 label/note 是兜底）----------------
 [theme.light]

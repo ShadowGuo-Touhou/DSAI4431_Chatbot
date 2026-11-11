@@ -143,6 +143,15 @@ QScrollArea, #messageViewport {{
     border-radius: {radius_small}px;
     padding: 10px 14px;
 }}
+/* 思考链气泡（第 16 条）：弱化、更小，视觉上明显不是正文 */
+#bubbleReasoning {{
+    background: {surface_alt};
+    border: 1px dashed {border_soft};
+    border-radius: {radius_small}px;
+    padding: 8px 12px;
+    color: {text_weak};
+    font-size: 12px;
+}}
 
 /* 输入卡：一张圆角卡片把输入区和操作行包在一起（模仿 DSH） */
 #inputCard {{
