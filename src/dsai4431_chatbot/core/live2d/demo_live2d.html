@@ -285,6 +285,26 @@ try {
     }
   }
 
+  // 松手时的收尾：不硬切回待机（会闪一下），用一条很短的时间轴把当前值淡回 0。
+  // 必须在 _rx 还在的时候调用，才能读到"反应碰过哪些参数"。
+  function _fadeOut(ms) {
+    if (!_rx) return;
+    const dur = Math.max(80, Number(ms) || 260);
+    const cm = im.coreModel;
+    const tracks = {};
+    for (const pid in _rx.def.tracks) {
+      let cur = 0;
+      try {
+        const idx = cm.getParameterIndex(pid);
+        if (typeof idx === 'number' && idx >= 0) {
+          cur = Number(cm.getParameterValueById(pid)) || 0;
+        }
+      } catch (_) {}
+      tracks[pid] = [[0, cur], [dur, 0]];
+    }
+    _rx = { def: { duration: dur, tracks }, start: performance.now(), name: 'fade' };
+  }
+
   function _tickReaction(now) {
     if (!_rx) return;
 
@@ -336,7 +356,7 @@ try {
       try { mm0.stopAllMotions(); } catch (_) {}
     }
 
-    _rx = { def, start: performance.now() };
+    _rx = { def, start: performance.now(), name };
     return true;
   }
 
@@ -393,36 +413,52 @@ try {
     }
   })();
 
-  // 点击 / 摸头的区域判定：点在头顶那块算摸头，点别处算戳一下
+  // 点击 / 摸头的判定：只看按住时长，不再看点在模型的哪个位置。
+  //   < HOLD_MS 就松手  → tap         被戳一下
+  //   >= HOLD_MS 还按着 → headpatLoop 摸头（按住期间一直摸，松手淡出）
+  // HOLD_MS 可用 URL 参数 hold= 覆盖（毫秒），默认 300。
+  const HOLD_MS = (() => {
+    const v = parseFloat(new URLSearchParams(location.search).get('hold'));
+    return Number.isFinite(v) && v > 0 ? v : 300;
+  })();
+
+  // 供 window.l2d.input 读取（也方便外部程序判断现在是什么手势状态）
+  let _pressed = false;
+  let _patting = false;
+  let _holdTimer = 0;
+
   (function installPointer() {
     const host = app.renderer.view;
     if (!host) return;
 
-    host.addEventListener('click', (ev) => {
-      const rect = host.getBoundingClientRect();
-      if (!rect.width || !rect.height) return;
-      const px = (ev.clientX - rect.left) * (app.renderer.width / rect.width);
-      const py = (ev.clientY - rect.top) * (app.renderer.height / rect.height);
+    function endPress() {
+      if (!_pressed) return;
+      const wasPatting = _patting;
+      _pressed = false;
+      _patting = false;
+      if (_holdTimer) { clearTimeout(_holdTimer); _holdTimer = 0; }
+      if (wasPatting) _fadeOut(280);   // 摸完了松手：淡出回待机，不硬切
+      else react('tap');               // 0.3 秒内撒手 = 点击
+    }
 
-      let onHead = false;
-      try {
-        const local = model.toLocal(new PIXI.Point(px, py));
-        const hits = model.hitTest(local.x, local.y) || [];
-        onHead = hits.some((n) => n === 'Head' || /头/.test(n));
-      } catch (_) {}
-
-      // hitTest 拿不到时按纵向位置兜底：模型上部 28% 当头部
-      if (!onHead) {
-        try {
-          const b = model.getBounds();
-          const headTop = b.y;
-          const headBottom = b.y + b.height * 0.28;
-          onHead = py >= headTop && py <= headBottom;
-        } catch (_) {}
-      }
-
-      react(onHead ? 'headpat' : 'tap');
+    host.addEventListener('pointerdown', (ev) => {
+      if (ev.button !== undefined && ev.button !== 0) return;   // 只认左键
+      if (_pressed) return;            // 重复按下（多指 / 漏了抬起）算同一次
+      _pressed = true;
+      _patting = false;
+      _holdTimer = setTimeout(() => {
+        _holdTimer = 0;
+        if (!_pressed) return;
+        _patting = true;
+        react('headpatLoop');
+      }, HOLD_MS);
     });
+
+    // 抬起可能发生在画布外面（按住拖出去再松手），所以挂在 window 上
+    window.addEventListener('pointerup', endPress);
+    window.addEventListener('pointercancel', endPress);
+    // 窗口失焦（比如 Alt+Tab 切走）时松开按住状态，别卡在摸头
+    window.addEventListener('blur', endPress);
   })();
 
   // 原始自动行为实例，用于开关后还原
@@ -570,6 +606,10 @@ try {
     stopReaction() { _stopReaction(); return true; },
     // 当前是否正在播反应
     get reacting() { return !!_rx; },
+    // 正在播的反应名：'tap' | 'headpat' | 'headpatLoop' | 'fade'，空闲为 null
+    get reaction() { return _rx ? _rx.name || null : null; },
+    // 指针按住状态与判定阈值（调试 / 自动化测试用）
+    get input() { return { pressed: _pressed, patting: _patting, holdMs: HOLD_MS }; },
     reactions: Object.keys(REACTIONS),
 
     motion(group, index = 0) {

@@ -35,6 +35,7 @@
 | 戳一下（闭眼 + 歪头） | ✅ |
 | 摸头（`><` 眼睛 + 小张嘴 + 脸红） | ✅ |
 | 摸头循环（GIF 式，手动停） | ✅ |
+| 点击 / 摸头的判定 | ✅ 按时长：<300ms 松手=点击，按住 ≥300ms=摸头（见 §7.3b） |
 | 头部跟随鼠标 | ✅ 但**牺牲物理晃动**（见 §7.4） |
 | 口型接麦克风 / 桌宠模式 | ❌ 没做 |
 
@@ -280,7 +281,23 @@ win.react('headpatLoop')  # 摸头（循环）
 win.stop_reaction()       # 停止 + 复位参数 + 接回待机动作
 ```
 
-页面侧对应 `window.l2d.react(name)` / `stopReaction()` / `reacting`。
+页面侧对应 `window.l2d.react(name)` / `stopReaction()` / `reacting` / `reaction`（当前反应名）。
+
+### 7.3b 页面内的「点击 / 摸头」判定（只看时长，不看位置）
+
+早期版本按**点在哪**判：`hitTest` 命中 `Head` 或落在模型上部 28% → 摸头，否则戳一下。现在改成只按**按住多久**：
+
+| 操作 | 结果 |
+| --- | --- |
+| 按住 **< 300ms** 就撒手 | `tap`（被戳一下，1.05s） |
+| 按住 **≥ 300ms** 还不松 | `headpatLoop`（摸头，一直摸到你松手） |
+| 摸头中松手 | 淡出 `fade`（280ms 把参数拉回默认），然后回待机 |
+
+- 阈值可用 URL 参数 `hold=` 覆盖：`demo_live2d.html?...&hold=450`。
+- 300ms 判定用 `pointerdown/pointerup`（挂在 canvas / window 上），抬起在画布外也收得到；`pointercancel` 和 window `blur`（Alt+Tab 切走）也算松手。
+- `window.l2d.input` 返回 `{pressed, patting, holdMs}`，调试/自动化测试用它读状态。
+
+修改前实测（2026-11-11）：`framing=bust&zoom=1.9`，用 QTest 往 render widget 发真实鼠标事件，`pointerdown/up` 都能进到页面（target 是 `CANVAS`）；按住 450ms → `headpatLoop`，松手 → `fade` → `null`。
 
 ### 7.4 头部跟随（当前方案，有取舍）
 
