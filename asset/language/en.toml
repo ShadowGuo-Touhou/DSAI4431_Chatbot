@@ -29,6 +29,19 @@ no_key = "No API key yet. Open Settings → API KEY, fill it in, then send again
 failed = "Request failed: {msg}"
 empty_reply = "(the model returned nothing)"
 
+# --- Chats (drawer opened by ≡) --------------------------------------
+[session]
+title = "Chats"
+new = "＋ New chat"
+cancel_new = "Cancel"
+persona = "Persona"
+model = "Model"
+create = "Create"
+cancel = "Cancel"
+empty = "No chats yet"
+close = "Close (Esc)"
+untitled = "(untitled chat)"
+
 [main.input]
 placeholder = "Say something… (Enter to send, Shift+Enter for a new line)"
 

@@ -50,10 +50,13 @@ from dsai4431_chatbot.core.gui import (
     i18n,
     live2d_config,
     live2d_embed,
+    personas,
+    session_store,
     theme,
     themes,
 )
 from dsai4431_chatbot.core.gui.i18n import t
+from dsai4431_chatbot.core.gui.session_drawer import DRAWER_W, SessionDrawer
 
 ICON_DIR = theme.ICON_DIR
 # 发给模型的历史上限（条）。太多会拖 token、太短又记不住上下文。
@@ -462,6 +465,8 @@ class ChatColumn(QWidget):
 
     settings_requested = Signal()
     menu_requested = Signal()
+    # 会话内容变了（新建 / 首条消息自动建 / 追加消息）→ 让外层刷新会话列表
+    session_updated = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -504,6 +509,9 @@ class ChatColumn(QWidget):
         self._history: list[dict] = []   # OpenAI 格式：{"role": ..., "content": ...}
         self._bubble: QLabel | None = None   # 正在流式写入的那个气泡
         self._bubble_fresh = True            # 还没写过内容（要替换占位文字）
+        # 当前会话（data/session 里的一条）；没建会话就直接发消息时自动建一条
+        self._session_id = ""
+        self._session: session_store.SessionMeta | None = None
 
         # 等回复时按 Enter 不发也不清空输入框
         self.input.edit.can_submit = lambda: not self.client.busy()
@@ -520,22 +528,74 @@ class ChatColumn(QWidget):
             self.messages.add_message("bot", t("main.messages.no_key"))
             return
 
+        # 没建会话就直接发消息：自动建一条（用第一个人格 + 当前模型）
+        session = self._ensure_session(cfg)
+        session_store.append_user_message(session.id, text)
+        self.session_updated.emit(session.id)
+
         self._history.append({"role": "user", "content": text})
         self._bubble = self.messages.begin_message("bot")
         self._bubble.setText(t("main.messages.thinking"))
         self._bubble_fresh = True
 
-        if not self.client.send(cfg, self._payload(cfg)):
+        model = session.model or cfg.model
+        if not self.client.send(cfg, self._payload(cfg), model=model):
             self._finish_bubble(t("main.messages.failed", msg="请求没能发出去"))
 
     def _payload(self, cfg) -> list[dict]:
         """人格文件 → system 消息；再加最近若干轮对话。"""
         messages: list[dict] = []
-        system = cfg.system_prompt()
+        system = self._system_prompt(cfg)
         if system:
             messages.append({"role": "system", "content": system})
         messages.extend(self._history[-MAX_HISTORY_MESSAGES:])
         return messages
+
+    def _system_prompt(self, cfg) -> str:
+        """会话里记着用哪个人格；没有就退回设置页那份。"""
+        session = self._session
+        if session is not None and session.persona:
+            prompt = personas.build_system_prompt(
+                str(session.persona.get("dir") or ""),
+                [str(name) for name in (session.persona.get("files") or [])],
+            )
+            if prompt:
+                return prompt
+        return cfg.system_prompt()
+
+    # --- 会话 -----------------------------------------------------------
+    def _ensure_session(self, cfg) -> session_store.SessionMeta:
+        if self._session is not None:
+            return self._session
+        choices = personas.list_personas()
+        persona = choices[0] if choices else None
+        meta = session_store.create_session(
+            persona=persona.as_dict() if persona else {},
+            model=cfg.model or personas.MODELS[0],
+        )
+        self._session = meta
+        self._session_id = meta.id
+        self.session_updated.emit(meta.id)
+        return meta
+
+    def open_session(self, session_id: str) -> None:
+        """切到某个会话：读回历史消息，重建上下文。"""
+        self.client.abort()
+        self._bubble = None
+        self._session_id = session_id
+        self._session = session_store.get_meta(session_id)
+        self.messages.clear_messages()
+        self._history.clear()
+        for row in session_store.load_messages(session_id):
+            bubble = self.messages.begin_message(row["role"])
+            bubble.setText(row["text"] or t("main.messages.empty_reply"))
+            self._history.append(
+                {
+                    "role": "user" if row["role"] == "user" else "assistant",
+                    "content": row["text"],
+                }
+            )
+        self.messages.scroll_to_end()
 
     # --- 流式回填 -------------------------------------------------------
     def _on_delta(self, piece: str) -> None:
@@ -551,6 +611,14 @@ class ChatColumn(QWidget):
     def _on_reply_done(self, full: str) -> None:
         self._finish_bubble(full or t("main.messages.empty_reply"))
         self._history.append({"role": "assistant", "content": full})
+        if self._session is not None:
+            session_store.append_assistant_message(
+                self._session.id,
+                full,
+                reasoning="",
+                usage=self.client.last_usage(),
+            )
+            self.session_updated.emit(self._session.id)
 
     def _on_reply_failed(self, reason: str) -> None:
         # 已经收到的部分保留（chat_client 会把它当成功发出来），这里只处理空回复
@@ -564,10 +632,12 @@ class ChatColumn(QWidget):
 
     # --- 新对话 ---------------------------------------------------------
     def reset_conversation(self) -> None:
-        """清空当前对话（会话列表接入后由「新建会话」调用）。"""
+        """开始一条全新的对话（旧的那条已经落盘，不会丢）。"""
         self.client.abort()
         self._bubble = None
         self._history.clear()
+        self._session = None
+        self._session_id = ""
         self.messages.clear_messages()
 
 
@@ -607,6 +677,15 @@ class MainWindow(QMainWindow):
         self.chat.settings_requested.connect(self.open_settings)
         self._settings = None
 
+        # 会话抽屉（≡ 打开）：叠在窗口左侧，不占 splitter
+        self._drawer = SessionDrawer(self)
+        self._drawer.hide()
+        self._drawer.session_created.connect(self._on_session_switch)
+        self._drawer.session_opened.connect(self._on_session_switch)
+        self._drawer.close_requested.connect(self.hide_drawer)
+        self.chat.menu_requested.connect(self.toggle_drawer)
+        self.chat.session_updated.connect(self._on_session_updated)
+
         # 退出前把 WebEngine 收掉（嵌入式 HTTP 服务 + 渲染进程）。
         # aboutToQuit 管"换语言自动重启"（app.quit() 不触发 closeEvent），
         # closeEvent 管用户直接关窗口，两个入口都收一遍；shutdown 是幂等的。
@@ -616,6 +695,50 @@ class MainWindow(QMainWindow):
 
     def _on_about_to_quit(self) -> None:
         self.character.shutdown()
+
+    # --- 会话抽屉 -------------------------------------------------------
+    def _place_drawer(self) -> None:
+        margin = 12
+        self._drawer.setGeometry(
+            margin, margin, DRAWER_W, max(260, self.height() - margin * 2)
+        )
+
+    def show_drawer(self) -> None:
+        self._drawer.reload()
+        self._place_drawer()
+        self._drawer.show()
+        self._drawer.raise_()
+
+    def hide_drawer(self) -> None:
+        self._drawer.hide()
+
+    def toggle_drawer(self) -> None:
+        if self._drawer.isVisible():
+            self.hide_drawer()
+        else:
+            self.show_drawer()
+
+    def _on_session_switch(self, session_id: str) -> None:
+        """新建或选中会话：把它读进右边聊天区，然后收起抽屉。"""
+        self.chat.open_session(session_id)
+        self._drawer.set_current(session_id)
+        self.hide_drawer()
+
+    def _on_session_updated(self, session_id: str) -> None:
+        if self._drawer.isVisible():
+            self._drawer.reload()
+            self._drawer.set_current(session_id)
+
+    def resizeEvent(self, event):  # noqa: N802 - Qt 命名
+        super().resizeEvent(event)
+        if self._drawer.isVisible():
+            self._place_drawer()
+
+    def keyPressEvent(self, event):  # noqa: N802
+        if event.key() == Qt.Key.Key_Escape and self._drawer.isVisible():
+            self.hide_drawer()
+            return
+        super().keyPressEvent(event)
 
     def closeEvent(self, event):  # noqa: N802 - Qt 命名
         self.character.shutdown()

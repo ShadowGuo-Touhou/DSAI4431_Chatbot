@@ -197,6 +197,60 @@
   （`MemoryHttpCache`），本来就不落盘，所以 `data/webengine/` 一直是空的；
   路径设置留着当双保险
 
+### 13. 新建对话窗口 + 会话落盘 `data/session/` —— 已完成（2026-11-11）
+
+- **用户要求**：「提供新建对话的窗口：打开新页面并提供一个选择 persona
+  的选项，提供选择模型的选项。新建的 session 保存在 `data\session` 中。需要储存的内容与 dsh 相同」
+- **已完成**
+  - `core/gui/session_store.py`：`data/session/index.json` + `data/session/<slug>/<id>/session.v1.jsonl`
+  - `core/gui/personas.py`：人格清单直接读 DSH 那份
+    `P:\.dsh\persona-inject\personas.json`（赤蛮奇 / 大肥鲸），读不到就退回
+    「设置页那个目录 + 勾选文件」；模型候选 `deepseek-chat` / `deepseek-reasoner`
+  - `core/gui/session_drawer.py`：≡ 打开左侧抽屉（「会话」新页面）→「＋ 新建对话」→
+    选人格 + 选模型 → 创建；列表按最近更新排序，双击进入
+  - 主窗：抽屉叠在左侧、Esc 关闭；选中/新建会话后收起抽屉并把历史读进聊天区
+  - 不手动建会话直接发消息时，自动建一条（第一个人格 + 当前模型）
+  - 每条会话自己记着 persona 和 model，发请求时按会话的来
+- **DSH 那边实际存了什么**（我解了一份真实 session 看的，`session.v4.jsonl.zstd`）：
+  - 第一行是头：`{"type":"session","version":4,"id","createdAt","cwd","parentSession",
+    "isSeeded","origin","agentPreset"}`
+  - 之后每行一个事件：`{"type","seq","time","data"}`
+  - 关键事件：`session/title`（`data.title` + `messageSeqs` + `source.kind`）、
+    `user/message`（`data.content=[{type:"text",text}]`）、
+    `assistant/message`（`data.message.content` 里 `reasoning` / `text` / `tool-call` 块 +
+    `data.usage` + `data.stream`）、`turn/start`、`turn/end`（`reason.kind`）、
+    `request/header`（`config.provider/model/reasoningEffort/maxTokens`）
+- **本项目要照抄的部分**（去掉 `tool/*`、`job/*`、`approval/*` 这些我们还没有的事件）
+  - 目录：`data/session/<workspace-slug>/<session-id>/`
+  - 头：type/version/id/createdAt/cwd/persona/model（`agentPreset` 换成人格目录）
+  - 消息：`user/message` / `assistant/message`（content 块数组，`text` + `reasoning`，
+    带 `usage`），`session/title` 用于改名，`turn/start|end`
+  - **格式差异（有意）**：不压缩，写 `session.v1.jsonl`（纯文本，方便肉眼查/自带 grep）；
+    DSH 用 `zstd` 需要额外依赖。若以后要互通再加压缩
+  - 另加 `data/session/index.json`：会话列表索引（id/标题/时间/persona/model/消息数/token），
+    列表页不用逐个读大文件
+- **UI**：点 ≡ 打开「会话」抽屉（新页面）→ 顶部「新建对话」→ 选 persona + 选模型 → 创建并进入
+
+### 14. 修改对话名称 / 删除单个对话 —— 待做
+
+- 会话列表里每行右键（或行的「…」按钮）→ 重命名 / 删除
+- 重命名写 `session/title` 事件（和 DSH 一致），索引同步更新
+- 删除 = 删掉整个 session 目录 + 索引项；要二次确认
+
+### 15. 批量删除对话 —— 待做
+
+- 会话列表进入「选择模式」：每行前出勾选框，底部出现「删除选中(n)」和「全选/取消」
+- 删除前弹确认，写明会删掉几个会话；删完回正常模式
+
+### 16. 通用设置：显示思考链（默认关）—— 待做
+
+- 设置 → Other 页加一个开关「显示思考链」，默认**关**
+- 开：assistant 气泡里把 `reasoning_content` 用可折叠/弱化的样式显示出来
+  （`deepseek-reasoner` 才有思考内容；`deepseek-chat` 没这个字段）
+- 存 `settings.ini` 的 `chat/show_reasoning`
+- 注意：思考内容要**单独存**在 session 的 `reasoning` 块里（跟 DSH 一样），
+  开关只控制「显不显示」，不影响已存的数据
+
 ---
 
 ## 二、待用户决定

@@ -233,6 +233,35 @@ QListWidget#fieldList::item:selected {{
     color: {accent};
 }}
 
+/* 会话抽屉（≡ 打开）：浮在窗口左侧的一块面板 */
+QFrame#sessionDrawer {{
+    background: {surface};
+    border: 1px solid {border_soft};
+    border-radius: 12px;
+}}
+QFrame#newSessionForm {{
+    background: {surface_alt};
+    border: 1px solid {border_soft};
+    border-radius: 9px;
+}}
+QListWidget#sessionList {{
+    background: transparent;
+    border: none;
+    padding: 0;
+}}
+QListWidget#sessionList::item {{
+    padding: 5px 8px;
+    border-radius: 6px;
+    color: {text};
+}}
+QListWidget#sessionList::item:hover {{
+    background: {hover};
+}}
+QListWidget#sessionList::item:selected {{
+    background: {selected_bg};
+    color: {accent};
+}}
+
 /* 勾选式文件清单（Personality 页）：勾选框 + 文件名 + 字符数
    外框画在滚动区上（滚动条才会在框内），里面的 #fileList 当透明容器 */
 QScrollArea#fileListScroll {{

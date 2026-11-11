@@ -46,14 +46,22 @@ class ChatClient(QObject):
         self._got_delta = False
         self._server_error = ""    # 服务端在流里塞的 error
         self._aborted = False
+        self._usage: dict = {}     # 最后一次响应里的 usage（流式要有才给）
 
     # --- 状态 -----------------------------------------------------------
     def busy(self) -> bool:
         return self._reply is not None
 
+    def last_usage(self) -> dict:
+        """最近一次请求的 token 用量；网关没给就是空字典。"""
+        return dict(self._usage)
+
     # --- 发请求 ---------------------------------------------------------
-    def send(self, cfg, messages: list[dict]) -> bool:
-        """cfg 是 chat_config.ChatConfig；messages 是 OpenAI 格式的对话数组。"""
+    def send(self, cfg, messages: list[dict], model: str | None = None) -> bool:
+        """cfg 是 chat_config.ChatConfig；messages 是 OpenAI 格式的对话数组。
+
+        `model` 可以覆盖 cfg.model —— 每个会话自己记着用哪个模型。
+        """
         if self._reply is not None:
             return False
         ok, reason = cfg.ready()
@@ -62,7 +70,7 @@ class ChatClient(QObject):
             return False
 
         payload = {
-            "model": cfg.model or "deepseek-chat",
+            "model": (model or cfg.model or "deepseek-chat"),
             "messages": messages,
             "stream": True,
         }
@@ -84,6 +92,7 @@ class ChatClient(QObject):
         self._got_delta = False
         self._server_error = ""
         self._aborted = False
+        self._usage = {}
 
         body = QByteArray(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
         self._reply = self._nam.post(request, body)
@@ -133,6 +142,10 @@ class ChatClient(QObject):
 
     def _consume(self, payload: dict) -> None:
         """吃一个 data JSON：可能是增量、可能是错误、也可能是一整条回复。"""
+        usage = payload.get("usage")
+        if isinstance(usage, dict) and usage:
+            self._usage = usage
+
         error = payload.get("error")
         if error:
             self._server_error = _error_text(error)
