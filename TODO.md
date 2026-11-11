@@ -385,6 +385,29 @@
 - 附带查明：`Clothes1`（长短裙）和 `Clothes2`（体型）是 physics3.json 的**输入**
   （裙子/头发的摆动链靠它们选分支），不是输出，所以手动写不会被物理覆盖
 
+### 21. 中文输入法组字时占位符不消失 —— 已完成（2026-11-11）
+
+- **现象**：输入框里打拼音时，占位符和预编辑串叠在同一行
+  →「da点什么…（Enter 发送，Shift+Enter 换行）」
+- **根因**：IME 的预编辑串（拼音 `da`）**不写进 document**。
+  实测组字期间 `edit.document().isEmpty()` 仍是 `True`，
+  而 Qt 的 `QPlainTextEdit` 只按「document 是否为空」决定画不画 placeholder，
+  于是两张字叠在一起。（`QLineEdit` 有内建判断，`QPlainTextEdit` 没有）
+- **做法**：`_InputEdit` 覆写 `inputMethodEvent()`，按 `event.preeditString()`
+  是否为空切占位符；同时覆写 `setPlaceholderText()` 记住真文案，
+  组字中把它设成 `""`，组字结束再设回来（用 `_ph_hidden` 记住状态，
+  状态没变就不设，避免每次按键都重绘）
+- 验证：`_plan_preview/i18n/test_ae_ime_placeholder.py` 用
+  `QInputMethodEvent("da", [])` 手工模拟组字（不需要真 IME）
+  - 组字中 `placeholderText()` 变成 `''`，截图 `ime_composing.png` 只剩 `da`
+  - 提交「大」之后文案恢复，但 document 非空，Qt 自己不画
+  - `clear()` 之后占位符正常回来（`ime_idle.png` / `ime_cleared.png`）
+  - 顺带跑 `test_p_home.py` 32 项全过
+- **没做**：组字中按 Enter 会不会被输入框抢走（提前把拼音发出去）。
+  真 IME 一般会把 Enter 吃掉选候选，但这个风险存在，
+  要处理得在 `keyPressEvent` 里查 `InputMethodQuery.PreeditText` 再放行 ——
+  等真遇到再说
+
 ---
 
 ## 二、待用户决定

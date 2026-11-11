@@ -416,6 +416,28 @@ class _InputEdit(QPlainTextEdit):
     # 由外层注入：返回 False 时 Enter 不发也不清空（等回复时用）
     can_submit = None
 
+    # 占位符文案 / 是否因为正在组字而临时藏起来了
+    _ph_text = ""
+    _ph_hidden = False
+
+    def setPlaceholderText(self, text: str) -> None:  # noqa: N802 (Qt 命名)
+        self._ph_text = text
+        super().setPlaceholderText("" if self._ph_hidden else text)
+
+    def inputMethodEvent(self, event) -> None:  # noqa: N802 (Qt 命名)
+        """中文输入法组字时把占位符藏起来。
+
+        IME 的预编辑串（拼音 "da"）**不进 document**，Qt 只按 document 是否
+        为空决定画不画 placeholder，于是占位符会和拼音叠在同一行
+        （截图里那个「da点什么…」）。这里按 preeditString 是否为空来切。
+        """
+        super().inputMethodEvent(event)
+        composing = bool(event.preeditString())
+        if composing == self._ph_hidden:
+            return
+        self._ph_hidden = composing
+        super().setPlaceholderText("" if composing else self._ph_text)
+
     def keyPressEvent(self, event):  # noqa: N802 (Qt 命名)
         if event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter):
             if event.modifiers() & Qt.KeyboardModifier.ShiftModifier:
