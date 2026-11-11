@@ -535,7 +535,7 @@ class HomePage(QWidget):
         │  [赤蛮奇 ▾]                          │  ← 人格
         │  ┌────────────────────────────────┐  │
         │  │ 说点什么开始…                   │  │  ← 大输入框
-        │  │ [+]      [deepseek-chat ▾] [↑] │  │
+        │  │ [+]     [deepseek-flash ▾] [↑] │  │
         │  └────────────────────────────────┘  │
         └──────────────────────────────────────┘
 
@@ -848,7 +848,9 @@ class ChatColumn(QWidget):
             persona_dict = choices[0].as_dict() if choices else {}
         meta = session_store.create_session(
             persona=persona_dict,
-            model=self._pending_model or cfg.model or personas.MODELS[0],
+            # 旧会话/旧配置里可能是 deepseek-chat 这种下线的名字，建会话时就归一
+            model=personas.normalize_model(self._pending_model or cfg.model)
+            or personas.MODELS[0],
         )
         self._pending_persona = None
         self._pending_model = ""

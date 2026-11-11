@@ -296,13 +296,40 @@ def build_system_prompt(directory: str, files: list[str]) -> str:
     return prompt
 
 
-# 可选的对话模型（DeepSeek 官方这两个；别的兼容网关填自己的名字也行）
-MODELS = ["deepseek-chat", "deepseek-reasoner"]
+# 可选的对话模型。2026-11 起 DeepSeek 官方只剩这两个
+# （见 https://api-docs.deepseek.com/zh-cn/quick_start/pricing）：
+#
+#   deepseek-flash    便宜、快、支持图像理解（DeepSeek-V4.1-Flash-1017）
+#   deepseek-v4-pro   更贵更强，不支持图像理解（DeepSeek-V4-Pro-0813）
+#
+# 两个都支持「非思考 / 思考」两种模式（服务端默认思考）。别的兼容网关把模型名
+# 直接填进设置页就行 —— 这里只列官方那两个，不替用户猜网关支持什么。
+MODELS = ["deepseek-flash", "deepseek-v4-pro"]
+
+# 旧模型名 → 现在的名字。
+# 实测（2026-11-11，真打了 API）：`deepseek-chat` 现在还是 200，后端由
+# DeepSeek-V4.1-Flash 接单，只是**不带思考模式**；`deepseek-reasoner` 同理。
+# `deepseek-v4-flash*` 官方说"仍可调用但模型已下线"。老配置和老会话文件里存的
+# 都是这些旧名字，统一归到 flash，免得哪天旧名字真被删掉才炸。
+LEGACY_MODELS = {
+    "deepseek-chat": "deepseek-flash",
+    "deepseek-reasoner": "deepseek-flash",
+    "deepseek-v4-flash": "deepseek-flash",
+    "deepseek-v4-flash-vision-exp": "deepseek-flash",
+}
+
+
+def normalize_model(name: str) -> str:
+    """旧模型名换成现在的名字；认不出来的原样返回（给自定义网关留路）。"""
+    name = (name or "").strip()
+    return LEGACY_MODELS.get(name.lower(), name)
 
 
 def model_options(current: str = "") -> list[str]:
+    """下拉框里的模型列表。`current` 是配置里存的值，认不出来就插到最前面 ——
+    用户自己填的网关模型不能因为不在表里就丢掉。"""
     options = list(MODELS)
-    current = (current or "").strip()
+    current = normalize_model(current)
     if current and current not in options:
         options.insert(0, current)
     return options

@@ -93,7 +93,7 @@ api_placeholder = "例：https://api.deepseek.com"
 token = "Token"
 token_placeholder = "粘贴你的 API Token"
 model = "模型"
-model_placeholder = "默认 deepseek-chat（可换 deepseek-reasoner）"
+model_placeholder = "默认 deepseek-flash（可换 deepseek-v4-pro）"
 key_hint = '改完就自动保存，没有「保存」按钮。Key 以明文存在本机 settings.ini 里（不会上传到别处），但别把这份配置发给别人。'
 
 [settings.personality]
@@ -185,7 +185,7 @@ language_label = "界面语言"
 language_hint = "换语言会立即重启程序才能生效（配置已经存好，不会丢）。"
 language_restarting = "正在重启，请稍候…"
 show_reasoning = "显示思考链"
-show_reasoning_hint = "默认关闭。只有 deepseek-reasoner 会返回思考内容；deepseek-chat 没有。不管开不开，思考内容都会存进会话文件。"
+show_reasoning_hint = "默认关闭。思考模式下模型会先返回一段思维链，这里只决定要不要显示；不管开不开，思考内容都会存进会话文件。"
 
 # --- 主题卡上的文字（主题 toml 里的 label/note 是兜底）----------------
 [theme.light]

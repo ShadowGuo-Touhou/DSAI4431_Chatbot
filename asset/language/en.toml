@@ -94,7 +94,7 @@ api_placeholder = "e.g. https://api.deepseek.com"
 token = "Token"
 token_placeholder = "Paste your API token"
 model = "Model"
-model_placeholder = "defaults to deepseek-chat (or deepseek-reasoner)"
+model_placeholder = "defaults to deepseek-flash (or deepseek-v4-pro)"
 key_hint = "Saved as you edit — there is no Save button. The key is stored in plain text in the local settings.ini (it is not sent anywhere else), but do not hand that file to anyone."
 
 [settings.personality]
@@ -186,7 +186,7 @@ language_label = "Interface language"
 language_hint = "Switching restarts the app right away — that is when the text changes. Your settings are already saved."
 language_restarting = "Restarting, please wait…"
 show_reasoning = "Show reasoning"
-show_reasoning_hint = "Off by default. Only deepseek-reasoner returns reasoning; deepseek-chat has none. Either way it is saved in the session file."
+show_reasoning_hint = "Off by default. In thinking mode the model returns its chain of thought first; this only controls whether it is shown. Either way it is saved in the session file."
 
 # --- Theme cards (the label/note in each theme toml is the fallback) ---
 [theme.light]

@@ -22,6 +22,8 @@ import json
 from PySide6.QtCore import QByteArray, QObject, QUrl, Signal
 from PySide6.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
 
+from dsai4431_chatbot.core.gui import chat_config, personas
+
 # 单次请求的超时（毫秒）。流式下这里指"这么久一个字节都没有就断"，
 # 不是总时长；DeepSeek 偶尔首字节慢，给足 120 秒。
 TRANSFER_TIMEOUT = 120_000
@@ -33,7 +35,7 @@ class ChatClient(QObject):
     """一次一把：正在回复时再 send 会返回 False（调用方负责提示）。"""
 
     delta = Signal(str)            # 增量文本
-    reasoning_delta = Signal(str)  # 增量思考链（reasoner 才有）
+    reasoning_delta = Signal(str)  # 增量思考链（思考模式下才有）
     finished_ok = Signal(str)      # 完整文本
     failed = Signal(str)           # 人话版的错误
 
@@ -76,7 +78,9 @@ class ChatClient(QObject):
             return False
 
         payload = {
-            "model": (model or cfg.model or "deepseek-chat"),
+            # 旧会话文件里可能还存着 deepseek-chat 这种已经下线的名字，发之前归一
+            "model": personas.normalize_model(model or cfg.model)
+            or chat_config.DEFAULT_MODEL,
             "messages": messages,
             "stream": True,
         }

@@ -251,7 +251,7 @@ class ApiKeyPage(QWidget):
     """API KEY 页：API 地址 / Key / 模型。
 
     草图只有「API」「Token」两个字段；模型名是本项目加的（不填就默认
-    deepseek-chat，但换成 deepseek-reasoner 时得有个地方写）。
+    deepseek-flash，要换 deepseek-v4-pro 或者自定义网关时得有个地方写）。
 
     改完**自动存**进 settings.ini（和换肤、Live2D 一样的做法），没有"保存"按钮。
     """

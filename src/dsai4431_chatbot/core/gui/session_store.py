@@ -8,7 +8,7 @@
 `session.v1.jsonl` 第一行是头，其余每行一个事件：
 
     {"type":"session","version":1,"id":...,"createdAt":...,"cwd":...,
-     "persona":{"id","label","dir","files"},"model":"deepseek-chat"}
+     "persona":{"id","label","dir","files"},"model":"deepseek-flash"}
     {"type":"user/message","seq":1,"time":...,"data":{"content":[{"type":"text","text":"..."}]}}
     {"type":"assistant/message","seq":2,"time":...,"data":{"message":{"role":"assistant",
       "content":[{"type":"reasoning","text":"..."},{"type":"text","text":"..."}]},

@@ -20,7 +20,9 @@ from dsai4431_chatbot.core.gui import settings_store
 GROUP = "chat"
 
 DEFAULT_BASE_URL = "https://api.deepseek.com"
-DEFAULT_MODEL = "deepseek-chat"
+# 官方现在只有 deepseek-flash / deepseek-v4-pro 两个（2026-11），默认用便宜的那个。
+# 旧名字（deepseek-chat 等）的归一在 personas.normalize_model 里。
+DEFAULT_MODEL = "deepseek-flash"
 # 人格目录的默认值现在是 `<data>/personality`（见 personas.personality_dir）。
 # 这两个常量只留给"ini 里没写"的兜底，换机器不该指到绝对路径。
 DEFAULT_PERSONA_DIR = ""                                    # 空 = 用 personas.personality_dir()
@@ -39,7 +41,7 @@ class ChatConfig:
     rag_dir: str = ""
     rag_ollama: str = ""
     rag_embedding: str = ""
-    # 显示思考链（deepseek-reasoner 才有 reasoning_content）；默认关
+    # 显示思考链（两个模型都能返回 reasoning_content）；默认关
     show_reasoning: bool = False
 
     # --- 派生信息 -------------------------------------------------------
@@ -121,6 +123,14 @@ def _as_list(raw) -> list[str]:
         return []
 
 
+def _model(raw: str) -> str:
+    """把 ini 里存的模型名归一：旧名字（deepseek-chat 等）换成现在的，
+    空的退回默认。局部导入 personas 免得和它形成循环。"""
+    from dsai4431_chatbot.core.gui import personas
+
+    return personas.normalize_model(raw) or DEFAULT_MODEL
+
+
 def load() -> ChatConfig:
     """读配置。**任何异常都退回默认值** —— 配置坏了也不能让程序起不来。"""
     try:
@@ -128,7 +138,7 @@ def load() -> ChatConfig:
         return ChatConfig(
             base_url=_get(s, "base_url", DEFAULT_BASE_URL),
             api_key=_get(s, "api_key", ""),
-            model=_get(s, "model", DEFAULT_MODEL) or DEFAULT_MODEL,
+            model=_model(_get(s, "model", DEFAULT_MODEL)),
             persona_dir=_get(s, "persona_dir", ""),
             persona_files=_as_list(
                 s.value(f"{GROUP}/persona_files", None)
