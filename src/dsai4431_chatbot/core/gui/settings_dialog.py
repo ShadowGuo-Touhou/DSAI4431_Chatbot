@@ -20,9 +20,9 @@ API KEY 和 Personality 两张图写的是「Other」。这里按出现两次的
 
 from __future__ import annotations
 
-from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import (
+from PySide6.QtCore import QSize, Qt
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import (
     QButtonGroup,
     QDialog,
     QFrame,
@@ -75,7 +75,7 @@ def small_button(text: str, *, primary: bool = False) -> QPushButton:
     btn.setObjectName("smallButton")
     if primary:
         btn.setProperty("variant", "primary")
-    btn.setCursor(Qt.PointingHandCursor)
+    btn.setCursor(Qt.CursorShape.PointingHandCursor)
     return btn
 
 
@@ -85,7 +85,7 @@ def icon_button(icon: str, tooltip: str) -> QPushButton:
     btn.setIcon(QIcon(str(ICON_DIR / f"{icon}.svg")))
     btn.setIconSize(QSize(ICON, ICON))
     btn.setFixedSize(34, 34)
-    btn.setCursor(Qt.PointingHandCursor)
+    btn.setCursor(Qt.CursorShape.PointingHandCursor)
     btn.setToolTip(tooltip)
     return btn
 
@@ -106,7 +106,7 @@ def card() -> tuple[QFrame, QVBoxLayout]:
     """带描边的卡片容器。"""
     frame = QFrame()
     frame.setObjectName("surface")
-    frame.setAttribute(Qt.WA_StyledBackground, True)
+    frame.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
     lay = QVBoxLayout(frame)
     lay.setContentsMargins(16, 14, 16, 14)
     lay.setSpacing(8)
@@ -163,7 +163,7 @@ class PersonalityPage(QWidget):
         left.addWidget(
             field_list(["大肥鱼（默认）", "测试人格"], min_height=90), 1
         )
-        left.addWidget(small_button("+ New"), 0, Qt.AlignLeft)
+        left.addWidget(small_button("+ New"), 0, Qt.AlignmentFlag.AlignLeft)
         left_card.setFixedWidth(260)
         body.addWidget(left_card)
 
@@ -268,7 +268,7 @@ class Live2DModelPage(QWidget):
 
         hint = QLabel("草图里这一页没有内容。\n模型路径 / 显示尺寸 / 物理开关等，等确定后再画。")
         hint.setObjectName("hintText")
-        hint.setAlignment(Qt.AlignCenter)
+        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lay.addWidget(hint, 1)
 
 
@@ -284,7 +284,7 @@ class ThemePage(QWidget):
 
         hint = QLabel("换肤系统还没做（见 TODO 第 6 条）。\n做好后这里用来选主题，含一套蓝色皮。")
         hint.setObjectName("hintText")
-        hint.setAlignment(Qt.AlignCenter)
+        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lay.addWidget(hint, 1)
 
 
@@ -300,7 +300,7 @@ class OtherPage(QWidget):
 
         hint = QLabel("草图里这一页没有内容。")
         hint.setObjectName("hintText")
-        hint.setAlignment(Qt.AlignCenter)
+        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lay.addWidget(hint, 1)
 
 
@@ -336,7 +336,7 @@ class SettingsDialog(QDialog):
         # --- 左侧导航 ---------------------------------------------------
         nav = QFrame()
         nav.setObjectName("settingsNav")
-        nav.setAttribute(Qt.WA_StyledBackground, True)
+        nav.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         nav.setFixedWidth(NAV_W)
         nav_lay = QVBoxLayout(nav)
         nav_lay.setContentsMargins(10, 16, 10, 16)
@@ -352,7 +352,7 @@ class SettingsDialog(QDialog):
                 btn.setIcon(load_icon(icon))
                 btn.setIconSize(QSize(ICON, ICON))
             btn.setCheckable(True)
-            btn.setCursor(Qt.PointingHandCursor)
+            btn.setCursor(Qt.CursorShape.PointingHandCursor)
             btn.setChecked(index == 0)
             self._group.addButton(btn, index)
             nav_lay.addWidget(btn)

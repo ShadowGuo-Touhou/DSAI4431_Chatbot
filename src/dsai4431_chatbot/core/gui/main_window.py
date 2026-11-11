@@ -27,9 +27,9 @@ import sys
 from pathlib import Path
 from typing import Literal
 
-from PyQt5.QtCore import QSize, Qt, pyqtSignal
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import (
+from PySide6.QtCore import QSize, Qt, Signal
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import (
     QApplication,
     QFrame,
     QHBoxLayout,
@@ -77,7 +77,7 @@ def round_button(
 
     side = theme.ACTION_BUTTON if action else theme.ROUND_BUTTON
     btn.setFixedSize(side, side)
-    btn.setCursor(Qt.PointingHandCursor)
+    btn.setCursor(Qt.CursorShape.PointingHandCursor)
     btn.setToolTip(tooltip)
     return btn
 
@@ -95,7 +95,7 @@ class CharacterPanel(QWidget):
         super().__init__(parent)
         self.setObjectName("characterPanel")
         # 普通 QWidget 子类默认不画 QSS 的 background/border，必须显式打开
-        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setMinimumWidth(280)
 
         lay = QVBoxLayout(self)
@@ -103,7 +103,7 @@ class CharacterPanel(QWidget):
 
         hint = QLabel("Live2D 角色区\n（框架占位，待接入渲染页）")
         hint.setObjectName("characterHint")
-        hint.setAlignment(Qt.AlignCenter)
+        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lay.addWidget(hint)
 
 
@@ -113,8 +113,8 @@ class MessageArea(QScrollArea):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWidgetResizable(True)
-        self.setFrameShape(QFrame.NoFrame)
-        self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.setFrameShape(QFrame.Shape.NoFrame)
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
         self._body = QWidget()
         self._body.setObjectName("messageViewport")
@@ -125,7 +125,7 @@ class MessageArea(QScrollArea):
 
         self._empty = QLabel("还没有消息")
         self._empty.setObjectName("messageEmpty")
-        self._empty.setAlignment(Qt.AlignCenter)
+        self._empty.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._lay.insertWidget(0, self._empty)
 
         self._has_messages = False
@@ -143,8 +143,8 @@ class MessageArea(QScrollArea):
         bubble = QLabel(text)
         bubble.setObjectName("bubbleUser" if role == "user" else "bubbleBot")
         bubble.setWordWrap(True)
-        bubble.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        bubble.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        bubble.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+        bubble.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
         # 气泡最宽占视口的 2/3，长文本自动换行，短文本保持自身宽度
         bubble.setMaximumWidth(max(240, int(self.viewport().width() * 0.66)))
 
@@ -180,11 +180,11 @@ class _InputEdit(QPlainTextEdit):
     写在外层 QFrame 的 keyPressEvent 里永远不会被触发。
     """
 
-    submitted = pyqtSignal(str)
+    submitted = Signal(str)
 
     def keyPressEvent(self, event):  # noqa: N802 (Qt 命名)
-        if event.key() in (Qt.Key_Return, Qt.Key_Enter):
-            if event.modifiers() & Qt.ShiftModifier:
+        if event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter):
+            if event.modifiers() & Qt.KeyboardModifier.ShiftModifier:
                 return super().keyPressEvent(event)
             self.submit()
             return None
@@ -201,14 +201,14 @@ class _InputEdit(QPlainTextEdit):
 class InputCard(QFrame):
     """输入卡：一张圆角卡片，上输入、下操作行（附件在左，语音/发送在右）。"""
 
-    submitted = pyqtSignal(str)
+    submitted = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setObjectName("inputCard")
-        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         # 竖向只占内容高度，不要把消息区让出的空间全吃掉
-        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
+        self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
 
         outer = QVBoxLayout(self)
         outer.setContentsMargins(14, 12, 12, 10)
@@ -217,7 +217,7 @@ class InputCard(QFrame):
         self.edit = _InputEdit()
         self.edit.setObjectName("inputEdit")
         self.edit.setPlaceholderText("说点什么…（Enter 发送，Shift+Enter 换行）")
-        self.edit.setFrameShape(QFrame.NoFrame)
+        self.edit.setFrameShape(QFrame.Shape.NoFrame)
         self.edit.setMinimumHeight(44)
         self.edit.setMaximumHeight(84)  # 最多约三行，再多就内部滚动
         outer.addWidget(self.edit)
@@ -246,8 +246,8 @@ class InputCard(QFrame):
 class ChatColumn(QWidget):
     """右侧聊天列：顶栏 + 消息区 + 输入卡。"""
 
-    settings_requested = pyqtSignal()
-    menu_requested = pyqtSignal()
+    settings_requested = Signal()
+    menu_requested = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -298,7 +298,7 @@ class MainWindow(QMainWindow):
 
         body = QWidget()
         body.setObjectName("windowBody")
-        body.setAttribute(Qt.WA_StyledBackground, True)
+        body.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setCentralWidget(body)
 
         root = QHBoxLayout(body)
@@ -306,7 +306,7 @@ class MainWindow(QMainWindow):
         root.setSpacing(0)
 
         # 左右两栏用 QSplitter：允许用户拖动比例，也方便调试布局
-        splitter = QSplitter(Qt.Horizontal)
+        splitter = QSplitter(Qt.Orientation.Horizontal)
         splitter.setChildrenCollapsible(False)
 
         self.character = CharacterPanel()
@@ -331,18 +331,18 @@ class MainWindow(QMainWindow):
         from dsai4431_chatbot.core.gui.settings_dialog import SettingsDialog
 
         dlg = SettingsDialog(self)
-        dlg.exec_()
+        dlg.exec()
 
 
 def main(argv: list[str] | None = None) -> int:
     """启动主界面。"""
-    # 高分屏必须在 QApplication 之前设，否则 200% 缩放下界面小一半。
-    # 这条和 core/live2d 里踩过的坑是同一件事，见 HANDOFF §3.3。
-    for attr in ("AA_EnableHighDpiScaling", "AA_UseHighDpiPixmaps"):
-        flag = getattr(Qt, attr, None)
-        if flag is not None:
-            QApplication.setAttribute(flag, True)
-    QApplication.setAttribute(Qt.AA_ShareOpenGLContexts, True)
+    # Qt6 默认开启 HiDPI 缩放，AA_EnableHighDpiScaling / AA_UseHighDpiPixmaps
+    # 已废弃（setAttribute 会告警甚至无效），这里不再设置。
+    # AA_ShareOpenGLContexts 保留：后面嵌 QWebEngineView 时必须在 QApplication
+    # 之前打开，否则 WebEngine 起不来（见 core/live2d 的踩坑记录）。
+    QApplication.setAttribute(
+        Qt.ApplicationAttribute.AA_ShareOpenGLContexts, True
+    )
 
     app = QApplication(sys.argv if argv is None else argv)
     app.setApplicationName("DSAI4431 Chatbot")
@@ -350,7 +350,7 @@ def main(argv: list[str] | None = None) -> int:
 
     win = MainWindow()
     win.show()
-    return app.exec_()
+    return app.exec()
 
 
 if __name__ == "__main__":
