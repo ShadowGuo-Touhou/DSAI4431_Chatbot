@@ -580,14 +580,17 @@ class Live2DView(QWidget):
         页面重载后**只套一次**：这套模型有几个表情其实是开关（裙子切换 =
         短裙/长裙来回切），设置页动一下别的项就会再调一次本函数，
         不加这个闸门裙子会一会长一会短。
+
+        ⚠ 必须一次性传进去，不能循环调 expression()：cubism4 的表情管理器
+        只有一个 currentExpression 槽位，后一个会把前一个顶掉 —— 之前
+        「胸口衣服 + 裙子切换」里只有长裙生效，胸口一直是敞的。
+        页面侧 setExpressions() 把这些表情的参数合并后每帧自己写。
         """
         if self._expressions_done:
             return
         self._expressions_done = True
-        for name in names or ():
-            text = str(name).strip()
-            if text:
-                self.call("expression", text)
+        texts = [str(n).strip() for n in (names or ()) if str(n).strip()]
+        self.call("setExpressions", *texts)
 
     def _poll_aim(self) -> None:
         """把全局光标位置换算成「相对角色区」的归一化坐标，推给页面。

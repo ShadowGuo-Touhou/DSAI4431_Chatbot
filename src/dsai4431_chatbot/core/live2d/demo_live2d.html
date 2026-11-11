@@ -407,6 +407,38 @@ try {
   }
 
   // -------------------------------------------------------------------------
+  // 默认服装：把多个「换装表情」合并成一组参数
+  //   cubism4 的 ExpressionManager 只有一个 currentExpression 槽位
+  //   （setExpression → _setExpression(e)，后一个直接把前一个顶掉），
+  //   所以「胸口衣服 + 裙子切换」不能连续调两次 expression()：
+  //   后一次把前一次抹了，只有最后一个生效 —— 之前长裙生效、胸口没生效
+  //   就是这个原因。这里改成把各表情的参数并成一份，每帧自己写一遍。
+  // -------------------------------------------------------------------------
+  const _costume = {};        // paramId -> { value, blend }
+  let _costumeLog = [];       // 排查用：每个名字的处理结果
+
+  function _applyCostume() {
+    const cm = im && im.coreModel;
+    if (!cm) return;
+    for (const id in _costume) {
+      const p = _costume[id];
+      try {
+        const idx = cm.getParameterIndex(id);
+        if (typeof idx !== 'number' || idx < 0) continue;
+        // 都以「参数默认值」为底算，不能叠上一帧的值（会一路涨上去）
+        const base = cm.getParameterDefaultValue(idx);
+        if (p.blend === 'Add') {
+          cm.setParameterValueById(id, base + p.value);
+        } else if (p.blend === 'Multiply') {
+          cm.setParameterValueById(id, base * p.value);
+        } else {
+          cm.setParameterValueById(id, p.value);
+        }
+      } catch (_) {}
+    }
+  }
+
+  // -------------------------------------------------------------------------
   // 统一挂到 Core 的 update 上
   //   参数 → 必须在 update 之前写
   //   黑层 → 必须在 update 之后抹（Core 每帧重算 opacities）
@@ -459,6 +491,8 @@ try {
     if (typeof im.update === 'function') {
       const origIMUpdate = im.update.bind(im);
       im.update = function () {
+        // 默认服装（换装开关）每帧都要重新写，和鼠标跟随同一个道理
+        _applyCostume();
         // 反应优先；没有反应时才做鼠标跟随（否则会抢反应里的头角度）
         if (_rx) _tickReaction(performance.now());
         else _tickFollow();
@@ -534,6 +568,96 @@ try {
   const expressions = exprDefs
     .map((d) => d && (d.Name || d.name || d.Id || d.id))
     .filter((s) => typeof s === 'string' && s.length);
+
+  // 表达式里的参数。注意 loadExpression() 返回的是 CubismExpressionMotion
+  // 实例（不是 exp3.json 的原始对象），参数在 _parameters 里，形如
+  //   [{ parameterId: 'Clothes3', blendType: 0, value: 1 }]
+  // blendType：0=Add 1=Multiply 2=Overwrite（Cubism 的枚举）
+  // 原始 JSON 的写法（{Id,Value,Blend}）也兼容，换别的库时不至于炸。
+  function _exprParams(def) {
+    if (!def) return [];
+    const raw = def._parameters || def.parameters || def.Parameters || [];
+    const out = [];
+    for (let i = 0; i < raw.length; i++) {
+      const p = raw[i] || {};
+      const id = p.parameterId || p.id || p.Id;
+      if (typeof id !== 'string' || !id) continue;
+      let blend = p.blendType ?? p.blend ?? p.Blend ?? 0;
+      if (typeof blend === 'number') {
+        blend = blend === 1 ? 'Multiply' : blend === 2 ? 'Overwrite' : 'Add';
+      }
+      out.push({
+        id,
+        value: Number(p.value ?? p.Value ?? 0) || 0,
+        blend: String(blend),
+      });
+    }
+    return out;
+  }
+
+  function _findExprIndex(name) {
+    for (let i = 0; i < exprDefs.length; i++) {
+      const d = exprDefs[i] || {};
+      if ((d.Name || d.name || d.Id || d.id) === name) return i;
+    }
+    return -1;
+  }
+
+  // 把多个表情的参数并成一份，交给 _applyCostume() 每帧写。
+  // 单槽的表情管理器只能留一个，所以合并必须自己做（见 _costume 顶部注释）。
+  async function applyExpressions(names) {
+    const list = (Array.isArray(names) ? names : [names])
+      .map((n) => (typeof n === 'string' ? n.trim() : ''))
+      .filter((n) => n.length);
+    const merged = {};
+    const applied = [];
+    _costumeLog = ['em=' + (em ? 'ok' : 'null') + ' defs=' + exprDefs.length];
+    if (em) {
+      for (const name of list) {
+        const idx = _findExprIndex(name);
+        if (idx < 0) { _costumeLog.push(name + ': 找不到'); continue; }
+        let def = null;
+        try {
+          def = typeof em.loadExpression === 'function'
+            ? await em.loadExpression(idx)
+            : await em.getExpression(idx);
+        } catch (e) {
+          _costumeLog.push(name + ': 加载失败 ' + ((e && e.message) || e));
+          continue;
+        }
+        if (!def) { _costumeLog.push(name + ': 定义为空'); continue; }
+        const ps = _exprParams(def);
+        if (!ps.length) {
+          let dump = '';
+          try { dump = JSON.stringify(def._parameters || null); } catch (_) { dump = '?'; }
+          _costumeLog.push(name + ': 无参数 keys=' + Object.keys(def).join('|') + ' params=' + dump);
+          continue;
+        }
+        for (const p of ps) merged[p.id] = p;
+        applied.push(name);
+        _costumeLog.push(name + ': ' + ps.map((p) => p.id + '=' + p.value).join(','));
+      }
+    }
+    // 上一批有、这一批没有的参数：写回默认值。Cubism 会保留上一帧的外部写入，
+    // 不主动清掉的话「撤掉换装」之后衣服还停在合着的样子。
+    for (const id in _costume) {
+      if (id in merged) continue;
+      try {
+        const cm = im && im.coreModel;
+        const idx = cm && cm.getParameterIndex(id);
+        if (cm && typeof idx === 'number' && idx >= 0) {
+          cm.setParameterValueById(id, cm.getParameterDefaultValue(idx));
+        }
+      } catch (_) {}
+    }
+    for (const k in _costume) delete _costume[k];
+    for (const k in merged) _costume[k] = merged[k];
+    // 单槽里若还挂着一个表情，它会和这里抢同一批参数，清掉
+    try { em && em.resetExpression(); } catch (_) {}
+    _applyCostume();
+    _costumeLog.push('merged=' + Object.keys(merged).join(','));
+    return { applied, params: Object.keys(merged) };
+  }
 
   // --- 布局 -------------------------------------------------------------
   // 注意：不能用 app.renderer.width/resolution 当视口尺寸。QWebEngineView 里
@@ -686,9 +810,28 @@ try {
       catch (e) { fail(e.message); return false; }
     },
     resetExpression() {
-      try { em && em.resetExpression && em.resetExpression(); return true; }
+      try {
+        // 合并出来的默认服装也一并撤掉（applyExpressions 会把参数写回默认值），
+        // 否则「重置表情」之后衣服还合着
+        applyExpressions([]);
+        em && em.resetExpression && em.resetExpression();
+        return true;
+      }
       catch (e) { fail(e.message); return false; }
     },
+    // 同时套多个表情（换装开关），参数会合并；单槽管理器做不到这件事。
+    // 两种调用都吃：setExpressions(['a','b']) / setExpressions('a','b')
+    setExpressions(...names) {
+      const list = names.length === 1 && Array.isArray(names[0]) ? names[0] : names;
+      applyExpressions(list);
+      return true;
+    },
+    // 当前生效的合并参数，形如 ["Clothes3=1", "Clothes1=-1"]
+    get costume() {
+      return Object.keys(_costume).map((id) => id + '=' + _costume[id].value);
+    },
+    // 排查用：最近一次 setExpressions 的处理过程
+    get costumeLog() { return _costumeLog.slice(); },
 
     set(id, v) {
       try { im.coreModel.setParameterValueById(id, Number(v)); return true; }

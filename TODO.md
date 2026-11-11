@@ -344,7 +344,7 @@
   `体型1/体型2/兔牙/前倾/加载/单片眼镜/圈圈眼/尾巴开关/屑屑眼/流冷汗/流泪/爱心眼/
    竖食指关/竖食指开/胸口衣服/脱鞋/脸红/裙子切换/钢盆/黑框眼镜/黑脸/默认体型/＞＜`
   - 「胸口衣服」= 白衬衫盖住胸口；「裙子切换」= 短裙 ↔ 长裙
-  - 两个可以同时挂着（实测 `l2d.expression()` 连调两次，两种效果都在）
+  - ⚠ 当时的判断「两个可以同时挂着」是**错的**，见下面的 #20 —— 连调两次其实只有最后一个生效
 - **做法**
   - `live2d_config.DEFAULT_EXPRESSIONS = ("胸口衣服", "裙子切换")`，
     存 `live2d/expressions`；ini 里没这一项就用默认（设成空列表 = 不套）
@@ -355,6 +355,35 @@
   只在页面重载（`_load()`）后重置
 - 验证：`_plan_preview/i18n/test_z_default_dress.py` 直接启动截图
   `default_dress.png` = 白衬衫 + 长裙；对照 `dress_0_base.png`（原始短裙）
+
+### 20. 换装只生效一半（胸口没合上）—— 已完成（2026-11-11）
+
+- **现象**：用户截图「默认打开还是左手边的样子」—— 长裙生效了，胸口依旧敞着
+- **根因**：cubism4 的表情管理器只有一个槽位。`cubism4.min.js` 里的 `setExpression(t)`
+  最后一句是 `this.currentExpression = e; this._setExpression(e)`，
+  也就是**后一个表情直接顶掉前一个**。`set_expressions()` 里循环调两次
+  `l2d.expression(name)`，实际只有最后一个（`裙子切换`）留下。
+  #19 里「两个可以同时挂」的结论就是在这一步判错的。
+- **做法**：不再依赖单槽，自己在页面里合并
+  - `demo_live2d.html` 新增 `_costume`（paramId → {value, blend}）
+  - `setExpressions(names)`：用 `em.loadExpression(index)` 逐个取出表情的 `_parameters`
+    合并；`applyExpressions([])` 时把上一批参数写回默认值（否则撤掉换装后不还原）
+  - `_applyCostume()` 挂在 `im.update` 的包装里、**update 之前**写参数
+    （和鼠标跟随同一位置，那里写才压得住 Core 的每帧重置）
+  - `live2d_embed.set_expressions()` 改成一次调用 `setExpressions(*names)`，
+    不再循环
+- **两个坑**
+  - `em.loadExpression(i)` 返回的是 **CubismExpressionMotion 实例**，不是 exp3.json 原始对象。
+    参数在 `_parameters`，字段是 `{parameterId, blendType, value}`（blendType 0=Add/1=Multiply/2=Overwrite）。
+    照 `{Id,Value,Blend}` 或 `.parameters` 去读会全部读空 → 合并结果为空、什么都不生效。
+  - 外部写入的参数值 Cubism 会一直保留，所以「清空换装」必须显式写回
+    `getParameterDefaultValue(idx)`。
+- 验证：`_plan_preview/i18n/test_ab_costume.py`（用真实配置的副本跑真窗口）
+  - `l2d.costume` = `["Clothes3=1","Clothes1=-1"]`，`Clothes3`=1.0、`Clothes1`=0.0
+  - `costume_on.png` = 合领 + 长裙；`l2d.resetExpression()` 后
+    `costume_off.png` = 敞胸 + 短裙，两个参数都回到默认值
+- 附带查明：`Clothes1`（长短裙）和 `Clothes2`（体型）是 physics3.json 的**输入**
+  （裙子/头发的摆动链靠它们选分支），不是输出，所以手动写不会被物理覆盖
 
 ---
 
