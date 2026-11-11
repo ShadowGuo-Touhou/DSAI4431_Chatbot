@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
      fill="none" stroke="#1f2329" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
   <!-- 板身 -->
-  <rect x="3.5" y="10.6" width="17" height="9.4" rx="1.6"/>
+  <rect x="3.5" y="10.8" width="17" height="9.2" rx="1.6"/>
   <!-- 板身上的分格（对应 PROD / SCENE / TAKE） -->
-  <path d="M3.5 14.4h17"/>
-  <path d="M9.9 14.4v5.6M14.9 14.4v5.6"/>
-  <!-- 掀起的打板条 -->
-  <path d="M4.9 6.1 21.6 9.1 20.3 11.4 3.5 10.6Z"/>
+  <path d="M3.5 14.6h17"/>
+  <path d="M9.9 14.6v5.4M14.9 14.6v5.4"/>
+  <!-- 掀起来的打板条：左端是铰链，右端抬起 -->
+  <path d="M3.8 10.6 21 7.2 20.4 5.2 3.2 8.6Z"/>
   <!-- 打板条上的斜纹 -->
-  <path d="M8.6 7.0v3.6M12.9 7.7v3.4M17.2 8.5v3.1"/>
+  <path d="M8 7.9v1.7M12.2 7v1.7M16.4 6.2v1.7"/>
 </svg>
