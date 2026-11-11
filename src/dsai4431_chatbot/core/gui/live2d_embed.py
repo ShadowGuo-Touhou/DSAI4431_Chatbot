@@ -68,7 +68,7 @@ apply_webengine_env()
 
 # 上面这些必须先生效，import QtWebEngine 才有意义
 from PySide6.QtCore import QTimer, QUrl, Signal  # noqa: E402
-from PySide6.QtGui import QColor  # noqa: E402
+from PySide6.QtGui import QColor, QCursor  # noqa: E402
 from PySide6.QtWebEngineCore import (  # noqa: E402
     QWebEnginePage,
     QWebEngineProfile,
@@ -387,6 +387,14 @@ class Live2DView(QWidget):
         self._deadline.setSingleShot(True)
         self._deadline.timeout.connect(self._on_timeout)
 
+        # 头部跟随鼠标：页面自己只听 mousemove，那**只有鼠标落在角色区里**才动。
+        # 页里 setAim() 那段注释写明了正确做法 ——「Qt 那边用轮询喂进来」，
+        # 所以这里按和 demo_interactive.py 一样的方式轮询全局光标，跨整个窗口都跟。
+        self._aim = (0.0, 0.0)
+        self._aim_timer = QTimer(self)
+        self._aim_timer.setInterval(60)
+        self._aim_timer.timeout.connect(self._poll_aim)
+
     # --- 启动 -------------------------------------------------------------
     def start(self) -> None:
         """起本地服务并装载页面。"""
@@ -437,6 +445,7 @@ class Live2DView(QWidget):
         self._web.load(QUrl(url))
         self._poll.start()
         self._deadline.start(self._timeout_ms)
+        self._aim_timer.start()
 
     # --- 计时（性能计数，够用且不依赖 Qt 的时钟） -------------------------
     _t0 = 0.0
@@ -513,6 +522,12 @@ class Live2DView(QWidget):
         self.failed.emit(msg)
 
     def _stop_timers(self) -> None:
+        """停就绪探测用的计时器。
+
+        ⚠ 这里**不能**停 `_aim_timer`：就绪成功时也会调本方法，一停鼠标跟随就死了
+        （2026-11-11 踩过：ready 之后 aim 一直是 0，查了半天是这里被顺手停掉）。
+        视线跟随由 shutdown() 单独负责。
+        """
         for t in (self._poll, self._deadline):
             try:
                 t.stop()
@@ -556,6 +571,35 @@ class Live2DView(QWidget):
     def set_follow(self, on: bool) -> None:
         self.call("follow", bool(on))
 
+    def _poll_aim(self) -> None:
+        """把全局光标位置换算成「相对角色区」的归一化坐标，推给页面。
+
+        这样鼠标在聊天区、输入框上移动时头也会转（页面自己只听 mousemove，
+        那只有光标落在角色区里才生效）。窗口不在前台时让它看回正中。
+        """
+        if not self._settled or self._closed:
+            return
+        cursor = QCursor.pos()
+        win = self.window()
+        if win is not None and not win.rect().contains(win.mapFromGlobal(cursor)):
+            # 光标不在程序窗口里 → 看回正中（别让头一直歪着）
+            nx, ny = 0.0, 0.0
+        else:
+            # 相对**角色区**归一化（和 demo_interactive 一致），再缩到 ±0.75：
+            # 鼠标停在角色区边上头转约 ±19°，跑到右边聊天区打字时封顶 22.5°。
+            # 不压的话聊天区远在 4 倍宽度外，头会死死钉在 30° 上限上。
+            local = self.mapFromGlobal(cursor)
+            w = max(1, self.width())
+            h = max(1, self.height())
+            nx = max(-0.75, min(0.75, ((local.x() / w) * 2 - 1) * 0.75))
+            ny = max(-0.75, min(0.75, ((local.y() / h) * 2 - 1) * 0.75))
+        ox, oy = self._aim
+        # 变化太小就不发，省一次跨进程 JS 调用（和 demo_interactive 一致）
+        if abs(nx - ox) < 0.008 and abs(ny - oy) < 0.008:
+            return
+        self._aim = (nx, ny)
+        self.call("setAim", round(nx, 3), round(ny, 3))
+
     def parts(self, cb) -> None:
         """取部件清单（JSON 字符串回调）。部件 id 来自 moc3，很多模型就是 PartNN。"""
         self.js("window.l2d ? JSON.stringify(l2d.parts()) : '[]'", cb)
@@ -569,6 +613,10 @@ class Live2DView(QWidget):
             return
         self._closed = True
         self._stop_timers()
+        try:
+            self._aim_timer.stop()        # 视线跟随的轮询，收尾时单独停
+        except Exception:
+            pass
         srv = getattr(self, "_server", None)
         if srv is not None:
             srv.stop()

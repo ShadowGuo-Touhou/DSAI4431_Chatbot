@@ -314,10 +314,31 @@
   `look_{light,dark}.png`、`look_pill_*.png`、`look_model_*.png`、`popup_*_*.png`
   （`test_q_combo_look.py` / `test_r_popup.py` 都不建主窗口、不拉 Live2D，秒出）
 
+### 18. Live2D 头部跟随鼠标（跨整个窗口）—— 已完成（2026-11-11）
+
+- **用户反馈**：「角色的头部动作不渲染了」
+- **查到的实情**：页面的跟随只挂在自己的 `document.mousemove` 上 —— 也就是说
+  **只有鼠标落在角色区那一小块里**头才会转；一移到右边的聊天区/输入框就不动了。
+  而 `demo_live2d.html` 里 `setAim()` 的注释早就写明了正确做法：
+  「Qt 那边用轮询喂进来，比依赖 mousemove 事件可靠」—— 独立演示
+  （`core/live2d/demo_interactive.py`）确实有这段轮询，但嵌进主界面的
+  `gui/live2d_embed.py` **从来没接**。
+- **做法**：`Live2DView._poll_aim()`，60ms 轮询 `QCursor.pos()`
+  → 归一化 → `l2d.setAim(nx, ny)`
+  - 鼠标在程序窗口里：按角色区归一化再缩到 ±0.75（角色区边上 ±19°，
+    跑到聊天区打字时封顶 22.5°，不会钉死在 30° 上）
+  - 鼠标离开窗口：推 (0,0)，头看回正中
+  - 变化 < 0.008 不推，省跨进程 JS 调用（跟演示里一致）
+- **坑**：`_stop_timers()` 里顺手把 `_aim_timer` 也停了 —— 而**就绪成功时也会调
+  这个方法**，于是头不动了、aim 永远是 0，白查半天。现在 `_stop_timers` 只管
+  就绪探测的两个计时器，视线跟随在 `shutdown()` 里单独停
+- 验证：`_plan_preview/i18n/test_v_head_anywhere.py`（把 `QCursor` 换成可摆位置的
+  假货，逐点读 `l2d.aim` 和 `ParamAngleX/Y`：
+  角色区左/右 ±19.2°、聊天区 22.5°、窗口外 0°）
+
 ---
 
 ## 二、待用户决定
-
 ### 7. `asset/plan/` 那 4 张设计图 —— 已决定入库
 
 - 4 张 PNG，共 20.9 MB：`main interface.png`、`setting-api_key.png`、
