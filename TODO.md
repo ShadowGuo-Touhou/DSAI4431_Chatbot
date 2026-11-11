@@ -59,6 +59,11 @@
   Chromium 140 下已不成立；§4.1 的 Core6 `renderOrders` 崩溃也不会触发
   （vendor 里实际是 Cubism Core 5.1）
 - **对外接口备好但未接业务**：`CharacterPanel.react() / stop_reaction() / snapshot()`
+- **取景**：默认 `framing=bust`（上半身特写，宽度铺满、头顶留白、下方裁掉），
+  `zoom=1.9` 是照用户给的裁剪参考图定的。想换成全身或调远近不用改代码：
+  `$env:L2D_FRAMING="full"` / `$env:L2D_ZOOM="1.5"`
+  （渲染页 `demo_live2d.html` 支持 `?framing=bust&zoom=1.9&top=0.02`，默认仍是 full，
+  所以旧 PyQt5 demo 行为不变）
 
 ### 4b. 角色区虚线边框（已解决，记录用）
 

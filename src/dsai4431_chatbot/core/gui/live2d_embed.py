@@ -88,6 +88,17 @@ _HERE = Path(__file__).resolve().parent
 CORE_DIR = _HERE.parent                     # .../core
 PAGE_DIR = CORE_DIR / "live2d"              # 渲染页所在目录 = HTTP 站点根
 PAGE_LIVE = "demo_live2d.html"
+
+# 取景方式（传给渲染页的 URL 参数）：
+#   bust —— 上半身特写：宽度铺满、头顶留白，身高超出部分从下方裁掉
+#   full —— 全身适应（旧 demo 的行为）
+# 想临时试别的取景不用改代码，设环境变量即可：
+#   $env:L2D_FRAMING = "full"     # 退回全身
+#   $env:L2D_ZOOM = "1.2"         # 在上半身取景上再放大
+FRAMING = os.environ.get("L2D_FRAMING", "bust")
+# 1.9 是照着用户给的裁剪参考图定的：头到围裙下沿，两侧手臂自然裁掉。
+# 面板越窄，同一个 zoom 看起来越"特写"；想更近就调大。
+FRAMING_ZOOM = float(os.environ.get("L2D_ZOOM", "1.9"))
 MODEL_PREFIX = "/model/"
 VENDOR_PREFIX = "/vendor/"
 
@@ -173,11 +184,23 @@ class LocalPreviewServer:
         self._thread.start()
         self.port = int(self._server.server_port)
 
-    def url(self, page: str, model_json: Path | None = None) -> str:
+    def url(
+        self,
+        page: str,
+        model_json: Path | None = None,
+        *,
+        framing: str | None = None,
+        zoom: float | None = None,
+    ) -> str:
         base = f"http://127.0.0.1:{self.port}/{page}"
+        params: list[str] = []
         if model_json is not None:
-            return f"{base}?m={quote(model_json.name)}"
-        return base
+            params.append(f"m={quote(model_json.name)}")
+        if framing:
+            params.append(f"framing={quote(str(framing))}")
+        if zoom:
+            params.append(f"zoom={quote(str(zoom))}")
+        return base + ("?" + "&".join(params) if params else "")
 
     def stop(self) -> None:
         try:
@@ -323,7 +346,12 @@ class Live2DView(QWidget):
             return
 
         self._t0 = _now_ms()
-        url = self._server.url(self._page_name, self._model_json)
+        url = self._server.url(
+            self._page_name,
+            self._model_json,
+            framing=FRAMING,
+            zoom=FRAMING_ZOOM,
+        )
         print(f"[live2d] load {url}", file=sys.stderr, flush=True)
         self._web.load(QUrl(url))
         self._poll.start()

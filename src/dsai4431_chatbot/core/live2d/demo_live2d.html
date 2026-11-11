@@ -454,6 +454,18 @@ try {
   let userScale = 1;
   let followOn = true;
 
+  // 取景模式（由宿主用 URL 参数指定，默认 'full' 保持原行为）：
+  //   full —— 全身适应，整只模型塞进视口
+  //   bust —— 上半身特写：宽度铺满、头顶留一点空隙，多出来的身高从下方裁掉
+  //   zoom —— bust 下的额外放大倍数；top —— 头顶留白（占视口高度的比例）
+  const FRAMING = (() => {
+    const qs = new URLSearchParams(location.search);
+    const mode = qs.get('framing') === 'bust' ? 'bust' : 'full';
+    const zoom = parseFloat(qs.get('zoom')) || 1.0;
+    const top = parseFloat(qs.get('top'));
+    return { mode, zoom, top: Number.isFinite(top) ? top : 0.02 };
+  })();
+
   function viewport() {
     const cv = app.view;
     const vw = (cv && cv.clientWidth) || window.innerWidth || 1;
@@ -465,6 +477,16 @@ try {
     const [vw, vh] = viewport();
     const w = im.width || 1;
     const h = im.height || 1;
+
+    if (FRAMING.mode === 'bust') {
+      // 宽度铺满：保证肩膀和手臂不被裁掉；头顶对齐后，超出的身高自然裁在下方
+      fitScale = (vw / w) * FRAMING.zoom;
+      applyScale();
+      model.anchor.set(0.5, 0);
+      model.position.set(vw / 2, vh * FRAMING.top);
+      return;
+    }
+
     fitScale = Math.min(vw / w, vh / h) * 0.94;
     applyScale();
     model.anchor.set(0.5, 0.5);
