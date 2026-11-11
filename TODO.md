@@ -443,6 +443,21 @@
   - `test_p_home.py` 32 项回归全过（首页下拉仍能选人格）
 - **没做**（用户说先放）：长期记忆（每人格一本 sqlite、`[PERSONA_MEMORY]` 注入、
   最近会话摘录、LIKE 检索）、删除人格的按钮、从 DSH 的 personas.json 导入
+- **第二轮修的四件事**（用户实测报的）
+  - Preview 换成可滚动的只读文本框（`QMessageBox` 长内容看不全）
+  - 目录选择改自绘对话框：`QFileDialog.getExistingDirectory` **只显示目录**，
+    `data/personality` 明明有 .md 却一片空白；现在列出子目录 + .md（带字符数，
+    双击用系统程序打开），并删掉没意义的「编辑」按钮
+  - 新建人格后首页下拉不更新：`SettingsDialog` 加 `personas_changed`，
+    主窗连到下拉刷新
+  - 新建时目录跟着 ID 走 `<人格根目录>/<id>`，保存即建目录并写 3 个模板
+    （以前新人格和默认人格**共用**同一批 .md，用户建「赤蛮奇」时勾的其实是
+    大肥鱼的 IDENTITY.md）；手改路径/选过目录后不再跟随
+- ⚠ **自己踩的坑**：`MainWindow` 没有 `home` 属性（首页在 `ChatColumn` 下面），
+  写成 `self.home.refresh` 直接 AttributeError，**点齿轮开设置就崩**。
+  上一版的冒烟测试是直接 `new SettingsDialog` 绕过了 `open_settings`，所以没抓到。
+  → 新增 `test_ai_open_settings.py` 走真入口（`win.open_settings()`），
+  5 项全过：不抛异常 / 窗真的开出来 / 下拉从 2 条变 3 条 / 有新人名 / 探针清理干净
 
 ---
 

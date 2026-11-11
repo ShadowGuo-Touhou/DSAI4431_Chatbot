@@ -1137,7 +1137,8 @@ class MainWindow(QMainWindow):
         )
         # 人格清单随时可能被改（新建/改名/换目录）：一保存就重读首页的下拉，
         # 不然刚建的人格要等下次切回首页才出现（用户就是这么被卡住的）
-        dlg.personas_changed.connect(self.home.refresh)
+        # 注意：首页在 ChatColumn 下面（MainWindow 自己没有 home 属性）
+        dlg.personas_changed.connect(self.chat.home.refresh)
         dlg.destroyed.connect(lambda: setattr(self, "_settings", None))
         self._settings = dlg
         dlg.show()
