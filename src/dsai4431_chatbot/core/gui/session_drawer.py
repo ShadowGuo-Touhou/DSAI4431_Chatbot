@@ -206,7 +206,15 @@ class SessionDrawer(QFrame):
             self.list.clearSelection()
 
     # --- 打开 -----------------------------------------------------------
-    def _on_double_click(self, item: QListWidgetItem) -> None:
+    def _on_double_click(self, item: QListWidgetItem | None) -> None:
+        """双击列表项 = 打开这条会话。
+
+        `itemActivated` 也会走到这里，而它**没有选中项时会传 None**
+        （双击空白处、或焦点在列表上按回车），不判空就是
+        `AttributeError: 'NoneType' object has no attribute 'data'` —— 实测崩过。
+        """
+        if item is None:
+            return
         session_id = item.data(Qt.ItemDataRole.UserRole)
         if session_id:
             self._open(str(session_id))

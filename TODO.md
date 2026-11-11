@@ -494,6 +494,18 @@
   并且改成取像素比颜色（`test_al_round_popup.py`：角上必=弹窗外的背景色，
   卡片本体必须不透明且是浅色底）
 
+### 24. 抽屉双击空白 → `'NoneType' object has no attribute 'data'` —— 已完成（2026-11-12）
+
+- 现场：在会话列表的**空白处**双击（或列表获得焦点时按回车）就抛
+  `AttributeError: 'NoneType' object has no attribute 'data'`（`session_drawer._on_double_click`）
+- 原因：`itemDoubleClicked` / `itemActivated` **没有命中条目时都会传 None**，
+  槽里直接 `item.data(...)`
+- 修法：槽签名放宽成 `QListWidgetItem | None`，一进来先 `if item is None: return`
+- 顺手查了同类槽：设置页的 `_on_model_changed` / `_on_part_toggled` 早就有判空，
+  只有抽屉这处漏了 → **凡是 Qt 的 `item*` 信号，槽里都要当可能收到 None**
+- 测试：`test_am_drawer_crash.py` 7 项（直接传 None / 信号发 None / 空白双击 /
+  正常双击仍能打开 / 全程无异常）
+
 ---
 
 ## 二、待用户决定
