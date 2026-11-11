@@ -64,6 +64,12 @@ ICON_DIR = theme.ICON_DIR
 # 发给模型的历史上限（条）。太多会拖 token、太短又记不住上下文。
 MAX_HISTORY_MESSAGES = 20
 
+# 新对话页两颗下拉的「文字之外的宽度」：QSS 的左右内边距 + 箭头区 + 描边，
+# 人格那颗还要加上前面的 16px 图标和图标间距。
+# ⚠ 改 theme.py 里 #homePersona / #homeModel 的 padding / drop-down 宽度时要一起改。
+PERSONA_CHROME = 12 + 4 + 20 + 2 + 16 + 6
+MODEL_CHROME = 8 + 4 + 20 + 2
+
 
 def load_icon(name: str, role: str = "icon") -> QIcon:
     """从 icons/ 读 SVG 并按当前主题上色。
@@ -521,12 +527,18 @@ class HomePage(QWidget):
         col.addWidget(self.lb_title)
         col.addSpacing(14)
 
-        # --- 人格（首页上方，左对齐）--------------------------------------
+        # --- 人格（首页上方，左对齐的一颗胶囊）----------------------------
         self.cbo_persona = QComboBox()
         self.cbo_persona.setObjectName("homePersona")
         self.cbo_persona.setToolTip(t("session.persona"))
-        self.cbo_persona.setMinimumWidth(150)
-        self.cbo_persona.setMaximumWidth(240)
+        # 图标用设置页 Personality 那颗（icons/user.svg），跟着换肤重新上色
+        self.cbo_persona.setIconSize(QSize(16, 16))
+        self.cbo_persona.setFixedHeight(36)
+        # 宽度在 refresh()/切项时自己算（见 _fit_combo）：默认按最长项算会把
+        # 右边撑开，箭头离文字很远
+        self.cbo_persona.setSizePolicy(
+            QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed
+        )
         col.addWidget(self.cbo_persona, 0, Qt.AlignmentFlag.AlignLeft)
 
         # --- 大输入卡（模型选择器 + 发送放在卡片右下角）--------------------
@@ -555,11 +567,15 @@ class HomePage(QWidget):
         actions.addWidget(self.btn_attach)
         actions.addStretch(1)
 
+        # 模型：输入卡右下角的一行小字（无边框，悬停才浮出底色）
         self.cbo_model = QComboBox()
         self.cbo_model.setObjectName("homeModel")
         self.cbo_model.setToolTip(t("session.model"))
-        self.cbo_model.setMinimumWidth(150)
-        self.cbo_model.setMaximumWidth(220)
+        self.cbo_model.setFixedHeight(28)
+        # 同上：宽度自己算，箭头紧贴模型名
+        self.cbo_model.setSizePolicy(
+            QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed
+        )
         actions.addWidget(self.cbo_model)
 
         self.btn_send = round_button(
@@ -580,6 +596,9 @@ class HomePage(QWidget):
 
         self.edit.submitted.connect(self._emit)
         self.btn_send.clicked.connect(self.edit.submit)
+        # 换一项就重新收一次宽度（不然换了长/短名字，箭头位置会飘）
+        self.cbo_persona.currentIndexChanged.connect(self._fit_combos)
+        self.cbo_model.currentIndexChanged.connect(self._fit_combos)
 
     # --- 数据 -----------------------------------------------------------
     def refresh(self) -> None:
@@ -591,8 +610,11 @@ class HomePage(QWidget):
 
         keep_persona = self.cbo_persona.currentData()
         self.cbo_persona.clear()
+        # 图标和设置页 Personality 用同一颗（icons/user.svg）。
+        # 这里每次刷新都重新取：换主题后图标的颜色要跟着换。
+        persona_icon = themes.icon("user")
         for persona in personas.list_personas():
-            self.cbo_persona.addItem(persona.display, persona.id)
+            self.cbo_persona.addItem(persona_icon, persona.display, persona.id)
         if keep_persona:
             index = self.cbo_persona.findData(keep_persona)
             if index >= 0:
@@ -605,6 +627,24 @@ class HomePage(QWidget):
         index = self.cbo_model.findData(keep_model)
         if index >= 0:
             self.cbo_model.setCurrentIndex(index)
+        self._fit_combos()
+
+    @staticmethod
+    def _fit_combo(combo: QComboBox, chrome: int) -> None:
+        """把宽度收到「当前这一项」的宽度（而不是最长的那一项）。
+
+        QComboBox 默认按最长项算宽度，选中短名字时右边会留一截空白，
+        箭头离文字老远 —— DSH 里箭头是紧贴文字/图标的，所以自己算。
+
+        `chrome` = 左右内边距 + 箭头区 + 描边（各控件的 QSS 里定），
+        人格那颗还要加上前面 16px 的图标和图标间距。
+        """
+        text_w = combo.fontMetrics().horizontalAdvance(combo.currentText())
+        combo.setFixedWidth(max(96, min(280, text_w + chrome)))
+
+    def _fit_combos(self) -> None:
+        self._fit_combo(self.cbo_persona, PERSONA_CHROME)
+        self._fit_combo(self.cbo_model, MODEL_CHROME)
 
     def focus_input(self) -> None:
         self.edit.setFocus()

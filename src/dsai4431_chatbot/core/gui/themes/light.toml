@@ -18,6 +18,10 @@ accent_hover = "#2f6bc4"
 hover = "#f0f1f3"
 nav_hover = "#e9ebee"
 nav_checked = "#e3e7ec"
+# 胶囊选择器（新对话页的人格按钮）：要比页面底色深一点才看得出形状，
+# 但别深到像输入框。缺这两个 token 时会退回 surface_alt / hover
+chip_bg = "#e7eaee"
+chip_bg_hover = "#dfe3e8"
 selected_bg = "#e8f1ff"
 bubble_user_bg = "#e8f1ff"
 bubble_user_border = "#d3e3fb"

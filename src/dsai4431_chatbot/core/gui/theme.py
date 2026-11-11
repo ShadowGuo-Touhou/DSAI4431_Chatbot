@@ -17,6 +17,9 @@ ICON_DIR = Path(__file__).resolve().parent / "icons"
 # QSS 的 url() 只吃文件路径（不吃 data URI），勾选标记做成一个 svg 文件引用；
 # 这个图是白色描边，画在强调色底上，两套皮都不用改色。
 _CHECK_SVG = (ICON_DIR / "check.svg").as_posix()
+# 下拉框的小箭头。QSS 里的图片**不会被 themes 重新上色**（那是运行时换 SVG
+# 文本里的 #1f2329），所以这个文件直接用中性灰 #8a9099：浅色皮和深色皮上都看得见。
+_CHEVRON_SVG = (ICON_DIR / "chevron.svg").as_posix()
 
 RADIUS_PANEL = 14
 RADIUS_SMALL = 8
@@ -190,6 +193,67 @@ QPlainTextEdit#homeEdit {{
     font-size: 15px;
     color: {text};
     selection-background-color: {accent};
+}}
+
+/* 人格选择器：一颗圆角胶囊（图标 + 名字 + 细箭头），
+   不要系统默认那种「左边文字、右边一个带方框的三角按钮」的样子。
+   底色用 chip_bg（比页面底色深/亮一档），才看得出形状 */
+QComboBox#homePersona {{
+    background: {chip_bg};
+    border: 1px solid {border};
+    border-radius: 11px;
+    padding: 6px 4px 6px 12px;
+    color: {text};
+    font-size: 14px;
+}}
+QComboBox#homePersona:hover {{
+    background: {chip_bg_hover};
+}}
+QComboBox#homePersona:on {{
+    border-color: {accent};
+}}
+/* 模型选择器：输入卡右下角的一行小字，悬停才浮出底色（DSH 就是这种轻量做法） */
+QComboBox#homeModel {{
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 4px 4px 8px;
+    color: {text_weak};
+    font-size: 13px;
+}}
+QComboBox#homeModel:hover {{
+    background: {hover};
+    color: {text};
+}}
+/* 箭头自绘：drop-down 的方框去掉，只留一张图片 */
+QComboBox#homePersona::drop-down,
+QComboBox#homeModel::drop-down {{
+    background: transparent;
+    border: none;
+    width: 20px;
+}}
+QComboBox#homePersona::down-arrow,
+QComboBox#homeModel::down-arrow {{
+    image: url("{chevron_svg}");
+    width: 12px;
+    height: 12px;
+}}
+/* 展开后的候选列表：圆角、内缩一点，别用系统那种贴边的白框 */
+QComboBox#homePersona QAbstractItemView,
+QComboBox#homeModel QAbstractItemView {{
+    background: {surface};
+    border: 1px solid {border_soft};
+    border-radius: 10px;
+    padding: 4px;
+    outline: none;
+    selection-background-color: {selected_bg};
+    selection-color: {accent};
+}}
+QComboBox#homePersona QAbstractItemView::item,
+QComboBox#homeModel QAbstractItemView::item {{
+    min-height: 26px;
+    padding: 2px 8px;
+    border-radius: 6px;
 }}
 
 /* ---------- 设置弹窗 ---------- */
@@ -474,6 +538,9 @@ def stylesheet(palette: Mapping[str, str]) -> str:
     if missing:
         raise KeyError(f"主题缺少 token：{', '.join(missing)}")
     values = dict(palette)
+    # 后加的 token：老主题文件里没有也不该崩，退回最接近的现有色
+    values.setdefault("chip_bg", values.get("surface_alt") or values["surface"])
+    values.setdefault("chip_bg_hover", values.get("hover") or values["surface"])
     values.update(
         radius_panel=RADIUS_PANEL,
         radius_small=RADIUS_SMALL,
@@ -481,5 +548,6 @@ def stylesheet(palette: Mapping[str, str]) -> str:
         action_radius=ACTION_BUTTON // 2,
         splitter_gap=SPLITTER_GAP,
         check_svg=_CHECK_SVG,
+        chevron_svg=_CHEVRON_SVG,
     )
     return _TEMPLATE.format(**values)

@@ -284,8 +284,24 @@
   `self._drawer.close()`）整个覆盖掉了 → 删掉重复的那份
 - **坑**：`HomePage` 写在 `main_window.py` 里而不是单独模块 —— 它要用
   `_InputEdit`（Enter 发送）和 `round_button`，单独成模块会和本模块循环导入
+- **第二轮：选择器的「质感」**（用户 20:05 反馈「质感做得不行」，给了 DSH 的截图）
+  - 人格选择器改成**胶囊**：圆角 11px、底色 `chip_bg`（不是系统那种白底 + 带方框
+    的三角按钮）、左侧图标 + 名字 + 细箭头
+  - 图标直接用设置页 Personality 那颗（`icons/user.svg`），每次 `refresh()` 重新取，
+    换主题时颜色跟着走
+  - 箭头是 `icons/chevron.svg`。**坑**：QSS 里的 `image: url()` 不会被 `themes`
+    重新上色（那是运行时替换 SVG 文本里的 `#1f2329`），所以这个文件直接用中性灰
+    `#8a9099`，浅色/深色两套皮上都看得见
+  - **坑**：`QComboBox` 默认按**最长的一项**算宽度，选中短名字时右边留一截空白、
+    箭头离文字老远 → `HomePage._fit_combo()` 按当前文字宽度重算（`PERSONA_CHROME`
+    / `MODEL_CHROME` 是 QSS 里内边距+箭头区+图标的常量，改 QSS 要一起改）
+  - 模型选择器做成输入卡右下角的一行小字（无边框、悬停才浮底色），和 DSH 一致
+  - 新增主题 token `chip_bg` / `chip_bg_hover`（老主题文件没有也不会崩：
+    `stylesheet()` 里 `setdefault` 退回 `surface_alt` / `hover`）
 - 验证：`_plan_preview/i18n/test_p_home.py`（32 项全过），截图
-  `home_no_session.png` / `home_autoopened.png` / `home_page.png`
+  `home_no_session.png` / `home_autoopened.png` / `home_page.png`；
+  选择器的三倍放大对照图 `look_{light,dark}.png`、`look_pill_*.png`、`look_model_*.png`
+  （`test_q_combo_look.py`，不建主窗口、不拉 Live2D，秒出）
 
 ---
 
