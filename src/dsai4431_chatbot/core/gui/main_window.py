@@ -194,6 +194,8 @@ class CharacterPanel(QWidget):
         view.set_blink(cfg.blink)
         view.set_breath(cfg.breath)
         view.set_follow(cfg.follow)
+        # 换装（这套模型把换装做成表情名，默认「胸口衣服 + 裙子切换」）
+        view.set_expressions(cfg.expressions)
         if cfg.hidden_parts:
             view.parts(self._apply_hidden_parts)
 

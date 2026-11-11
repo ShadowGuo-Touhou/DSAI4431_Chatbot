@@ -394,6 +394,8 @@ class Live2DView(QWidget):
         self._aim_timer = QTimer(self)
         self._aim_timer.setInterval(60)
         self._aim_timer.timeout.connect(self._poll_aim)
+        # 换装表情只套一次（页面重载后重置）
+        self._expressions_done = False
 
     # --- 启动 -------------------------------------------------------------
     def start(self) -> None:
@@ -442,6 +444,7 @@ class Live2DView(QWidget):
             zoom=FRAMING_ZOOM,
         )
         print(f"[live2d] load {url}", file=sys.stderr, flush=True)
+        self._expressions_done = False          # 新页面，换装要重新套
         self._web.load(QUrl(url))
         self._poll.start()
         self._deadline.start(self._timeout_ms)
@@ -570,6 +573,21 @@ class Live2DView(QWidget):
 
     def set_follow(self, on: bool) -> None:
         self.call("follow", bool(on))
+
+    def set_expressions(self, names) -> None:
+        """套上「换装」表情（如「胸口衣服」「裙子切换」）。
+
+        页面重载后**只套一次**：这套模型有几个表情其实是开关（裙子切换 =
+        短裙/长裙来回切），设置页动一下别的项就会再调一次本函数，
+        不加这个闸门裙子会一会长一会短。
+        """
+        if self._expressions_done:
+            return
+        self._expressions_done = True
+        for name in names or ():
+            text = str(name).strip()
+            if text:
+                self.call("expression", text)
 
     def _poll_aim(self) -> None:
         """把全局光标位置换算成「相对角色区」的归一化坐标，推给页面。
