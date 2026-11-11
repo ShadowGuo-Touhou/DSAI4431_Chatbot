@@ -238,13 +238,12 @@ QComboBox#homeModel::down-arrow {{
     width: 12px;
     height: 12px;
 }}
-/* 展开后的候选列表：别用系统那种贴边的白框。
-   ⚠ 这里**不能画圆角**：弹窗是独立的原生窗口，它的 palette Window 是纯黑
-   （#000000），item view 一圆角，四个角就露出黑色方块（2026-11-11 实测） */
+/* 展开后的候选列表：别用系统那种贴边的白框，圆角和下拉框对齐 */
 QComboBox#homePersona QAbstractItemView,
 QComboBox#homeModel QAbstractItemView {{
     background: {surface};
     border: 1px solid {border_soft};
+    border-radius: 10px;
     padding: 4px;
     outline: none;
     selection-background-color: {selected_bg};
@@ -527,6 +526,8 @@ QComboBox:hover {{
 QComboBox QAbstractItemView {{
     background: {surface};
     border: 1px solid {border_soft};
+    border-radius: 10px;
+    padding: 4px;
     selection-background-color: {selected_bg};
     selection-color: {accent};
     outline: none;
