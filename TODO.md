@@ -109,10 +109,11 @@
 
 ## 二、待用户决定
 
-### 7. `asset/plan/` 那 4 张设计图（共约 21 MB）要不要入库
+### 7. `asset/plan/` 那 4 张设计图 —— 已决定入库
 
-- 目前未提交。是设计源图，体积偏大但不算离谱
-- 用户尚未表态
+- 4 张 PNG，共 20.9 MB：`main interface.png`、`setting-api_key.png`、
+  `setting-persona.png`、`setting-RAG.png`
+- 2026-11-11 用户决定提交进仓库（设计源图跟代码一起版本化）
 
 ### 8. `_plan_preview/` 临时目录
 
