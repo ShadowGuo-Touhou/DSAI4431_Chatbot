@@ -295,3 +295,28 @@ def apply(app: QApplication | None = None, theme_id: str | None = None, *, persi
 
 def apply_saved(app: QApplication) -> Theme:
     return manager().apply_saved(app)
+
+
+def round_popup(combo) -> None:
+    """让下拉弹窗的圆角真的圆，而不是四个深色角。
+
+    Qt 的下拉弹窗是**独立的原生窗口**，它自己会铺一层容器底色；item view 画了
+    圆角之后，四个角漏出来的正是那层底色（light 皮下实测 #0f1115，看着就是四块
+    黑）。把容器设成透明窗口、不画自己的底，圆角才是真的圆。
+
+    ⚠ 必须在**第一次 showPopup 之前**调用：原生窗口的透明属性创建时就定死了，
+    显示之后再改不生效（实测改了反而整块变纯黑 #000）。
+    """
+    view = combo.view()
+    popup = view.window()
+    if popup is combo:          # 弹窗容器是懒创建的，还没建就别动
+        return
+    popup.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+    popup.setWindowFlags(
+        popup.windowFlags()
+        | Qt.WindowType.FramelessWindowHint
+        | Qt.WindowType.NoDropShadowWindowHint
+    )
+    # ⚠ 别给容器 setStyleSheet（哪怕只写 `background: transparent` / 只写
+    # `#name {…}`）：容器一旦有自己的样式表，里面的列表就不再吃全局 QSS 的
+    # 圆角底色，整张卡片会变透明（实测两种写法都翻车）。上面两步就够了。

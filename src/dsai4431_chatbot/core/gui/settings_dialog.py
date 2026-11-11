@@ -912,6 +912,7 @@ class Live2DModelPage(QWidget):
         framing_row.setSpacing(8)
         framing_row.addWidget(field_label(t("settings.live2d.framing")))
         self.cbo_framing = QComboBox()
+        themes.round_popup(self.cbo_framing)      # 弹窗圆角（见 themes.round_popup）
         self.cbo_framing.addItem(t("settings.live2d.framing_bust"), "bust")
         self.cbo_framing.addItem(t("settings.live2d.framing_full"), "full")
         self.cbo_framing.currentIndexChanged.connect(self._on_framing)
@@ -1247,6 +1248,7 @@ class OtherPage(QWidget):
         row.setSpacing(10)
         row.addWidget(field_label(t("settings.other.language_label")))
         self.cbo_language = QComboBox()
+        themes.round_popup(self.cbo_language)     # 弹窗圆角（见 themes.round_popup）
         for lang in i18n.available():
             # 用各语言自己的写法（中文 / English），无论当前是哪套文案都认得
             self.cbo_language.addItem(lang.name, lang.code)

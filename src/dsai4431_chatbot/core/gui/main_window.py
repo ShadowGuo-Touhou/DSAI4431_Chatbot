@@ -516,6 +516,11 @@ class _HomeCombo(QComboBox):
     里先把列表的最小宽度撑到最长项。
     """
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 弹窗圆角必须在第一次 showPopup 之前设好，见 themes.round_popup
+        themes.round_popup(self)
+
     def showPopup(self) -> None:  # noqa: N802 - Qt 命名
         view = self.view()
         # sizeHintForColumn 已经把「列表项内边距 + 图标」算进去了；再加 14 给
