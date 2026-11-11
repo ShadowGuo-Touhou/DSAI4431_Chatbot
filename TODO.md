@@ -445,9 +445,11 @@
   最近会话摘录、LIKE 检索）、删除人格的按钮、从 DSH 的 personas.json 导入
 - **第二轮修的四件事**（用户实测报的）
   - Preview 换成可滚动的只读文本框（`QMessageBox` 长内容看不全）
-  - 目录选择改自绘对话框：`QFileDialog.getExistingDirectory` **只显示目录**，
-    `data/personality` 明明有 .md 却一片空白；现在列出子目录 + .md（带字符数，
-    双击用系统程序打开），并删掉没意义的「编辑」按钮
+  - 目录选择：**别自己画文件浏览器**。`QFileDialog.getExistingDirectory`
+    （= 系统的 IFileDialog FOS_PICKFOLDERS）会把文件整个隐藏、过滤参数也传不进去，
+    所以目录里明明有 .md 却一片空白。正确做法是换成**带过滤器的「打开文件」**
+    `getOpenFileName(..., "人格文件 (*.md);;所有文件 (*)")`，取所选文件所在目录。
+    （用户提示的，我一开始画了个自绘选择器，多余）
   - 新建人格后首页下拉不更新：`SettingsDialog` 加 `personas_changed`，
     主窗连到下拉刷新
   - 新建时目录跟着 ID 走 `<人格根目录>/<id>`，保存即建目录并写 3 个模板

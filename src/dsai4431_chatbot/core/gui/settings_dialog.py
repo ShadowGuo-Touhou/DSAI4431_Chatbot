@@ -334,99 +334,6 @@ class _TextDialog(QDialog):
         view.setFocus()
 
 
-class _DirPicker(QDialog):
-    """选人格目录：子目录能进，`.md` 列出来给你看（双击用系统程序打开）。
-
-    不用 QFileDialog.getExistingDirectory 是因为它**只显示目录**，
-    `data/personality` 明明有 .md 却是一片空白（用户就是这么被迷惑的）。
-    """
-
-    def __init__(self, start: Path, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle(t("settings.personality.files"))
-        self.resize(660, 480)
-        start = Path(start)
-        self._dir = start if start.is_dir() else start.parent
-        self.chosen: Path | None = None
-
-        lay = QVBoxLayout(self)
-        lay.setContentsMargins(18, 16, 18, 14)
-        lay.setSpacing(10)
-
-        self.lb_path = QLabel("")
-        self.lb_path.setObjectName("hintText")
-        self.lb_path.setWordWrap(True)
-        self.lb_path.setTextInteractionFlags(
-            Qt.TextInteractionFlag.TextSelectableByMouse
-        )
-        lay.addWidget(self.lb_path)
-
-        self.lst = QListWidget()
-        self.lst.setObjectName("fieldList")
-        self.lst.itemDoubleClicked.connect(self._on_activate)
-        lay.addWidget(self.lst, 1)
-
-        row = QHBoxLayout()
-        btn_up = small_button(t("settings.personality.dir_up"))
-        btn_up.clicked.connect(lambda: self._enter(self._dir.parent))
-        row.addWidget(btn_up)
-        row.addStretch(1)
-        btn_use = small_button(t("settings.personality.dir_use"), primary=True)
-        btn_use.clicked.connect(self._accept_current)
-        row.addWidget(btn_use)
-        btn_cancel = small_button(t("common.cancel"))
-        btn_cancel.clicked.connect(self.reject)
-        row.addWidget(btn_cancel)
-        lay.addLayout(row)
-
-        self._reload()
-
-    # --- 内容 -----------------------------------------------------------
-    def _reload(self) -> None:
-        self.lb_path.setText(str(self._dir))
-        self.lst.clear()
-        try:
-            entries = sorted(
-                self._dir.iterdir(),
-                key=lambda p: (not p.is_dir(), p.name.lower()),
-            )
-        except OSError:
-            entries = []
-        for path in entries:
-            if path.is_dir():
-                item = QListWidgetItem(t("settings.personality.dir_item", name=path.name))
-                item.setData(Qt.ItemDataRole.UserRole, ("dir", str(path)))
-                self.lst.addItem(item)
-            elif path.suffix.lower() == ".md":
-                try:
-                    chars = len(path.read_text(encoding="utf-8", errors="ignore"))
-                except OSError:
-                    chars = 0
-                item = QListWidgetItem(
-                    t("settings.personality.file_item", name=path.name, n=f"{chars:,}")
-                )
-                item.setData(Qt.ItemDataRole.UserRole, ("file", str(path)))
-                item.setForeground(QColor("#8a9099"))
-                self.lst.addItem(item)
-
-    def _enter(self, path: Path) -> None:
-        if path.is_dir():
-            self._dir = path
-            self._reload()
-
-    def _on_activate(self, item: QListWidgetItem) -> None:
-        kind, raw = item.data(Qt.ItemDataRole.UserRole)
-        path = Path(raw)
-        if kind == "dir":
-            self._enter(path)
-        elif path.is_file():
-            QDesktopServices.openUrl(QUrl.fromLocalFile(str(path)))
-
-    def _accept_current(self) -> None:
-        self.chosen = self._dir
-        self.accept()
-
-
 class PersonalityPage(QWidget):
     """人格编辑页：左「Persona 列表」、右表单。
 
@@ -606,11 +513,24 @@ class PersonalityPage(QWidget):
         return Path(raw).expanduser() if raw else personas.personality_dir()
 
     def _pick_dir(self) -> None:
-        picker = _DirPicker(self._dir(), self)
-        if picker.exec() == QDialog.DialogCode.Accepted and picker.chosen is not None:
-            self.ed_dir.setText(str(picker.chosen))
-            self._dir_follows_id = False      # 自己挑过了，别再跟着 ID 跑
-            self._rescan()
+        """用 Windows 原生的「打开文件」对话框选 .md，取它所在目录当人格目录。
+
+        为什么不用「选文件夹」模式（getExistingDirectory）：那是系统的
+        IFileDialog(FOS_PICKFOLDERS)，文件列表被系统整个隐藏、过滤参数也传不进去
+        —— 目录里明明有 .md 却是一片空白，就是这条导致的。
+        换成带过滤器的「打开文件」，就只显示、也只允许选 .md。
+        """
+        chosen, _flt = QFileDialog.getOpenFileName(
+            self,
+            t("settings.personality.files"),
+            str(self._dir()),
+            t("settings.personality.file_filter"),
+        )
+        if not chosen:
+            return
+        self.ed_dir.setText(str(Path(chosen).parent))
+        self._dir_follows_id = False      # 自己挑过了，别再跟着 ID 跑
+        self._rescan()
 
     def _rescan(self, checked: set[str] | None = None) -> None:
         directory = self._dir()
