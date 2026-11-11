@@ -408,6 +408,42 @@
   要处理得在 `keyPressEvent` 里查 `InputMethodQuery.PreeditText` 再放行 ——
   等真遇到再说
 
+### 22. Personality 页实装（人格清单 + 默认大肥鱼人格）—— 已完成（2026-11-11）
+
+- **用户要求**：「现在开始做 personality 的实装，直接抄你自己的人格注入插件」，
+  人格文件放 `data/personality`，记忆这一轮先不做
+- **原来是什么样**：左边列表是两行写死的演示文案，ID/NAME 两个输入框没接线，
+  Save 只把「目录 + 勾选」写进 `chat_config`（单人格）。对话侧那条链路
+  （`build_system_prompt` / 会话记 persona / 首页下拉）倒是通的
+- **做法**
+  - `personas.py` 重写：清单默认 `<data>/personality/personas.json`
+    （`DSAI_PERSONA_DIR` / `DSAI_PERSONA_JSON` 可覆盖），
+    提供 `list_personas / save_personas / upsert / remove / scan_files`；
+    `dir` 存空串表示"就是默认人格目录"，换机器/挪仓库不影响
+  - 写入用「先写 .tmp 再 replace」，写到一半崩了不会毁掉清单
+  - `PersonalityPage` 重写：左列表真读清单、点谁载谁；`id` 建好即只读
+    （和 DSH 插件一致，id 以后要拿来命名记忆库）；Save 校验
+    id 非空/字符集/重名、目录存在、至少勾一个文件
+  - 默认人格：`data/personality/` 下的 `IDENTITY.md / SOUL.md / USER.md`，
+    清单里 id=`deepseek`、label=`大肥鱼`
+  - `.gitignore` 加例外 `!data/personality/**`：人格 .md 是**内容**，跟代码入库；
+    `data/settings.ini` 那些运行时数据仍然忽略（`git check-ignore` 验过）
+- **坑**
+  - `_new()` 里用 `clearSelection()` 不行：`currentRow` 没变，用户再点原来那行
+    不会有 `currentRowChanged`，表单就卡在"新建"状态
+    → 改成 `setCurrentRow(-1)`
+  - `QMessageBox.warning` 是模态的，自动化测试里必须 monkeypatch 掉，
+    否则脚本直接卡死
+  - `set_rows()` 刚换过一批控件时马上 `grab()` 会截到**空框**：
+    行对象在、但布局还没跑。测试里得 `qWait` 之后再截图（这个坑之前就踩过）
+- 验证：`_plan_preview/i18n/test_af_personality.py` 41 项全过
+  （清单读写 / 选中回填 / 新建 / 换目录 / 四类校验 / 提示词拼接）
+  - 截图 `personality_page.png`（临时数据）、`settings_personality_real.png`
+    （真对话框 + 真 data/personality）
+  - `test_p_home.py` 32 项回归全过（首页下拉仍能选人格）
+- **没做**（用户说先放）：长期记忆（每人格一本 sqlite、`[PERSONA_MEMORY]` 注入、
+  最近会话摘录、LIKE 检索）、删除人格的按钮、从 DSH 的 personas.json 导入
+
 ---
 
 ## 二、待用户决定

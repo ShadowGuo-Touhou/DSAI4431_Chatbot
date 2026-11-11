@@ -51,6 +51,10 @@ desktop.ini
 # settings.ini 里有明文的 API Key，别手工 git add -f 它
 data/*
 
+# 例外：人格文件（.md）和人格清单是**内容**不是运行时数据，跟代码一起入库
+!data/personality/
+!data/personality/**
+
 # 界面渲染截图等临时产物
 _plan_preview/
 

@@ -21,8 +21,9 @@ GROUP = "chat"
 
 DEFAULT_BASE_URL = "https://api.deepseek.com"
 DEFAULT_MODEL = "deepseek-chat"
-# 人格目录和设置页 Personality 页用的是同一个默认（可用 DSAI_PERSONA_DIR 改写）
-DEFAULT_PERSONA_DIR = r"P:\.dsh\agentsoul"
+# 人格目录的默认值现在是 `<data>/personality`（见 personas.personality_dir）。
+# 这两个常量只留给"ini 里没写"的兜底，换机器不该指到绝对路径。
+DEFAULT_PERSONA_DIR = ""                                    # 空 = 用 personas.personality_dir()
 DEFAULT_PERSONA_FILES = ["IDENTITY.md", "SOUL.md", "USER.md"]
 # 系统提示词上限：勾了超大的文件也不至于把上下文撑爆
 SYSTEM_PROMPT_LIMIT = 20000
@@ -44,7 +45,12 @@ class ChatConfig:
     # --- 派生信息 -------------------------------------------------------
     def persona_path(self) -> Path:
         raw = self.persona_dir.strip()
-        return Path(raw).expanduser() if raw else Path(DEFAULT_PERSONA_DIR)
+        if raw:
+            return Path(raw).expanduser()
+        # 局部导入：personas 只依赖 settings_store，这样不会形成循环
+        from dsai4431_chatbot.core.gui import personas
+
+        return personas.personality_dir()
 
     def endpoint(self) -> str:
         """拼出 chat/completions 的完整 URL。

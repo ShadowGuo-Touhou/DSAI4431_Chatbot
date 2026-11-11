@@ -47,7 +47,15 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import chat_config, i18n, live2d_embed, relaunch, theme, themes
+from dsai4431_chatbot.core.gui import (
+    chat_config,
+    i18n,
+    live2d_embed,
+    personas,
+    relaunch,
+    theme,
+    themes,
+)
 from dsai4431_chatbot.core.gui.i18n import t
 
 SHADOW = 18  # 圆角窗外留给投影的透明边距（窗口本身比可见卡片大一圈）
@@ -55,10 +63,9 @@ DIALOG_W, DIALOG_H = 980 + 2 * SHADOW, 660 + 2 * SHADOW
 NAV_W = 172
 ICON = 16
 
-# 人格文件目录 / 默认勾选：和对话配置用同一份定义（chat_config），别再各写一套
-PERSONA_DIR = chat_config.DEFAULT_PERSONA_DIR
+# 人格默认勾选：和对话配置用同一份定义（chat_config），别再各写一套
+# 目录本身由 personas.personality_dir() 决定（<data>/personality）
 PERSONA_DEFAULT_CHECKED = set(chat_config.DEFAULT_PERSONA_FILES)
-PERSONA_DEMO_FILES = [("IDENTITY.md", 619), ("SOUL.md", 1298), ("USER.md", 374)]
 
 
 # ---------------------------------------------------------------------------
@@ -88,22 +95,8 @@ def field_list(items: list[str] | None = None, min_height: int = 0) -> QListWidg
 
 
 def scan_persona_files(directory: Path) -> list[tuple[str, int]]:
-    """扫描人格目录下的 .md，返回 [(文件名, 字符数)]。
-
-    目录不存在（或空）时退回演示数据 —— Personality 页目前只有布局。
-    """
-    try:
-        paths = sorted(p for p in directory.iterdir() if p.suffix.lower() == ".md")
-    except OSError:
-        return list(PERSONA_DEMO_FILES)
-
-    rows: list[tuple[str, int]] = []
-    for path in paths:
-        try:
-            rows.append((path.name, len(path.read_text(encoding="utf-8", errors="ignore"))))
-        except OSError:
-            rows.append((path.name, 0))
-    return rows or list(PERSONA_DEMO_FILES)
+    """扫描人格目录下的 .md，返回 [(文件名, 字符数)]；目录不在就返回空表。"""
+    return personas.scan_files(directory)
 
 
 class FileCheckList(QScrollArea):
@@ -301,16 +294,20 @@ class ApiKeyPage(QWidget):
 
 
 class PersonalityPage(QWidget):
-    """人格编辑页：左「Persona 列表」，右「New Persona」表单。
+    """人格编辑页：左「Persona 列表」、右表单。
 
-    这一页真正会被对话用到的是两样：**人格文件目录** + **勾选了哪些文件**。
-    勾选的文件内容会拼成 system 提示词（见 `chat_config.system_prompt`）。
-    左边那个 Persona 列表仍是演示数据 —— 多套人格的切换还没做。
+    这一页是人格清单的**唯一入口**，真正读写 `<data>/personality/personas.json`：
+    左边列出清单里所有启用的人格，点一个就载进右边；右边改显示名、换目录、
+    勾要注入的 .md，按 Save 写回清单。新建会话时下拉里看到的就是这些人格。
+
+    id 建好就不许改（和 DSH 那个插件一致）：它会被用来命名记忆库等文件，
+    改名等于新建一条。
     """
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self._cfg = chat_config.load()
+        self._persona_id = ""      # 正在编辑哪一条；空 = 新建中
+        self._order = 0
 
         lay = QVBoxLayout(self)
         lay.setContentsMargins(28, 24, 28, 24)
@@ -325,46 +322,40 @@ class PersonalityPage(QWidget):
         left_card, left = card()
         left.setSpacing(8)
         left.addWidget(section_title(t("settings.personality.list")))
-        left.addWidget(
-            field_list(
-                [
-                    t("settings.personality.list_default"),
-                    t("settings.personality.list_test"),
-                ],
-                min_height=90,
-            ),
-            1,
-        )
-        left.addWidget(
-            small_button(t("settings.personality.new_button")), 0, Qt.AlignmentFlag.AlignLeft
-        )
+        self.list_personas = field_list(min_height=90)
+        self.list_personas.currentRowChanged.connect(self._on_row_changed)
+        left.addWidget(self.list_personas, 1)
+        btn_new = small_button(t("settings.personality.new_button"))
+        btn_new.clicked.connect(lambda: self._new())
+        left.addWidget(btn_new, 0, Qt.AlignmentFlag.AlignLeft)
         left_card.setFixedWidth(260)
         body.addWidget(left_card)
 
-        # --- 右：New Persona 表单 ---------------------------------------
+        # --- 右：表单 ---------------------------------------------------
         right_card, right = card()
         right.addWidget(section_title(t("settings.personality.new_title")))
 
         right.addWidget(field_label(t("settings.personality.id")))
-        right.addWidget(field_input(t("settings.personality.id_placeholder")))
+        self.ed_id = field_input(t("settings.personality.id_placeholder"))
+        right.addWidget(self.ed_id)
 
         right.addWidget(field_label(t("settings.personality.name")))
-        right.addWidget(field_input(t("settings.personality.name_placeholder")))
+        self.ed_name = field_input(t("settings.personality.name_placeholder"))
+        right.addWidget(self.ed_name)
 
         right.addWidget(field_label(t("settings.personality.files")))
         self.ed_dir = field_input(t("settings.personality.files_placeholder"))
-        self.ed_dir.setText(str(self._cfg.persona_path()))
-        self.ed_dir.editingFinished.connect(self._on_dir_edited)
+        self.ed_dir.editingFinished.connect(lambda: self._rescan())
         right.addWidget(self.ed_dir)
 
         path_row = QHBoxLayout()
         path_row.setSpacing(8)
         btn_pick = small_button(t("common.choose"))
-        btn_pick.clicked.connect(self._pick_dir)
+        btn_pick.clicked.connect(lambda: self._pick_dir())
         btn_open = small_button(t("common.edit"))
-        btn_open.clicked.connect(self._open_dir)
+        btn_open.clicked.connect(lambda: self._open_dir())
         btn_rescan = small_button(t("settings.personality.rescan"))
-        btn_rescan.clicked.connect(self._load_files)
+        btn_rescan.clicked.connect(lambda: self._rescan())
         path_row.addWidget(btn_pick)
         path_row.addWidget(btn_open)
         path_row.addWidget(btn_rescan)
@@ -377,18 +368,19 @@ class PersonalityPage(QWidget):
         right.addWidget(self.lb_dir_state)
 
         right.addWidget(field_label(t("settings.personality.file_list")))
-        # 先建空的，内容交给 _load_files() 填 —— 不要在构造里再填一遍，
-        # 否则 rows 建两次，前一批还没销毁就和新的一批叠着画
-        self.file_list = FileCheckList([], checked=set(self._cfg.persona_files))
-        self.file_list.changed.connect(self._save_files)
+        # 先建空的，内容交给 _rescan() 填
+        self.file_list = FileCheckList([], checked=set())
+        self.file_list.changed.connect(self._on_files_changed)
         right.addWidget(self.file_list, 1)
 
         footer = QHBoxLayout()
-        footer.addStretch(1)
+        self.lb_status = QLabel("")
+        self.lb_status.setObjectName("hintText")
+        footer.addWidget(self.lb_status, 1)
         btn_preview = small_button(t("settings.personality.preview"))
-        btn_preview.clicked.connect(self._preview)
+        btn_preview.clicked.connect(lambda: self._preview())
         btn_save = small_button(t("settings.personality.save"), primary=True)
-        btn_save.clicked.connect(self.save)
+        btn_save.clicked.connect(lambda: self.save())
         footer.addWidget(btn_preview)
         footer.addWidget(btn_save)
         right.addLayout(footer)
@@ -396,66 +388,160 @@ class PersonalityPage(QWidget):
         body.addWidget(right_card, 1)
         lay.addLayout(body, 1)
 
-        self._load_files()
+        self.refresh()
 
-    # --- 路径 -----------------------------------------------------------
-    def persona_dir(self) -> Path:
+    # --- 列表 -----------------------------------------------------------
+    def refresh(self, select_id: str = "") -> None:
+        """重读清单并重画左边的列表。"""
+        items = personas.list_personas()
+        self.list_personas.blockSignals(True)
+        self.list_personas.clear()
+        for item in items:
+            row = QListWidgetItem(item.display)
+            row.setData(Qt.ItemDataRole.UserRole, item.id)
+            row.setToolTip(f"{item.id} · {item.path()}")
+            self.list_personas.addItem(row)
+        self.list_personas.blockSignals(False)
+
+        wanted = select_id or self._persona_id
+        for index in range(self.list_personas.count()):
+            row = self.list_personas.item(index)
+            if str(row.data(Qt.ItemDataRole.UserRole)) == wanted:
+                self.list_personas.setCurrentRow(index)
+                return
+        if self.list_personas.count():
+            self.list_personas.setCurrentRow(0)
+        else:
+            self._clear_form()
+
+    def _on_row_changed(self, index: int) -> None:
+        row = self.list_personas.item(index)
+        if row is None:
+            return
+        found = personas.by_id(str(row.data(Qt.ItemDataRole.UserRole)))
+        if found is not None:
+            self._load(found)
+
+    def _load(self, persona: personas.Persona) -> None:
+        self._persona_id = persona.id
+        self._order = persona.order
+        self.ed_id.setText(persona.id)
+        self.ed_id.setReadOnly(True)
+        self.ed_name.setText(persona.label)
+        self.ed_dir.setText(str(persona.path()))
+        self._rescan(checked=set(persona.files))
+        self.lb_status.setText("")
+
+    def _clear_form(self) -> None:
+        self._persona_id = ""
+        self._order = 0
+        self.ed_id.setReadOnly(False)
+        self.ed_id.clear()
+        self.ed_name.clear()
+        self.ed_dir.setText(str(personas.personality_dir()))
+        self._rescan(checked=set())
+        self.lb_status.setText("")
+
+    # --- 按钮 -----------------------------------------------------------
+    def _new(self) -> None:
+        # 用 -1 而不是 clearSelection()：currentRow 不清掉的话，用户再点
+        # 原来那一行不会有 currentRowChanged，表单就停在"新建"状态不动
+        self.list_personas.setCurrentRow(-1)
+        self._clear_form()
+        self.ed_id.setFocus()
+
+    def _dir(self) -> Path:
         raw = self.ed_dir.text().strip()
-        return Path(raw).expanduser() if raw else Path(chat_config.DEFAULT_PERSONA_DIR)
-
-    def _on_dir_edited(self) -> None:
-        self.save()
-        self._load_files()
+        return Path(raw).expanduser() if raw else personas.personality_dir()
 
     def _pick_dir(self) -> None:
         chosen = QFileDialog.getExistingDirectory(
-            self, t("settings.personality.files"), str(self.persona_dir())
+            self, t("settings.personality.files"), str(self._dir())
         )
         if chosen:
             self.ed_dir.setText(chosen)
-            self._on_dir_edited()
+            self._rescan()
 
     def _open_dir(self) -> None:
-        target = self.persona_dir()
+        target = self._dir()
         if target.is_dir():
             QDesktopServices.openUrl(QUrl.fromLocalFile(str(target)))
 
-    # --- 文件清单 -------------------------------------------------------
-    def _load_files(self) -> None:
-        directory = self.persona_dir()
-        exists = directory.is_dir()
-        if exists:
-            # 路径本身上面那个输入框已经显示了，这里只说状态（长路径会折行，难看）
-            self.lb_dir_state.setText(t("settings.personality.dir_ok"))
+    def _rescan(self, checked: set[str] | None = None) -> None:
+        directory = self._dir()
+        rows = personas.scan_files(directory)
+        if checked is None:
+            keep = {name for name, _ in rows}
+            checked = self.file_list.checked_names() & keep
+        self.file_list.set_rows(rows, checked=checked)
+        if directory.is_dir():
+            self.lb_dir_state.setText(t("settings.personality.dir_ok", n=len(rows)))
         else:
             self.lb_dir_state.setText(
                 t("settings.personality.dir_missing", path=str(directory))
             )
-        self.file_list.set_rows(
-            scan_persona_files(directory), checked=set(self._cfg.persona_files)
-        )
 
-    def _save_files(self, names) -> None:
-        cfg = chat_config.load()          # 同上：现读，只改自己这一项
-        cfg.persona_files = sorted(str(name) for name in names)
-        self._cfg.persona_files = cfg.persona_files
-        chat_config.save(cfg)
+    def _on_files_changed(self, _names) -> None:
+        self.lb_status.setText(t("settings.personality.unsaved"))
+
+    def _selected_files(self) -> list[str]:
+        return sorted(self.file_list.checked_names())
 
     # --- 存盘 -----------------------------------------------------------
-    def save(self) -> None:
-        raw = self.ed_dir.text().strip()
-        cfg = chat_config.load()
-        # 存空串表示"用默认目录"，这样换机器不改配置也能跑
-        cfg.persona_dir = "" if raw == chat_config.DEFAULT_PERSONA_DIR else raw
-        self._cfg.persona_dir = cfg.persona_dir
-        chat_config.save(cfg)
+    def save(self) -> bool:
+        """校验 + 写回清单。返回是否真的写进去了。"""
+        persona_id = self.ed_id.text().strip()
+        label = self.ed_name.text().strip()
+        if not persona_id:
+            self._complain(t("settings.personality.err_id_empty"))
+            return False
+        if not personas.ID_RE.match(persona_id):
+            self._complain(t("settings.personality.err_id_chars"))
+            return False
+        if self._persona_id != persona_id and personas.by_id(persona_id) is not None:
+            self._complain(t("settings.personality.err_id_dup", id=persona_id))
+            return False
+        directory = self._dir()
+        if not directory.is_dir():
+            self._complain(t("settings.personality.err_dir", path=str(directory)))
+            return False
+        files = self._selected_files()
+        if not files:
+            self._complain(t("settings.personality.err_files"))
+            return False
+
+        # 目录就是默认人格目录时存空串：换机器/挪仓库也能跑
+        try:
+            is_default = directory.resolve() == personas.personality_dir().resolve()
+        except OSError:
+            is_default = False
+        personas.upsert(
+            personas.Persona(
+                id=persona_id,
+                label=label or persona_id,
+                dir="" if is_default else str(directory.resolve()),
+                files=files,
+                order=self._order,
+            )
+        )
+        self._persona_id = persona_id
+        self.refresh(select_id=persona_id)
+        self.lb_status.setText(t("settings.personality.saved"))
+        return True
 
     def _preview(self) -> None:
         """看一眼拼出来的 system 提示词 —— 排查"模型不按人格说话"用。"""
-        self.save()
-        cfg = chat_config.load()
-        body = cfg.system_prompt() or t("settings.personality.preview_empty")
-        QMessageBox.information(self, t("settings.personality.preview"), body[:4000])
+        body = personas.build_system_prompt(str(self._dir()), self._selected_files())
+        QMessageBox.information(
+            self,
+            t("settings.personality.preview"),
+            body[:4000] or t("settings.personality.preview_empty"),
+        )
+
+    def _complain(self, message: str) -> None:
+        self.lb_status.setText(message)
+        QMessageBox.warning(self, t("settings.personality.title"), message)
+
 
 
 class RagPage(QWidget):

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "personas": [
+    {
+      "id": "deepseek",
+      "label": "大肥鱼",
+      "dir": "",
+      "files": [
+        "IDENTITY.md",
+        "SOUL.md",
+        "USER.md"
+      ],
+      "enabled": true,
+      "order": 10
+    }
+  ]
+}
