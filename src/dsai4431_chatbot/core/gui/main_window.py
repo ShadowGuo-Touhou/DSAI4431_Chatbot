@@ -741,10 +741,11 @@ class MainWindow(QMainWindow):
 
     # --- 会话抽屉 -------------------------------------------------------
     def _place_drawer(self) -> None:
+        """抽屉是独立窗口（见 SessionDrawer 里的说明），按主窗口左上角算全局坐标。"""
         margin = 12
-        self._drawer.setGeometry(
-            margin, margin, DRAWER_W, max(260, self.height() - margin * 2)
-        )
+        top_left = self.mapToGlobal(QPoint(margin, margin))
+        self._drawer.move(top_left)
+        self._drawer.resize(DRAWER_W, max(260, self.height() - margin * 2))
 
     def show_drawer(self) -> None:
         self._drawer.reload()
@@ -781,6 +782,16 @@ class MainWindow(QMainWindow):
         super().resizeEvent(event)
         if self._drawer.isVisible():
             self._place_drawer()
+
+    def moveEvent(self, event):  # noqa: N802
+        super().moveEvent(event)
+        if self._drawer.isVisible():
+            self._place_drawer()
+
+    def closeEvent(self, event):  # noqa: N802
+        self._drawer.close()
+        self.character.shutdown()
+        super().closeEvent(event)
 
     def keyPressEvent(self, event):  # noqa: N802
         if event.key() == Qt.Key.Key_Escape and self._drawer.isVisible():

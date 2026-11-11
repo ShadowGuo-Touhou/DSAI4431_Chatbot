@@ -35,6 +35,7 @@ from PySide6.QtWidgets import (
     QMenu,
     QMessageBox,
     QPushButton,
+    QSizePolicy,
     QVBoxLayout,
     QWidget,
 )
@@ -137,8 +138,13 @@ class SessionDrawer(QFrame):
     close_requested = Signal()
 
     def __init__(self, parent=None):
+        # 独立窗口（Qt.Tool + 无边框）：QWebEngineView 是原生子窗口，
+        # 会把同级的 Qt 控件盖住，raise_() 也没用 —— 只能让它当独立窗口浮在上面
         super().__init__(parent)
         self.setObjectName("sessionDrawer")
+        self.setWindowFlags(
+            Qt.WindowType.Tool | Qt.WindowType.FramelessWindowHint
+        )
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setFixedWidth(DRAWER_W)
         self._current_id = ""
@@ -179,10 +185,12 @@ class SessionDrawer(QFrame):
         lay.addWidget(self.btn_new)
 
         self.form = NewSessionForm()
+        # 表单只占自己的高度，别被布局拉长（列表隐藏时剩余空间会被它吃掉，按钮就看不见了）
+        self.form.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
         self.form.hide()
         self.form.submitted.connect(self._on_create)
         self.form.cancelled.connect(self.toggle_form)
-        lay.addWidget(self.form)
+        lay.addWidget(self.form, 0, Qt.AlignmentFlag.AlignTop)
 
         # --- 列表 ---------------------------------------------------------
         self.list = QListWidget()
@@ -275,11 +283,12 @@ class SessionDrawer(QFrame):
 
     # --- 新建 -----------------------------------------------------------
     def toggle_form(self) -> None:
+        """展开/收起新建表单；表单展开时把「＋ 新建对话」按钮收起来（避免两个取消）。"""
         visible = not self.form.isVisible()
         if visible:
             self.form.reset()
         self.form.setVisible(visible)
-        self.btn_new.setText(t("session.cancel_new") if visible else t("session.new"))
+        self.btn_new.setVisible(not visible)
 
     def _on_create(self, payload: dict) -> None:
         meta = session_store.create_session(

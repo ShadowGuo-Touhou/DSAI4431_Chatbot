@@ -242,11 +242,11 @@ QListWidget#fieldList::item:selected {{
     color: {accent};
 }}
 
-/* 会话抽屉（≡ 打开）：浮在窗口左侧的一块面板 */
+/* 会话抽屉：独立无边框窗口（QWebEngineView 是原生子窗口，会把同级控件盖住），
+   所以不能画圆角 —— 窗口四角会露出底色 */
 QFrame#sessionDrawer {{
     background: {surface};
     border: 1px solid {border_soft};
-    border-radius: 12px;
 }}
 QFrame#newSessionForm {{
     background: {surface_alt};
