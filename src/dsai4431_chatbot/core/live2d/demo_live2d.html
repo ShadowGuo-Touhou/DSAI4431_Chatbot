@@ -203,6 +203,7 @@ try {
   let _curX = 0, _curY = 0;          // 平滑后的实际值
   let _physSaved = null;             // 跟随期间被摘掉的物理实例
   let _physSuspended = false;
+  let _physWanted = true;            // 宿主设置里「物理」这一项是开还是关
 
   function _ease(k) { return k * k * (3 - 2 * k); }   // smoothstep
 
@@ -228,7 +229,8 @@ try {
   function _tickFollow() {
     if (!followOn) {
       if (_physSuspended) {
-        try { im.physics = _physSaved; } catch (_) {}
+        // 关掉跟随时把物理还回去 —— 但只在宿主本来就开着物理时才还
+        try { im.physics = _physWanted ? _physSaved : null; } catch (_) {}
         _physSaved = null;
         _physSuspended = false;
       }
@@ -706,6 +708,11 @@ try {
       return !!im.breath;
     },
     physics(on) {
+      // ⚠ 跟随期间物理是被临时摘掉的（见 _tickFollow 的注释：物理开着会把
+      // ParamAngleX 锁死，画面只剩眼珠在动）。这时候宿主来设物理，只记配置，
+      // 绝对不要把物理塞回去 —— 之前就是这么塞回去的，头就再也不转了。
+      _physWanted = !!on;
+      if (_physSuspended) return !!(_physWanted && _physSaved);
       im.physics = on ? saved.physics : null;
       return !!im.physics;
     },
