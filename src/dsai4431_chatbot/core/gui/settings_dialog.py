@@ -128,6 +128,7 @@ class FileCheckList(QScrollArea):
 
         self.boxes: dict[str, QCheckBox] = {}
         self._building = False
+        self._editable = True          # set_editable() 会改；set_rows 重建时要照旧
 
         # 滚动内容：透明容器，行都挂在它下面（QSS 用 #fileList > #fileRow 选中）
         self._body = QFrame()
@@ -167,6 +168,7 @@ class FileCheckList(QScrollArea):
             box = QCheckBox(name)
             box.setObjectName("fileCheck")
             box.setChecked(name in names)
+            box.setEnabled(self._editable)
             box.setCursor(Qt.CursorShape.PointingHandCursor)
             box.toggled.connect(self._on_toggled)
             self.boxes[name] = box
@@ -183,6 +185,15 @@ class FileCheckList(QScrollArea):
 
     def checked_names(self) -> set[str]:
         return {name for name, box in self.boxes.items() if box.isChecked()}
+
+    def set_editable(self, editable: bool) -> None:
+        """整体锁/解锁勾选（默认人格那套文件是固定的，不让改）。
+
+        锁住的状态要记住：set_rows() 会把行全部重建，重建时要照旧上锁。
+        """
+        self._editable = bool(editable)
+        for box in self.boxes.values():
+            box.setEnabled(self._editable)
 
     def _on_toggled(self, _on: bool) -> None:
         if self._building:          # 建列表时 setChecked 的噪声不要往外发
@@ -353,6 +364,8 @@ class PersonalityPage(QWidget):
         self._order = 0
         # 新建时目录跟着 ID 走：<人格根目录>/<id>，用户自己挑过就不跟了
         self._dir_follows_id = True
+        # 正在看默认人格（大肥鱼）时为 True：表单全锁、不能存也不能删
+        self._readonly = False
 
         lay = QVBoxLayout(self)
         lay.setContentsMargins(28, 24, 28, 24)
@@ -370,9 +383,17 @@ class PersonalityPage(QWidget):
         self.list_personas = field_list(min_height=90)
         self.list_personas.currentRowChanged.connect(self._on_row_changed)
         left.addWidget(self.list_personas, 1)
+
+        list_btns = QHBoxLayout()
+        list_btns.setSpacing(8)
         btn_new = small_button(t("settings.personality.new_button"))
         btn_new.clicked.connect(lambda: self._new())
-        left.addWidget(btn_new, 0, Qt.AlignmentFlag.AlignLeft)
+        self.btn_del = small_button(t("settings.personality.delete_button"))
+        self.btn_del.clicked.connect(lambda: self._delete())
+        list_btns.addWidget(btn_new)
+        list_btns.addWidget(self.btn_del)
+        list_btns.addStretch(1)
+        left.addLayout(list_btns)
         left_card.setFixedWidth(260)
         body.addWidget(left_card)
 
@@ -399,15 +420,15 @@ class PersonalityPage(QWidget):
         # 两种都给：直接选文件夹，或者点一个 .md 文件（取它所在目录）。
         # 单靠「打开文件」会逼着用户必须先挑一个 .md，单靠「选文件夹」
         # 又看不见目录里有哪些文件 —— 两个按钮各管一种，都是系统原生对话框。
-        btn_pick_dir = small_button(t("settings.personality.choose_dir"))
-        btn_pick_dir.clicked.connect(lambda: self._pick_dir())
-        btn_pick_file = small_button(t("settings.personality.choose_file"))
-        btn_pick_file.clicked.connect(lambda: self._pick_file())
-        btn_rescan = small_button(t("settings.personality.rescan"))
-        btn_rescan.clicked.connect(lambda: self._rescan())
-        path_row.addWidget(btn_pick_dir)
-        path_row.addWidget(btn_pick_file)
-        path_row.addWidget(btn_rescan)
+        self.btn_pick_dir = small_button(t("settings.personality.choose_dir"))
+        self.btn_pick_dir.clicked.connect(lambda: self._pick_dir())
+        self.btn_pick_file = small_button(t("settings.personality.choose_file"))
+        self.btn_pick_file.clicked.connect(lambda: self._pick_file())
+        self.btn_rescan = small_button(t("settings.personality.rescan"))
+        self.btn_rescan.clicked.connect(lambda: self._rescan())
+        path_row.addWidget(self.btn_pick_dir)
+        path_row.addWidget(self.btn_pick_file)
+        path_row.addWidget(self.btn_rescan)
         path_row.addStretch(1)
         right.addLayout(path_row)
 
@@ -428,10 +449,10 @@ class PersonalityPage(QWidget):
         footer.addWidget(self.lb_status, 1)
         btn_preview = small_button(t("settings.personality.preview"))
         btn_preview.clicked.connect(lambda: self._preview())
-        btn_save = small_button(t("settings.personality.save"), primary=True)
-        btn_save.clicked.connect(lambda: self.save())
+        self.btn_save = small_button(t("settings.personality.save"), primary=True)
+        self.btn_save.clicked.connect(lambda: self.save())
         footer.addWidget(btn_preview)
-        footer.addWidget(btn_save)
+        footer.addWidget(self.btn_save)
         right.addLayout(footer)
 
         body.addWidget(right_card, 1)
@@ -480,7 +501,23 @@ class PersonalityPage(QWidget):
         self.ed_name.setText(persona.label)
         self.ed_dir.setText(str(persona.path()))
         self._rescan(checked=set(persona.files))
-        self.lb_status.setText("")
+        self._set_readonly(persona.readonly)
+        if persona.readonly:
+            self.lb_status.setText(t("settings.personality.default_locked"))
+        else:
+            self.lb_status.setText("")
+
+    def _set_readonly(self, locked: bool) -> None:
+        """默认人格「大肥鱼」是固定的：名字/目录/勾选/保存/删除全都锁住。"""
+        self._readonly = locked
+        self.ed_name.setReadOnly(locked)
+        self.ed_dir.setReadOnly(locked)
+        self.btn_pick_dir.setEnabled(not locked)
+        self.btn_pick_file.setEnabled(not locked)
+        self.btn_rescan.setEnabled(not locked)
+        self.btn_save.setEnabled(not locked)
+        self.btn_del.setEnabled(not locked)
+        self.file_list.set_editable(not locked)
 
     def _clear_form(self) -> None:
         self._persona_id = ""
@@ -491,6 +528,7 @@ class PersonalityPage(QWidget):
         self.ed_name.clear()
         self.ed_dir.setText(str(personas.personality_dir()))
         self._rescan(checked=set())
+        self._set_readonly(False)
         self.lb_status.setText("")
 
     def _on_id_edited(self, text: str) -> None:
@@ -570,11 +608,17 @@ class PersonalityPage(QWidget):
 
     # --- 存盘 -----------------------------------------------------------
     def save(self) -> bool:
-        """校验 + 写回清单。返回是否真的写进去了。"""
+        """校验 + 写这一条定义（一个 id 一份 json）。返回是否真的写进去了。"""
+        if self._readonly:
+            self._complain(t("settings.personality.err_default_locked"))
+            return False
         persona_id = self.ed_id.text().strip()
         label = self.ed_name.text().strip()
         if not persona_id:
             self._complain(t("settings.personality.err_id_empty"))
+            return False
+        if persona_id == personas.DEFAULT_ID:
+            self._complain(t("settings.personality.err_id_reserved", id=persona_id))
             return False
         if not personas.ID_RE.match(persona_id):
             self._complain(t("settings.personality.err_id_chars"))
@@ -598,16 +642,11 @@ class PersonalityPage(QWidget):
             self._complain(t("settings.personality.err_files"))
             return False
 
-        # 目录就是默认人格目录时存空串：换机器/挪仓库也能跑
-        try:
-            is_default = directory.resolve() == personas.personality_dir().resolve()
-        except OSError:
-            is_default = False
-        personas.upsert(
+        personas.save_persona(
             personas.Persona(
                 id=persona_id,
                 label=label or persona_id,
-                dir="" if is_default else str(directory.resolve()),
+                dir=str(directory),      # save_persona 会折算成相对人格根目录
                 files=files,
                 order=self._order,
             )
@@ -617,6 +656,39 @@ class PersonalityPage(QWidget):
         self.lb_status.setText(t("settings.personality.saved"))
         self.saved.emit()
         return True
+
+    def _delete(self) -> None:
+        """从清单里删掉这一条定义 —— **不动它的目录和 .md**。"""
+        persona_id = self._persona_id
+        if self._readonly or persona_id == personas.DEFAULT_ID:
+            self._complain(t("settings.personality.err_default_delete"))
+            return
+        if not persona_id:
+            self._complain(t("settings.personality.err_no_selection"))
+            return
+        target = personas.by_id(persona_id)
+        if target is None:
+            return
+        if len(personas.list_personas()) <= 1:
+            self._complain(t("settings.personality.err_last_persona"))
+            return
+        answer = QMessageBox.question(
+            self,
+            t("settings.personality.delete_button"),
+            t("settings.personality.confirm_delete", name=target.display,
+              path=str(target.path())),
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if answer != QMessageBox.StandardButton.Yes:
+            return
+        if not personas.remove_persona(persona_id):
+            self._complain(t("settings.personality.err_delete_failed"))
+            return
+        self._persona_id = ""
+        self.refresh()
+        self.lb_status.setText(t("settings.personality.deleted"))
+        self.saved.emit()
 
     def _preview(self) -> None:
         """看一眼拼出来的 system 提示词 —— 排查"模型不按人格说话"用。"""

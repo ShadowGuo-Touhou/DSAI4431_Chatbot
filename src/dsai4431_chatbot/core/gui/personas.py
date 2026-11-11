@@ -1,19 +1,33 @@
-"""人格清单：一套人格 = 一个目录 + 里面若干个 .md。
+"""人格：一套人格 = 一个目录 + 里面若干个 .md。
 
-设计抄的是 DSH 那个人格注入插件（`P:\\Deekseek_playground\\dsh-persona-inject`）：
-清单是一份 `personas.json`，每条记 id / 显示名 / 目录 / 勾了哪几个 .md。
-勾选的文件按顺序拼成一条 `system` 提示词发给模型 —— 这就是「人格」在本项目的落地。
+存储结构（都在 `<data>/personality/` 下，路径全按这个根目录算，**不写死盘符**）
+--------------------------------------------------------------------------
+    <data>/personality/
+        FatWhale/                  ← 默认人格「大肥鱼」，固定读这个目录下的 .md
+            IDENTITY.md
+            SOUL.md
+            USER.md
+        banki.json                 ← 自定义人格：一份定义一个 json（文件名就是 id）
+        banki/                     ← 它的 .md（新建时自动建、塞模板）
+            ...
 
-存哪儿
-------
-默认 `<data>/personality/personas.json`，人格文件（IDENTITY.md / SOUL.md / USER.md）
-也放在同一个目录里，跟代码一起入库（`.gitignore` 里有例外）。
-新建的人格可以指向任意目录（用户自己选），清单里记绝对路径。
+为什么不再用一个 `personas.json` 装所有定义：那样改一条要重写整份文件，
+两个人格同时保存就会互相覆盖；现在一条一个文件，互不影响。
+
+`dir` 字段的写法
+----------------
+- 在人格根目录里 → 存**相对路径**（如 `"banki"`），换机器/挪仓库照样能用
+- 在别处（用户自己挑的目录）→ 只能存绝对路径
+读的时候：相对 → `<data>/personality/<dir>`；绝对 → 原样。
+
+默认人格
+--------
+id = `FatWhale`，label = `大肥鱼`，目录固定 `<data>/personality/FatWhale`，
+文件固定读该目录下所有 .md（按文件名排序）。它在 UI 上不可改、不可删。
 
 环境变量（测试用）
 ------------------
-- `DSAI_PERSONA_DIR`：人格根目录
-- `DSAI_PERSONA_JSON`：直接指到清单文件（优先级更高）
+- `DSAI_PERSONA_DIR`：人格根目录（默认 `<data>/personality`）
 """
 
 from __future__ import annotations
@@ -27,17 +41,15 @@ from pathlib import Path
 
 from dsai4431_chatbot.core.gui import settings_store
 
-# 默认人格（仓库自带的那套）
-DEFAULT_ID = "deepseek"
+# 默认人格（固定目录、固定读取，不可改）
+DEFAULT_ID = "FatWhale"
 DEFAULT_LABEL = "大肥鱼"
-DEFAULT_FILES = ["IDENTITY.md", "SOUL.md", "USER.md"]
 
 # 系统提示词上限
 PROMPT_LIMIT = 20000
 
-# id 只允许 ASCII 字母数字下划线短横线：它会被用来命名记忆库文件
+# id 只允许 ASCII 字母数字下划线短横线：它会被当成文件名
 ID_RE = re.compile(r"^[A-Za-z0-9_-]{1,40}$")
-
 
 # 新建人格时先塞这几个模板，用户再往里写内容
 TEMPLATES = {
@@ -61,7 +73,7 @@ TEMPLATES = {
 class Persona:
     id: str
     label: str
-    dir: str                                    # 空串 = 用 personality_dir()
+    dir: str                                    # 相对人格根目录，或绝对路径；空 = 默认
     files: list[str] = field(default_factory=list)
     order: int = 0
 
@@ -70,15 +82,29 @@ class Persona:
     def display(self) -> str:
         return self.label or self.id
 
+    @property
+    def readonly(self) -> bool:
+        """默认人格不允许改（改名/换目录/取消勾选/删除都不行）。"""
+        return self.id == DEFAULT_ID
+
     def path(self) -> Path:
         raw = (self.dir or "").strip()
-        return Path(raw).expanduser() if raw else personality_dir()
+        if not raw:
+            return default_dir() if self.readonly else personality_dir()
+        candidate = Path(raw).expanduser()
+        return candidate if candidate.is_absolute() else personality_dir() / candidate
+
+    def rel_dir(self) -> str:
+        """存进 json 的写法：在人格根目录里就存相对路径。"""
+        if self.readonly:
+            return ""
+        try:
+            return self.path().resolve().relative_to(personality_dir().resolve()).as_posix()
+        except (ValueError, OSError):
+            return str(self.path())
 
     def as_dict(self) -> dict:
-        """写进 session 头部的那个 persona 字段（目录写**绝对路径**）。
-
-        会话里记绝对路径，以后清单被改了也不会把这通对话的人格换掉。
-        """
+        """写进 session 头部的 persona 字段（目录写绝对路径，会话自带上下文）。"""
         return {
             "id": self.id,
             "label": self.label,
@@ -94,7 +120,7 @@ class Persona:
 # 位置
 # ---------------------------------------------------------------------------
 def personality_dir() -> Path:
-    """人格根目录（默认 `<data>/personality`）。"""
+    """人格根目录（默认 `<data>/personality`，可被 DSAI_PERSONA_DIR 覆盖）。"""
     override = os.environ.get("DSAI_PERSONA_DIR")
     path = Path(override).expanduser() if override else settings_store.data_dir() / "personality"
     try:
@@ -104,62 +130,59 @@ def personality_dir() -> Path:
     return path
 
 
-def manifest_path() -> Path:
-    override = os.environ.get("DSAI_PERSONA_JSON")
-    if override:
-        return Path(override).expanduser()
-    return personality_dir() / "personas.json"
+def default_dir() -> Path:
+    """默认人格「大肥鱼」的固定目录。"""
+    return personality_dir() / DEFAULT_ID
+
+
+def definition_path(persona_id: str) -> Path:
+    return personality_dir() / f"{persona_id}.json"
 
 
 # ---------------------------------------------------------------------------
 # 读
 # ---------------------------------------------------------------------------
 def default_persona() -> Persona:
-    """清单还没有（或坏了）时用的那一条：仓库自带的默认人格。"""
-    directory = personality_dir()
-    files = [name for name in DEFAULT_FILES if (directory / name).is_file()]
-    return Persona(id=DEFAULT_ID, label=DEFAULT_LABEL, dir="", files=files)
+    """固定读 `<人格根目录>/FatWhale/*.md`；文件没了就是空列表（不是错误）。"""
+    rows = scan_files(default_dir())
+    return Persona(
+        id=DEFAULT_ID,
+        label=DEFAULT_LABEL,
+        dir="",
+        files=[name for name, _chars in rows],
+    )
 
 
-def _read_manifest() -> list[Persona]:
-    path = manifest_path()
+def _persona_from_json(path: Path) -> Persona | None:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-    except FileNotFoundError:
-        return []
     except (OSError, ValueError) as exc:
         print(f"[persona] {path} 读不了：{exc}", file=sys.stderr, flush=True)
-        return []
-
-    items: list[Persona] = []
-    for item in (data.get("personas") or []) if isinstance(data, dict) else []:
-        if not isinstance(item, dict):
-            continue
-        if item.get("enabled") is False:
-            continue
-        persona_id = str(item.get("id") or "").strip()
-        if not persona_id:
-            continue
-        files = [str(f) for f in (item.get("files") or []) if str(f).strip()]
-        items.append(
-            Persona(
-                id=persona_id,
-                label=str(item.get("label") or persona_id),
-                dir=str(item.get("dir") or ""),
-                files=files,
-                order=int(item.get("order") or 0),
-            )
-        )
-    return items
+        return None
+    if not isinstance(data, dict):
+        return None
+    persona_id = str(data.get("id") or path.stem).strip()
+    if not persona_id or persona_id == DEFAULT_ID:
+        return None
+    files = [str(f) for f in (data.get("files") or []) if str(f).strip()]
+    return Persona(
+        id=persona_id,
+        label=str(data.get("label") or persona_id),
+        dir=str(data.get("dir") or ""),
+        files=files,
+        order=int(data.get("order") or 0),
+    )
 
 
 def list_personas() -> list[Persona]:
-    """清单里所有启用的人格；空清单就退回默认人格（永远至少有一条）。"""
-    items = _read_manifest()
-    if not items:
-        items = [default_persona()]
-    items.sort(key=lambda p: (p.order, p.display))
-    return items
+    """默认人格排第一，其余按 `<id>.json` 扫出来，再按显示名排序。"""
+    items = [default_persona()]
+    for path in sorted(personality_dir().glob("*.json")):
+        persona = _persona_from_json(path)
+        if persona is not None:
+            items.append(persona)
+    tail = sorted(items[1:], key=lambda p: (p.order, p.display))
+    return items[:1] + tail
 
 
 def by_id(persona_id: str) -> Persona | None:
@@ -184,52 +207,42 @@ def from_session(session_persona: dict, model: str = "") -> Persona | None:
 # ---------------------------------------------------------------------------
 # 写
 # ---------------------------------------------------------------------------
-def save_personas(items: list[Persona]) -> Path:
-    """整份写回清单（保持 DSH 插件的字段名，方便以后互通）。"""
-    path = manifest_path()
+def save_persona(persona: Persona) -> Path:
+    """一个 id 一份 json；先写 .tmp 再换名，写到一半崩了不会毁掉定义。"""
+    if persona.readonly:
+        raise ValueError("默认人格不可修改")
+    path = definition_path(persona.id)
     payload = {
-        "version": 1,
-        "personas": [
-            {
-                "id": p.id,
-                "label": p.label,
-                "dir": (p.dir or "").strip(),
-                "files": list(p.files),
-                "enabled": True,
-                "order": int(p.order),
-            }
-            for p in items
-        ],
+        "id": persona.id,
+        "label": persona.label,
+        "dir": persona.rel_dir(),
+        "files": list(persona.files),
+        "order": int(persona.order),
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    tmp.replace(path)          # 先写临时文件再换名：写到一半崩了不会毁掉清单
+    tmp.replace(path)
     return path
 
 
-def upsert(persona: Persona) -> Path:
-    """按 id 覆盖或追加一条，其余原样保留。"""
-    items = _read_manifest()
-    if not items:
-        items = [default_persona()]
-    for index, existing in enumerate(items):
-        if existing.id == persona.id:
-            items[index] = persona
-            break
-    else:
-        persona.order = persona.order or (10 * (len(items) + 1))
-        items.append(persona)
-    return save_personas(items)
-
-
-def remove(persona_id: str) -> None:
-    items = [p for p in _read_manifest() if p.id != persona_id]
-    save_personas(items)
+def remove_persona(persona_id: str) -> bool:
+    """删掉这一份定义（**不动目录和 .md**）。默认人格删不掉。"""
+    if persona_id == DEFAULT_ID:
+        return False
+    path = definition_path(persona_id)
+    try:
+        path.unlink()
+        return True
+    except FileNotFoundError:
+        return False
+    except OSError as exc:
+        print(f"[persona] 删不掉 {path}：{exc}", file=sys.stderr, flush=True)
+        return False
 
 
 def create_persona_dir(persona_id: str, templates: dict[str, str] | None = None) -> Path:
-    """在人格根目录下建一个以 id 命名的目录，缺哪个文件补一个模板。
+    """在人格根目录下建 `<id>/`，缺哪个模板文件补一个。
 
     已经有同名目录就复用（不覆盖用户写过的内容）。
     """
@@ -247,7 +260,7 @@ def create_persona_dir(persona_id: str, templates: dict[str, str] | None = None)
 
 
 # ---------------------------------------------------------------------------
-# 提示词
+# 扫描 / 提示词
 # ---------------------------------------------------------------------------
 def scan_files(directory: str | Path) -> list[tuple[str, int]]:
     """扫目录下的 .md，返回 [(文件名, 字符数)]。目录不在就返回空表。"""

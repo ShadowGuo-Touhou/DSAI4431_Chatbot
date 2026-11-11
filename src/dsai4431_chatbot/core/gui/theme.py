@@ -437,6 +437,30 @@ QPushButton#smallButton[variant="primary"] {{
 QPushButton#smallButton[variant="primary"]:hover {{
     background: {accent_hover};
 }}
+/* 禁用态要看得出来：默认人格那页的按钮全是灰的，没有这条会和能点的一模一样 */
+QPushButton#smallButton:disabled {{
+    background: {surface_alt};
+    border-color: {border_soft};
+    color: {text_weak};
+}}
+QPushButton#smallButton[variant="primary"]:disabled {{
+    background: {chip_bg};
+    border-color: {chip_bg};
+    color: {text_weak};
+}}
+QCheckBox#fileCheck:disabled {{
+    color: {text_weak};
+}}
+QCheckBox#fileCheck::indicator:disabled {{
+    background: {surface_alt};
+    border-color: {border_soft};
+}}
+/* 锁住的但已经勾上的：要看出"它是选中的、只是不能改"，
+   否则只看截图会以为一个都没勾 */
+QCheckBox#fileCheck::indicator:checked:disabled {{
+    background: {chip_bg_hover};
+    border-color: {accent};
+}}
 
 QPushButton#iconButton {{
     background: {surface};

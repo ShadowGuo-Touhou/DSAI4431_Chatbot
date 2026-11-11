@@ -460,6 +460,21 @@
   上一版的冒烟测试是直接 `new SettingsDialog` 绕过了 `open_settings`，所以没抓到。
   → 新增 `test_ai_open_settings.py` 走真入口（`win.open_settings()`），
   5 项全过：不抛异常 / 窗真的开出来 / 下拉从 2 条变 3 条 / 有新人名 / 探针清理干净
+- **第三轮：存储结构换掉 + 删除（2026-11-11 晚）**
+  - 不再用一个 `personas.json` 装所有定义（改一条要重写整份，两人格互踩），
+    改成**一个 id 一份 json**：`<人格根目录>/<id>.json`
+  - 默认人格固定 `FatWhale`：读 `<人格根目录>/FatWhale/*.md`，
+    UI 全锁（名字/目录/勾选/保存/删除），`save_persona()` 直接抛 ValueError
+  - 「删除」只删 `<id>.json`，**不动目录和 .md**；默认人格删不掉；
+    至少保留一个自定义，删完只剩默认时就拒绝
+  - **移植性**：源码里没有任何绝对路径（`Select-String '[A-Za-z]:\\' src` 为空）。
+    `dir` 在人格根目录里就存**相对路径**（`"alpha"`），只有用户挑了根目录外的
+    才存绝对；读的时候相对 → `<根目录>/<dir>`
+  - 禁用态要看得出来：给 `#smallButton:disabled` / `#fileCheck` 加深色规则，
+    否则大肥鱼那页的「保存/删除」看着和能点的一模一样；
+    `::indicator:checked:disabled` 单独一条，不然锁住的勾选看着像没勾
+  - 测试：`test_af_personality.py` 重写为 **54 项**（含删除、只读、相对路径、
+    两个原生选择入口）；`test_p_home` / `test_ai_open_settings` 也跟着改结构
 
 ---
 
