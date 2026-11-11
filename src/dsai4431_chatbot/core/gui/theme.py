@@ -160,6 +160,16 @@ QPlainTextEdit#inputEdit {{
 }}
 
 /* ---------- 设置弹窗 ---------- */
+/* 无边框窗口：圆角画在 shell 上（窗口本身透明，四周留出投影边距） */
+#settingsShell {{
+    background: {surface};
+    border: 1px solid {border};
+    border-radius: 16px;
+}}
+#settingsTitle {{
+    font-size: 16px;
+    font-weight: 600;
+}}
 /* 导航区不画分隔线：和内容区同底色，靠胶囊选中态与间距区分 */
 #settingsNav {{
     background: transparent;

@@ -30,6 +30,13 @@
 - **状态**：`core/gui/settings_dialog.py` 已渲染出**六个分页**的布局，
   `MainWindow.open_settings()` 已改为打开这个弹窗。**没有任何业务逻辑**：
   所有按钮都是空壳，唯一的行为是左侧导航切换分页
+- **外观与交互（2026-11-11 照 DSH 改）**
+  - 无边框 + 圆角（`#settingsShell` 16px）+ 外投影；窗口本身透明，四周留 18px 给投影
+  - 顶部有「设置」标题 + `×` 关闭按钮（`icons/close.svg`）
+  - **不可拖动**：无边框后没有标题栏，也没实现拖动
+  - **点框外关闭**：对话框必须是 **modeless**（模态会把外部点击吃掉），
+    在 `QApplication` 上装事件过滤器，判断按下的全局坐标是否在 `frameGeometry()` 外
+  - Esc 也能关（QDialog 默认）
 - **导航（顺序照用户 2026-11-11 给的清单）**：
   `API KEY` / `Personality` / `RAG` / `Live2D model` / `Theme` / `Other`
   - 前四项带图标，`Theme` 和 `Other` 草图没画图标 → 目前是纯文字

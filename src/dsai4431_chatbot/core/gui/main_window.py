@@ -26,7 +26,7 @@ from __future__ import annotations
 import sys
 from typing import Literal
 
-from PySide6.QtCore import QSize, Qt, Signal
+from PySide6.QtCore import QPoint, QSize, Qt, Signal
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QApplication,
@@ -407,18 +407,35 @@ class MainWindow(QMainWindow):
         root.addWidget(splitter)
 
         self.chat.settings_requested.connect(self.open_settings)
+        self._settings = None
 
     # --- 设置 -----------------------------------------------------------
     def open_settings(self) -> None:
-        """打开设置窗口。
+        """打开设置窗口（无边框圆角，点框外自动关）。
 
-        目前只渲染布局，没有业务逻辑。分页与字段见 settings_dialog.py。
+        注意是 modeless：只有非模态，窗口外的点击才会作为事件送到别处，
+        「点框外关闭」才做得到（模态会把这些点击吃掉）。
         """
         # 延迟导入：settings_dialog 反过来要用本模块的 ICON_DIR / load_icon
-        from dsai4431_chatbot.core.gui.settings_dialog import SettingsDialog
+        from dsai4431_chatbot.core.gui.settings_dialog import (
+            DIALOG_H,
+            DIALOG_W,
+            SettingsDialog,
+        )
+
+        dlg = self._settings
+        if dlg is not None and dlg.isVisible():
+            dlg.raise_()
+            dlg.activateWindow()
+            return
 
         dlg = SettingsDialog(self)
-        dlg.exec()
+        dlg.move(
+            self.frameGeometry().center() - QPoint(DIALOG_W // 2, DIALOG_H // 2)
+        )
+        dlg.destroyed.connect(lambda: setattr(self, "_settings", None))
+        self._settings = dlg
+        dlg.show()
 
 
 def main(argv: list[str] | None = None) -> int:

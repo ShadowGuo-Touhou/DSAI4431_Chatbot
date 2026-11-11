@@ -23,13 +23,15 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from PySide6.QtCore import QSize, Qt, Signal
+from PySide6.QtCore import QEvent, QSize, Qt, Signal
+from PySide6.QtGui import QColor
 from PySide6.QtWidgets import (
     QApplication,
     QButtonGroup,
     QCheckBox,
     QDialog,
     QFrame,
+    QGraphicsDropShadowEffect,
     QHBoxLayout,
     QLabel,
     QLineEdit,
@@ -42,7 +44,8 @@ from PySide6.QtWidgets import (
 
 from dsai4431_chatbot.core.gui import theme, themes
 
-DIALOG_W, DIALOG_H = 980, 660
+SHADOW = 18  # 圆角窗外留给投影的透明边距（窗口本身比可见卡片大一圈）
+DIALOG_W, DIALOG_H = 980 + 2 * SHADOW, 660 + 2 * SHADOW
 NAV_W = 172
 ICON = 16
 
@@ -484,20 +487,66 @@ class SettingsDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("设置")
+        # 无边框 + 透明底：圆角和外投影都要自己画（DSH 的设置窗就是这个样子）。
+        # 无边框之后系统标题栏没了，窗口自然也不能拖动，符合"不可移动"。
+        self.setWindowFlags(Qt.WindowType.Dialog | Qt.WindowType.FramelessWindowHint)
+        self.setWindowModality(Qt.WindowModality.NonModal)
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.setMinimumSize(820 + 2 * SHADOW, 560 + 2 * SHADOW)
         self.resize(DIALOG_W, DIALOG_H)
-        self.setMinimumSize(820, 560)
 
-        root = QHBoxLayout(self)
-        root.setContentsMargins(0, 0, 0, 0)
-        root.setSpacing(0)
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(SHADOW, SHADOW, SHADOW, SHADOW)
+        outer.setSpacing(0)
 
-        # --- 左侧导航 ---------------------------------------------------
+        shell = QFrame()
+        shell.setObjectName("settingsShell")
+        shell.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+        outer.addWidget(shell)
+        self._shell = shell
+
+        shadow = QGraphicsDropShadowEffect(shell)
+        shadow.setBlurRadius(40)
+        shadow.setColor(QColor(15, 17, 21, 70))
+        shadow.setOffset(0, 10)
+        shell.setGraphicsEffect(shadow)
+
+        body = QVBoxLayout(shell)
+        body.setContentsMargins(0, 0, 0, 0)
+        body.setSpacing(0)
+
+        # --- 顶栏：标题 + 关闭 -------------------------------------------
+        header = QHBoxLayout()
+        header.setContentsMargins(20, 14, 14, 4)
+        header.setSpacing(8)
+        title = QLabel("设置")
+        title.setObjectName("settingsTitle")
+        header.addWidget(title)
+        header.addStretch(1)
+        self.btn_close = QPushButton()
+        self.btn_close.setObjectName("iconButton")
+        themes.bind(self.btn_close, "close")
+        self.btn_close.setIconSize(QSize(ICON, ICON))
+        self.btn_close.setFixedSize(30, 30)
+        self.btn_close.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_close.setToolTip("关闭（Esc）")
+        self.btn_close.clicked.connect(self.reject)
+        header.addWidget(self.btn_close)
+        body.addLayout(header)
+
+        # --- 导航 + 分页 -------------------------------------------------
+        content = QHBoxLayout()
+        content.setContentsMargins(0, 0, 0, 0)
+        content.setSpacing(0)
+        body.addLayout(content, 1)
+
+        # 左侧导航
         nav = QFrame()
         nav.setObjectName("settingsNav")
         nav.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         nav.setFixedWidth(NAV_W)
         nav_lay = QVBoxLayout(nav)
-        nav_lay.setContentsMargins(10, 16, 10, 16)
+        nav_lay.setContentsMargins(10, 8, 10, 16)
         nav_lay.setSpacing(4)
 
         self._group = QButtonGroup(self)
@@ -506,7 +555,7 @@ class SettingsDialog(QDialog):
         for index, (icon, text, _page) in enumerate(self.PAGES):
             btn = QPushButton(text)
             btn.setObjectName("navButton")
-            if icon:  # Theme / Other 草图没画图标
+            if icon:
                 themes.bind(btn, icon)
                 btn.setIconSize(QSize(ICON, ICON))
             btn.setCheckable(True)
@@ -516,16 +565,33 @@ class SettingsDialog(QDialog):
             nav_lay.addWidget(btn)
 
         nav_lay.addStretch(1)
-        root.addWidget(nav)
+        content.addWidget(nav)
 
-        # --- 右侧分页 ---------------------------------------------------
+        # 右侧分页
         self.stack = QStackedWidget()
         for _icon, _text, page_cls in self.PAGES:
             self.stack.addWidget(page_cls())
-        root.addWidget(self.stack, 1)
+        content.addWidget(self.stack, 1)
 
         # 唯一的行为：切页（否则其余两页看不到）
         self._group.idClicked.connect(self.stack.setCurrentIndex)
+
+    # --- 点框外关闭 -------------------------------------------------------
+    # 对话框不是模态（模态会把点击吃掉，外面根本收不到事件），
+    # 所以在应用级装一个事件过滤器，按下点不在窗口范围内就关。
+    def showEvent(self, event):  # noqa: N802 - Qt 命名
+        super().showEvent(event)
+        QApplication.instance().installEventFilter(self)
+
+    def hideEvent(self, event):  # noqa: N802
+        super().hideEvent(event)
+        QApplication.instance().removeEventFilter(self)
+
+    def eventFilter(self, obj, event):  # noqa: N802
+        if event.type() == QEvent.Type.MouseButtonPress and self.isVisible():
+            if not self.frameGeometry().contains(event.globalPosition().toPoint()):
+                self.close()
+        return super().eventFilter(obj, event)
 
     def set_page(self, index: int) -> None:
         """给截图/调试用：直接跳到某一页。"""
