@@ -71,6 +71,7 @@ from PySide6.QtCore import QTimer, QUrl, Signal  # noqa: E402
 from PySide6.QtGui import QColor  # noqa: E402
 from PySide6.QtWebEngineCore import (  # noqa: E402
     QWebEnginePage,
+    QWebEngineProfile,
     QWebEngineScript,
 )
 from PySide6.QtWebEngineWidgets import QWebEngineView  # noqa: E402
@@ -80,6 +81,8 @@ from PySide6.QtWidgets import (  # noqa: E402
     QVBoxLayout,
     QWidget,
 )
+
+from dsai4431_chatbot.core.gui import settings_store  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # 路径
@@ -123,6 +126,39 @@ ASSET_ROOT = _resolve_asset_root()
 VENDOR_DIR = ASSET_ROOT / "vendor"
 MODELS_DIR = ASSET_ROOT / "models"
 CORE_FILE = VENDOR_DIR / "live2dcubismcore.min.js"
+
+_profile_ready = False
+
+
+def _prepare_profile() -> None:
+    """把 QtWebEngine 的 disk cache / local storage 指到 `<repo>/data/webengine`。
+
+    实测（Qt 6.12 这台机器）：`QWebEngineProfile.defaultProfile()` 是
+    **off-the-record** 的 —— `httpCacheType` 是 `MemoryHttpCache`，正常运行时
+    什么都不落盘（所以 data/webengine 会一直是空的）。这里的路径设置属于
+    "双保险"：万一哪天 Qt 改成持久化，也只会写进项目目录，不会跑到用户目录。
+
+    早先的版本确实在 `%LOCALAPPDATA%Low\\python\\cache\\QtWebEngine` 留过 30 多个
+    缓存文件（那时缓存路径是默认值），2026-11-11 已清理。
+
+    必须在**创建 QWebEngineView 之前**调用。
+    """
+    global _profile_ready
+    if _profile_ready:
+        return
+    _profile_ready = True
+    try:
+        base = settings_store.webengine_dir()
+        cache = base / "cache"
+        storage = base / "storage"
+        cache.mkdir(parents=True, exist_ok=True)
+        storage.mkdir(parents=True, exist_ok=True)
+        profile = QWebEngineProfile.defaultProfile()
+        profile.setCachePath(str(cache))
+        profile.setPersistentStoragePath(str(storage))
+        profile.setHttpCacheType(QWebEngineProfile.HttpCacheType.DiskHttpCache)
+    except Exception as exc:  # noqa: BLE001 - 指不到项目里也不该让角色区起不来
+        print(f"[live2d] WebEngine 缓存目录设置失败（用默认位置）：{exc}", flush=True)
 
 # 默认模型：必须是 make_demo_model.py 生成的 .demo. 版本（带动作/表情引用）
 DEFAULT_MODEL = MODELS_DIR / "DeepSeek免费公皮" / "DeepSeek" / "大肥鱼.demo.model3.json"
@@ -316,6 +352,8 @@ class Live2DView(QWidget):
         self._lay.setContentsMargins(0, 0, 0, 0)
         self._lay.setSpacing(0)
 
+        # 先把缓存目录指到项目里，再建 view（顺序不能反）
+        _prepare_profile()
         self._web = QWebEngineView(self)
         self._page = _Page(self._web)
         self._web.setPage(self._page)

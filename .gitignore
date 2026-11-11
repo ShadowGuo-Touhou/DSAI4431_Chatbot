@@ -47,5 +47,9 @@ Thumbs.db
 desktop.ini
 .DS_Store
 
+# 运行时数据（settings.ini、WebEngine 缓存）：**一定不要入库**
+# settings.ini 里有明文的 API Key，别手工 git add -f 它
+data/*
+
 # 界面渲染截图等临时产物
 _plan_preview/

@@ -189,8 +189,7 @@ python -m dsai4431_chatbot.core.gui
   - `light.toml`：默认浅色
   - `deepseek-blue.toml`：DeepSeek 蓝（深色底 + `#4D6BFE`）
   - 切换：设置 → Theme，点一下立即生效（`app.setStyleSheet()` 热替换），
-    选择记在本地 `settings.ini`（Windows 上是 `%USERPROFILE%\AppData\LocalLow\DSAI4431_Chatbot\settings.ini`，
-    可用 `DSAI_CONFIG_DIR` 改写），下次启动保持
+    选择记在 `data/settings.ini`（见下面「运行时数据放哪」），下次启动保持
   - 加新皮肤：丢一个 `.toml` 进这个目录，重启后自动出现在列表里
   - 注意：图标颜色不跟着 QSS 走，是读 SVG 文本替换颜色再渲染成 pixmap
     （要跟随换肤的按钮得通过 `themes.bind()` 设置图标）
@@ -219,7 +218,23 @@ python -m dsai4431_chatbot.core.gui
 # 回主界面输入框打字 → Enter
 ```
 
-- Key 是**明文**存在本机 `settings.ini` 里的；那个文件不要发给别人
+- Key 是**明文**存在 `data/settings.ini` 里的；那个文件已在 `.gitignore` 里，
+  但别忘了它随项目文件夹走 —— 别把整个文件夹打包发给别人
+
+### 运行时数据放哪
+
+**程序产生的东西全部留在项目目录里，不写用户目录**（用户 2026-11-11 要求）：
+
+```
+<repo>/data/settings.ini     # 主题 / 语言 / Live2D / 对话配置（含明文 API Key）
+<repo>/data/webengine/       # QtWebEngine 缓存与 storage（当前 profile 是
+                             # off-the-record，实测不落盘；路径先占好）
+```
+
+- `data/` 在 `.gitignore` 里，**不要** `git add -f`
+- 老版本存在用户目录里的 `settings.ini` 会在首次启动时自动复制过来
+  （`%USERPROFILE%\AppData\LocalLow\DSAI4431_Chatbot\settings.ini`，复制后不删）
+- 想换位置：`DSAI_DATA_DIR` 指定目录，`DSAI_CONFIG_DIR` 只改 ini 所在目录
 - 回复是流式的：先出现「正在输入…」的气泡，然后逐字填进去
 - 等回复时按 Enter 不会发、也不会清空你正在敲的内容
 - 出错时气泡里直接写原因（`HTTP 401 · Authentication Fails…` 这类）

@@ -132,9 +132,8 @@
   - `core/gui/themes/`：`__init__.py`（ThemeManager）+ `light.toml` + `deepseek-blue.toml`
   - 一套主题 = 一个 toml：`label` / `note` / `dark` + 一张 `[palette]` 表（22 个 token）
   - `theme.py` 变成 QSS 模板：只写形状，颜色全部 `{token}`；缺 token 直接抛错
-  - 切肤：`app.setStyleSheet()` 热替换，不用重启；选择存本地 `settings.ini`，启动时
-    `apply_saved()` 读回（Windows 实测在 `%USERPROFILE%\AppData\LocalLow\DSAI4431_Chatbot\settings.ini`，
-    可用 `DSAI_CONFIG_DIR` 覆盖）
+  - 切肤：`app.setStyleSheet()` 热替换，不用重启；选择存 `data/settings.ini`，启动时
+    `apply_saved()` 读回（2026-11-11 起配置都在项目内，见第 12 条）
   - 蓝色皮：底 `#0F1115`、卡片 `#171A21`、描边 `#262B33`、正文 `#E6E8EC`、
     正文弱 `#8B93A1`、主色 `#4D6BFE`（悬停 `#5F7BFF`）
   - 设置 → Theme 页做成真的选皮界面（色块预览 + 选中态 + 「使用中」）
@@ -175,6 +174,24 @@
 - **注意**：换语言**不是热更新**。文案在构造窗口时取一次；要真热更新得给每个控件记 key、
   再挨个 setText，复杂度不值当（用户也选的是重启）
 
+### 12. 运行时数据全部落在项目内 —— 已完成
+
+- **用户要求（2026-11-11）**：「所有产生的附带文件都直接写项目文件夹内部，不出项目文件夹」
+- **改了什么**
+  - 配置从 `%USERPROFILE%\AppData\LocalLow\DSAI4431_Chatbot\settings.ini` 搬到
+    `<repo>/data/settings.ini`（`settings_store.project_root()` 靠 `pyproject.toml` 定位）
+  - 首次启动会把老位置那份**自动复制**过来（不删旧的，怕新位置出问题还能对账）
+  - QtWebEngine 的缓存/storage 路径显式指到 `<repo>/data/webengine/`
+  - `.gitignore` 加 `data/*` —— 里面有**明文 API Key**，绝不能入库
+  - 我的测试脚本和截图从 `P:\Deekseek_playground\_plan_preview\` 移到项目内同名目录
+  - 清掉用户目录里的旧残留：`LocalLow\DSAI4431_Chatbot`、`LocalLow\DSAI4431 Chatbot`、
+    `LocalLow\python`（后两个是更早版本用应用名 python 时留下的，含 30 多个 WebEngine 缓存）
+- **实测**：跑一次 GUI 前后对比用户目录 —— 三个旧目录的文件数、mtime 都没变；
+  项目内 `data/settings.ini` 正常生成并带着原来的主题/语言/Live2D 配置
+- **一个发现**：`QWebEngineProfile.defaultProfile()` 是 off-the-record
+  （`MemoryHttpCache`），本来就不落盘，所以 `data/webengine/` 一直是空的；
+  路径设置留着当双保险
+
 ---
 
 ## 二、待用户决定
@@ -187,8 +204,9 @@
 
 ### 8. `_plan_preview/` 临时目录
 
-- 里面是界面渲染截图和放大用的裁剪图
-- 属于临时产物，确认可以删就删
+- 里面是界面渲染截图、调试脚本、放大裁剪图
+- 属于临时产物（`.gitignore` 里），确认可以删就删
+- 2026-11-11 起统一放在**项目内**的 `_plan_preview/`，不再散在 `P:\Deekseek_playground\` 下
 
 ---
 
