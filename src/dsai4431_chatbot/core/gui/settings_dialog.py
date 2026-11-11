@@ -468,8 +468,8 @@ class OtherPage(QWidget):
 class SettingsDialog(QDialog):
     """六个分页，顺序照用户给的导航清单。
 
-    草图里前四项带图标，Theme 和 Other 没画图标 —— 这里照抄，
-    所以后两项是纯文字（想要图标就把 icon 填上文件名即可）。
+    草图里只画了前四项的图标；Theme 后来补了场记板（clapper.svg），
+    Other 用齿轮（gear.svg），现在六项都有图标。
     """
 
     PAGES = [
@@ -477,8 +477,8 @@ class SettingsDialog(QDialog):
         ("user", "Personality", PersonalityPage),
         ("doc", "RAG", RagPage),
         ("live2d", "Live2D model", Live2DModelPage),
-        (None, "Theme", ThemePage),
-        (None, "Other", OtherPage),
+        ("clapper", "Theme", ThemePage),
+        ("gear", "Other", OtherPage),
     ]
 
     def __init__(self, parent=None):

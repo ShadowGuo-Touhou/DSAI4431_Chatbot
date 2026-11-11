@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+     fill="none" stroke="#1f2329" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- 板身 -->
+  <rect x="3.5" y="10.6" width="17" height="9.4" rx="1.6"/>
+  <!-- 板身上的分格（对应 PROD / SCENE / TAKE） -->
+  <path d="M3.5 14.4h17"/>
+  <path d="M9.9 14.4v5.6M14.9 14.4v5.6"/>
+  <!-- 掀起的打板条 -->
+  <path d="M4.9 6.1 21.6 9.1 20.3 11.4 3.5 10.6Z"/>
+  <!-- 打板条上的斜纹 -->
+  <path d="M8.6 7.0v3.6M12.9 7.7v3.4M17.2 8.5v3.1"/>
+</svg>
