@@ -1,0 +1,28 @@
+id = "deepseek-blue"
+label = "DeepSeek 蓝 · 深色"
+note = "深底 + DeepSeek 品牌蓝 #4D6BFE"
+dark = true
+
+[palette]
+bg = "#0f1115"                  # 窗口底色
+surface = "#171a21"             # 卡片 / 面板
+surface_alt = "#12151b"         # 列表、输入框的深一档底
+border = "#262b33"              # 主描边
+border_soft = "#1e232b"         # 更浅的描边（输入框、列表）
+border_dash = "#2c333d"         # 虚线占位框
+text = "#e6e8ec"
+text_weak = "#8b93a1"
+text_on_accent = "#ffffff"
+accent = "#4d6bfe"
+accent_hover = "#5f7bff"
+hover = "#1f242d"
+nav_hover = "#1f242d"
+nav_checked = "#232936"
+selected_bg = "#1b2440"
+bubble_user_bg = "#1c2440"
+bubble_user_border = "#2a3557"
+check_border = "#3a424f"
+scroll = "#2a313c"
+scroll_hover = "#363e4b"
+icon = "#e6e8ec"
+icon_on_accent = "#ffffff"

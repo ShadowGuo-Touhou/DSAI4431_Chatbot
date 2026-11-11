@@ -80,30 +80,30 @@
 - **现状**：`ChatColumn._on_submit()` 只把用户输入回显成气泡，没有回复
 - **要做**：接真实对话后端，回复用 `messages.add_message("bot", ...)` 追加
 
-### 6. 主题 / 换肤系统 + 一套蓝色皮
+### 6. 主题 / 换肤系统 + 一套蓝色皮 —— 已完成
 
 - **决策人**：用户（2026-11-11），原话「后续可以通过加载不同预设改页面样貌吗」
   +「添加一个蓝色的皮。就是你自己的配色」
-- **要做**：把 `theme.py` 里的常量抽成 token 集，做 `ThemeManager`，支持运行时切换
-  （`app.setStyleSheet()` 是热替换的，不用重启），选择写进配置文件、启动时读取
-- **建议结构**
-
-  ```
-  core/gui/themes/
-  ├── __init__.py      # ThemeManager：加载 token → 套 QSS 模板 → setStyleSheet → 重刷图标
-  ├── light.toml       # 现在的浅色（默认）
-  ├── dark.toml
-  └── deepseek-blue.toml   # 蓝色皮
-  ```
-
-- **蓝色皮配色（待细化）**：主色用 DeepSeek 品牌蓝 `#4D6BFE`，
-  深色底 `#0F1115`、卡片 `#171A21`、描边 `#262B33`、正文 `#E6E8EC`、正文弱 `#8B93A1`
-- **两个已知坑（务必处理）**
-  1. **图标不会自动跟着变色**：SVG 里 `stroke` 是写死的，深色皮下会看不见。
-     要读 SVG 文本→替换颜色→`QSvgRenderer` 渲染成 pixmap（别落临时文件）
-  2. **动态属性变了必须重新 polish**：改完 `setProperty` 要
-     `widget.style().unpolish(w); widget.style().polish(w)`，否则样式不更新
-- **时机建议**：等界面控件定型后再抽。现在抽，后面每加一个控件都要回来改模板
+- **已完成（2026-11-11）**
+  - `core/gui/themes/`：`__init__.py`（ThemeManager）+ `light.toml` + `deepseek-blue.toml`
+  - 一套主题 = 一个 toml：`label` / `note` / `dark` + 一张 `[palette]` 表（22 个 token）
+  - `theme.py` 变成 QSS 模板：只写形状，颜色全部 `{token}`；缺 token 直接抛错
+  - 切肤：`app.setStyleSheet()` 热替换，不用重启；选择存
+    `%APPDATA%\DSAI4431_Chatbot\settings.ini`，启动时 `apply_saved()` 读回
+  - 蓝色皮：底 `#0F1115`、卡片 `#171A21`、描边 `#262B33`、正文 `#E6E8EC`、
+    正文弱 `#8B93A1`、主色 `#4D6BFE`（悬停 `#5F7BFF`）
+  - 设置 → Theme 页做成真的选皮界面（色块预览 + 选中态 + 「使用中」）
+- **两个坑都处理了**
+  1. **图标不跟 QSS 变色**：`themes.icon()` 读 SVG 文本 → 替换 `#1f2329` /
+     白色描边 → `QSvgRenderer` 渲染成 pixmap（不落临时文件）；
+     要跟随换肤的按钮必须用 `themes.bind(btn, name, role)` 注册
+  2. **动态属性改了要重新 polish**：`themes.restyle(w)`（unpolish + polish + update）
+- **额外踩到的坑**：`QSettings(org, app)` 在这台机器上写注册表返回
+  `AccessError`（写不进也读不回），所以改成 INI 文件
+  （`settings_path()`，可用 `DSAI_CONFIG_DIR` 覆盖）
+- **待做**：`dark.toml` 没做（只做了浅色 + 蓝）。真要加，复制一份 toml 改配色即可，
+  代码一行都不用动
+- **时机**：现在抽完了，以后加控件只要引用现有 token
 
 ---
 

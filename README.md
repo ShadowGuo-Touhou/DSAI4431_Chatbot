@@ -180,7 +180,15 @@ python -m dsai4431_chatbot.core.gui
 ```
 
 - `main_window.py`：窗口与各面板组件
-- `theme.py`：全部配色/圆角/间距（改外观只动这里）
+- `theme.py`：QSS 模板（字体、圆角、间距，以及每个控件引用哪个 token）
+- `themes/`：换肤系统。一套主题 = 一个 `.toml`（`label` / `note` + `[palette]` 配色表）
+  - `light.toml`：默认浅色
+  - `deepseek-blue.toml`：DeepSeek 蓝（深色底 + `#4D6BFE`）
+  - 切换：设置 → Theme，点一下立即生效（`app.setStyleSheet()` 热替换），
+    选择记在 `%APPDATA%\DSAI4431_Chatbot\settings.ini`，下次启动保持
+  - 加新皮肤：丢一个 `.toml` 进这个目录，重启后自动出现在列表里
+  - 注意：图标颜色不跟着 QSS 走，是读 SVG 文本替换颜色再渲染成 pixmap
+    （要跟随换肤的按钮得通过 `themes.bind()` 设置图标）
 
 > 截图和线框图在 `asset/plan/` 下，原图是竖排的，**需要顺时针旋转 90° 才是正的**。
 

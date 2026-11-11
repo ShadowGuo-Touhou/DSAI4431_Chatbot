@@ -24,7 +24,6 @@
 from __future__ import annotations
 
 import sys
-from pathlib import Path
 from typing import Literal
 
 from PySide6.QtCore import QSize, Qt, Signal
@@ -44,14 +43,18 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import live2d_embed, theme
+from dsai4431_chatbot.core.gui import live2d_embed, theme, themes
 
-ICON_DIR = Path(__file__).resolve().parent / "icons"
+ICON_DIR = theme.ICON_DIR
 
 
-def load_icon(name: str) -> QIcon:
-    """从 icons/ 读 SVG 图标。"""
-    return QIcon(str(ICON_DIR / f"{name}.svg"))
+def load_icon(name: str, role: str = "icon") -> QIcon:
+    """从 icons/ 读 SVG 并按当前主题上色。
+
+    注意：这样拿到的图标不会自动跟着换肤 —— 要跟主题走的按钮请用
+    `round_button()`（内部会 `themes.bind`）。
+    """
+    return themes.icon(name, role)
 
 
 def round_button(
@@ -72,7 +75,8 @@ def round_button(
         # 导致 QSS 的 [size="action"] 规则永远不生效（踩过）。
         btn.setProperty("kind", "action")
 
-    btn.setIcon(load_icon(icon))
+    # 图标走 themes.bind：换肤时会被重新上色（send 是白图标，画在强调色上）
+    themes.bind(btn, icon, "on_accent" if primary else "icon")
     btn.setIconSize(QSize(theme.ICON_SIZE, theme.ICON_SIZE))
 
     side = theme.ACTION_BUTTON if action else theme.ROUND_BUTTON
@@ -431,7 +435,8 @@ def main(argv: list[str] | None = None) -> int:
 
     app = QApplication(sys.argv if argv is None else argv)
     app.setApplicationName("DSAI4431 Chatbot")
-    app.setStyleSheet(theme.STYLESHEET)
+    # 换肤：启动时按上次的选择套 QSS（没有记录就是 light）
+    themes.apply_saved(app)
 
     win = MainWindow()
     win.show()

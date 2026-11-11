@@ -23,9 +23,9 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from PySide6.QtCore import QSize, Qt
-from PySide6.QtGui import QIcon
+from PySide6.QtCore import QSize, Qt, Signal
 from PySide6.QtWidgets import (
+    QApplication,
     QButtonGroup,
     QCheckBox,
     QDialog,
@@ -40,8 +40,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import theme
-from dsai4431_chatbot.core.gui.main_window import ICON_DIR, load_icon
+from dsai4431_chatbot.core.gui import theme, themes
 
 DIALOG_W, DIALOG_H = 980, 660
 NAV_W = 172
@@ -158,7 +157,7 @@ def small_button(text: str, *, primary: bool = False) -> QPushButton:
 def icon_button(icon: str, tooltip: str) -> QPushButton:
     btn = QPushButton()
     btn.setObjectName("iconButton")
-    btn.setIcon(QIcon(str(ICON_DIR / f"{icon}.svg")))
+    themes.bind(btn, icon)          # 换肤时自动重新上色
     btn.setIconSize(QSize(ICON, ICON))
     btn.setFixedSize(34, 34)
     btn.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -348,20 +347,103 @@ class Live2DModelPage(QWidget):
         lay.addWidget(hint, 1)
 
 
+class ThemeCard(QFrame):
+    """一张主题卡：左边四个色块预览，右边名字和说明。点一下切过去。"""
+
+    clicked = Signal(str)
+
+    def __init__(self, item: themes.Theme, selected: bool, parent=None):
+        super().__init__(parent)
+        self.setObjectName("themeCard")
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.theme_id = item.id
+        # QSS 的 [selected="true"] 匹配的是字符串属性：这里必须存字符串，
+        # 存 bool 会匹配不上（QSS 里 true/false 是字面量）。
+        self.setProperty("selected", "true" if selected else "false")
+
+        lay = QHBoxLayout(self)
+        lay.setContentsMargins(14, 12, 16, 12)
+        lay.setSpacing(16)
+
+        # 预览色块：底 / 卡片 / 强调 / 正文
+        swatches = QHBoxLayout()
+        swatches.setContentsMargins(0, 0, 0, 0)
+        swatches.setSpacing(3)
+        for color in item.swatches:
+            sw = QFrame()
+            sw.setFixedSize(20, 30)
+            sw.setStyleSheet(f"background: {color}; border-radius: 4px;")
+            swatches.addWidget(sw)
+        lay.addLayout(swatches)
+
+        text_box = QVBoxLayout()
+        text_box.setContentsMargins(0, 0, 0, 0)
+        text_box.setSpacing(2)
+        name = QLabel(item.label)
+        name.setObjectName("themeName")
+        note = QLabel(item.note or item.id)
+        note.setObjectName("themeNote")
+        text_box.addWidget(name)
+        text_box.addWidget(note)
+        lay.addLayout(text_box, 1)
+
+        self.state_label = QLabel("使用中" if selected else "")
+        self.state_label.setObjectName("hintText")
+        lay.addWidget(self.state_label)
+
+    def set_selected(self, on: bool) -> None:
+        value = "true" if on else "false"
+        if self.property("selected") == value:
+            return
+        self.setProperty("selected", value)
+        self.state_label.setText("使用中" if on else "")
+        themes.restyle(self)   # 动态属性改了必须重新 polish
+
+    def mousePressEvent(self, event):  # noqa: N802 - Qt 命名
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.clicked.emit(self.theme_id)
+        super().mousePressEvent(event)
+
+
 class ThemePage(QWidget):
-    """Theme 页：对应 TODO 第 6 条的换肤系统，目前只是占位。"""
+    """Theme 页：换肤。点一下立即生效，选择写进 QSettings，下次启动保持。"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._cards: dict[str, ThemeCard] = {}
+
         lay = QVBoxLayout(self)
         lay.setContentsMargins(28, 24, 28, 24)
+        lay.setSpacing(12)
 
         lay.addWidget(page_title("Theme"))
 
-        hint = QLabel("换肤系统还没做（见 TODO 第 6 条）。\n做好后这里用来选主题，含一套蓝色皮。")
+        hint = QLabel(
+            "点一下立即换肤，不用重启，选择会被记住。\n"
+            "加新皮肤：往 core/gui/themes/ 丢一个 .toml（配色表）即可。"
+        )
         hint.setObjectName("hintText")
-        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        lay.addWidget(hint, 1)
+        hint.setWordWrap(True)
+        lay.addWidget(hint)
+        lay.addSpacing(4)
+
+        manager = themes.manager()
+        for item in manager.available:
+            card = ThemeCard(item, selected=item.id == manager.current.id)
+            card.clicked.connect(self._on_pick)
+            self._cards[item.id] = card
+            lay.addWidget(card)
+
+        lay.addStretch(1)
+        manager.changed.connect(self._sync)
+
+    def _on_pick(self, theme_id: str) -> None:
+        themes.manager().apply(QApplication.instance(), theme_id)
+
+    def _sync(self, theme_id: str) -> None:
+        for tid, card in self._cards.items():
+            card.set_selected(tid == theme_id)
 
 
 class OtherPage(QWidget):
@@ -425,7 +507,7 @@ class SettingsDialog(QDialog):
             btn = QPushButton(text)
             btn.setObjectName("navButton")
             if icon:  # Theme / Other 草图没画图标
-                btn.setIcon(load_icon(icon))
+                themes.bind(btn, icon)
                 btn.setIconSize(QSize(ICON, ICON))
             btn.setCheckable(True)
             btn.setCursor(Qt.CursorShape.PointingHandCursor)

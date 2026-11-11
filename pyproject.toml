@@ -35,4 +35,4 @@ dsai4431-chatbot = "dsai4431_chatbot.main:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-"*" = ["py.typed", "*.svg"]
+"*" = ["py.typed", "*.svg", "*.toml"]

@@ -1,0 +1,28 @@
+id = "light"
+label = "浅色 · 默认"
+note = "白底浅灰，和 DSH 主界面一致"
+dark = false
+
+[palette]
+bg = "#f2f3f5"                  # 窗口底色
+surface = "#ffffff"             # 卡片 / 面板
+surface_alt = "#fafbfc"         # 列表、输入框的浅一档底
+border = "#e2e4e8"              # 主描边
+border_soft = "#ebedf0"         # 更浅的描边（输入框、列表）
+border_dash = "#c8ccd4"         # 虚线占位框
+text = "#1f2329"
+text_weak = "#8a9099"
+text_on_accent = "#ffffff"
+accent = "#3b7ddd"
+accent_hover = "#2f6bc4"
+hover = "#f0f1f3"
+nav_hover = "#e9ebee"
+nav_checked = "#e3e7ec"
+selected_bg = "#e8f1ff"
+bubble_user_bg = "#e8f1ff"
+bubble_user_border = "#d3e3fb"
+check_border = "#cdd3db"
+scroll = "#cdd1d8"
+scroll_hover = "#b6bbc4"
+icon = "#1f2329"
+icon_on_accent = "#ffffff"
