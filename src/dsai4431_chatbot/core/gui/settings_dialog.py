@@ -396,11 +396,17 @@ class PersonalityPage(QWidget):
 
         path_row = QHBoxLayout()
         path_row.setSpacing(8)
-        btn_pick = small_button(t("common.choose"))
-        btn_pick.clicked.connect(lambda: self._pick_dir())
+        # 两种都给：直接选文件夹，或者点一个 .md 文件（取它所在目录）。
+        # 单靠「打开文件」会逼着用户必须先挑一个 .md，单靠「选文件夹」
+        # 又看不见目录里有哪些文件 —— 两个按钮各管一种，都是系统原生对话框。
+        btn_pick_dir = small_button(t("settings.personality.choose_dir"))
+        btn_pick_dir.clicked.connect(lambda: self._pick_dir())
+        btn_pick_file = small_button(t("settings.personality.choose_file"))
+        btn_pick_file.clicked.connect(lambda: self._pick_file())
         btn_rescan = small_button(t("settings.personality.rescan"))
         btn_rescan.clicked.connect(lambda: self._rescan())
-        path_row.addWidget(btn_pick)
+        path_row.addWidget(btn_pick_dir)
+        path_row.addWidget(btn_pick_file)
         path_row.addWidget(btn_rescan)
         path_row.addStretch(1)
         right.addLayout(path_row)
@@ -513,12 +519,22 @@ class PersonalityPage(QWidget):
         return Path(raw).expanduser() if raw else personas.personality_dir()
 
     def _pick_dir(self) -> None:
-        """用 Windows 原生的「打开文件」对话框选 .md，取它所在目录当人格目录。
+        """直接选文件夹（系统原生「选择文件夹」对话框）。"""
+        chosen = QFileDialog.getExistingDirectory(
+            self, t("settings.personality.files"), str(self._dir())
+        )
+        if not chosen:
+            return
+        self.ed_dir.setText(chosen)
+        self._dir_follows_id = False      # 自己挑过了，别再跟着 ID 跑
+        self._rescan()
 
-        为什么不用「选文件夹」模式（getExistingDirectory）：那是系统的
-        IFileDialog(FOS_PICKFOLDERS)，文件列表被系统整个隐藏、过滤参数也传不进去
-        —— 目录里明明有 .md 却是一片空白，就是这条导致的。
-        换成带过滤器的「打开文件」，就只显示、也只允许选 .md。
+    def _pick_file(self) -> None:
+        """点一个 .md，取它所在目录当人格目录。
+
+        这条的好处是对话框里能看见目录中有哪些 .md；系统原生「选文件夹」
+        模式会把文件整个隐藏（IFileDialog 的 FOS_PICKFOLDERS），过滤参数
+        也传不进去，目录看着像空的。
         """
         chosen, _flt = QFileDialog.getOpenFileName(
             self,
@@ -529,7 +545,7 @@ class PersonalityPage(QWidget):
         if not chosen:
             return
         self.ed_dir.setText(str(Path(chosen).parent))
-        self._dir_follows_id = False      # 自己挑过了，别再跟着 ID 跑
+        self._dir_follows_id = False
         self._rescan()
 
     def _rescan(self, checked: set[str] | None = None) -> None:
