@@ -19,6 +19,13 @@ live2d = [
     "PyQtWebEngine>=5.15",
 ]
 
+# 主界面 GUI（core/gui）。和 live2d 用同一套 Qt 依赖；
+# PyQtWebEngine 留给后面把 Live2D 嵌进界面时用。
+gui = [
+    "PyQt5>=5.15",
+    "PyQtWebEngine>=5.15",
+]
+
 [project.scripts]
 dsai4431-chatbot = "dsai4431_chatbot.main:main"
 
@@ -26,4 +33,4 @@ dsai4431-chatbot = "dsai4431_chatbot.main:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-"*" = ["py.typed"]
+"*" = ["py.typed", "*.svg"]

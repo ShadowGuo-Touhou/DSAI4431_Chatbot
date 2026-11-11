@@ -168,6 +168,22 @@ $env:L2D_ASSET_DIR = "D:\somewhere\live2d"
 参数写入的唯一有效位置、物理会锁死头部角度、`--no-sandbox` 必须开、Chromium 83 没有
 顶层 await 等。改这个演示之前先读它。
 
+## 主界面 GUI（框架阶段）
+
+`src/dsai4431_chatbot/core/gui/` 是按 `asset/plan/main interface.png` 搭的主界面骨架：
+左栏 Live2D 角色区、右侧聊天列（顶栏 / 消息区 / 输入框 / 操作条）。
+目前只有结构与样式，业务逻辑全部留空并标了 TODO。
+
+```powershell
+pip install -e ".[gui]"
+python -m dsai4431_chatbot.core.gui
+```
+
+- `main_window.py`：窗口与各面板组件
+- `theme.py`：全部配色/圆角/间距（改外观只动这里）
+
+> 截图和线框图在 `asset/plan/` 下，原图是竖排的，**需要顺时针旋转 90° 才是正的**。
+
 ## 后续可以加
 
 - 测试：`tests/` + `pytest`（在 `pyproject.toml` 加 `[tool.pytest.ini_options]`）

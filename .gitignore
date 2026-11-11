@@ -46,3 +46,6 @@ asset/live2d/models/DeepSeek免费公皮/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# 界面渲染截图等临时产物
+_plan_preview/
