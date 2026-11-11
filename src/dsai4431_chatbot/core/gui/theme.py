@@ -24,6 +24,7 @@ ROUND_BUTTON = 36              # 圆形按钮直径（顶栏）
 ACTION_BUTTON = 32             # 输入卡里的操作按钮直径
 ICON_SIZE = 18                 # 图标绘制尺寸
 HEADER_HEIGHT = 48
+SPLITTER_GAP = 24              # 左右两栏之间的距离（角色卡 ↔ 聊天列）
 
 # 模板里用到的 token 必须全部存在，缺一个就直接报错（比 QSS 静默失效好查）
 REQUIRED_TOKENS = (
@@ -61,9 +62,10 @@ QWidget {{
 QMainWindow, #windowBody {{
     background: {bg};
 }}
+/* QSplitter 的 handle 宽度不能用 QSS 的 width 设（实测无效，handle 会是 0，
+   两栏直接贴在一起），必须在代码里 setHandleWidth()。这里只管透明。 */
 QSplitter::handle {{
     background: transparent;
-    width: 12px;
 }}
 
 /* 通用卡片：靠底色差和间距区分，不用描边（模仿 DSH，避免明显分界线） */
@@ -359,6 +361,7 @@ def stylesheet(palette: Mapping[str, str]) -> str:
         radius_small=RADIUS_SMALL,
         round_radius=ROUND_BUTTON // 2,
         action_radius=ACTION_BUTTON // 2,
+        splitter_gap=SPLITTER_GAP,
         check_svg=_CHECK_SVG,
     )
     return _TEMPLATE.format(**values)

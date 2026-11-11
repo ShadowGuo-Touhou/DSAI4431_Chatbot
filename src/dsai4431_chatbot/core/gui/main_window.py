@@ -392,6 +392,9 @@ class MainWindow(QMainWindow):
         # 左右两栏用 QSplitter：允许用户拖动比例，也方便调试布局
         splitter = QSplitter(Qt.Orientation.Horizontal)
         splitter.setChildrenCollapsible(False)
+        # 两栏之间的留白。注意别指望 QSS 的 QSplitter::handle{width}：
+        # 实测不生效（handle 宽度会是 0，两栏贴死），只能在这里设。
+        splitter.setHandleWidth(theme.SPLITTER_GAP)
 
         self.character = CharacterPanel()
         self.chat = ChatColumn()
