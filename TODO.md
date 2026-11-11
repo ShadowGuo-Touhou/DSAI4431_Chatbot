@@ -55,7 +55,8 @@
   `FileCheckList`，数据从 `P:\.dsh\agentsoul` 实扫（可用环境变量
   `DSAI_PERSONA_DIR` 改目录），目录不存在时退回演示数据。
   勾选状态目前只存在控件里，不落盘
-- **空占位页**：Live2D model、Theme、Other（草图只有 tab，没有内容）
+- **Other 页（2026-11-11）**：原本是空占位，现在放「界面语言」切换（中文 / English），
+  见第 11 条
 - **待办**：
   - RAG 页底部草图还画着两个小控件（一串点和一个小圆角框），看不清是什么，
     现在只放了一个「索引状态：未构建」文字占位
@@ -105,8 +106,9 @@
   - `core/gui/themes/`：`__init__.py`（ThemeManager）+ `light.toml` + `deepseek-blue.toml`
   - 一套主题 = 一个 toml：`label` / `note` / `dark` + 一张 `[palette]` 表（22 个 token）
   - `theme.py` 变成 QSS 模板：只写形状，颜色全部 `{token}`；缺 token 直接抛错
-  - 切肤：`app.setStyleSheet()` 热替换，不用重启；选择存
-    `%APPDATA%\DSAI4431_Chatbot\settings.ini`，启动时 `apply_saved()` 读回
+  - 切肤：`app.setStyleSheet()` 热替换，不用重启；选择存本地 `settings.ini`，启动时
+    `apply_saved()` 读回（Windows 实测在 `%USERPROFILE%\AppData\LocalLow\DSAI4431_Chatbot\settings.ini`，
+    可用 `DSAI_CONFIG_DIR` 覆盖）
   - 蓝色皮：底 `#0F1115`、卡片 `#171A21`、描边 `#262B33`、正文 `#E6E8EC`、
     正文弱 `#8B93A1`、主色 `#4D6BFE`（悬停 `#5F7BFF`）
   - 设置 → Theme 页做成真的选皮界面（色块预览 + 选中态 + 「使用中」）
@@ -121,6 +123,31 @@
 - **待做**：`dark.toml` 没做（只做了浅色 + 蓝）。真要加，复制一份 toml 改配色即可，
   代码一行都不用动
 - **时机**：现在抽完了，以后加控件只要引用现有 token
+
+### 11. 界面语言（中文 / English）—— 已完成
+
+- **用户要求（2026-11-11）**：「在 setting 添加英文和中文。不同的文本保存在
+  `asset/language` 中」；确认过：范围是**整个 GUI**、格式 **TOML**、切换后**自动重启**
+- **已完成**
+  - `asset/language/zh.toml` + `en.toml`：各 87 条文案，键名是点分路径
+    （`[settings.nav]` 的 `api_key` → `t("settings.nav.api_key")`）
+  - `core/gui/i18n.py`：扫目录、加载（TOML 嵌套表摊平成点分键）、
+    `t(key, default, **fmt)` 四级回退（当前语言 → 中文 → default → 键名）
+  - `core/gui/settings_store.py`：把「配置在哪儿」从 themes 里抽出来，
+    theme / i18n / live2d 共用同一份 `settings.ini`（不然 i18n 和 themes 会互相 import 成环）
+  - `core/gui/relaunch.py`：重启助手。**不直接 startDetached**——旧进程没退干净时
+    两份 QtWebEngine 会抢同一个 profile 目录，所以先起一个无控制台的助手进程，
+    按 PID 轮询等旧进程退出（上限 12s + 0.6s 余量），再拉起主程序
+  - 设置 → Other 页：语言下拉 + 说明；换语言 = 存盘 `language/code` + 重启；
+    拉不起新进程会回滚到原语言，不留「看着像换好了」的假状态
+  - 主题卡的名字/说明也走语言包，语言包里没有就用主题 toml 自带的 `label`/`note` 兜底
+- **实测**（2026-11-11）
+  - 键名对齐、占位符成对、空值：全过（87 / 87）
+  - 英文界面 184 条文案零漏翻（语言下拉的「中文」和模型文件名是原文，属预期）
+  - 重启链路：旧进程 exit 0 → 助手等它退出 → 新 GUI 起来（用新的 `language/code`）
+  - 中英两套主窗 + 设置窗截图都验过
+- **注意**：换语言**不是热更新**。文案在构造窗口时取一次；要真热更新得给每个控件记 key、
+  再挨个 setText，复杂度不值当（用户也选的是重启）
 
 ---
 
@@ -143,10 +170,11 @@
 
 ### 9. 未提交的改动
 
-截至本文档更新时，工作区未提交的内容：
-- 新增：`src/dsai4431_chatbot/core/gui/`（含 `icons/` 5 个 SVG）、`启动GUI.bat`（项目根）、
-  `asset/plan/`、`_plan_preview/`、`TODO.md`
-- 修改：`pyproject.toml`（新增 `gui` 可选依赖组）、`README.md`（新增「主界面 GUI」小节）
+截至 2026-11-11 最后一次提交，工作区是干净的：
+- 早期那批（`core/gui/` 全套、`icons/`、`启动GUI.bat`、`asset/plan/`、`README`、`pyproject.toml`）
+  已按用户指示入库并推到 `origin/main`
+- 之后的设置窗外观、Live2D model 页、主题系统、启动崩溃修复、多语言都是逐个提交的
+- `_plan_preview/` 仍在 `.gitignore` 里（临时截图与测试脚本），没有入库
 
 ### 10. 旧目录 `P:\Deekseek_playground\live2d-python-demo`
 

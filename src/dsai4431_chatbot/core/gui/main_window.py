@@ -44,7 +44,8 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import live2d_config, live2d_embed, theme, themes
+from dsai4431_chatbot.core.gui import i18n, live2d_config, live2d_embed, theme, themes
+from dsai4431_chatbot.core.gui.i18n import t
 
 ICON_DIR = theme.ICON_DIR
 
@@ -108,7 +109,7 @@ class CharacterPanel(QWidget):
         self._lay = QVBoxLayout(self)
         self._lay.setContentsMargins(16, 16, 16, 16)
 
-        self._hint = QLabel("Live2D 角色区\n（框架占位，待接入渲染页）")
+        self._hint = QLabel(t("main.character.placeholder"))
         self._hint.setObjectName("characterHint")
         self._hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._lay.addWidget(self._hint, 1)
@@ -264,7 +265,7 @@ class CharacterPanel(QWidget):
             view.shutdown()
             view.deleteLater()
         self._hint.show()
-        self._status.setText(f"Live2D 未加载：{msg}")
+        self._status.setText(t("main.character.error", msg=msg))
         self._status.show()
         # 退回占位态，虚线框回来
         self._set_state("")
@@ -311,7 +312,7 @@ class MessageArea(QScrollArea):
         self._lay.setSpacing(10)
         self._lay.addStretch(1)
 
-        self._empty = QLabel("还没有消息")
+        self._empty = QLabel(t("main.messages.empty"))
         self._empty.setObjectName("messageEmpty")
         self._empty.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._lay.insertWidget(0, self._empty)
@@ -404,7 +405,7 @@ class InputCard(QFrame):
 
         self.edit = _InputEdit()
         self.edit.setObjectName("inputEdit")
-        self.edit.setPlaceholderText("说点什么…（Enter 发送，Shift+Enter 换行）")
+        self.edit.setPlaceholderText(t("main.input.placeholder"))
         self.edit.setFrameShape(QFrame.Shape.NoFrame)
         self.edit.setMinimumHeight(44)
         self.edit.setMaximumHeight(84)  # 最多约三行，再多就内部滚动
@@ -414,15 +415,17 @@ class InputCard(QFrame):
         actions.setContentsMargins(0, 0, 0, 0)
         actions.setSpacing(8)
 
-        self.btn_attach = round_button("plus", "添加附件（占位）", action=True)
+        self.btn_attach = round_button("plus", t("main.button.attach"), action=True)
         actions.addWidget(self.btn_attach)
 
         actions.addStretch(1)
 
-        self.btn_voice = round_button("mic", "语音输入（占位）", action=True)
+        self.btn_voice = round_button("mic", t("main.button.voice"), action=True)
         actions.addWidget(self.btn_voice)
 
-        self.btn_send = round_button("send", "发送", primary=True, action=True)
+        self.btn_send = round_button(
+            "send", t("main.button.send"), primary=True, action=True
+        )
         actions.addWidget(self.btn_send)
 
         outer.addLayout(actions)
@@ -449,13 +452,13 @@ class ChatColumn(QWidget):
         header.setContentsMargins(0, 0, 0, 0)
         header.setSpacing(8)
 
-        self.btn_menu = round_button("menu", "会话列表")
+        self.btn_menu = round_button("menu", t("main.button.menu"))
         self.btn_menu.clicked.connect(self.menu_requested.emit)
         header.addWidget(self.btn_menu)
 
         header.addStretch(1)
 
-        self.btn_settings = round_button("gear", "设置")
+        self.btn_settings = round_button("gear", t("main.button.settings"))
         self.btn_settings.clicked.connect(self.settings_requested.emit)
         header.addWidget(self.btn_settings)
 
@@ -480,7 +483,7 @@ class ChatColumn(QWidget):
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("DSAI4431 Chatbot")
+        self.setWindowTitle(t("app.title"))
         self.resize(1440, 900)
         self.setMinimumSize(1100, 700)
 
@@ -512,6 +515,20 @@ class MainWindow(QMainWindow):
 
         self.chat.settings_requested.connect(self.open_settings)
         self._settings = None
+
+        # 退出前把 WebEngine 收掉（嵌入式 HTTP 服务 + 渲染进程）。
+        # aboutToQuit 管"换语言自动重启"（app.quit() 不触发 closeEvent），
+        # closeEvent 管用户直接关窗口，两个入口都收一遍；shutdown 是幂等的。
+        app = QApplication.instance()
+        if app is not None:
+            app.aboutToQuit.connect(self._on_about_to_quit)
+
+    def _on_about_to_quit(self) -> None:
+        self.character.shutdown()
+
+    def closeEvent(self, event):  # noqa: N802 - Qt 命名
+        self.character.shutdown()
+        super().closeEvent(event)
 
     # --- 设置 -----------------------------------------------------------
     def open_settings(self) -> None:
@@ -559,6 +576,8 @@ def main(argv: list[str] | None = None) -> int:
 
     app = QApplication(sys.argv if argv is None else argv)
     app.setApplicationName("DSAI4431 Chatbot")
+    # 语言：启动时定下来（没有记录就是中文）。换语言只能重启，所以这里读一次就够。
+    i18n.apply_saved()
     # 换肤：启动时按上次的选择套 QSS（没有记录就是 light）
     themes.apply_saved(app)
 

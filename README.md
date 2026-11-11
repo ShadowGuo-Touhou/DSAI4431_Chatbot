@@ -40,6 +40,7 @@ DSAI4431_Chatbot/
 ├── .venv/                      # 本地虚拟环境（不入库）
 ├── asset/                      # 资源：数据、模型、素材（见下节）
 │   ├── persona/                # 人格设定文本
+│   ├── language/               # 界面文案（zh.toml / en.toml）
 │   ├── live2d/                 # Live2D 依赖库、Cubism Core、模型
 │   │   ├── vendor/             # pixi / cubism4 / cubismcore 三件套（入库）
 │   │   ├── cubism-core/        # 官方 Cubism Core 原始文件（入库）
@@ -73,6 +74,7 @@ DSAI4431_Chatbot/
 | 目录 | 放什么 | 是否入库 |
 |---|---|---|
 | `asset/persona/` | 人格设定文本（`.md` / `.json`） | 入库 |
+| `asset/language/` | 界面文案：`zh.toml` / `en.toml` | 入库 |
 | `asset/live2d/vendor/` | `pixi.min.js`、`cubism4.min.js`、`live2dcubismcore.min.js` | 入库 |
 | `asset/live2d/cubism-core/` | 官方 Cubism SDK for Web 的 Core 原始文件 | 入库 |
 | `asset/live2d/models/Hiyori/`、`Natori/` | 示例模型 | 入库 |
@@ -187,10 +189,22 @@ python -m dsai4431_chatbot.core.gui
   - `light.toml`：默认浅色
   - `deepseek-blue.toml`：DeepSeek 蓝（深色底 + `#4D6BFE`）
   - 切换：设置 → Theme，点一下立即生效（`app.setStyleSheet()` 热替换），
-    选择记在 `%APPDATA%\DSAI4431_Chatbot\settings.ini`，下次启动保持
+    选择记在本地 `settings.ini`（Windows 上是 `%USERPROFILE%\AppData\LocalLow\DSAI4431_Chatbot\settings.ini`，
+    可用 `DSAI_CONFIG_DIR` 改写），下次启动保持
   - 加新皮肤：丢一个 `.toml` 进这个目录，重启后自动出现在列表里
   - 注意：图标颜色不跟着 QSS 走，是读 SVG 文本替换颜色再渲染成 pixmap
     （要跟随换肤的按钮得通过 `themes.bind()` 设置图标）
+- `i18n.py` + `asset/language/`：界面语言（中文 / English）。一套语言 = 一个 `.toml`，
+  键名是点分路径（`[settings.nav]` 的 `api_key` → `t("settings.nav.api_key")`）
+  - 切语言在 设置 → Other；**换语言会重启程序**（文案在构造窗口时取一次），
+    重启由 `relaunch.py` 负责：它先等旧进程退干净，再拉起新的，避免两份
+    QtWebEngine 抢同一个 profile 目录
+  - 选择记在 `settings.ini` 的 `language/code`，默认中文
+  - 缺键按「当前语言 → 中文 → 调用方 default → 键名」四级回退，
+    所以 en 少翻译一条只会显示中文，不会空白
+  - 加新语言：往 `asset/language/` 丢一个 `<code>.toml`（带 `[meta]` 的 `code`/`name`），
+    重启后自动出现在下拉里
+- `settings_store.py`：配置文件的读写位置（`settings.ini`），theme / i18n / live2d 共用
 
 > 截图和线框图在 `asset/plan/` 下，原图是竖排的，**需要顺时针旋转 90° 才是正的**。
 

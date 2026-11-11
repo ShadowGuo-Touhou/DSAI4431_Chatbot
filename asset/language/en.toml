@@ -1,0 +1,136 @@
+# =====================================================================
+#  UI text · English (en)
+#
+#  Keys are dotted paths: `api_key` under `[settings.nav]` is read with
+#  `t("settings.nav.api_key")`. Adding a string means adding one line to
+#  every language file.
+#
+#  `{...}` placeholders are filled by t(key, name=value) — keep that syntax.
+#  A key missing here falls back to Chinese (zh), so a gap shows Chinese
+#  rather than a blank label.
+# =====================================================================
+
+[meta]
+code = "en"
+name = "English"
+
+[app]
+title = "DSAI4431 Chatbot"
+
+# --- Main window ----------------------------------------------------
+[main.character]
+placeholder = "Live2D character area\n(placeholder — renderer not wired up yet)"
+error = "Live2D failed to load: {msg}"
+
+[main.messages]
+empty = "No messages yet"
+
+[main.input]
+placeholder = "Say something… (Enter to send, Shift+Enter for a new line)"
+
+[main.button]
+menu = "Conversations"
+settings = "Settings"
+attach = "Add attachment (placeholder)"
+voice = "Voice input (placeholder)"
+send = "Send"
+
+# --- Shared ---------------------------------------------------------
+[common]
+browse = "Browse (placeholder)"
+choose = "Choose"
+edit = "Edit"
+chars = "{n} chars"
+
+# --- Settings window ------------------------------------------------
+[settings]
+title = "Settings"
+close = "Close (Esc)"
+
+[settings.nav]
+api_key = "API KEY"
+personality = "Personality"
+rag = "RAG"
+live2d = "Live2D model"
+theme = "Theme"
+other = "Other"
+
+[settings.api_key]
+title = "API Key"
+api = "API"
+api_placeholder = "e.g. https://api.deepseek.com"
+token = "Token"
+token_placeholder = "Paste your API token"
+
+[settings.personality]
+title = "Persona"
+list = "Personas"
+list_default = "Big fat fish (default)"
+list_test = "Test persona"
+new_button = "+ New"
+new_title = "New Persona"
+id = "ID"
+id_placeholder = "persona_id"
+name = "NAME"
+name_placeholder = "Display name"
+files = "Persona Files"
+files_placeholder = "Folder holding the persona files"
+file_list = "FileList"
+preview = "Preview"
+save = "Save"
+
+[settings.rag]
+title = "Retrieval-Augmented Generation"
+ollama = "Ollama"
+ollama_placeholder = "Ollama executable or service URL"
+embedding = "Embedding"
+embedding_placeholder = "Embedding model directory"
+folder = "Folder"
+folder_placeholder = "Knowledge base directory"
+file_list = "FileList"
+file_empty = "(no indexed files yet)"
+rebuild = "Full rebuild"
+status = "Index status: not built"
+
+[settings.live2d]
+title = "Live2D model"
+hint = "Changes apply immediately and are remembered.\nPart names come from the moc3 file — many models just call them PartNN. The list is sorted by drawable count; uncheck one and you see the result right away."
+model = "Models"
+rescan = "Rescan"
+look = "Appearance"
+framing = "Framing"
+framing_bust = "Upper body"
+framing_full = "Full body"
+scale = "Scale"
+offset_x = "Horizontal offset"
+offset_y = "Vertical offset"
+behavior = "Behavior"
+physics = "Physics (hair/skirt inertia)"
+blink = "Auto blink"
+breath = "Breathing"
+follow = "Eyes follow cursor"
+parts = "Part visibility"
+show_all = "Show all"
+reset_look = "Reset appearance"
+part = "{id} ({n} drawables)"
+
+[settings.theme]
+title = "Theme"
+hint = "Click to restyle instantly — no restart, and the choice is remembered.\nTo add a skin, drop a .toml palette file into core/gui/themes/."
+in_use = "In use"
+
+[settings.other]
+title = "Other"
+language = "Language"
+language_label = "Interface language"
+language_hint = "Switching restarts the app right away — that is when the text changes. Your settings are already saved."
+language_restarting = "Restarting, please wait…"
+
+# --- Theme cards (the label/note in each theme toml is the fallback) ---
+[theme.light]
+name = "Light · Default"
+note = "White and light grey, matching the DSH main window"
+
+[theme.deepseek-blue]
+name = "DeepSeek Blue · Dark"
+note = "Dark base + DeepSeek brand blue #4D6BFE"

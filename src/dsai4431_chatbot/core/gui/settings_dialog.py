@@ -45,7 +45,8 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import live2d_embed, theme, themes
+from dsai4431_chatbot.core.gui import i18n, live2d_embed, relaunch, theme, themes
+from dsai4431_chatbot.core.gui.i18n import t
 
 SHADOW = 18  # 圆角窗外留给投影的透明边距（窗口本身比可见卡片大一圈）
 DIALOG_W, DIALOG_H = 980 + 2 * SHADOW, 660 + 2 * SHADOW
@@ -141,7 +142,7 @@ class FileCheckList(QFrame):
             box.setCursor(Qt.CursorShape.PointingHandCursor)
             self.boxes[name] = box
 
-            size = QLabel(f"{chars:,} 字符")
+            size = QLabel(t("common.chars", n=f"{chars:,}"))
             size.setObjectName("fileSize")
 
             row_lay.addWidget(box, 1)
@@ -209,15 +210,15 @@ class ApiKeyPage(QWidget):
         lay.setContentsMargins(28, 24, 28, 24)
         lay.setSpacing(10)
 
-        lay.addWidget(page_title("API Key"))
+        lay.addWidget(page_title(t("settings.api_key.title")))
         lay.addSpacing(6)
 
-        lay.addWidget(field_label("API"))
-        lay.addWidget(field_input("例：https://api.deepseek.com"))
+        lay.addWidget(field_label(t("settings.api_key.api")))
+        lay.addWidget(field_input(t("settings.api_key.api_placeholder")))
 
         lay.addSpacing(6)
-        lay.addWidget(field_label("Token"))
-        lay.addWidget(field_input("粘贴你的 API Token"))
+        lay.addWidget(field_label(t("settings.api_key.token")))
+        lay.addWidget(field_input(t("settings.api_key.token_placeholder")))
 
         lay.addStretch(1)
 
@@ -232,7 +233,7 @@ class PersonalityPage(QWidget):
         lay.setContentsMargins(28, 24, 28, 24)
         lay.setSpacing(14)
 
-        lay.addWidget(page_title("人格编辑"))
+        lay.addWidget(page_title(t("settings.personality.title")))
 
         body = QHBoxLayout()
         body.setSpacing(16)
@@ -240,41 +241,50 @@ class PersonalityPage(QWidget):
         # --- 左：Persona 列表 -------------------------------------------
         left_card, left = card()
         left.setSpacing(8)
-        left.addWidget(section_title("Persona 列表"))
+        left.addWidget(section_title(t("settings.personality.list")))
         left.addWidget(
-            field_list(["大肥鱼（默认）", "测试人格"], min_height=90), 1
+            field_list(
+                [
+                    t("settings.personality.list_default"),
+                    t("settings.personality.list_test"),
+                ],
+                min_height=90,
+            ),
+            1,
         )
-        left.addWidget(small_button("+ New"), 0, Qt.AlignmentFlag.AlignLeft)
+        left.addWidget(
+            small_button(t("settings.personality.new_button")), 0, Qt.AlignmentFlag.AlignLeft
+        )
         left_card.setFixedWidth(260)
         body.addWidget(left_card)
 
         # --- 右：New Persona 表单 ---------------------------------------
         right_card, right = card()
-        right.addWidget(section_title("New Persona"))
+        right.addWidget(section_title(t("settings.personality.new_title")))
 
-        right.addWidget(field_label("ID"))
-        right.addWidget(field_input("persona_id"))
+        right.addWidget(field_label(t("settings.personality.id")))
+        right.addWidget(field_input(t("settings.personality.id_placeholder")))
 
-        right.addWidget(field_label("NAME"))
-        right.addWidget(field_input("显示名称"))
+        right.addWidget(field_label(t("settings.personality.name")))
+        right.addWidget(field_input(t("settings.personality.name_placeholder")))
 
-        right.addWidget(field_label("Persona Files"))
-        right.addWidget(field_input("人格文件所在目录"))
+        right.addWidget(field_label(t("settings.personality.files")))
+        right.addWidget(field_input(t("settings.personality.files_placeholder")))
 
         path_row = QHBoxLayout()
         path_row.setSpacing(8)
-        path_row.addWidget(small_button("choose"))
-        path_row.addWidget(small_button("edit"))
+        path_row.addWidget(small_button(t("common.choose")))
+        path_row.addWidget(small_button(t("common.edit")))
         path_row.addStretch(1)
         right.addLayout(path_row)
 
-        right.addWidget(field_label("FileList"))
+        right.addWidget(field_label(t("settings.personality.file_list")))
         right.addWidget(FileCheckList(scan_persona_files(PERSONA_DIR)), 1)
 
         footer = QHBoxLayout()
         footer.addStretch(1)
-        footer.addWidget(small_button("Preview"))
-        footer.addWidget(small_button("Save", primary=True))
+        footer.addWidget(small_button(t("settings.personality.preview")))
+        footer.addWidget(small_button(t("settings.personality.save"), primary=True))
         right.addLayout(footer)
 
         body.addWidget(right_card, 1)
@@ -291,45 +301,45 @@ class RagPage(QWidget):
         lay.setContentsMargins(28, 24, 28, 24)
         lay.setSpacing(14)
 
-        lay.addWidget(page_title("Retrieval-Augmented Generation"))
+        lay.addWidget(page_title(t("settings.rag.title")))
 
         # --- 卡片一：模型路径 -------------------------------------------
         top_card, top = card()
-        top.addWidget(field_label("Ollama"))
+        top.addWidget(field_label(t("settings.rag.ollama")))
         row = QHBoxLayout()
         row.setSpacing(8)
-        row.addWidget(field_input("Ollama 可执行文件或服务地址"), 1)
-        row.addWidget(icon_button("folder", "浏览（占位）"))
+        row.addWidget(field_input(t("settings.rag.ollama_placeholder")), 1)
+        row.addWidget(icon_button("folder", t("common.browse")))
         top.addLayout(row)
 
-        top.addWidget(field_label("Embedding"))
+        top.addWidget(field_label(t("settings.rag.embedding")))
         row = QHBoxLayout()
         row.setSpacing(8)
-        row.addWidget(field_input("Embedding 模型目录"), 1)
-        row.addWidget(icon_button("folder", "浏览（占位）"))
+        row.addWidget(field_input(t("settings.rag.embedding_placeholder")), 1)
+        row.addWidget(icon_button("folder", t("common.browse")))
         top.addLayout(row)
 
         lay.addWidget(top_card)
 
         # --- 卡片二：知识库 ---------------------------------------------
         bottom_card, bottom = card()
-        bottom.addWidget(field_label("Folder"))
+        bottom.addWidget(field_label(t("settings.rag.folder")))
 
         folder_row = QHBoxLayout()
         folder_row.setSpacing(8)
-        folder_row.addWidget(field_input("知识库目录"), 1)
-        folder_row.addWidget(small_button("choose"))
-        folder_row.addWidget(small_button("edit"))
+        folder_row.addWidget(field_input(t("settings.rag.folder_placeholder")), 1)
+        folder_row.addWidget(small_button(t("common.choose")))
+        folder_row.addWidget(small_button(t("common.edit")))
         bottom.addLayout(folder_row)
 
-        bottom.addWidget(field_label("FileList"))
-        bottom.addWidget(field_list(["（还没有索引文件）"]), 1)
+        bottom.addWidget(field_label(t("settings.rag.file_list")))
+        bottom.addWidget(field_list([t("settings.rag.file_empty")]), 1)
 
         rebuild_row = QHBoxLayout()
         rebuild_row.setSpacing(10)
-        rebuild_row.addWidget(small_button("Full rebuild"))
+        rebuild_row.addWidget(small_button(t("settings.rag.rebuild")))
         rebuild_row.addStretch(1)
-        status = QLabel("索引状态：未构建")
+        status = QLabel(t("settings.rag.status"))
         status.setObjectName("hintText")
         rebuild_row.addWidget(status)
         bottom.addLayout(rebuild_row)
@@ -354,11 +364,8 @@ class Live2DModelPage(QWidget):
         lay.setContentsMargins(28, 24, 28, 24)
         lay.setSpacing(10)
 
-        lay.addWidget(page_title("Live2D model"))
-        hint = QLabel(
-            "改完立刻生效，选择会记住。\n"
-            "部件名来自 moc3，很多模型就叫 PartNN；列表按绘制单元数排序，勾掉马上能看到效果。"
-        )
+        lay.addWidget(page_title(t("settings.live2d.title")))
+        hint = QLabel(t("settings.live2d.hint"))
         hint.setObjectName("hintText")
         hint.setWordWrap(True)
         lay.addWidget(hint)
@@ -369,13 +376,13 @@ class Live2DModelPage(QWidget):
         # --- 左：模型列表 -----------------------------------------------
         left_card, left = card()
         left_card.setFixedWidth(280)
-        left.addWidget(section_title("模型"))
+        left.addWidget(section_title(t("settings.live2d.model")))
         self.model_list = field_list()
         self.model_list.setSpacing(1)
         left.addWidget(self.model_list, 1)
 
         scan_row = QHBoxLayout()
-        scan_row.addWidget(small_button("重新扫描", primary=False))
+        scan_row.addWidget(small_button(t("settings.live2d.rescan"), primary=False))
         scan_row.itemAt(0).widget().clicked.connect(self._rescan_models)
         scan_row.addStretch(1)
         left.addLayout(scan_row)
@@ -383,30 +390,36 @@ class Live2DModelPage(QWidget):
 
         # --- 右：调整 ---------------------------------------------------
         right_card, right = card()
-        right.addWidget(section_title("外观"))
+        right.addWidget(section_title(t("settings.live2d.look")))
 
         framing_row = QHBoxLayout()
         framing_row.setSpacing(8)
-        framing_row.addWidget(field_label("取景"))
+        framing_row.addWidget(field_label(t("settings.live2d.framing")))
         self.cbo_framing = QComboBox()
-        self.cbo_framing.addItem("上半身", "bust")
-        self.cbo_framing.addItem("全身", "full")
+        self.cbo_framing.addItem(t("settings.live2d.framing_bust"), "bust")
+        self.cbo_framing.addItem(t("settings.live2d.framing_full"), "full")
         self.cbo_framing.currentIndexChanged.connect(self._on_framing)
         framing_row.addWidget(self.cbo_framing, 1)
         right.addLayout(framing_row)
 
-        self.sl_scale, self.lb_scale = self._slider_row(right, "缩放", 40, 250, "%")
-        self.sl_offx, self.lb_offx = self._slider_row(right, "左右偏移", -300, 300, "px")
-        self.sl_offy, self.lb_offy = self._slider_row(right, "上下偏移", -300, 300, "px")
+        self.sl_scale, self.lb_scale = self._slider_row(
+            right, t("settings.live2d.scale"), 40, 250, "%"
+        )
+        self.sl_offx, self.lb_offx = self._slider_row(
+            right, t("settings.live2d.offset_x"), -300, 300, "px"
+        )
+        self.sl_offy, self.lb_offy = self._slider_row(
+            right, t("settings.live2d.offset_y"), -300, 300, "px"
+        )
 
         right.addSpacing(4)
-        right.addWidget(section_title("行为"))
+        right.addWidget(section_title(t("settings.live2d.behavior")))
         behaviors = QVBoxLayout()
         behaviors.setSpacing(2)
-        self.cb_physics = QCheckBox("物理（头发/裙摆的惯性）")
-        self.cb_blink = QCheckBox("自动眨眼")
-        self.cb_breath = QCheckBox("呼吸")
-        self.cb_follow = QCheckBox("视线跟随鼠标")
+        self.cb_physics = QCheckBox(t("settings.live2d.physics"))
+        self.cb_blink = QCheckBox(t("settings.live2d.blink"))
+        self.cb_breath = QCheckBox(t("settings.live2d.breath"))
+        self.cb_follow = QCheckBox(t("settings.live2d.follow"))
         for box, name in (
             (self.cb_physics, "physics"),
             (self.cb_blink, "blink"),
@@ -420,9 +433,9 @@ class Live2DModelPage(QWidget):
 
         right.addSpacing(4)
         parts_head = QHBoxLayout()
-        parts_head.addWidget(section_title("部件显隐"))
+        parts_head.addWidget(section_title(t("settings.live2d.parts")))
         parts_head.addStretch(1)
-        btn_show_all = small_button("全部显示")
+        btn_show_all = small_button(t("settings.live2d.show_all"))
         btn_show_all.clicked.connect(self._show_all_parts)
         parts_head.addWidget(btn_show_all)
         right.addLayout(parts_head)
@@ -434,7 +447,7 @@ class Live2DModelPage(QWidget):
 
         reset_row = QHBoxLayout()
         reset_row.addStretch(1)
-        btn_reset = small_button("恢复默认外观")
+        btn_reset = small_button(t("settings.live2d.reset_look"))
         btn_reset.clicked.connect(self._reset_look)
         reset_row.addWidget(btn_reset)
         right.addLayout(reset_row)
@@ -565,7 +578,9 @@ class Live2DModelPage(QWidget):
         self._syncing = True
         self.parts_list.clear()
         for part in parts:
-            item = QListWidgetItem(f"{part['id']}（{part['drawables']} 个绘制单元）")
+            item = QListWidgetItem(
+                t("settings.live2d.part", id=part["id"], n=part["drawables"])
+            )
             item.setData(Qt.ItemDataRole.UserRole, part["index"])
             item.setData(Qt.ItemDataRole.UserRole + 1, part["id"])
             item.setFlags(item.flags() | Qt.ItemFlag.ItemIsUserCheckable)
@@ -628,15 +643,17 @@ class ThemeCard(QFrame):
         text_box = QVBoxLayout()
         text_box.setContentsMargins(0, 0, 0, 0)
         text_box.setSpacing(2)
-        name = QLabel(item.label)
+        # 名字取自语言包；语言包里没有就用主题 toml 自带的 label/note 兜底，
+        # 这样新加的主题不翻译也能正常显示。
+        name = QLabel(t(f"theme.{item.id}.name", default=item.label))
         name.setObjectName("themeName")
-        note = QLabel(item.note or item.id)
+        note = QLabel(t(f"theme.{item.id}.note", default=item.note or item.id))
         note.setObjectName("themeNote")
         text_box.addWidget(name)
         text_box.addWidget(note)
         lay.addLayout(text_box, 1)
 
-        self.state_label = QLabel("使用中" if selected else "")
+        self.state_label = QLabel(t("settings.theme.in_use") if selected else "")
         self.state_label.setObjectName("hintText")
         lay.addWidget(self.state_label)
 
@@ -645,7 +662,7 @@ class ThemeCard(QFrame):
         if self.property("selected") == value:
             return
         self.setProperty("selected", value)
-        self.state_label.setText("使用中" if on else "")
+        self.state_label.setText(t("settings.theme.in_use") if on else "")
         themes.restyle(self)   # 动态属性改了必须重新 polish
 
     def mousePressEvent(self, event):  # noqa: N802 - Qt 命名
@@ -665,12 +682,9 @@ class ThemePage(QWidget):
         lay.setContentsMargins(28, 24, 28, 24)
         lay.setSpacing(12)
 
-        lay.addWidget(page_title("Theme"))
+        lay.addWidget(page_title(t("settings.theme.title")))
 
-        hint = QLabel(
-            "点一下立即换肤，不用重启，选择会被记住。\n"
-            "加新皮肤：往 core/gui/themes/ 丢一个 .toml（配色表）即可。"
-        )
+        hint = QLabel(t("settings.theme.hint"))
         hint.setObjectName("hintText")
         hint.setWordWrap(True)
         lay.addWidget(hint)
@@ -695,19 +709,71 @@ class ThemePage(QWidget):
 
 
 class OtherPage(QWidget):
-    """Other 页：草图里没有内容，留空占位。"""
+    """Other 页：界面语言。
+
+    换语言**不热更新**：文案在构造窗口时取过一次，所以这里只负责存盘 +
+    重启进程（用户选定的方案）。重启由 `relaunch` 负责等旧进程退干净再
+    拉起新的，避免两份 QtWebEngine 抢 profile 目录。
+    """
 
     def __init__(self, parent=None):
         super().__init__(parent)
         lay = QVBoxLayout(self)
         lay.setContentsMargins(28, 24, 28, 24)
+        lay.setSpacing(12)
 
-        lay.addWidget(page_title("Other"))
+        lay.addWidget(page_title(t("settings.other.title")))
 
-        hint = QLabel("草图里这一页没有内容。")
-        hint.setObjectName("hintText")
-        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        lay.addWidget(hint, 1)
+        card_frame, body = card()
+        body.addWidget(section_title(t("settings.other.language")))
+
+        row = QHBoxLayout()
+        row.setSpacing(10)
+        row.addWidget(field_label(t("settings.other.language_label")))
+        self.cbo_language = QComboBox()
+        for lang in i18n.available():
+            # 用各语言自己的写法（中文 / English），无论当前是哪套文案都认得
+            self.cbo_language.addItem(lang.name, lang.code)
+        self._select(i18n.current().code)
+        self.cbo_language.currentIndexChanged.connect(self._on_language)
+        row.addWidget(self.cbo_language, 1)
+        body.addLayout(row)
+
+        self.hint = QLabel(t("settings.other.language_hint"))
+        self.hint.setObjectName("hintText")
+        self.hint.setWordWrap(True)
+        body.addWidget(self.hint)
+
+        lay.addWidget(card_frame)
+        lay.addStretch(1)
+
+    def _select(self, code: str) -> None:
+        """按 code 选中下拉项（找不到就留在第一项），不触发切换逻辑。"""
+        index = self.cbo_language.findData(code)
+        if index < 0:
+            return
+        blocker = QSignalBlocker(self.cbo_language)
+        self.cbo_language.setCurrentIndex(index)
+        del blocker
+
+    def _on_language(self, index: int) -> None:
+        code = self.cbo_language.itemData(index)
+        if not code:
+            return
+        previous = i18n.current().code
+        if code == previous:
+            return
+
+        i18n.set_language(code)              # 先落盘：重启后的新进程按它取文案
+        self.hint.setText(t("settings.other.language_restarting"))
+        self.cbo_language.setEnabled(False)
+
+        if not relaunch.restart():
+            # 拉不起新进程：回滚到原语言，不留一个"看着像换好了"的假状态
+            i18n.set_language(previous)
+            self.cbo_language.setEnabled(True)
+            self._select(previous)
+            self.hint.setText(t("settings.other.language_hint"))
 
 
 # ---------------------------------------------------------------------------
@@ -720,19 +786,20 @@ class SettingsDialog(QDialog):
     Other 用齿轮（gear.svg），现在六项都有图标。
     """
 
+    # (图标, 文案 key, 页面类)
     PAGES = [
-        ("key", "API KEY", ApiKeyPage),
-        ("user", "Personality", PersonalityPage),
-        ("doc", "RAG", RagPage),
-        ("live2d", "Live2D model", Live2DModelPage),
-        ("clapper", "Theme", ThemePage),
-        ("gear", "Other", OtherPage),
+        ("key", "settings.nav.api_key", ApiKeyPage),
+        ("user", "settings.nav.personality", PersonalityPage),
+        ("doc", "settings.nav.rag", RagPage),
+        ("live2d", "settings.nav.live2d", Live2DModelPage),
+        ("clapper", "settings.nav.theme", ThemePage),
+        ("gear", "settings.nav.other", OtherPage),
     ]
 
     def __init__(self, parent=None, character=None):
         super().__init__(parent)
         self.character = character          # 给 Live2D model 页用（可为 None）
-        self.setWindowTitle("设置")
+        self.setWindowTitle(t("settings.title"))
         # 无边框 + 透明底：圆角和外投影都要自己画（DSH 的设置窗就是这个样子）。
         # 无边框之后系统标题栏没了，窗口自然也不能拖动，符合"不可移动"。
         self.setWindowFlags(Qt.WindowType.Dialog | Qt.WindowType.FramelessWindowHint)
@@ -765,7 +832,7 @@ class SettingsDialog(QDialog):
         header = QHBoxLayout()
         header.setContentsMargins(20, 14, 14, 4)
         header.setSpacing(8)
-        title = QLabel("设置")
+        title = QLabel(t("settings.title"))
         title.setObjectName("settingsTitle")
         header.addWidget(title)
         header.addStretch(1)
@@ -775,7 +842,7 @@ class SettingsDialog(QDialog):
         self.btn_close.setIconSize(QSize(ICON, ICON))
         self.btn_close.setFixedSize(30, 30)
         self.btn_close.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.btn_close.setToolTip("关闭（Esc）")
+        self.btn_close.setToolTip(t("settings.close"))
         self.btn_close.clicked.connect(self.reject)
         header.addWidget(self.btn_close)
         body.addLayout(header)
@@ -798,8 +865,8 @@ class SettingsDialog(QDialog):
         self._group = QButtonGroup(self)
         self._group.setExclusive(True)
 
-        for index, (icon, text, _page) in enumerate(self.PAGES):
-            btn = QPushButton(text)
+        for index, (icon, text_key, _page) in enumerate(self.PAGES):
+            btn = QPushButton(t(text_key))
             btn.setObjectName("navButton")
             if icon:
                 themes.bind(btn, icon)
@@ -815,7 +882,7 @@ class SettingsDialog(QDialog):
 
         # 右侧分页
         self.stack = QStackedWidget()
-        for _icon, _text, page_cls in self.PAGES:
+        for _icon, _text_key, page_cls in self.PAGES:
             if page_cls is Live2DModelPage:
                 self.stack.addWidget(page_cls(character))
             else:

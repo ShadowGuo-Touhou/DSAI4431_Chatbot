@@ -1,0 +1,135 @@
+# =====================================================================
+#  界面文案 · 中文（zh）
+#
+#  键名就是点分路径：`[settings.nav]` 下的 `api_key` 对应
+#  `t("settings.nav.api_key")`。加一条文案 = 每个语言包里各加一行。
+#
+#  `{...}` 是占位符，由 t(key, name=value) 填充，不要改成别的写法。
+#  这个文件缺的键会回退到自身（zh 就是回退语言），所以 en 里缺一条
+#  会显示中文而不是空白。
+# =====================================================================
+
+[meta]
+code = "zh"
+name = "中文"
+
+[app]
+title = "DSAI4431 Chatbot"
+
+# --- 主窗口 ---------------------------------------------------------
+[main.character]
+placeholder = "Live2D 角色区\n（框架占位，待接入渲染页）"
+error = "Live2D 未加载：{msg}"
+
+[main.messages]
+empty = "还没有消息"
+
+[main.input]
+placeholder = "说点什么…（Enter 发送，Shift+Enter 换行）"
+
+[main.button]
+menu = "会话列表"
+settings = "设置"
+attach = "添加附件（占位）"
+voice = "语音输入（占位）"
+send = "发送"
+
+# --- 通用 -----------------------------------------------------------
+[common]
+browse = "浏览（占位）"
+choose = "选择"
+edit = "编辑"
+chars = "{n} 字符"
+
+# --- 设置窗口 -------------------------------------------------------
+[settings]
+title = "设置"
+close = "关闭（Esc）"
+
+[settings.nav]
+api_key = "API KEY"
+personality = "Personality"
+rag = "RAG"
+live2d = "Live2D model"
+theme = "Theme"
+other = "Other"
+
+[settings.api_key]
+title = "API Key"
+api = "API"
+api_placeholder = "例：https://api.deepseek.com"
+token = "Token"
+token_placeholder = "粘贴你的 API Token"
+
+[settings.personality]
+title = "人格编辑"
+list = "Persona 列表"
+list_default = "大肥鱼（默认）"
+list_test = "测试人格"
+new_button = "+ 新建"
+new_title = "New Persona"
+id = "ID"
+id_placeholder = "persona_id"
+name = "NAME"
+name_placeholder = "显示名称"
+files = "Persona Files"
+files_placeholder = "人格文件所在目录"
+file_list = "FileList"
+preview = "Preview"
+save = "Save"
+
+[settings.rag]
+title = "Retrieval-Augmented Generation"
+ollama = "Ollama"
+ollama_placeholder = "Ollama 可执行文件或服务地址"
+embedding = "Embedding"
+embedding_placeholder = "Embedding 模型目录"
+folder = "Folder"
+folder_placeholder = "知识库目录"
+file_list = "FileList"
+file_empty = "（还没有索引文件）"
+rebuild = "Full rebuild"
+status = "索引状态：未构建"
+
+[settings.live2d]
+title = "Live2D model"
+hint = "改完立刻生效，选择会记住。\n部件名来自 moc3，很多模型就叫 PartNN；列表按绘制单元数排序，勾掉马上能看到效果。"
+model = "模型"
+rescan = "重新扫描"
+look = "外观"
+framing = "取景"
+framing_bust = "上半身"
+framing_full = "全身"
+scale = "缩放"
+offset_x = "左右偏移"
+offset_y = "上下偏移"
+behavior = "行为"
+physics = "物理（头发/裙摆的惯性）"
+blink = "自动眨眼"
+breath = "呼吸"
+follow = "视线跟随鼠标"
+parts = "部件显隐"
+show_all = "全部显示"
+reset_look = "恢复默认外观"
+part = "{id}（{n} 个绘制单元）"
+
+[settings.theme]
+title = "Theme"
+hint = "点一下立即换肤，不用重启，选择会被记住。\n加新皮肤：往 core/gui/themes/ 丢一个 .toml（配色表）即可。"
+in_use = "使用中"
+
+[settings.other]
+title = "Other"
+language = "语言"
+language_label = "界面语言"
+language_hint = "换语言会立即重启程序才能生效（配置已经存好，不会丢）。"
+language_restarting = "正在重启，请稍候…"
+
+# --- 主题卡上的文字（主题 toml 里的 label/note 是兜底）----------------
+[theme.light]
+name = "浅色 · 默认"
+note = "白底浅灰，和 DSH 主界面一致"
+
+[theme.deepseek-blue]
+name = "DeepSeek 蓝 · 深色"
+note = "深底 + DeepSeek 品牌蓝 #4D6BFE"

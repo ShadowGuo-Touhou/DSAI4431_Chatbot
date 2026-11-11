@@ -23,24 +23,25 @@
 
 from __future__ import annotations
 
-import os
 import tomllib
 import weakref
 from dataclasses import dataclass
 from pathlib import Path
 
-from PySide6.QtCore import (
-    QByteArray,
-    QObject,
-    QSettings,
-    QStandardPaths,
-    Qt,
-    Signal,
-)
+from PySide6.QtCore import QByteArray, QObject, Qt, Signal
 from PySide6.QtGui import QColor, QIcon, QPainter, QPalette, QPixmap
 from PySide6.QtWidgets import QApplication, QWidget
 
 from dsai4431_chatbot.core.gui import theme as _theme
+
+# 配置的存放位置统一由 settings_store 管（语言模块也要用，放这里会成环）。
+# 这三个名字仍然从这里导出，旧代码 `themes.app_settings()` 不用改。
+from dsai4431_chatbot.core.gui.settings_store import (  # noqa: F401
+    APP,
+    ORG,
+    app_settings,
+    settings_path,
+)
 
 try:  # QtSvg 单独一个模块；缺了也不至于整个界面起不来
     from PySide6.QtSvg import QSvgRenderer
@@ -52,35 +53,7 @@ except Exception:  # pragma: no cover - 只在 QtSvg 缺失时走到
 
 THEME_DIR = Path(__file__).resolve().parent
 
-ORG = "DSAI4431"
-APP = "Chatbot"
 SETTINGS_KEY = "theme/id"
-
-
-def settings_path() -> Path:
-    """配置文件位置：%APPDATA%/…/settings.ini（可用 DSAI_CONFIG_DIR 覆盖）。
-
-    这里刻意**不用** `QSettings(org, app)` 的原生后端：Windows 下它写的是
-    注册表 HKCU\\Software\\…，实测在这台机器上 `status()` 直接是 AccessError，
-    写进去也读不回来。落成 ini 文件可靠得多。
-    """
-    override = os.environ.get("DSAI_CONFIG_DIR")
-    if override:
-        root = Path(override).expanduser()
-    else:
-        # GenericConfigLocation 在 Windows 上是 %APPDATA%，与 applicationName
-        # 无关（用 AppConfigLocation 会变成 %APPDATA%\<应用名>，而脚本方式
-        # 启动时应用名是 "python"，路径会跑偏）。
-        base = QStandardPaths.writableLocation(
-            QStandardPaths.StandardLocation.GenericConfigLocation
-        )
-        root = (Path(base) if base else Path.home()) / "DSAI4431_Chatbot"
-    root.mkdir(parents=True, exist_ok=True)
-    return root / "settings.ini"
-
-
-def app_settings() -> QSettings:
-    return QSettings(str(settings_path()), QSettings.Format.IniFormat)
 
 
 # ---------------------------------------------------------------------------
