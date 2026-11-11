@@ -476,6 +476,24 @@
   - 测试：`test_af_personality.py` 重写为 **54 项**（含删除、只读、相对路径、
     两个原生选择入口）；`test_p_home` / `test_ai_open_settings` 也跟着改结构
 
+### 23. 模型列表换成 deepseek-flash / deepseek-v4-pro + 下拉弹窗圆角 —— 已完成（2026-11-11）
+
+- 官方 2026-11 起只剩两个模型（`deepseek-flash` / `deepseek-v4-pro`）：
+  `personas.MODELS`、`chat_config.DEFAULT_MODEL`、设置页提示文案一起换
+- 旧名字（`deepseek-chat` / `deepseek-reasoner` / `deepseek-v4-flash*`）在
+  `personas.normalize_model()` 里归一——**实测** `deepseek-chat` 现在还是 200，
+  后端由 V4.1-Flash 接单、但**没有思考模式**；不归一的话老 `settings.ini`
+  里那条会一直顶在下拉第一项
+- 真打了 API 才知道：新名字**默认开思考模式**（`thinking` 默认 enabled），
+  回复会先憋一段思维链，慢且贵。要不要发 `{"thinking":{"type":"disabled"}}`
+  **待用户决定**
+- ⚠ **教训：验证要量像素，别拿截图「看着像没问题」当证据。**
+  第一版只给 item view 加了 `border-radius`，我截的图里弹窗正好压在深色
+  区域上，四角的黑块和背景一个色，我判定「通过」；用户在自己白底窗口上一开就
+  看见四个黑角。**结论：截图判定必须让目标压在和它不同的背景上**，
+  并且改成取像素比颜色（`test_al_round_popup.py`：角上必=弹窗外的背景色，
+  卡片本体必须不透明且是浅色底）
+
 ---
 
 ## 二、待用户决定
@@ -543,3 +561,18 @@ PyQt5 只支持 **QSS**，是 CSS 的子集：
 - 动态属性的**名字不能撞** Qt 自带属性。比如用 `setProperty("size", ...)` 会静默失败
   （`QWidget.size` 是 QSize 类型，转换不过去），导致 `[size="action"]` 规则永不生效。
   现改用 `kind`。
+
+### 下拉弹窗的圆角（QComboBox popup）
+
+`QComboBox QAbstractItemView { border-radius: … }` 只给**列表**画圆角，弹窗还有一层
+**容器**（`combo.view().window()`，一个 QFrame）会铺自己的底色 —— 浅色皮下实测
+`#0f1115`，四个角看起来就是四块黑。2026-11-11 的解法与两条禁令：
+
+| 做法 | 结论 |
+|---|---|
+| 容器 `setAttribute(WA_TranslucentBackground)` + `FramelessWindowHint` + `NoDropShadowWindowHint` | ✅ 唯一可行，四角透出的是窗口背景 |
+| 调用的时机 | **必须第一次 `showPopup` 之前**（原生窗口的透明属性创建时定死；显示后再改整块变纯黑 `#000`） |
+| 给容器 `setStyleSheet("background: transparent")` | ❌ 会顺带作用到子控件，列表也透掉，整张卡片消失 |
+| 给容器 `setStyleSheet("#comboPopupShell { … }")`（只命中自己） | ❌ 同样翻车（容器一旦有自己的样式表，里面的列表就不吃全局 QSS 的圆角底色了） |
+
+统一封装在 `themes.round_popup(combo)`，控件创建后立刻调用一次即可。
