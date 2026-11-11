@@ -40,6 +40,7 @@ from PySide6.QtWidgets import (
     QListWidgetItem,
     QMessageBox,
     QPushButton,
+    QScrollArea,
     QSlider,
     QStackedWidget,
     QVBoxLayout,
@@ -105,11 +106,15 @@ def scan_persona_files(directory: Path) -> list[tuple[str, int]]:
     return rows or list(PERSONA_DEMO_FILES)
 
 
-class FileCheckList(QFrame):
-    """文件清单：每行 = 勾选框（文件名）+ 右侧字符数。
+class FileCheckList(QScrollArea):
+    """文件清单：每行 = 勾选框（文件名）+ 右侧字符数，**可滚动**。
 
     勾选结果会发 `changed`（set[str]），由 Personality 页存进配置 ——
     勾了哪些文件，对话时就把哪些文件拼成 system 提示词。
+
+    为什么是 QScrollArea 而不是 QFrame：人格目录里文件数不固定（实测 6 个就
+    顶出卡片了），用 QFrame 排会直接被裁掉、下面的文件点不到。box 外观
+    （底色/描边/圆角）画在滚动区上，滚动条因此落在框内。
     """
 
     changed = Signal(object)          # set[str]
@@ -121,15 +126,23 @@ class FileCheckList(QFrame):
         parent=None,
     ):
         super().__init__(parent)
-        self.setObjectName("fileList")
-        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+        self.setObjectName("fileListScroll")
+        self.setWidgetResizable(True)
+        self.setFrameShape(QFrame.Shape.NoFrame)
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
 
         self.boxes: dict[str, QCheckBox] = {}
         self._building = False
 
-        self._lay = QVBoxLayout(self)
+        # 滚动内容：透明容器，行都挂在它下面（QSS 用 #fileList > #fileRow 选中）
+        self._body = QFrame()
+        self._body.setObjectName("fileList")
+        self._body.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+        self._lay = QVBoxLayout(self._body)
         self._lay.setContentsMargins(6, 6, 6, 6)
         self._lay.setSpacing(1)
+        self.setWidget(self._body)
 
         self.set_rows(rows, checked)
 
@@ -141,6 +154,10 @@ class FileCheckList(QFrame):
             item = self._lay.takeAt(0)
             widget = item.widget()
             if widget is not None:
+                # 先摘掉父子关系再 deleteLater：只标 deleteLater 的话，旧行要等
+                # 事件循环处理 DeferredDelete 才消失，这期间会和新行**叠在一起**
+                # 被画出来（实测截图里两行文字糊成一团）。
+                widget.setParent(None)
                 widget.deleteLater()
         self.boxes.clear()
 
@@ -360,10 +377,9 @@ class PersonalityPage(QWidget):
         right.addWidget(self.lb_dir_state)
 
         right.addWidget(field_label(t("settings.personality.file_list")))
-        self.file_list = FileCheckList(
-            scan_persona_files(self.persona_dir()),
-            checked=set(self._cfg.persona_files),
-        )
+        # 先建空的，内容交给 _load_files() 填 —— 不要在构造里再填一遍，
+        # 否则 rows 建两次，前一批还没销毁就和新的一批叠着画
+        self.file_list = FileCheckList([], checked=set(self._cfg.persona_files))
         self.file_list.changed.connect(self._save_files)
         right.addWidget(self.file_list, 1)
 

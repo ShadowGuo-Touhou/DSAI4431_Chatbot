@@ -33,6 +33,11 @@
   - API KEY：地址 / Key（密码框）/ 模型；Key 明文存在本机 ini（用户在选项里确认过）
   - Personality：人格目录（可 choose 选目录 / edit 打开目录 / 重新扫描）+ 勾选文件，
     勾选结果落盘并作为对话的 system 提示词；Preview 直接看拼出来的全文
+    - 文件清单是**滚动区**（`FileCheckList` 继承 QScrollArea，2026-11-11 补）：
+      之前用 QFrame 手工排行，文件一多就被卡片裁掉、下面的点不到
+    - 坑：`set_rows()` 被调两次（构造一次 + `_load_files()` 一次）时，旧行
+      `deleteLater()` 要等事件循环才消失，期间会和新行**叠着画**（截图里两行文字糊成一团）
+      → 先 `setParent(None)` 再 deleteLater；另外构造时传空列表，只让 `_load_files()` 填一次
   - RAG：三条路径落盘 + 目录里的文件清单（带大小）；「Full rebuild」是灰的 ——
     索引还没实现，不做假按钮
 - **外观与交互（2026-11-11 照 DSH 改）**

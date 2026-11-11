@@ -233,11 +233,19 @@ QListWidget#fieldList::item:selected {{
     color: {accent};
 }}
 
-/* 勾选式文件清单（Personality 页）：勾选框 + 文件名 + 字符数 */
-QFrame#fileList {{
+/* 勾选式文件清单（Personality 页）：勾选框 + 文件名 + 字符数
+   外框画在滚动区上（滚动条才会在框内），里面的 #fileList 当透明容器 */
+QScrollArea#fileListScroll {{
     background: {surface_alt};
     border: 1px solid {border_soft};
     border-radius: 9px;
+}}
+QScrollArea#fileListScroll > QWidget > QWidget {{
+    background: transparent;
+}}
+QFrame#fileList {{
+    background: transparent;
+    border: none;
 }}
 QFrame#fileList > QFrame#fileRow {{
     background: transparent;
