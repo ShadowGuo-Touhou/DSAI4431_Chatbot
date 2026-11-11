@@ -298,10 +298,21 @@
   - 模型选择器做成输入卡右下角的一行小字（无边框、悬停才浮底色），和 DSH 一致
   - 新增主题 token `chip_bg` / `chip_bg_hover`（老主题文件没有也不会崩：
     `stylesheet()` 里 `setdefault` 退回 `surface_alt` / `hover`）
-- 验证：`_plan_preview/i18n/test_p_home.py`（32 项全过），截图
-  `home_no_session.png` / `home_autoopened.png` / `home_page.png`；
-  选择器的三倍放大对照图 `look_{light,dark}.png`、`look_pill_*.png`、`look_model_*.png`
-  （`test_q_combo_look.py`，不建主窗口、不拉 Live2D，秒出）
+- **第三轮：展开列表的三个坑**（用户 20:11 截图：`deeps...soner` 被省略 + 四角露黑）
+  1. **弹窗宽度跟着盒子走**：盒子按当前项收窄之后，长的那一项就被省略成
+     `deeps...soner`。修法：`_HomeCombo.showPopup()` 里先
+     `view().setMinimumWidth(view.sizeHintForColumn(0) + 14)` 再 `super()`。
+     ⚠ 只加 1px 都不够（Qt 用 `<` 判断要不要省略），实测 +14 才稳。
+     ⚠ 测这个必须选**最短**的那项：两条宽度碰巧都够时，选长项是测不出来的
+  2. **弹窗不能画圆角**：它是独立原生窗口，`palette().window()` 实测是
+     `#000000`，item view 一圆角四角就是黑方块。所以列表是直角 + 1px 描边
+     （想圆角得自己做无边框半透明弹窗，代价大，先不做）
+  3. `QComboBox QAbstractItemView` 的 `icon-size` 单独给带图标的人格列表设 16px
+- 验证：`_plan_preview/i18n/test_p_home.py`（32 项全过）、`test_r_popup.py`
+  （两颗下拉 × 两套皮 × 短/长两项，打印 box/popup 宽度 + 是否省略，并单独截弹窗），
+  截图 `home_no_session.png` / `home_autoopened.png` / `home_page.png`、
+  `look_{light,dark}.png`、`look_pill_*.png`、`look_model_*.png`、`popup_*_*.png`
+  （`test_q_combo_look.py` / `test_r_popup.py` 都不建主窗口、不拉 Live2D，秒出）
 
 ---
 

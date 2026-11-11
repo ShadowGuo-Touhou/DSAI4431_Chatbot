@@ -481,6 +481,25 @@ class InputCard(QFrame):
         self.btn_send.clicked.connect(self.edit.submit)
 
 
+class _HomeCombo(QComboBox):
+    """新对话页的选择器：**盒子**宽度贴着当前项，**弹窗**宽度贴着最长项。
+
+    为什么不能直接用 QComboBox：
+    - 它默认按最长的一项算盒子宽度 —— 选中短名字时右边留一截空白，箭头离文字老远
+    - 而弹窗宽度又跟着盒子走 —— 盒子收窄之后，长选项被省略成「deeps...soner」
+
+    所以盒子这边自己算宽度（见 HomePage._fit_combo），弹窗那边在 showPopup()
+    里先把列表的最小宽度撑到最长项。
+    """
+
+    def showPopup(self) -> None:  # noqa: N802 - Qt 命名
+        view = self.view()
+        # sizeHintForColumn 已经把「列表项内边距 + 图标」算进去了；再加 14 给
+        # 列表框自己的 padding/border 和取整余量 —— 少 1px 就会省略成「deeps…soner」
+        view.setMinimumWidth(view.sizeHintForColumn(0) + 14)
+        super().showPopup()
+
+
 class HomePage(QWidget):
     """新对话页：「新建对话」后右侧聊天列里整块换成的空白首页。
 
@@ -528,7 +547,7 @@ class HomePage(QWidget):
         col.addSpacing(14)
 
         # --- 人格（首页上方，左对齐的一颗胶囊）----------------------------
-        self.cbo_persona = QComboBox()
+        self.cbo_persona = _HomeCombo()
         self.cbo_persona.setObjectName("homePersona")
         self.cbo_persona.setToolTip(t("session.persona"))
         # 图标用设置页 Personality 那颗（icons/user.svg），跟着换肤重新上色
@@ -568,7 +587,7 @@ class HomePage(QWidget):
         actions.addStretch(1)
 
         # 模型：输入卡右下角的一行小字（无边框，悬停才浮出底色）
-        self.cbo_model = QComboBox()
+        self.cbo_model = _HomeCombo()
         self.cbo_model.setObjectName("homeModel")
         self.cbo_model.setToolTip(t("session.model"))
         self.cbo_model.setFixedHeight(28)
