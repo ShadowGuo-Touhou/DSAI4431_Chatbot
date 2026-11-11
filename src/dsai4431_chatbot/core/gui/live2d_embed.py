@@ -142,6 +142,29 @@ def default_model() -> Path | None:
     return None
 
 
+def list_models() -> list[Path]:
+    """models 目录下所有 *.model3.json（给设置页做可选模型列表）。"""
+    if not MODELS_DIR.is_dir():
+        return []
+    try:
+        return [p for p in sorted(MODELS_DIR.rglob("*.model3.json")) if p.is_file()]
+    except OSError:
+        return []
+
+
+def model_key(path: Path) -> str:
+    """模型在 models 目录下的相对路径，用作配置里的稳定标识。"""
+    try:
+        return path.relative_to(MODELS_DIR).as_posix()
+    except ValueError:
+        return path.name
+
+
+def model_label(path: Path) -> str:
+    """给人看的名字：保留文件名里的 .demo 后缀（同一模型的两份文件要能区分）。"""
+    return path.name.replace(".model3.json", "")
+
+
 # ---------------------------------------------------------------------------
 # 本地静态服务
 # ---------------------------------------------------------------------------
@@ -339,6 +362,26 @@ class Live2DView(QWidget):
         if self._model_json is None:
             self._fail("没有可用的 model3.json")
             return
+        self._load()
+
+    def switch_model(self, model_json: Path) -> None:
+        """换模型：停掉旧服务、重置就绪探测，重新装载页面（约 2-3 秒）。
+
+        ready 会再发一次，调用方在这里之后补上显示配置即可。
+        """
+        self._model_json = Path(model_json)
+        self._stop_timers()
+        if self._server is not None:
+            self._server.stop()
+            self._server = None
+        self._settled = False
+        self._polls = 0
+        self._js_error = ""
+        self._load_ok = None
+        self.console_messages.clear()
+        self._load()
+
+    def _load(self) -> None:
         try:
             self._server = LocalPreviewServer(self._model_json)
         except OSError as exc:
@@ -452,6 +495,35 @@ class Live2DView(QWidget):
     def snapshot(self, cb) -> None:
         """从页面导出 canvas（Pixi extract → dataURL）。回调收到 str 或 None。"""
         self.js(JS_SNAPSHOT, cb)
+
+    # --- 显示调整（设置页驱动） -------------------------------------------
+    def set_scale(self, factor: float) -> None:
+        self.call("scale", float(factor))
+
+    def set_offset(self, dx: float, dy: float) -> None:
+        self.call("offset", int(dx), int(dy))
+
+    def set_framing(self, mode: str, zoom: float | None = None) -> None:
+        self.call("framing", str(mode), zoom)
+
+    def set_physics(self, on: bool) -> None:
+        self.call("physics", bool(on))
+
+    def set_blink(self, on: bool) -> None:
+        self.call("autoBlink", bool(on))
+
+    def set_breath(self, on: bool) -> None:
+        self.call("autoBreath", bool(on))
+
+    def set_follow(self, on: bool) -> None:
+        self.call("follow", bool(on))
+
+    def parts(self, cb) -> None:
+        """取部件清单（JSON 字符串回调）。部件 id 来自 moc3，很多模型就是 PartNN。"""
+        self.js("window.l2d ? JSON.stringify(l2d.parts()) : '[]'", cb)
+
+    def set_part_hidden(self, index: int, hidden: bool) -> None:
+        self.call("setPart", int(index), bool(hidden))
 
     # --- 收尾 -------------------------------------------------------------
     def shutdown(self) -> None:

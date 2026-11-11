@@ -361,6 +361,50 @@ try {
   }
 
   // -------------------------------------------------------------------------
+  // 部件显隐
+  //   每个 drawable 都归属某个 Part（drawables.parentPartIndices）。想隐藏一个
+  //   部件，只能把它的 drawable 的 opacities 抹 0 —— 改 part 自己的 opacity 没用，
+  //   渲染器读的是 drawable 那一层（和上面黑层的毛病是同一个）。
+  // -------------------------------------------------------------------------
+  const _partDrawables = new Map();   // partIndex -> [drawableIndex...]
+  const _partHidden = new Set();      // 当前隐藏的 partIndex
+
+  function _indexPartDrawables() {
+    _partDrawables.clear();
+    const dr = im.coreModel && im.coreModel._model && im.coreModel._model.drawables;
+    if (!dr || !dr.parentPartIndices) return false;
+    const n = dr.parentPartIndices.length;
+    for (let i = 0; i < n; i++) {
+      const p = dr.parentPartIndices[i];
+      if (!_partDrawables.has(p)) _partDrawables.set(p, []);
+      _partDrawables.get(p).push(i);
+    }
+    return true;
+  }
+
+  function partList() {
+    const parts = im.coreModel && im.coreModel._model && im.coreModel._model.parts;
+    const ids = (parts && parts.ids) || [];
+    if (!_partDrawables.size) _indexPartDrawables();
+    const out = [];
+    for (let i = 0; i < ids.length; i++) {
+      const list = _partDrawables.get(i) || [];
+      // 没有 drawable 的部件（纯逻辑分组）不列出来，UI 上勾了也没效果
+      if (!list.length) continue;
+      out.push({ index: i, id: String(ids[i]), drawables: list.length, hidden: _partHidden.has(i) });
+    }
+    return out;
+  }
+
+  function setPartHidden(index, on) {
+    const i = Number(index);
+    if (!Number.isInteger(i) || i < 0) return false;
+    if (on) _partHidden.add(i);
+    else _partHidden.delete(i);
+    return true;
+  }
+
+  // -------------------------------------------------------------------------
   // 统一挂到 Core 的 update 上
   //   参数 → 必须在 update 之前写
   //   黑层 → 必须在 update 之后抹（Core 每帧重算 opacities）
@@ -388,11 +432,19 @@ try {
     cm.update = function () {
       const out = orig.apply(cm, arguments);
       // 黑层必须在 update 之后抹（Core 每帧重算 opacities）
-      if (hidden.length) {
-        const dr = cm._model && cm._model.drawables;
-        if (dr && dr.opacities) {
-          for (let i = 0; i < hidden.length; i++) {
-            try { dr.opacities[hidden[i]] = 0; } catch (_) {}
+      const dr = cm._model && cm._model.drawables;
+      if (dr && dr.opacities) {
+        for (let i = 0; i < hidden.length; i++) {
+          try { dr.opacities[hidden[i]] = 0; } catch (_) {}
+        }
+        // 被隐藏的部件同理：它下面的 drawable 每帧都会被重算，得跟着抹
+        if (_partHidden.size) {
+          for (const p of _partHidden) {
+            const list = _partDrawables.get(p);
+            if (!list) continue;
+            for (let k = 0; k < list.length; k++) {
+              try { dr.opacities[list[k]] = 0; } catch (_) {}
+            }
           }
         }
       }
@@ -502,6 +554,9 @@ try {
     return { mode, zoom, top: Number.isFinite(top) ? top : 0.02 };
   })();
 
+  // 额外偏移（像素）。宿主侧用 l2d.offset() 调，用来微调模型在框里的位置。
+  const OFFSET = { x: 0, y: 0 };
+
   function viewport() {
     const cv = app.view;
     const vw = (cv && cv.clientWidth) || window.innerWidth || 1;
@@ -519,14 +574,14 @@ try {
       fitScale = (vw / w) * FRAMING.zoom;
       applyScale();
       model.anchor.set(0.5, 0);
-      model.position.set(vw / 2, vh * FRAMING.top);
+      model.position.set(vw / 2 + OFFSET.x, vh * FRAMING.top + OFFSET.y);
       return;
     }
 
     fitScale = Math.min(vw / w, vh / h) * 0.94;
     applyScale();
     model.anchor.set(0.5, 0.5);
-    model.position.set(vw / 2, vh / 2);
+    model.position.set(vw / 2 + OFFSET.x, vh / 2 + OFFSET.y);
   }
 
   function applyScale() {
@@ -659,6 +714,29 @@ try {
       userScale = Math.max(0.2, Math.min(4, Number(k) || 1));
       applyScale();
       return userScale;
+    },
+    // 额外偏移（像素），正数往右下
+    offset(dx, dy) {
+      OFFSET.x = Number(dx) || 0;
+      OFFSET.y = Number(dy) || 0;
+      fit();
+      return { x: OFFSET.x, y: OFFSET.y };
+    },
+    // 取景：full（全身适应）/ bust（上半身）
+    framing(mode, zoom, top) {
+      if (mode === 'full' || mode === 'bust') FRAMING.mode = mode;
+      if (Number.isFinite(Number(zoom)) && Number(zoom) > 0) FRAMING.zoom = Number(zoom);
+      if (Number.isFinite(Number(top))) FRAMING.top = Math.max(0, Math.min(0.5, Number(top)));
+      fit();
+      return { mode: FRAMING.mode, zoom: FRAMING.zoom, top: FRAMING.top };
+    },
+    get framingInfo() { return { mode: FRAMING.mode, zoom: FRAMING.zoom, top: FRAMING.top, offset: { x: OFFSET.x, y: OFFSET.y } }; },
+
+    // 部件显隐：parts() 列出「有 drawable 的」部件，setPart 勾隐藏
+    parts() { return partList(); },
+    setPart(index, hidden) {
+      if (!setPartHidden(index, !!hidden)) return false;
+      return { index: Number(index), hidden: !!hidden };
     },
     follow(on) { followOn = !!on; return followOn; },
     focus(x, y) {

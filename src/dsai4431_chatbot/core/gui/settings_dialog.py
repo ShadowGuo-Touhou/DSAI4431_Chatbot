@@ -23,12 +23,13 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from PySide6.QtCore import QEvent, QSize, Qt, Signal
+from PySide6.QtCore import QEvent, QSize, QSignalBlocker, Qt, Signal
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import (
     QApplication,
     QButtonGroup,
     QCheckBox,
+    QComboBox,
     QDialog,
     QFrame,
     QGraphicsDropShadowEffect,
@@ -36,13 +37,15 @@ from PySide6.QtWidgets import (
     QLabel,
     QLineEdit,
     QListWidget,
+    QListWidgetItem,
     QPushButton,
+    QSlider,
     QStackedWidget,
     QVBoxLayout,
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import theme, themes
+from dsai4431_chatbot.core.gui import live2d_embed, theme, themes
 
 SHADOW = 18  # 圆角窗外留给投影的透明边距（窗口本身比可见卡片大一圈）
 DIALOG_W, DIALOG_H = 980 + 2 * SHADOW, 660 + 2 * SHADOW
@@ -335,19 +338,261 @@ class RagPage(QWidget):
 
 
 class Live2DModelPage(QWidget):
-    """Live2D model 页：草图里只画了 tab，没有内容，先留空。"""
+    """Live2D model 页：选模型 + 外观 / 行为 / 部件调整。
 
-    def __init__(self, parent=None):
+    所有改动都**立即生效**并写进 settings.ini（和换肤共用一份配置），
+    下次启动自动还原。
+    """
+
+    def __init__(self, character, parent=None):
         super().__init__(parent)
+        self.character = character          # main_window.CharacterPanel
+        self._parts: list[dict] = []
+        self._syncing = False
+
         lay = QVBoxLayout(self)
         lay.setContentsMargins(28, 24, 28, 24)
+        lay.setSpacing(10)
 
         lay.addWidget(page_title("Live2D model"))
-
-        hint = QLabel("草图里这一页没有内容。\n模型路径 / 显示尺寸 / 物理开关等，等确定后再画。")
+        hint = QLabel(
+            "改完立刻生效，选择会记住。\n"
+            "部件名来自 moc3，很多模型就叫 PartNN；列表按绘制单元数排序，勾掉马上能看到效果。"
+        )
         hint.setObjectName("hintText")
-        hint.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        lay.addWidget(hint, 1)
+        hint.setWordWrap(True)
+        lay.addWidget(hint)
+
+        body = QHBoxLayout()
+        body.setSpacing(16)
+
+        # --- 左：模型列表 -----------------------------------------------
+        left_card, left = card()
+        left_card.setFixedWidth(280)
+        left.addWidget(section_title("模型"))
+        self.model_list = field_list()
+        self.model_list.setSpacing(1)
+        left.addWidget(self.model_list, 1)
+
+        scan_row = QHBoxLayout()
+        scan_row.addWidget(small_button("重新扫描", primary=False))
+        scan_row.itemAt(0).widget().clicked.connect(self._rescan_models)
+        scan_row.addStretch(1)
+        left.addLayout(scan_row)
+        body.addWidget(left_card)
+
+        # --- 右：调整 ---------------------------------------------------
+        right_card, right = card()
+        right.addWidget(section_title("外观"))
+
+        framing_row = QHBoxLayout()
+        framing_row.setSpacing(8)
+        framing_row.addWidget(field_label("取景"))
+        self.cbo_framing = QComboBox()
+        self.cbo_framing.addItem("上半身", "bust")
+        self.cbo_framing.addItem("全身", "full")
+        self.cbo_framing.currentIndexChanged.connect(self._on_framing)
+        framing_row.addWidget(self.cbo_framing, 1)
+        right.addLayout(framing_row)
+
+        self.sl_scale, self.lb_scale = self._slider_row(right, "缩放", 40, 250, "%")
+        self.sl_offx, self.lb_offx = self._slider_row(right, "左右偏移", -300, 300, "px")
+        self.sl_offy, self.lb_offy = self._slider_row(right, "上下偏移", -300, 300, "px")
+
+        right.addSpacing(4)
+        right.addWidget(section_title("行为"))
+        behaviors = QVBoxLayout()
+        behaviors.setSpacing(2)
+        self.cb_physics = QCheckBox("物理（头发/裙摆的惯性）")
+        self.cb_blink = QCheckBox("自动眨眼")
+        self.cb_breath = QCheckBox("呼吸")
+        self.cb_follow = QCheckBox("视线跟随鼠标")
+        for box, name in (
+            (self.cb_physics, "physics"),
+            (self.cb_blink, "blink"),
+            (self.cb_breath, "breath"),
+            (self.cb_follow, "follow"),
+        ):
+            box.setObjectName("fileCheck")
+            box.toggled.connect(lambda on, n=name: self._on_behavior(n, on))
+            behaviors.addWidget(box)
+        right.addLayout(behaviors)
+
+        right.addSpacing(4)
+        parts_head = QHBoxLayout()
+        parts_head.addWidget(section_title("部件显隐"))
+        parts_head.addStretch(1)
+        btn_show_all = small_button("全部显示")
+        btn_show_all.clicked.connect(self._show_all_parts)
+        parts_head.addWidget(btn_show_all)
+        right.addLayout(parts_head)
+
+        self.parts_list = field_list()
+        self.parts_list.setMinimumHeight(120)
+        self.parts_list.itemChanged.connect(self._on_part_toggled)
+        right.addWidget(self.parts_list, 1)
+
+        reset_row = QHBoxLayout()
+        reset_row.addStretch(1)
+        btn_reset = small_button("恢复默认外观")
+        btn_reset.clicked.connect(self._reset_look)
+        reset_row.addWidget(btn_reset)
+        right.addLayout(reset_row)
+
+        body.addWidget(right_card, 1)
+        lay.addLayout(body, 1)
+
+        self._rescan_models()
+        self._sync_from_config()
+        # 换模型后 view 会重新就绪，这时候再去要一次部件清单
+        if hasattr(character, "live2d_ready"):
+            character.live2d_ready.connect(self.refresh_parts)
+        self.refresh_parts()
+
+    # --- 小工具 ---------------------------------------------------------
+    def _slider_row(self, layout, label: str, lo: int, hi: int, unit: str):
+        row = QHBoxLayout()
+        row.setSpacing(8)
+        row.addWidget(field_label(label))
+        slider = QSlider(Qt.Orientation.Horizontal)
+        slider.setRange(lo, hi)
+        slider.setMinimumWidth(120)
+        value = QLabel("")
+        value.setObjectName("hintText")
+        value.setFixedWidth(56)
+        value.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        row.addWidget(slider, 1)
+        row.addWidget(value)
+        layout.addLayout(row)
+
+        def show(v: int) -> None:
+            value.setText(f"{v}{unit}")
+
+        slider.valueChanged.connect(show)
+        return slider, show
+
+    def _set_slider(self, slider: QSlider, value: int, formatter) -> None:
+        blocker = QSignalBlocker(slider)
+        slider.setValue(int(value))
+        del blocker
+        formatter(int(value))
+
+    # --- 模型 -----------------------------------------------------------
+    def _rescan_models(self) -> None:
+        self._syncing = True
+        self.model_list.clear()
+        current = self.character.current_model()
+        for path in live2d_embed.list_models():
+            item = QListWidgetItem(live2d_embed.model_label(path))
+            item.setData(Qt.ItemDataRole.UserRole, str(path))
+            item.setToolTip(live2d_embed.model_key(path))   # 完整相对路径
+            self.model_list.addItem(item)
+            if current is not None and path == current:
+                self.model_list.setCurrentItem(item)
+        self._syncing = False
+        if self.model_list.currentItem() is None and self.model_list.count():
+            self.model_list.setCurrentRow(0)
+        self.model_list.currentItemChanged.connect(self._on_model_changed)
+
+    def _on_model_changed(self, item, _prev) -> None:
+        if self._syncing or item is None:
+            return
+        path = item.data(Qt.ItemDataRole.UserRole)
+        if not path:
+            return
+        self.character.set_model(Path(path))
+
+    # --- 外观 -----------------------------------------------------------
+    def _on_framing(self, index: int) -> None:
+        if self._syncing:
+            return
+        self.character.set_framing(self.cbo_framing.itemData(index))
+
+    def _on_scale(self, value: int) -> None:
+        if not self._syncing:
+            self.character.set_scale(value / 100.0)
+
+    def _on_offset(self, _value: int) -> None:
+        if not self._syncing:
+            self.character.set_offset(self.sl_offx.value(), self.sl_offy.value())
+
+    def _on_behavior(self, name: str, on: bool) -> None:
+        if not self._syncing:
+            self.character.set_behavior(name, on)
+
+    def _reset_look(self) -> None:
+        self._syncing = True
+        self.cbo_framing.setCurrentIndex(0)
+        self._set_slider(self.sl_scale, 100, self.lb_scale)
+        self._set_slider(self.sl_offx, 0, self.lb_offx)
+        self._set_slider(self.sl_offy, 0, self.lb_offy)
+        self._syncing = False
+        self.character.set_framing("bust")
+        self.character.set_scale(1.0)
+        self.character.set_offset(0, 0)
+
+    def _sync_from_config(self) -> None:
+        cfg = self.character.config
+        self._syncing = True
+        index = self.cbo_framing.findData(cfg.framing)
+        self.cbo_framing.setCurrentIndex(max(0, index))
+        self._set_slider(self.sl_scale, round(cfg.scale * 100), self.lb_scale)
+        self._set_slider(self.sl_offx, cfg.offset_x, self.lb_offx)
+        self._set_slider(self.sl_offy, cfg.offset_y, self.lb_offy)
+        self.cb_physics.setChecked(cfg.physics)
+        self.cb_blink.setChecked(cfg.blink)
+        self.cb_breath.setChecked(cfg.breath)
+        self.cb_follow.setChecked(cfg.follow)
+        self._syncing = False
+        # 滑块要在 init 之后才连信号，避免初始化时触发一次保存
+        self.sl_scale.valueChanged.connect(self._on_scale)
+        self.sl_offx.valueChanged.connect(self._on_offset)
+        self.sl_offy.valueChanged.connect(self._on_offset)
+
+    # --- 部件 -----------------------------------------------------------
+    def refresh_parts(self) -> None:
+        self.character.request_parts(self._fill_parts)
+
+    def _fill_parts(self, payload) -> None:
+        import json
+
+        try:
+            parts = json.loads(payload or "[]")
+        except (TypeError, ValueError):
+            parts = []
+        self._parts = parts
+        hidden = set(self.character.config.hidden_parts)
+        self._syncing = True
+        self.parts_list.clear()
+        for part in parts:
+            item = QListWidgetItem(f"{part['id']}（{part['drawables']} 个绘制单元）")
+            item.setData(Qt.ItemDataRole.UserRole, part["index"])
+            item.setData(Qt.ItemDataRole.UserRole + 1, part["id"])
+            item.setFlags(item.flags() | Qt.ItemFlag.ItemIsUserCheckable)
+            item.setCheckState(
+                Qt.CheckState.Unchecked if part["id"] in hidden else Qt.CheckState.Checked
+            )
+            self.parts_list.addItem(item)
+        self._syncing = False
+
+    def _on_part_toggled(self, item: QListWidgetItem) -> None:
+        if self._syncing or item is None:
+            return
+        index = item.data(Qt.ItemDataRole.UserRole)
+        part_id = item.data(Qt.ItemDataRole.UserRole + 1)
+        hidden = item.checkState() != Qt.CheckState.Checked
+        self.character.set_part_hidden(index, part_id, hidden)
+
+    def _show_all_parts(self) -> None:
+        self._syncing = True
+        for row in range(self.parts_list.count()):
+            item = self.parts_list.item(row)
+            if item.checkState() != Qt.CheckState.Checked:
+                item.setCheckState(Qt.CheckState.Checked)
+        self._syncing = False
+        for part in self._parts:
+            self.character.set_part_hidden(part["index"], part["id"], False)
+
 
 
 class ThemeCard(QFrame):
@@ -484,8 +729,9 @@ class SettingsDialog(QDialog):
         ("gear", "Other", OtherPage),
     ]
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, character=None):
         super().__init__(parent)
+        self.character = character          # 给 Live2D model 页用（可为 None）
         self.setWindowTitle("设置")
         # 无边框 + 透明底：圆角和外投影都要自己画（DSH 的设置窗就是这个样子）。
         # 无边框之后系统标题栏没了，窗口自然也不能拖动，符合"不可移动"。
@@ -570,7 +816,10 @@ class SettingsDialog(QDialog):
         # 右侧分页
         self.stack = QStackedWidget()
         for _icon, _text, page_cls in self.PAGES:
-            self.stack.addWidget(page_cls())
+            if page_cls is Live2DModelPage:
+                self.stack.addWidget(page_cls(character))
+            else:
+                self.stack.addWidget(page_cls())
         content.addWidget(self.stack, 1)
 
         # 唯一的行为：切页（否则其余两页看不到）

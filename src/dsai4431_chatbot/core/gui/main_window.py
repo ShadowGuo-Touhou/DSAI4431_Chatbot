@@ -24,6 +24,7 @@
 from __future__ import annotations
 
 import sys
+from pathlib import Path
 from typing import Literal
 
 from PySide6.QtCore import QPoint, QSize, Qt, Signal
@@ -43,7 +44,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import live2d_embed, theme, themes
+from dsai4431_chatbot.core.gui import live2d_config, live2d_embed, theme, themes
 
 ICON_DIR = theme.ICON_DIR
 
@@ -95,10 +96,12 @@ class CharacterPanel(QWidget):
     回原来的占位文字，不白屏、不崩溃。
     """
 
+    # 每次（重新）就绪时发一次：换模型后设置页要重新拉部件清单
+    live2d_ready = Signal()
+
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setObjectName("characterPanel")
-        # 普通 QWidget 子类默认不画 QSS 的 background/border，必须显式打开
+        self.setObjectName("characterPanel")        # 普通 QWidget 子类默认不画 QSS 的 background/border，必须显式打开
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setMinimumWidth(280)
 
@@ -119,13 +122,15 @@ class CharacterPanel(QWidget):
         self._lay.addWidget(self._status, 0)
 
         self._view: live2d_embed.Live2DView | None = None
-        self._start_embed()
+        # 显示配置（换模型/缩放/偏移/取景/行为开关/隐藏部件），存在 settings.ini
+        self._cfg = live2d_config.load()
+        self._start_embed(self._cfg.model_path())
 
-    def _start_embed(self) -> None:
+    def _start_embed(self, model: "Path | None" = None) -> None:
         """有模型就嵌进来；没有模型/素材就安静地保持占位，不报错。"""
-        model = live2d_embed.default_model()
+        model = model or live2d_embed.default_model()
         if model is None:
-            print("[character] 没有找到 *.demo.model3.json，保持占位", file=sys.stderr, flush=True)
+            print("[character] 没有找到 *.model3.json，保持占位", file=sys.stderr, flush=True)
             return
 
         view = live2d_embed.Live2DView(self, model_json=model)
@@ -151,6 +156,105 @@ class CharacterPanel(QWidget):
         self._status.hide()
         # 模型出来了，去掉占位用的虚线框
         self._set_state("model")
+        self._apply_display_config()
+        self.live2d_ready.emit()
+
+    def _apply_display_config(self) -> None:
+        """把配置套到刚就绪的页面上（顺序有讲究：先取景，再偏移，最后缩放）。"""
+        view = self._view
+        if view is None:
+            return
+        cfg = self._cfg
+        view.set_framing(cfg.framing)
+        view.set_offset(cfg.offset_x, cfg.offset_y)
+        view.set_scale(cfg.scale)
+        view.set_physics(cfg.physics)
+        view.set_blink(cfg.blink)
+        view.set_breath(cfg.breath)
+        view.set_follow(cfg.follow)
+        if cfg.hidden_parts:
+            view.parts(self._apply_hidden_parts)
+
+    def _apply_hidden_parts(self, payload) -> None:
+        """页面回传部件清单后，把配置里勾了隐藏的部件藏回去。"""
+        import json
+
+        if self._view is None or not payload:
+            return
+        try:
+            parts = json.loads(payload)
+        except (TypeError, ValueError):
+            return
+        wanted = set(self._cfg.hidden_parts)
+        for part in parts:
+            if part.get("id") in wanted and not part.get("hidden"):
+                self._view.set_part_hidden(part["index"], True)
+
+    # --- 设置页（Live2D model）驱动的接口 --------------------------------
+    @property
+    def config(self):
+        return self._cfg
+
+    def current_model(self) -> Path | None:
+        return self._cfg.model_path()
+
+    def set_model(self, path: Path) -> None:
+        """换模型。部件 id 是每个 moc3 自己的，所以隐藏记录一起清掉。"""
+        self._cfg.model = live2d_embed.model_key(Path(path))
+        self._cfg.hidden_parts = []
+        live2d_config.save(self._cfg)
+        if self._view is None:
+            self._start_embed(Path(path))
+        else:
+            self._view.switch_model(Path(path))
+
+    def set_framing(self, mode: str) -> None:
+        self._cfg.framing = "full" if mode == "full" else "bust"
+        live2d_config.save(self._cfg)
+        if self._view is not None:
+            self._view.set_framing(self._cfg.framing)
+
+    def set_scale(self, factor: float) -> None:
+        self._cfg.scale = float(factor)
+        live2d_config.save(self._cfg)
+        if self._view is not None:
+            self._view.set_scale(self._cfg.scale)
+
+    def set_offset(self, dx: int, dy: int) -> None:
+        self._cfg.offset_x = int(dx)
+        self._cfg.offset_y = int(dy)
+        live2d_config.save(self._cfg)
+        if self._view is not None:
+            self._view.set_offset(self._cfg.offset_x, self._cfg.offset_y)
+
+    def set_behavior(self, name: str, on: bool) -> None:
+        setattr(self._cfg, name, bool(on))
+        live2d_config.save(self._cfg)
+        if self._view is None:
+            return
+        {
+            "physics": self._view.set_physics,
+            "blink": self._view.set_blink,
+            "breath": self._view.set_breath,
+            "follow": self._view.set_follow,
+        }[name](bool(on))
+
+    def request_parts(self, callback) -> bool:
+        if self._view is None:
+            return False
+        self._view.parts(callback)
+        return True
+
+    def set_part_hidden(self, index: int, part_id: str, hidden: bool) -> None:
+        ids = set(self._cfg.hidden_parts)
+        if hidden:
+            ids.add(part_id)
+        else:
+            ids.discard(part_id)
+        self._cfg.hidden_parts = sorted(ids)
+        live2d_config.save(self._cfg)
+        if self._view is not None:
+            self._view.set_part_hidden(index, hidden)
 
     def _on_live2d_failed(self, msg: str) -> None:
         view, self._view = self._view, None
@@ -429,7 +533,7 @@ class MainWindow(QMainWindow):
             dlg.activateWindow()
             return
 
-        dlg = SettingsDialog(self)
+        dlg = SettingsDialog(self, character=self.character)
         dlg.move(
             self.frameGeometry().center() - QPoint(DIALOG_W // 2, DIALOG_H // 2)
         )

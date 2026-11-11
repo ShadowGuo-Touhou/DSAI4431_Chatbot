@@ -180,6 +180,8 @@ python -m dsai4431_chatbot.core.gui
 ```
 
 - `main_window.py`：窗口与各面板组件
+- `live2d_config.py`：Live2D 显示配置（模型 / 取景 / 缩放 / 偏移 / 行为开关 / 隐藏部件），
+  存在 `settings.ini`；设置 → Live2D model 页改的就是它，启动时自动还原
 - `theme.py`：QSS 模板（字体、圆角、间距，以及每个控件引用哪个 token）
 - `themes/`：换肤系统。一套主题 = 一个 `.toml`（`label` / `note` + `[palette]` 配色表）
   - `light.toml`：默认浅色

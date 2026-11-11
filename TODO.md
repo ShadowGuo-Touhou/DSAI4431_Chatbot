@@ -41,6 +41,16 @@
   `API KEY` / `Personality` / `RAG` / `Live2D model` / `Theme` / `Other`
   - 前四项带图标，`Theme` 和 `Other` 草图没画图标 → 目前是纯文字
 - **已完成内容的页**：API KEY、Personality、RAG（按三张草图铺好字段）
+- **Live2D model 页（2026-11-11 实现，不再是占位）**
+  - 左：`asset/live2d/models` 扫出来的模型列表（现 4 个 `*.model3.json`），选中即换模型
+    （重新装载渲染页，约 3 秒）
+  - 右：取景（上半身/全身）、缩放 40–250%、左右/上下偏移 ±300px、
+    行为开关（物理 / 自动眨眼 / 呼吸 / 视线跟随）
+  - 部件显隐：`l2d.parts()` 拿部件清单做勾选列表，取消勾选 = 隐藏
+  - 全部改动立即生效并存盘（`live2d_config.py`，与换肤共用 `settings.ini`）
+  - 已知限制：部件 id 来自 moc3，这个模型就叫 `PartNN`（model3 里没有 `Parts`
+    命名表），所以列表只能按「绘制单元数」排序；被别的部件盖住的部件
+    勾掉也看不出变化（实测只藏 Part48 几乎无变化，藏前 5 大部件掉 14% 像素）
 - **Personality 页文件清单（2026-11-11 补）**：改成「勾选框 + 文件名 + 字符数」的
   `FileCheckList`，数据从 `P:\.dsh\agentsoul` 实扫（可用环境变量
   `DSAI_PERSONA_DIR` 改目录），目录不存在时退回演示数据。

@@ -320,6 +320,44 @@ QLabel#themeNote {{
     font-size: 12px;
 }}
 
+/* 滑条 / 下拉框（Live2D model 页用） */
+QSlider::groove:horizontal {{
+    height: 4px;
+    background: {border};
+    border-radius: 2px;
+}}
+QSlider::sub-page:horizontal {{
+    background: {accent};
+    border-radius: 2px;
+}}
+QSlider::handle:horizontal {{
+    width: 14px;
+    height: 14px;
+    margin: -6px 0;
+    border-radius: 7px;
+    background: {accent};
+    border: none;
+}}
+QSlider::handle:horizontal:hover {{
+    background: {accent_hover};
+}}
+QComboBox {{
+    background: {surface};
+    border: 1px solid {border_soft};
+    border-radius: 9px;
+    padding: 6px 10px;
+}}
+QComboBox:hover {{
+    border-color: {border};
+}}
+QComboBox QAbstractItemView {{
+    background: {surface};
+    border: 1px solid {border_soft};
+    selection-background-color: {selected_bg};
+    selection-color: {accent};
+    outline: none;
+}}
+
 /* 滚动条：细一点，别抢视线 */
 QScrollBar:vertical {{
     background: transparent;
