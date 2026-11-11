@@ -206,8 +206,10 @@
   - `core/gui/personas.py`：人格清单直接读 DSH 那份
     `P:\.dsh\persona-inject\personas.json`（赤蛮奇 / 大肥鲸），读不到就退回
     「设置页那个目录 + 勾选文件」；模型候选 `deepseek-chat` / `deepseek-reasoner`
-  - `core/gui/session_drawer.py`：≡ 打开左侧抽屉（「会话」新页面）→「＋ 新建对话」→
-    选人格 + 选模型 → 创建；列表按最近更新排序，双击进入
+  - `core/gui/session_drawer.py`：≡ 打开左侧抽屉（「会话」新页面）→「＋ 新建对话」；
+    列表按最近更新排序，双击进入
+    - **2026-11-11 改版**：抽屉里的「选人格 + 选模型 + 创建/取消」表单已删，
+      「＋ 新建对话」改成切到右侧的**整页新对话页**（见第 17 条）
   - 主窗：抽屉叠在左侧、Esc 关闭；选中/新建会话后收起抽屉并把历史读进聊天区
     - **坑（2026-11-11 用户反馈）**：抽屉原来是主窗的子控件，被 Live2D 整个盖住、点不到——
       `QWebEngineView` 是原生子窗口，永远压在兄弟 Qt 控件上面，`raise_()` 无效。
@@ -258,6 +260,32 @@
   开关关：不画，但**照样存进会话**（`assistant/message` 的 `reasoning` 块）
 - 重开会话时也按当前开关决定要不要把历史思考链画回来
 - `deepseek-chat` 不返回思考内容，所以这个开关只对 `deepseek-reasoner` 有实际效果
+
+### 17. 新对话页（整页空白首页）+ 启动自动续上最近会话 —— 已完成（2026-11-11）
+
+- **用户要求**（对照 DSH 首页截图）：「点击新建对话后应该跳这样一个窗口才对
+  （忽略上面的 logo），然后在刚打开时自动加载最近更新过的对话，没有对话就直接
+  打开这样一个新建对话的窗口」
+- **确认过的三个选择**：新对话页占**右侧聊天列**（左边 Live2D 保留）；抽屉里的
+  新建表单**删掉**；发出第一条消息后**自动切成普通对话视图**
+- 实现
+  - `main_window.HomePage`：大标题 + 人格下拉 + 大输入卡（模型下拉 + 发送在卡片
+    右下角，附件图标在左下角，和 DSH 一样）。输入框宽 760 居中，上下留白 3:5
+  - `ChatColumn` 里改成 `QStackedWidget`：0 = 对话页（消息 + 输入卡），
+    1 = 新对话页；顶栏（≡ / ⚙）两页共用
+  - `start_new_conversation()` 只清状态、**不建会话**；第一句话发出时
+    `_ensure_session()` 才按首页选的人格/模型落盘（空会话文件没有意义）
+  - `MainWindow._restore_last_session()`：启动时 `list_sessions()[0]`
+    （已按 `updated_at` 倒序）直接打开；一条都没有才停在首页
+  - 抽屉 `session_created` / `NewSessionForm` / `toggle_form` 全部删掉，
+    `btn_new` 改为发 `new_session_requested` → `MainWindow` 收起抽屉 + 切首页
+    → 全程序**只有一条创建路径**
+- **顺手修的 bug**：`MainWindow.closeEvent` 有两份定义，后一份把前一份（含
+  `self._drawer.close()`）整个覆盖掉了 → 删掉重复的那份
+- **坑**：`HomePage` 写在 `main_window.py` 里而不是单独模块 —— 它要用
+  `_InputEdit`（Enter 发送）和 `round_button`，单独成模块会和本模块循环导入
+- 验证：`_plan_preview/i18n/test_p_home.py`（32 项全过），截图
+  `home_no_session.png` / `home_autoopened.png` / `home_page.png`
 
 ---
 

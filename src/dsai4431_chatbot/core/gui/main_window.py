@@ -31,6 +31,7 @@ from PySide6.QtCore import QPoint, QSize, Qt, Signal
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QApplication,
+    QComboBox,
     QFrame,
     QHBoxLayout,
     QLabel,
@@ -40,6 +41,7 @@ from PySide6.QtWidgets import (
     QScrollArea,
     QSizePolicy,
     QSplitter,
+    QStackedWidget,
     QVBoxLayout,
     QWidget,
 )
@@ -473,8 +475,158 @@ class InputCard(QFrame):
         self.btn_send.clicked.connect(self.edit.submit)
 
 
+class HomePage(QWidget):
+    """新对话页：「新建对话」后右侧聊天列里整块换成的空白首页。
+
+    布局（对照 DSH 的首页）：
+
+        ┌──────────────────────────────────────┐
+        │                                      │
+        │             开始新的对话              │  ← 大标题
+        │  [赤蛮奇 ▾]                          │  ← 人格
+        │  ┌────────────────────────────────┐  │
+        │  │ 说点什么开始…                   │  │  ← 大输入框
+        │  │ [+]      [deepseek-chat ▾] [↑] │  │
+        │  └────────────────────────────────┘  │
+        └──────────────────────────────────────┘
+
+    为什么这个类写在 main_window.py 里而不是单独一个模块：它要用上面的
+    `_InputEdit`（Enter 发送）和 `round_button`，单独成模块会与本模块循环
+    导入（本模块必须先拿到 HomePage 才能装进 ChatColumn）。
+    """
+
+    # 输入框宽度上限：和 DSH 一样收窄居中的一列，太宽了输入框会失去焦点感
+    COLUMN_W = 760
+    submitted = Signal(dict)      # {"persona": dict, "model": str, "text": str}
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setObjectName("homePage")
+
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(0, 0, 0, 0)
+        outer.setSpacing(0)
+        # 上下留白按 3:5 分：整块内容略高于正中，看起来不像飘在中间
+        outer.addStretch(3)
+
+        column = QWidget()
+        column.setMaximumWidth(self.COLUMN_W)
+        col = QVBoxLayout(column)
+        col.setContentsMargins(0, 0, 0, 0)
+        col.setSpacing(12)
+
+        self.lb_title = QLabel(t("main.home.title"))
+        self.lb_title.setObjectName("homeTitle")
+        self.lb_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        col.addWidget(self.lb_title)
+        col.addSpacing(14)
+
+        # --- 人格（首页上方，左对齐）--------------------------------------
+        self.cbo_persona = QComboBox()
+        self.cbo_persona.setObjectName("homePersona")
+        self.cbo_persona.setToolTip(t("session.persona"))
+        self.cbo_persona.setMinimumWidth(150)
+        self.cbo_persona.setMaximumWidth(240)
+        col.addWidget(self.cbo_persona, 0, Qt.AlignmentFlag.AlignLeft)
+
+        # --- 大输入卡（模型选择器 + 发送放在卡片右下角）--------------------
+        card = QFrame()
+        card.setObjectName("homeCard")
+        card.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+        card.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
+        self.card = card
+        inner = QVBoxLayout(card)
+        inner.setContentsMargins(16, 14, 14, 12)
+        inner.setSpacing(8)
+
+        self.edit = _InputEdit()
+        self.edit.setObjectName("homeEdit")
+        self.edit.setPlaceholderText(t("main.home.placeholder"))
+        self.edit.setFrameShape(QFrame.Shape.NoFrame)
+        self.edit.setMinimumHeight(92)
+        self.edit.setMaximumHeight(200)
+        inner.addWidget(self.edit)
+
+        actions = QHBoxLayout()
+        actions.setContentsMargins(0, 0, 0, 0)
+        actions.setSpacing(8)
+
+        self.btn_attach = round_button("plus", t("main.button.attach"), action=True)
+        actions.addWidget(self.btn_attach)
+        actions.addStretch(1)
+
+        self.cbo_model = QComboBox()
+        self.cbo_model.setObjectName("homeModel")
+        self.cbo_model.setToolTip(t("session.model"))
+        self.cbo_model.setMinimumWidth(150)
+        self.cbo_model.setMaximumWidth(220)
+        actions.addWidget(self.cbo_model)
+
+        self.btn_send = round_button(
+            "send", t("main.button.send"), primary=True, action=True
+        )
+        actions.addWidget(self.btn_send)
+
+        inner.addLayout(actions)
+        col.addWidget(card)
+
+        row = QHBoxLayout()
+        row.setContentsMargins(0, 0, 0, 0)
+        row.addStretch(1)
+        row.addWidget(column, 20)      # 撑到 COLUMN_W 为止，剩下的给两侧的 stretch
+        row.addStretch(1)
+        outer.addLayout(row)
+        outer.addStretch(5)
+
+        self.edit.submitted.connect(self._emit)
+        self.btn_send.clicked.connect(self.edit.submit)
+
+    # --- 数据 -----------------------------------------------------------
+    def refresh(self) -> None:
+        """每次显示时重读人格/模型清单（设置里刚改过 personas.json 也能反映）。
+
+        尽量保住上次选的项：找不到就退回第一项 / 设置里的默认模型。
+        """
+        cfg = chat_config.load()
+
+        keep_persona = self.cbo_persona.currentData()
+        self.cbo_persona.clear()
+        for persona in personas.list_personas():
+            self.cbo_persona.addItem(persona.display, persona.id)
+        if keep_persona:
+            index = self.cbo_persona.findData(keep_persona)
+            if index >= 0:
+                self.cbo_persona.setCurrentIndex(index)
+
+        keep_model = self.cbo_model.currentData() or cfg.model
+        self.cbo_model.clear()
+        for model in personas.model_options(cfg.model):
+            self.cbo_model.addItem(model, model)
+        index = self.cbo_model.findData(keep_model)
+        if index >= 0:
+            self.cbo_model.setCurrentIndex(index)
+
+    def focus_input(self) -> None:
+        self.edit.setFocus()
+
+    def selection(self) -> dict:
+        """当前选中的人格与模型（给测试和 _emit 共用）。"""
+        persona_id = self.cbo_persona.currentData()
+        persona = personas.by_id(persona_id) if persona_id else None
+        model = self.cbo_model.currentData() or self.cbo_model.currentText()
+        return {
+            "persona": persona.as_dict() if persona else {},
+            "model": str(model),
+        }
+
+    def _emit(self, text: str) -> None:
+        payload = self.selection()
+        payload["text"] = text
+        self.submitted.emit(payload)
+
+
 class ChatColumn(QWidget):
-    """右侧聊天列：顶栏 + 消息区 + 输入卡。"""
+    """右侧聊天列：顶栏 + （对话页 | 新对话页）+ 会话后端。"""
 
     settings_requested = Signal()
     menu_requested = Signal()
@@ -505,13 +657,27 @@ class ChatColumn(QWidget):
 
         lay.addLayout(header)
 
-        # --- 消息区 -----------------------------------------------------
-        self.messages = MessageArea()
-        lay.addWidget(self.messages, 1)
+        # --- 两种页面：对话页 / 新对话页 ---------------------------------
+        self.stack = QStackedWidget()
+        self.stack.setObjectName("chatStack")
+        lay.addWidget(self.stack, 1)
 
-        # --- 输入卡 -----------------------------------------------------
+        page_chat = QWidget()
+        page_lay = QVBoxLayout(page_chat)
+        page_lay.setContentsMargins(0, 0, 0, 0)
+        page_lay.setSpacing(12)
+
+        self.messages = MessageArea()
+        page_lay.addWidget(self.messages, 1)
+
         self.input = InputCard()
-        lay.addWidget(self.input)
+        page_lay.addWidget(self.input)
+
+        self.page_chat = page_chat
+        self.home = HomePage()
+        self.stack.addWidget(page_chat)      # 0：看历史 / 继续对话
+        self.stack.addWidget(self.home)      # 1：新对话页
+        self.home.submitted.connect(self._on_home_submit)
 
         # --- 对话后端 ---------------------------------------------------
         self.client = chat_client.ChatClient(self)
@@ -528,6 +694,9 @@ class ChatColumn(QWidget):
         # 当前会话（data/session 里的一条）；没建会话就直接发消息时自动建一条
         self._session_id = ""
         self._session: session_store.SessionMeta | None = None
+        # 新对话页上选好的人格 / 模型：等第一句话发出去、真要建会话时才用
+        self._pending_persona: dict | None = None
+        self._pending_model = ""
 
         # 等回复时按 Enter 不发也不清空输入框
         self.input.edit.can_submit = lambda: not self.client.busy()
@@ -589,16 +758,59 @@ class ChatColumn(QWidget):
     def _ensure_session(self, cfg) -> session_store.SessionMeta:
         if self._session is not None:
             return self._session
-        choices = personas.list_personas()
-        persona = choices[0] if choices else None
+        # 新对话页上选过就按选的来；没选（比如直接在对话页敲字）就退回第一个人格
+        persona_dict = self._pending_persona
+        if not persona_dict:
+            choices = personas.list_personas()
+            persona_dict = choices[0].as_dict() if choices else {}
         meta = session_store.create_session(
-            persona=persona.as_dict() if persona else {},
-            model=cfg.model or personas.MODELS[0],
+            persona=persona_dict,
+            model=self._pending_model or cfg.model or personas.MODELS[0],
         )
+        self._pending_persona = None
+        self._pending_model = ""
         self._session = meta
         self._session_id = meta.id
         self.session_updated.emit(meta.id)
         return meta
+
+    # --- 两种页面 -------------------------------------------------------
+    def show_home(self) -> None:
+        """切到新对话页（首页）。"""
+        self.home.refresh()
+        self.stack.setCurrentWidget(self.home)
+        self.home.focus_input()
+
+    def show_conversation(self) -> None:
+        """切到对话页（消息 + 输入卡）。"""
+        self.stack.setCurrentWidget(self.page_chat)
+
+    def start_new_conversation(self) -> None:
+        """「新建对话」：把当前状态清干净，回到空白首页。
+
+        注意这里**不建会话**：空会话文件没有意义，等第一句话发出去时
+        `_ensure_session()` 才真正落盘（和以前「直接敲字自动建」是同一条路径）。
+        """
+        self.client.abort()
+        self._bubble = None
+        self._reasoning_bubble = None
+        self._reasoning_text = ""
+        self._history.clear()
+        self._session = None
+        self._session_id = ""
+        self._pending_persona = None
+        self._pending_model = ""
+        self.messages.clear_messages()
+        self.input.edit.clear()
+        self.show_home()
+
+    def _on_home_submit(self, payload: dict) -> None:
+        """首页里敲下第一句话：带上选好的人格/模型，切到对话页按常规发出去。"""
+        self._pending_persona = payload.get("persona") or None
+        self._pending_model = str(payload.get("model") or "")
+        self.show_conversation()
+        self._on_submit(str(payload.get("text") or ""))
+        self.input.edit.setFocus()
 
     def open_session(self, session_id: str) -> None:
         """切到某个会话：读回历史消息，重建上下文。"""
@@ -606,6 +818,8 @@ class ChatColumn(QWidget):
         self._bubble = None
         self._session_id = session_id
         self._session = session_store.get_meta(session_id)
+        self._pending_persona = None
+        self._pending_model = ""
         self.messages.clear_messages()
         self._history.clear()
         self._reasoning_bubble = None
@@ -624,6 +838,7 @@ class ChatColumn(QWidget):
                 }
             )
         self.messages.scroll_to_end()
+        self.show_conversation()
 
     # --- 流式回填 -------------------------------------------------------
     def _on_reasoning_delta(self, piece: str) -> None:
@@ -674,13 +889,8 @@ class ChatColumn(QWidget):
 
     # --- 新对话 ---------------------------------------------------------
     def reset_conversation(self) -> None:
-        """开始一条全新的对话（旧的那条已经落盘，不会丢）。"""
-        self.client.abort()
-        self._bubble = None
-        self._history.clear()
-        self._session = None
-        self._session_id = ""
-        self.messages.clear_messages()
+        """旧名字，保留给「删掉的正好是当前会话」那一处：清空并回到首页。"""
+        self.start_new_conversation()
 
 
 class MainWindow(QMainWindow):
@@ -722,7 +932,7 @@ class MainWindow(QMainWindow):
         # 会话抽屉（≡ 打开）：叠在窗口左侧，不占 splitter
         self._drawer = SessionDrawer(self)
         self._drawer.hide()
-        self._drawer.session_created.connect(self._on_session_switch)
+        self._drawer.new_session_requested.connect(self._on_new_session_requested)
         self._drawer.session_opened.connect(self._on_session_switch)
         self._drawer.session_deleted.connect(self._on_session_deleted)
         self._drawer.close_requested.connect(self.hide_drawer)
@@ -735,6 +945,9 @@ class MainWindow(QMainWindow):
         app = QApplication.instance()
         if app is not None:
             app.aboutToQuit.connect(self._on_about_to_quit)
+
+        # 一打开就把上一次的对话接上（没有对话 → 停在空白首页）
+        self._restore_last_session()
 
     def _on_about_to_quit(self) -> None:
         self.character.shutdown()
@@ -768,6 +981,22 @@ class MainWindow(QMainWindow):
         self._drawer.set_current(session_id)
         self.hide_drawer()
 
+    def _on_new_session_requested(self) -> None:
+        """抽屉里点「新建对话」：收起抽屉，右侧换成空白首页（此时还不建会话）。"""
+        self.hide_drawer()
+        self._drawer.set_current("")
+        self.chat.start_new_conversation()
+
+    def _restore_last_session(self) -> None:
+        """启动时自动接上最近更新过的那条对话；一条都没有就停在空白首页。"""
+        sessions = session_store.list_sessions()      # 已按 updated_at 倒序
+        if not sessions:
+            self.chat.start_new_conversation()
+            return
+        newest = sessions[0]
+        self.chat.open_session(newest.id)
+        self._drawer.set_current(newest.id)
+
     def _on_session_updated(self, session_id: str) -> None:
         if self._drawer.isVisible():
             self._drawer.reload()
@@ -798,10 +1027,6 @@ class MainWindow(QMainWindow):
             self.hide_drawer()
             return
         super().keyPressEvent(event)
-
-    def closeEvent(self, event):  # noqa: N802 - Qt 命名
-        self.character.shutdown()
-        super().closeEvent(event)
 
     # --- 设置 -----------------------------------------------------------
     def open_settings(self) -> None:

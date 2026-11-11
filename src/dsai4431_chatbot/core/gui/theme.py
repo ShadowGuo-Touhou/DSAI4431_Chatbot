@@ -168,6 +168,30 @@ QPlainTextEdit#inputEdit {{
     selection-background-color: {accent};
 }}
 
+/* ---------- 新对话页（「新建对话」后右侧整块换成的空白首页）---------- */
+#homePage {{
+    background: transparent;
+    border: none;
+}}
+#homeTitle {{
+    font-size: 30px;
+    font-weight: 600;
+}}
+/* 首页的大输入卡：和输入卡同一个形状，只是更高 */
+#homeCard {{
+    background: {surface};
+    border: 1px solid {border};
+    border-radius: {radius_panel}px;
+}}
+QPlainTextEdit#homeEdit {{
+    background: transparent;
+    border: none;
+    padding: 2px;
+    font-size: 15px;
+    color: {text};
+    selection-background-color: {accent};
+}}
+
 /* ---------- 设置弹窗 ---------- */
 /* 无边框窗口：圆角画在 shell 上（窗口本身透明，四周留出投影边距） */
 #settingsShell {{

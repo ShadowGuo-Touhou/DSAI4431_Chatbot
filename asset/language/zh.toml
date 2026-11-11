@@ -28,15 +28,17 @@ no_key = "还没填 API Key。打开 设置 → API KEY 填好，再回来发消
 failed = "请求失败：{msg}"
 empty_reply = "（模型没有返回内容）"
 
+# --- 新对话页（右侧聊天列里的空白首页） -------------------------------
+[main.home]
+title = "开始新的对话"
+placeholder = "说点什么开始…（Enter 发送，Shift+Enter 换行）"
+
 # --- 会话（≡ 打开的抽屉） --------------------------------------------
 [session]
 title = "会话"
 new = "＋ 新建对话"
-cancel_new = "取消新建"
 persona = "人格"
 model = "模型"
-create = "创建"
-cancel = "取消"
 empty = "还没有对话"
 close = "关闭（Esc）"
 untitled = "（未命名对话）"

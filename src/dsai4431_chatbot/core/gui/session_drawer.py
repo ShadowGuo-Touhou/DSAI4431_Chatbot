@@ -1,18 +1,15 @@
 """会话抽屉：左上角 ≡ 打开的那块面板。
 
-现在只做第 13 条（新建对话 + 列表 + 进入）。改名 / 删除 / 批量删除是第 14、15 条，
-后面在这上面接着加。
+只负责「列出会话 + 打开 / 改名 / 删除 / 批量删除」。「新建对话」不再在这里
+展开小表单（选人格、选模型、取消/创建），而是把右侧聊天列整块换成新对话页
+（见 main_window.HomePage）—— 人格、模型、输入框都在那一页上，全程序只有
+一条创建路径，不会出现两套行为。
 
 布局：
 
     ┌──────────────────────┐
-    │ 会话            ×    │
-    │ [+ 新建对话]          │
-    │ ┌ 新建表单（默认收起）┐│
-    │ │ 人格：[✓ 大肥鲸   ] ││
-    │ │ 模型：[✓ deepseek…] ││
-    │ │      [取消] [创建]  ││
-    │ └────────────────────┘│
+    │ 会话         [选择] × │
+    │ [＋ 新建对话]          │
     │ ── 会话列表 ──        │
     │ 你好，帮我看看… 18:20  │
     │ 赤蛮奇的设定     17:02 │
@@ -25,7 +22,6 @@ import time
 
 from PySide6.QtCore import QSize, Qt, Signal
 from PySide6.QtWidgets import (
-    QComboBox,
     QFrame,
     QHBoxLayout,
     QInputDialog,
@@ -35,12 +31,11 @@ from PySide6.QtWidgets import (
     QMenu,
     QMessageBox,
     QPushButton,
-    QSizePolicy,
     QVBoxLayout,
     QWidget,
 )
 
-from dsai4431_chatbot.core.gui import personas, session_store, themes
+from dsai4431_chatbot.core.gui import session_store, themes
 from dsai4431_chatbot.core.gui.i18n import t
 
 DRAWER_W = 300
@@ -60,79 +55,10 @@ def _when(ms: int) -> str:
     return time.strftime("%Y-%m-%d", local)
 
 
-class NewSessionForm(QFrame):
-    """新建对话表单：选人格 + 选模型。"""
-
-    submitted = Signal(dict)          # {"persona": dict, "model": str}
-    cancelled = Signal()
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setObjectName("newSessionForm")
-        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
-
-        lay = QVBoxLayout(self)
-        lay.setContentsMargins(12, 12, 12, 12)
-        lay.setSpacing(8)
-
-        lay.addWidget(self._label(t("session.persona")))
-        self.cbo_persona = QComboBox()
-        for persona in personas.list_personas():
-            self.cbo_persona.addItem(persona.display, persona.id)
-        lay.addWidget(self.cbo_persona)
-
-        lay.addWidget(self._label(t("session.model")))
-        self.cbo_model = QComboBox()
-        for model in personas.model_options():
-            self.cbo_model.addItem(model, model)
-        lay.addWidget(self.cbo_model)
-
-        buttons = QHBoxLayout()
-        buttons.setSpacing(8)
-        buttons.addStretch(1)
-        btn_cancel = QPushButton(t("session.cancel"))
-        btn_cancel.setObjectName("smallButton")
-        btn_cancel.setCursor(Qt.CursorShape.PointingHandCursor)
-        btn_cancel.clicked.connect(self.cancelled.emit)
-        btn_create = QPushButton(t("session.create"))
-        btn_create.setObjectName("smallButton")
-        btn_create.setProperty("variant", "primary")
-        btn_create.setCursor(Qt.CursorShape.PointingHandCursor)
-        btn_create.clicked.connect(self._emit)
-        buttons.addWidget(btn_cancel)
-        buttons.addWidget(btn_create)
-        lay.addLayout(buttons)
-
-    @staticmethod
-    def _label(text: str) -> QLabel:
-        lab = QLabel(text)
-        lab.setObjectName("fieldLabel")
-        return lab
-
-    def reset(self) -> None:
-        """重开表单时刷新人格清单（用户可能刚在设置里改了 personas.json）。"""
-        self.cbo_persona.clear()
-        for persona in personas.list_personas():
-            self.cbo_persona.addItem(persona.display, persona.id)
-        if self.cbo_persona.count():
-            self.cbo_persona.setCurrentIndex(0)
-
-    def _emit(self) -> None:
-        persona_id = self.cbo_persona.currentData()
-        persona = personas.by_id(persona_id) if persona_id else None
-        model = self.cbo_model.currentData() or self.cbo_model.currentText()
-        self.submitted.emit(
-            {
-                "persona": persona.as_dict() if persona else {},
-                "model": str(model),
-            }
-        )
-
-
 class SessionDrawer(QFrame):
     """会话面板（覆盖在窗口左侧，不是 splitter 里的一栏）。"""
 
-    session_created = Signal(str)     # session id
+    new_session_requested = Signal()  # 点「＋ 新建对话」：由 MainWindow 切到新对话页
     session_opened = Signal(str)
     session_deleted = Signal(str)
     close_requested = Signal()
@@ -177,20 +103,14 @@ class SessionDrawer(QFrame):
         lay.addLayout(header)
 
         # --- 新建 ---------------------------------------------------------
+        # 这里只发信号：真正的新对话页在右侧聊天列里，由 MainWindow 切过去。
+        # 好处是「唯一创建路径」—— 人格/模型/输入框都在那一页，不会有两套行为。
         self.btn_new = QPushButton(t("session.new"))
         self.btn_new.setObjectName("smallButton")
         self.btn_new.setProperty("variant", "primary")
         self.btn_new.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.btn_new.clicked.connect(self.toggle_form)
+        self.btn_new.clicked.connect(self.new_session_requested.emit)
         lay.addWidget(self.btn_new)
-
-        self.form = NewSessionForm()
-        # 表单只占自己的高度，别被布局拉长（列表隐藏时剩余空间会被它吃掉，按钮就看不见了）
-        self.form.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
-        self.form.hide()
-        self.form.submitted.connect(self._on_create)
-        self.form.cancelled.connect(self.toggle_form)
-        lay.addWidget(self.form, 0, Qt.AlignmentFlag.AlignTop)
 
         # --- 列表 ---------------------------------------------------------
         self.list = QListWidget()
@@ -241,7 +161,6 @@ class SessionDrawer(QFrame):
 
         self._selecting = False
         self._loading = False
-
         self.reload()
 
     # --- 数据 -----------------------------------------------------------
@@ -275,30 +194,16 @@ class SessionDrawer(QFrame):
 
     def set_current(self, session_id: str) -> None:
         self._current_id = session_id or ""
+        hit = False
         for row in range(self.list.count()):
             item = self.list.item(row)
             if item.data(Qt.ItemDataRole.UserRole) == self._current_id:
                 self.list.setCurrentItem(item)
+                hit = True
                 break
-
-    # --- 新建 -----------------------------------------------------------
-    def toggle_form(self) -> None:
-        """展开/收起新建表单；表单展开时把「＋ 新建对话」按钮收起来（避免两个取消）。"""
-        visible = not self.form.isVisible()
-        if visible:
-            self.form.reset()
-        self.form.setVisible(visible)
-        self.btn_new.setVisible(not visible)
-
-    def _on_create(self, payload: dict) -> None:
-        meta = session_store.create_session(
-            persona=payload.get("persona") or {},
-            model=str(payload.get("model") or ""),
-        )
-        self.toggle_form() if self.form.isVisible() else None
-        self._current_id = meta.id
-        self.reload()
-        self.session_created.emit(meta.id)
+        if not hit:
+            # 「新建对话」之后列表不该还高亮着上一条
+            self.list.clearSelection()
 
     # --- 打开 -----------------------------------------------------------
     def _on_double_click(self, item: QListWidgetItem) -> None:

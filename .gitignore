@@ -53,3 +53,6 @@ data/*
 
 # 界面渲染截图等临时产物
 _plan_preview/
+
+# 临时测试目录：tempfile.mkdtemp() 在本机会落到项目根目录，兜一层
+dsai_*/
