@@ -23,9 +23,15 @@ live2d = [
 # 独立的 Qt 绑定，别混装到同一个 import 里。
 # PySide6 元包同时带 Essentials + Addons，QtWebEngineWidgets 在 Addons 里，
 # 后面把 Live2D 嵌进界面时直接 import PySide6.QtWebEngineWidgets 即可。
+#
+# numpy / sherpa-onnx 是语音输入（core/gui/voice_input.py）要的：
+# - numpy：顶层就用（录音缓冲转 float32）
+# - sherpa-onnx：模型推理，Windows 轮子自带 onnxruntime，纯 CPU，不需要 torch
 # 安装：pip install -e ".[gui]"
 gui = [
     "PySide6>=6.12",
+    "numpy>=1.26",
+    "sherpa-onnx>=1.13",
 ]
 
 # 本地知识库检索（core/rag）：只多一个 numpy（向量存成 .npz）。
