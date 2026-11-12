@@ -10,6 +10,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -90,3 +91,15 @@ def read_text(root: Path, rel: str) -> str | None:
         except UnicodeDecodeError:
             continue
     return raw.decode("utf-8", "replace")
+
+
+def sha256_file(path: Path) -> str:
+    """整个文件的 sha256（和台账里记的是同一个口径）；读不到返回空串。"""
+    digest = hashlib.sha256()
+    try:
+        with open(path, "rb") as handle:
+            for block in iter(lambda: handle.read(1 << 16), b""):
+                digest.update(block)
+    except OSError:
+        return ""
+    return digest.hexdigest()

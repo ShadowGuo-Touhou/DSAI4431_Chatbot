@@ -46,14 +46,8 @@ def _iso_now() -> str:
 
 
 def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    try:
-        with open(path, "rb") as handle:
-            for block in iter(lambda: handle.read(1 << 16), b""):
-                digest.update(block)
-    except OSError:
-        return ""
-    return digest.hexdigest()
+    """文件哈希（口径统一在 loader.sha256_file，设置页的「已入库/未入库」也用它）。"""
+    return loader.sha256_file(path)
 
 
 def sync_once(

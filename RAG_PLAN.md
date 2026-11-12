@@ -254,7 +254,7 @@ rag_inject_chars=3000                 ; 注入内容总字数上限（防爆上�
 |---|---|
 | `core/gui/rag_service.py`（新） | Qt 侧封装：`QThreadPool` 跑 `sync_once()`，`progress/ready/failed` 信号；持有只读索引 |
 | `core/gui/chat_config.py` | 新增第 3 节那些字段的读写（含 bool/int 的容错，沿用 `_get_bool`） |
-| `core/gui/settings_dialog.py` `RagPage` | 状态行变实时；**11 个参数全部有控件**（见 3.1），改动即时存盘；「Full rebuild」→「重新扫描」+「清空索引」；显示 skipped 原因与真实生效目录 |
+| `core/gui/settings_dialog.py` `RagPage` | 状态行变实时；**12 个参数全部有控件**（见 3.1），改动即时存盘；文件清单**每行右侧带绿/红标记**（已入库 / 已改动 / 新文件，口径=台账 sha256）；「Full rebuild」→「重新扫描」+「清空索引」；显示 skipped 原因与真实生效目录 |
 | `core/gui/main_window.py` | 启动后台同步；`_send` 里在人格 system 之后插检索片段（第 6 节） |
 | `core/gui/session_store.py` | 新事件类型 `rag/retrieved`（记录本次注入了哪些块） |
 | `asset/language/zh.toml` / `en.toml` | 新增状态/错误文案 |
@@ -455,6 +455,7 @@ Ollama 默认监听 11434 端口……
 | 2026-11-12 12:20 | 3.1 扩成「11 个参数全进设置页」（用户要求）；补 §13 实装进度 |
 | 2026-11-12 12:30 | 明确 Ollama / 模型放哪：系统已装就用系统的，没装解压到 `asset/ollama`；模型统一 `asset/embedding`（`OLLAMA_MODELS` 指这里） |
 | 2026-11-12 12:45 | 新增「启动时探测并自动拉起 Ollama」（方案 B：只关自己起的那份）+ 设置项 `rag_autostart`；`rag_service` 改成主线程轮询（worker 不碰 Qt 对象） |
+| 2026-11-12 12:52 | 文件清单每行右侧加「已入库 / 未入库」标记（`core/rag/status.py`，口径=台账 sha256）；「清空索引」后标记立即全变红 |
 
 ---
 

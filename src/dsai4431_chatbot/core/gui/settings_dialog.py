@@ -81,6 +81,16 @@ def field_label(text: str) -> QLabel:
     return lab
 
 
+# 文件清单右侧「入库了没有」的标记配色（绿=已进语料库，红=待重扫，灰=被跳过）
+_FILE_STATE_COLORS = {
+    "indexed": "#2fbf71",
+    "changed": "#e5534b",
+    "new": "#e5534b",
+    "unreadable": "#8b8f98",
+    "skipped": "#8b8f98",
+}
+
+
 def field_input(placeholder: str = "") -> QLineEdit:
     edit = QLineEdit()
     edit.setObjectName("field")
@@ -864,6 +874,11 @@ class RagPage(QWidget):
         self.file_list = field_list()
         lib.addWidget(self.file_list, 1)
 
+        self.lb_files_note = QLabel("")
+        self.lb_files_note.setObjectName("hintText")
+        self.lb_files_note.setWordWrap(True)
+        lib.addWidget(self.lb_files_note)
+
         self.lb_status = QLabel("")
         self.lb_status.setObjectName("hintText")
         self.lb_status.setWordWrap(True)
@@ -932,7 +947,15 @@ class RagPage(QWidget):
 
     # --- 文件清单 / 状态 ------------------------------------------------
     def _refresh_files(self) -> None:
+        """重建文件清单：每行右边带一个「入库了没有」的彩色标记。
+
+        绿 = 台账里的 sha256 和磁盘上一致（已进语料库）
+        红 = 内容变了 / 新文件（还没进，按「重新扫描」入库）
+        灰 = 被跳过（太大、读不出来、扩展名不收）
+        """
         self.file_list.clear()
+        self.file_states: dict[str, str] = {}     # rel → state（测试直接读它）
+        self.file_state_labels: dict[str, QLabel] = {}
         directory = _resolve_folder(self.ed_folder.text())
         self.lb_resolved.setText(
             t("settings.rag.resolved", path=_display_path(directory))
@@ -941,19 +964,74 @@ class RagPage(QWidget):
             self.file_list.addItem(t("settings.rag.file_empty"))
             return
 
-        from dsai4431_chatbot.core.rag import loader
+        from dsai4431_chatbot.core.rag import status as rag_status, store
 
         max_mb = chat_config.clamp_int(self.sp_max_file.value(), "max_file_mb")
-        scanned = loader.scan(directory, max_mb)
-        if not scanned.files:
+        index = store.load()
+        rows, skipped = rag_status.file_states(
+            directory, max_file_mb=max_mb, meta=None if index is None else index.meta
+        )
+        if not rows and not skipped:
             self.file_list.addItem(t("settings.rag.file_empty"))
-        for rel, (size, _mtime) in sorted(scanned.files.items()):
-            self.file_list.addItem(f"{rel}    ({_human_size(size)})")
-        for item in scanned.skipped[:20]:
+
+        for row in rows:
+            self.file_states[row.rel] = row.state
+            label = self._add_file_row(row.rel, _human_size(row.size), row.state)
+            self.file_state_labels[row.rel] = label
+        for item in skipped[:20]:
             reason = t(f"settings.rag.skip_{item['reason']}")
-            self.file_list.addItem(f"{item['rel']}    ({reason})")
+            self.file_states[item["rel"]] = "skipped"
+            self.file_state_labels[item["rel"]] = self._add_file_row(
+                item["rel"], reason, "skipped"
+            )
+
+        tally = rag_status.counts(rows)
+        self.lb_files_note.setText(
+            t(
+                "settings.rag.files_note",
+                indexed=tally["indexed"],
+                pending=tally["pending"],
+            )
+        )
         if self.rag is None:
             self.lb_status.setText(t("settings.rag.status_no_service"))
+
+    def _add_file_row(self, rel: str, meta_text: str, state: str) -> QLabel:
+        """一行：文件名（左） + 大小/原因 + 弹性空白 + 绿/红标记（最右）。"""
+        row = QWidget()
+        row.setObjectName("fileRow")
+        # 让列表的选中/悬停底色透上来（否则整行被这层小面板盖住）
+        row.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        box = QHBoxLayout(row)
+        box.setContentsMargins(2, 2, 2, 2)
+        box.setSpacing(10)
+
+        name = QLabel(rel)
+        name.setObjectName("fileRowName")
+        detail = QLabel(meta_text)
+        detail.setObjectName("hintText")
+
+        color = _FILE_STATE_COLORS.get(state, _FILE_STATE_COLORS["skipped"])
+        mark = QLabel(t(f"settings.rag.state_{state}"))
+        mark.setStyleSheet(f"color: {color};")
+        mark.setToolTip(t(f"settings.rag.state_{state}_hint"))
+        mark.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+
+        box.addWidget(name)
+        box.addWidget(detail)
+        box.addStretch(1)
+        box.addWidget(mark)
+
+        item = QListWidgetItem()
+        # ⚠ 高度要留余量：行是「子控件」，它的 sizeHint 用默认字号算，
+        # 而列表本身字号更大，加完 padding 后文字会被上下裁掉（实测过）
+        item.setSizeHint(QSize(0, row.sizeHint().height() + 14))
+        self.file_list.addItem(item)
+        self.file_list.setItemWidget(item, row)
+        return mark
+        self.file_list.addItem(item)
+        self.file_list.setItemWidget(item, row)
+        return mark
 
     def _wire_service(self) -> None:
         if self.rag is None:
@@ -1045,6 +1123,9 @@ class RagPage(QWidget):
         if self.rag is not None:
             self.rag.reload_index()
         self.refresh_status()
+        self.lb_status.setText(t("settings.rag.status_cleared"))
+        # 语料库空了 → 清单上的标记全变红（不然界面上还写着「已入库」）
+        self._refresh_files()
         self.lb_status.setText(t("settings.rag.status_cleared"))
 
     # --- 存盘 -----------------------------------------------------------
