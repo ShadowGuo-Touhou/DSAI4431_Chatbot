@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import json
+import re
 
 from PySide6.QtCore import QByteArray, QObject, QUrl, Signal
 from PySide6.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
@@ -29,6 +30,87 @@ from dsai4431_chatbot.core.gui import chat_config, personas
 TRANSFER_TIMEOUT = 120_000
 # 出错时把服务端响应体截这么长，足够看出是哪一步挂了
 BODY_SNIPPET = 400
+
+# --- DSML（DeepSeek 内部工具调用标记）-----------------------------------
+# 有时模型不通过 tool_calls 通道，而是把调用写进正文，形如：
+#   <｜｜DSML｜｜ calls>
+#   <｜｜DSML｜｜ invoke name="search_knowledge">
+#   <｜｜DSML｜｜ parameter name="query" string="true">租房</｜｜DSML｜｜ parameter>
+#   </｜｜DSML｜｜ invoke>
+#   </｜｜DSML｜｜ calls>
+# 竖线是全角 U+FF5C（也兼容半角 |）。这种情况不能直接显示给用户，
+# 要**识别出来、还原成一次真正的工具调用**，否则用户只会看到一堆噪声。
+_DSML_PIPE = r"[|｜]{1,2}"
+_DSML_START = re.compile(rf"<\s*{_DSML_PIPE}\s*DSML\s*{_DSML_PIPE}\s*calls\s*>", re.I)
+_DSML_ANY = re.compile(rf"<\s*/?\s*{_DSML_PIPE}\s*DSML\s*{_DSML_PIPE}\s*(\w+)", re.I)
+_DSML_END = re.compile(rf"<\s*/\s*{_DSML_PIPE}\s*DSML\s*{_DSML_PIPE}\s*calls\s*>", re.I)
+_DSML_INVOKE = re.compile(
+    rf"<\s*{_DSML_PIPE}\s*DSML\s*{_DSML_PIPE}\s*invoke\s+name=\"([^\"]+)\"\s*>(.*?)"
+    rf"<\s*/\s*{_DSML_PIPE}\s*DSML\s*{_DSML_PIPE}\s*invoke\s*>",
+    re.S | re.I,
+)
+_DSML_PARAM = re.compile(
+    rf"<\s*{_DSML_PIPE}\s*DSML\s*{_DSML_PIPE}\s*parameter\s+name=\"([^\"]+)\"[^>]*>(.*?)"
+    rf"<\s*/\s*{_DSML_PIPE}\s*DSML\s*{_DSML_PIPE}\s*parameter\s*>",
+    re.S | re.I,
+)
+_DSML_CANON = ("<||DSML||calls>", "<｜｜DSML｜｜calls>", "<|DSML|calls>", "<｜DSML｜calls>")
+
+
+def _dsml_progress(text: str) -> bool:
+    """`text` 是不是「标记还没写完」的前缀（要扣住，先别显示）。"""
+    compact = re.sub(r"\s+", "", text.lstrip())
+    if not compact:
+        return False
+    for canon in _DSML_CANON:
+        if len(compact) < len(canon) and canon.startswith(compact):
+            return True
+    return False
+
+
+def _progress_suffix(text: str) -> str:
+    """结尾那段还没写完的标记前缀（普通文本会返回空串）。"""
+    limit = min(len(text), 16)
+    for cut in range(len(text) - limit, len(text)):
+        tail = text[cut:]
+        if tail.startswith("<") and _dsml_progress(tail):
+            return tail
+    return ""
+
+
+def parse_dsml_calls(text: str) -> list[dict]:
+    """从正文里抠出 DSML 形式的工具调用；解析不出来就返回空列表。"""
+    calls: list[dict] = []
+    for block in _DSML_START.split(text)[1:]:
+        body = _DSML_END.split(block)[0]
+        for index, match in enumerate(_DSML_INVOKE.finditer(body)):
+            name = match.group(1)
+            params: dict[str, str] = {}
+            for param in _DSML_PARAM.finditer(match.group(2)):
+                params[param.group(1)] = param.group(2).strip()
+            calls.append(
+                {
+                    "id": f"dsml_{len(calls)}_{index}",
+                    "name": name,
+                    "arguments": json.dumps(params, ensure_ascii=False),
+                }
+            )
+    return calls
+
+
+def strip_dsml(text: str) -> str:
+    """把正文里的 DSML 段落整段删掉（invoke / parameter / 包裹标签都不留）。"""
+    cleaned = _DSML_INVOKE.sub("", text)
+    cleaned = re.sub(
+        rf"<\s*/?\s*{_DSML_PIPE}\s*DSML\s*{_DSML_PIPE}\s*\w+[^>]*>", "", cleaned
+    )
+    return cleaned.strip()
+
+
+def _partial_marker_tail(text: str) -> str:
+    """兼容旧名：结尾那段「可能是标记开头」的字符。"""
+    return _progress_suffix(text)
+
 
 
 class ChatClient(QObject):
@@ -55,6 +137,10 @@ class ChatClient(QObject):
         self._usage: dict = {}     # 最后一次响应里的 usage（流式要有才给）
         self._tool_calls: dict[int, dict] = {}   # index → {id,name,arguments}
         self._finish_reason = ""
+        # DSML 防御：扣住可能的半截标记、收集整段标记（见 parse_dsml_calls）
+        self._hold = ""
+        self._dsml_mode = False
+        self._dsml_buf = ""
 
     # --- 状态 -----------------------------------------------------------
     def busy(self) -> bool:
@@ -120,6 +206,9 @@ class ChatClient(QObject):
         self._usage = {}
         self._tool_calls = {}
         self._finish_reason = ""
+        self._hold = ""
+        self._dsml_mode = False
+        self._dsml_buf = ""
 
         body = QByteArray(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
         self._reply = self._nam.post(request, body)
@@ -222,9 +311,49 @@ class ChatClient(QObject):
             piece = (choice.get("message") or {}).get("content")
         if not piece:
             return
+        self._feed_text(str(piece))
+
+    # --- 正文：DSML 过滤 + 流式输出 -------------------------------------
+    def _feed_text(self, piece: str) -> None:
+        """吃一段正文：普通文字立刻发出去；DSML 标记扣下来，不让用户看到。"""
+        self._hold += piece
+        while self._hold:
+            if self._dsml_mode:
+                end = _DSML_END.search(self._hold)
+                if end is None:
+                    self._dsml_buf += self._hold
+                    self._hold = ""
+                    return
+                self._dsml_buf += self._hold[: end.end()]
+                self._hold = self._hold[end.end():]
+                self._dsml_mode = False
+                continue
+
+            start = _DSML_START.search(self._hold)
+            if start is not None:
+                if start.start() > 0:
+                    self._emit_visible(self._hold[: start.start()])
+                self._dsml_buf += self._hold[start.start():]
+                self._hold = ""
+                self._dsml_mode = True
+                continue
+
+            tail = _partial_marker_tail(self._hold)
+            if tail:
+                safe = self._hold[: len(self._hold) - len(tail)]
+                self._hold = tail
+                self._emit_visible(safe)
+                return
+            safe, self._hold = self._hold, ""
+            self._emit_visible(safe)
+            return
+
+    def _emit_visible(self, text: str) -> None:
+        if not text:
+            return
         self._got_delta = True
-        self._text += piece
-        self.delta.emit(piece)
+        self._text += text
+        self.delta.emit(text)
 
     # --- 收尾 -----------------------------------------------------------
     def _on_finished(self) -> None:
@@ -245,13 +374,31 @@ class ChatClient(QObject):
         if not self._got_delta and body and not body.startswith("data:"):
             text = _extract_full_text(body)
             if text:
-                self._got_delta = True
-                self._text = text
-                self.delta.emit(text)
+                self._feed_text(text)
 
         if self._aborted:
             self.finished_ok.emit(self._text)
             return
+
+        # 收尾：先放出被扣住的普通文字，再把 DSML 段落还原成真正的工具调用
+        if self._hold and not self._dsml_mode:
+            self._emit_visible(self._hold)
+        self._hold = ""
+        self._dsml_mode = False
+        if self._dsml_buf:
+            pending = self._dsml_buf
+            self._dsml_buf = ""
+            parsed = parse_dsml_calls(pending)
+            if parsed:
+                print(f"[rag] 模型用正文写了工具调用，已还原：{[c['name'] for c in parsed]}",
+                      flush=True)
+                for offset, call in enumerate(parsed):
+                    self._tool_calls[9000 + offset] = call
+            elif not self._text:
+                self.failed.emit(
+                    "模型返回了一段无法解析的工具调用标记，这一轮没有结果，请再发一次。"
+                )
+                return
 
         # 模型要调工具：这一轮没有正文，交给上层去执行工具、然后再发一次请求
         if self._tool_calls:

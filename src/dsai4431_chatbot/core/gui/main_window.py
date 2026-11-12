@@ -1004,6 +1004,9 @@ class ChatColumn(QWidget):
             messages.append({"role": "system", "content": system})
         rag_hint = self._rag_hint(cfg)
         if rag_hint:
+            # 这一轮确实会把工具声明发出去时，顺手加一句「走工具通道，别在正文写标记」
+            if self._tools_for(cfg):
+                rag_hint = f"{rag_hint.rstrip()}\n\n{tool_router.PROTOCOL_HINT}"
             messages.append({"role": "system", "content": rag_hint})
         messages.extend(self._history[-MAX_HISTORY_MESSAGES:])
         return messages
