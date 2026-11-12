@@ -276,6 +276,75 @@ data/session/<workspace-slug>/<session-id>/session.v1.jsonl
 
 > 截图和线框图在 `asset/plan/` 下，原图是竖排的，**需要顺时针旋转 90° 才是正的**。
 
+## 知识库检索（RAG）怎么配
+
+**一句话**：设置 → RAG 里那两格，一格填**服务地址**，一格填**模型名字**；
+Ollama 自己按名字找文件，**没有「导入模型」这一步**，也不能填文件夹。
+
+| 设置项 | 填什么 | 千万别填 |
+|---|---|---|
+| `Ollama` | `http://127.0.0.1:11434` | Ollama 的 exe 路径、`models` 目录 |
+| `Embedding` | 模型名，例如 `bge-m3` / `nomic-embed-text` / `quentinz/bge-base-zh-v1.5` | `P:\...` 这种路径、`.gguf` 文件名 |
+
+### 1. 让 Ollama 先跑起来
+
+```powershell
+ollama list                  # 能列出模型就说明服务在跑
+ollama pull bge-m3           # 中文效果更好（1024 维，约 1.2 GB）
+```
+
+服务没起就用托盘里的 Ollama，或单独跑 `ollama serve`（默认监听 11434）。
+
+### 2. 模型在别的盘（比如 `P:\.Ollama`）
+
+Ollama 只认 `OLLAMA_MODELS` 这个环境变量，**不认设置页里填路径**。
+变量要指向**包含 `blobs\` 和 `manifests\` 的那一层**：
+
+```powershell
+# 模型实际在 P:\.Ollama\models\manifests\... → 指向 P:\.Ollama\models
+setx OLLAMA_MODELS "P:\.Ollama\models"
+# setx 只影响新开的进程：要退出托盘里的 Ollama 再重新启动
+```
+
+设对了 `ollama list` 里就能看到那个模型；看不到就是这一层指错了。
+
+### 3. 模型名怎么从路径推出来
+
+Ollama 的模型名就是 manifests 目录下的相对路径（去掉 `registry.ollama.ai/`、去掉 tag）：
+
+| 磁盘上的路径 | 设置里填 |
+|---|---|
+| `models\manifests\registry.ollama.ai\library\bge-m3\latest` | `bge-m3` |
+| `models\manifests\registry.ollama.ai\library\nomic-embed-text\latest` | `nomic-embed-text` |
+| `models\manifests\registry.ollama.ai\quentinz\bge-base-zh-v1.5\latest` | `quentinz/bge-base-zh-v1.5` |
+
+规则：`library` 这个命名空间可以省，`latest` 是默认 tag 也可以省；
+别的命名空间必须带上，形如 `命名空间/模型名`。
+
+### 4. 生效
+
+1. 填好两格（值一变就自动存盘，没有保存按钮）
+2. **重启程序**（索引在启动时建一次），或点「重新扫描」
+3. 状态行出现 `索引状态：38 个文件 · 512 块 · 1024 维` 就是成功了
+4. 往 `asset/RAG/` 里放 `.md` / `.txt`，问里面的内容，回答会带上资料
+
+索引存在 `data/rag/`，删掉没关系，下次启动自动重建。换模型 / 改块长度或重叠会
+**整库重切**；只是加改文件则走增量（没变的文件不会重新算向量）。
+
+### 5. 出问题先看这张表
+
+| 现象 | 原因 | 怎么办 |
+|---|---|---|
+| 状态行「同步失败：连不上 Ollama」 | 服务没起 / 地址写错 | 起服务；地址核对成 `http://127.0.0.1:11434` |
+| `ollama list` 里没有，但文件确实在 P 盘 | `OLLAMA_MODELS` 没设或指错层 | 按第 2 步设变量，重启 Ollama |
+| `HTTP 404 model not found` | 名字写错，或填了路径/tag 之外的写法 | 用 `ollama list` 里那一列**原样复制** |
+| 总是「检索超时」 | 首次加载模型慢，而超时只有 3000 ms | 先点一次「重新扫描」热身，或把超时调到 15000 |
+| 答案里带不出知识库内容 | 阈值太高 / 块太长 / 模型弱 | 阈值降到 0.25；块长度 300~500；换 `bge-m3` |
+| 「该模型不支持 embeddings」 | 那份 GGUF 不是 embedding 版 | 换 `nomic-embed-text` 或 `bge-m3` |
+
+> 维度和模型绑死：`bge-m3` 1024 维、`bge-base-zh-v1.5` 与 `nomic-embed-text` 768 维。
+> 换模型会自动重建索引，不用手动删 `data/rag/`。
+
 ## 后续可以加
 
 - 测试：`tests/` + `pytest`（在 `pyproject.toml` 加 `[tool.pytest.ini_options]`）
