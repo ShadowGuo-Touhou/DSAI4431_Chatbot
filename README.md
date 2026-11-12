@@ -16,31 +16,43 @@
 
 ## 环境要求
 
-- Python >= 3.12
+- **Windows 10 / 11** —— Ollama 接管用 `netstat` / `taskkill` / Win32 API，自动下载的
+  也是 Windows 版 Ollama；macOS / Linux 上跑不了这套
+- Python >= 3.12（3.13+ 也行，但只测过 3.12）
 - Git
+- **磁盘约 3 GB**：Ollama 1.6 GB + 向量模型 0.2 GB + 语音模型 0.23 GB + 索引与缓存
+- 麦克风（可选，用语音输入才需要）
 
 ## 快速开始
 
+**跑主界面**（要的东西最多，按这个来）：
+
 ```powershell
-# 1. 激活虚拟环境
-.\.venv\Scripts\Activate.ps1
+# 1. 建虚拟环境（只做一次）
+python -m venv .venv
 
-# 2. 以可编辑模式安装本项目
+# 2. 装依赖：主界面 + 知识库检索
+#    国内建议加镜像：-i https://pypi.tuna.tsinghua.edu.cn/simple
+.\.venv\Scripts\python.exe -m pip install -e ".[gui,rag]"
+
+# 3. 启动
+.\启动GUI.bat
+```
+
+首次启动会显示一个**加载页**，把 Ollama（约 1.6 GB）、向量模型、语音模型一项项
+准备好才进主界面；不想等可以点「跳过下载」，之后在设置 → RAG 里手动配。
+具体每一步做什么见 [0.5 程序启动时会做什么](#05-程序启动时会做什么)。
+
+**只要核心包的命令行**（echo 占位，不装 Qt，几十秒就装完）：
+
+```powershell
 python -m pip install -e .
-
-# 3. 试运行
 dsai4431-chatbot --version
 dsai4431-chatbot "你好"
-# 或者：python -m dsai4431_chatbot
+# 或者不安装，直接：$env:PYTHONPATH = "src"; python -m dsai4431_chatbot "你好"
 ```
 
-不安装也可以直接跑（把 `src` 加进 `PYTHONPATH`）：
-
-```powershell
-$env:PYTHONPATH = "src"; python -m dsai4431_chatbot "你好"
-```
-
-> `pip install -e .` 第一次执行需要联网下载 `setuptools`，可能比较慢。
+> `pip install -e` 第一次执行需要联网下载 `setuptools`，可能比较慢。
 
 ## 目录结构
 
@@ -276,6 +288,47 @@ data/session/<workspace-slug>/<session-id>/session.v1.jsonl
 
 > 截图和线框图在 `asset/plan/` 下，原图是竖排的，**需要顺时针旋转 90° 才是正的**。
 
+## 语音输入
+
+点输入卡右边的麦克风 → 说话 → **再点一次麦克风**结束 → 文字落进输入框（插在
+光标处，不会覆盖你已经打的字）。全程本地识别，音频不上传。
+
+> **麦克风在「对话页」的输入卡里**，首页那张大卡片上没有 —— 先发一句话、或点开
+> 一个会话进到对话页，才看得到麦克风按钮。
+
+| 时机 | 会看到什么 |
+|---|---|
+| 启动时 | 加载页多一行「语音识别模型」；`asset/stt` 里没有就自动下载 228 MB（可以点「跳过下载」） |
+| 第一次点麦克风 | 多等 2~3 秒（模型读进内存），之后每次约 0.3 秒 |
+| 录音中 | 麦克风淡红底 + 输入卡里出现声纹；最长 60 秒自动停 |
+| 失败 | 输入卡顶部一行提示：「太短了，没听清」/「没听清，再说一次？」/「没找到麦克风…」 |
+
+### 引擎与模型
+
+- 引擎 [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx)：纯 CPU 的 ONNX 推理，
+  Windows 轮子**自带 onnxruntime**，不引入 torch。随 `pip install -e ".[gui]"` 装好。
+- 模型 **SenseVoiceSmall int8** + **Silero VAD**：中/英/粤/日/韩，`language="auto"`
+  自己判语种，不用选。
+- 文件在 `asset/stt/`，**不入库**，缺了启动时自动下：
+
+  ```
+  asset/stt/sensevoice/model.int8.onnx    228 MB
+  asset/stt/sensevoice/tokens.txt         0.3 MB
+  asset/stt/silero_vad.onnx               1.7 MB
+  ```
+
+- 下载先走 `hf-mirror.com`，失败回退 `huggingface.co`；revision 固定、逐个校验
+  sha256（对不上就删掉重来）。
+
+### 出问题先看这张表
+
+| 现象 | 原因 |
+|---|---|
+| 「没找到麦克风」 | Windows → 设置 → 隐私和安全性 → 麦克风，给桌面应用开权限 |
+| 声纹一直是平的 | 麦克风增益太低（系统声音设置里调）；静音时本来就接近一条线 |
+| 识别成乱码 / 老是英文 | 说得太短或太小声；`auto` 偶尔会猜错语种 |
+| 「语音模型还没装好」 | `asset/stt` 缺文件 —— 重启让它自动下，或看加载页那行是不是失败了 |
+
 ## 知识库检索（RAG）怎么配
 
 **一句话**：设置 → RAG 里那两格，一格填**服务地址**，一格填**模型名字**；
@@ -286,43 +339,52 @@ Ollama 自己按名字找文件，**没有「导入模型」这一步**，也不
 | `Ollama` | `http://127.0.0.1:11434` | Ollama 的 exe 路径、`models` 目录 |
 | `Embedding` | 模型名，例如 `bge-m3` / `nomic-embed-text` / `quentinz/bge-base-zh-v1.5` | `P:\...` 这种路径、`.gguf` 文件名 |
 
-### 0. 先决定用哪份 Ollama
+### 0. 用哪份 Ollama：程序会**接管**端口
 
-**按顺序二选一，不要两个混着跑**（会抢 11434 端口）：
+**规则（2026-11-13 起）**：启动时先看 `11434` —— 上面已经有别的 Ollama 在跑
+（系统装的、你手动 `ollama serve` 起的、上次遗留的），**就先关掉它**，再按设置页
+那两格路径重新起一个。这样「实际在用的模型」永远等于设置页显示的那份，不会
+悄悄复用外面的服务。
 
-1. **电脑上已经装过 Ollama** → 就用它，什么都不用动。
-   验证：新开一个终端敲 `ollama list`，能列出模型就行。
-2. **没装过** → 用便携版，放进**本项目的 `asset/ollama/`**（目录已经建好，只有个 `.gitkeep`），
-   不装到系统里、不改 PATH：
+| 设置 → RAG 里的两格 | 留空时用 | 填了但这台机器上不存在 |
+|---|---|---|
+| **Ollama 目录** | `asset/ollama` | 自动退回 `asset/ollama`（日志会打一行） |
+| **模型目录** | `asset/embedding` | 自动退回 `asset/embedding` |
 
-   ```
-   <repo>/asset/ollama/ollama.exe        ← 从 ollama.com 下载 Windows zip 解压到这里
-   <repo>/asset/ollama/lib/...           ← zip 里自带的运行库，一起解压
-   ```
+两种情况**不动手**：
 
-   之后所有命令都用 `asset\ollama\ollama.exe` 代替 `ollama`。
+- 端口上那个进程**不是 ollama**（比如被别的软件占了）→ 报「端口被别的程序占着」，不硬起
+- 确实是 ollama 但**关不掉**（权限不足）→ 报「关不掉，可能需要管理员权限」
 
-> `asset/ollama/` 和 `asset/embedding/` 都在 `.gitignore` 里（几百 MB~几 GB 的二进制），
-> **不要 `git add -f`**；换机器时重新放一份即可。
+> ⚠ 只 kill 进程名是 `ollama` 的。但如果你机器上还有别的东西连着那个 Ollama
+> （别的 AI 工具、别的会话），接管那一下它会短暂断掉。
 
-### 0.5 程序启动时会做什么（自动拉起 Ollama）
+`asset/ollama/` 和 `asset/embedding/` 都在 `.gitignore` 里（几百 MB~几 GB 的二进制），
+**不要 `git add -f`**。换机器时不用手动放——首次启动会自动下载。
 
-**不用你手动开服务**，程序自己会处理，规则是「先探测、探不到才拉起、退出时收掉」：
+### 0.5 程序启动时会做什么
 
-| 时机 | 动作 |
+**不用你手动开服务**，加载页会把这些一项项做掉：
+
+| 加载页那一行 | 动作 |
 |---|---|
-| 启动后约 0.6 秒 | 后台 `GET /api/tags` 探测一次（超时 0.6 秒，不会卡界面） |
-| 探测通了 | **什么都不做**，直接用你开着的那份 |
-| 探测不到 + 开关开着 | 按顺序找 `asset\ollama\ollama.exe` → PATH 里的 `ollama` → `%LOCALAPPDATA%\Programs\Ollama\ollama.exe`，后台 `serve`，最多等 20 秒就绪 |
-| 找不到 exe | 不报错、不弹窗，只在设置页状态行写一行提示，聊天照常用 |
-| 退出程序 | **只关程序自己拉起的那份**；你手动开的、系统装的那份不碰 |
+| Ollama 运行时 | 探测 `GET /api/tags` → 通着就按上面的规则接管；不通就找 `asset\ollama\ollama.exe` 后台 `serve`，最多等 20 秒 |
+| 向量模型（bge） | 按设置里的模型名检查 `<模型目录>/manifests/...` 在不在；不在就 `ollama pull` |
+| 语音识别模型 | 检查 `asset/stt` 三个文件；缺了就下载（可点「跳过下载」） |
+| 构建知识库索引 | 扫描知识库目录、切块、算向量 |
+| 回收站以外的收尾 | 预热 embedding 模型（跑完才进主界面） |
+
+| 情况 | 行为 |
+|---|---|
+| 找不到 exe 也没有网络 | 那一行标红报错，聊天照常用（只是查不了知识库） |
+| 中途点「跳过下载」 | 停掉自动安装，先放你进主界面；之后可以在设置 → RAG 里手动配 |
+| 退出程序 | **只关程序自己拉起的那份** |
 
 对应设置项：**设置 → RAG → 「启动时自动检测并拉起 Ollama」**（默认开）。
-不想让程序自己起服务就关掉它，那时行为和以前一样：只探测、只在状态行报错。
+关掉它之后不会接管端口，端口上有什么就用什么。
 
-> 拉起时如果环境里**没有** `OLLAMA_MODELS`，程序会把它设成 `asset/embedding` 再启动；
-> 你已经显式设过就尊重你的设置，不覆盖。
-> 判断「是不是自己起的」靠进程号，重启程序不会去杀上次遗留的进程。
+> 拉起时程序会**显式**把 `OLLAMA_MODELS` 设成模型目录再启动，不沿用你环境里
+> 那句（机器上那份只读目录曾经让它启动失败，见 `manifests-v2: Access is denied`）。
 
 ### 1. 模型放哪：`asset/embedding/`
 
@@ -346,8 +408,14 @@ Ollama 自己按名字找文件，**没有「导入模型」这一步**，也不
 > 两条路只选一条。**别让两个 `OLLAMA_MODELS` 打架**：一个是系统环境变量、
 > 一个是当前终端的 `$env:`，同时存在时只认其中一个，`ollama list` 里会莫名其妙少模型。
 
-Ollama 只认 `OLLAMA_MODELS` 这个环境变量，**设置页里填路径没用**。
-它要指向**包含 `blobs\` 和 `manifests\` 的那一层**，也就是 `asset\embedding`：
+分两种情况，别搞混：
+
+| 谁起的服务 | 模型目录由谁决定 |
+|---|---|
+| **程序自己拉起**（绝大多数情况） | 设置 → RAG → **模型目录**，程序会把它写进 `OLLAMA_MODELS` 传给子进程；不看你环境里那句 |
+| **你在终端手动 `ollama serve`** | 只认环境变量 `OLLAMA_MODELS`，此时设置页填什么都管不着 |
+
+手动调试时才需要自己设（要指向**包含 `blobs\` 和 `manifests\` 的那一层**）：
 
 ```powershell
 # 临时（只对当前这个终端窗口有效，调试时最省事）
