@@ -38,8 +38,14 @@ SYSTEM_PROMPT_LIMIT = 20000
 # 实测 bge-base 的分数会压缩（相关 0.6~0.85、无关 0.33~0.5），所以卡在 0.5。
 RAG_TOOL_MIN_SCORE = 0.5
 
-# RAG 提示词默认值：只告诉模型「你有知识库」，不替用户写规矩
+# RAG 提示词默认值：只告诉模型「你有知识库、它在哪」，不替用户写规矩。
+# `{dir}` 会被替换成当前知识库目录（设置页里那个），保证文案和实际一致。
 DEFAULT_RAG_PROMPT = (
+    "你有一个本地知识库工具 search_knowledge，可以检索我放在 {dir} 里的文档与笔记。"
+    "需要事实依据时先调用它，不要凭记忆猜。"
+)
+# 旧文案（曾经写错，说成「我电脑上的项目文档与笔记」）：读到它就换成新的默认值
+_LEGACY_RAG_PROMPT = (
     "你有一个本地知识库工具 search_knowledge，可以检索我电脑上的项目文档与笔记。"
     "需要事实依据时先调用它，不要凭记忆猜。"
 )
@@ -177,6 +183,13 @@ def _get(settings, key: str, default: str) -> str:
     return default if raw is None else str(raw)
 
 
+def _clean_prompt(text: str) -> str:
+    """旧版本写死的错误文案 → 换成现在的默认值（用户自己改过的原样保留）。"""
+    if str(text or "").strip() == _LEGACY_RAG_PROMPT:
+        return DEFAULT_RAG_PROMPT
+    return str(text or "")
+
+
 def _get_bool(settings, key: str, default: bool) -> bool:
     """INI 里 bool 存成 true/false（也可能被手改成 1/yes），都要认。"""
     raw = settings.value(f"{GROUP}/{key}", default)
@@ -227,7 +240,7 @@ def load() -> ChatConfig:
             show_reasoning=_get_bool(s, "show_reasoning", False),
             rag_enabled=_get_bool(s, "rag_enabled", RAG_DEFAULTS["enabled"]),
             rag_mode=_get(s, "rag_mode", RAG_DEFAULTS["mode"]) or RAG_DEFAULTS["mode"],
-            rag_prompt=_get(s, "rag_prompt", RAG_DEFAULTS["prompt"]),
+            rag_prompt=_clean_prompt(_get(s, "rag_prompt", RAG_DEFAULTS["prompt"])),
             rag_autostart=_get_bool(s, "rag_autostart", RAG_DEFAULTS["autostart"]),
             rag_top_k=clamp_int(_get(s, "rag_top_k", RAG_DEFAULTS["top_k"]), "top_k"),
             rag_timeout_ms=clamp_int(

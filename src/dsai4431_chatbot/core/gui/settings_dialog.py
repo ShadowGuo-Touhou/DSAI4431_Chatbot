@@ -843,7 +843,11 @@ class RagPage(QWidget):
         self.ed_rag_prompt.setPlainText(
             str(getattr(self._cfg, "rag_prompt", "") or "")
         )
-        self.ed_rag_prompt.setPlaceholderText(t("settings.rag.prompt_placeholder"))
+        self.ed_rag_prompt.setPlaceholderText(
+            chat_config.DEFAULT_RAG_PROMPT.replace(
+                "{dir}", str(getattr(self._cfg, "rag_dir", "") or "asset/RAG")
+            )
+        )
         self.ed_rag_prompt.textChanged.connect(self.save)
         top.addWidget(self.ed_rag_prompt)
         hint_prompt = QLabel(t("settings.rag.prompt_hint"))

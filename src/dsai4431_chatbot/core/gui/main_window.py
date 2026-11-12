@@ -919,10 +919,17 @@ class ChatColumn(QWidget):
         return messages
 
     def _rag_hint(self, cfg) -> str:
-        """用户在设置页写的 RAG 提示词（默认只说「你有知识库」）。"""
+        """用户在设置页写的 RAG 提示词（默认只说「你有知识库、它在哪」）。
+
+        `{dir}` 会替换成当前知识库目录，换了目录文案也不会说错。
+        """
         if self._rag_mode(cfg) == "off":
             return ""
-        return str(getattr(cfg, "rag_prompt", "") or "").strip()
+        text = str(getattr(cfg, "rag_prompt", "") or "").strip()
+        if not text:
+            return ""
+        folder = str(getattr(cfg, "rag_dir", "") or "asset/RAG").strip()
+        return text.replace("{dir}", folder)
 
     # --- 知识库检索 -----------------------------------------------------
     def _rag_block(self, cfg) -> str:
