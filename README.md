@@ -60,9 +60,9 @@ DSAI4431_Chatbot/
 │   │   │   ├── Hiyori/         # 示例模型（入库）
 │   │   │   ├── Natori/         # 示例模型（入库）
 │   │   │   └── DeepSeek免费公皮/ # 大肥鱼模型 + PSD 源文件（**不入库**）
-│   ├── RAG/                    # 检索用的知识库原始文件
-│   ├── embedding/              # 向量模型权重（不入库）
-│   └── ollama/                 # Ollama 本地模型（不入库）
+│   ├── RAG/                    # 检索用的知识库原始文件（.md/.txt）
+│   ├── embedding/              # 检索用的模型（OLLAMA_MODELS 指这里，不入库）
+│   └── ollama/                 # 没装系统版时，便携版 Ollama 解压到这里（不入库）
 └── src/
     └── dsai4431_chatbot/       # 代码包
         ├── __init__.py         # 包元信息（__version__）
@@ -91,9 +91,9 @@ DSAI4431_Chatbot/
 | `asset/live2d/cubism-core/`             | 官方 Cubism SDK for Web 的 Core 原始文件                        | 入库      |
 | `asset/live2d/models/Hiyori/`、`Natori/` | 示例模型                                                     | 入库      |
 | `asset/live2d/models/DeepSeek免费公皮/`     | 大肥鱼模型 + 125 MB PSD 源文件                                   | **不入库** |
-| `asset/RAG/`                            | 检索知识库的原始文档                                               | 入库      |
-| `asset/embedding/`                      | 向量模型权重                                                   | **不入库** |
-| `asset/ollama/`                         | Ollama 拉取的本地模型               | **不入库** |
+| `asset/RAG/`                            | 检索知识库的原始文档（`.md` / `.txt`）                             | 入库      |
+| `asset/embedding/`                      | **检索用的模型**（Ollama 的 `OLLAMA_MODELS` 指到这里）            | **不入库** |
+| `asset/ollama/`                         | **Ollama 本身**：没装系统版时，便携版解压到这里                    | **不入库** |
 
 ### 关于模型文件不入库
 
@@ -286,40 +286,88 @@ Ollama 自己按名字找文件，**没有「导入模型」这一步**，也不
 | `Ollama` | `http://127.0.0.1:11434` | Ollama 的 exe 路径、`models` 目录 |
 | `Embedding` | 模型名，例如 `bge-m3` / `nomic-embed-text` / `quentinz/bge-base-zh-v1.5` | `P:\...` 这种路径、`.gguf` 文件名 |
 
-### 1. 让 Ollama 先跑起来
+### 0. 先决定用哪份 Ollama
 
-```powershell
-ollama list                  # 能列出模型就说明服务在跑
-ollama pull bge-m3           # 中文效果更好（1024 维，约 1.2 GB）
+**按顺序二选一，不要两个混着跑**（会抢 11434 端口）：
+
+1. **电脑上已经装过 Ollama** → 就用它，什么都不用动。
+   验证：新开一个终端敲 `ollama list`，能列出模型就行。
+2. **没装过** → 用便携版，放进**本项目的 `asset/ollama/`**（目录已经建好，只有个 `.gitkeep`），
+   不装到系统里、不改 PATH：
+
+   ```
+   <repo>/asset/ollama/ollama.exe        ← 从 ollama.com 下载 Windows zip 解压到这里
+   <repo>/asset/ollama/lib/...           ← zip 里自带的运行库，一起解压
+   ```
+
+   之后所有命令都用 `asset\ollama\ollama.exe` 代替 `ollama`。
+
+> `asset/ollama/` 和 `asset/embedding/` 都在 `.gitignore` 里（几百 MB~几 GB 的二进制），
+> **不要 `git add -f`**；换机器时重新放一份即可。
+
+### 1. 模型放哪：`asset/embedding/`
+
+模型**不要**留在系统盘默认位置，统一放本项目的 `asset/embedding/`
+（这个目录已经建好，里面只有个 `.gitkeep`）：
+
+```
+<repo>/asset/embedding/
+    blobs/        ← ollama pull 时自动生成
+    manifests/    ← ollama pull 时自动生成（模型名就是这里的目录结构）
 ```
 
-服务没起就用托盘里的 Ollama，或单独跑 `ollama serve`（默认监听 11434）。
+⚠ **顺序很重要**：先设 `OLLAMA_MODELS`，再 `pull`。反了会拉到默认位置
+（`%USERPROFILE%\.ollama\models`），`asset/embedding/` 里就是空的。
 
-### 2. 模型在别的盘（比如 `P:\.Ollama`）
+已经有模型的话（比如以前拉到 `P:\.Ollama\models` 的那份），两种做法任选：
 
-Ollama 只认 `OLLAMA_MODELS` 这个环境变量，**不认设置页里填路径**。
-变量要指向**包含 `blobs\` 和 `manifests\` 的那一层**：
+- 把那个目录下的 `manifests\` 和 `blobs\` 整个**复制**到 `asset/embedding/`（推荐，和仓库在一起）
+- 或者不复制，继续把 `OLLAMA_MODELS` 指到原来那个目录（那就不看本节，模型名按第 3 节推）
+
+> 两条路只选一条。**别让两个 `OLLAMA_MODELS` 打架**：一个是系统环境变量、
+> 一个是当前终端的 `$env:`，同时存在时只认其中一个，`ollama list` 里会莫名其妙少模型。
+
+Ollama 只认 `OLLAMA_MODELS` 这个环境变量，**设置页里填路径没用**。
+它要指向**包含 `blobs\` 和 `manifests\` 的那一层**，也就是 `asset\embedding`：
 
 ```powershell
-# 模型实际在 P:\.Ollama\models\manifests\... → 指向 P:\.Ollama\models
-setx OLLAMA_MODELS "P:\.Ollama\models"
-# setx 只影响新开的进程：要退出托盘里的 Ollama 再重新启动
+# 临时（只对当前这个终端窗口有效，调试时最省事）
+$env:OLLAMA_MODELS = "<repo>\asset\embedding"
+
+# 永久（新开终端才生效；如果用系统装的那份，要退出托盘图标再重开）
+setx OLLAMA_MODELS "<repo>\asset\embedding"
 ```
 
-设对了 `ollama list` 里就能看到那个模型；看不到就是这一层指错了。
+### 2. 拉模型 + 起服务
+
+```powershell
+# 便携版；装过系统的就直接用 ollama
+asset\ollama\ollama.exe pull bge-m3         # 中文效果更好，1024 维，约 1.2 GB
+asset\ollama\ollama.exe list                # 能看到 bge-m3:latest 才算成功
+
+asset\ollama\ollama.exe serve               # 前台启动服务，默认监听 11434
+```
+
+用系统版的话：双击托盘里的 Ollama，或 `ollama serve`。
+服务起没起，用一条命令判断：
+
+```powershell
+curl http://127.0.0.1:11434/api/tags        # 返回一段 JSON 就是活着
+```
 
 ### 3. 模型名怎么从路径推出来
 
-Ollama 的模型名就是 manifests 目录下的相对路径（去掉 `registry.ollama.ai/`、去掉 tag）：
+模型名就是 `asset\embedding\manifests\`（或你原有的 models 目录）下的相对路径——
+去掉 `registry.ollama.ai/`、去掉 tag：
 
 | 磁盘上的路径 | 设置里填 |
 |---|---|
-| `models\manifests\registry.ollama.ai\library\bge-m3\latest` | `bge-m3` |
-| `models\manifests\registry.ollama.ai\library\nomic-embed-text\latest` | `nomic-embed-text` |
-| `models\manifests\registry.ollama.ai\quentinz\bge-base-zh-v1.5\latest` | `quentinz/bge-base-zh-v1.5` |
+| `asset\embedding\manifests\registry.ollama.ai\library\bge-m3\latest` | `bge-m3` |
+| `asset\embedding\manifests\registry.ollama.ai\library\nomic-embed-text\latest` | `nomic-embed-text` |
+| `manifests\registry.ollama.ai\quentinz\bge-base-zh-v1.5\latest`（你已有的那份） | `quentinz/bge-base-zh-v1.5` |
 
 规则：`library` 这个命名空间可以省，`latest` 是默认 tag 也可以省；
-别的命名空间必须带上，形如 `命名空间/模型名`。
+别的命名空间必须带上，形如 `命名空间/模型名`。最稳的办法是直接抄 `ollama list` 里那一列。
 
 ### 4. 生效
 
@@ -335,9 +383,10 @@ Ollama 的模型名就是 manifests 目录下的相对路径（去掉 `registry.
 
 | 现象 | 原因 | 怎么办 |
 |---|---|---|
-| 状态行「同步失败：连不上 Ollama」 | 服务没起 / 地址写错 | 起服务；地址核对成 `http://127.0.0.1:11434` |
-| `ollama list` 里没有，但文件确实在 P 盘 | `OLLAMA_MODELS` 没设或指错层 | 按第 2 步设变量，重启 Ollama |
-| `HTTP 404 model not found` | 名字写错，或填了路径/tag 之外的写法 | 用 `ollama list` 里那一列**原样复制** |
+| 状态行「同步失败：连不上 Ollama」 | 服务没起 / 地址写错 / 端口被另一个 Ollama 占着 | 先 `curl http://127.0.0.1:11434/api/tags`；只留一个 Ollama 在跑 |
+| `ollama list` 里没有模型，但文件确实在 | `OLLAMA_MODELS` 没设或指错层（要指向含 `blobs\`+`manifests\` 的那层） | 按第 1 节设 `OLLAMA_MODELS`，重启 Ollama |
+| 两个 Ollama（系统的 + `asset/ollama`）抢端口 | 同时跑了两个 `serve` | 只留一个；要么用系统那份，要么用 `asset\ollama` 那份 |
+| `HTTP 404 model not found` | 名字写错，或填了路径/`.gguf` | 用 `ollama list` 里那一列**原样复制** |
 | 总是「检索超时」 | 首次加载模型慢，而超时只有 3000 ms | 先点一次「重新扫描」热身，或把超时调到 15000 |
 | 答案里带不出知识库内容 | 阈值太高 / 块太长 / 模型弱 | 阈值降到 0.25；块长度 300~500；换 `bge-m3` |
 | 「该模型不支持 embeddings」 | 那份 GGUF 不是 embedding 版 | 换 `nomic-embed-text` 或 `bge-m3` |

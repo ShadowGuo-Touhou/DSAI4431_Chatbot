@@ -24,8 +24,14 @@
 │   ├── 课程笔记.md
 │   ├── faq.txt
 │   └── 子目录/xxx.md
+├── asset/ollama/                    ← ② 便携版 Ollama（没有系统版时用；不进 git）
+│   ├── ollama.exe
+│   └── lib/…
+├── asset/embedding/                 ← ③ 模型（OLLAMA_MODELS 指这里；不进 git）
+│   ├── blobs/
+│   └── manifests/registry.ollama.ai/library/bge-m3/latest
 └── data/                            ← 全部运行时数据（.gitignore：data/*）
-    └── rag/                         ← ② 索引（自动生成，删了重启会自动重建）
+    └── rag/                         ← ④ 索引（自动生成，删了重启会自动重建）
         ├── meta.json                ←   台账 + 切片文本（人可读）
         ├── index.npz                ←   向量（二进制）
         └── .tmp/                    ←   原子写入用的临时文件（成功即删）
@@ -38,6 +44,8 @@
 | 文件 | 路径 | 格式 | 谁写 | 什么时候写 | 进 git？ | 能删吗 |
 |---|---|---|---|---|---|---|
 | 知识库源文件 | `asset/RAG/**/*.md\|*.txt` | 纯文本（UTF-8） | **用户**手工放 | 任意时间 | ✅ 进 | 删了索引下次启动自动剔除 |
+| Ollama 程序 | `asset/ollama/`（没有系统版时才放） | zip 解压出来的 exe + lib | **用户**手工解压 | 一次性 | ❌ 不进（`.gitignore`） | 换机器重新解压 |
+| Embedding 模型 | `asset/embedding/{blobs,manifests}` | Ollama 自己的模型仓库格式 | `ollama pull`（`OLLAMA_MODELS` 指这里） | 一次性 / 换模型时 | ❌ 不进（`.gitignore`） | 换机器重新 pull，或从旧机器复制 |
 | 索引台账 + 切片 | `data/rag/meta.json` | JSON（UTF-8，2 空格缩进） | 程序 | 每次启动同步后 | ❌ 不进（`data/*`） | ✅ 删了自动重建 |
 | 向量矩阵 | `data/rag/index.npz` | NumPy `.npz`（未压缩，`float32`） | 程序 | 同上，与 json 成对 | ❌ 不进 | ✅ 删了自动重建 |
 | 临时文件 | `data/rag/.tmp/*` | 同目标文件 | 程序 | 写入过程中 | ❌ 不进 | ✅ 残留文件启动时清理 |
@@ -444,6 +452,7 @@ Ollama 默认监听 11434 端口……
 | 2026-11-12 00:10 | 初稿：存储规范、切片、启动时差量同步、分阶段 |
 | 2026-11-12 00:12 | 新增 3.1：用户可调 @k 与检索超时（设置页两个数字框）；同步更新第 6/7/8 节 |
 | 2026-11-12 12:20 | 3.1 扩成「11 个参数全进设置页」（用户要求）；补 §13 实装进度 |
+| 2026-11-12 12:30 | 明确 Ollama / 模型放哪：系统已装就用系统的，没装解压到 `asset/ollama`；模型统一 `asset/embedding`（`OLLAMA_MODELS` 指这里） |
 
 ---
 
