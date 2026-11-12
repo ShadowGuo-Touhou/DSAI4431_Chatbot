@@ -24,10 +24,11 @@
 from __future__ import annotations
 
 import sys
+import threading
 from pathlib import Path
 from typing import Literal
 
-from PySide6.QtCore import QPoint, QSize, Qt, QTimer, Signal
+from PySide6.QtCore import QPoint, QRunnable, QSize, Qt, QThreadPool, QTimer, Signal
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QApplication,
@@ -716,6 +717,37 @@ class HomePage(QWidget):
         self.submitted.emit(payload)
 
 
+class _ToolJob(QRunnable):
+    """后台跑一次工具调用（检索会发 HTTP 给 Ollama，最慢十几秒，绝不能卡界面）。
+
+    worker 里**不碰任何 Qt 对象**：结果写进带锁的字段，主线程用 QTimer 轮询。
+    """
+
+    def __init__(self, router, calls: list) -> None:
+        super().__init__()
+        self.router = router
+        self.calls = [dict(call) for call in calls]
+        self.lock = threading.Lock()
+        self.outcomes: list | None = None
+        self.error: BaseException | None = None
+        self.setAutoDelete(True)
+
+    def run(self) -> None:                      # noqa: D401 - QRunnable 约定
+        outcomes = []
+        try:
+            for call in self.calls:
+                outcomes.append(self.router.run(call))
+        except BaseException as exc:            # noqa: BLE001 - 后台不能把异常丢给 Qt
+            with self.lock:
+                self.error = exc
+        with self.lock:
+            self.outcomes = outcomes
+
+    def snapshot(self):
+        with self.lock:
+            return self.outcomes, self.error
+
+
 class ChatColumn(QWidget):
     """右侧聊天列：顶栏 + （对话页 | 新对话页）+ 会话后端。"""
 
@@ -787,6 +819,13 @@ class ChatColumn(QWidget):
         self._req_messages: list[dict] = []   # 正在发的这份 messages（工具轮要往后追加）
         self._req_model = ""
         self._tool_notes: list[QLabel] = []   # 本轮已画的「🔍 检索…」小字
+        # 检索放到后台线程跑：主线程只轮询，界面不卡
+        self._tool_job: _ToolJob | None = None
+        self._tool_busy = False
+        self._pending_note: QLabel | None = None
+        self._tool_timer = QTimer(self)
+        self._tool_timer.setInterval(80)
+        self._tool_timer.timeout.connect(self._poll_tool_job)
 
         self._history: list[dict] = []   # OpenAI 格式：{"role": ..., "content": ...}
         self._bubble: QLabel | None = None   # 正在流式写入的那个气泡
@@ -802,8 +841,10 @@ class ChatColumn(QWidget):
         # 最近一次检索的结果（超时/失败时给上层看原因）
         self._rag_last = None
 
-        # 等回复时按 Enter 不发也不清空输入框
-        self.input.edit.can_submit = lambda: not self.client.busy()
+        # 等回复时（或正在后台检索时）按 Enter 不发也不清空输入框
+        self.input.edit.can_submit = (
+            lambda: not self.client.busy() and not self._tool_busy
+        )
         self.input.submitted.connect(self._on_submit)
 
     # --- 发消息 ---------------------------------------------------------
@@ -832,6 +873,8 @@ class ChatColumn(QWidget):
         model = session.model or cfg.model
         self._tool_rounds = 0
         self._tool_notes = []
+        self._tool_busy = False
+        self._pending_note = None
         self._start_request(cfg, self._payload(cfg), model)
 
     # --- 发请求 / 工具轮 -------------------------------------------------
@@ -921,18 +964,57 @@ class ChatColumn(QWidget):
 
         messages = self._req_messages
         messages.append(tool_router.assistant_message(calls))
+        self._req_messages = messages
 
-        for call in calls:
-            outcome = self._tool_router.run(dict(call))
+        # 先画一行「正在检索」，让用户知道在干什么（此时还没结果）
+        self._pending_note = None
+        try:
+            self._pending_note = self.messages.begin_message(
+                "reasoning", before=self._bubble
+            )
+            self._pending_note.setText("🔍 正在检索知识库…")
+            self.messages.scroll_to_end()
+        except Exception as exc:              # noqa: BLE001
+            print(f"[rag] 检索提示行没画出来：{exc}", flush=True)
+
+        # 检索丢到后台线程：这一步可能耗时十几秒，绝不能占着主线程
+        self._tool_busy = True
+        self._tool_job = _ToolJob(self._tool_router, calls)
+        QThreadPool.globalInstance().start(self._tool_job)
+        self._tool_timer.start()
+
+    def _poll_tool_job(self) -> None:
+        """轮询后台检索：好了就把 tool 消息接上、继续发请求。"""
+        job = self._tool_job
+        if job is None:
+            self._tool_timer.stop()
+            return
+        outcomes, error = job.snapshot()
+        if outcomes is None and error is None:
+            return                            # 还在跑
+
+        self._tool_timer.stop()
+        self._tool_job = None
+        self._tool_busy = False
+
+        if error is not None:
+            self._finish_bubble(
+                t("main.messages.failed", msg=f"检索出错：{error}")
+            )
+            return
+
+        messages = self._req_messages
+        for index, outcome in enumerate(outcomes or []):
+            call_id = outcome.call_id or ""
             messages.append(
                 {
                     "role": "tool",
                     # 必须回填模型给的 call id，否则服务端会拒绝
-                    "tool_call_id": outcome.call_id or str(call.get("id") or ""),
+                    "tool_call_id": call_id,
                     "content": outcome.content,
                 }
             )
-            self._show_tool_note(outcome)
+            self._show_tool_note(outcome, reuse=self._pending_note if index == 0 else None)
             print(f"[rag] 工具调用：{outcome.summary()}", flush=True)
             if self._session is not None:
                 session_store.append_rag_event(
@@ -942,6 +1024,7 @@ class ChatColumn(QWidget):
                     scores=[round(outcome.top_score, 4)] if outcome.hits else [],
                     elapsed_ms=outcome.elapsed_ms,
                 )
+        self._pending_note = None
 
         self._tool_rounds += 1
         # 到轮次上限就不给工具了，逼它拿现有资料直接回答
@@ -953,7 +1036,7 @@ class ChatColumn(QWidget):
                     "content": "检索次数已用完，请立刻基于已有资料回答；资料不足就直说。",
                 }
             )
-        self._req_messages = messages
+        cfg = chat_config.load()
         if not self.client.send(
             cfg,
             messages,
@@ -962,12 +1045,13 @@ class ChatColumn(QWidget):
         ):
             self._finish_bubble(t("main.messages.failed", msg="工具结果没能发回模型"))
 
-    def _show_tool_note(self, outcome) -> None:
-        """在回答气泡上方加一行「🔍 检索…」（流式正文开始前就看得见）。"""
+    def _show_tool_note(self, outcome, reuse: QLabel | None = None) -> None:
+        """在回答气泡上方写「🔍 检索…」。`reuse` 用来把「正在检索…」那行改写掉。"""
         try:
-            note = self.messages.begin_message("reasoning", before=self._bubble)
+            note = reuse or self.messages.begin_message("reasoning", before=self._bubble)
             note.setText(f"🔍 {outcome.summary()}")
-            self._tool_notes.append(note)
+            if note not in self._tool_notes:
+                self._tool_notes.append(note)
             self.messages.scroll_to_end()
         except Exception as exc:              # noqa: BLE001 - 提示行画不出来不影响主流程
             print(f"[rag] 检索提示行没画出来：{exc}", flush=True)
@@ -1121,6 +1205,11 @@ class ChatColumn(QWidget):
         if self._bubble is not None:
             self._bubble.setText(text)
             self._bubble = None
+        # 收尾时把后台检索状态也清干净，免得输入框一直卡在「不能发」
+        self._tool_timer.stop()
+        self._tool_job = None
+        self._tool_busy = False
+        self._pending_note = None
         self.messages.scroll_to_end()
 
     # --- 新对话 ---------------------------------------------------------
