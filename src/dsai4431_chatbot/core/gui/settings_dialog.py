@@ -1758,11 +1758,12 @@ class SettingsDialog(QDialog):
     personas_changed = Signal()
 
     # (图标, 文案 key, 页面类)
+    # 注意：Live2D model 页从 2026-11-12 起**不放进设置**（用户觉得没意义）。
+    # 类还留着（Live2DModelPage），以后要恢复只需在这里加回一行。
     PAGES = [
         ("key", "settings.nav.api_key", ApiKeyPage),
         ("user", "settings.nav.personality", PersonalityPage),
         ("doc", "settings.nav.rag", RagPage),
-        ("live2d", "settings.nav.live2d", Live2DModelPage),
         ("clapper", "settings.nav.theme", ThemePage),
         ("gear", "settings.nav.other", OtherPage),
     ]
