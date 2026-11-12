@@ -3,7 +3,7 @@ rem ===================================================================
 rem  DSAI4431 Chatbot  -  install Python dependencies into .venv
 rem
 rem  ASCII only on purpose: cmd.exe parses .bat with the system ANSI
-rem  codepage (same note as in 启动GUI.bat), so Chinese text written
+rem  codepage (same note as in the GUI launcher bat), so Chinese text written
 rem  inside would come out garbled.
 rem
 rem  Usage:
@@ -25,7 +25,12 @@ chcp 65001 >nul
 cd /d "%~dp0"
 
 set "PIP_ARGS="
-if /i "%~1"=="--mirror" set "PIP_ARGS=-i https://pypi.tuna.tsinghua.edu.cn/simple"
+if /i "%~1"=="--mirror" (
+    rem also export it: the pip upgrade step needs the mirror too,
+    rem otherwise it hangs on the default PyPI index
+    set "PIP_ARGS=-i https://pypi.tuna.tsinghua.edu.cn/simple"
+    set "PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple"
+)
 
 echo.
 echo   DSAI4431 Chatbot  -  install dependencies
@@ -50,10 +55,10 @@ if exist ".venv\Scripts\python.exe" (
     if errorlevel 1 goto :failed
 )
 
-rem --- 3) pip --------------------------------------------------------
+rem --- 3) pip (failure here is not fatal: the bundled one usually works) ---
 echo   [3/4] upgrading pip ...
-".venv\Scripts\python.exe" -m pip install --upgrade pip -q
-if errorlevel 1 goto :failed
+".venv\Scripts\python.exe" -m pip install --upgrade pip -q %PIP_ARGS%
+if errorlevel 1 echo         (pip upgrade failed - continuing with the bundled pip)
 
 rem --- 4) project + extras -------------------------------------------
 echo   [4/4] installing .[gui,rag]   (PySide6 is ~200 MB, this takes a while)
