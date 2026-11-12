@@ -44,9 +44,13 @@ def make_embedder(cfg, *, timeout_s: float = INDEX_TIMEOUT_S):
     """按配置造一个 embedder。`DSAI_RAG_EMBED=debug` 时走调试后端。"""
     if os.environ.get("DSAI_RAG_EMBED", "").strip().lower() == "debug":
         return DebugEmbedder()
+    # 留空时用**和自动下载一致**的默认模型；别再各写一套硬编码
+    # （以前这里写死 bge-m3，和 bootstrap 下载的 bge-base-zh-v1.5 对不上）
+    from dsai4431_chatbot.core.rag.bootstrap import DEFAULT_EMBED_MODEL
+
     return OllamaEmbedder(
         base_url=getattr(cfg, "rag_ollama", "") or "http://127.0.0.1:11434",
-        model=getattr(cfg, "rag_embedding", "") or "bge-m3",
+        model=getattr(cfg, "rag_embedding", "") or DEFAULT_EMBED_MODEL,
         timeout_s=timeout_s,
     )
 

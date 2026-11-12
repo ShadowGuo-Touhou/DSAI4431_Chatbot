@@ -809,6 +809,13 @@ class RagPage(QWidget):
         row.addWidget(self.ed_embedding, 1)
         top.addLayout(row)
 
+        # 这个模型在不在模型目录里 —— 直接写出来，省得真 404 了才知道
+        self.lb_embedding_state = QLabel("")
+        self.lb_embedding_state.setObjectName("hintText")
+        self.lb_embedding_state.setWordWrap(True)
+        top.addWidget(self.lb_embedding_state)
+        self._refresh_embedding_state()
+
         self.cb_enabled = QCheckBox(t("settings.rag.enabled"))
         self.cb_enabled.setObjectName("fileCheck")
         self.cb_enabled.setChecked(bool(self._cfg.rag_enabled))
@@ -1271,6 +1278,24 @@ class RagPage(QWidget):
         cfg.rag_max_chunks = self.sp_max_chunks.value()
         cfg.rag_inject_chars = self.sp_inject.value()
         chat_config.save(cfg)
+        # 路径/模型名可能刚改：状态行要跟着重算
+        self._refresh_embedding_state()
+
+    def _refresh_embedding_state(self) -> None:
+        """模型到底在不在「该在的目录」里。
+
+        这一行是为了回答「现在用的是哪个模型、会不会 404」——
+        以前只能从控制台日志里看出来。
+        """
+        from dsai4431_chatbot.core.rag import bootstrap
+
+        model = self.ed_embedding.text().strip() or bootstrap.DEFAULT_EMBED_MODEL
+        root = ollama_launcher.models_dir(self._cfg)
+        if bootstrap.has_model(root, model):
+            text = t("settings.rag.embedding_ready", model=model, path=str(root))
+        else:
+            text = t("settings.rag.embedding_missing", model=model, path=str(root))
+        self.lb_embedding_state.setText(text)
 
 
 def _store_path(chosen: str) -> str:

@@ -30,6 +30,11 @@ from pathlib import Path
 ZIP_URL = os.environ.get(
     "DSAI_OLLAMA_ZIP_URL", "https://ollama.com/download/ollama-windows-amd64.zip"
 )
+# 默认 embedding 模型。设置页留空时用它 —— **必须和 asset/embedding 里
+# 自动下载的那份一致**，否则「清空输入框」会变成「去要一个不存在的模型」。
+# （以前 embedder.py 里硬编码的是 bge-m3，和这里下载的模型名对不上，
+#  清空后检索直接 404，而且加载页还显示一切正常。）
+DEFAULT_EMBED_MODEL = "quentinz/bge-base-zh-v1.5"
 # 下载超时：大文件用大超时；urllib 的 timeout 是「单次读」的超时，不是总时长
 DOWNLOAD_TIMEOUT_S = 60
 CHUNK = 1 << 20
@@ -295,7 +300,7 @@ def needs_bootstrap(cfg, *, service_alive: bool = False) -> bool:
 
     if ollama_launcher.find_executable(cfg) is None:
         return True
-    model = str(getattr(cfg, "rag_embedding", "") or "").strip()
+    model = str(getattr(cfg, "rag_embedding", "") or "").strip() or DEFAULT_EMBED_MODEL
     if model and not has_model(ollama_launcher.models_dir(cfg), model):
         return True
     return False
@@ -321,7 +326,7 @@ def ensure_stack(
     # 装到哪 = 从哪起：同一个解析函数，避免"装进 A 却从 B 启动"
     target_dir = ollama_launcher.resolve_ollama_dir(cfg)
     target_models = ollama_launcher.models_dir(cfg)
-    model = str(getattr(cfg, "rag_embedding", "") or "").strip()
+    model = str(getattr(cfg, "rag_embedding", "") or "").strip() or DEFAULT_EMBED_MODEL
 
     exe = ollama_exe(target_dir)
     if not exe.is_file():
