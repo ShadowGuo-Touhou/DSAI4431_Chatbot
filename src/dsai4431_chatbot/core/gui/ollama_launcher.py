@@ -123,31 +123,69 @@ def listener_pids(port: int) -> list[int]:
     return pids
 
 
+def process_image(pid: int) -> str:
+    """PID 对应的可执行文件完整路径；查不到返回空串。
+
+    用 ctypes 的 `QueryFullProcessImageNameW`：快、无依赖、不受输出编码影响。
+    ⚠ 别用 `tasklist /FI "PID eq N"`：实测在部分环境下过滤器直接失效
+    （全表能列出该进程，加了 /FI 就回 "No tasks are running"），
+    结果就是该接管的时候误判成"不是 ollama"。
+    """
+    if sys.platform != "win32":
+        return ""
+    try:
+        import ctypes
+        from ctypes import wintypes
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.OpenProcess.restype = wintypes.HANDLE
+        kernel32.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+        kernel32.QueryFullProcessImageNameW.restype = wintypes.BOOL
+        kernel32.QueryFullProcessImageNameW.argtypes = (
+            wintypes.HANDLE,
+            wintypes.DWORD,
+            wintypes.LPWSTR,
+            ctypes.POINTER(wintypes.DWORD),
+        )
+
+        # 0x1000 = PROCESS_QUERY_LIMITED_INFORMATION（Vista+ 够用，权限要求最低）
+        handle = kernel32.OpenProcess(0x1000, False, int(pid))
+        if not handle:
+            return ""
+        try:
+            size = wintypes.DWORD(32768)
+            buffer = ctypes.create_unicode_buffer(size.value)
+            if not kernel32.QueryFullProcessImageNameW(
+                handle, 0, buffer, ctypes.byref(size)
+            ):
+                return ""
+            return buffer.value
+        finally:
+            kernel32.CloseHandle(handle)
+    except (OSError, AttributeError, ValueError):
+        return ""
+
+
 def process_name(pid: int) -> str:
     """PID 对应的进程名（小写，带 .exe）；查不到返回空串。"""
-    try:
-        output = subprocess.run(  # noqa: S603,S607
-            ["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV", "/NH"],
-            capture_output=True,
-            text=True,
-            timeout=8,
-            creationflags=_CREATE_NO_WINDOW,
-        ).stdout.strip()
-    except (OSError, subprocess.SubprocessError):
-        return ""
-    if not output or output.startswith("INFO:"):
-        return ""
-    # 形如 "ollama.exe","8496","Console","1","60,236 K"
-    return output.split('","')[0].strip('"').lower()
+    image = process_image(pid)
+    return Path(image).name.lower() if image else ""
 
 
-def stop_foreign(url: str = DEFAULT_BASE_URL, *, wait_s: float = 8.0) -> str:
+def stop_foreign(
+    url: str = DEFAULT_BASE_URL,
+    *,
+    expected_exe: Path | str | None = None,
+    wait_s: float = 8.0,
+) -> str:
     """关掉端口上那个**不是本程序拉起**的 Ollama。
 
     返回：
+    - `already_ours` 端口上那个就是 `expected_exe`（路径已经对了，别折腾）
     - `stopped`      关掉了，端口已释放
     - `no_listener`  端口上没有人
     - `not_ollama`   端口被别的程序占着（不动它）
+    - `cannot_stop`  是 ollama 但关不掉（权限/被保护）
     - `failed`       关了但端口没释放
 
     ⚠ 只 taskkill 进程名是 ollama 的。用户机器上 `P:\\.Ollama` 那份是
@@ -162,7 +200,10 @@ def stop_foreign(url: str = DEFAULT_BASE_URL, *, wait_s: float = 8.0) -> str:
     if not pids:
         return "no_listener"
 
-    killed = False
+    wanted = str(expected_exe).lower() if expected_exe else ""
+
+    killed = 0
+    denied = 0
     for pid in pids:
         name = process_name(pid)
         if name not in ("ollama.exe", "ollama"):
@@ -171,8 +212,14 @@ def stop_foreign(url: str = DEFAULT_BASE_URL, *, wait_s: float = 8.0) -> str:
                 flush=True,
             )
             continue
+        # 已经在用「设置里那个 exe」了：不用杀，直接复用
+        if wanted:
+            image = process_image(pid).lower()
+            if image and image == wanted:
+                print(f"[rag] 端口 {port} 上的 Ollama 就是设置里的那个，直接复用", flush=True)
+                return "already_ours"
         try:
-            subprocess.run(  # noqa: S603,S607
+            result = subprocess.run(  # noqa: S603,S607
                 ["taskkill", "/PID", str(pid), "/F"],
                 capture_output=True,
                 text=True,
@@ -180,13 +227,26 @@ def stop_foreign(url: str = DEFAULT_BASE_URL, *, wait_s: float = 8.0) -> str:
                 creationflags=_CREATE_NO_WINDOW,
             )
         except (OSError, subprocess.SubprocessError) as exc:
+            denied += 1
             print(f"[rag] 关闭 Ollama（PID {pid}）失败：{exc}", flush=True)
             continue
-        killed = True
+        # ⚠ 必须看返回码：taskkill 失败时不一定抛异常（权限不足会打一行字
+        # 然后 returncode != 0）。以前不看，于是"没杀掉"被当成"杀掉了"，
+        # 接着白等 8 秒、报 failed，而那个 Ollama 其实一直活着。
+        if result.returncode != 0:
+            denied += 1
+            message = (result.stdout or result.stderr or "").strip().splitlines()
+            print(
+                f"[rag] 关闭 Ollama（PID {pid}）失败：{message[-1] if message else result.returncode}",
+                flush=True,
+            )
+            continue
+        killed += 1
         print(f"[rag] 已关掉占用 {port} 的外部 Ollama（PID {pid}）", flush=True)
 
-    if not killed:
-        return "not_ollama"
+    if killed == 0:
+        # 端口上确实是 ollama，但我们关不掉（权限/被保护）
+        return "cannot_stop" if denied else "not_ollama"
 
     # taskkill 是异步的：等端口真的放开，否则我们自己的服务会抢不到
     deadline = time.monotonic() + max(1.0, float(wait_s))
@@ -301,14 +361,27 @@ def ensure_running(
         take_over = command is None
     took_over = False
 
+    autostart = bool(getattr(cfg, "rag_autostart", True))
+    # exe 先解析出来：接管时要判断「端口上那个是不是就是这个 exe」
+    exe = find_executable(cfg) if command is None else Path(command[0])
+
     if is_alive(url):
-        if not take_over:
+        # 不想接管 / 关掉了自动启动：现有服务能用就用，别杀
+        if not take_over or not autostart:
             return LaunchResult(ok=True, started=False, detail="already_running")
 
-        code = stop_foreign(url)
+        code = stop_foreign(url, expected_exe=None if command is not None else exe)
+        if code == "already_ours":
+            # 端口上跑的就是设置里那个 exe —— 路径已经对了，没必要重启
+            return LaunchResult(
+                ok=True, started=False, detail="already_running", exe=str(exe or "")
+            )
         if code == "not_ollama":
             # 端口被别的东西占了：不杀、也不硬起（会抢端口失败）
             return LaunchResult(ok=False, started=False, detail="port_busy")
+        if code == "cannot_stop":
+            # 确实是 ollama，但关不掉（权限不足/进程被保护）
+            return LaunchResult(ok=False, started=False, detail="cannot_stop")
         if code == "failed":
             return LaunchResult(ok=False, started=False, detail="failed")
         if code == "no_listener":
@@ -317,10 +390,9 @@ def ensure_running(
             return LaunchResult(ok=True, started=False, detail="already_running")
         took_over = True                     # stopped：端口已释放，往下按自己的起
 
-    if not bool(getattr(cfg, "rag_autostart", True)):
+    if not autostart:
         return LaunchResult(ok=False, started=False, detail="disabled")
 
-    exe = find_executable(cfg) if command is None else Path(command[0])
     if command is None and exe is None:
         return LaunchResult(ok=False, started=False, detail="no_exe")
 
