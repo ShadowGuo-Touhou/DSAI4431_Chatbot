@@ -94,7 +94,12 @@ class ToolRouter:
         self.rag = rag
         self.max_chars = int(max_chars)
 
-    def run(self, call: dict) -> ToolOutcome:
+    def run(self, call: dict, *, min_score: float | None = None) -> ToolOutcome:
+        """执行一次工具调用。
+
+        `min_score` 是可信度门槛（设置页可调）；不给就用模块默认值。
+        """
+        threshold = MIN_TOOL_SCORE if min_score is None else float(min_score)
         call_id = str(call.get("id") or "")
         name = str(call.get("name") or "")
         if name and name != TOOL_NAME:
@@ -142,14 +147,14 @@ class ToolRouter:
         elapsed = int((time.perf_counter() - started) * 1000)
         error = str(getattr(result, "error", "") or "")
         # B 防线：不够相关的一律不给模型，免得它被噪声带偏、或误判「知识库里没有」
-        strong = [hit for hit in hits if float(hit.score) >= MIN_TOOL_SCORE]
+        strong = [hit for hit in hits if float(hit.score) >= threshold]
         if hits and not strong:
             best = float(hits[0].score)
             return ToolOutcome(
                 ok=False,
                 content=(
                     f"检索「{query}」没有找到足够相关的资料"
-                    f"（最高相关度只有 {best:.2f}，低于 {MIN_TOOL_SCORE:.2f} 的可信阈值）。"
+                    f"（最高相关度只有 {best:.2f}，低于 {threshold:.2f} 的可信阈值）。"
                     "请如实告诉用户知识库里没有相关内容，不要编造；也不要拿低分片段当依据。"
                 ),
                 query=query,

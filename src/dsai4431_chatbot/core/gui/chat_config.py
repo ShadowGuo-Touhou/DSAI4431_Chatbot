@@ -58,7 +58,9 @@ RAG_DEFAULTS = {
     "autostart": True,       # 探测不到 Ollama 时自己把它拉起来（退出时关掉自己起的那份）
     "top_k": 4,              # 每次最多注入几块
     "timeout_ms": 3000,      # 单次检索最长等待
-    "min_score": 0.35,       # 余弦下限
+    "min_score": 0.35,       # 余弦下限（注入模式用）
+    # 工具调用模式的可信度门槛：最高分低于它就告诉模型「没查到」，一段都不给
+    "tool_min_score": RAG_TOOL_MIN_SCORE,
     "chunk_chars": 480,      # 切块目标字数
     "chunk_overlap": 64,     # 超长段滑窗重叠
     "max_file_mb": 2,        # 单文件上限
@@ -70,6 +72,7 @@ RAG_LIMITS = {
     "top_k": (1, 20, 1),
     "timeout_ms": (200, 15000, 500),
     "min_score": (0.0, 1.0, 0.05),
+    "tool_min_score": (0.0, 1.0, 0.05),
     "chunk_chars": (120, 2000, 20),
     "chunk_overlap": (0, 500, 8),
     "max_file_mb": (1, 64, 1),
@@ -120,6 +123,7 @@ class ChatConfig:
     rag_top_k: int = 4
     rag_timeout_ms: int = 3000
     rag_min_score: float = 0.35
+    rag_tool_min_score: float = RAG_TOOL_MIN_SCORE
     rag_chunk_chars: int = 480
     rag_chunk_overlap: int = 64
     rag_max_file_mb: int = 2
@@ -249,6 +253,10 @@ def load() -> ChatConfig:
             rag_min_score=clamp_float(
                 _get(s, "rag_min_score", RAG_DEFAULTS["min_score"]), "min_score"
             ),
+            rag_tool_min_score=clamp_float(
+                _get(s, "rag_tool_min_score", RAG_DEFAULTS["tool_min_score"]),
+                "tool_min_score",
+            ),
             rag_chunk_chars=clamp_int(
                 _get(s, "rag_chunk_chars", RAG_DEFAULTS["chunk_chars"]), "chunk_chars"
             ),
@@ -290,6 +298,10 @@ def save(cfg: ChatConfig) -> None:
     s.setValue(f"{GROUP}/rag_top_k", clamp_int(cfg.rag_top_k, "top_k"))
     s.setValue(f"{GROUP}/rag_timeout_ms", clamp_int(cfg.rag_timeout_ms, "timeout_ms"))
     s.setValue(f"{GROUP}/rag_min_score", clamp_float(cfg.rag_min_score, "min_score"))
+    s.setValue(
+        f"{GROUP}/rag_tool_min_score",
+        clamp_float(cfg.rag_tool_min_score, "tool_min_score"),
+    )
     s.setValue(f"{GROUP}/rag_chunk_chars", clamp_int(cfg.rag_chunk_chars, "chunk_chars"))
     s.setValue(
         f"{GROUP}/rag_chunk_overlap", clamp_int(cfg.rag_chunk_overlap, "chunk_overlap")

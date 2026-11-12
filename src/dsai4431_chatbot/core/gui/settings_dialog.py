@@ -883,6 +883,7 @@ class RagPage(QWidget):
         self.sp_timeout = self._spin("timeout_ms")
         self.sp_inject = self._spin("inject_chars")
         self.sp_min_score = self._score_spin()
+        self.sp_tool_score = self._score_spin("tool_min_score", self._cfg.rag_tool_min_score)
 
         left = [
             (t("settings.rag.chunk_chars"), self.sp_chunk_chars,
@@ -896,6 +897,8 @@ class RagPage(QWidget):
             (t("settings.rag.top_k"), self.sp_top_k, t("settings.rag.top_k_hint")),
             (t("settings.rag.timeout"), self.sp_timeout, t("settings.rag.timeout_hint")),
             (t("settings.rag.min_score"), self.sp_min_score, ""),
+            (t("settings.rag.tool_min_score"), self.sp_tool_score,
+             t("settings.rag.tool_min_score_hint")),
             (t("settings.rag.inject_chars"), self.sp_inject, ""),
         ]
         for column, items in enumerate((left, right)):
@@ -990,13 +993,15 @@ class RagPage(QWidget):
         setattr(self, f"_spin_{field}", box)
         return box
 
-    def _score_spin(self) -> QDoubleSpinBox:
-        low, high, step = chat_config.RAG_LIMITS["min_score"]
+    def _score_spin(self, key: str = "min_score", value: float | None = None) -> QDoubleSpinBox:
+        """0~1 的分数框。`key` 决定范围（RAG_LIMITS），`value` 不给就读 min_score。"""
+        low, high, step = chat_config.RAG_LIMITS[key]
         box = QDoubleSpinBox()
         box.setRange(float(low), float(high))
         box.setSingleStep(float(step))
         box.setDecimals(2)
-        box.setValue(float(self._cfg.rag_min_score))
+        initial = float(self._cfg.rag_min_score) if value is None else float(value)
+        box.setValue(initial)
         box.setFixedWidth(96)
         box.valueChanged.connect(self.save)
         return box
@@ -1257,6 +1262,7 @@ class RagPage(QWidget):
         cfg.rag_top_k = self.sp_top_k.value()
         cfg.rag_timeout_ms = self.sp_timeout.value()
         cfg.rag_min_score = float(self.sp_min_score.value())
+        cfg.rag_tool_min_score = float(self.sp_tool_score.value())
         cfg.rag_chunk_chars = self.sp_chunk_chars.value()
         cfg.rag_chunk_overlap = self.sp_chunk_overlap.value()
         cfg.rag_max_file_mb = self.sp_max_file.value()

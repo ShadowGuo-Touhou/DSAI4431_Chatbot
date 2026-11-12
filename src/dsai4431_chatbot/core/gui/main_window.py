@@ -723,10 +723,12 @@ class _ToolJob(QRunnable):
     worker 里**不碰任何 Qt 对象**：结果写进带锁的字段，主线程用 QTimer 轮询。
     """
 
-    def __init__(self, router, calls: list) -> None:
+    def __init__(self, router, calls: list, *, min_score: float | None = None) -> None:
         super().__init__()
         self.router = router
         self.calls = [dict(call) for call in calls]
+        # 门槛在**主线程**读好再带进来：worker 里不碰 QSettings
+        self.min_score = min_score
         self.lock = threading.Lock()
         self.outcomes: list | None = None
         self.error: BaseException | None = None
@@ -736,7 +738,7 @@ class _ToolJob(QRunnable):
         outcomes = []
         try:
             for call in self.calls:
-                outcomes.append(self.router.run(call))
+                outcomes.append(self.router.run(call, min_score=self.min_score))
         except BaseException as exc:            # noqa: BLE001 - 后台不能把异常丢给 Qt
             with self.lock:
                 self.error = exc
@@ -995,7 +997,9 @@ class ChatColumn(QWidget):
 
         # 检索丢到后台线程：这一步可能耗时十几秒，绝不能占着主线程
         self._tool_busy = True
-        self._tool_job = _ToolJob(self._tool_router, calls)
+        self._tool_job = _ToolJob(
+            self._tool_router, calls, min_score=float(getattr(cfg, "rag_tool_min_score", 0.5))
+        )
         QThreadPool.globalInstance().start(self._tool_job)
         self._tool_timer.start()
 
