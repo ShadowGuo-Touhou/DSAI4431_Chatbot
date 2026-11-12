@@ -164,10 +164,12 @@ class CharacterPanel(QWidget):
         self._start_embed(self._cfg.model_path())
 
     def _start_embed(self, model: "Path | None" = None) -> None:
-        """有模型就嵌进来；没有模型/素材就安静地保持占位，不报错。"""
+        """有模型就嵌进来；没有模型/素材就**留空**，不提示也不报错。"""
         model = model or live2d_embed.default_model()
         if model is None:
-            print("[character] 没有找到 *.model3.json，保持占位", file=sys.stderr, flush=True)
+            print("[character] 没有 Live2D 模型文件，界面留空", file=sys.stderr, flush=True)
+            self._hint.hide()
+            self._status.hide()
             return
 
         view = live2d_embed.Live2DView(self, model_json=model)
@@ -302,10 +304,10 @@ class CharacterPanel(QWidget):
             view.hide()
             view.shutdown()
             view.deleteLater()
-        self._hint.show()
-        self._status.setText(t("main.character.error", msg=msg))
-        self._status.show()
-        # 退回占位态，虚线框回来
+        # 按用户要求：素材缺失就**留空**，不在界面上报错（诊断只进控制台）
+        print(f"[character] Live2D 加载失败，界面留空：{msg}", file=sys.stderr, flush=True)
+        self._hint.hide()
+        self._status.hide()
         self._set_state("")
 
     # --- 对外：给未来的业务调用（对话/情绪驱动角色） ---------------------
@@ -1298,7 +1300,7 @@ class ChatColumn(QWidget):
         for row in session_store.load_messages(session_id):
             if row["role"] == "bot" and row["reasoning"] and show_reasoning:
                 thought = self.messages.begin_message("reasoning")
-                thought.setText(row["reasoning"])
+                thought.set_raw(row["reasoning"])
             bubble = self.messages.begin_message(row["role"])
             bubble.set_raw(row["text"] or t("main.messages.empty_reply"))
             self._history.append(
@@ -1319,9 +1321,8 @@ class ChatColumn(QWidget):
         if self._reasoning_bubble is None:
             before = self._bubble.parentWidget() if self._bubble is not None else None
             self._reasoning_bubble = self.messages.begin_message("reasoning", before=before)
-            self._reasoning_bubble.setText(piece)
-        else:
-            self._reasoning_bubble.setText(self._reasoning_bubble.text() + piece)
+        # 用 set_raw：它会顺带按内容量宽度（直接用 setText 会一直保持很窄）
+        self._reasoning_bubble.set_raw(self._reasoning_text)
         self.messages.scroll_to_end()
 
     def _on_delta(self, piece: str) -> None:
