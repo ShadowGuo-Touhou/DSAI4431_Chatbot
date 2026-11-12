@@ -622,6 +622,82 @@ QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {{
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {{
     background: transparent;
 }}
+
+/* --- 启动加载页（覆盖层，见 gui/loading_page.py）-----------------------
+   清单里加新阶段只需要改 MainWindow.LOAD_STEPS，这里样式不用动。
+   状态靠 #loadStep 的 state 属性区分（改属性后要 unpolish/polish 才生效）。 */
+#loadingPage {{
+    background: {bg};
+}}
+#loadingCard {{
+    background: {surface};
+    border: 1px solid {border_soft};
+    border-radius: {radius_panel}px;
+}}
+#loadingTitle {{
+    font-size: 20px;
+    font-weight: 600;
+    color: {text};
+}}
+#loadingSubtitle {{
+    color: {text_weak};
+    font-size: 13px;
+}}
+#loadMark {{
+    color: {text_weak};
+    font-size: 14px;
+}}
+#loadStep[state="running"] #loadMark,
+#loadStep[state="done"] #loadMark {{
+    color: {accent};
+}}
+#loadStepTitle {{
+    color: {text};
+}}
+#loadStep[state="pending"] #loadStepTitle,
+#loadStep[state="skipped"] #loadStepTitle {{
+    color: {text_weak};
+}}
+#loadStepDetail {{
+    color: {text_weak};
+    font-size: 12px;
+}}
+/* 失败要把原因读清楚，别和"已完成"一个色 */
+#loadStep[state="failed"] #loadStepDetail {{
+    color: {text};
+}}
+#loadBar {{
+    background: {surface_alt};
+    border: none;
+    border-radius: 2px;
+}}
+#loadBar::chunk {{
+    background: {accent};
+    border-radius: 2px;
+}}
+#loadOverall {{
+    background: {surface_alt};
+    border: none;
+    border-radius: 3px;
+}}
+#loadOverall::chunk {{
+    background: {accent};
+    border-radius: 3px;
+}}
+#loadingHint {{
+    color: {text_weak};
+    font-size: 12px;
+}}
+#loadingSkip {{
+    background: {surface_alt};
+    color: {text};
+    border: 1px solid {border_soft};
+    border-radius: {radius_small}px;
+    padding: 6px 14px;
+}}
+#loadingSkip:hover {{
+    background: {hover};
+}}
 """
 
 

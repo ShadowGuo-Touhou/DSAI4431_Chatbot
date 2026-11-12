@@ -63,6 +63,7 @@ from dsai4431_chatbot.core.gui import (
     i18n,
     live2d_config,
     live2d_embed,
+    loading_page,
     personas,
     rag_service,
     session_store,
@@ -71,6 +72,7 @@ from dsai4431_chatbot.core.gui import (
     tool_router,
     markdown_lite,
 )
+from dsai4431_chatbot.core.gui.loading_page import LoadingPage
 from dsai4431_chatbot.core.gui.rag_service import RagService
 from dsai4431_chatbot.core.gui.i18n import t
 from dsai4431_chatbot.core.gui.session_drawer import DRAWER_W, SessionDrawer
@@ -135,6 +137,9 @@ class CharacterPanel(QWidget):
 
     # 每次（重新）就绪时发一次：换模型后设置页要重新拉部件清单
     live2d_ready = Signal()
+    # 首次装载「有结论」时发一次：成功 / 失败 / 没有模型。启动加载页要等它
+    # 才能把「加载 Live2D」这一行收掉（ok, 失败原因；没有模型时原因是 "no_model"）
+    settled = Signal(bool, str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -170,6 +175,8 @@ class CharacterPanel(QWidget):
             print("[character] 没有 Live2D 模型文件，界面留空", file=sys.stderr, flush=True)
             self._hint.hide()
             self._status.hide()
+            # 延到事件循环里再发：调用方通常在构造完才接这个信号
+            QTimer.singleShot(0, lambda: self.settled.emit(False, "no_model"))
             return
 
         view = live2d_embed.Live2DView(self, model_json=model)
@@ -197,6 +204,7 @@ class CharacterPanel(QWidget):
         self._set_state("model")
         self._apply_display_config()
         self.live2d_ready.emit()
+        self.settled.emit(True, "")
 
     def _apply_display_config(self) -> None:
         """把配置套到刚就绪的页面上（顺序有讲究：先取景，再偏移，最后缩放）。"""
@@ -309,6 +317,7 @@ class CharacterPanel(QWidget):
         self._hint.hide()
         self._status.hide()
         self._set_state("")
+        self.settled.emit(False, msg)
 
     # --- 对外：给未来的业务调用（对话/情绪驱动角色） ---------------------
     def react(self, name: str) -> bool:
@@ -1368,6 +1377,17 @@ class ChatColumn(QWidget):
 
 
 class MainWindow(QMainWindow):
+    # 启动加载清单：(key, i18n 标题键, 总进度权重)。
+    # 以后接语音模型（SenseVoice）就再追加一行，别的都不用动。
+    LOAD_STEPS = (
+        ("ui", "loading.step_ui", 0.4),
+        ("live2d", "loading.step_live2d", 1.6),
+        ("session", "loading.step_session", 0.4),
+        ("ollama", "loading.step_ollama", 3.0),
+        ("bge", "loading.step_bge", 3.0),
+        ("index", "loading.step_index", 2.0),
+    )
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle(t("app.title"))
@@ -1378,6 +1398,7 @@ class MainWindow(QMainWindow):
         body.setObjectName("windowBody")
         body.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setCentralWidget(body)
+        self._body = body
 
         root = QHBoxLayout(body)
         root.setContentsMargins(16, 16, 16, 16)
@@ -1389,21 +1410,110 @@ class MainWindow(QMainWindow):
         # 两栏之间的留白。注意别指望 QSS 的 QSplitter::handle{width}：
         # 实测不生效（handle 宽度会是 0，两栏贴死），只能在这里设。
         splitter.setHandleWidth(theme.SPLITTER_GAP)
-
-        self.character = CharacterPanel()
-        # 知识库：一个实例同时给聊天列和设置页（状态才一致）
-        self.rag = RagService(self)
-        self.chat = ChatColumn(rag=self.rag)
-        splitter.addWidget(self.character)
-        splitter.addWidget(self.chat)
         splitter.setStretchFactor(0, 3)
         splitter.setStretchFactor(1, 7)
         splitter.setSizes([420, 1020])
-
+        self._splitter = splitter
         root.addWidget(splitter)
+        # 加载期间整块主内容禁用：覆盖层挡住鼠标，disable 兜住键盘焦点
+        splitter.setEnabled(False)
 
-        self.chat.settings_requested.connect(self.open_settings)
+        # 下面这些部件由启动阶段一个个填进来；加载页还在的时候是 None，
+        # 所以任何用到它们的地方都要先判断（见 resizeEvent / open_settings 等）
+        self.character: CharacterPanel | None = None
+        self.chat: ChatColumn | None = None
+        self._drawer: SessionDrawer | None = None
         self._settings = None
+
+        # 知识库服务构造很轻（只建对象 + 一个没启动的定时器），先建好
+        self.rag = RagService(self)
+
+        # 退出前把 WebEngine 收掉（嵌入式 HTTP 服务 + 渲染进程）。
+        # aboutToQuit 管"换语言自动重启"（app.quit() 不触发 closeEvent），
+        # closeEvent 管用户直接关窗口，两个入口都收一遍；shutdown 是幂等的。
+        app = QApplication.instance()
+        if app is not None:
+            app.aboutToQuit.connect(self._on_about_to_quit)
+
+        self._live2d_deadline: QTimer | None = None
+        self._boot_seen: set[str] = set()
+        self._rag_wired = False
+
+        # --- 启动加载页（覆盖层，见 gui/loading_page.py）-----------------
+        self.loading = LoadingPage(body)
+        self.loading.setGeometry(body.rect())
+        self.loading.raise_()
+        for key, title_key, weight in self.LOAD_STEPS:
+            self.loading.add_step(key, t(title_key), weight)
+        self.loading.skip_requested.connect(self._on_skip_downloads)
+        self.loading.closed.connect(self._on_loading_closed)
+
+        # 先把窗口和加载页画出来，再一步步干重活。之前是构造里一口气干完，
+        # 界面出来的时候活已经做完了 —— 加载页根本没机会显示。
+        QTimer.singleShot(0, self._startup_ui)
+
+    # --- 启动阶段 -------------------------------------------------------
+    # 每一步之间用 singleShot(0) 让事件循环刷一次，加载页才有动画。
+    def _startup_ui(self) -> None:
+        self.loading.step("ui").done(t("loading.state.ready"))
+        self.loading.refresh_progress()
+        QTimer.singleShot(0, self._startup_live2d)
+
+    def _startup_live2d(self) -> None:
+        row = self.loading.step("live2d")
+        row.start()
+        self.loading.refresh_progress()
+
+        self.character = CharacterPanel()
+        self.character.settled.connect(self._on_live2d_settled)
+        self._splitter.insertWidget(0, self.character)
+
+        # CharacterPanel 自己有 20 s 探活超时，这里再兜一层：万一信号没发
+        # 出来，加载页也不能一直卡在这一行
+        self._live2d_deadline = QTimer(self)
+        self._live2d_deadline.setSingleShot(True)
+        self._live2d_deadline.timeout.connect(self._on_live2d_timeout)
+        self._live2d_deadline.start(25_000)
+
+    def _stop_live2d_deadline(self) -> bool:
+        """收掉兜底定时器；返回 True 表示这次调用是"第一次"收（没被超时抢先）。"""
+        timer, self._live2d_deadline = self._live2d_deadline, None
+        if timer is None:
+            return False
+        timer.stop()
+        return True
+
+    def _on_live2d_settled(self, ok: bool, reason: str) -> None:
+        if not self._stop_live2d_deadline():
+            return                      # 已经按超时算过了
+        row = self.loading.step("live2d")
+        if ok:
+            row.done(t("loading.state.ready"))
+        elif reason == "no_model":
+            row.skipped(t("loading.state.no_model"))
+        else:
+            # 加载失败按用户要求是"留空不报错"，但加载页上要如实说一声
+            row.failed(t("loading.state.blank"))
+        self.loading.refresh_progress()
+        QTimer.singleShot(0, self._startup_session)
+
+    def _on_live2d_timeout(self) -> None:
+        if not self._stop_live2d_deadline():
+            return
+        self.loading.step("live2d").skipped(t("loading.state.timeout"))
+        self.loading.refresh_progress()
+        QTimer.singleShot(0, self._startup_session)
+
+    def _startup_session(self) -> None:
+        self.loading.step("session").start()
+        self.loading.refresh_progress()
+        QTimer.singleShot(0, self._build_chat)
+
+    def _build_chat(self) -> None:
+        row = self.loading.step("session")
+        self.chat = ChatColumn(rag=self.rag)
+        self.chat.settings_requested.connect(self.open_settings)
+        self._splitter.addWidget(self.chat)
 
         # 会话抽屉（≡ 打开）：叠在窗口左侧，不占 splitter
         self._drawer = SessionDrawer(self)
@@ -1415,29 +1525,167 @@ class MainWindow(QMainWindow):
         self.chat.menu_requested.connect(self.toggle_drawer)
         self.chat.session_updated.connect(self._on_session_updated)
 
-        # 退出前把 WebEngine 收掉（嵌入式 HTTP 服务 + 渲染进程）。
-        # aboutToQuit 管"换语言自动重启"（app.quit() 不触发 closeEvent），
-        # closeEvent 管用户直接关窗口，两个入口都收一遍；shutdown 是幂等的。
-        app = QApplication.instance()
-        if app is not None:
-            app.aboutToQuit.connect(self._on_about_to_quit)
+        count = self._restore_last_session()
+        if count:
+            row.done(t("loading.detail.messages", count=count))
+        else:
+            row.done(t("loading.state.ready"))
+        self.loading.refresh_progress()
+        QTimer.singleShot(0, self._startup_rag)
 
-        # 一打开就把上一次的对话接上（没有对话 → 停在空白首页）
-        self._restore_last_session()
+    def _startup_rag(self) -> None:
+        """启动的知识库同步：信号驱动加载页的第 4/5/6 行。"""
+        cfg = chat_config.load()
+        if not cfg.rag_enabled:
+            for key in ("ollama", "bge", "index"):
+                self.loading.step(key).skipped(t("loading.state.off"))
+            self.loading.refresh_progress()
+            self.loading.complete()
+            return
 
-        # 知识库：启动扫一次（后台跑，界面照常用）。用户明确要求「只在启动时同步」，
-        # 所以这里没有定时器、也没有文件监听；运行中想立刻生效就点设置页的「重新扫描」。
-        QTimer.singleShot(600, self.start_rag_sync)
+        self.loading.step("ollama").start(t("loading.detail.checking"))
+        self.loading.step("index").start(t("loading.detail.checking"))
+        self.loading.refresh_progress()
+
+        if not self._rag_wired:
+            self._rag_wired = True
+            self.rag.bootstrap_progress.connect(self._on_boot_progress)
+            self.rag.bootstrap_ready.connect(self._on_boot_ready)
+            self.rag.progress.connect(self._on_sync_progress)
+            self.rag.synced.connect(self._on_sync_done)
+
+        self.rag.refresh(cfg)
+
+    # --- 加载页：自动安装（Ollama / bge）的进度 --------------------------
+    @staticmethod
+    def _mb(value: int) -> str:
+        return f"{value / (1024 * 1024):.1f}"
+
+    def _on_boot_progress(self, stage: str, done: int, total: int) -> None:
+        page = self.loading
+        if page is None:
+            return
+        if stage in ("downloading", "extracting"):
+            self._boot_seen.add(stage)
+            page.show_skip(True)
+            row = page.step("ollama")
+            if stage == "extracting":
+                row.start(t("loading.detail.extracting"))
+            elif total:
+                row.start()
+                row.set_progress(done / total, t("loading.detail.downloading",
+                                                 done=self._mb(done), total=self._mb(total)))
+            else:
+                row.start(t("loading.detail.downloading_unknown"))
+        elif stage == "pulling":
+            self._boot_seen.add(stage)
+            page.show_skip(True)
+            row = page.step("bge")
+            if total:
+                row.start()
+                row.set_progress(done / total, t("loading.detail.pulling",
+                                                 percent=int(done / total * 100),
+                                                 done=self._mb(done), total=self._mb(total)))
+            else:
+                row.start(t("loading.detail.pulling_unknown"))
+        page.refresh_progress()
+
+    def _on_boot_ready(self, result) -> None:
+        page = self.loading
+        if page is None:
+            return
+        page.show_skip(False)
+        ok = bool(getattr(result, "ok", False))
+        detail = getattr(result, "detail", "") or ""
+        error = getattr(result, "error", "") or ""
+
+        if detail == "cancelled":
+            return                      # 用户点的跳过，两行已经标好了
+        if ok:
+            if "downloading" in self._boot_seen or "extracting" in self._boot_seen:
+                page.step("ollama").done(t("loading.state.ready"))
+            else:
+                page.step("ollama").skipped(t("loading.state.installed"))
+            if "pulling" in self._boot_seen:
+                page.step("bge").done(t("loading.state.ready"))
+            else:
+                page.step("bge").skipped(t("loading.state.installed"))
+        else:
+            # 报错归属：下载阶段失败的算 Ollama，pull 阶段失败的算 bge
+            bad = "ollama" if self._boot_seen & {"downloading", "extracting"} else "bge"
+            good = "bge" if bad == "ollama" else "ollama"
+            page.step(bad).failed(error or t("loading.state.failed"))
+            page.step(good).skipped(t("loading.state.ready"))
+        page.refresh_progress()
+
+    def _on_sync_progress(self, done: int, total: int, rel: str) -> None:
+        page = self.loading
+        if page is None:
+            return
+        row = page.step("index")
+        if total:
+            row.start()
+            row.set_progress(done / total, t("loading.detail.chunks", done=done, total=total))
+        elif rel:
+            row.start(rel)
+        page.refresh_progress()
+
+    def _on_sync_done(self, result) -> None:
+        page = self.loading
+        if page is None:
+            return
+        status = getattr(result, "status", "") if result is not None else ""
+        row = page.step("index")
+        if status == "ok":
+            row.done(t("loading.state.ready"))
+        else:
+            row.skipped(t("loading.state.off"))
+        page.show_skip(False)
+        page.refresh_progress()
+        page.complete()
+
+    # --- 加载页：跳过下载 -----------------------------------------------
+    def _on_skip_downloads(self) -> None:
+        """用户不想等下载：让后台收手，先把主界面放出来。"""
+        page = self.loading
+        if page is None:
+            return
+        from dsai4431_chatbot.core.rag import bootstrap
+
+        bootstrap.cancel()
+        page.show_skip(False)
+        for key in ("ollama", "bge"):
+            row = page.step(key)
+            if row.status in (loading_page.PENDING, loading_page.RUNNING):
+                row.skipped(t("loading.state.skipped"))
+        page.refresh_progress()
+        page.complete()
+        # complete() 会把提示换成"即将进入主界面"，所以这句必须放它后面：
+        # 用户点了跳过，得看得见"跳过之后去哪儿配"
+        page.set_hint(t("loading.skip_done"))
+
+    def _on_loading_closed(self) -> None:
+        """加载页收起：解禁主界面。"""
+        self._splitter.setEnabled(True)
+        page, self.loading = self.loading, None
+        if page is not None:
+            page.deleteLater()
+        if self.chat is not None:
+            # 人格/模型清单是加载期间读的，收尾再刷一次更稳
+            self.chat.home.refresh()
+        self.raise_()
+        self.activateWindow()
 
     def start_rag_sync(self) -> None:
-        """后台跑一次差量同步（启动时自动调，设置页按钮也会调）。"""
+        """后台跑一次差量同步（设置页按钮会调；启动那次走 _startup_rag）。"""
         cfg = chat_config.load()
         if not cfg.rag_enabled:
             return
         self.rag.refresh(cfg)
 
     def _on_about_to_quit(self) -> None:
-        self.character.shutdown()
+        if self.character is not None:
+            self.character.shutdown()
         # 只关「本程序自己拉起的」Ollama；用户开着的、系统装的都不碰
         try:
             from dsai4431_chatbot.core.gui import ollama_launcher
@@ -1449,21 +1697,28 @@ class MainWindow(QMainWindow):
     # --- 会话抽屉 -------------------------------------------------------
     def _place_drawer(self) -> None:
         """抽屉是独立窗口（见 SessionDrawer 里的说明），按主窗口左上角算全局坐标。"""
+        if self._drawer is None:
+            return
         margin = 12
         top_left = self.mapToGlobal(QPoint(margin, margin))
         self._drawer.move(top_left)
         self._drawer.resize(DRAWER_W, max(260, self.height() - margin * 2))
 
     def show_drawer(self) -> None:
+        if self._drawer is None:
+            return
         self._drawer.reload()
         self._place_drawer()
         self._drawer.show()
         self._drawer.raise_()
 
     def hide_drawer(self) -> None:
-        self._drawer.hide()
+        if self._drawer is not None:
+            self._drawer.hide()
 
     def toggle_drawer(self) -> None:
+        if self._drawer is None:
+            return
         if self._drawer.isVisible():
             self.hide_drawer()
         else:
@@ -1471,53 +1726,77 @@ class MainWindow(QMainWindow):
 
     def _on_session_switch(self, session_id: str) -> None:
         """新建或选中会话：把它读进右边聊天区，然后收起抽屉。"""
+        if self.chat is None:
+            return
         self.chat.open_session(session_id)
-        self._drawer.set_current(session_id)
+        if self._drawer is not None:
+            self._drawer.set_current(session_id)
         self.hide_drawer()
 
     def _on_new_session_requested(self) -> None:
         """抽屉里点「新建对话」：收起抽屉，右侧换成空白首页（此时还不建会话）。"""
         self.hide_drawer()
-        self._drawer.set_current("")
-        self.chat.start_new_conversation()
+        if self._drawer is not None:
+            self._drawer.set_current("")
+        if self.chat is not None:
+            self.chat.start_new_conversation()
 
-    def _restore_last_session(self) -> None:
-        """启动时自动接上最近更新过的那条对话；一条都没有就停在空白首页。"""
+    def _restore_last_session(self) -> int:
+        """启动时自动接上最近更新过的那条对话；返回渲染出的消息条数。
+
+        返回条数是给加载页用的（"已恢复 N 条消息"比一个"完成"更有信息量）。
+        """
+        if self.chat is None:
+            return 0
         sessions = session_store.list_sessions()      # 已按 updated_at 倒序
         if not sessions:
             self.chat.start_new_conversation()
-            return
+            return 0
         newest = sessions[0]
         self.chat.open_session(newest.id)
-        self._drawer.set_current(newest.id)
+        if self._drawer is not None:
+            self._drawer.set_current(newest.id)
+        return len(self.chat._history)
 
     def _on_session_updated(self, session_id: str) -> None:
-        if self._drawer.isVisible():
+        if self._drawer is not None and self._drawer.isVisible():
             self._drawer.reload()
             self._drawer.set_current(session_id)
 
     def _on_session_deleted(self, session_id: str) -> None:
         """删掉的正好是当前打开的会话 → 聊天区清空（文件已没了）。"""
-        if self.chat.current_session_id == session_id:
+        if self.chat is not None and self.chat.current_session_id == session_id:
             self.chat.reset_conversation()
 
     def resizeEvent(self, event):  # noqa: N802 - Qt 命名
         super().resizeEvent(event)
-        if self._drawer.isVisible():
+        # 加载页是覆盖层，不会跟着布局走，得手动同步尺寸
+        page = getattr(self, "loading", None)
+        body = getattr(self, "_body", None)
+        if page is not None and body is not None:
+            page.setGeometry(body.rect())
+            page.raise_()
+        if self._drawer is not None and self._drawer.isVisible():
             self._place_drawer()
 
     def moveEvent(self, event):  # noqa: N802
         super().moveEvent(event)
-        if self._drawer.isVisible():
+        if self._drawer is not None and self._drawer.isVisible():
             self._place_drawer()
 
     def closeEvent(self, event):  # noqa: N802
-        self._drawer.close()
-        self.character.shutdown()
+        if self._drawer is not None:
+            self._drawer.close()
+        if self.character is not None:
+            self.character.shutdown()
         super().closeEvent(event)
 
     def keyPressEvent(self, event):  # noqa: N802
-        if event.key() == Qt.Key.Key_Escape and self._drawer.isVisible():
+        if (
+            event.key() == Qt.Key.Key_Escape
+            and self._drawer is not None
+            and self._drawer.isVisible()
+        ):
             self.hide_drawer()
             return
         super().keyPressEvent(event)
@@ -1535,6 +1814,10 @@ class MainWindow(QMainWindow):
             DIALOG_W,
             SettingsDialog,
         )
+
+        # 加载页还在的时候不该能点到这里（覆盖层已经挡住了，这是第二道保险）
+        if self.chat is None or self.character is None:
+            return
 
         dlg = self._settings
         if dlg is not None and dlg.isVisible():

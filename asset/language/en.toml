@@ -266,3 +266,40 @@ note = "White and light grey, matching the DSH main window"
 [theme.deepseek-blue]
 name = "DeepSeek Blue · Dark"
 note = "Dark base + DeepSeek brand blue #4D6BFE"
+
+# --- Startup loading page (core/gui/loading_page.py) -------------------
+# New stage = one more row in MainWindow.LOAD_STEPS + two lines here
+[loading]
+title = "Getting ready"
+subtitle = "The first run downloads components (Ollama ≈ 1.6 GB, the embedding model several hundred MB) and may take a few minutes. The main window appears when everything is ready."
+busy_hint = "Preparing, please wait…"
+enter_hint = "Opening the main window…"
+skip = "Skip downloads"
+skip_done = "Automatic download skipped. You can point Settings → RAG at an Ollama folder and a model folder later."
+step_ui = "Initialising the window"
+step_live2d = "Loading the Live2D model"
+step_session = "Restoring the last conversation"
+step_ollama = "Ollama runtime"
+step_bge = "Embedding model (bge)"
+step_index = "Building the knowledge index"
+
+[loading.state]
+ready = "Done"
+installed = "Already available"
+off = "Turned off"
+skipped = "Skipped"
+failed = "Failed"
+no_model = "No model file"
+blank = "Failed to load; panel left blank"
+timeout = "Timed out"
+
+[loading.detail]
+checking = "Checking…"
+downloading = "{done} / {total} MB"
+downloading_unknown = "Downloading…"
+extracting = "Extracting…"
+pulling = "{percent}% · {done} / {total} MB"
+pulling_unknown = "Downloading model weights…"
+chunks = "{done} / {total} chunks"
+messages = "Restored {count} messages"
+

@@ -265,3 +265,40 @@ note = "白底浅灰，和 DSH 主界面一致"
 [theme.deepseek-blue]
 name = "DeepSeek 蓝 · 深色"
 note = "深底 + DeepSeek 品牌蓝 #4D6BFE"
+
+# --- 启动加载页（core/gui/loading_page.py）----------------------------
+# 加新阶段 = 在 MainWindow.LOAD_STEPS 里追加一行 + 在这里补两条文案
+[loading]
+title = "正在准备"
+subtitle = "首次运行需要下载组件（Ollama ≈ 1.6 GB、向量模型数百 MB），可能需要几分钟。准备完成后会自动进入主界面。"
+busy_hint = "准备中，请稍候…"
+enter_hint = "即将进入主界面…"
+skip = "跳过下载"
+skip_done = "已跳过自动下载。之后可以在 设置 → RAG 里手动指定 Ollama 目录和模型目录。"
+step_ui = "初始化界面"
+step_live2d = "加载 Live2D 模型"
+step_session = "恢复上一次对话"
+step_ollama = "Ollama 运行时"
+step_bge = "向量模型（bge）"
+step_index = "构建知识库索引"
+
+[loading.state]
+ready = "已完成"
+installed = "已就绪"
+off = "已关闭"
+skipped = "已跳过"
+failed = "失败"
+no_model = "没有模型文件"
+blank = "加载失败，界面留空"
+timeout = "等待超时"
+
+[loading.detail]
+checking = "检查中…"
+downloading = "{done} / {total} MB"
+downloading_unknown = "下载中…"
+extracting = "解压中…"
+pulling = "{percent}% · {done} / {total} MB"
+pulling_unknown = "下载模型权重…"
+chunks = "{done} / {total} 块"
+messages = "已恢复 {count} 条消息"
+
