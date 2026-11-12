@@ -64,6 +64,7 @@ settings = "Settings"
 attach = "Add attachment (placeholder)"
 voice = "Voice input (placeholder)"
 send = "Send"
+jump_bottom = "Scroll to bottom"
 
 # --- Shared ---------------------------------------------------------
 [common]

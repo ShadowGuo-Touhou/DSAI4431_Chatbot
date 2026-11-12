@@ -28,7 +28,17 @@ import threading
 from pathlib import Path
 from typing import Literal
 
-from PySide6.QtCore import QPoint, QRunnable, QSize, Qt, QThreadPool, QTimer, Signal
+from PySide6.QtCore import (
+    QEasingCurve,
+    QPoint,
+    QPropertyAnimation,
+    QRunnable,
+    QSize,
+    Qt,
+    QThreadPool,
+    QTimer,
+    Signal,
+)
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QApplication,
@@ -324,7 +334,15 @@ class CharacterPanel(QWidget):
 
 
 class MessageArea(QScrollArea):
-    """消息区：可滚动的竖向气泡列表。"""
+    """消息区：可滚动的竖向气泡列表。
+
+    滚动规矩：
+    - 用户发消息 / 追加消息 → 一定贴到底部（`_pin_bottom`）
+    - 用户自己往上翻 → 松开吸附，流式回复不再把他拽回去
+    - 不在底部时，视图底部中间浮出一个「↓」圆钮，点一下回到底部
+    """
+
+    JUMP_SIDE = 40          # 回到底部按钮直径
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -346,6 +364,21 @@ class MessageArea(QScrollArea):
 
         self._has_messages = False
         self.setWidget(self._body)
+
+        # 是否自动贴底：用户自己往上滚就松开，发消息时重新吸附
+        self._pin_bottom = True
+        self._jump = round_button("chevron", t("main.button.jump_bottom"))
+        self._jump.setParent(self.viewport())
+        self._jump.setFixedSize(self.JUMP_SIDE, self.JUMP_SIDE)
+        self._jump.clicked.connect(self.jump_to_end)
+        self._jump.hide()
+        self._jump_anim = QPropertyAnimation(self.verticalScrollBar(), b"value", self)
+        self._jump_anim.setDuration(160)
+        self._jump_anim.setEasingCurve(QEasingCurve.Type.OutCubic)
+
+        bar = self.verticalScrollBar()
+        bar.rangeChanged.connect(self._on_range_changed)
+        bar.valueChanged.connect(self._on_scrolled)
 
     def add_message(self, role: Literal["user", "bot"], text: str) -> QLabel:
         """追加一条完整消息，返回气泡（流式回复也可以先用它占位）。"""
@@ -397,8 +430,56 @@ class MessageArea(QScrollArea):
         return bubble
 
     def scroll_to_end(self) -> None:
+        """贴到底部。布局还没算完时（刚插入气泡）排一次队再滚。"""
+        self._pin_bottom = True
+        QTimer.singleShot(0, self._apply_pin)
+
+    def _apply_pin(self) -> None:
+        if not self._pin_bottom:
+            return
         bar = self.verticalScrollBar()
         bar.setValue(bar.maximum())
+        self._update_jump()
+
+    def _on_range_changed(self, _low: int, _high: int) -> None:
+        # 内容变长（流式回复、图片加载）时，贴着底部的人不能被甩开
+        if self._pin_bottom:
+            bar = self.verticalScrollBar()
+            bar.setValue(bar.maximum())
+        self._update_jump()
+
+    def _on_scrolled(self, _value: int) -> None:
+        bar = self.verticalScrollBar()
+        # 到底就重新吸附，离开底部就松开（用户自己翻 / 动画过程中都走这条）
+        self._pin_bottom = bar.value() >= bar.maximum() - 4
+        self._update_jump()
+
+    def _update_jump(self) -> None:
+        bar = self.verticalScrollBar()
+        away = bar.maximum() > 0 and bar.value() < bar.maximum() - 4
+        if away:
+            self._place_jump()
+        self._jump.setVisible(away)
+
+    def _place_jump(self) -> None:
+        view = self.viewport()
+        x = max(0, (view.width() - self._jump.width()) // 2)
+        y = max(0, view.height() - self._jump.height() - 14)
+        self._jump.move(x, y)
+
+    def jump_to_end(self) -> None:
+        """圆钮：平滑回到底部（并重新吸附）。"""
+        self._pin_bottom = True
+        bar = self.verticalScrollBar()
+        self._jump_anim.stop()
+        self._jump_anim.setStartValue(bar.value())
+        self._jump_anim.setEndValue(bar.maximum())
+        self._jump_anim.start()
+        self._update_jump()
+
+    def resizeEvent(self, event) -> None:      # noqa: N802 - Qt 命名
+        super().resizeEvent(event)
+        self._place_jump()
 
     def clear_messages(self) -> None:
         while self._lay.count() > 2:  # 保留 empty 标签与底部 stretch
@@ -407,6 +488,8 @@ class MessageArea(QScrollArea):
                 item.widget().deleteLater()
         self._has_messages = False
         self._empty.show()
+        self._pin_bottom = True
+        self._jump.hide()
 
 
 class _InputEdit(QPlainTextEdit):
