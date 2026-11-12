@@ -757,12 +757,17 @@ class RagPage(QWidget):
         # --- 卡片一：服务与模型 -----------------------------------------
         top_card, top = card()
 
-        # 两个「路径」放在最前面：不知道装在哪的用户可以直接留空
+        # 两个「路径」放在最前面：不知道装在哪的用户可以直接留空。
+        # 填了但解析失败（目录不存在/被移走/换机器）的，这里直接当空处理：
+        # 框里留一个死路径毫无意义，反而让人以为"配的是这儿"。
+        self._ollama_dir_kept = _existing_dir_text(self._cfg.rag_ollama_dir)
+        self._models_dir_kept = _existing_dir_text(self._cfg.rag_models_dir)
+
         top.addWidget(field_label(t("settings.rag.ollama_dir")))
         row = QHBoxLayout()
         row.setSpacing(8)
         self.ed_ollama_dir = field_input(self._default_ollama_dir())
-        self.ed_ollama_dir.setText(self._cfg.rag_ollama_dir)
+        self.ed_ollama_dir.setText(self._ollama_dir_kept)
         self.ed_ollama_dir.editingFinished.connect(self.save)
         row.addWidget(self.ed_ollama_dir, 1)
         btn_ollama_dir = small_button(t("common.choose"))
@@ -776,7 +781,7 @@ class RagPage(QWidget):
         row = QHBoxLayout()
         row.setSpacing(8)
         self.ed_models_dir = field_input(self._default_models_dir())
-        self.ed_models_dir.setText(self._cfg.rag_models_dir)
+        self.ed_models_dir.setText(self._models_dir_kept)
         self.ed_models_dir.editingFinished.connect(self.save)
         row.addWidget(self.ed_models_dir, 1)
         btn_models_dir = small_button(t("common.choose"))
@@ -975,6 +980,22 @@ class RagPage(QWidget):
         self._wire_service()
         self.refresh_status()
         self._refresh_files()
+        # 填了但解析失败的路径已经在界面上当空处理了；配置里那个死路径
+        # 也一并清掉，否则下次打开又读回来
+        self._drop_dead_paths()
+
+    def _drop_dead_paths(self) -> None:
+        """把配置文件里已经不存在的路径清空。"""
+        if (
+            self._ollama_dir_kept == (self._cfg.rag_ollama_dir or "").strip()
+            and self._models_dir_kept == (self._cfg.rag_models_dir or "").strip()
+        ):
+            return
+        cfg = chat_config.load()
+        cfg.rag_ollama_dir = self._ollama_dir_kept
+        cfg.rag_models_dir = self._models_dir_kept
+        chat_config.save(cfg)
+        self._cfg = cfg
 
     # --- 参数控件 -------------------------------------------------------
     def _spin(self, field: str) -> QSpinBox:
@@ -1296,6 +1317,27 @@ class RagPage(QWidget):
         else:
             text = t("settings.rag.embedding_missing", model=model, path=str(root))
         self.lb_embedding_state.setText(text)
+
+
+def _existing_dir_text(raw: str) -> str:
+    """填了但**解析不出来**的路径一律当空处理。
+
+    死路径留在框里只会误导（用户以为自己配的就是那儿）。运行时反正也会
+    fallback 到 asset/…，界面上干脆显示成空，让 placeholder 把真实默认
+    路径写清楚。
+
+    目录和文件都认（Ollama 那栏用户可能直接选了 `ollama.exe`）。
+    相对路径按仓库根解析 —— `_store_path()` 存的就是相对形式。
+    """
+    text = (raw or "").strip()
+    if not text:
+        return ""
+    from dsai4431_chatbot.core.gui import settings_store
+
+    path = Path(text)
+    if not path.is_absolute():
+        path = settings_store.project_root() / path
+    return text if (path.is_dir() or path.is_file()) else ""
 
 
 def _store_path(chosen: str) -> str:
