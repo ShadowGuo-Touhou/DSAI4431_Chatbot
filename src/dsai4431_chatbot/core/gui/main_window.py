@@ -1578,6 +1578,7 @@ class MainWindow(QMainWindow):
             self._rag_wired = True
             self.rag.bootstrap_progress.connect(self._on_boot_progress)
             self.rag.bootstrap_ready.connect(self._on_boot_ready)
+            self.rag.ollama_ready.connect(self._on_ollama_ready)
             self.rag.progress.connect(self._on_sync_progress)
             self.rag.synced.connect(self._on_sync_done)
 
@@ -1587,6 +1588,38 @@ class MainWindow(QMainWindow):
     @staticmethod
     def _mb(value: int) -> str:
         return f"{value / (1024 * 1024):.1f}"
+
+    def _on_ollama_ready(self, launch) -> None:
+        """Ollama 那一步的结论：复用 / 已启动 / 已接管 / 失败。
+
+        下载进度**不在这里**：`_on_boot_progress` 负责「正在下载 x / y MB」。
+        两者不会打架 —— `bootstrap`（下载）一定跑在 `ensure_running`（起服务）
+        前面，所以等这个信号来的时候，下载早就结束了。
+
+        （之前漏连这个信号，于是不需要下载时那一行永远停在「检查中…」。）
+        """
+        page = self.loading
+        if page is None or launch is None:
+            return
+
+        detail = str(getattr(launch, "detail", "") or "")
+        row = page.step("ollama")
+        if bool(getattr(launch, "ok", False)):
+            row.done(
+                t(f"loading.detail.ollama_{detail}", default=t("loading.state.ready"))
+            )
+        else:
+            row.failed(
+                t(f"settings.rag.ollama_{detail}", default=t("loading.state.failed"))
+            )
+
+        # 模型不需要下载时（本来就在该在的目录里），bge 那行没人更新，
+        # 顺手在这里收掉，不然它会一直停在灰色的「等待」
+        bge = page.step("bge")
+        if bge.status == loading_page.PENDING:
+            bge.skipped(t("loading.state.installed"))
+
+        page.refresh_progress()
 
     def _on_boot_progress(self, stage: str, done: int, total: int) -> None:
         page = self.loading

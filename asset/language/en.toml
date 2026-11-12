@@ -311,4 +311,8 @@ pulling = "{percent}% · {done} / {total} MB"
 pulling_unknown = "Downloading model weights…"
 chunks = "{done} / {total} chunks"
 messages = "Restored {count} messages"
+# Outcome of the Ollama step (downloading has its own strings above)
+ollama_already_running = "already running, reused"
+ollama_started = "started"
+ollama_took_over = "taken over and restarted"
 

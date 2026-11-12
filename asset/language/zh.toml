@@ -310,4 +310,8 @@ pulling = "{percent}% · {done} / {total} MB"
 pulling_unknown = "下载模型权重…"
 chunks = "{done} / {total} 块"
 messages = "已恢复 {count} 条消息"
+# Ollama 那一步的结论（下载过程另有 downloading / extracting / pulling 文案）
+ollama_already_running = "已在运行，直接复用"
+ollama_started = "已启动"
+ollama_took_over = "已接管并重启"
 
