@@ -723,12 +723,20 @@ class _ToolJob(QRunnable):
     worker 里**不碰任何 Qt 对象**：结果写进带锁的字段，主线程用 QTimer 轮询。
     """
 
-    def __init__(self, router, calls: list, *, min_score: float | None = None) -> None:
+    def __init__(
+        self,
+        router,
+        calls: list,
+        *,
+        min_score: float | None = None,
+        max_chars: int | None = None,
+    ) -> None:
         super().__init__()
         self.router = router
         self.calls = [dict(call) for call in calls]
-        # 门槛在**主线程**读好再带进来：worker 里不碰 QSettings
+        # 门槛/字数上限都在**主线程**读好再带进来：worker 里不碰 QSettings
         self.min_score = min_score
+        self.max_chars = max_chars
         self.lock = threading.Lock()
         self.outcomes: list | None = None
         self.error: BaseException | None = None
@@ -738,7 +746,11 @@ class _ToolJob(QRunnable):
         outcomes = []
         try:
             for call in self.calls:
-                outcomes.append(self.router.run(call, min_score=self.min_score))
+                outcomes.append(
+                    self.router.run(
+                        call, min_score=self.min_score, max_chars=self.max_chars
+                    )
+                )
         except BaseException as exc:            # noqa: BLE001 - 后台不能把异常丢给 Qt
             with self.lock:
                 self.error = exc
@@ -880,16 +892,13 @@ class ChatColumn(QWidget):
         self._start_request(cfg, self._payload(cfg), model)
 
     # --- 发请求 / 工具轮 -------------------------------------------------
-    def _rag_mode(self, cfg) -> str:
-        """tool（默认）/ inject（老办法，直接塞片段）/ off。"""
-        mode = str(getattr(cfg, "rag_mode", "tool") or "tool").strip().lower()
-        if not cfg.rag_enabled:
-            return "off"
-        return mode if mode in ("tool", "inject") else "tool"
+    def _rag_on(self, cfg) -> bool:
+        """知识库是否参与本轮（只有开/关两种状态，检索方式固定为工具调用）。"""
+        return bool(getattr(cfg, "rag_enabled", True))
 
     def _tools_for(self, cfg) -> list[dict] | None:
-        """tool 模式、且有索引时才把工具声明发给模型。"""
-        if self._rag_mode(cfg) != "tool":
+        """开着知识库、且有索引时，把工具声明发给模型（唯一检索方式）。"""
+        if not self._rag_on(cfg):
             return None
         if self.rag is None or self.rag.index() is None:
             return None
@@ -902,9 +911,9 @@ class ChatColumn(QWidget):
             self._finish_bubble(t("main.messages.failed", msg="请求没能发出去"))
 
     def _payload(self, cfg) -> list[dict]:
-        """人格文件 → system 消息；RAG 提示词 → 另一条 system；inject 模式再塞片段。
+        """人格文件 → system 消息；RAG 提示词 → 另一条 system；再加最近对话。
 
-        tool 模式**不注入**片段：模型自己调 search_knowledge，结果作为 tool 消息回来。
+        片段一律**不注入**：模型自己调 search_knowledge，结果作为 tool 消息回来。
         """
         messages: list[dict] = []
         system = self._system_prompt(cfg)
@@ -913,10 +922,6 @@ class ChatColumn(QWidget):
         rag_hint = self._rag_hint(cfg)
         if rag_hint:
             messages.append({"role": "system", "content": rag_hint})
-        if self._rag_mode(cfg) == "inject":
-            retrieved = self._rag_block(cfg)
-            if retrieved:
-                messages.append({"role": "system", "content": retrieved})
         messages.extend(self._history[-MAX_HISTORY_MESSAGES:])
         return messages
 
@@ -925,7 +930,7 @@ class ChatColumn(QWidget):
 
         `{dir}` 会替换成当前知识库目录，换了目录文案也不会说错。
         """
-        if self._rag_mode(cfg) == "off":
+        if not self._rag_on(cfg):
             return ""
         text = str(getattr(cfg, "rag_prompt", "") or "").strip()
         if not text:
@@ -934,38 +939,6 @@ class ChatColumn(QWidget):
         return text.replace("{dir}", folder)
 
     # --- 知识库检索 -----------------------------------------------------
-    def _rag_block(self, cfg) -> str:
-        """查一次知识库并把结果拼成 system 片段。
-
-        **任何失败都返回空串**（关掉 / 没索引 / 超时 / Ollama 没起 / 无命中），
-        发消息这条主路绝不能被 RAG 挡住。
-        """
-        try:
-            if not cfg.rag_enabled:
-                return ""
-            query = self._history[-1]["content"] if self._history else ""
-            result = self.rag.search(str(query), cfg)
-        except Exception as exc:                     # noqa: BLE001 - 兜底：RAG 不许崩聊天
-            print(f"[rag] 检索失败，本次不注入：{exc}", flush=True)
-            return ""
-        self._rag_last = result
-        if not result.hits:
-            if result.error:
-                print(f"[rag] 检索无结果：{result.error}", flush=True)
-            return ""
-        from dsai4431_chatbot.core.rag import retriever
-
-        block = retriever.build_block(result.hits, cfg.rag_inject_chars)
-        if block and self._session is not None:
-            session_store.append_rag_event(
-                self._session.id,
-                query=str(self._history[-1]["content"]) if self._history else "",
-                hits=[hit.digest for hit in result.hits],
-                scores=[round(hit.score, 4) for hit in result.hits],
-                elapsed_ms=result.elapsed_ms,
-            )
-        return block
-
     # --- 工具调用（tool calling）----------------------------------------
     def _on_tool_calls(self, calls: list) -> None:
         """模型说「我要查知识库」：真去查，把结果作为 tool 消息追加后重新发请求。"""
@@ -998,7 +971,10 @@ class ChatColumn(QWidget):
         # 检索丢到后台线程：这一步可能耗时十几秒，绝不能占着主线程
         self._tool_busy = True
         self._tool_job = _ToolJob(
-            self._tool_router, calls, min_score=float(getattr(cfg, "rag_tool_min_score", 0.5))
+            self._tool_router,
+            calls,
+            min_score=float(getattr(cfg, "rag_tool_min_score", 0.5)),
+            max_chars=int(getattr(cfg, "rag_inject_chars", 3000) or 3000),
         )
         QThreadPool.globalInstance().start(self._tool_job)
         self._tool_timer.start()

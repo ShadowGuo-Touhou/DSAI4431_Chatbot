@@ -139,8 +139,6 @@ class _SyncTask(QRunnable):
 
         if not bool(getattr(self.cfg, "rag_enabled", True)):
             return
-        if str(getattr(self.cfg, "rag_mode", "tool")) == "off":
-            return
         try:
             engine = self.embedder or embedder_mod.make_embedder(self.cfg, timeout_s=90)
         except Exception:                        # noqa: BLE001

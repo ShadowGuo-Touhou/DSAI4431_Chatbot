@@ -94,12 +94,20 @@ class ToolRouter:
         self.rag = rag
         self.max_chars = int(max_chars)
 
-    def run(self, call: dict, *, min_score: float | None = None) -> ToolOutcome:
+    def run(
+        self,
+        call: dict,
+        *,
+        min_score: float | None = None,
+        max_chars: int | None = None,
+    ) -> ToolOutcome:
         """执行一次工具调用。
 
         `min_score` 是可信度门槛（设置页可调）；不给就用模块默认值。
+        `max_chars` 覆盖回灌给模型的资料总字数（设置页的「注入字数上限」）。
         """
         threshold = MIN_TOOL_SCORE if min_score is None else float(min_score)
+        limit_chars = self.max_chars if max_chars is None else int(max_chars)
         call_id = str(call.get("id") or "")
         name = str(call.get("name") or "")
         if name and name != TOOL_NAME:
@@ -179,7 +187,7 @@ class ToolRouter:
                 call_id=call_id,
             )
 
-        block = retriever.build_block(strong, self.max_chars)
+        block = retriever.build_block(strong, limit_chars)
         content = f"检索「{query}」命中 {len(strong)} 段资料：\n\n{block}"
         return ToolOutcome(
             ok=True,

@@ -52,8 +52,6 @@ _LEGACY_RAG_PROMPT = (
 
 RAG_DEFAULTS = {
     "enabled": True,
-    # tool = 模型自己调 search_knowledge（默认）；inject = 老办法，发送前直接塞片段
-    "mode": "tool",
     "prompt": DEFAULT_RAG_PROMPT,   # 用户自己写的 RAG 提示词，随工具声明一起发给模型
     "autostart": True,       # 探测不到 Ollama 时自己把它拉起来（退出时关掉自己起的那份）
     "top_k": 4,              # 每次最多注入几块
@@ -117,7 +115,6 @@ class ChatConfig:
     # --- RAG（本地知识库）---------------------------------------------
     # 地址/模型名是文本，其余都在 RAG_LIMITS 范围内，越界会被夹住
     rag_enabled: bool = True
-    rag_mode: str = "tool"
     rag_prompt: str = DEFAULT_RAG_PROMPT
     rag_autostart: bool = True
     rag_top_k: int = 4
@@ -243,7 +240,6 @@ def load() -> ChatConfig:
             rag_embedding=_get(s, "rag_embedding", ""),
             show_reasoning=_get_bool(s, "show_reasoning", False),
             rag_enabled=_get_bool(s, "rag_enabled", RAG_DEFAULTS["enabled"]),
-            rag_mode=_get(s, "rag_mode", RAG_DEFAULTS["mode"]) or RAG_DEFAULTS["mode"],
             rag_prompt=_clean_prompt(_get(s, "rag_prompt", RAG_DEFAULTS["prompt"])),
             rag_autostart=_get_bool(s, "rag_autostart", RAG_DEFAULTS["autostart"]),
             rag_top_k=clamp_int(_get(s, "rag_top_k", RAG_DEFAULTS["top_k"]), "top_k"),
@@ -292,7 +288,6 @@ def save(cfg: ChatConfig) -> None:
     s.setValue(f"{GROUP}/rag_embedding", cfg.rag_embedding)
     s.setValue(f"{GROUP}/show_reasoning", bool(cfg.show_reasoning))
     s.setValue(f"{GROUP}/rag_enabled", bool(cfg.rag_enabled))
-    s.setValue(f"{GROUP}/rag_mode", str(cfg.rag_mode or RAG_DEFAULTS["mode"]))
     s.setValue(f"{GROUP}/rag_prompt", str(cfg.rag_prompt or ""))
     s.setValue(f"{GROUP}/rag_autostart", bool(cfg.rag_autostart))
     s.setValue(f"{GROUP}/rag_top_k", clamp_int(cfg.rag_top_k, "top_k"))
