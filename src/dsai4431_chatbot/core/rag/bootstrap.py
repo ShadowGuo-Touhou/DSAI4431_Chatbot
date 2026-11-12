@@ -254,23 +254,51 @@ def pull_model(
 # ---------------------------------------------------------------------------
 # 总流程
 # ---------------------------------------------------------------------------
-def needs_bootstrap(cfg, *, service_alive: bool) -> bool:
-    """要不要走「自动下载」这套。
+def model_manifest_path(models_root: Path, model: str) -> Path | None:
+    """`quentinz/bge-base-zh-v1.5:latest` → 模型清单在磁盘上的位置。
 
-    只要满足任意一条就不下：
-    1. 设置页里填了 Ollama 目录（用户明确指定）
-    2. 服务已经在跑（说明机器上有能用的 Ollama）
-    3. `find_executable()` 能在默认位置找到 exe（`asset/ollama` 已经有了）
+    Ollama 把清单放在 `<models>/manifests/registry.ollama.ai/<所有者>/<名字>/<tag>`；
+    没有所有者时补 `library`（和 ollama 自己的规则一致）。
     """
-    if bool(getattr(cfg, "rag_ollama_dir", "")):
-        return False
-    if service_alive:
-        return False
+    name = (model or "").strip()
+    if not name:
+        return None
+    if ":" in name:
+        base, tag = name.rsplit(":", 1)
+    else:
+        base, tag = name, "latest"
+    parts = [part for part in base.split("/") if part]
+    if len(parts) == 1:
+        parts = ["library", parts[0]]
+    if len(parts) != 2:
+        return None
+    return models_root / "manifests" / "registry.ollama.ai" / parts[0] / parts[1] / tag
+
+
+def has_model(models_root: Path, model: str) -> bool:
+    path = model_manifest_path(models_root, model)
+    return path is not None and path.is_file()
+
+
+def needs_bootstrap(cfg, *, service_alive: bool = False) -> bool:
+    """要不要走「确保 Ollama 和模型都在」这套。
+
+    只按两条判断（用户 2026-11-12：严格按输入路径，找不到就回默认）：
+
+    1. `ollama.exe` 能不能按路径解析出来 —— 解析不出来就要装
+    2. 模型清单在不在**该在的那个模型目录**里 —— 不在就要 pull
+
+    `service_alive` 保留只为兼容调用方：端口上跑着服务不代表模型就在
+    该在的目录里（以前只看这个，于是"服务在跑但模型没下"会静默坏掉）。
+    """
     from dsai4431_chatbot.core.gui import ollama_launcher
 
-    if ollama_launcher.find_executable(cfg) is not None:
-        return False
-    return True
+    if ollama_launcher.find_executable(cfg) is None:
+        return True
+    model = str(getattr(cfg, "rag_embedding", "") or "").strip()
+    if model and not has_model(ollama_launcher.models_dir(cfg), model):
+        return True
+    return False
 
 
 def ensure_stack(
@@ -288,8 +316,11 @@ def ensure_stack(
     「解压 → 起服务 → pull」。只下载不拉模型时可以不传。
     """
     reset_cancel()
-    target_dir = Path(getattr(cfg, "rag_ollama_dir", "") or ollama_dir())
-    target_models = Path(getattr(cfg, "rag_models_dir", "") or models_dir())
+    from dsai4431_chatbot.core.gui import ollama_launcher
+
+    # 装到哪 = 从哪起：同一个解析函数，避免"装进 A 却从 B 启动"
+    target_dir = ollama_launcher.resolve_ollama_dir(cfg)
+    target_models = ollama_launcher.models_dir(cfg)
     model = str(getattr(cfg, "rag_embedding", "") or "").strip()
 
     exe = ollama_exe(target_dir)

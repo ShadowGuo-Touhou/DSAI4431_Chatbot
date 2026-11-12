@@ -207,49 +207,77 @@ def _project_root() -> Path:
     return settings_store.project_root()
 
 
+def resolve_ollama_dir(cfg=None) -> Path:
+    """Ollama 目录：设置里填的（存在才用）→ 项目自带 `asset/ollama`。
+
+    下载/解压也用它，保证「装到哪」和「从哪起」是同一个判断。
+    """
+    explicit = ""
+    if cfg is not None:
+        explicit = str(getattr(cfg, "rag_ollama_dir", "") or "").strip()
+    if explicit:
+        path = Path(explicit)
+        if path.is_dir():
+            return path
+        print(
+            f"[rag] 设置里的 Ollama 目录不存在（{explicit}），改用 asset/ollama",
+            flush=True,
+        )
+    return _project_root() / "asset" / "ollama"
+
+
 def models_dir(cfg=None) -> Path:
-    """模型目录：设置页填的 > `asset/embedding`。
+    """模型目录：设置页填的（且真的存在）> `asset/embedding`。
+
+    严格按输入路径，但**留一条活路**：填的路径在这台机器上不存在
+    （换电脑、外接盘没插、目录被移走）时退回项目自带的 `asset/embedding`，
+    否则程序会带着一个空模型目录去连 Ollama，检索全是 404。
 
     **不看环境变量 `OLLAMA_MODELS`**（用户 2026-11-12 的决定：设置页说了算）。
-    照环境变量走的坑实测过：机器上那份 Ollama 的模型目录是只读的，
-    新下载的 Ollama 一启动就想在那里建 `manifests-v2`，直接 Permission denied。
     """
-    explicit = str(getattr(cfg, "rag_models_dir", "") or "").strip() if cfg is not None else ""
+    explicit = ""
+    if cfg is not None:
+        explicit = str(getattr(cfg, "rag_models_dir", "") or "").strip()
     if explicit:
-        return Path(explicit)
+        path = Path(explicit)
+        if path.is_dir():
+            return path
+        print(
+            f"[rag] 设置里的模型目录不存在（{explicit}），改用 asset/embedding",
+            flush=True,
+        )
     return _project_root() / "asset" / "embedding"
 
 
 def find_executable(cfg=None) -> Path | None:
-    """按顺序找 ollama：设置页填的目录 → 项目便携版 → PATH → 系统安装的典型位置。"""
-    explicit = str(getattr(cfg, "rag_ollama_dir", "") or "").strip() if cfg is not None else ""
+    """按顺序找 ollama：设置页填的 → 项目自带便携版 → 没了。
+
+    两条硬规矩（用户 2026-11-12）：
+
+    1. **严格按输入路径**：填了就用那个，不去 PATH / `Program Files` 里
+       翻系统装的 Ollama。否则换台机器行为就变，还会悄悄用上别处的模型。
+    2. **找不到就退回默认**：填的路径不存在（换电脑、盘没插）时用项目
+       自带的 `asset/ollama`，而不是直接返回 None 让整个程序瘫掉。
+    """
+    explicit = ""
+    if cfg is not None:
+        explicit = str(getattr(cfg, "rag_ollama_dir", "") or "").strip()
     if explicit:
         base = Path(explicit)
         # 用户可能选了目录，也可能直接选了 exe
         for candidate in (base, base / "ollama.exe", base / "ollama"):
             if candidate.is_file():
                 return candidate
-        return None                       # 填了但不对，就别偷偷换别的，让状态行报出来
+        print(
+            f"[rag] 设置里的 Ollama 目录找不到（{explicit}），改用项目自带的",
+            flush=True,
+        )
 
     portable = _project_root() / "asset" / "ollama" / "ollama.exe"
     if portable.is_file():
         return portable
-
-    from shutil import which
-
-    found = which("ollama")
-    if found:
-        return Path(found)
-
-    local = os.environ.get("LOCALAPPDATA", "")
-    candidates = []
-    if local:
-        candidates.append(Path(local) / "Programs" / "Ollama" / "ollama.exe")
-    candidates.append(Path("C:/Program Files/Ollama/ollama.exe"))
-    for path in candidates:
-        if path.is_file():
-            return path
     return None
+
 
 
 # ---------------------------------------------------------------------------
