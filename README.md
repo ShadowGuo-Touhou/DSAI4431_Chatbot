@@ -1,6 +1,18 @@
 # DSAI4431 Chatbot
 
-DSAI4431 课程聊天机器人项目。
+### For my teammates:
+
+* This installation guide is written for AI, not human, it's going to be painful to set it up yourself. You better let AI do it.
+
+* You can change the language in the setting page on top right coner, Chinese and English are supported.
+
+* The personality plugin is ready, I still working on RAG, but you can now write your chatbot persona.
+
+* To create new personality, just create a new directory somewhere and write perosnality for your chatbot in .md files.
+  
+  * Refer to the default "FatWhale" persona for reference
+
+
 
 ## 环境要求
 
@@ -71,17 +83,17 @@ DSAI4431_Chatbot/
 
 ## 资源目录 `asset/`
 
-| 目录 | 放什么 | 是否入库 |
-|---|---|---|
-| `asset/persona/` | 人格设定文本（`.md` / `.json`） | 入库 |
-| `asset/language/` | 界面文案：`zh.toml` / `en.toml` | 入库 |
-| `asset/live2d/vendor/` | `pixi.min.js`、`cubism4.min.js`、`live2dcubismcore.min.js` | 入库 |
-| `asset/live2d/cubism-core/` | 官方 Cubism SDK for Web 的 Core 原始文件 | 入库 |
-| `asset/live2d/models/Hiyori/`、`Natori/` | 示例模型 | 入库 |
-| `asset/live2d/models/DeepSeek免费公皮/` | 大肥鱼模型 + 125 MB PSD 源文件 | **不入库** |
-| `asset/RAG/` | 检索知识库的原始文档 | 入库 |
-| `asset/embedding/` | 向量模型权重 | **不入库** |
-| `asset/ollama/` | Ollama 拉取的本地模型 | **不入库** |
+| 目录                                      | 放什么                                                      | 是否入库    |
+| --------------------------------------- | -------------------------------------------------------- | ------- |
+| `asset/persona/`                        | 人格设定文本（`.md` / `.json`）                                  | 入库      |
+| `asset/language/`                       | 界面文案：`zh.toml` / `en.toml`                               | 入库      |
+| `asset/live2d/vendor/`                  | `pixi.min.js`、`cubism4.min.js`、`live2dcubismcore.min.js` | 入库      |
+| `asset/live2d/cubism-core/`             | 官方 Cubism SDK for Web 的 Core 原始文件                        | 入库      |
+| `asset/live2d/models/Hiyori/`、`Natori/` | 示例模型                                                     | 入库      |
+| `asset/live2d/models/DeepSeek免费公皮/`     | 大肥鱼模型 + 125 MB PSD 源文件                                   | **不入库** |
+| `asset/RAG/`                            | 检索知识库的原始文档                                               | 入库      |
+| `asset/embedding/`                      | 向量模型权重                                                   | **不入库** |
+| `asset/ollama/`                         | Ollama 拉取的本地模型               | **不入库** |
 
 ### 关于模型文件不入库
 
@@ -146,7 +158,7 @@ src\dsai4431_chatbot\core\live2d\启动.bat
 > 动作/表情不在 model3.json 里；`make_demo_model.py` 扫描 `Animation/` 与 `Exp3/`
 > 后生成带 `Motions` + `Expressions` 的版本。原始文件不要改。
 > 因为模型目录已排除出 git，clone 后需要重新生成一次：
->
+> 
 > ```powershell
 > .\.venv\Scripts\python.exe src\dsai4431_chatbot\core\live2d\make_demo_model.py `
 >   "asset\live2d\models\DeepSeek免费公皮\DeepSeek\大肥鱼.model3.json"
