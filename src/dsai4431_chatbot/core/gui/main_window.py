@@ -1388,6 +1388,11 @@ class MainWindow(QMainWindow):
         ("index", "loading.step_index", 2.0),
     )
 
+    # 角色区最多占窗口宽度的这个比例（用户要求：2/5 左右）。
+    # QSplitter 没有「最大比例」这种东西，只能靠子控件的 maximumWidth 卡住 ——
+    # splitter 会尊重它，拖到上限就停。
+    CHARACTER_MAX_RATIO = 0.4
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle(t("app.title"))
@@ -1467,6 +1472,7 @@ class MainWindow(QMainWindow):
         self.character = CharacterPanel()
         self.character.settled.connect(self._on_live2d_settled)
         self._splitter.insertWidget(0, self.character)
+        self._fit_character_width()
 
         # CharacterPanel 自己有 20 s 探活超时，这里再兜一层：万一信号没发
         # 出来，加载页也不能一直卡在这一行
@@ -1482,6 +1488,25 @@ class MainWindow(QMainWindow):
             return False
         timer.stop()
         return True
+
+    def _fit_character_width(self) -> None:
+        """按窗口宽度卡住角色区的最大宽度。
+
+        分割条没有「最大比例」这种东西，只能设子控件的 maximumWidth：
+        QSplitter 会尊重它，拖动到上限就停住，窗口变大时上限自动放宽。
+        """
+        character = getattr(self, "character", None)
+        body = getattr(self, "_body", None)
+        if character is None or body is None:
+            return
+        body_w = body.width()
+        if body_w <= 0:
+            return
+        limit = max(
+            character.minimumWidth(), int(body_w * self.CHARACTER_MAX_RATIO)
+        )
+        if character.maximumWidth() != limit:
+            character.setMaximumWidth(limit)
 
     def _on_live2d_settled(self, ok: bool, reason: str) -> None:
         if not self._stop_live2d_deadline():
@@ -1776,6 +1801,7 @@ class MainWindow(QMainWindow):
         if page is not None and body is not None:
             page.setGeometry(body.rect())
             page.raise_()
+        self._fit_character_width()
         if self._drawer is not None and self._drawer.isVisible():
             self._place_drawer()
 
