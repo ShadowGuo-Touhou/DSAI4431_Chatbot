@@ -25,23 +25,27 @@
 
 ## 快速开始
 
-**跑主界面**（要的东西最多，按这个来）：
+**跑主界面**（最省事，两步）：
 
 ```powershell
-# 1. 建虚拟环境（只做一次）
-python -m venv .venv
+# 1. 装依赖：脚本自己找 Python 3.12+、建 .venv、pip install -e ".[gui,rag]"
+.\安装依赖.bat
+#    网络慢就走清华镜像：.\安装依赖.bat --mirror
 
-# 2. 装依赖：主界面 + 知识库检索
-#    国内建议加镜像：-i https://pypi.tuna.tsinghua.edu.cn/simple
-.\.venv\Scripts\python.exe -m pip install -e ".[gui,rag]"
-
-# 3. 启动
+# 2. 启动
 .\启动GUI.bat
 ```
 
 首次启动会显示一个**加载页**，把 Ollama（约 1.6 GB）、向量模型、语音模型一项项
 准备好才进主界面；不想等可以点「跳过下载」，之后在设置 → RAG 里手动配。
 具体每一步做什么见 [0.5 程序启动时会做什么](#05-程序启动时会做什么)。
+
+手工等价命令（不想用脚本时）：
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e ".[gui,rag]"
+```
 
 **只要核心包的命令行**（echo 占位，不装 Qt，几十秒就装完）：
 
