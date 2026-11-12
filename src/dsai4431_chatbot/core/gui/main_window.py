@@ -1040,7 +1040,10 @@ class ChatColumn(QWidget):
             return
 
         messages = self._req_messages
-        messages.append(tool_router.assistant_message(calls))
+        # 思考模式下必须把这一轮的思考链带回去，否则下一次请求会被 400 拒掉
+        messages.append(
+            tool_router.assistant_message(calls, self.client.last_reasoning())
+        )
         self._req_messages = messages
 
         # 先画一行「正在检索」，让用户知道在干什么（此时还没结果）

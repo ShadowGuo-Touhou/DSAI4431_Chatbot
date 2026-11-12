@@ -74,9 +74,13 @@ class ToolOutcome:
         return f"检索「{self.query}」· 没有找到相关资料"
 
 
-def assistant_message(calls: list[dict]) -> dict:
-    """把模型这一轮的 tool_calls 还原成要追加进 messages 的 assistant 消息。"""
-    return {
+def assistant_message(calls: list[dict], reasoning: str = "") -> dict:
+    """把模型这一轮的 tool_calls 还原成要追加进 messages 的 assistant 消息。
+
+    **思考模式下必须把 `reasoning_content` 原样带回去**，否则服务端直接 400：
+    `The reasoning_content in the thinking mode must be passed back to the API.`
+    """
+    message = {
         "role": "assistant",
         "content": "",
         "tool_calls": [
@@ -91,6 +95,9 @@ def assistant_message(calls: list[dict]) -> dict:
             for index, call in enumerate(calls)
         ],
     }
+    if reasoning:
+        message["reasoning_content"] = reasoning
+    return message
 
 
 class ToolRouter:
