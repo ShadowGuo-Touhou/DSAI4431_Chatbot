@@ -73,6 +73,7 @@ from dsai4431_chatbot.core.gui import (
     themes,
     tool_router,
     markdown_lite,
+    voice_input,
 )
 from dsai4431_chatbot.core.gui.loading_page import LoadingPage
 from dsai4431_chatbot.core.gui.rag_service import RagService
@@ -625,6 +626,8 @@ class InputCard(QFrame):
     """输入卡：一张圆角卡片，上输入、下操作行（附件在左，语音/发送在右）。"""
 
     submitted = Signal(str)
+    # 点了麦克风（开始/结束录音由 ChatColumn 判断，这里只是转发）
+    voice_clicked = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -636,6 +639,13 @@ class InputCard(QFrame):
         outer = QVBoxLayout(self)
         outer.setContentsMargins(14, 12, 12, 10)
         outer.setSpacing(6)
+
+        # 录音/识别的状态提示（平时隐藏，不占视线）
+        self._note = QLabel("")
+        self._note.setObjectName("voiceNote")
+        self._note.setWordWrap(True)
+        self._note.hide()
+        outer.addWidget(self._note)
 
         self.edit = _InputEdit()
         self.edit.setObjectName("inputEdit")
@@ -655,6 +665,7 @@ class InputCard(QFrame):
         actions.addStretch(1)
 
         self.btn_voice = round_button("mic", t("main.button.voice"), action=True)
+        self.btn_voice.clicked.connect(self.voice_clicked.emit)
         actions.addWidget(self.btn_voice)
 
         self.btn_send = round_button(
@@ -666,6 +677,23 @@ class InputCard(QFrame):
 
         self.edit.submitted.connect(self.submitted)
         self.btn_send.clicked.connect(self.edit.submit)
+
+    # --- 语音输入的状态显示 ---------------------------------------------
+    def set_note(self, text: str) -> None:
+        """显示/清掉一行状态（"正在听…"、"识别中…"、"没听清"）。"""
+        if text:
+            self._note.setText(text)
+            self._note.show()
+        else:
+            self._note.clear()
+            self._note.hide()
+
+    def set_recording(self, on: bool) -> None:
+        """录音中：麦克风按钮换状态（QSS 里 [recording="true"]）。"""
+        self.btn_voice.setProperty("recording", bool(on))
+        style = self.btn_voice.style()
+        style.unpolish(self.btn_voice)
+        style.polish(self.btn_voice)
 
 
 class _HomeCombo(QComboBox):
@@ -921,6 +949,45 @@ class _ToolJob(QRunnable):
             return self.outcomes, self.error
 
 
+class _VoiceJob(QRunnable):
+    """后台做一次语音识别（模型加载 + 解码，几百毫秒到几秒）。
+
+    和 `_ToolJob` 一个套路：worker 里不碰 Qt，结果写进带锁字段，
+    主线程用 QTimer 轮询。
+    """
+
+    def __init__(self, samples, *, language: str = "auto", model_dir=None) -> None:
+        super().__init__()
+        self.samples = samples
+        self.language = language
+        self.model_dir = model_dir
+        self.lock = threading.Lock()
+        self.text = ""
+        self.error: BaseException | None = None
+        self.done = False
+        self.setAutoDelete(True)
+
+    def run(self) -> None:                      # noqa: D401 - QRunnable 约定
+        try:
+            from dsai4431_chatbot.core.gui import voice_input
+
+            text = voice_input.transcribe(
+                self.samples, self.language, self.model_dir
+            )
+            with self.lock:
+                self.text = text
+        except BaseException as exc:            # noqa: BLE001 - 交给主线程显示
+            with self.lock:
+                self.error = exc
+        finally:
+            with self.lock:
+                self.done = True
+
+    def snapshot(self):
+        with self.lock:
+            return self.text, self.error, self.done
+
+
 class ChatColumn(QWidget):
     """右侧聊天列：顶栏 + （对话页 | 新对话页）+ 会话后端。"""
 
@@ -1020,6 +1087,86 @@ class ChatColumn(QWidget):
             lambda: not self.client.busy() and not self._tool_busy
         )
         self.input.submitted.connect(self._on_submit)
+
+        # --- 语音输入 ---------------------------------------------------
+        # 录音在主线程（QtMultimedia 的消息），识别放后台线程（模型加载
+        # 2.5 s、解码几百毫秒，绝不能卡界面）
+        self._recorder = voice_input.Recorder(self)
+        self._recorder.auto_stopped.connect(self._finish_voice)
+        self._voice_job: _VoiceJob | None = None
+        self._voice_busy = False
+        self._voice_timer = QTimer(self)
+        self._voice_timer.setInterval(80)
+        self._voice_timer.timeout.connect(self._poll_voice_job)
+        self.input.voice_clicked.connect(self._on_voice_click)
+
+    # --- 语音输入 -------------------------------------------------------
+    def _voice_model_dir(self):
+        cfg = chat_config.load()
+        return voice_input.resolve_model_dir(getattr(cfg, "voice_model_dir", ""))
+
+    def _on_voice_click(self) -> None:
+        """麦克风按钮：没在录就开始，正在录就结束并识别。"""
+        if self._voice_busy:
+            return                       # 后台还在识别，别叠加
+        if self._recorder.is_recording():
+            self._finish_voice()
+        else:
+            self._begin_voice()
+
+    def _begin_voice(self) -> None:
+        if not self._recorder.supported():
+            self.input.set_note(t("main.voice.no_device"))
+            return
+        model_dir = self._voice_model_dir()
+        if not voice_input.models_ready(model_dir):
+            self.input.set_note(t("main.voice.no_model"))
+            return
+        if not self._recorder.start():
+            self.input.set_note(t("main.voice.start_failed"))
+            return
+        self.input.set_recording(True)
+        self.input.set_note(t("main.voice.listening"))
+        # 用户说话的这几秒正好用来把 228 MB 的模型读进来
+        voice_input.warm_up_background("auto", model_dir)
+
+    def _finish_voice(self) -> None:
+        self.input.set_recording(False)
+        samples = self._recorder.stop()
+        if samples is None:
+            self.input.set_note(t("main.voice.too_short"))
+            return
+        self._voice_busy = True
+        self.input.set_note(t("main.voice.recognizing"))
+        job = _VoiceJob(samples, model_dir=self._voice_model_dir())
+        self._voice_job = job
+        QThreadPool.globalInstance().start(job)
+        self._voice_timer.start()
+
+    def _poll_voice_job(self) -> None:
+        job = self._voice_job
+        if job is None:
+            self._voice_timer.stop()
+            return
+        text, error, done = job.snapshot()
+        if not done:
+            return
+
+        self._voice_timer.stop()
+        self._voice_job = None
+        self._voice_busy = False
+
+        if error is not None:
+            self.input.set_note(t("main.voice.failed", reason=str(error)[:60]))
+            return
+        if not text:
+            self.input.set_note(t("main.voice.empty"))
+            return
+
+        self.input.set_note("")
+        # 插到光标处（用户可能已经敲了半句），不覆盖
+        self.input.edit.insertPlainText(text)
+        self.input.edit.setFocus()
 
     # --- 发消息 ---------------------------------------------------------
     def _on_submit(self, text: str) -> None:

@@ -29,6 +29,10 @@ asset/embedding/*
 !asset/embedding/.gitkeep
 asset/ollama/*
 !asset/ollama/.gitkeep
+# 语音识别模型（SenseVoice int8 约 228 MB + Silero VAD）：同样不入库，
+# 缺失时由启动加载页按需下载（见 gui/loading_page.py 的 speech 行）。
+asset/stt/*
+!asset/stt/.gitkeep
 
 # DeepSeek 免费公皮（Live2D 模型 + 125 MB PSD 源文件）：体积大且许可要求
 # 使用者自行获取，不入库。整个目录忽略，目录本身也不需要占位文件。

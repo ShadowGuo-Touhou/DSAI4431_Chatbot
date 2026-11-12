@@ -125,6 +125,22 @@ QPushButton[shape="round"][variant="primary"]:hover {{
     border-color: {accent_hover};
 }}
 
+/* 麦克风录音中：淡红底 + 红边。图标本身是 SVG（由 themes 上色），
+   这里只改底色，不动图标，换肤也不会打架。 */
+QPushButton[shape="round"][kind="action"][recording="true"] {{
+    background: rgba(217, 83, 79, 0.16);
+    border: 1px solid rgba(217, 83, 79, 0.65);
+}}
+QPushButton[shape="round"][kind="action"][recording="true"]:hover {{
+    background: rgba(217, 83, 79, 0.26);
+}}
+/* 录音/识别的状态提示（输入卡最上面那行小字） */
+#voiceNote {{
+    color: {text_weak};
+    font-size: 12px;
+    padding: 0 2px;
+}}
+
 /* 消息区 */
 QScrollArea, #messageViewport {{
     background: transparent;

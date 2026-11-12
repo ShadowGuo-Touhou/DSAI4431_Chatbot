@@ -66,9 +66,20 @@ placeholder = "说点什么…（Enter 发送，Shift+Enter 换行）"
 menu = "会话列表"
 settings = "设置"
 attach = "添加附件（占位）"
-voice = "语音输入（占位）"
+voice = "语音输入（点一下开始，再点一下结束）"
 send = "发送"
 jump_bottom = "回到底部"
+
+# --- 语音输入（core/gui/voice_input.py）------------------------------
+[main.voice]
+listening = "正在听…再点一次麦克风结束（最长 60 秒）"
+recognizing = "识别中…"
+too_short = "太短了，没听清"
+empty = "没听清，再说一次？"
+no_device = "没找到麦克风（检查一下系统 → 隐私 → 麦克风权限）"
+no_model = "语音模型还没装好（启动加载页会下载到 asset/stt）"
+start_failed = "麦克风打不开"
+failed = "识别失败：{reason}"
 
 # --- 通用 -----------------------------------------------------------
 [common]
