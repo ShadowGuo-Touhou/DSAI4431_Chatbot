@@ -36,6 +36,8 @@ SYSTEM_PROMPT_LIMIT = 20000
 # （测试里有一条断言盯着，改一边忘了另一边会红）。
 RAG_DEFAULTS = {
     "enabled": True,
+    # tool = 模型自己调 search_knowledge（默认）；inject = 老办法，发送前直接塞片段
+    "mode": "tool",
     "autostart": True,       # 探测不到 Ollama 时自己把它拉起来（退出时关掉自己起的那份）
     "top_k": 4,              # 每次最多注入几块
     "timeout_ms": 3000,      # 单次检索最长等待
@@ -87,12 +89,15 @@ class ChatConfig:
     persona_files: list[str] = field(default_factory=lambda: list(DEFAULT_PERSONA_FILES))
     rag_dir: str = ""
     rag_ollama: str = ""
+    rag_ollama_dir: str = ""      # 留空 = asset/ollama（再留空就自动下载）
+    rag_models_dir: str = ""      # 留空 = asset/embedding
     rag_embedding: str = ""
     # 显示思考链（两个模型都能返回 reasoning_content）；默认关
     show_reasoning: bool = False
     # --- RAG（本地知识库）---------------------------------------------
     # 地址/模型名是文本，其余都在 RAG_LIMITS 范围内，越界会被夹住
     rag_enabled: bool = True
+    rag_mode: str = "tool"
     rag_autostart: bool = True
     rag_top_k: int = 4
     rag_timeout_ms: int = 3000
@@ -204,9 +209,12 @@ def load() -> ChatConfig:
             ) or list(DEFAULT_PERSONA_FILES),
             rag_dir=_get(s, "rag_dir", ""),
             rag_ollama=_get(s, "rag_ollama", ""),
+            rag_ollama_dir=_get(s, "rag_ollama_dir", ""),
+            rag_models_dir=_get(s, "rag_models_dir", ""),
             rag_embedding=_get(s, "rag_embedding", ""),
             show_reasoning=_get_bool(s, "show_reasoning", False),
             rag_enabled=_get_bool(s, "rag_enabled", RAG_DEFAULTS["enabled"]),
+            rag_mode=_get(s, "rag_mode", RAG_DEFAULTS["mode"]) or RAG_DEFAULTS["mode"],
             rag_autostart=_get_bool(s, "rag_autostart", RAG_DEFAULTS["autostart"]),
             rag_top_k=clamp_int(_get(s, "rag_top_k", RAG_DEFAULTS["top_k"]), "top_k"),
             rag_timeout_ms=clamp_int(
@@ -245,9 +253,12 @@ def save(cfg: ChatConfig) -> None:
     s.setValue(f"{GROUP}/persona_files", list(cfg.persona_files))
     s.setValue(f"{GROUP}/rag_dir", cfg.rag_dir)
     s.setValue(f"{GROUP}/rag_ollama", cfg.rag_ollama)
+    s.setValue(f"{GROUP}/rag_ollama_dir", cfg.rag_ollama_dir)
+    s.setValue(f"{GROUP}/rag_models_dir", cfg.rag_models_dir)
     s.setValue(f"{GROUP}/rag_embedding", cfg.rag_embedding)
     s.setValue(f"{GROUP}/show_reasoning", bool(cfg.show_reasoning))
     s.setValue(f"{GROUP}/rag_enabled", bool(cfg.rag_enabled))
+    s.setValue(f"{GROUP}/rag_mode", str(cfg.rag_mode or RAG_DEFAULTS["mode"]))
     s.setValue(f"{GROUP}/rag_autostart", bool(cfg.rag_autostart))
     s.setValue(f"{GROUP}/rag_top_k", clamp_int(cfg.rag_top_k, "top_k"))
     s.setValue(f"{GROUP}/rag_timeout_ms", clamp_int(cfg.rag_timeout_ms, "timeout_ms"))

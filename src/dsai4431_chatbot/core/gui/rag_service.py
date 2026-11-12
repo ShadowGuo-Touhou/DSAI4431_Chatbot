@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import threading
+import time
 
 from PySide6.QtCore import QObject, QRunnable, QThreadPool, QTimer, Signal
 
@@ -27,6 +28,10 @@ class _Job:
         self.progress = (0, 0, "")
         self.ticks = 0
         self.launch = None          # ollama_launcher.LaunchResult
+        self.boot = None            # bootstrap.BootstrapResult
+        self.boot_stage = ""        # downloading / extracting / pulling
+        self.boot_done = 0
+        self.boot_total = 0
         self.result = None          # indexer.SyncResult
         self.error: BaseException | None = None
         self.done = False
@@ -36,7 +41,15 @@ class _Job:
             self.progress = (int(done), int(total), str(rel))
             self.ticks += 1
 
-    def snapshot(self) -> tuple[tuple[int, int, str], int, object, object, BaseException | None, bool]:
+    def set_boot(self, stage: str, done: int = 0, total: int = 0) -> None:
+        """自动下载/装模型时的进度（字节数，total=0 表示未知）。"""
+        with self.lock:
+            self.boot_stage = stage
+            self.boot_done = int(done)
+            self.boot_total = int(total)
+            self.ticks += 1
+
+    def snapshot(self):
         with self.lock:
             return (
                 self.progress,
@@ -45,6 +58,10 @@ class _Job:
                 self.result,
                 self.error,
                 self.done,
+                self.boot,
+                self.boot_stage,
+                self.boot_done,
+                self.boot_total,
             )
 
 
@@ -60,10 +77,28 @@ class _SyncTask(QRunnable):
         self.setAutoDelete(True)
 
     def run(self) -> None:                      # noqa: D401 - QRunnable 约定
-        from dsai4431_chatbot.core.rag import indexer
+        from dsai4431_chatbot.core.rag import bootstrap, indexer
 
         job = self.job
         try:
+            # 0) 什么都没配、也找不到 Ollama → 自动下到 asset/ollama + asset/embedding
+            if self.ensure_runner is not None:
+                try:
+                    alive = ollama_launcher.is_alive(ollama_launcher.base_url(self.cfg))
+                    if bootstrap.needs_bootstrap(self.cfg, service_alive=alive):
+                        boot = bootstrap.ensure_stack(
+                            self.cfg,
+                            progress=job.set_boot,
+                            service_alive=alive,
+                            # pull 之前必须先把 serve 拉起来；用同一个 starter 保证
+                            # 「谁起的进程谁负责收」，退出时能关掉
+                            starter=lambda: self.ensure_runner(self.cfg),
+                        )
+                        with job.lock:
+                            job.boot = boot
+                except Exception as exc:        # noqa: BLE001 - 后台不能把异常丢给 Qt
+                    print(f"[rag] 自动配置 Ollama 时出错：{exc}", flush=True)
+
             # 1) 探测 / 按需拉起 Ollama（已经在跑就什么都不做）
             if self.ensure_runner is not None:
                 try:
@@ -80,6 +115,11 @@ class _SyncTask(QRunnable):
             )
             with job.lock:
                 job.result = result
+
+            # 3) 预热（A 方案）：embedding 模型第一次请求要 20+ 秒加载，
+            #    而且每遇到一个新的输入长度还要重新分配缓冲（3~9 秒）。
+            #    不预热的话，工具调用链路的第一问必然超时。
+            self._warm_up(job)
         except BaseException as exc:            # noqa: BLE001 - 同上，交给主线程显示
             with job.lock:
                 job.error = exc
@@ -88,12 +128,43 @@ class _SyncTask(QRunnable):
             with job.lock:
                 job.done = True
 
+    def _warm_up(self, job: _Job) -> None:
+        """同步完成后打几枪，把模型和常见长度都热起来。
+
+        - 失败一律忽略（没 Ollama / 没模型都不该影响同步结果）
+        - 覆盖三档长度：极短、常见问句、稍长
+        - 总时长有上限，避免启动卡太久
+        """
+        from dsai4431_chatbot.core.rag import embedder as embedder_mod
+
+        if not bool(getattr(self.cfg, "rag_enabled", True)):
+            return
+        if str(getattr(self.cfg, "rag_mode", "tool")) == "off":
+            return
+        try:
+            engine = self.embedder or embedder_mod.make_embedder(self.cfg, timeout_s=90)
+        except Exception:                        # noqa: BLE001
+            return
+        samples = ["预热", "这个项目的知识库索引保存在哪个目录？",
+                   "请检索一下项目文档里关于检索超时与返回条数这两项参数的说明"]
+        deadline = time.monotonic() + 90.0
+        for index, text in enumerate(samples, start=1):
+            if time.monotonic() > deadline:
+                break
+            try:
+                engine.embed([text])
+            except Exception as exc:             # noqa: BLE001 - 预热失败不算错
+                print(f"[rag] 预热第 {index} 句失败（忽略）：{exc}", flush=True)
+                break
+
 
 class RagService(QObject):
     """索引缓存的持有者。`ChatColumn` 用它检索，`RagPage` 用它刷新状态。"""
 
     progress = Signal(int, int, str)            # 进度（done, total, 当前文件）
     ollama_ready = Signal(object)               # ollama_launcher.LaunchResult
+    bootstrap_progress = Signal(str, int, int)  # 自动下载/装模型：stage, done, total
+    bootstrap_ready = Signal(object)            # bootstrap.BootstrapResult
     synced = Signal(object)                     # indexer.SyncResult
     syncing_changed = Signal(bool)              # 开始 / 结束
 
@@ -115,6 +186,8 @@ class RagService(QObject):
         self._ensure_runner = ensure_runner
         self.last_result = None
         self.last_launch = None
+        self.last_boot = None
+        self._seen_boot = False
         self._timer = QTimer(self)
         self._timer.setInterval(POLL_MS)
         self._timer.timeout.connect(self._poll)
@@ -156,6 +229,7 @@ class RagService(QObject):
         self._job = job
         self._seen_ticks = 0
         self._seen_launch = False
+        self._seen_boot = False
         self._running = True
         self._again = False
         self.syncing_changed.emit(True)
@@ -172,16 +246,26 @@ class RagService(QObject):
         if job is None:
             self._timer.stop()
             return
-        progress, ticks, launch, result, error, done = job.snapshot()
+        progress, ticks, launch, result, error, done, boot, stage, boot_done, boot_total = (
+            job.snapshot()
+        )
 
         if ticks != self._seen_ticks:
             self._seen_ticks = ticks
-            self.progress.emit(*progress)
+            if stage:
+                self.bootstrap_progress.emit(stage, boot_done, boot_total)
+            else:
+                self.progress.emit(*progress)
 
         if launch is not None and not self._seen_launch:
             self._seen_launch = True
             self.last_launch = launch
             self.ollama_ready.emit(launch)
+
+        if boot is not None and not self._seen_boot:
+            self._seen_boot = True
+            self.last_boot = boot
+            self.bootstrap_ready.emit(boot)
 
         if not done:
             return

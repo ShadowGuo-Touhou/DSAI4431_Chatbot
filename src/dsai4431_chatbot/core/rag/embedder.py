@@ -25,6 +25,11 @@ import numpy as np
 MAX_BATCH = 16
 # 建索引时单次请求的超时（秒）。查询走自己那套 timeout，见 retriever
 INDEX_TIMEOUT_S = 60.0
+# 让 Ollama 把 embedding 模型保活多久（每次请求都会续期；超过这个时长没请求才卸载）。
+# 实测不设的话每次请求后都可能卸载：冷启动 22 s、热 0.06 s，
+# 而检索超时只有十几秒 → 闲置后第一句必然拿不到知识库。
+# 用 "30m" 而不是 -1：常用时够快，长时间不用会把内存还回去。
+KEEP_ALIVE = "30m"
 
 
 class EmbedError(RuntimeError):
@@ -88,7 +93,8 @@ class OllamaEmbedder:
     # --- 内部 ---------------------------------------------------------
     def _post(self, batch: list[str]) -> list[list[float]]:
         payload = json.dumps(
-            {"model": self.model, "input": batch}, ensure_ascii=False
+            {"model": self.model, "input": batch, "keep_alive": KEEP_ALIVE},
+            ensure_ascii=False,
         ).encode("utf-8")
         request = urllib.request.Request(
             self.endpoint(),

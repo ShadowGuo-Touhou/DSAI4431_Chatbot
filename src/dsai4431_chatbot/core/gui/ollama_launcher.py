@@ -81,13 +81,30 @@ def _project_root() -> Path:
     return settings_store.project_root()
 
 
-def models_dir() -> Path:
-    """模型应该放的地方：`<repo>/asset/embedding`（README 里就是这么定的）。"""
+def models_dir(cfg=None) -> Path:
+    """模型目录：设置页填的 > `asset/embedding`。
+
+    **不看环境变量 `OLLAMA_MODELS`**（用户 2026-11-12 的决定：设置页说了算）。
+    照环境变量走的坑实测过：机器上那份 Ollama 的模型目录是只读的，
+    新下载的 Ollama 一启动就想在那里建 `manifests-v2`，直接 Permission denied。
+    """
+    explicit = str(getattr(cfg, "rag_models_dir", "") or "").strip() if cfg is not None else ""
+    if explicit:
+        return Path(explicit)
     return _project_root() / "asset" / "embedding"
 
 
-def find_executable() -> Path | None:
-    """按顺序找 ollama：项目便携版 → PATH → 系统安装的典型位置。"""
+def find_executable(cfg=None) -> Path | None:
+    """按顺序找 ollama：设置页填的目录 → 项目便携版 → PATH → 系统安装的典型位置。"""
+    explicit = str(getattr(cfg, "rag_ollama_dir", "") or "").strip() if cfg is not None else ""
+    if explicit:
+        base = Path(explicit)
+        # 用户可能选了目录，也可能直接选了 exe
+        for candidate in (base, base / "ollama.exe", base / "ollama"):
+            if candidate.is_file():
+                return candidate
+        return None                       # 填了但不对，就别偷偷换别的，让状态行报出来
+
     portable = _project_root() / "asset" / "ollama" / "ollama.exe"
     if portable.is_file():
         return portable
@@ -126,15 +143,14 @@ def ensure_running(
     if not bool(getattr(cfg, "rag_autostart", True)):
         return LaunchResult(ok=False, started=False, detail="disabled")
 
-    exe = find_executable() if command is None else Path(command[0])
+    exe = find_executable(cfg) if command is None else Path(command[0])
     if command is None and exe is None:
         return LaunchResult(ok=False, started=False, detail="no_exe")
 
     argv = command or [str(exe), "serve"]
     env = os.environ.copy()
-    # 只在用户没自己设过时兜底，别覆盖他显式配置的路径
-    if not env.get("OLLAMA_MODELS"):
-        env["OLLAMA_MODELS"] = str(models_dir())
+    # 设置页填了模型目录就以它为准；没填才沿用环境变量，再退回 asset/embedding
+    env["OLLAMA_MODELS"] = str(models_dir(cfg))
 
     creation = _CREATE_NO_WINDOW if sys.platform == "win32" else 0
     try:

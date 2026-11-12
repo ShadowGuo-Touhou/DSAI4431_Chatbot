@@ -456,6 +456,7 @@ Ollama 默认监听 11434 端口……
 | 2026-11-12 12:30 | 明确 Ollama / 模型放哪：系统已装就用系统的，没装解压到 `asset/ollama`；模型统一 `asset/embedding`（`OLLAMA_MODELS` 指这里） |
 | 2026-11-12 12:45 | 新增「启动时探测并自动拉起 Ollama」（方案 B：只关自己起的那份）+ 设置项 `rag_autostart`；`rag_service` 改成主线程轮询（worker 不碰 Qt 对象） |
 | 2026-11-12 12:52 | 文件清单每行右侧加「已入库 / 未入库」标记（`core/rag/status.py`，口径=台账 sha256）；「清空索引」后标记立即全变红 |
+| 2026-11-12 13:48 | **改成工具调用（tool calling）**：模型自己调 `search_knowledge`；新增 `tool_router.py`、`rag_mode` 开关（tool/inject）、启动预热、轮次上限 3；注入模式保留作对照 |
 
 ---
 
@@ -468,6 +469,7 @@ Ollama 默认监听 11434 端口……
 | S2 设置页 + 启动同步 | ✅ | `RagPage` 12 个控件 + 状态行 + 两个按钮；`rag_service` 后台同步；`test_ap_rag_ui.py` **33/33** |
 | **启动时自动拉起 Ollama** | ✅ | `ollama_launcher`：探测 → 找 exe → `serve` → 等就绪 → 退出时只收自己起的；`test_aq_ollama_launcher.py` **24/24** |
 | S3 检索注入 | ✅ | `main_window._payload` 插第二条 system；会话追加 `rag/retrieved` 事件 |
+| **S3.5 工具调用** | ✅ | 模型自己调 `search_knowledge`（已用真 API 验证 `finish_reason=tool_calls`）；`tool_router.py` + `rag_mode`；`test_at_tool_calls.py` **23/23**；真机端到端能答对并显示「🔍 检索…」 |
 | Ollama 真联调 | ⏳ **未做**（按用户安排：最后再导模型） | `embedder.py` 已按 `/api/embed` 写好，但**没有对真实 Ollama 跑过**；上模型前先 `ollama pull bge-m3`，再把设置页的模型名改成 `bge-m3` |
 | S4 气泡里显示来源 | ❌ 未做（可选） | 计划里的 S4 |
 

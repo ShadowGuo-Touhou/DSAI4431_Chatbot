@@ -57,6 +57,7 @@ from dsai4431_chatbot.core.gui import (
     session_store,
     theme,
     themes,
+    tool_router,
 )
 from dsai4431_chatbot.core.gui.rag_service import RagService
 from dsai4431_chatbot.core.gui.i18n import t
@@ -778,6 +779,14 @@ class ChatColumn(QWidget):
         self.client.reasoning_delta.connect(self._on_reasoning_delta)
         self.client.finished_ok.connect(self._on_reply_done)
         self.client.failed.connect(self._on_reply_failed)
+        self.client.tool_calls.connect(self._on_tool_calls)
+
+        # 工具调用（tool calling）：模型自己要检索时，这里负责真去查
+        self._tool_router = tool_router.ToolRouter(self.rag)
+        self._tool_rounds = 0          # 本轮已经查了几次（防无限循环）
+        self._req_messages: list[dict] = []   # 正在发的这份 messages（工具轮要往后追加）
+        self._req_model = ""
+        self._tool_notes: list[QLabel] = []   # 本轮已画的「🔍 检索…」小字
 
         self._history: list[dict] = []   # OpenAI 格式：{"role": ..., "content": ...}
         self._bubble: QLabel | None = None   # 正在流式写入的那个气泡
@@ -821,18 +830,45 @@ class ChatColumn(QWidget):
         self._reasoning_bubble = None
 
         model = session.model or cfg.model
-        if not self.client.send(cfg, self._payload(cfg), model=model):
+        self._tool_rounds = 0
+        self._tool_notes = []
+        self._start_request(cfg, self._payload(cfg), model)
+
+    # --- 发请求 / 工具轮 -------------------------------------------------
+    def _rag_mode(self, cfg) -> str:
+        """tool（默认）/ inject（老办法，直接塞片段）/ off。"""
+        mode = str(getattr(cfg, "rag_mode", "tool") or "tool").strip().lower()
+        if not cfg.rag_enabled:
+            return "off"
+        return mode if mode in ("tool", "inject") else "tool"
+
+    def _tools_for(self, cfg) -> list[dict] | None:
+        """tool 模式、且有索引时才把工具声明发给模型。"""
+        if self._rag_mode(cfg) != "tool":
+            return None
+        if self.rag is None or self.rag.index() is None:
+            return None
+        return [tool_router.TOOL_SPEC]
+
+    def _start_request(self, cfg, messages: list[dict], model: str) -> None:
+        self._req_messages = messages
+        self._req_model = model
+        if not self.client.send(cfg, messages, model=model, tools=self._tools_for(cfg)):
             self._finish_bubble(t("main.messages.failed", msg="请求没能发出去"))
 
     def _payload(self, cfg) -> list[dict]:
-        """人格文件 → system 消息；知识库片段 → 第二条 system；再加最近若干轮对话。"""
+        """人格文件 → system 消息；inject 模式下再塞一条知识库片段；最后是最近对话。
+
+        tool 模式**不注入**片段：模型自己调 search_knowledge，结果作为 tool 消息回来。
+        """
         messages: list[dict] = []
         system = self._system_prompt(cfg)
         if system:
             messages.append({"role": "system", "content": system})
-        retrieved = self._rag_block(cfg)
-        if retrieved:
-            messages.append({"role": "system", "content": retrieved})
+        if self._rag_mode(cfg) == "inject":
+            retrieved = self._rag_block(cfg)
+            if retrieved:
+                messages.append({"role": "system", "content": retrieved})
         messages.extend(self._history[-MAX_HISTORY_MESSAGES:])
         return messages
 
@@ -868,6 +904,73 @@ class ChatColumn(QWidget):
                 elapsed_ms=result.elapsed_ms,
             )
         return block
+
+    # --- 工具调用（tool calling）----------------------------------------
+    def _on_tool_calls(self, calls: list) -> None:
+        """模型说「我要查知识库」：真去查，把结果作为 tool 消息追加后重新发请求。"""
+        cfg = chat_config.load()
+        if not calls:
+            self._finish_bubble(t("main.messages.failed", msg="模型返回了空的工具调用"))
+            return
+        if self._tool_rounds >= tool_router.MAX_ROUNDS:
+            # 已经用完轮次、也明确告诉过它「不许再查」，它还要求工具 → 收尾，别死循环
+            self._finish_bubble(
+                t("main.messages.failed", msg="模型反复要求检索，已停止本轮")
+            )
+            return
+
+        messages = self._req_messages
+        messages.append(tool_router.assistant_message(calls))
+
+        for call in calls:
+            outcome = self._tool_router.run(dict(call))
+            messages.append(
+                {
+                    "role": "tool",
+                    # 必须回填模型给的 call id，否则服务端会拒绝
+                    "tool_call_id": outcome.call_id or str(call.get("id") or ""),
+                    "content": outcome.content,
+                }
+            )
+            self._show_tool_note(outcome)
+            print(f"[rag] 工具调用：{outcome.summary()}", flush=True)
+            if self._session is not None:
+                session_store.append_rag_event(
+                    self._session.id,
+                    query=outcome.query,
+                    hits=[] if not outcome.hits else [f"{outcome.hits} 段"],
+                    scores=[round(outcome.top_score, 4)] if outcome.hits else [],
+                    elapsed_ms=outcome.elapsed_ms,
+                )
+
+        self._tool_rounds += 1
+        # 到轮次上限就不给工具了，逼它拿现有资料直接回答
+        exhausted = self._tool_rounds >= tool_router.MAX_ROUNDS
+        if exhausted:
+            messages.append(
+                {
+                    "role": "system",
+                    "content": "检索次数已用完，请立刻基于已有资料回答；资料不足就直说。",
+                }
+            )
+        self._req_messages = messages
+        if not self.client.send(
+            cfg,
+            messages,
+            model=self._req_model,
+            tools=None if exhausted else self._tools_for(cfg),
+        ):
+            self._finish_bubble(t("main.messages.failed", msg="工具结果没能发回模型"))
+
+    def _show_tool_note(self, outcome) -> None:
+        """在回答气泡上方加一行「🔍 检索…」（流式正文开始前就看得见）。"""
+        try:
+            note = self.messages.begin_message("reasoning", before=self._bubble)
+            note.setText(f"🔍 {outcome.summary()}")
+            self._tool_notes.append(note)
+            self.messages.scroll_to_end()
+        except Exception as exc:              # noqa: BLE001 - 提示行画不出来不影响主流程
+            print(f"[rag] 检索提示行没画出来：{exc}", flush=True)
 
     def _system_prompt(self, cfg) -> str:
         """会话里记着用哪个人格；没有就退回设置页那份。"""

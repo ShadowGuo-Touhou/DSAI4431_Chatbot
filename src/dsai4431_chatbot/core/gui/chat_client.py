@@ -38,6 +38,8 @@ class ChatClient(QObject):
     reasoning_delta = Signal(str)  # 增量思考链（思考模式下才有）
     finished_ok = Signal(str)      # 完整文本
     failed = Signal(str)           # 人话版的错误
+    # 模型要求调用工具：list[{"id","name","arguments"}]；来了这个就不再发 finished_ok
+    tool_calls = Signal(list)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -51,6 +53,8 @@ class ChatClient(QObject):
         self._server_error = ""    # 服务端在流里塞的 error
         self._aborted = False
         self._usage: dict = {}     # 最后一次响应里的 usage（流式要有才给）
+        self._tool_calls: dict[int, dict] = {}   # index → {id,name,arguments}
+        self._finish_reason = ""
 
     # --- 状态 -----------------------------------------------------------
     def busy(self) -> bool:
@@ -65,10 +69,17 @@ class ChatClient(QObject):
         return self._reasoning
 
     # --- 发请求 ---------------------------------------------------------
-    def send(self, cfg, messages: list[dict], model: str | None = None) -> bool:
+    def send(
+        self,
+        cfg,
+        messages: list[dict],
+        model: str | None = None,
+        tools: list[dict] | None = None,
+    ) -> bool:
         """cfg 是 chat_config.ChatConfig；messages 是 OpenAI 格式的对话数组。
 
         `model` 可以覆盖 cfg.model —— 每个会话自己记着用哪个模型。
+        `tools` 给了就在 payload 里声明工具（OpenAI 格式），并让模型自己决定用不用。
         """
         if self._reply is not None:
             return False
@@ -84,6 +95,9 @@ class ChatClient(QObject):
             "messages": messages,
             "stream": True,
         }
+        if tools:
+            payload["tools"] = tools
+            payload["tool_choice"] = "auto"
         request = QNetworkRequest(QUrl(cfg.endpoint()))
         request.setHeader(
             QNetworkRequest.KnownHeaders.ContentTypeHeader, "application/json"
@@ -104,6 +118,8 @@ class ChatClient(QObject):
         self._server_error = ""
         self._aborted = False
         self._usage = {}
+        self._tool_calls = {}
+        self._finish_reason = ""
 
         body = QByteArray(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
         self._reply = self._nam.post(request, body)
@@ -168,6 +184,30 @@ class ChatClient(QObject):
         choice = choices[0] or {}
         delta = choice.get("delta") or {}
 
+        if choice.get("finish_reason"):
+            self._finish_reason = str(choice["finish_reason"])
+
+        # 工具调用：流式下按 index 拼（第一片带 id + 函数名，之后只带 arguments 碎片；
+        # 实测 DeepSeek 的 arguments 会被切成十几个小片，必须一路相加）
+        pieces = delta.get("tool_calls") or (choice.get("message") or {}).get("tool_calls") or []
+        for entry in pieces:
+            if not isinstance(entry, dict):
+                continue
+            try:
+                index = int(entry.get("index", 0) or 0)
+            except (TypeError, ValueError):
+                index = 0
+            slot = self._tool_calls.setdefault(
+                index, {"id": "", "name": "", "arguments": ""}
+            )
+            if entry.get("id"):
+                slot["id"] = str(entry["id"])
+            function = entry.get("function") or {}
+            if function.get("name"):
+                slot["name"] = str(function["name"])
+            if function.get("arguments"):
+                slot["arguments"] += str(function["arguments"])
+
         # 思考链先到（reasoner）：单独发，别和正文混在一起
         think = delta.get("reasoning_content") or (choice.get("message") or {}).get(
             "reasoning_content"
@@ -212,6 +252,18 @@ class ChatClient(QObject):
         if self._aborted:
             self.finished_ok.emit(self._text)
             return
+
+        # 模型要调工具：这一轮没有正文，交给上层去执行工具、然后再发一次请求
+        if self._tool_calls:
+            calls = [
+                self._tool_calls[i]
+                for i in sorted(self._tool_calls)
+                if self._tool_calls[i].get("name")
+            ]
+            self._tool_calls = {}
+            if calls:
+                self.tool_calls.emit(calls)
+                return
 
         if self._server_error and not self._text:
             self.failed.emit(self._server_error)

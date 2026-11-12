@@ -755,6 +755,41 @@ class RagPage(QWidget):
 
         # --- 卡片一：服务与模型 -----------------------------------------
         top_card, top = card()
+
+        # 两个「路径」放在最前面：不知道装在哪的用户可以直接留空
+        top.addWidget(field_label(t("settings.rag.ollama_dir")))
+        row = QHBoxLayout()
+        row.setSpacing(8)
+        self.ed_ollama_dir = field_input(self._default_ollama_dir())
+        self.ed_ollama_dir.setText(self._cfg.rag_ollama_dir)
+        self.ed_ollama_dir.editingFinished.connect(self.save)
+        row.addWidget(self.ed_ollama_dir, 1)
+        btn_ollama_dir = small_button(t("common.choose"))
+        btn_ollama_dir.clicked.connect(
+            lambda: self._pick_dir(self.ed_ollama_dir, self._default_ollama_dir())
+        )
+        row.addWidget(btn_ollama_dir)
+        top.addLayout(row)
+
+        top.addWidget(field_label(t("settings.rag.models_dir")))
+        row = QHBoxLayout()
+        row.setSpacing(8)
+        self.ed_models_dir = field_input(self._default_models_dir())
+        self.ed_models_dir.setText(self._cfg.rag_models_dir)
+        self.ed_models_dir.editingFinished.connect(self.save)
+        row.addWidget(self.ed_models_dir, 1)
+        btn_models_dir = small_button(t("common.choose"))
+        btn_models_dir.clicked.connect(
+            lambda: self._pick_dir(self.ed_models_dir, self._default_models_dir())
+        )
+        row.addWidget(btn_models_dir)
+        top.addLayout(row)
+
+        hint_paths = QLabel(t("settings.rag.paths_hint"))
+        hint_paths.setObjectName("hintText")
+        hint_paths.setWordWrap(True)
+        top.addWidget(hint_paths)
+
         top.addWidget(field_label(t("settings.rag.ollama")))
         row = QHBoxLayout()
         row.setSpacing(8)
@@ -779,6 +814,25 @@ class RagPage(QWidget):
         self.cb_enabled.setCursor(Qt.CursorShape.PointingHandCursor)
         self.cb_enabled.toggled.connect(self.save)
         top.addWidget(self.cb_enabled)
+
+        # 检索方式：工具调用（模型自己查）/ 直接注入（发送前塞片段）
+        mode_row = QHBoxLayout()
+        mode_row.setSpacing(8)
+        mode_row.addWidget(field_label(t("settings.rag.mode")))
+        self.cb_mode = QComboBox()
+        self.cb_mode.addItem(t("settings.rag.mode_tool"), "tool")
+        self.cb_mode.addItem(t("settings.rag.mode_inject"), "inject")
+        index = self.cb_mode.findData(str(self._cfg.rag_mode or "tool"))
+        self.cb_mode.setCurrentIndex(max(0, index))
+        self.cb_mode.setToolTip(t("settings.rag.mode_hint"))
+        self.cb_mode.currentIndexChanged.connect(self.save)
+        mode_row.addWidget(self.cb_mode)
+        mode_row.addStretch(1)
+        top.addLayout(mode_row)
+        hint_mode = QLabel(t("settings.rag.mode_hint"))
+        hint_mode.setObjectName("hintText")
+        hint_mode.setWordWrap(True)
+        top.addWidget(hint_mode)
 
         self.cb_autostart = QCheckBox(t("settings.rag.autostart"))
         self.cb_autostart.setObjectName("fileCheck")
@@ -927,6 +981,20 @@ class RagPage(QWidget):
         return box
 
     # --- 路径 -----------------------------------------------------------
+    def _default_ollama_dir(self) -> str:
+        return t("settings.rag.ollama_dir_placeholder")
+
+    def _default_models_dir(self) -> str:
+        return t("settings.rag.models_dir_placeholder")
+
+    def _pick_dir(self, edit: QLineEdit, placeholder: str) -> None:
+        chosen = QFileDialog.getExistingDirectory(
+            self, placeholder or t("common.choose"), str(Path.home())
+        )
+        if chosen:
+            edit.setText(_store_path(chosen))
+            self.save()
+
     def _pick_folder(self) -> None:
         chosen = QFileDialog.getExistingDirectory(
             self, self.ed_folder.placeholderText(), str(Path.home())
@@ -1040,8 +1108,33 @@ class RagPage(QWidget):
             return
         self.rag.progress.connect(self._on_progress)
         self.rag.ollama_ready.connect(self._on_ollama_ready)
+        self.rag.bootstrap_progress.connect(self._on_boot_progress)
+        self.rag.bootstrap_ready.connect(self._on_boot_ready)
         self.rag.synced.connect(self._on_synced)
         self.rag.syncing_changed.connect(self._on_syncing)
+
+    def _on_boot_progress(self, stage: str, done: int, total: int) -> None:
+        """自动下载 Ollama / 拉模型时的进度（第一次运行才会出现）。"""
+        if stage == "downloading":
+            self.lb_status.setText(
+                t(
+                    "settings.rag.boot_downloading",
+                    done=round(done / (1024 * 1024), 1),
+                    total=round(total / (1024 * 1024), 1) if total else "?",
+                )
+            )
+            return
+        self.lb_status.setText(t(f"settings.rag.boot_{stage}"))
+
+    def _on_boot_ready(self, result) -> None:
+        if result is None:
+            return
+        if result.ok:
+            self.lb_status.setText(t(result.message_key))
+        else:
+            self.lb_status.setText(
+                t("settings.rag.boot_failed", detail=result.error or result.detail)
+            )
 
     def _on_ollama_ready(self, launch) -> None:
         """Ollama 探测/拉起的结果（同步结果随后会覆盖这一行，正常）。"""
@@ -1135,7 +1228,10 @@ class RagPage(QWidget):
         cfg.rag_embedding = self.ed_embedding.text().strip()
         cfg.rag_dir = self.ed_folder.text().strip()
         cfg.rag_enabled = bool(self.cb_enabled.isChecked())
+        cfg.rag_mode = str(self.cb_mode.currentData() or "tool")
         cfg.rag_autostart = bool(self.cb_autostart.isChecked())
+        cfg.rag_ollama_dir = self.ed_ollama_dir.text().strip()
+        cfg.rag_models_dir = self.ed_models_dir.text().strip()
         cfg.rag_top_k = self.sp_top_k.value()
         cfg.rag_timeout_ms = self.sp_timeout.value()
         cfg.rag_min_score = float(self.sp_min_score.value())

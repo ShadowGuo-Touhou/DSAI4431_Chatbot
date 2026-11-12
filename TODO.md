@@ -555,6 +555,24 @@
 - 测试：`test_aq_ollama_launcher` 24 项（假 `/api/tags` 服务 + 假 exe 测拉起/就绪/收掉/
   timeout/不覆盖用户 env）；`test_ap_rag_ui` 也加了自动启动开关的读写
 
+### 28. RAG 改成工具调用（模型自己查）—— 已完成（2026-11-12）
+
+用户判断「单纯注入等于模型不知道自己在用知识库」，要求改成 tool calling。
+
+- `chat_client`：`send(tools=...)`；按 `index` 拼接流式 `delta.tool_calls`（真 API 实测
+  一次调用被切成 25 个分片，第一片带 id+函数名、之后只有 arguments 碎片）；
+  新信号 `tool_calls`，来了它就不再发 `finished_ok`
+- `core/gui/tool_router.py`（新）：`search_knowledge` 的 schema + 把一次调用翻译成
+  一次检索 + 一条 `role="tool"` 消息；参数缺 query / 未知工具 / 畸形 JSON 都兜住
+- `main_window`：`_on_tool_calls` 跑工具、回灌、再发；**最多 3 轮**，超了就明确告诉
+  模型「不许再查，直接答」，它还要查就收尾（防死循环）；界面上插一行 `🔍 检索「…」· N 段`
+- 新配置 `rag_mode`：`tool`（默认）/ `inject`（老行为，留作对照），设置页有下拉
+- **启动预热**：同步完成后打 3 枪（短/中/长句）。没有它，工具链路第一问必超时——
+  bge-base 冷启动 22 s，而且**每换一个输入长度还要重新分配缓冲 3~9 s**（实测表格见
+  RAG_PLAN §13）
+- 真机验证（flash）：模型自己连查 2 次 → 命中 0.66 → 正确答出「索引在 data/rag」
+- 测试：`test_at_tool_calls` **23/23**；`test_ap/p_home/aq/as` 跟着改成按模式断言
+
 ### 27. 文件清单右侧「已入库 / 未入库」标记 —— 已完成（2026-11-12）
 
 用户要求：清单每行最右边显示状态，**和台账 hash 一致 = 绿（已在语料库）**，
