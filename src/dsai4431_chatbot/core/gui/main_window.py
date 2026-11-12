@@ -900,7 +900,7 @@ class ChatColumn(QWidget):
             self._finish_bubble(t("main.messages.failed", msg="请求没能发出去"))
 
     def _payload(self, cfg) -> list[dict]:
-        """人格文件 → system 消息；inject 模式下再塞一条知识库片段；最后是最近对话。
+        """人格文件 → system 消息；RAG 提示词 → 另一条 system；inject 模式再塞片段。
 
         tool 模式**不注入**片段：模型自己调 search_knowledge，结果作为 tool 消息回来。
         """
@@ -908,12 +908,21 @@ class ChatColumn(QWidget):
         system = self._system_prompt(cfg)
         if system:
             messages.append({"role": "system", "content": system})
+        rag_hint = self._rag_hint(cfg)
+        if rag_hint:
+            messages.append({"role": "system", "content": rag_hint})
         if self._rag_mode(cfg) == "inject":
             retrieved = self._rag_block(cfg)
             if retrieved:
                 messages.append({"role": "system", "content": retrieved})
         messages.extend(self._history[-MAX_HISTORY_MESSAGES:])
         return messages
+
+    def _rag_hint(self, cfg) -> str:
+        """用户在设置页写的 RAG 提示词（默认只说「你有知识库」）。"""
+        if self._rag_mode(cfg) == "off":
+            return ""
+        return str(getattr(cfg, "rag_prompt", "") or "").strip()
 
     # --- 知识库检索 -----------------------------------------------------
     def _rag_block(self, cfg) -> str:

@@ -13,6 +13,9 @@ from dataclasses import dataclass
 TOOL_NAME = "search_knowledge"
 # 一次问答里最多来回几轮工具调用（防止模型无限查）
 MAX_ROUNDS = 3
+# 结果最低分（B 防线）：最高分低于它 → 干脆告诉模型「没查到」，不塞噪声片段。
+# bge-base 的分数会压缩（相关 0.6~0.85、无关 0.33~0.5），实测卡 0.5 比较稳。
+MIN_TOOL_SCORE = 0.5
 
 TOOL_SPEC = {
     "type": "function",
@@ -53,14 +56,16 @@ class ToolOutcome:
 
     def summary(self) -> str:
         """界面上那一行小字用。"""
-        if not self.ok:
-            return f"检索失败：{self.error or '未知原因'}"
-        if not self.hits:
-            return f"检索「{self.query}」· 没有找到相关资料"
-        return (
-            f"检索「{self.query}」· {self.hits} 段 · "
-            f"最高 {self.top_score:.2f} · {self.elapsed_ms}ms"
-        )
+        if self.hits:
+            return (
+                f"检索「{self.query}」· {self.hits} 段 · "
+                f"最高 {self.top_score:.2f} · {self.elapsed_ms}ms"
+            )
+        if self.error == "相关度不足":
+            return f"检索「{self.query}」· 相关度不足（最高 {self.top_score:.2f}）"
+        if self.error:
+            return f"检索「{self.query}」失败：{self.error}"
+        return f"检索「{self.query}」· 没有找到相关资料"
 
 
 def assistant_message(calls: list[dict]) -> dict:
@@ -136,6 +141,24 @@ class ToolRouter:
         hits = list(getattr(result, "hits", []) or [])
         elapsed = int((time.perf_counter() - started) * 1000)
         error = str(getattr(result, "error", "") or "")
+        # B 防线：不够相关的一律不给模型，免得它被噪声带偏、或误判「知识库里没有」
+        strong = [hit for hit in hits if float(hit.score) >= MIN_TOOL_SCORE]
+        if hits and not strong:
+            best = float(hits[0].score)
+            return ToolOutcome(
+                ok=False,
+                content=(
+                    f"检索「{query}」没有找到足够相关的资料"
+                    f"（最高相关度只有 {best:.2f}，低于 {MIN_TOOL_SCORE:.2f} 的可信阈值）。"
+                    "请如实告诉用户知识库里没有相关内容，不要编造；也不要拿低分片段当依据。"
+                ),
+                query=query,
+                hits=0,
+                top_score=best,
+                elapsed_ms=elapsed,
+                error="相关度不足",
+                call_id=call_id,
+            )
         if not hits:
             content = (
                 f"检索「{query}」没有命中任何资料"
@@ -151,14 +174,14 @@ class ToolRouter:
                 call_id=call_id,
             )
 
-        block = retriever.build_block(hits, self.max_chars)
-        content = f"检索「{query}」命中 {len(hits)} 段资料：\n\n{block}"
+        block = retriever.build_block(strong, self.max_chars)
+        content = f"检索「{query}」命中 {len(strong)} 段资料：\n\n{block}"
         return ToolOutcome(
             ok=True,
             content=content,
             query=query,
-            hits=len(hits),
-            top_score=float(hits[0].score),
+            hits=len(strong),
+            top_score=float(strong[0].score),
             elapsed_ms=elapsed,
             call_id=call_id,
         )

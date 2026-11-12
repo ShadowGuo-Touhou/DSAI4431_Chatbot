@@ -34,10 +34,21 @@ SYSTEM_PROMPT_LIMIT = 20000
 # 这里是**唯一**的默认值来源：设置页的数字框、索引器、检索器都读它。
 # 与 rag/chunker.py 的 DEFAULT_SIZE / DEFAULT_OVERLAP 保持一致
 # （测试里有一条断言盯着，改一边忘了另一边会红）。
+# 工具检索的最低分：低于它就不把片段交给模型（宁可不给，也别给噪声）
+# 实测 bge-base 的分数会压缩（相关 0.6~0.85、无关 0.33~0.5），所以卡在 0.5。
+RAG_TOOL_MIN_SCORE = 0.5
+
+# RAG 提示词默认值：只告诉模型「你有知识库」，不替用户写规矩
+DEFAULT_RAG_PROMPT = (
+    "你有一个本地知识库工具 search_knowledge，可以检索我电脑上的项目文档与笔记。"
+    "需要事实依据时先调用它，不要凭记忆猜。"
+)
+
 RAG_DEFAULTS = {
     "enabled": True,
     # tool = 模型自己调 search_knowledge（默认）；inject = 老办法，发送前直接塞片段
     "mode": "tool",
+    "prompt": DEFAULT_RAG_PROMPT,   # 用户自己写的 RAG 提示词，随工具声明一起发给模型
     "autostart": True,       # 探测不到 Ollama 时自己把它拉起来（退出时关掉自己起的那份）
     "top_k": 4,              # 每次最多注入几块
     "timeout_ms": 3000,      # 单次检索最长等待
@@ -98,6 +109,7 @@ class ChatConfig:
     # 地址/模型名是文本，其余都在 RAG_LIMITS 范围内，越界会被夹住
     rag_enabled: bool = True
     rag_mode: str = "tool"
+    rag_prompt: str = DEFAULT_RAG_PROMPT
     rag_autostart: bool = True
     rag_top_k: int = 4
     rag_timeout_ms: int = 3000
@@ -215,6 +227,7 @@ def load() -> ChatConfig:
             show_reasoning=_get_bool(s, "show_reasoning", False),
             rag_enabled=_get_bool(s, "rag_enabled", RAG_DEFAULTS["enabled"]),
             rag_mode=_get(s, "rag_mode", RAG_DEFAULTS["mode"]) or RAG_DEFAULTS["mode"],
+            rag_prompt=_get(s, "rag_prompt", RAG_DEFAULTS["prompt"]),
             rag_autostart=_get_bool(s, "rag_autostart", RAG_DEFAULTS["autostart"]),
             rag_top_k=clamp_int(_get(s, "rag_top_k", RAG_DEFAULTS["top_k"]), "top_k"),
             rag_timeout_ms=clamp_int(
@@ -259,6 +272,7 @@ def save(cfg: ChatConfig) -> None:
     s.setValue(f"{GROUP}/show_reasoning", bool(cfg.show_reasoning))
     s.setValue(f"{GROUP}/rag_enabled", bool(cfg.rag_enabled))
     s.setValue(f"{GROUP}/rag_mode", str(cfg.rag_mode or RAG_DEFAULTS["mode"]))
+    s.setValue(f"{GROUP}/rag_prompt", str(cfg.rag_prompt or ""))
     s.setValue(f"{GROUP}/rag_autostart", bool(cfg.rag_autostart))
     s.setValue(f"{GROUP}/rag_top_k", clamp_int(cfg.rag_top_k, "top_k"))
     s.setValue(f"{GROUP}/rag_timeout_ms", clamp_int(cfg.rag_timeout_ms, "timeout_ms"))

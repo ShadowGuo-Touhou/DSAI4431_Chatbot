@@ -834,6 +834,23 @@ class RagPage(QWidget):
         hint_mode.setWordWrap(True)
         top.addWidget(hint_mode)
 
+        # RAG 提示词：会和工具声明一起发给模型。默认只说「你有知识库」。
+        top.addWidget(field_label(t("settings.rag.prompt")))
+        self.ed_rag_prompt = QPlainTextEdit()
+        self.ed_rag_prompt.setObjectName("ragPrompt")
+        self.ed_rag_prompt.setLineWrapMode(QPlainTextEdit.LineWrapMode.WidgetWidth)
+        self.ed_rag_prompt.setFixedHeight(96)
+        self.ed_rag_prompt.setPlainText(
+            str(getattr(self._cfg, "rag_prompt", "") or "")
+        )
+        self.ed_rag_prompt.setPlaceholderText(t("settings.rag.prompt_placeholder"))
+        self.ed_rag_prompt.textChanged.connect(self.save)
+        top.addWidget(self.ed_rag_prompt)
+        hint_prompt = QLabel(t("settings.rag.prompt_hint"))
+        hint_prompt.setObjectName("hintText")
+        hint_prompt.setWordWrap(True)
+        top.addWidget(hint_prompt)
+
         self.cb_autostart = QCheckBox(t("settings.rag.autostart"))
         self.cb_autostart.setObjectName("fileCheck")
         self.cb_autostart.setChecked(bool(self._cfg.rag_autostart))
@@ -1229,6 +1246,7 @@ class RagPage(QWidget):
         cfg.rag_dir = self.ed_folder.text().strip()
         cfg.rag_enabled = bool(self.cb_enabled.isChecked())
         cfg.rag_mode = str(self.cb_mode.currentData() or "tool")
+        cfg.rag_prompt = self.ed_rag_prompt.toPlainText().strip()
         cfg.rag_autostart = bool(self.cb_autostart.isChecked())
         cfg.rag_ollama_dir = self.ed_ollama_dir.text().strip()
         cfg.rag_models_dir = self.ed_models_dir.text().strip()
