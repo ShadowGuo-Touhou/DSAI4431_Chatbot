@@ -420,9 +420,13 @@ class MessageArea(QScrollArea):
 
         box = QWidget()
         box.setLayout(row)
+        # 布局里放的是 box（外层容器），外面拿到的是 bubble（QLabel）——
+        # 记下来，`before=bubble` 才能插到正确位置（否则会一路追加到末尾，踩过）
+        bubble._box = box
         index = self._lay.count() - 1
         if before is not None:
-            found = self._lay.indexOf(before)
+            target = getattr(before, "_box", before)
+            found = self._lay.indexOf(target)
             if found >= 0:
                 index = found
         self._lay.insertWidget(index, box)
