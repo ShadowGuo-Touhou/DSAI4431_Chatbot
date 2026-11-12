@@ -20,6 +20,8 @@ _CHECK_SVG = (ICON_DIR / "check.svg").as_posix()
 # 下拉框的小箭头。QSS 里的图片**不会被 themes 重新上色**（那是运行时换 SVG
 # 文本里的 #1f2329），所以这个文件直接用中性灰 #8a9099：浅色皮和深色皮上都看得见。
 _CHEVRON_SVG = (ICON_DIR / "chevron.svg").as_posix()
+# 数字输入框的上下小箭头（同一支笔画的朝上版本）
+_CHEVRON_UP_SVG = (ICON_DIR / "chevron_up.svg").as_posix()
 
 RADIUS_PANEL = 14
 RADIUS_SMALL = 8
@@ -319,6 +321,54 @@ QLineEdit#field {{
 QLineEdit#field:focus {{
     border-color: {accent};
 }}
+/* 数字输入框（设置页参数）：跟文本框同一套圆角外观，去掉系统那套方角灰底 */
+QSpinBox, QDoubleSpinBox {{
+    background: {surface};
+    border: 1px solid {border_soft};
+    border-radius: 9px;
+    padding: 4px 8px;
+    color: {text};
+    min-height: 20px;
+    selection-background-color: {accent};
+}}
+QSpinBox:focus, QDoubleSpinBox:focus {{
+    border-color: {accent};
+}}
+QSpinBox:disabled, QDoubleSpinBox:disabled {{
+    color: {text_weak};
+}}
+QSpinBox::up-button, QDoubleSpinBox::up-button {{
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 18px;
+    border: none;
+    border-left: 1px solid {border_soft};
+    border-top-right-radius: 9px;
+    background: transparent;
+}}
+QSpinBox::down-button, QDoubleSpinBox::down-button {{
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 18px;
+    border: none;
+    border-left: 1px solid {border_soft};
+    border-bottom-right-radius: 9px;
+    background: transparent;
+}}
+QSpinBox::up-button:hover, QDoubleSpinBox::up-button:hover,
+QSpinBox::down-button:hover, QDoubleSpinBox::down-button:hover {{
+    background: {surface_alt};
+}}
+QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {{
+    image: url("{chevron_up_svg}");
+    width: 10px;
+    height: 10px;
+}}
+QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {{
+    image: url("{chevron_svg}");
+    width: 10px;
+    height: 10px;
+}}
 /* Preview 的只读文本框：和 QLineEdit 同一套外观。
    font-size 必须显式写 —— QPlainTextEdit 不认 #field 里继承来的字号，
    不写会落回系统默认（实测渲染成宋体、比别的控件大一号）。 */
@@ -592,5 +642,6 @@ def stylesheet(palette: Mapping[str, str]) -> str:
         splitter_gap=SPLITTER_GAP,
         check_svg=_CHECK_SVG,
         chevron_svg=_CHEVRON_SVG,
+        chevron_up_svg=_CHEVRON_UP_SVG,
     )
     return _TEMPLATE.format(**values)
