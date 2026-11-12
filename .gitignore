@@ -60,6 +60,6 @@ _plan_preview/
 
 # 临时测试目录：tempfile.mkdtemp() 在本机会落到项目根目录，兜一层
 dsai_*/
-# 知识库内容属于个人笔记，绝不入库（只留占位文件）
-asset/RAG/*
-!asset/RAG/.gitkeep
+
+# 知识库内容属于个人笔记：整个目录一律不入库（含 .gitkeep 之外的任何文件）
+asset/RAG/
