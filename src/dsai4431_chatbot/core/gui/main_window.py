@@ -69,6 +69,7 @@ from dsai4431_chatbot.core.gui import (
     theme,
     themes,
     tool_router,
+    markdown_lite,
 )
 from dsai4431_chatbot.core.gui.rag_service import RagService
 from dsai4431_chatbot.core.gui.i18n import t
@@ -333,6 +334,26 @@ class CharacterPanel(QWidget):
             self._view.shutdown()
 
 
+class _Bubble(QLabel):
+    """聊天气泡。
+
+    `role == "bot"` 的气泡把 Markdown 渲染成富文本（表格/代码块/列表…），
+    用户消息与思考链保持纯文本；原文留在 `raw_text` 里，方便回放与测试。
+    """
+
+    def __init__(self, role: str, parent=None) -> None:
+        super().__init__(parent)
+        self.role = role
+        self.raw_text = ""
+
+    def set_raw(self, text: str) -> None:
+        self.raw_text = "" if text is None else str(text)
+        if self.role == "bot":
+            self.setText(markdown_lite.to_html(self.raw_text))
+        else:
+            self.setText(self.raw_text)
+
+
 class MessageArea(QScrollArea):
     """消息区：可滚动的竖向气泡列表。
 
@@ -383,7 +404,7 @@ class MessageArea(QScrollArea):
     def add_message(self, role: Literal["user", "bot"], text: str) -> QLabel:
         """追加一条完整消息，返回气泡（流式回复也可以先用它占位）。"""
         bubble = self.begin_message(role)
-        bubble.setText(text)
+        bubble.set_raw(text)
         self.scroll_to_end()
         return bubble
 
@@ -401,10 +422,13 @@ class MessageArea(QScrollArea):
             self._empty.hide()
             self._has_messages = True
 
-        bubble = QLabel("")
+        bubble = _Bubble(role)
         bubble.setObjectName(self.ROLE_NAMES.get(role, "bubbleBot"))
         bubble.setWordWrap(True)
         bubble.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+        if role == "bot":
+            # 回答里的链接可以点（Markdown 渲染之后才有 <a>）
+            bubble.setOpenExternalLinks(True)
         bubble.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
         # 气泡最宽占视口的 2/3，长文本自动换行，短文本保持自身宽度
         bubble.setMaximumWidth(max(240, int(self.viewport().width() * 0.66)))
@@ -930,6 +954,7 @@ class ChatColumn(QWidget):
 
         self._history: list[dict] = []   # OpenAI 格式：{"role": ..., "content": ...}
         self._bubble: QLabel | None = None   # 正在流式写入的那个气泡
+        self._stream_raw = ""               # 本轮回答的原始 Markdown（渲染用）
         self._bubble_fresh = True            # 还没写过内容（要替换占位文字）
         self._reasoning_text = ""            # 本轮思考链全文（reasoner 才有）
         self._reasoning_bubble: QLabel | None = None
@@ -966,8 +991,9 @@ class ChatColumn(QWidget):
 
         self._history.append({"role": "user", "content": text})
         self._bubble = self.messages.begin_message("bot")
-        self._bubble.setText(t("main.messages.thinking"))
+        self._bubble.set_raw(t("main.messages.thinking"))
         self._bubble_fresh = True
+        self._stream_raw = ""
         self._reasoning_text = ""
         self._reasoning_bubble = None
 
@@ -1239,7 +1265,7 @@ class ChatColumn(QWidget):
                 thought = self.messages.begin_message("reasoning")
                 thought.setText(row["reasoning"])
             bubble = self.messages.begin_message(row["role"])
-            bubble.setText(row["text"] or t("main.messages.empty_reply"))
+            bubble.set_raw(row["text"] or t("main.messages.empty_reply"))
             self._history.append(
                 {
                     "role": "user" if row["role"] == "user" else "assistant",
@@ -1266,11 +1292,9 @@ class ChatColumn(QWidget):
     def _on_delta(self, piece: str) -> None:
         if self._bubble is None:
             return
-        if self._bubble_fresh:
-            self._bubble.setText(piece)
-            self._bubble_fresh = False
-        else:
-            self._bubble.setText(self._bubble.text() + piece)
+        self._stream_raw += piece
+        self._bubble_fresh = False
+        self._bubble.set_raw(self._stream_raw)
         self.messages.scroll_to_end()
 
     def _on_reply_done(self, full: str) -> None:
@@ -1292,7 +1316,7 @@ class ChatColumn(QWidget):
 
     def _finish_bubble(self, text: str) -> None:
         if self._bubble is not None:
-            self._bubble.setText(text)
+            self._bubble.set_raw(text)
             self._bubble = None
         # 收尾时把后台检索状态也清干净，免得输入框一直卡在「不能发」
         self._tool_timer.stop()
