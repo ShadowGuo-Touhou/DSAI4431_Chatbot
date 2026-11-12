@@ -303,6 +303,7 @@ step_live2d = "Loading the Live2D model"
 step_session = "Restoring the last conversation"
 step_ollama = "Ollama runtime"
 step_bge = "Embedding model (bge)"
+step_speech = "Speech recognition model"
 step_index = "Building the knowledge index"
 
 [loading.state]
@@ -324,6 +325,9 @@ pulling = "{percent}% · {done} / {total} MB"
 pulling_unknown = "Downloading model weights…"
 chunks = "{done} / {total} chunks"
 messages = "Restored {count} messages"
+model = "Downloading {name} ({done} / {total} MB)"
+model_unknown = "Downloading {name}…"
+speech_failed = "Speech model download failed: {reason}"
 # Outcome of the Ollama step (downloading has its own strings above)
 ollama_already_running = "already running, reused"
 ollama_started = "started"

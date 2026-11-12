@@ -90,6 +90,105 @@ def models_ready(model_dir: Path | None = None) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# 下载（缺失时由启动加载页调用）
+# ---------------------------------------------------------------------------
+# 三个文件的位置、大小、sha256 都取自 DSH 自己的资源清单（固定 revision，
+# 不会因为上游更新而变），这样校验才有意义。
+_HF_REPO = "csukuangfj/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17"
+_HF_REV = "2365baeacb507f821a0c8120fcee3d484dba7a07"
+_VAD_REPO = "csukuangfj/vad"
+_VAD_REV = "fba88cd2e921609e7675c3aaf51e0b9b295da4bc"
+
+# 先镜像后源站：国内直连 huggingface 基本没戏
+MODEL_SOURCES = ("https://hf-mirror.com", "https://huggingface.co")
+
+MODEL_FILES = (
+    (
+        "sensevoice/model.int8.onnx",
+        f"{_HF_REPO}/resolve/{_HF_REV}/model.int8.onnx",
+        239233841,
+        "c71f0ce00bec95b07744e116345e33d8cbbe08cef896382cf907bf4b51a2cd51",
+    ),
+    (
+        "sensevoice/tokens.txt",
+        f"{_HF_REPO}/resolve/{_HF_REV}/tokens.txt",
+        315894,
+        "f449eb28dc567533d7fa59be34e2abca8784f771850c78a47fb731a31429a1dc",
+    ),
+    (
+        "silero_vad.onnx",
+        f"{_VAD_REPO}/resolve/{_VAD_REV}/silero_vad.onnx",
+        1807522,
+        "a35ebf52fd3ce5f1469b2a36158dba761bc47b973ea3382b3186ca15b1f5af28",
+    ),
+)
+
+
+def _sha256(path: Path) -> str:
+    import hashlib
+
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for block in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def ensure_models(model_dir: Path | None = None, progress=None) -> str:
+    """确保三个模型文件都在；缺的下载并校验 sha256。
+
+    `progress(stage, done, total)`：stage 是文件名，done/total 是字节。
+    返回 `"ready"` / `"downloaded"`；失败抛异常（调用方包成 UI 状态）。
+    """
+    import urllib.error
+
+    from dsai4431_chatbot.core.rag import bootstrap
+
+    root = model_dir or default_model_dir()
+    downloaded = False
+
+    for rel, remote, size, sha in MODEL_FILES:
+        dest = root / rel
+        if dest.is_file() and dest.stat().st_size == size:
+            if _sha256(dest) == sha:
+                continue                              # 已经好了
+        downloaded = True
+        dest.parent.mkdir(parents=True, exist_ok=True)
+
+        last_error: Exception | None = None
+        for origin in MODEL_SOURCES:
+            url = f"{origin}/{remote}"
+            try:
+                if progress is not None:
+                    progress(rel, 0, size)
+
+                def report(done: int, total: int, _rel=rel) -> None:
+                    if progress is not None:
+                        progress(_rel, done, total or size)
+
+                bootstrap.download(url, dest, report)
+                break
+            except Exception as exc:                  # noqa: BLE001 - 换下一个源
+                last_error = exc
+                print(f"[voice] 从 {origin} 下载 {rel} 失败：{exc}", flush=True)
+        else:
+            raise RuntimeError(f"下载 {rel} 失败：{last_error}")
+
+        got = _sha256(dest)
+        if got != sha:
+            dest.unlink(missing_ok=True)
+            raise RuntimeError(f"{rel} 校验失败（sha256 不符）")
+
+    return "downloaded" if downloaded else "ready"
+
+
+def models_missing(model_dir: Path | None = None) -> list[str]:
+    """还缺哪些文件（给加载页显示用）。"""
+    root = model_dir or default_model_dir()
+    return [rel for rel, *_ in MODEL_FILES if not (root / rel).is_file()]
+
+
+# ---------------------------------------------------------------------------
 # 识别器（进程级单例）
 # ---------------------------------------------------------------------------
 _recognizer = None
@@ -167,6 +266,8 @@ class Recorder(QObject):
 
     # 录音中每秒发一次，给界面画时长
     tick = Signal(float)
+    # 每次采到一块数据就发一次峰值（0~1），声纹动画用它
+    level = Signal(float)
     # 录到上限自动停（界面据此收起录音态）
     auto_stopped = Signal()
 
@@ -239,6 +340,7 @@ class Recorder(QObject):
         self._chunks.append(data)
         self._frames += len(data) // 2            # 16 bit = 2 字节一帧
         self.tick.emit(self.duration_s())
+        self.level.emit(self._peak_of(data))
         if self.duration_s() >= MAX_SECONDS:
             self._limit_hit = True
             self.stop()
@@ -277,12 +379,13 @@ class Recorder(QObject):
         return self._limit_hit
 
     # --- 音量大不大（用来提示"没收到声音"）------------------------------
-    def peak_level(self) -> float:
-        """最近这段录音的峰值（0~1）。全程接近 0 说明麦克风没权限。"""
-        if not self._chunks:
-            return 0.0
-        raw = self._chunks[-1]
+    @staticmethod
+    def _peak_of(raw: bytes) -> float:
         if len(raw) < 2:
             return 0.0
         arr = np.frombuffer(raw, dtype="<i2")
         return float(np.max(np.abs(arr)) / 32768.0) if len(arr) else 0.0
+
+    def peak_level(self) -> float:
+        """最近一块数据的峰值（0~1）。全程接近 0 说明麦克风没权限。"""
+        return self._peak_of(self._chunks[-1]) if self._chunks else 0.0

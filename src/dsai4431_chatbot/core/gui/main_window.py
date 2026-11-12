@@ -33,6 +33,7 @@ from PySide6.QtCore import (
     QLockFile,
     QPoint,
     QPropertyAnimation,
+    QRectF,
     QRunnable,
     QSize,
     Qt,
@@ -40,7 +41,7 @@ from PySide6.QtCore import (
     QTimer,
     Signal,
 )
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QColor, QIcon, QPainter, QPen
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
@@ -622,6 +623,99 @@ class _InputEdit(QPlainTextEdit):
         self.submitted.emit(text)
 
 
+class _Waveform(QWidget):
+    """录音时的声纹起伏：一排竖条，以中线为轴上下起伏。
+
+    数据来自 `Recorder.level`（每块音频一个峰值，约 20 ms 一次）。这里不逐块
+    推进，而是每 50 ms 推进一格取这段时间的最大值 —— 既够顺滑，又不会因为
+    主线程被高频刷新拖住。
+    """
+
+    BARS = 32
+    STEP_MS = 50
+    # 麦克风原始电平很小（实测静音 0.004、正常说话才 0.05~0.3），
+    # 放大几倍柱子才看得出来在"跳"
+    GAIN = 3.0
+    # 静音时也留 6px：3px 的柱子配 2px 间隙看着像断掉的虚线，像坏了
+    MIN_BAR = 6.0
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setObjectName("voiceWave")
+        self.setFixedHeight(30)
+        self._levels = [0.0] * self.BARS
+        self._pending = 0.0
+        self._timer = QTimer(self)
+        self._timer.setInterval(self.STEP_MS)
+        self._timer.timeout.connect(self._advance)
+        self.hide()
+
+    # --- 生命周期 -------------------------------------------------------
+    def start(self) -> None:
+        self._levels = [0.0] * self.BARS
+        self._pending = 0.0
+        self.show()
+        self._timer.start()
+
+    def stop(self) -> None:
+        self._timer.stop()
+        self.hide()
+
+    def push(self, level: float) -> None:
+        """记录这段时间里的最大峰值（尖峰不会被后续小声盖掉）。"""
+        self._pending = max(self._pending, float(level))
+
+    def _advance(self) -> None:
+        self._levels.pop(0)
+        self._levels.append(min(1.0, self._pending))
+        self._pending *= 0.35            # 衰减，看起来才有"跳"的感觉
+        self.update()
+
+    # --- 绘制 -----------------------------------------------------------
+    def _accent(self) -> QColor:
+        try:
+            return QColor(themes.manager().palette.get("accent", "#4D6BFE"))
+        except Exception:                # noqa: BLE001 - 取不到就用兜底色
+            return QColor("#4D6BFE")
+
+    def paintEvent(self, event) -> None:  # noqa: N802 - Qt 命名
+        painter = QPainter(self)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        color = self._accent()
+        width = self.width()
+        height = self.height()
+        count = self.BARS
+        gap = 2.0
+        bar_w = max(2.0, (width - gap * (count - 1)) / count)
+        mid = height / 2.0
+
+        # 基线：静音时也看得见"这里有一排东西"，不然整行像断掉的虚线
+        baseline = QColor(color)
+        baseline.setAlpha(55)
+        painter.setPen(QPen(baseline, 1.0))
+        painter.drawLine(0, int(mid), width, int(mid))
+
+        painter.setPen(Qt.PenStyle.NoPen)
+        for index, level in enumerate(self._levels):
+            # 中间高、两边低：越靠中间系数越大，像真声纹
+            center_bias = 1.0 - abs(index - (count - 1) / 2.0) / ((count - 1) / 2.0)
+            shape = 0.45 + 0.55 * center_bias
+            boosted = min(1.0, level * self.GAIN * shape)
+            bar_h = max(self.MIN_BAR, boosted * (height - 4))
+            x = index * (bar_w + gap)
+            y = mid - bar_h / 2.0
+
+            alpha = 110 + int(120 * min(1.0, boosted * 2))
+            color.setAlpha(min(255, alpha))
+            painter.setBrush(color)
+            # 圆角最多 3px：取 bar_w/2 的话矮柱子会被吃成圆点，像一串珠子
+            radius = min(bar_w / 2.0, bar_h / 2.0, 3.0)
+            painter.drawRoundedRect(
+                QRectF(x, y, bar_w, bar_h), radius, radius
+            )
+        painter.end()
+
+
 class InputCard(QFrame):
     """输入卡：一张圆角卡片，上输入、下操作行（附件在左，语音/发送在右）。"""
 
@@ -646,6 +740,10 @@ class InputCard(QFrame):
         self._note.setWordWrap(True)
         self._note.hide()
         outer.addWidget(self._note)
+
+        # 录音时的声纹起伏（同样平时隐藏）
+        self._wave = _Waveform()
+        outer.addWidget(self._wave)
 
         self.edit = _InputEdit()
         self.edit.setObjectName("inputEdit")
@@ -689,11 +787,19 @@ class InputCard(QFrame):
             self._note.hide()
 
     def set_recording(self, on: bool) -> None:
-        """录音中：麦克风按钮换状态（QSS 里 [recording="true"]）。"""
+        """录音中：麦克风按钮换状态（QSS 里 [recording="true"]）+ 声纹动画。"""
         self.btn_voice.setProperty("recording", bool(on))
         style = self.btn_voice.style()
         style.unpolish(self.btn_voice)
         style.polish(self.btn_voice)
+        if on:
+            self._wave.start()
+        else:
+            self._wave.stop()
+
+    def push_level(self, level: float) -> None:
+        """把录音电平喂给声纹动画（Recorder.level 直接连过来）。"""
+        self._wave.push(level)
 
 
 class _HomeCombo(QComboBox):
@@ -988,6 +1094,56 @@ class _VoiceJob(QRunnable):
             return self.text, self.error, self.done
 
 
+class _SpeechJob(QRunnable):
+    """后台确保语音模型在（缺哪个下哪个，带 sha256 校验）。
+
+    下载 228 MB 会花几分钟，绝不能放主线程；进度靠主线程轮询。
+    """
+
+    def __init__(self, model_dir) -> None:
+        super().__init__()
+        self.model_dir = model_dir
+        self.lock = threading.Lock()
+        self.stage = ""
+        self.done_bytes = 0
+        self.total_bytes = 0
+        self.result = ""
+        self.error: BaseException | None = None
+        self.done = False
+        self.setAutoDelete(True)
+
+    def run(self) -> None:                      # noqa: D401 - QRunnable 约定
+        try:
+            from dsai4431_chatbot.core.gui import voice_input
+
+            result = voice_input.ensure_models(self.model_dir, progress=self._report)
+            with self.lock:
+                self.result = result
+        except BaseException as exc:            # noqa: BLE001 - 交给主线程显示
+            with self.lock:
+                self.error = exc
+        finally:
+            with self.lock:
+                self.done = True
+
+    def _report(self, stage: str, done: int, total: int) -> None:
+        with self.lock:
+            self.stage = stage
+            self.done_bytes = done
+            self.total_bytes = total
+
+    def snapshot(self):
+        with self.lock:
+            return (
+                self.stage,
+                self.done_bytes,
+                self.total_bytes,
+                self.result,
+                self.error,
+                self.done,
+            )
+
+
 class ChatColumn(QWidget):
     """右侧聊天列：顶栏 + （对话页 | 新对话页）+ 会话后端。"""
 
@@ -1093,6 +1249,8 @@ class ChatColumn(QWidget):
         # 2.5 s、解码几百毫秒，绝不能卡界面）
         self._recorder = voice_input.Recorder(self)
         self._recorder.auto_stopped.connect(self._finish_voice)
+        # 电平直接喂给声纹动画（InputCard 自己决定要不要画）
+        self._recorder.level.connect(self.input.push_level)
         self._voice_job: _VoiceJob | None = None
         self._voice_busy = False
         self._voice_timer = QTimer(self)
@@ -1534,6 +1692,7 @@ class MainWindow(QMainWindow):
         ("session", "loading.step_session", 0.4),
         ("ollama", "loading.step_ollama", 3.0),
         ("bge", "loading.step_bge", 3.0),
+        ("speech", "loading.step_speech", 3.0),
         ("index", "loading.step_index", 2.0),
     )
 
@@ -1592,6 +1751,10 @@ class MainWindow(QMainWindow):
         self._live2d_deadline: QTimer | None = None
         self._boot_seen: set[str] = set()
         self._rag_wired = False
+        self._speech_job: _SpeechJob | None = None
+        self._speech_timer = QTimer(self)
+        self._speech_timer.setInterval(120)
+        self._speech_timer.timeout.connect(self._poll_speech_job)
 
         # --- 启动加载页（覆盖层，见 gui/loading_page.py）-----------------
         self.loading = LoadingPage(body)
@@ -1708,13 +1871,16 @@ class MainWindow(QMainWindow):
         QTimer.singleShot(0, self._startup_rag)
 
     def _startup_rag(self) -> None:
-        """启动的知识库同步：信号驱动加载页的第 4/5/6 行。"""
+        """启动的知识库同步：信号驱动加载页的 ollama / bge / index 三行。
+
+        语音那一行和 RAG 无关，并行检查（`_startup_speech`），谁先完谁先绿。
+        """
         cfg = chat_config.load()
         if not cfg.rag_enabled:
             for key in ("ollama", "bge", "index"):
                 self.loading.step(key).skipped(t("loading.state.off"))
             self.loading.refresh_progress()
-            self.loading.complete()
+            QTimer.singleShot(0, self._startup_speech)
             return
 
         self.loading.step("ollama").start(t("loading.detail.checking"))
@@ -1730,6 +1896,82 @@ class MainWindow(QMainWindow):
             self.rag.synced.connect(self._on_sync_done)
 
         self.rag.refresh(cfg)
+        QTimer.singleShot(0, self._startup_speech)
+
+    # --- 加载页：语音模型 ------------------------------------------------
+    def _startup_speech(self) -> None:
+        page = self.loading
+        if page is None:
+            return
+        try:
+            cfg = chat_config.load()
+            model_dir = voice_input.resolve_model_dir(
+                getattr(cfg, "voice_model_dir", "")
+            )
+        except Exception:                        # noqa: BLE001 - 配置坏了不该卡启动
+            model_dir = voice_input.default_model_dir()
+
+        if voice_input.models_ready(model_dir):
+            page.step("speech").skipped(t("loading.state.installed"))
+            page.refresh_progress()
+            self._maybe_complete()
+            return
+
+        page.step("speech").start(t("loading.detail.checking"))
+        page.show_skip(True)                     # 228 MB，允许用户跳过
+        page.refresh_progress()
+
+        job = _SpeechJob(model_dir)
+        self._speech_job = job
+        QThreadPool.globalInstance().start(job)
+        self._speech_timer.start()
+
+    def _poll_speech_job(self) -> None:
+        job = self._speech_job
+        page = self.loading
+        if job is None or page is None:
+            self._speech_timer.stop()
+            return
+
+        stage, done, total, result, error, finished = job.snapshot()
+        row = page.step("speech")
+
+        if not finished:
+            if stage:
+                name = stage.split("/")[-1]
+                if total:
+                    row.start()
+                    row.set_progress(
+                        done / total,
+                        t("loading.detail.model",
+                          name=name, done=self._mb(done), total=self._mb(total)),
+                    )
+                else:
+                    row.start(t("loading.detail.model_unknown", name=name))
+                page.refresh_progress()
+            return
+
+        self._speech_timer.stop()
+        self._speech_job = None
+        page.show_skip(False)
+        if error is not None:
+            row.failed(t("loading.detail.speech_failed", reason=str(error)[:60]))
+        elif result == "downloaded":
+            row.done(t("loading.state.ready"))
+        else:
+            row.skipped(t("loading.state.installed"))
+        page.refresh_progress()
+        self._maybe_complete()
+
+    def _maybe_complete(self) -> None:
+        """所有阶段都收尾了才收起加载页。"""
+        page = self.loading
+        if page is None:
+            return
+        for key in ("ollama", "bge", "index", "speech"):
+            if page.step(key).status in (loading_page.PENDING, loading_page.RUNNING):
+                return
+        page.complete()
 
     # --- 加载页：自动安装（Ollama / bge）的进度 --------------------------
     @staticmethod
@@ -1847,9 +2089,19 @@ class MainWindow(QMainWindow):
             row.done(t("loading.state.ready"))
         else:
             row.skipped(t("loading.state.off"))
+
+        # 兜底：同步都跑完了就说明 Ollama 是能用的，但这两行可能一直挂在
+        # 「检查中…」（例如注入了别的 runner，`ollama_ready` 根本不会发）。
+        # 收到了真结论就不动它。
+        for key in ("ollama", "bge"):
+            fallback = page.step(key)
+            if fallback.status in (loading_page.PENDING, loading_page.RUNNING):
+                fallback.skipped(t("loading.state.ready"))
+
         page.show_skip(False)
         page.refresh_progress()
-        page.complete()
+        # 语音那一行可能还在下模型，交给 _maybe_complete 判断
+        self._maybe_complete()
 
     # --- 加载页：跳过下载 -----------------------------------------------
     def _on_skip_downloads(self) -> None:
@@ -1859,9 +2111,9 @@ class MainWindow(QMainWindow):
             return
         from dsai4431_chatbot.core.rag import bootstrap
 
-        bootstrap.cancel()
+        bootstrap.cancel()               # 语音模型的下载也走这个取消开关
         page.show_skip(False)
-        for key in ("ollama", "bge"):
+        for key in ("ollama", "bge", "speech"):
             row = page.step(key)
             if row.status in (loading_page.PENDING, loading_page.RUNNING):
                 row.skipped(t("loading.state.skipped"))

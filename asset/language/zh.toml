@@ -302,6 +302,7 @@ step_live2d = "加载 Live2D 模型"
 step_session = "恢复上一次对话"
 step_ollama = "Ollama 运行时"
 step_bge = "向量模型（bge）"
+step_speech = "语音识别模型"
 step_index = "构建知识库索引"
 
 [loading.state]
@@ -323,6 +324,9 @@ pulling = "{percent}% · {done} / {total} MB"
 pulling_unknown = "下载模型权重…"
 chunks = "{done} / {total} 块"
 messages = "已恢复 {count} 条消息"
+model = "下载 {name}（{done} / {total} MB）"
+model_unknown = "下载 {name}…"
+speech_failed = "语音模型下载失败：{reason}"
 # Ollama 那一步的结论（下载过程另有 downloading / extracting / pulling 文案）
 ollama_already_running = "已在运行，直接复用"
 ollama_started = "已启动"
