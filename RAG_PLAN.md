@@ -194,6 +194,7 @@ rag_inject_chars=3000                 ; 注入内容总字数上限（防爆上�
 | 设置项 | ini 键 | 控件 | 范围 | 默认 |
 |---|---|---|---|---|
 | 启用知识库检索 | `rag_enabled` | 勾选框 | — | 开 |
+| 启动时自动拉起 Ollama | `rag_autostart` | 勾选框 | — | 开（探不到才起，退出时关掉自己起的那份） |
 | Ollama 地址 | `rag_ollama` | 输入框 | — | `http://127.0.0.1:11434` |
 | Embedding 模型名 | `rag_embedding` | 输入框 | — | `bge-m3` |
 | 返回条数 @k | `rag_top_k` | `QSpinBox` | 1–20 | **4** |
@@ -453,6 +454,7 @@ Ollama 默认监听 11434 端口……
 | 2026-11-12 00:12 | 新增 3.1：用户可调 @k 与检索超时（设置页两个数字框）；同步更新第 6/7/8 节 |
 | 2026-11-12 12:20 | 3.1 扩成「11 个参数全进设置页」（用户要求）；补 §13 实装进度 |
 | 2026-11-12 12:30 | 明确 Ollama / 模型放哪：系统已装就用系统的，没装解压到 `asset/ollama`；模型统一 `asset/embedding`（`OLLAMA_MODELS` 指这里） |
+| 2026-11-12 12:45 | 新增「启动时探测并自动拉起 Ollama」（方案 B：只关自己起的那份）+ 设置项 `rag_autostart`；`rag_service` 改成主线程轮询（worker 不碰 Qt 对象） |
 
 ---
 
@@ -462,7 +464,8 @@ Ollama 默认监听 11434 端口……
 |---|---|---|
 | S0 切片器 | ✅ | `core/rag/chunker.py`，`test_an_rag_chunker.py` **22/22** |
 | S1 台账 / 差量 / store | ✅ | `loader/store/indexer`，`test_ao_rag_index.py` **45/45**（含改名复用向量、去重、坏索引自愈、签名变更重切） |
-| S2 设置页 + 启动同步 | ✅ | `RagPage` 11 个控件 + 状态行 + 两个按钮；`rag_service` 后台同步；`test_ap_rag_ui.py` **30/30** |
+| S2 设置页 + 启动同步 | ✅ | `RagPage` 12 个控件 + 状态行 + 两个按钮；`rag_service` 后台同步；`test_ap_rag_ui.py` **33/33** |
+| **启动时自动拉起 Ollama** | ✅ | `ollama_launcher`：探测 → 找 exe → `serve` → 等就绪 → 退出时只收自己起的；`test_aq_ollama_launcher.py` **24/24** |
 | S3 检索注入 | ✅ | `main_window._payload` 插第二条 system；会话追加 `rag/retrieved` 事件 |
 | Ollama 真联调 | ⏳ **未做**（按用户安排：最后再导模型） | `embedder.py` 已按 `/api/embed` 写好，但**没有对真实 Ollama 跑过**；上模型前先 `ollama pull bge-m3`，再把设置页的模型名改成 `bge-m3` |
 | S4 气泡里显示来源 | ❌ 未做（可选） | 计划里的 S4 |
@@ -476,3 +479,9 @@ Ollama 默认监听 11434 端口……
   所以同步一完成，下一条消息就能用，不用重启）
 - 运行中改了知识库文件 → 下次启动才生效（或点「重新扫描」）
 - 超时/失败原因只打到控制台 + 会话事件，界面上不弹窗（避免打断聊天）
+
+**线程模型踩的坑（重要）**：`RagService` 一开始在 `QRunnable` 里直接
+`emit` 主线程 QObject 的信号，PySide6 抛 `RuntimeError: Signal source has been deleted`
+——而且这个异常会**把整次同步打断**，索引永远建不出来（表现是状态行一直「正在建立索引」）。
+现在改成：worker 只往带锁的 `_Job` 写数据，主线程用 120ms 的 `QTimer` 轮询后再发信号。
+**规矩：worker 线程里不碰任何 Qt 对象。**

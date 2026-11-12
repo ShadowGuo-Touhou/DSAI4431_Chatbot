@@ -535,7 +535,25 @@
   3. 调试后端的向量无语义，测试里查询句必须和原文高度重合，否则算出负相关
      被阈值吃掉（不是检索逻辑的 bug，换真模型就好了）
 - 测试：`test_an_rag_chunker` **22/22**、`test_ao_rag_index` **45/45**、
-  `test_ap_rag_ui` **30/30**
+  `test_ap_rag_ui` **33/33**、`test_aq_ollama_launcher` **24/24**
+
+### 26. 启动时自动探测 / 拉起 Ollama（方案 B）—— 已完成（2026-11-12）
+
+用户拍板选 B：**探不到就自己起，退出时把我们起的那份关掉**，别人开着的不碰。
+
+- 新增 `core/gui/ollama_launcher.py`：`is_alive()`（`GET /api/tags`，0.6s 超时）→
+  `find_executable()`（`asset/ollama` → PATH → `%LOCALAPPDATA%\Programs\Ollama`）→
+  `serve` → 最多等 20s 就绪 → 失败就收掉半死进程
+- 新增设置项 `rag_autostart`（默认开，界面上是「启动时自动检测并拉起 Ollama」）
+- 只 kill 自己 `Popen` 出来的 pid；`MainWindow._on_about_to_quit` 调 `stop_owned()`
+- `OLLAMA_MODELS` 只在环境里没有时兜底成 `asset/embedding`，用户设过就尊重
+- **踩的坑（很重要）**：`RagService` 原来在 `QRunnable` 里直接 emit 主线程 QObject 的信号，
+  PySide6 抛 `RuntimeError: Signal source has been deleted`，**而且会把整次同步打断**
+  → 索引永远建不出来（现象：状态行卡在「正在建立索引」，测试里表现为偶发超时失败）。
+  改成 worker 只写带锁的 `_Job`、主线程 120ms `QTimer` 轮询后发信号。
+  **规矩：worker 线程里不碰任何 Qt 对象。**
+- 测试：`test_aq_ollama_launcher` 24 项（假 `/api/tags` 服务 + 假 exe 测拉起/就绪/收掉/
+  timeout/不覆盖用户 env）；`test_ap_rag_ui` 也加了自动启动开关的读写
 
 ---
 

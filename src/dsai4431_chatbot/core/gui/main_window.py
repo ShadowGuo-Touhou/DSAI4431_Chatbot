@@ -1097,6 +1097,13 @@ class MainWindow(QMainWindow):
 
     def _on_about_to_quit(self) -> None:
         self.character.shutdown()
+        # 只关「本程序自己拉起的」Ollama；用户开着的、系统装的都不碰
+        try:
+            from dsai4431_chatbot.core.gui import ollama_launcher
+
+            ollama_launcher.stop_owned()
+        except Exception as exc:                 # noqa: BLE001 - 收尾逻辑不能挡退出
+            print(f"[rag] 关闭自动启动的 Ollama 失败：{exc}", flush=True)
 
     # --- 会话抽屉 -------------------------------------------------------
     def _place_drawer(self) -> None:

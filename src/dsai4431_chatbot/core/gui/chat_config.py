@@ -36,6 +36,7 @@ SYSTEM_PROMPT_LIMIT = 20000
 # （测试里有一条断言盯着，改一边忘了另一边会红）。
 RAG_DEFAULTS = {
     "enabled": True,
+    "autostart": True,       # 探测不到 Ollama 时自己把它拉起来（退出时关掉自己起的那份）
     "top_k": 4,              # 每次最多注入几块
     "timeout_ms": 3000,      # 单次检索最长等待
     "min_score": 0.35,       # 余弦下限
@@ -92,6 +93,7 @@ class ChatConfig:
     # --- RAG（本地知识库）---------------------------------------------
     # 地址/模型名是文本，其余都在 RAG_LIMITS 范围内，越界会被夹住
     rag_enabled: bool = True
+    rag_autostart: bool = True
     rag_top_k: int = 4
     rag_timeout_ms: int = 3000
     rag_min_score: float = 0.35
@@ -205,6 +207,7 @@ def load() -> ChatConfig:
             rag_embedding=_get(s, "rag_embedding", ""),
             show_reasoning=_get_bool(s, "show_reasoning", False),
             rag_enabled=_get_bool(s, "rag_enabled", RAG_DEFAULTS["enabled"]),
+            rag_autostart=_get_bool(s, "rag_autostart", RAG_DEFAULTS["autostart"]),
             rag_top_k=clamp_int(_get(s, "rag_top_k", RAG_DEFAULTS["top_k"]), "top_k"),
             rag_timeout_ms=clamp_int(
                 _get(s, "rag_timeout_ms", RAG_DEFAULTS["timeout_ms"]), "timeout_ms"
@@ -245,6 +248,7 @@ def save(cfg: ChatConfig) -> None:
     s.setValue(f"{GROUP}/rag_embedding", cfg.rag_embedding)
     s.setValue(f"{GROUP}/show_reasoning", bool(cfg.show_reasoning))
     s.setValue(f"{GROUP}/rag_enabled", bool(cfg.rag_enabled))
+    s.setValue(f"{GROUP}/rag_autostart", bool(cfg.rag_autostart))
     s.setValue(f"{GROUP}/rag_top_k", clamp_int(cfg.rag_top_k, "top_k"))
     s.setValue(f"{GROUP}/rag_timeout_ms", clamp_int(cfg.rag_timeout_ms, "timeout_ms"))
     s.setValue(f"{GROUP}/rag_min_score", clamp_float(cfg.rag_min_score, "min_score"))

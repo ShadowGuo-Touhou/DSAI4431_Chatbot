@@ -769,6 +769,18 @@ class RagPage(QWidget):
         self.cb_enabled.setCursor(Qt.CursorShape.PointingHandCursor)
         self.cb_enabled.toggled.connect(self.save)
         top.addWidget(self.cb_enabled)
+
+        self.cb_autostart = QCheckBox(t("settings.rag.autostart"))
+        self.cb_autostart.setObjectName("fileCheck")
+        self.cb_autostart.setChecked(bool(self._cfg.rag_autostart))
+        self.cb_autostart.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.cb_autostart.setToolTip(t("settings.rag.autostart_hint"))
+        self.cb_autostart.toggled.connect(self.save)
+        top.addWidget(self.cb_autostart)
+        hint_auto = QLabel(t("settings.rag.autostart_hint"))
+        hint_auto.setObjectName("hintText")
+        hint_auto.setWordWrap(True)
+        top.addWidget(hint_auto)
         lay.addWidget(top_card)
 
         # --- 卡片二：参数（两列，省竖向空间）----------------------------
@@ -949,8 +961,19 @@ class RagPage(QWidget):
             self.btn_clear.setEnabled(False)
             return
         self.rag.progress.connect(self._on_progress)
+        self.rag.ollama_ready.connect(self._on_ollama_ready)
         self.rag.synced.connect(self._on_synced)
         self.rag.syncing_changed.connect(self._on_syncing)
+
+    def _on_ollama_ready(self, launch) -> None:
+        """Ollama 探测/拉起的结果（同步结果随后会覆盖这一行，正常）。"""
+        if launch is None:
+            return
+        try:
+            text = t(launch.message_key)
+        except Exception:                       # noqa: BLE001 - 文案缺了也别炸
+            text = str(launch.detail)
+        self.lb_status.setText(text)
 
     def _on_progress(self, done: int, total: int, rel: str) -> None:
         self.lb_status.setText(
@@ -1031,6 +1054,7 @@ class RagPage(QWidget):
         cfg.rag_embedding = self.ed_embedding.text().strip()
         cfg.rag_dir = self.ed_folder.text().strip()
         cfg.rag_enabled = bool(self.cb_enabled.isChecked())
+        cfg.rag_autostart = bool(self.cb_autostart.isChecked())
         cfg.rag_top_k = self.sp_top_k.value()
         cfg.rag_timeout_ms = self.sp_timeout.value()
         cfg.rag_min_score = float(self.sp_min_score.value())
