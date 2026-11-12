@@ -339,12 +339,18 @@ class _Bubble(QLabel):
 
     `role == "bot"` 的气泡把 Markdown 渲染成富文本（表格/代码块/列表…），
     用户消息与思考链保持纯文本；原文留在 `raw_text` 里，方便回放与测试。
+
+    宽度：**按内容实测**决定（微信那种——短句窄框、长句撑到上限），
+    只靠 sizeHint 的话 QLabel 会一直保持很窄，长句过早折行。
     """
+
+    MAX_WIDTH = 10**6
 
     def __init__(self, role: str, parent=None) -> None:
         super().__init__(parent)
         self.role = role
         self.raw_text = ""
+        self.max_width = self.MAX_WIDTH
 
     def set_raw(self, text: str) -> None:
         self.raw_text = "" if text is None else str(text)
@@ -352,6 +358,22 @@ class _Bubble(QLabel):
             self.setText(markdown_lite.to_html(self.raw_text))
         else:
             self.setText(self.raw_text)
+        self._fit_width()
+
+    def set_max_width(self, width: int) -> None:
+        self.max_width = max(160, int(width))
+        self.setMaximumWidth(self.max_width)
+        self._fit_width()
+
+    def _fit_width(self) -> None:
+        """把最小宽度调到「内容自然宽度」，再用最大值收住。"""
+        self.ensurePolished()        # 先让 QSS 生效，否则量到的字体是默认字体
+        metrics = self.fontMetrics()
+        natural = 0
+        for line in (self.raw_text or "").splitlines() or [""]:
+            natural = max(natural, metrics.horizontalAdvance(line))
+        padding = 34 if self.role != "reasoning" else 26
+        self.setMinimumWidth(max(60, min(self.max_width, natural + padding)))
 
 
 class MessageArea(QScrollArea):
@@ -375,7 +397,8 @@ class MessageArea(QScrollArea):
         self._body.setObjectName("messageViewport")
         self._lay = QVBoxLayout(self._body)
         self._lay.setContentsMargins(4, 4, 4, 4)
-        self._lay.setSpacing(10)
+        # 行距收紧一点，交错排列时更像聊天软件（太松会显得散）
+        self._lay.setSpacing(8)
         self._lay.addStretch(1)
 
         self._empty = QLabel(t("main.messages.empty"))
@@ -430,8 +453,8 @@ class MessageArea(QScrollArea):
             # 回答里的链接可以点（Markdown 渲染之后才有 <a>）
             bubble.setOpenExternalLinks(True)
         bubble.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
-        # 气泡最宽占视口的 2/3，长文本自动换行，短文本保持自身宽度
-        bubble.setMaximumWidth(max(240, int(self.viewport().width() * 0.66)))
+        # 微信式：宽度跟着内容走，最多占视口 80%（以前 66% 太窄，长句很早就折行）
+        bubble.set_max_width(self._bubble_max_width())
 
         row = QHBoxLayout()
         row.setContentsMargins(0, 0, 0, 0)
@@ -508,6 +531,18 @@ class MessageArea(QScrollArea):
     def resizeEvent(self, event) -> None:      # noqa: N802 - Qt 命名
         super().resizeEvent(event)
         self._place_jump()
+        # 窗口变宽变窄时，已有气泡的上限也要跟着变（否则一直卡在旧宽度）
+        width = self._bubble_max_width()
+        for bubble in self._body.findChildren(QLabel):
+            if bubble.objectName().startswith("bubble"):
+                if hasattr(bubble, "set_max_width"):
+                    bubble.set_max_width(width)
+                else:
+                    bubble.setMaximumWidth(width)
+
+    def _bubble_max_width(self) -> int:
+        """气泡最大宽度：跟内容走，最多占视口 80%（微信那种观感）。"""
+        return max(240, int(self.viewport().width() * 0.8))
 
     def clear_messages(self) -> None:
         while self._lay.count() > 2:  # 保留 empty 标签与底部 stretch

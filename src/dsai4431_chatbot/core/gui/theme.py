@@ -133,18 +133,20 @@ QScrollArea, #messageViewport {{
     font-size: 14px;
 }}
 
-/* 消息气泡 */
+/* 消息气泡（微信式：宽度跟内容走，圆角在「说话人那一侧」收窄成尖角） */
 #bubbleUser {{
     background: {bubble_user_bg};
     border: 1px solid {bubble_user_border};
     border-radius: {radius_small}px;
-    padding: 10px 14px;
+    border-bottom-right-radius: 4px;
+    padding: 9px 13px;
 }}
 #bubbleBot {{
     background: {surface};
     border: 1px solid {border};
     border-radius: {radius_small}px;
-    padding: 10px 14px;
+    border-bottom-left-radius: 4px;
+    padding: 9px 13px;
 }}
 /* 思考链气泡（第 16 条）：弱化、更小，视觉上明显不是正文 */
 #bubbleReasoning {{
