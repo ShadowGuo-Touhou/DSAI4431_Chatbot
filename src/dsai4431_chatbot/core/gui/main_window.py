@@ -30,6 +30,7 @@ from typing import Literal
 
 from PySide6.QtCore import (
     QEasingCurve,
+    QLockFile,
     QPoint,
     QPropertyAnimation,
     QRunnable,
@@ -47,6 +48,7 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
     QMainWindow,
+    QMessageBox,
     QPlainTextEdit,
     QPushButton,
     QScrollArea,
@@ -1864,6 +1866,43 @@ class MainWindow(QMainWindow):
         dlg.show()
 
 
+# 单实例锁：拿着不放，进程退出才释放（模块级变量，别让它被回收）
+_INSTANCE_LOCK: QLockFile | None = None
+
+
+def _single_instance_path():
+    from dsai4431_chatbot.core.gui import settings_store
+
+    return settings_store.settings_path().parent / "app.lock"
+
+
+def acquire_single_instance(*, notify: bool = True) -> bool:
+    """抢单实例锁；抢不到就弹窗告诉用户并返回 False。
+
+    为什么必须在**所有检测之前**做：两个实例各自都要「接管」Ollama，
+    后开的那个会把前一个刚拉起来的 ollama 杀掉，然后前一个的检索就全废。
+    与其让它们互相拆台，不如第二个直接不开。
+
+    QLockFile 自带崩溃兜底：锁文件里记着 PID + 主机名，进程没了会被当成
+    过期锁清掉，所以上次异常退出不会导致永远打不开。
+
+    `notify=False` 只给测试用（模态框会把无人值守的测试卡死）。
+    """
+    global _INSTANCE_LOCK
+    lock = QLockFile(str(_single_instance_path()))
+    if lock.tryLock(200):
+        _INSTANCE_LOCK = lock
+        return True
+
+    if notify:
+        QMessageBox.information(
+            None,
+            t("app.already_running.title"),
+            t("app.already_running.body"),
+        )
+    return False
+
+
 def main(argv: list[str] | None = None) -> int:
     """启动主界面。"""
     # Qt6 默认开启 HiDPI 缩放，AA_EnableHighDpiScaling / AA_UseHighDpiPixmaps
@@ -1885,6 +1924,10 @@ def main(argv: list[str] | None = None) -> int:
     i18n.apply_saved()
     # 换肤：启动时按上次的选择套 QSS（没有记录就是 light）
     themes.apply_saved(app)
+
+    # 一切检测之前：已经有窗口开着就直接拒绝（见 acquire_single_instance）
+    if not acquire_single_instance():
+        return 0
 
     win = MainWindow()
     win.show()

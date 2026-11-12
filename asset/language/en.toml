@@ -17,6 +17,11 @@ name = "English"
 [app]
 title = "DSAI4431 Chatbot"
 
+# Shown when the single-instance check fails (see main_window.acquire_single_instance)
+[app.already_running]
+title = "Already running"
+body = "This app is already open.\n\nA second window would fight over the same Ollama service and knowledge index, so it was not started.\n\nSwitch to the window that is already open."
+
 # --- Main window ----------------------------------------------------
 [main.character]
 placeholder = "Live2D character area\n(placeholder — renderer not wired up yet)"
@@ -143,6 +148,7 @@ title = "Retrieval-Augmented Generation"
 ollama = "Ollama"
 ollama_dir = "Ollama folder"
 ollama_dir_placeholder = "empty = asset/ollama"
+dir_effective = "empty uses {path}"
 models_dir = "Models folder"
 models_dir_placeholder = "empty = asset/embedding"
 paths_hint = "Point these at the folder holding ollama.exe and at your models folder. If both are empty, the first launch downloads Ollama and pulls the model into asset/ollama and asset/embedding (about 1.6 GB, needs network)."
@@ -182,6 +188,8 @@ autostart = "Detect and start Ollama at launch"
 autostart_hint = "Only starts it when the service is not reachable. On exit, only the instance this app started is stopped; one you started yourself or a system install is never touched."
 ollama_already_running = "Ollama is already running"
 ollama_started = "Ollama started automatically (stopped when this app exits)"
+ollama_took_over = "Took over: stopped the Ollama on that port and restarted it with the paths above"
+ollama_port_busy = "The port is held by something else (not ollama); left it alone"
 ollama_disabled = "Ollama not found; auto-start is turned off"
 ollama_no_exe = "Ollama not found and no ollama.exe located (put it in asset/ollama, or use a system install)"
 ollama_timeout = "Ollama was started but was not ready within 20s"

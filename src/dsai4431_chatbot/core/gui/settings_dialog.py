@@ -55,6 +55,7 @@ from dsai4431_chatbot.core.gui import (
     chat_config,
     i18n,
     live2d_embed,
+    ollama_launcher,
     personas,
     relaunch,
     theme,
@@ -995,14 +996,29 @@ class RagPage(QWidget):
 
     # --- 路径 -----------------------------------------------------------
     def _default_ollama_dir(self) -> str:
-        return t("settings.rag.ollama_dir_placeholder")
+        """留空时**实际**会用的目录（绝对路径）。
+
+        以前这里只写「留空 = asset/ollama」，用户根本看不到真实位置，
+        也分不清到底用的是哪一份 —— 改成显示解析后的绝对路径。
+        """
+        found = ollama_launcher.find_executable(self._cfg)
+        if found is not None:
+            return t("settings.rag.dir_effective", path=str(found.parent))
+        # 连 exe 都没有：默认目录就是将来自动下载到的位置
+        from dsai4431_chatbot.core.gui import settings_store
+
+        portable = settings_store.project_root() / "asset" / "ollama"
+        return t("settings.rag.dir_effective", path=str(portable))
 
     def _default_models_dir(self) -> str:
-        return t("settings.rag.models_dir_placeholder")
+        return t("settings.rag.dir_effective",
+                 path=str(ollama_launcher.models_dir(self._cfg)))
 
     def _pick_dir(self, edit: QLineEdit, placeholder: str) -> None:
+        # 对话框标题不能用上面那种「留空则用 …」的长句
+        title = t("common.choose")
         chosen = QFileDialog.getExistingDirectory(
-            self, placeholder or t("common.choose"), str(Path.home())
+            self, title, str(Path.home())
         )
         if chosen:
             edit.setText(_store_path(chosen))

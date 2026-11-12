@@ -16,6 +16,11 @@ name = "中文"
 [app]
 title = "DSAI4431 Chatbot"
 
+# 单实例检查失败时弹的框（见 main_window.acquire_single_instance）
+[app.already_running]
+title = "程序已经在运行"
+body = "已经打开了一个窗口。\n\n再开一份会让两个窗口抢同一份 Ollama 服务和知识库索引，所以这次不启动。\n\n请切到已经打开的那个窗口。"
+
 # --- 主窗口 ---------------------------------------------------------
 [main.character]
 placeholder = "Live2D 角色区\n（框架占位，待接入渲染页）"
@@ -142,6 +147,7 @@ title = "Retrieval-Augmented Generation"
 ollama = "Ollama"
 ollama_dir = "Ollama 目录"
 ollama_dir_placeholder = "留空 = asset/ollama"
+dir_effective = "留空则用 {path}"
 models_dir = "模型目录"
 models_dir_placeholder = "留空 = asset/embedding"
 paths_hint = "填你电脑上 Ollama 和模型的文件夹路径（选到包含 ollama.exe 的那一层）。两个都留空时，首次启动会自动下载 Ollama 并拉取模型到 asset/ollama 与 asset/embedding —— 约 1.6 GB，需要联网。"
@@ -181,6 +187,8 @@ autostart = "启动时自动检测并拉起 Ollama"
 autostart_hint = "只在检测不到服务时才自己启动；退出程序时会关掉这份「自己起的」。你手动开着的、系统安装的那份永远不会被动。"
 ollama_already_running = "Ollama 已在运行"
 ollama_started = "已自动启动 Ollama（退出程序时会关掉它）"
+ollama_took_over = "已接管：关掉了端口上原来的 Ollama，按上面的路径重新启动"
+ollama_port_busy = "端口被别的程序占着（不是 ollama），没有动它"
 ollama_disabled = "没检测到 Ollama，自动启动已关闭"
 ollama_no_exe = "没检测到 Ollama，也没找到 ollama.exe（把它放进 asset/ollama，或用系统安装版）"
 ollama_timeout = "把 Ollama 拉起来了，但 20 秒内没准备好"
