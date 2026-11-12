@@ -30,6 +30,52 @@ DEFAULT_PERSONA_FILES = ["IDENTITY.md", "SOUL.md", "USER.md"]
 # 系统提示词上限：勾了超大的文件也不至于把上下文撑爆
 SYSTEM_PROMPT_LIMIT = 20000
 
+# --- RAG（本地知识库）默认值与合法范围 --------------------------------
+# 这里是**唯一**的默认值来源：设置页的数字框、索引器、检索器都读它。
+# 与 rag/chunker.py 的 DEFAULT_SIZE / DEFAULT_OVERLAP 保持一致
+# （测试里有一条断言盯着，改一边忘了另一边会红）。
+RAG_DEFAULTS = {
+    "enabled": True,
+    "top_k": 4,              # 每次最多注入几块
+    "timeout_ms": 3000,      # 单次检索最长等待
+    "min_score": 0.35,       # 余弦下限
+    "chunk_chars": 480,      # 切块目标字数
+    "chunk_overlap": 64,     # 超长段滑窗重叠
+    "max_file_mb": 2,        # 单文件上限
+    "max_chunks": 2000,      # 块数上限（防把整个盘当知识库）
+    "inject_chars": 3000,    # 注入内容总字数上限
+}
+# 参数 → (最小, 最大, 步长)；设置页的 spinbox 直接用它建控件
+RAG_LIMITS = {
+    "top_k": (1, 20, 1),
+    "timeout_ms": (200, 15000, 500),
+    "min_score": (0.0, 1.0, 0.05),
+    "chunk_chars": (120, 2000, 20),
+    "chunk_overlap": (0, 500, 8),
+    "max_file_mb": (1, 64, 1),
+    "max_chunks": (50, 20000, 50),
+    "inject_chars": (200, 20000, 200),
+}
+
+
+def clamp_int(value, key: str) -> int:
+    """把 ini 里的值夹到合法范围；非数字回默认。"""
+    low, high, _step = RAG_LIMITS[key]
+    try:
+        number = int(float(str(value).strip()))
+    except (TypeError, ValueError, AttributeError):
+        return int(RAG_DEFAULTS[key])
+    return max(low, min(high, number))
+
+
+def clamp_float(value, key: str) -> float:
+    low, high, _step = RAG_LIMITS[key]
+    try:
+        number = float(str(value).strip())
+    except (TypeError, ValueError, AttributeError):
+        return float(RAG_DEFAULTS[key])
+    return max(low, min(high, number))
+
 
 @dataclass
 class ChatConfig:
@@ -43,6 +89,17 @@ class ChatConfig:
     rag_embedding: str = ""
     # 显示思考链（两个模型都能返回 reasoning_content）；默认关
     show_reasoning: bool = False
+    # --- RAG（本地知识库）---------------------------------------------
+    # 地址/模型名是文本，其余都在 RAG_LIMITS 范围内，越界会被夹住
+    rag_enabled: bool = True
+    rag_top_k: int = 4
+    rag_timeout_ms: int = 3000
+    rag_min_score: float = 0.35
+    rag_chunk_chars: int = 480
+    rag_chunk_overlap: int = 64
+    rag_max_file_mb: int = 2
+    rag_max_chunks: int = 2000
+    rag_inject_chars: int = 3000
 
     # --- 派生信息 -------------------------------------------------------
     def persona_path(self) -> Path:
@@ -147,6 +204,29 @@ def load() -> ChatConfig:
             rag_ollama=_get(s, "rag_ollama", ""),
             rag_embedding=_get(s, "rag_embedding", ""),
             show_reasoning=_get_bool(s, "show_reasoning", False),
+            rag_enabled=_get_bool(s, "rag_enabled", RAG_DEFAULTS["enabled"]),
+            rag_top_k=clamp_int(_get(s, "rag_top_k", RAG_DEFAULTS["top_k"]), "top_k"),
+            rag_timeout_ms=clamp_int(
+                _get(s, "rag_timeout_ms", RAG_DEFAULTS["timeout_ms"]), "timeout_ms"
+            ),
+            rag_min_score=clamp_float(
+                _get(s, "rag_min_score", RAG_DEFAULTS["min_score"]), "min_score"
+            ),
+            rag_chunk_chars=clamp_int(
+                _get(s, "rag_chunk_chars", RAG_DEFAULTS["chunk_chars"]), "chunk_chars"
+            ),
+            rag_chunk_overlap=clamp_int(
+                _get(s, "rag_chunk_overlap", RAG_DEFAULTS["chunk_overlap"]), "chunk_overlap"
+            ),
+            rag_max_file_mb=clamp_int(
+                _get(s, "rag_max_file_mb", RAG_DEFAULTS["max_file_mb"]), "max_file_mb"
+            ),
+            rag_max_chunks=clamp_int(
+                _get(s, "rag_max_chunks", RAG_DEFAULTS["max_chunks"]), "max_chunks"
+            ),
+            rag_inject_chars=clamp_int(
+                _get(s, "rag_inject_chars", RAG_DEFAULTS["inject_chars"]), "inject_chars"
+            ),
         )
     except Exception as exc:  # noqa: BLE001 - 配置读挂了就退回默认，不能挡启动
         print(f"[chat] 配置读取失败，用默认值：{exc}", file=sys.stderr, flush=True)
@@ -164,4 +244,17 @@ def save(cfg: ChatConfig) -> None:
     s.setValue(f"{GROUP}/rag_ollama", cfg.rag_ollama)
     s.setValue(f"{GROUP}/rag_embedding", cfg.rag_embedding)
     s.setValue(f"{GROUP}/show_reasoning", bool(cfg.show_reasoning))
+    s.setValue(f"{GROUP}/rag_enabled", bool(cfg.rag_enabled))
+    s.setValue(f"{GROUP}/rag_top_k", clamp_int(cfg.rag_top_k, "top_k"))
+    s.setValue(f"{GROUP}/rag_timeout_ms", clamp_int(cfg.rag_timeout_ms, "timeout_ms"))
+    s.setValue(f"{GROUP}/rag_min_score", clamp_float(cfg.rag_min_score, "min_score"))
+    s.setValue(f"{GROUP}/rag_chunk_chars", clamp_int(cfg.rag_chunk_chars, "chunk_chars"))
+    s.setValue(
+        f"{GROUP}/rag_chunk_overlap", clamp_int(cfg.rag_chunk_overlap, "chunk_overlap")
+    )
+    s.setValue(f"{GROUP}/rag_max_file_mb", clamp_int(cfg.rag_max_file_mb, "max_file_mb"))
+    s.setValue(f"{GROUP}/rag_max_chunks", clamp_int(cfg.rag_max_chunks, "max_chunks"))
+    s.setValue(
+        f"{GROUP}/rag_inject_chars", clamp_int(cfg.rag_inject_chars, "inject_chars")
+    )
     s.sync()      # 立刻落盘

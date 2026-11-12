@@ -375,6 +375,31 @@ def append_user_message(session_id: str, text: str) -> dict:
     return event
 
 
+def append_rag_event(
+    session_id: str,
+    *,
+    query: str,
+    hits: list[str],
+    scores: list[float],
+    elapsed_ms: int = 0,
+) -> dict:
+    """记下「这一轮检索注入了哪些块」。
+
+    只追加事件，**不动 meta**（不算一条消息、不改标题、不刷新会话排序）。
+    事后能查清「当时查到了什么」，也能拿来核对 RAG 到底有没有生效。
+    """
+    return _append(
+        session_id,
+        "rag/retrieved",
+        {
+            "query": query or "",
+            "injected": list(hits),
+            "scores": [round(float(score), 4) for score in scores],
+            "elapsed_ms": int(elapsed_ms),
+        },
+    )
+
+
 def append_assistant_message(
     session_id: str,
     text: str,

@@ -241,7 +241,12 @@ python -m dsai4431_chatbot.core.gui
 <repo>/data/settings.ini     # 主题 / 语言 / Live2D / 对话配置（含明文 API Key）
 <repo>/data/webengine/       # QtWebEngine 缓存与 storage（当前 profile 是
                              # off-the-record，实测不落盘；路径先占好）
+<repo>/data/rag/             # 知识库索引（meta.json + index.npz），启动时自动生成；
+                             # 删掉没关系，下次启动会重建
 ```
+
+知识库的**源文件**放在 `<repo>/asset/RAG/`（只收 `.md` / `.txt`），
+索引与格式细节见仓库根的 `RAG_PLAN.md`。
 
 - `data/` 在 `.gitignore` 里，**不要** `git add -f`
 - 老版本存在用户目录里的 `settings.ini` 会在首次启动时自动复制过来

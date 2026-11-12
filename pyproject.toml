@@ -28,6 +28,13 @@ gui = [
     "PySide6>=6.12",
 ]
 
+# 本地知识库检索（core/rag）：只多一个 numpy（向量存成 .npz）。
+# 真正的 embedding 由 Ollama 通过 HTTP 提供，不是 Python 依赖。
+# 安装：pip install -e ".[rag]"
+rag = [
+    "numpy>=1.26",
+]
+
 [project.scripts]
 dsai4431-chatbot = "dsai4431_chatbot.main:main"
 

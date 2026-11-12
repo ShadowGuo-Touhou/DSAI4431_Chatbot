@@ -27,7 +27,7 @@ import sys
 from pathlib import Path
 from typing import Literal
 
-from PySide6.QtCore import QPoint, QSize, Qt, Signal
+from PySide6.QtCore import QPoint, QSize, Qt, QTimer, Signal
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QApplication,
@@ -53,10 +53,12 @@ from dsai4431_chatbot.core.gui import (
     live2d_config,
     live2d_embed,
     personas,
+    rag_service,
     session_store,
     theme,
     themes,
 )
+from dsai4431_chatbot.core.gui.rag_service import RagService
 from dsai4431_chatbot.core.gui.i18n import t
 from dsai4431_chatbot.core.gui.session_drawer import DRAWER_W, SessionDrawer
 
@@ -721,8 +723,11 @@ class ChatColumn(QWidget):
     # 会话内容变了（新建 / 首条消息自动建 / 追加消息）→ 让外层刷新会话列表
     session_updated = Signal(str)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, *, rag=None):
         super().__init__(parent)
+
+        # 知识库检索：由 MainWindow 传进来（同一个实例也给设置页用，状态才一致）
+        self.rag = rag if rag is not None else RagService(self)
 
         lay = QVBoxLayout(self)
         lay.setContentsMargins(0, 0, 0, 0)
@@ -785,6 +790,8 @@ class ChatColumn(QWidget):
         # 新对话页上选好的人格 / 模型：等第一句话发出去、真要建会话时才用
         self._pending_persona: dict | None = None
         self._pending_model = ""
+        # 最近一次检索的结果（超时/失败时给上层看原因）
+        self._rag_last = None
 
         # 等回复时按 Enter 不发也不清空输入框
         self.input.edit.can_submit = lambda: not self.client.busy()
@@ -818,13 +825,49 @@ class ChatColumn(QWidget):
             self._finish_bubble(t("main.messages.failed", msg="请求没能发出去"))
 
     def _payload(self, cfg) -> list[dict]:
-        """人格文件 → system 消息；再加最近若干轮对话。"""
+        """人格文件 → system 消息；知识库片段 → 第二条 system；再加最近若干轮对话。"""
         messages: list[dict] = []
         system = self._system_prompt(cfg)
         if system:
             messages.append({"role": "system", "content": system})
+        retrieved = self._rag_block(cfg)
+        if retrieved:
+            messages.append({"role": "system", "content": retrieved})
         messages.extend(self._history[-MAX_HISTORY_MESSAGES:])
         return messages
+
+    # --- 知识库检索 -----------------------------------------------------
+    def _rag_block(self, cfg) -> str:
+        """查一次知识库并把结果拼成 system 片段。
+
+        **任何失败都返回空串**（关掉 / 没索引 / 超时 / Ollama 没起 / 无命中），
+        发消息这条主路绝不能被 RAG 挡住。
+        """
+        try:
+            if not cfg.rag_enabled:
+                return ""
+            query = self._history[-1]["content"] if self._history else ""
+            result = self.rag.search(str(query), cfg)
+        except Exception as exc:                     # noqa: BLE001 - 兜底：RAG 不许崩聊天
+            print(f"[rag] 检索失败，本次不注入：{exc}", flush=True)
+            return ""
+        self._rag_last = result
+        if not result.hits:
+            if result.error:
+                print(f"[rag] 检索无结果：{result.error}", flush=True)
+            return ""
+        from dsai4431_chatbot.core.rag import retriever
+
+        block = retriever.build_block(result.hits, cfg.rag_inject_chars)
+        if block and self._session is not None:
+            session_store.append_rag_event(
+                self._session.id,
+                query=str(self._history[-1]["content"]) if self._history else "",
+                hits=[hit.digest for hit in result.hits],
+                scores=[round(hit.score, 4) for hit in result.hits],
+                elapsed_ms=result.elapsed_ms,
+            )
+        return block
 
     def _system_prompt(self, cfg) -> str:
         """会话里记着用哪个人格；没有就退回设置页那份。"""
@@ -1007,7 +1050,9 @@ class MainWindow(QMainWindow):
         splitter.setHandleWidth(theme.SPLITTER_GAP)
 
         self.character = CharacterPanel()
-        self.chat = ChatColumn()
+        # 知识库：一个实例同时给聊天列和设置页（状态才一致）
+        self.rag = RagService(self)
+        self.chat = ChatColumn(rag=self.rag)
         splitter.addWidget(self.character)
         splitter.addWidget(self.chat)
         splitter.setStretchFactor(0, 3)
@@ -1038,6 +1083,17 @@ class MainWindow(QMainWindow):
 
         # 一打开就把上一次的对话接上（没有对话 → 停在空白首页）
         self._restore_last_session()
+
+        # 知识库：启动扫一次（后台跑，界面照常用）。用户明确要求「只在启动时同步」，
+        # 所以这里没有定时器、也没有文件监听；运行中想立刻生效就点设置页的「重新扫描」。
+        QTimer.singleShot(600, self.start_rag_sync)
+
+    def start_rag_sync(self) -> None:
+        """后台跑一次差量同步（启动时自动调，设置页按钮也会调）。"""
+        cfg = chat_config.load()
+        if not cfg.rag_enabled:
+            return
+        self.rag.refresh(cfg)
 
     def _on_about_to_quit(self) -> None:
         self.character.shutdown()
@@ -1138,7 +1194,7 @@ class MainWindow(QMainWindow):
             dlg.activateWindow()
             return
 
-        dlg = SettingsDialog(self, character=self.character)
+        dlg = SettingsDialog(self, character=self.character, rag=self.rag)
         dlg.move(
             self.frameGeometry().center() - QPoint(DIALOG_W // 2, DIALOG_H // 2)
         )

@@ -33,6 +33,7 @@ from PySide6.QtWidgets import (
     QFileDialog,
     QFrame,
     QGraphicsDropShadowEffect,
+    QGridLayout,
     QHBoxLayout,
     QLabel,
     QLineEdit,
@@ -43,6 +44,8 @@ from PySide6.QtWidgets import (
     QPushButton,
     QScrollArea,
     QSlider,
+    QDoubleSpinBox,
+    QSpinBox,
     QStackedWidget,
     QVBoxLayout,
     QWidget,
@@ -706,23 +709,41 @@ class PersonalityPage(QWidget):
 
 
 class RagPage(QWidget):
-    """RAG 页：上图检索配置，下图知识库。
+    """RAG 页：服务配置 / 检索与切片参数 / 知识库。
 
-    路径都会存进 settings.ini（下一个版本接检索时直接读），但**索引还没做**：
-    「Full rebuild」是灰的，状态栏老实写着"未构建"，不做假动作。
+    参数全部**立即存盘**（和别的页一样，没有保存按钮）：
+
+    - 检索类（@k、超时、相似度、注入字数）：下一次提问生效
+    - 切片类（块大小、重叠、单文件上限、块数上限）：下一次同步生效，
+      点「重新扫描」可以立刻重建；改这两个会触发整库重切
+
+    索引只在**启动时**同步一次（用户 2026-11-12 的要求），运行中想立刻生效就点
+    「重新扫描」。
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, *, rag=None):
         super().__init__(parent)
+        self.rag = rag
         self._cfg = chat_config.load()
 
-        lay = QVBoxLayout(self)
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(0, 0, 0, 0)
+        # 内容比一屏高：整页塞进滚动区，窗口小也都能改到
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QFrame.Shape.NoFrame)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        outer.addWidget(scroll)
+
+        body = QWidget()
+        lay = QVBoxLayout(body)
         lay.setContentsMargins(28, 24, 28, 24)
-        lay.setSpacing(14)
+        lay.setSpacing(12)
+        scroll.setWidget(body)
 
         lay.addWidget(page_title(t("settings.rag.title")))
 
-        # --- 卡片一：模型路径 -------------------------------------------
+        # --- 卡片一：服务与模型 -----------------------------------------
         top_card, top = card()
         top.addWidget(field_label(t("settings.rag.ollama")))
         row = QHBoxLayout()
@@ -731,9 +752,6 @@ class RagPage(QWidget):
         self.ed_ollama.setText(self._cfg.rag_ollama)
         self.ed_ollama.editingFinished.connect(self.save)
         row.addWidget(self.ed_ollama, 1)
-        btn_ollama = icon_button("folder", t("common.browse"))
-        btn_ollama.clicked.connect(lambda: self._pick_file(self.ed_ollama))
-        row.addWidget(btn_ollama)
         top.addLayout(row)
 
         top.addWidget(field_label(t("settings.rag.embedding")))
@@ -743,18 +761,73 @@ class RagPage(QWidget):
         self.ed_embedding.setText(self._cfg.rag_embedding)
         self.ed_embedding.editingFinished.connect(self.save)
         row.addWidget(self.ed_embedding, 1)
-        btn_embedding = icon_button("folder", t("common.browse"))
-        btn_embedding.clicked.connect(
-            lambda: self._pick_dir_into(self.ed_embedding)
-        )
-        row.addWidget(btn_embedding)
         top.addLayout(row)
 
+        self.cb_enabled = QCheckBox(t("settings.rag.enabled"))
+        self.cb_enabled.setObjectName("fileCheck")
+        self.cb_enabled.setChecked(bool(self._cfg.rag_enabled))
+        self.cb_enabled.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.cb_enabled.toggled.connect(self.save)
+        top.addWidget(self.cb_enabled)
         lay.addWidget(top_card)
 
-        # --- 卡片二：知识库 ---------------------------------------------
-        bottom_card, bottom = card()
-        bottom.addWidget(field_label(t("settings.rag.folder")))
+        # --- 卡片二：参数（两列，省竖向空间）----------------------------
+        param_card, params = card()
+        params.addWidget(field_label(t("settings.rag.params")))
+        grid = QGridLayout()
+        grid.setHorizontalSpacing(18)
+        grid.setVerticalSpacing(8)
+
+        self.sp_chunk_chars = self._spin("chunk_chars")
+        self.sp_chunk_overlap = self._spin("chunk_overlap")
+        self.sp_max_file = self._spin("max_file_mb")
+        self.sp_max_chunks = self._spin("max_chunks")
+        self.sp_top_k = self._spin("top_k")
+        self.sp_timeout = self._spin("timeout_ms")
+        self.sp_inject = self._spin("inject_chars")
+        self.sp_min_score = self._score_spin()
+
+        left = [
+            (t("settings.rag.chunk_chars"), self.sp_chunk_chars,
+             t("settings.rag.chunk_chars_hint")),
+            (t("settings.rag.chunk_overlap"), self.sp_chunk_overlap,
+             t("settings.rag.chunk_overlap_hint")),
+            (t("settings.rag.max_file_mb"), self.sp_max_file, ""),
+            (t("settings.rag.max_chunks"), self.sp_max_chunks, ""),
+        ]
+        right = [
+            (t("settings.rag.top_k"), self.sp_top_k, t("settings.rag.top_k_hint")),
+            (t("settings.rag.timeout"), self.sp_timeout, t("settings.rag.timeout_hint")),
+            (t("settings.rag.min_score"), self.sp_min_score, ""),
+            (t("settings.rag.inject_chars"), self.sp_inject, ""),
+        ]
+        for column, items in enumerate((left, right)):
+            for index, (label, widget, hint) in enumerate(items):
+                cell = QVBoxLayout()
+                cell.setSpacing(2)
+                head = QHBoxLayout()
+                head.setSpacing(6)
+                head.addWidget(field_label(label))
+                head.addWidget(widget)
+                head.addStretch(1)
+                cell.addLayout(head)
+                if hint:
+                    note = QLabel(hint)
+                    note.setObjectName("hintText")
+                    note.setWordWrap(True)
+                    cell.addWidget(note)
+                grid.addLayout(cell, index, column)
+        params.addLayout(grid)
+
+        self.lb_params_note = QLabel(t("settings.rag.params_note"))
+        self.lb_params_note.setObjectName("hintText")
+        self.lb_params_note.setWordWrap(True)
+        params.addWidget(self.lb_params_note)
+        lay.addWidget(param_card)
+
+        # --- 卡片三：知识库目录 + 文件清单 ------------------------------
+        lib_card, lib = card()
+        lib.addWidget(field_label(t("settings.rag.folder")))
 
         folder_row = QHBoxLayout()
         folder_row.setSpacing(8)
@@ -768,90 +841,232 @@ class RagPage(QWidget):
         btn_open.clicked.connect(self._open_folder)
         folder_row.addWidget(btn_choose)
         folder_row.addWidget(btn_open)
-        bottom.addLayout(folder_row)
+        lib.addLayout(folder_row)
 
-        bottom.addWidget(field_label(t("settings.rag.file_list")))
+        self.lb_resolved = QLabel("")
+        self.lb_resolved.setObjectName("hintText")
+        self.lb_resolved.setWordWrap(True)
+        lib.addWidget(self.lb_resolved)
+
+        lib.addWidget(field_label(t("settings.rag.file_list")))
         self.file_list = field_list()
-        bottom.addWidget(self.file_list, 1)
+        lib.addWidget(self.file_list, 1)
 
-        rebuild_row = QHBoxLayout()
-        rebuild_row.setSpacing(10)
-        btn_rebuild = small_button(t("settings.rag.rebuild"))
-        btn_rebuild.setEnabled(False)              # 索引尚未实现，别做假按钮
-        btn_rebuild.setToolTip(t("settings.rag.rebuild_todo"))
-        rebuild_row.addWidget(btn_rebuild)
-        rebuild_row.addStretch(1)
-        self.lb_status = QLabel(t("settings.rag.status"))
+        self.lb_status = QLabel("")
         self.lb_status.setObjectName("hintText")
-        rebuild_row.addWidget(self.lb_status)
-        bottom.addLayout(rebuild_row)
+        self.lb_status.setWordWrap(True)
+        lib.addWidget(self.lb_status)
 
-        lay.addWidget(bottom_card, 1)
+        buttons = QHBoxLayout()
+        buttons.setSpacing(10)
+        self.btn_rescan = small_button(t("settings.rag.rescan"), primary=True)
+        self.btn_rescan.setToolTip(t("settings.rag.rescan_hint"))
+        self.btn_rescan.clicked.connect(self._rescan)
+        self.btn_clear = small_button(t("settings.rag.clear_index"))
+        self.btn_clear.setToolTip(t("settings.rag.clear_hint"))
+        self.btn_clear.clicked.connect(self._clear_index)
+        buttons.addWidget(self.btn_rescan)
+        buttons.addWidget(self.btn_clear)
+        buttons.addStretch(1)
+        lib.addLayout(buttons)
 
+        lay.addWidget(lib_card, 1)
+
+        self._wire_service()
+        self.refresh_status()
         self._refresh_files()
 
+    # --- 参数控件 -------------------------------------------------------
+    def _spin(self, field: str) -> QSpinBox:
+        low, high, step = chat_config.RAG_LIMITS[field]
+        box = QSpinBox()
+        box.setRange(int(low), int(high))
+        box.setSingleStep(max(1, int(step)))
+        box.setValue(int(getattr(self._cfg, f"rag_{field}")))
+        box.setFixedWidth(96)
+        box.valueChanged.connect(self.save)
+        setattr(self, f"_spin_{field}", box)
+        return box
+
+    def _score_spin(self) -> QDoubleSpinBox:
+        low, high, step = chat_config.RAG_LIMITS["min_score"]
+        box = QDoubleSpinBox()
+        box.setRange(float(low), float(high))
+        box.setSingleStep(float(step))
+        box.setDecimals(2)
+        box.setValue(float(self._cfg.rag_min_score))
+        box.setFixedWidth(96)
+        box.valueChanged.connect(self.save)
+        return box
+
     # --- 路径 -----------------------------------------------------------
-    def _pick_file(self, edit: QLineEdit) -> None:
-        chosen, _filter = QFileDialog.getOpenFileName(
-            self, edit.placeholderText(), str(Path.home())
-        )
-        if chosen:
-            edit.setText(chosen)
-            self.save()
-
-    def _pick_dir_into(self, edit: QLineEdit) -> None:
-        chosen = QFileDialog.getExistingDirectory(
-            self, edit.placeholderText(), str(Path.home())
-        )
-        if chosen:
-            edit.setText(chosen)
-            self.save()
-
     def _pick_folder(self) -> None:
-        self._pick_dir_into(self.ed_folder)
-        self._on_folder_edited()
+        chosen = QFileDialog.getExistingDirectory(
+            self, self.ed_folder.placeholderText(), str(Path.home())
+        )
+        if chosen:
+            self.ed_folder.setText(_store_path(chosen))
+            self._on_folder_edited()
 
     def _open_folder(self) -> None:
-        raw = self.ed_folder.text().strip()
-        if raw and Path(raw).expanduser().is_dir():
-            QDesktopServices.openUrl(QUrl.fromLocalFile(str(Path(raw).expanduser())))
+        directory = _resolve_folder(self.ed_folder.text())
+        if directory.is_dir():
+            QDesktopServices.openUrl(QUrl.fromLocalFile(str(directory)))
 
     def _on_folder_edited(self) -> None:
         self.save()
         self._refresh_files()
+        self.refresh_status()
 
-    # --- 文件清单 -------------------------------------------------------
+    # --- 文件清单 / 状态 ------------------------------------------------
     def _refresh_files(self) -> None:
         self.file_list.clear()
-        raw = self.ed_folder.text().strip()
-        directory = Path(raw).expanduser() if raw else None
-        files: list[Path] = []
-        if directory is not None and directory.is_dir():
-            try:
-                files = sorted(p for p in directory.iterdir() if p.is_file())
-            except OSError:
-                files = []
-
-        if not files:
+        directory = _resolve_folder(self.ed_folder.text())
+        self.lb_resolved.setText(
+            t("settings.rag.resolved", path=_display_path(directory))
+        )
+        if not directory.is_dir():
             self.file_list.addItem(t("settings.rag.file_empty"))
-            self.lb_status.setText(t("settings.rag.status"))
             return
 
-        for path in files[:200]:        # 目录里东西太多就只列前 200 个
-            try:
-                size = path.stat().st_size
-            except OSError:
-                size = 0
-            self.file_list.addItem(f"{path.name}    ({_human_size(size)})")
-        self.lb_status.setText(t("settings.rag.status_files", n=len(files)))
+        from dsai4431_chatbot.core.rag import loader
+
+        max_mb = chat_config.clamp_int(self.sp_max_file.value(), "max_file_mb")
+        scanned = loader.scan(directory, max_mb)
+        if not scanned.files:
+            self.file_list.addItem(t("settings.rag.file_empty"))
+        for rel, (size, _mtime) in sorted(scanned.files.items()):
+            self.file_list.addItem(f"{rel}    ({_human_size(size)})")
+        for item in scanned.skipped[:20]:
+            reason = t(f"settings.rag.skip_{item['reason']}")
+            self.file_list.addItem(f"{item['rel']}    ({reason})")
+        if self.rag is None:
+            self.lb_status.setText(t("settings.rag.status_no_service"))
+
+    def _wire_service(self) -> None:
+        if self.rag is None:
+            self.btn_rescan.setEnabled(False)
+            self.btn_clear.setEnabled(False)
+            return
+        self.rag.progress.connect(self._on_progress)
+        self.rag.synced.connect(self._on_synced)
+        self.rag.syncing_changed.connect(self._on_syncing)
+
+    def _on_progress(self, done: int, total: int, rel: str) -> None:
+        self.lb_status.setText(
+            t("settings.rag.syncing", done=done, total=total, name=rel)
+        )
+
+    def _on_syncing(self, running: bool) -> None:
+        self.btn_rescan.setEnabled(not running)
+        if running:
+            self.lb_status.setText(t("settings.rag.syncing_start"))
+
+    def _on_synced(self, result) -> None:
+        if result is None:
+            self.lb_status.setText(t("settings.rag.sync_failed_unknown"))
+            return
+        if result.status == "empty":
+            self.lb_status.setText(t("settings.rag.sync_empty"))
+        elif result.ok:
+            self.lb_status.setText(
+                t(
+                    "settings.rag.sync_ok",
+                    files=result.files,
+                    chunks=result.chunks,
+                    added=result.added,
+                    updated=result.updated,
+                    removed=result.removed,
+                    seconds=f"{result.elapsed_s:.1f}",
+                )
+            )
+        elif result.status == "too_many_chunks":
+            self.lb_status.setText(t("settings.rag.sync_too_many", detail=result.error))
+        else:
+            self.lb_status.setText(t("settings.rag.sync_failed", detail=result.error))
+        self._refresh_files()
+
+    def refresh_status(self) -> None:
+        """没用过 service（或者同步失败）时，至少把「盘上那份索引」说清楚。"""
+        if self.rag is None:
+            return
+        if self.rag.is_syncing():
+            return
+        summary = self.rag.status()
+        if summary.get("chunks"):
+            self.lb_status.setText(
+                t(
+                    "settings.rag.index_ready",
+                    files=summary["files"],
+                    chunks=summary["chunks"],
+                    dim=summary["dim"],
+                )
+            )
+            self.btn_clear.setEnabled(True)
+        else:
+            self.lb_status.setText(t("settings.rag.status_not_built"))
+            self.btn_clear.setEnabled(False)
+
+    # --- 按钮 -----------------------------------------------------------
+    def _rescan(self) -> None:
+        self.save()
+        if self.rag is None:
+            return
+        self.lb_status.setText(t("settings.rag.syncing_start"))
+        self.rag.refresh(chat_config.load())
+
+    def _clear_index(self) -> None:
+        from dsai4431_chatbot.core.rag import store
+
+        store.clear()
+        if self.rag is not None:
+            self.rag.reload_index()
+        self.refresh_status()
+        self.lb_status.setText(t("settings.rag.status_cleared"))
 
     # --- 存盘 -----------------------------------------------------------
     def save(self) -> None:
-        cfg = chat_config.load()          # 现读，只改自己这三个字段
+        cfg = chat_config.load()          # 现读，只改自己这些字段
         cfg.rag_ollama = self.ed_ollama.text().strip()
         cfg.rag_embedding = self.ed_embedding.text().strip()
         cfg.rag_dir = self.ed_folder.text().strip()
+        cfg.rag_enabled = bool(self.cb_enabled.isChecked())
+        cfg.rag_top_k = self.sp_top_k.value()
+        cfg.rag_timeout_ms = self.sp_timeout.value()
+        cfg.rag_min_score = float(self.sp_min_score.value())
+        cfg.rag_chunk_chars = self.sp_chunk_chars.value()
+        cfg.rag_chunk_overlap = self.sp_chunk_overlap.value()
+        cfg.rag_max_file_mb = self.sp_max_file.value()
+        cfg.rag_max_chunks = self.sp_max_chunks.value()
+        cfg.rag_inject_chars = self.sp_inject.value()
         chat_config.save(cfg)
+
+
+def _store_path(chosen: str) -> str:
+    """选目录时尽量存相对仓库根的路径（换机器还能用）。"""
+    from dsai4431_chatbot.core.gui import settings_store
+
+    path = Path(chosen)
+    try:
+        return path.resolve().relative_to(settings_store.project_root().resolve()).as_posix()
+    except (ValueError, OSError):
+        return str(path)
+
+
+def _resolve_folder(raw: str) -> Path:
+    """把输入框里的字变成绝对目录（空 = 默认 asset/RAG）。"""
+    from dsai4431_chatbot.core.rag import paths
+
+    return paths.knowledge_root(raw)
+
+
+def _display_path(path: Path) -> str:
+    from dsai4431_chatbot.core.gui import settings_store
+
+    try:
+        return path.resolve().relative_to(settings_store.project_root().resolve()).as_posix()
+    except (ValueError, OSError):
+        return str(path)
 
 
 def _human_size(size: int) -> str:
@@ -1337,9 +1552,10 @@ class SettingsDialog(QDialog):
         ("gear", "settings.nav.other", OtherPage),
     ]
 
-    def __init__(self, parent=None, character=None):
+    def __init__(self, parent=None, character=None, rag=None):
         super().__init__(parent)
         self.character = character          # 给 Live2D model 页用（可为 None）
+        self.rag = rag                      # 给 RAG 页用（可为 None）
         self.setWindowTitle(t("settings.title"))
         # 无边框 + 透明底：圆角和外投影都要自己画（DSH 的设置窗就是这个样子）。
         # 无边框之后系统标题栏没了，窗口自然也不能拖动，符合"不可移动"。
@@ -1426,6 +1642,8 @@ class SettingsDialog(QDialog):
         for _icon, _text_key, page_cls in self.PAGES:
             if page_cls is Live2DModelPage:
                 page = page_cls(character)
+            elif page_cls is RagPage:
+                page = page_cls(rag=self.rag)     # 共用主窗口那份索引缓存
             else:
                 page = page_cls()
             # 人格页保存后主窗要刷新首页的下拉，别让人新建完还看不到
