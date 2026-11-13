@@ -1893,6 +1893,7 @@ class MainWindow(QMainWindow):
             self.rag.bootstrap_ready.connect(self._on_boot_ready)
             self.rag.ollama_ready.connect(self._on_ollama_ready)
             self.rag.progress.connect(self._on_sync_progress)
+            self.rag.warming.connect(self._on_warming)
             self.rag.synced.connect(self._on_sync_done)
 
         self.rag.refresh(cfg)
@@ -1962,6 +1963,23 @@ class MainWindow(QMainWindow):
             row.skipped(t("loading.state.installed"))
         page.refresh_progress()
         self._maybe_complete()
+
+    def _on_warming(self, done: int, total: int) -> None:
+        """预热阶段：同步已经 100%，但 synced 要等预热跑完才发。
+
+        不报进度的话那行会停在「127 / 127 块」不动 —— 用户会以为卡死了
+        （实际遇到的就是这个，冷启动时能停 1~2 分钟）。这里把措辞换成
+        「预热模型 2/3」，进度条按句数走。
+        """
+        page = self.loading
+        if page is None or not total:
+            return
+        row = page.step("index")
+        row.start()
+        row.set_progress(
+            done / total, t("loading.detail.warming", done=done, total=total)
+        )
+        page.refresh_progress()
 
     def _maybe_complete(self) -> None:
         """所有阶段都收尾了才收起加载页。"""

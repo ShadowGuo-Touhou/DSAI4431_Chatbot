@@ -35,6 +35,10 @@ class _Job:
         self.result = None          # indexer.SyncResult
         self.error: BaseException | None = None
         self.done = False
+        # 预热进度（第几句 / 共几句）。预热排在 synced 之前，没有这个的话
+        # 界面会停在 127/127 不动，看起来像卡死。
+        self.warm = (0, 0)
+        self.warm_ticks = 0
 
     def set_progress(self, done: int, total: int, rel: str) -> None:
         with self.lock:
@@ -49,6 +53,12 @@ class _Job:
             self.boot_total = int(total)
             self.ticks += 1
 
+    def set_warm(self, done: int, total: int) -> None:
+        """预热进度：已经打完几句 / 共几句。"""
+        with self.lock:
+            self.warm = (int(done), int(total))
+            self.warm_ticks += 1
+
     def snapshot(self):
         with self.lock:
             return (
@@ -62,6 +72,8 @@ class _Job:
                 self.boot_stage,
                 self.boot_done,
                 self.boot_total,
+                self.warm,
+                self.warm_ticks,
             )
 
 
@@ -145,15 +157,21 @@ class _SyncTask(QRunnable):
             return
         samples = ["预热", "这个项目的知识库索引保存在哪个目录？",
                    "请检索一下项目文档里关于检索超时与返回条数这两项参数的说明"]
+        total = len(samples)
         deadline = time.monotonic() + 90.0
+        # 预热排在 synced 之前：不报进度的话，界面会停在「127/127 块」不动，
+        # 看起来像卡死（用户实际遇到的正是这个）
+        job.set_warm(1, total)
         for index, text in enumerate(samples, start=1):
             if time.monotonic() > deadline:
                 break
+            job.set_warm(index, total)
             try:
                 engine.embed([text])
             except Exception as exc:             # noqa: BLE001 - 预热失败不算错
                 print(f"[rag] 预热第 {index} 句失败（忽略）：{exc}", flush=True)
                 break
+        job.set_warm(total, total)
 
 
 class RagService(QObject):
@@ -165,6 +183,7 @@ class RagService(QObject):
     bootstrap_ready = Signal(object)            # bootstrap.BootstrapResult
     synced = Signal(object)                     # indexer.SyncResult
     syncing_changed = Signal(bool)              # 开始 / 结束
+    warming = Signal(int, int)                  # 预热（第几句, 共几句）
 
     def __init__(self, parent=None, *, embedder=None, ensure_runner=None) -> None:
         super().__init__(parent)
@@ -186,6 +205,7 @@ class RagService(QObject):
         self.last_launch = None
         self.last_boot = None
         self._seen_boot = False
+        self._seen_warm = 0
         self._timer = QTimer(self)
         self._timer.setInterval(POLL_MS)
         self._timer.timeout.connect(self._poll)
@@ -244,9 +264,20 @@ class RagService(QObject):
         if job is None:
             self._timer.stop()
             return
-        progress, ticks, launch, result, error, done, boot, stage, boot_done, boot_total = (
-            job.snapshot()
-        )
+        (
+            progress,
+            ticks,
+            launch,
+            result,
+            error,
+            done,
+            boot,
+            stage,
+            boot_done,
+            boot_total,
+            warm,
+            warm_ticks,
+        ) = job.snapshot()
 
         if ticks != self._seen_ticks:
             self._seen_ticks = ticks
@@ -254,6 +285,10 @@ class RagService(QObject):
                 self.bootstrap_progress.emit(stage, boot_done, boot_total)
             else:
                 self.progress.emit(*progress)
+
+        if warm_ticks != self._seen_warm:
+            self._seen_warm = warm_ticks
+            self.warming.emit(*warm)
 
         if launch is not None and not self._seen_launch:
             self._seen_launch = True
