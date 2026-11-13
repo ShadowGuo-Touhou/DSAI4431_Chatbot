@@ -57,7 +57,8 @@ if exist ".venv\Scripts\python.exe" (
 
 rem --- 3) pip (failure here is not fatal: the bundled one usually works) ---
 echo   [3/4] upgrading pip ...
-".venv\Scripts\python.exe" -m pip install --upgrade pip -q %PIP_ARGS%
+rem slow networks can hang for minutes here (seen 4+), so cap it hard
+".venv\Scripts\python.exe" -m pip install --upgrade pip -q --timeout 15 --retries 1 %PIP_ARGS%
 if errorlevel 1 echo         (pip upgrade failed - continuing with the bundled pip)
 
 rem --- 4) project + extras -------------------------------------------
