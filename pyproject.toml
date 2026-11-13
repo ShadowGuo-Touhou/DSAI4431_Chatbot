@@ -29,7 +29,9 @@ live2d = [
 # - sherpa-onnx：模型推理，Windows 轮子自带 onnxruntime，纯 CPU，不需要 torch
 # 安装：pip install -e ".[gui]"
 gui = [
-    "PySide6>=6.12",
+    # 钉死版本：写成 >=6.12 时 pip 的 resolver 会试遍所有 PySide6 版本，
+    # 实测卡了 6 分钟零产出；钉成 ==6.12.0 后 90 秒装完。
+    "PySide6==6.12.0",
     "numpy>=1.26",
     "sherpa-onnx>=1.13",
 ]
