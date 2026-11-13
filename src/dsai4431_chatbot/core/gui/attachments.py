@@ -174,3 +174,41 @@ def summary(attachments: list[Attachment]) -> str:
         return ""
     names = "、".join(a.name for a in good)
     return f"[附件 {len(good)} 个：{names}]"
+
+
+def strip_old_images(messages: list[dict], keep_turns: int = 10) -> list[dict]:
+    """历史里只保留最近 `keep_turns` 轮的图片，更早的降级成纯文本。
+
+    为什么：图片在**每次**请求里都会重发，每张最多占 1024 token。聊久了
+    前面那些截图会一直计费，而且模型早就不需要再"看"它们了。
+
+    只降级不改内容 —— 文字部分原样留着，模型仍然知道当时说过什么，
+    只是不再重复付图片的 token。
+
+    "一轮"按 **user 消息** 数：从最后一条往前数，数到第 `keep_turns` 条
+    用户消息为止，再往前的 user 消息里的图片块全部摘掉。
+    """
+    if keep_turns <= 0 or not messages:
+        return messages
+
+    turns = 0
+    result: list[dict] = []
+    for message in reversed(messages):
+        content = message.get("content")
+        if message.get("role") == "user":
+            turns += 1
+            if turns > keep_turns and isinstance(content, list):
+                # 降级：只留文本块，拼回一个字符串
+                texts = [
+                    str(block.get("text", ""))
+                    for block in content
+                    if isinstance(block, dict) and block.get("type") == "text"
+                ]
+                stripped = {**message, "content": "\n\n".join(t for t in texts if t)}
+                result.append(stripped)
+                continue
+        result.append(message)
+
+    result.reverse()
+    return result
+

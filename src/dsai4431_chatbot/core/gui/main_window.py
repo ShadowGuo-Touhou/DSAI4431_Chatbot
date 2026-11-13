@@ -86,6 +86,9 @@ from dsai4431_chatbot.core.gui.session_drawer import DRAWER_W, SessionDrawer
 ICON_DIR = theme.ICON_DIR
 # 发给模型的历史上限（条）。太多会拖 token、太短又记不住上下文。
 MAX_HISTORY_MESSAGES = 20
+# 历史里最多保留最近几轮的**图片**（每轮都会重发，每张最多 1024 token）。
+# 超过这个轮数的图片会在 _payload 里降级成纯文本。
+MAX_IMAGE_TURNS = 10
 
 # 新对话页两颗下拉的「文字之外的宽度」：QSS 的左右内边距 + 箭头区 + 描边，
 # 人格那颗还要加上前面的 16px 图标和图标间距。
@@ -1500,7 +1503,13 @@ class ChatColumn(QWidget):
             if self._tools_for(cfg):
                 rag_hint = f"{rag_hint.rstrip()}\n\n{tool_router.PROTOCOL_HINT}"
             messages.append({"role": "system", "content": rag_hint})
-        messages.extend(self._history[-MAX_HISTORY_MESSAGES:])
+        # 历史里只保留最近 MAX_IMAGE_TURNS 轮的图片：图片每次请求都会重发，
+        # 每张最多 1024 token，聊久了前面那些截图会一直计费。
+        # 更早的降级成纯文本（文字留着，图摘掉）。
+        history = attachments.strip_old_images(
+            self._history[-MAX_HISTORY_MESSAGES:], MAX_IMAGE_TURNS
+        )
+        messages.extend(history)
         return messages
 
     def _rag_hint(self, cfg) -> str:
