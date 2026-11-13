@@ -172,6 +172,42 @@ def process_name(pid: int) -> str:
     return Path(image).name.lower() if image else ""
 
 
+def terminate_process(pid: int) -> tuple[bool, str]:
+    """结束一个进程。返回 (成功, 失败原因)。
+
+    ⚠ **别用 `taskkill`**：实测在这台机器上 `taskkill /PID N /F` 会报
+    「ERROR: The process "N" not found」，可那个进程明明活着、端口还占着。
+    `tasklist /FI "PID eq N"` 有同样的毛病（全表能列出，加了 `/FI` 就说没有）。
+    两边的 PID 过滤逻辑都不可靠，所以这里直接走 Win32 API。
+
+    （从零安装验证时踩到的：第一次接管必失败，重启一次才好。）
+    """
+    if sys.platform != "win32":
+        return False, "只能在 Windows 上用"
+    try:
+        import ctypes
+        from ctypes import wintypes
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.OpenProcess.restype = wintypes.HANDLE
+        kernel32.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+        kernel32.TerminateProcess.restype = wintypes.BOOL
+        kernel32.TerminateProcess.argtypes = (wintypes.HANDLE, wintypes.UINT)
+
+        # 0x0001 = PROCESS_TERMINATE
+        handle = kernel32.OpenProcess(0x0001, False, int(pid))
+        if not handle:
+            return False, f"OpenProcess 失败（错误码 {ctypes.get_last_error()}）"
+        try:
+            if not kernel32.TerminateProcess(handle, 1):
+                return False, f"TerminateProcess 失败（错误码 {ctypes.get_last_error()}）"
+            return True, ""
+        finally:
+            kernel32.CloseHandle(handle)
+    except (OSError, AttributeError, ValueError) as exc:
+        return False, str(exc)
+
+
 def stop_foreign(
     url: str = DEFAULT_BASE_URL,
     *,
@@ -188,7 +224,7 @@ def stop_foreign(
     - `cannot_stop`  是 ollama 但关不掉（权限/被保护）
     - `failed`       关了但端口没释放
 
-    ⚠ 只 taskkill 进程名是 ollama 的。用户机器上 `P:\\.Ollama` 那份是
+    ⚠ 只结束进程名是 ollama 的。用户机器上 `P:\\.Ollama` 那份是
     自己用 start-ollama.ps1 启的常驻服务，别的工具可能也在用 —— 但既然
     用户要求"按设置里的路径掌管 Ollama"，这里就是会关掉它。
     """
@@ -218,28 +254,11 @@ def stop_foreign(
             if image and image == wanted:
                 print(f"[rag] 端口 {port} 上的 Ollama 就是设置里的那个，直接复用", flush=True)
                 return "already_ours"
-        try:
-            result = subprocess.run(  # noqa: S603,S607
-                ["taskkill", "/PID", str(pid), "/F"],
-                capture_output=True,
-                text=True,
-                timeout=15,
-                creationflags=_CREATE_NO_WINDOW,
-            )
-        except (OSError, subprocess.SubprocessError) as exc:
+        # 走 Win32 API 而不是 taskkill（原因见 terminate_process 的注释）
+        ok, reason = terminate_process(pid)
+        if not ok:
             denied += 1
-            print(f"[rag] 关闭 Ollama（PID {pid}）失败：{exc}", flush=True)
-            continue
-        # ⚠ 必须看返回码：taskkill 失败时不一定抛异常（权限不足会打一行字
-        # 然后 returncode != 0）。以前不看，于是"没杀掉"被当成"杀掉了"，
-        # 接着白等 8 秒、报 failed，而那个 Ollama 其实一直活着。
-        if result.returncode != 0:
-            denied += 1
-            message = (result.stdout or result.stderr or "").strip().splitlines()
-            print(
-                f"[rag] 关闭 Ollama（PID {pid}）失败：{message[-1] if message else result.returncode}",
-                flush=True,
-            )
+            print(f"[rag] 关闭 Ollama（PID {pid}）失败：{reason}", flush=True)
             continue
         killed += 1
         print(f"[rag] 已关掉占用 {port} 的外部 Ollama（PID {pid}）", flush=True)
@@ -248,7 +267,7 @@ def stop_foreign(
         # 端口上确实是 ollama，但我们关不掉（权限/被保护）
         return "cannot_stop" if denied else "not_ollama"
 
-    # taskkill 是异步的：等端口真的放开，否则我们自己的服务会抢不到
+    # 杀进程是异步的：等端口真的放开，否则我们自己的服务会抢不到
     deadline = time.monotonic() + max(1.0, float(wait_s))
     while time.monotonic() < deadline:
         if not listener_pids(port):
