@@ -70,6 +70,13 @@ voice = "语音输入（点一下开始，再点一下结束）"
 send = "发送"
 jump_bottom = "回到底部"
 
+# --- 附件（core/gui/attachments.py）----------------------------------
+# 只收图片和纯文本：DeepSeek API 只认这两类，PDF/DOCX 得自己提文本
+[main.attach]
+title = "选择附件"
+filter = "图片 (*.png *.jpg *.jpeg *.gif *.webp);;纯文本 (*.md *.txt *.py *.json *.csv *.log *.yaml *.toml *.ini *.xml *.html *.css *.js *.ts);;所有支持的 (*.png *.jpg *.jpeg *.gif *.webp *.md *.txt *.py *.json *.csv *.log *.yaml *.toml *.ini *.xml *.html *.css *.js *.ts)"
+too_many = "最多 {n} 个附件"
+
 # --- 语音输入（core/gui/voice_input.py）------------------------------
 [main.voice]
 listening = "正在听…再点一次麦克风结束（最长 60 秒）"

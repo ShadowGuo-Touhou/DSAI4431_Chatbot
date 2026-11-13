@@ -71,6 +71,13 @@ voice = "Voice input (click to start, click again to stop)"
 send = "Send"
 jump_bottom = "Scroll to bottom"
 
+# --- Attachments (core/gui/attachments.py) ---------------------------
+# Images and plain text only: that is what the DeepSeek API accepts
+[main.attach]
+title = "Choose attachments"
+filter = "Images (*.png *.jpg *.jpeg *.gif *.webp);;Plain text (*.md *.txt *.py *.json *.csv *.log *.yaml *.toml *.ini *.xml *.html *.css *.js *.ts);;All supported (*.png *.jpg *.jpeg *.gif *.webp *.md *.txt *.py *.json *.csv *.log *.yaml *.toml *.ini *.xml *.html *.css *.js *.ts)"
+too_many = "At most {n} attachments"
+
 # --- Voice input (core/gui/voice_input.py) ---------------------------
 [main.voice]
 listening = "Listening… click the mic again to stop (60 s max)"

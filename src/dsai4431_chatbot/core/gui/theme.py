@@ -140,6 +140,19 @@ QPushButton[shape="round"][kind="action"][recording="true"]:hover {{
     font-size: 12px;
     padding: 0 2px;
 }}
+/* 已选附件的小胶囊（点一下移除） */
+#attachChip {{
+    background: {surface_alt};
+    color: {text};
+    border: 1px solid {border_soft};
+    border-radius: 11px;
+    padding: 3px 9px;
+    font-size: 12px;
+}}
+#attachChip:hover {{
+    background: {hover};
+    border-color: {border};
+}}
 
 /* 消息区 */
 QScrollArea, #messageViewport {{

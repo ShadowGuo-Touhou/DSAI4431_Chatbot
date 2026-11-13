@@ -45,6 +45,7 @@ from PySide6.QtGui import QColor, QIcon, QPainter, QPen
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
+    QFileDialog,
     QFrame,
     QHBoxLayout,
     QLabel,
@@ -61,6 +62,7 @@ from PySide6.QtWidgets import (
 )
 
 from dsai4431_chatbot.core.gui import (
+    attachments,
     chat_client,
     chat_config,
     i18n,
@@ -716,12 +718,27 @@ class _Waveform(QWidget):
         painter.end()
 
 
+class _AttachChip(QPushButton):
+    """输入卡里的一个附件胶囊：显示文件名，点一下从待发列表里移除。"""
+
+    def __init__(self, att, parent=None) -> None:
+        label = att.name if len(att.name) <= 20 else att.name[:18] + "…"
+        icon = "🖼" if att.kind == "image" else "📄"
+        super().__init__(f"{icon} {label}  ×", parent)
+        self.att = att
+        self.setObjectName("attachChip")
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.setToolTip(f"{att.path}\n点击移除")
+
+
 class InputCard(QFrame):
     """输入卡：一张圆角卡片，上输入、下操作行（附件在左，语音/发送在右）。"""
 
     submitted = Signal(str)
     # 点了麦克风（开始/结束录音由 ChatColumn 判断，这里只是转发）
     voice_clicked = Signal()
+    # 点了加号（选文件由 ChatColumn 做，这里只转发）
+    attach_clicked = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -729,6 +746,9 @@ class InputCard(QFrame):
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         # 竖向只占内容高度，不要把消息区让出的空间全吃掉
         self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
+
+        # 已选但还没发出去的附件（attachments.Attachment）
+        self._attachments: list = []
 
         outer = QVBoxLayout(self)
         outer.setContentsMargins(14, 12, 12, 10)
@@ -745,6 +765,15 @@ class InputCard(QFrame):
         self._wave = _Waveform()
         outer.addWidget(self._wave)
 
+        # 附件 chips（没有附件时隐藏）
+        self._attach_bar = QWidget()
+        self._attach_layout = QHBoxLayout(self._attach_bar)
+        self._attach_layout.setContentsMargins(0, 0, 0, 0)
+        self._attach_layout.setSpacing(6)
+        self._attach_layout.addStretch(1)
+        self._attach_bar.hide()
+        outer.addWidget(self._attach_bar)
+
         self.edit = _InputEdit()
         self.edit.setObjectName("inputEdit")
         self.edit.setPlaceholderText(t("main.input.placeholder"))
@@ -758,6 +787,7 @@ class InputCard(QFrame):
         actions.setSpacing(8)
 
         self.btn_attach = round_button("plus", t("main.button.attach"), action=True)
+        self.btn_attach.clicked.connect(self.attach_clicked.emit)
         actions.addWidget(self.btn_attach)
 
         actions.addStretch(1)
@@ -800,6 +830,50 @@ class InputCard(QFrame):
     def push_level(self, level: float) -> None:
         """把录音电平喂给声纹动画（Recorder.level 直接连过来）。"""
         self._wave.push(level)
+
+    # --- 附件 -----------------------------------------------------------
+    def attachments(self) -> list:
+        return list(self._attachments)
+
+    def add_attachment(self, att) -> bool:
+        """加一个附件；到上限了就给提示并返回 False。"""
+        from dsai4431_chatbot.core.gui import attachments as attmod
+
+        if len(self._attachments) >= attmod.MAX_ATTACHMENTS:
+            self.set_note(t("main.attach.too_many", n=attmod.MAX_ATTACHMENTS))
+            return False
+        self._attachments.append(att)
+        chip = _AttachChip(att)
+        chip.clicked.connect(lambda _checked=False, c=chip: self._remove_chip(c))
+        # 插在末尾那个 stretch 前面，chips 靠左排
+        self._attach_layout.insertWidget(self._attach_layout.count() - 1, chip)
+        self._attach_bar.show()
+        return True
+
+    def _remove_chip(self, chip) -> None:
+        if chip.att in self._attachments:
+            self._attachments.remove(chip.att)
+        self._attach_layout.removeWidget(chip)
+        chip.deleteLater()
+        if not self._attachments:
+            self._attach_bar.hide()
+
+    def take_attachments(self) -> list:
+        """取走全部附件并清空界面（发送时调用）。"""
+        taken = list(self._attachments)
+        self._attachments.clear()
+        while self._attach_layout.count() > 1:      # 留末尾那个 stretch
+            item = self._attach_layout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+        self._attach_bar.hide()
+        if taken:
+            self.set_note("")
+        return taken
+
+    def clear_attachments(self) -> None:
+        self.take_attachments()
 
 
 class _HomeCombo(QComboBox):
@@ -1257,6 +1331,29 @@ class ChatColumn(QWidget):
         self._voice_timer.setInterval(80)
         self._voice_timer.timeout.connect(self._poll_voice_job)
         self.input.voice_clicked.connect(self._on_voice_click)
+        self.input.attach_clicked.connect(self._on_attach_click)
+
+    # --- 附件 -----------------------------------------------------------
+    def _on_attach_click(self) -> None:
+        """加号：选文件。**只让选图片和纯文本** —— 别的类型 API 也不认。"""
+        from dsai4431_chatbot.core.gui import attachments as attmod
+
+        files, _selected = QFileDialog.getOpenFileNames(
+            self,
+            t("main.attach.title"),
+            str(Path.home()),
+            t("main.attach.filter"),
+        )
+        if not files:
+            return
+        for raw in files:
+            att = attmod.load(Path(raw))
+            if not att.ok:
+                self.input.set_note(att.error)
+                continue
+            if not self.input.add_attachment(att):
+                break
+
 
     # --- 语音输入 -------------------------------------------------------
     def _voice_model_dir(self):
@@ -1330,19 +1427,31 @@ class ChatColumn(QWidget):
     def _on_submit(self, text: str) -> None:
         # 每次都现读配置：设置页里刚填的 Key / 刚改的模型立刻生效
         cfg = chat_config.load()
-        self.messages.add_message("user", text)
+
+        # 先取走附件（输入框已经被 _InputEdit.submit() 清空了）。
+        # 有图片时 content 是块数组，只有文本时仍是普通字符串 —— 见 attachments。
+        atts = self.input.take_attachments()
+        content = attachments.build_content(text, atts)
+        display = text
+        note = attachments.summary(atts)
+        if note:
+            display = f"{display}\n\n{note}" if display else note
+        self.messages.add_message("user", display)
 
         ok, _reason = cfg.ready()
         if not ok:
+            # 没发出去就把附件放回去，别让用户白选一遍
+            for att in atts:
+                self.input.add_attachment(att)
             self.messages.add_message("bot", t("main.messages.no_key"))
             return
 
         # 没建会话就直接发消息：自动建一条（用第一个人格 + 当前模型）
         session = self._ensure_session(cfg)
-        session_store.append_user_message(session.id, text)
+        session_store.append_user_message(session.id, display)
         self.session_updated.emit(session.id)
 
-        self._history.append({"role": "user", "content": text})
+        self._history.append({"role": "user", "content": content})
         self._bubble = self.messages.begin_message("bot")
         self._bubble.set_raw(t("main.messages.thinking"))
         self._bubble_fresh = True
