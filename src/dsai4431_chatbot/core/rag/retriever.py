@@ -177,6 +177,11 @@ def _lexical_boost(scores, chunks: list[dict], query: str):
         for token in tokens:
             if f"**{token}**" in text:
                 bonus += 0.2          # 术语表里的加粗词条（`- **MMT** …`）
+            elif len(token) <= 3:
+                # 两三个字母的型号/阵营缩写（SA、OSP、PDT）要整词命中，
+                # 否则 "sa" 会命中 "mass"、"sarissa" 这类无关片段。
+                if re.search(rf"\b{re.escape(token)}\b", text):
+                    bonus += 0.2
             elif token in text:
                 bonus += 0.12
         if bonus:
