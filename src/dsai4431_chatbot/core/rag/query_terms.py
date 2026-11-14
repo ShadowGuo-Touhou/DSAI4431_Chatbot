@@ -111,6 +111,16 @@ TERMS: list[tuple[str, str]] = [
     ("地图", "map maps"),
     ("这张图", "map"),
     ("多大", "map size"),
+    # 命名差异（wiki 名称 vs 游戏内字符串）
+    ("名字", "naming differences wiki in-game name"),
+    ("名称", "naming differences wiki in-game name"),
+    ("叫法", "naming differences in-game name"),
+    ("改名", "renamed naming differences"),
+    ("对不上", "naming differences"),
+    ("不一致", "naming differences"),
+    ("冲突", "naming differences"),
+    ("差异", "naming differences"),
+    ("换过名", "renamed"),
     # 阵营（wiki 用阵营徽记标记专属部件）
     ("部件", "part"),
     ("组件", "part"),
