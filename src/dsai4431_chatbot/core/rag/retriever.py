@@ -6,12 +6,14 @@
 
 from __future__ import annotations
 
+import re
 import time
 from dataclasses import dataclass, field
 
 import numpy as np
 
 from dsai4431_chatbot.core.rag import embedder as embedder_mod
+from dsai4431_chatbot.core.rag import query_terms
 from dsai4431_chatbot.core.rag import store
 
 # 注入块顶部那句「请依据资料回答」的说明
@@ -80,8 +82,9 @@ def search(
     # 查询用的超时必须比建索引小得多：这里按预算现造一个（或改临时的 timeout）
     _apply_timeout(engine, timeout_ms / 1000.0)
 
+    pairs = query_terms.variants(query)
     try:
-        vector = engine.embed([query])[0]
+        vectors = engine.embed([text for text, _weight in pairs])
     except embedder_mod.EmbedError as exc:
         timed_out = "超时" in str(exc) or exc.kind == "unreachable"
         return Retrieval(
@@ -89,6 +92,8 @@ def search(
             timed_out=timed_out and exc.kind == "unreachable",
             error=str(exc),
         )
+
+    vector = _merge_vectors(vectors, [weight for _text, weight in pairs])
 
     if time.perf_counter() - started > timeout_ms / 1000.0:
         return Retrieval(
@@ -98,6 +103,7 @@ def search(
         )
 
     scores = index.vectors @ np.asarray(vector, dtype=np.float32)
+    scores = _lexical_boost(scores, index.chunks, query)
     order = np.argsort(-scores)[: max(1, top_k)]
     hits: list[Hit] = []
     for row in order:
@@ -148,6 +154,49 @@ def build_block(hits: list[Hit], limit_chars: int = 3000) -> str:
 # ---------------------------------------------------------------------------
 # 小工具
 # ---------------------------------------------------------------------------
+# 查询里出现这类 token 时（缩写、型号、英文舰名），字面命中要额外加权：
+# bge-base-zh 对 "MMT"、"AE-10" 这种短词的语义不敏感，纯向量会把正确文档排到 0.4 以下。
+LEX_TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9\-]{1,}|[A-Z]{2,}")
+
+
+def _lexical_boost(scores, chunks: list[dict], query: str):
+    """字面命中加权：查询里的英文/型号 token 在片段里出现，就加一点分。"""
+    tokens: list[str] = []
+    for token in LEX_TOKEN.findall(query or ""):
+        low = token.lower()
+        if len(low) >= 2 and low not in tokens:
+            tokens.append(low)
+    if not tokens:
+        return scores
+    out = np.array(scores, dtype=np.float32, copy=True)
+    for row, chunk in enumerate(chunks):
+        text = (chunk.get("text") or "").lower()
+        if not text:
+            continue
+        bonus = 0.0
+        for token in tokens:
+            if f"**{token}**" in text:
+                bonus += 0.2          # 术语表里的加粗词条（`- **MMT** …`）
+            elif token in text:
+                bonus += 0.12
+        if bonus:
+            # 每个 token 最多 +0.2，整片最多 +0.36；上限 0.99 保持余弦分数的可比性
+            out[row] = min(0.99, float(out[row]) + min(0.36, bonus))
+    return out
+
+
+def _merge_vectors(vectors: list, weights: list[float]) -> np.ndarray:
+    """多个查询变体按权重求平均向量（中文原句 + 英文术语补充），再归一化。"""
+    matrix = np.asarray(vectors, dtype=np.float32)
+    if len(vectors) == 1:
+        return matrix[0]
+    w = np.asarray(weights, dtype=np.float32)
+    w = w / w.sum() if float(w.sum()) > 0 else np.full(len(vectors), 1.0 / len(vectors), dtype=np.float32)
+    merged = (matrix * w[:, None]).sum(axis=0)
+    norm = float(np.linalg.norm(merged))
+    return merged / norm if norm > 0 else merged
+
+
 def _apply_timeout(engine, seconds: float) -> None:
     if hasattr(engine, "timeout_s"):
         engine.timeout_s = max(0.2, float(seconds))
