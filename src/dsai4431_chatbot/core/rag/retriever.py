@@ -157,6 +157,9 @@ def build_block(hits: list[Hit], limit_chars: int = 3000) -> str:
 # 查询里出现这类 token 时（缩写、型号、英文舰名），字面命中要额外加权：
 # bge-base-zh 对 "MMT"、"AE-10" 这种短词的语义不敏感，纯向量会把正确文档排到 0.4 以下。
 LEX_TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9\-]{1,}|[A-Z]{2,}")
+# 舰级代号（450 CH / missile CC / S2CC）：文档名和标题里出现整串才算命中，
+# 否则 "CH" 会把 250 CH、missile CH 全拉进来，把用户问的那一类挤掉。
+CLASS_CODE = re.compile(r"\b(\d{2,4}|[A-Za-z][A-Za-z0-9]{1,3})\s+(CH|CC|BB|LN|CL|DD|FF|FFL|CVE|CVL|MN)\b", re.I)
 
 
 def _lexical_boost(scores, chunks: list[dict], query: str):
@@ -166,13 +169,16 @@ def _lexical_boost(scores, chunks: list[dict], query: str):
         low = token.lower()
         if len(low) >= 2 and low not in tokens:
             tokens.append(low)
-    if not tokens:
+    phrases = [" ".join(m).lower() for m in CLASS_CODE.findall(query or "")]
+    if not tokens and not phrases:
         return scores
     out = np.array(scores, dtype=np.float32, copy=True)
     for row, chunk in enumerate(chunks):
         text = (chunk.get("text") or "").lower()
         if not text:
             continue
+        # "450mm" 在资料里常写成 "450 mm"，去掉空格再比一次
+        squashed = text.replace(" ", "")
         bonus = 0.0
         for token in tokens:
             if f"**{token}**" in text:
@@ -182,11 +188,16 @@ def _lexical_boost(scores, chunks: list[dict], query: str):
                 # 否则 "sa" 会命中 "mass"、"sarissa" 这类无关片段。
                 if re.search(rf"\b{re.escape(token)}\b", text):
                     bonus += 0.2
-            elif token in text:
+            elif token in text or token in squashed:
                 bonus += 0.12
+        for phrase in phrases:
+            slug = (chunk.get("source") or "").rsplit("/", 1)[-1].removesuffix(".md")
+            heading = (chunk.get("heading") or "").lower()
+            if phrase == slug.replace("-", " ") or phrase in heading:
+                bonus += 0.3          # 问的就是这一类，标题/文件名对上了
         if bonus:
             # 每个 token 最多 +0.2，整片最多 +0.36；上限 0.99 保持余弦分数的可比性
-            out[row] = min(0.99, float(out[row]) + min(0.36, bonus))
+            out[row] = min(0.99, float(out[row]) + min(0.5, bonus))
     return out
 
 
