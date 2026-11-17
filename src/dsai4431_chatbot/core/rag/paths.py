@@ -37,20 +37,14 @@ def index_dir() -> Path:
     return root
 
 
-def knowledge_root(raw: str = "") -> Path:
-    """把配置里的 `rag_dir` 变成绝对路径。
+def knowledge_root() -> Path:
+    """知识库目录：固定 `<repo>/asset/RAG`。
 
-    - 空 → `<repo>/asset/RAG`
-    - 相对 → `<repo>/<raw>`（存 ini 的默认写法，换机器照样能用）
-    - 绝对 → 原样（用户自己挑的仓库外目录）
+    以前这里接受配置里的 `rag_dir`（可填仓库外任意目录），结果接别人交付的
+    知识库时要把路径写进 ini，换机器就失效、还得再改一次。现在目录是常量：
+    想换知识库就直接替换 `asset/RAG` 里的文件。
     """
-    value = (raw or "").strip().replace("\\", "/")
-    if not value:
-        return project_root() / DEFAULT_KNOWLEDGE_DIR
-    path = Path(value).expanduser()
-    if path.is_absolute():
-        return path
-    return project_root() / path
+    return project_root() / DEFAULT_KNOWLEDGE_DIR
 
 
 def rel_to_project(path: Path) -> str:
@@ -63,10 +57,14 @@ def rel_to_project(path: Path) -> str:
 
 
 def signature(cfg) -> str:
-    """索引签名：任何一项变了都必须整库重切（维度/口径都不同了）。"""
+    """索引签名：任何一项变了都必须整库重切（维度/口径都不同了）。
+
+    **不再包含知识库的绝对路径**：目录已经固定成 `asset/RAG`，而项目整个
+    搬到别的盘/别的目录时切片口径没变，向量照样能复用 —— 带上路径只会让
+    每次搬家白重建一遍索引。
+    """
     parts = [
         "v1",
-        str(knowledge_root(getattr(cfg, "rag_dir", "")).resolve()),
         str(getattr(cfg, "rag_embedding", "") or ""),
         str(int(getattr(cfg, "rag_chunk_chars", 480))),
         str(int(getattr(cfg, "rag_chunk_overlap", 64))),

@@ -844,9 +844,7 @@ class RagPage(QWidget):
             str(getattr(self._cfg, "rag_prompt", "") or "")
         )
         self.ed_rag_prompt.setPlaceholderText(
-            chat_config.DEFAULT_RAG_PROMPT.replace(
-                "{dir}", str(getattr(self._cfg, "rag_dir", "") or "asset/RAG")
-            )
+            chat_config.DEFAULT_RAG_PROMPT.replace("{dir}", "asset/RAG")
         )
         self.ed_rag_prompt.textChanged.connect(self.save)
         top.addWidget(self.ed_rag_prompt)
@@ -925,21 +923,20 @@ class RagPage(QWidget):
         params.addWidget(self.lb_params_note)
         lay.addWidget(param_card)
 
-        # --- 卡片三：知识库目录 + 文件清单 ------------------------------
+        # --- 卡片三：知识库目录（固定 asset/RAG）+ 文件清单 ---------------
         lib_card, lib = card()
         lib.addWidget(field_label(t("settings.rag.folder")))
 
         folder_row = QHBoxLayout()
         folder_row.setSpacing(8)
-        self.ed_folder = field_input(t("settings.rag.folder_placeholder"))
-        self.ed_folder.setText(self._cfg.rag_dir)
-        self.ed_folder.editingFinished.connect(self._on_folder_edited)
+        # 只读：目录是常量，用户不能改，但得看得见东西往哪放
+        self.ed_folder = field_input("")
+        self.ed_folder.setText(_display_path(_resolve_folder()))
+        self.ed_folder.setReadOnly(True)
+        self.ed_folder.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         folder_row.addWidget(self.ed_folder, 1)
-        btn_choose = small_button(t("common.choose"))
-        btn_choose.clicked.connect(self._pick_folder)
         btn_open = small_button(t("common.edit"))
         btn_open.clicked.connect(self._open_folder)
-        folder_row.addWidget(btn_choose)
         folder_row.addWidget(btn_open)
         lib.addLayout(folder_row)
 
@@ -1052,23 +1049,10 @@ class RagPage(QWidget):
             edit.setText(_store_path(chosen))
             self.save()
 
-    def _pick_folder(self) -> None:
-        chosen = QFileDialog.getExistingDirectory(
-            self, self.ed_folder.placeholderText(), str(Path.home())
-        )
-        if chosen:
-            self.ed_folder.setText(_store_path(chosen))
-            self._on_folder_edited()
-
     def _open_folder(self) -> None:
-        directory = _resolve_folder(self.ed_folder.text())
+        directory = _resolve_folder()
         if directory.is_dir():
             QDesktopServices.openUrl(QUrl.fromLocalFile(str(directory)))
-
-    def _on_folder_edited(self) -> None:
-        self.save()
-        self._refresh_files()
-        self.refresh_status()
 
     # --- 文件清单 / 状态 ------------------------------------------------
     def _refresh_files(self) -> None:
@@ -1081,7 +1065,7 @@ class RagPage(QWidget):
         self.file_list.clear()
         self.file_states: dict[str, str] = {}     # rel → state（测试直接读它）
         self.file_state_labels: dict[str, QLabel] = {}
-        directory = _resolve_folder(self.ed_folder.text())
+        directory = _resolve_folder()
         self.lb_resolved.setText(
             t("settings.rag.resolved", path=_display_path(directory))
         )
@@ -1283,7 +1267,6 @@ class RagPage(QWidget):
         cfg = chat_config.load()          # 现读，只改自己这些字段
         cfg.rag_ollama = self.ed_ollama.text().strip()
         cfg.rag_embedding = self.ed_embedding.text().strip()
-        cfg.rag_dir = self.ed_folder.text().strip()
         cfg.rag_enabled = bool(self.cb_enabled.isChecked())
         cfg.rag_prompt = self.ed_rag_prompt.toPlainText().strip()
         cfg.rag_autostart = bool(self.cb_autostart.isChecked())
@@ -1351,11 +1334,11 @@ def _store_path(chosen: str) -> str:
         return str(path)
 
 
-def _resolve_folder(raw: str) -> Path:
-    """把输入框里的字变成绝对目录（空 = 默认 asset/RAG）。"""
+def _resolve_folder() -> Path:
+    """知识库的绝对目录（固定 asset/RAG，不再读输入框）。"""
     from dsai4431_chatbot.core.rag import paths
 
-    return paths.knowledge_root(raw)
+    return paths.knowledge_root()
 
 
 def _display_path(path: Path) -> str:

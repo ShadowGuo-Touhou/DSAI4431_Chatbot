@@ -1515,14 +1515,15 @@ class ChatColumn(QWidget):
     def _rag_hint(self, cfg) -> str:
         """用户在设置页写的 RAG 提示词（默认只说「你有知识库、它在哪」）。
 
-        `{dir}` 会替换成当前知识库目录，换了目录文案也不会说错。
+        `{dir}` 会替换成知识库目录。目录已固定成 `asset/RAG`，这里只是为了
+        让旧提示词里写的 `{dir}` 不至于原样发出去。
         """
         if not self._rag_on(cfg):
             return ""
         text = str(getattr(cfg, "rag_prompt", "") or "").strip()
         if not text:
             return ""
-        folder = str(getattr(cfg, "rag_dir", "") or "asset/RAG").strip()
+        folder = "asset/RAG"
         return text.replace("{dir}", folder)
 
     # --- 知识库检索 -----------------------------------------------------
