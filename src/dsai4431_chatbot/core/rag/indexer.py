@@ -60,7 +60,7 @@ def sync_once(
     started = time.perf_counter()
     result = SyncResult()
 
-    root = paths.knowledge_root(getattr(cfg, "rag_dir", ""))
+    root = paths.knowledge_root()
     scan = loader.scan(root, int(getattr(cfg, "rag_max_file_mb", 2)))
     result.skipped = list(scan.skipped)
 

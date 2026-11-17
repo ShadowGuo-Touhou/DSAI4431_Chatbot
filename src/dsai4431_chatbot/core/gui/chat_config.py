@@ -62,7 +62,7 @@ RAG_DEFAULTS = {
     "chunk_chars": 480,      # 切块目标字数
     "chunk_overlap": 64,     # 超长段滑窗重叠
     "max_file_mb": 2,        # 单文件上限
-    "max_chunks": 2000,      # 块数上限（防把整个盘当知识库）
+    "max_chunks": 200000,    # 块数硬顶（几乎撞不到；loader 另有 5000 文件上限兜着）
     "inject_chars": 3000,    # 注入内容总字数上限
 }
 # 参数 → (最小, 最大, 步长)；设置页的 spinbox 直接用它建控件
@@ -74,7 +74,7 @@ RAG_LIMITS = {
     "chunk_chars": (120, 2000, 20),
     "chunk_overlap": (0, 500, 8),
     "max_file_mb": (1, 64, 1),
-    "max_chunks": (50, 20000, 50),
+    "max_chunks": (50, 200000, 50),
     "inject_chars": (200, 20000, 200),
 }
 
@@ -105,7 +105,7 @@ class ChatConfig:
     model: str = DEFAULT_MODEL
     persona_dir: str = ""                                  # 空 = 用默认目录
     persona_files: list[str] = field(default_factory=lambda: list(DEFAULT_PERSONA_FILES))
-    rag_dir: str = ""
+    # 知识库目录是常量 asset/RAG，不再可配（见 core/rag/paths.knowledge_root）
     rag_ollama: str = ""
     rag_ollama_dir: str = ""      # 留空 = asset/ollama（再留空就自动下载）
     rag_models_dir: str = ""      # 留空 = asset/embedding
@@ -124,7 +124,7 @@ class ChatConfig:
     rag_chunk_chars: int = 480
     rag_chunk_overlap: int = 64
     rag_max_file_mb: int = 2
-    rag_max_chunks: int = 2000
+    rag_max_chunks: int = 200000
     rag_inject_chars: int = 3000
 
     # --- 派生信息 -------------------------------------------------------
@@ -233,7 +233,6 @@ def load() -> ChatConfig:
             persona_files=_as_list(
                 s.value(f"{GROUP}/persona_files", None)
             ) or list(DEFAULT_PERSONA_FILES),
-            rag_dir=_get(s, "rag_dir", ""),
             rag_ollama=_get(s, "rag_ollama", ""),
             rag_ollama_dir=_get(s, "rag_ollama_dir", ""),
             rag_models_dir=_get(s, "rag_models_dir", ""),
@@ -281,7 +280,6 @@ def save(cfg: ChatConfig) -> None:
     s.setValue(f"{GROUP}/model", cfg.model)
     s.setValue(f"{GROUP}/persona_dir", cfg.persona_dir)
     s.setValue(f"{GROUP}/persona_files", list(cfg.persona_files))
-    s.setValue(f"{GROUP}/rag_dir", cfg.rag_dir)
     s.setValue(f"{GROUP}/rag_ollama", cfg.rag_ollama)
     s.setValue(f"{GROUP}/rag_ollama_dir", cfg.rag_ollama_dir)
     s.setValue(f"{GROUP}/rag_models_dir", cfg.rag_models_dir)
