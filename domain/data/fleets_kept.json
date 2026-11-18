@@ -1,0 +1,641 @@
+[
+ {
+  "name": "missle spams",
+  "points": 18855,
+  "ships": 6,
+  "faction": "Alliance",
+  "edited": "2026-09-23 21:14",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Test ships\\missle spams.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Rush B",
+  "points": 12000,
+  "ships": 6,
+  "faction": "Protectorate",
+  "edited": "2026-10-18 16:38",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\6k\\Rush B.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Helplessness",
+  "points": 6000,
+  "ships": 2,
+  "faction": "Protectorate",
+  "edited": "2026-10-07 20:48",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\6k\\Helplessness.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "24th-DACS 6k",
+  "points": 5952,
+  "ships": 8,
+  "faction": "Alliance",
+  "edited": "2026-11-14 20:34",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Anti CLN\\DACS\\24th\\24th-DACS 6k.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "CV 6k",
+  "points": 5868,
+  "ships": 2,
+  "faction": "Protectorate",
+  "edited": "2026-09-04 01:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\6k\\CV 6k.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "True Legacy",
+  "points": 5850,
+  "ships": 5,
+  "faction": "Alliance",
+  "edited": "2026-10-29 22:14",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Capitals\\True Legacy.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "msl ln test",
+  "points": 5834,
+  "ships": 2,
+  "faction": "Protectorate",
+  "edited": "2026-09-04 01:10",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\Test Ships\\msl ln test.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "CV 6k duo",
+  "points": 5698,
+  "ships": 2,
+  "faction": "Protectorate",
+  "edited": "2026-09-04 01:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\6k\\CV 6k duo.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "new update test",
+  "points": 3390,
+  "ships": 4,
+  "faction": "Alliance",
+  "edited": "2026-09-23 21:14",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Test ships\\new update test.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "emmmmmmmm",
+  "points": 3195,
+  "ships": 8,
+  "faction": "Protectorate",
+  "edited": "2026-09-08 00:29",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\emmmmmmmm.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Heteroteuthinae",
+  "points": 3095,
+  "ships": 4,
+  "faction": "Protectorate",
+  "edited": "2026-11-10 21:32",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\Heteroteuthinae.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Comet Squadron",
+  "points": 3075,
+  "ships": 3,
+  "faction": "Protectorate",
+  "edited": "2026-10-21 21:56",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\Comet Squadron.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "3_OSP_Carrier_ASW++",
+  "points": 3011,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-09-16 22:57",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\3_OSP_Carrier_ASW++.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "OSP supported Pirate",
+  "points": 3006,
+  "ships": 3,
+  "faction": "Protectorate",
+  "edited": "2026-10-14 23:40",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\OSP supported Pirate.fleet",
+  "custom_missiles": false
+ },
+ {
+  "name": "Presidential Escort",
+  "points": 3003,
+  "ships": 4,
+  "faction": "Alliance",
+  "edited": "2026-10-20 18:03",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\Presidential_Escort.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "2cvl  s3 6km",
+  "points": 3000,
+  "ships": 2,
+  "faction": "Protectorate",
+  "edited": "2026-09-03 23:53",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\2cvl  s3 6km.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Advent Squadran MK IV",
+  "points": 3000,
+  "ships": 9,
+  "faction": "Protectorate",
+  "edited": "2026-10-25 19:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\Advent Squadran MK IV.fleet",
+  "custom_missiles": false
+ },
+ {
+  "name": "Amethyst Squadron",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Protectorate\\Amethyst Squadron.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "CC LN test 1",
+  "points": 3000,
+  "ships": 3,
+  "faction": "Protectorate",
+  "edited": "2026-10-22 22:32",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\群新手舰队包 v1.11\\OSP\\鳶蘿硌閨挐栥耦+鳶蘿盄蹈耦+嗣髡夔援坲儂\\CC LN test 1.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "CV ",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-09-16 23:46",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\CV .fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "CV Rocket",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-10-25 19:39",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\CV Rocket.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "CVE test 33 SS2",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-11-14 18:53",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\群新手舰队包 v1.12\\联盟（ANS）\\防区外打击航母舰队\\CVE test 33 SS2.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Cobalt Squadron",
+  "points": 3000,
+  "ships": 2,
+  "faction": "Protectorate",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Protectorate\\Cobalt Squadron.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Container Liner test 33",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-11-15 00:23",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\Container Liner test 33.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Garnet Squadron",
+  "points": 3000,
+  "ships": 5,
+  "faction": "Protectorate",
+  "edited": "2026-11-07 20:35",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Protectorate\\Garnet Squadron.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Kyanite Squadron",
+  "points": 3000,
+  "ships": 3,
+  "faction": "Protectorate",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Protectorate\\Kyanite Squadron.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Life Goes On LNG",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-10-20 19:52",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\Life Goes On LNG.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Literal shit",
+  "points": 3000,
+  "ships": 7,
+  "faction": "Protectorate",
+  "edited": "2026-09-15 20:32",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\Literal shit.fleet",
+  "custom_missiles": false
+ },
+ {
+  "name": "Pretty lights",
+  "points": 3000,
+  "ships": 5,
+  "faction": "Protectorate",
+  "edited": "2026-10-20 18:05",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\Pretty lights.fleet",
+  "custom_missiles": false
+ },
+ {
+  "name": "Rocket CV",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-09-18 21:09",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\Rocket CV.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Rocket CV JR",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-09-18 22:02",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\Rocket CV JR.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Rocket Shuttles but bigger",
+  "points": 3000,
+  "ships": 2,
+  "faction": "Protectorate",
+  "edited": "2026-09-12 22:41",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\Rocket Shuttles but bigger.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "S2 DIR OCELLO",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-11-14 23:25",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\群新手舰队包 v1.04\\OSP\\絳粟漆硌閨挐栥耦\\S2 DIR OCELLO.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "S2CH",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-10-07 23:16",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Capitals\\S2CH.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "S3 Test",
+  "points": 3000,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-09-03 23:55",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\S3 Test.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Skirmishers                                                   V2 BiBlob ffl sprinter blob",
+  "points": 3000,
+  "ships": 10,
+  "faction": "Alliance",
+  "edited": "2026-09-19 15:22",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\Skirmishers                                                   V2 BiBlob ffl sprinter blob.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "TF Birch",
+  "points": 3000,
+  "ships": 3,
+  "faction": "Alliance",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Alliance\\TF Birch.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "TF Maple",
+  "points": 3000,
+  "ships": 3,
+  "faction": "Alliance",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Alliance\\TF Maple.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "TF Oak",
+  "points": 3000,
+  "ships": 2,
+  "faction": "Alliance",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Alliance\\TF Oak.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "TF Ponthera (4-2)",
+  "points": 3000,
+  "ships": 2,
+  "faction": "Alliance",
+  "edited": "2026-10-30 23:53",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Capitals\\TF Ponthera\\TF Ponthera (4-2).fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "TF Redwood",
+  "points": 3000,
+  "ships": 4,
+  "faction": "Alliance",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Alliance\\TF Redwood.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "TF Willow",
+  "points": 3000,
+  "ships": 8,
+  "faction": "Alliance",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Alliance\\TF Willow.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Tantalum Squadron",
+  "points": 3000,
+  "ships": 8,
+  "faction": "Protectorate",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Protectorate\\Tantalum Squadron.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "White Fox and her doggos",
+  "points": 3000,
+  "ships": 3,
+  "faction": "Alliance",
+  "edited": "2026-10-25 19:10",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\White Fox and her doggos.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Wulfenite Squadron",
+  "points": 3000,
+  "ships": 5,
+  "faction": "Protectorate",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Protectorate\\Wulfenite Squadron.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Zircon Squadron",
+  "points": 3000,
+  "ships": 3,
+  "faction": "Protectorate",
+  "edited": "2026-09-03 23:47",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Starter Fleets - Protectorate\\Zircon Squadron.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "capper test",
+  "points": 3000,
+  "ships": 9,
+  "faction": "Alliance",
+  "edited": "2026-09-16 21:06",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Test ships\\capper test.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "concept",
+  "points": 3000,
+  "ships": 3,
+  "faction": "Alliance",
+  "edited": "2026-11-01 20:48",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Capitals\\concept.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "greedford",
+  "points": 3000,
+  "ships": 2,
+  "faction": "Alliance",
+  "edited": "2026-09-16 22:05",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\greedford.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "CC LN test 4 450",
+  "points": 2998,
+  "ships": 3,
+  "faction": "Protectorate",
+  "edited": "2026-11-14 18:48",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\群新手舰队包 v1.01\\保护国（OSP）\\火炮指挥巡洋舰+火炮线列舰+多功能穿梭机\\CC LN test 4 450.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "1- cc and shuttles",
+  "points": 2988,
+  "ships": 10,
+  "faction": "Protectorate",
+  "edited": "2026-09-19 15:22",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\1- cc and shuttles.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "       OSP carrier",
+  "points": 2982,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-09-16 23:45",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\OSP carrier.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Presidential Escort",
+  "points": 2973,
+  "ships": 4,
+  "faction": "Alliance",
+  "edited": "2026-10-20 18:03",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\Presidential Escort.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "CVE test 34 S2",
+  "points": 2968,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-11-14 18:49",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\群新手舰队包 v1.01\\联盟（ANS）\\防区外打击航母舰队\\优化方向其一\\CVE test 34 S2.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "'We can fix her' (3)",
+  "points": 2961,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-09-09 22:46",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Anti CLN\\Archer\\'We can fix her' (3).fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "CVE test 33 SS2",
+  "points": 2944,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-11-14 19:04",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\群进阶舰队包v1.04\\ANS\\滅俋湖僻瑤譫耦勦\\CVE test 33 SS2.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "3_OSP_Carrier_ASW++",
+  "points": 2916,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-10-15 22:37",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\3_OSP_Carrier_ASW++.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "TF KATNIP MK3",
+  "points": 2887,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-10-30 21:21",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\TF_KATNIP_MK3.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "CVLN test 5 Newbie",
+  "points": 2880,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-11-14 18:53",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\群进阶舰队包v1.04\\OSP\\耦勦瑤譫\\CVLN test 5 Newbie.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Testbulous",
+  "points": 2880,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-09-23 21:14",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Test ships\\Testbulous.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "zpzd 导弹FF",
+  "points": 2856,
+  "ships": 3,
+  "faction": "Alliance",
+  "edited": "2026-10-30 21:21",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\zpzd 导弹FF.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Advent Squadran",
+  "points": 2844,
+  "ships": 10,
+  "faction": "Protectorate",
+  "edited": "2026-10-15 22:37",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Protectorate\\Advent Squadran.fleet",
+  "custom_missiles": false
+ },
+ {
+  "name": "Archer 3.0",
+  "points": 2747,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-11-14 23:41",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Anti CLN\\Archer\\Archer 3.0.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Taskforce 'Adventrix'",
+  "points": 2617,
+  "ships": 5,
+  "faction": "Alliance",
+  "edited": "2026-09-09 22:43",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Taskforce 'Adventrix'.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "Hellbomb",
+  "points": 2602,
+  "ships": 1,
+  "faction": "Protectorate",
+  "edited": "2026-09-19 14:37",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\Hellbomb.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "very tanky BB",
+  "points": 2482,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-09-23 21:14",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Test ships\\very tanky BB.fleet",
+  "custom_missiles": false
+ },
+ {
+  "name": "sprinter test 2",
+  "points": 2237,
+  "ships": 4,
+  "faction": "Alliance",
+  "edited": "2026-09-23 21:01",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Test ships\\sprinter test 2.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "MSL platform",
+  "points": 2190,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-09-23 21:14",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Test ships\\MSL platform.fleet",
+  "custom_missiles": true
+ },
+ {
+  "name": "sprinter test",
+  "points": 2026,
+  "ships": 7,
+  "faction": "Alliance",
+  "edited": "2026-09-23 21:49",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Test ships\\sprinter test.fleet",
+  "custom_missiles": false
+ },
+ {
+  "name": "DACS 6k duo (-rev)",
+  "points": 1584,
+  "ships": 1,
+  "faction": "Alliance",
+  "edited": "2026-11-14 23:41",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Anti CLN\\DACS\\DACS 6k duo (-rev).fleet",
+  "custom_missiles": false
+ },
+ {
+  "name": "sprinter test 3",
+  "points": 1434,
+  "ships": 3,
+  "faction": "Alliance",
+  "edited": "2026-09-23 21:13",
+  "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Custom Alliance\\Test ships\\sprinter test 3.fleet",
+  "custom_missiles": true
+ }
+]

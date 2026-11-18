@@ -71,3 +71,12 @@ pip-*/
 # 知识库内容：整个目录不入库。目录固定在 asset/RAG（见 core/rag/paths.py），
 # 想换知识库就替换里面的文件；仓库里只留 .gitkeep 占位。
 asset/RAG/
+
+# 原始素材（131 MB 的 PDF/反编译源码/存档拷贝）不进库：
+# 工作区里以目录联接(other info -> ../other info)出现，脚本照旧能读到。
+other info/
+_wheels/
+domain/_archive_wikidot/
+
+# build_fleet_file 的产物（工具生成的舰队文件，用户自己往游戏目录里拷）
+fleet output/

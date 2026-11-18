@@ -1,0 +1,5307 @@
+{
+ "page": "Spacecraft - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Spacecraft",
+ "category": "craft",
+ "slug": "spacecraft",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [
+  {
+   "name": "RS-35 Halberd",
+   "section": "Spacecraft Mechanics › Craft Stats › ANS",
+   "fields": {
+    "Name": "RS-35 Halberd",
+    "Type": "Skiff",
+    "Base Cost": "15",
+    "Size/Pad Size": "1/6x6",
+    "PD Threat Size": "1",
+    "HP": "130/+30",
+    "Armor": "3mm",
+    "CMD Control Cap": "1/+1",
+    "Speed m/s (Idle/Cruise/Hburn)": "20/45/68",
+    "Speed m/s -17% (Idle/Cruise/Hburn)": "N/A",
+    "Speed m/s -33% (Idle/Cruise/Hburn)": "N/A",
+    "Fuel (Capacity/Loiter Time/Range)": "1,200/33:20/36km"
+   }
+  },
+  {
+   "name": "E-44 Sundial",
+   "section": "Spacecraft Mechanics › Craft Stats › ANS",
+   "fields": {
+    "Name": "E-44 Sundial",
+    "Type": "SEWAC",
+    "Base Cost": "75",
+    "Size/Pad Size": "2/10x10",
+    "PD Threat Size": "1",
+    "HP": "135/+30",
+    "Armor": "3mm",
+    "CMD Control Cap": "0",
+    "Speed m/s (Idle/Cruise/Hburn)": "25/60/90",
+    "Speed m/s -17% (Idle/Cruise/Hburn)": "N/A",
+    "Speed m/s -33% (Idle/Cruise/Hburn)": "N/A",
+    "Fuel (Capacity/Loiter Time/Range)": "2000/42:40/60km"
+   }
+  },
+  {
+   "name": "PF-440 Tanto",
+   "section": "Spacecraft Mechanics › Craft Stats › ANS",
+   "fields": {
+    "Name": "PF-440 Tanto",
+    "Type": "Interceptor",
+    "Base Cost": "8",
+    "Size/Pad Size": "1/6x6",
+    "PD Threat Size": "2",
+    "HP": "50/+30",
+    "Armor": "1.75mm/+1.25mm",
+    "CMD Control Cap": "0/+1",
+    "Speed m/s (Idle/Cruise/Hburn)": "35/113/169",
+    "Speed m/s -17% (Idle/Cruise/Hburn)": "35/94/141",
+    "Speed m/s -33% (Idle/Cruise/Hburn)": "35/75/113",
+    "Fuel (Capacity/Loiter Time/Range)": "1200/11:26/73km"
+   }
+  },
+  {
+   "name": "B-86 Claymore",
+   "section": "Spacecraft Mechanics › Craft Stats › ANS",
+   "fields": {
+    "Name": "B-86 Claymore",
+    "Type": "Bomber",
+    "Base Cost": "12",
+    "Size/Pad Size": "2/10x10",
+    "PD Threat Size": "3",
+    "HP": "135/+30",
+    "Armor": "3mm/+1.25mm",
+    "CMD Control Cap": "0/+6",
+    "Speed m/s (Idle/Cruise/Hburn)": "30/65/98",
+    "Speed m/s -17% (Idle/Cruise/Hburn)": "N/A",
+    "Speed m/s -33% (Idle/Cruise/Hburn)": "N/A",
+    "Fuel (Capacity/Loiter Time/Range)": "2000/13:20/43km"
+   }
+  },
+  {
+   "name": "RS-35 Halberd",
+   "section": "Spacecraft Mechanics › Craft Stats › OSP",
+   "fields": {
+    "Name": "RS-35 Halberd",
+    "Type": "Skiff",
+    "Base Cost": "15",
+    "Size/Pad Size": "1/6x6",
+    "PD Threat Size": "1",
+    "HP": "130/+30",
+    "Armor": "3mm",
+    "CMD Control Cap": "1/+1",
+    "Speed m/s (Idle/Cruise/Hburn)": "20/45/68",
+    "Speed m/s -17% (Idle/Cruise/Hburn)": "N/A",
+    "Speed m/s -33% (Idle/Cruise/Hburn)": "N/A",
+    "Fuel (Capacity/Loiter Time/Range)": "1,200/33:20/36km"
+   }
+  },
+  {
+   "name": "RF-286 Pike",
+   "section": "Spacecraft Mechanics › Craft Stats › OSP",
+   "fields": {
+    "Name": "RF-286 Pike",
+    "Type": "Scout",
+    "Base Cost": "8",
+    "Size/Pad Size": "1/6x6",
+    "PD Threat Size": "1",
+    "HP": "40/+30",
+    "Armor": "1mm",
+    "CMD Control Cap": "0",
+    "Speed m/s (Idle/Cruise/Hburn)": "40/131/196",
+    "Speed m/s -17% (Idle/Cruise/Hburn)": "N/A",
+    "Speed m/s -33% (Idle/Cruise/Hburn)": "40/88/132",
+    "Fuel (Capacity/Loiter Time/Range)": "500/11:07/65km"
+   }
+  },
+  {
+   "name": "PF-386 Barracuda",
+   "section": "Spacecraft Mechanics › Craft Stats › OSP",
+   "fields": {
+    "Name": "PF-386 Barracuda",
+    "Type": "Strike Fighter",
+    "Base Cost": "8",
+    "Size/Pad Size": "1/6x6",
+    "PD Threat Size": "2",
+    "HP": "60/+30",
+    "Armor": "1.75mm/+1.25mm",
+    "CMD Control Cap": "0/+1",
+    "Speed m/s (Idle/Cruise/Hburn)": "35/101/176",
+    "Speed m/s -17% (Idle/Cruise/Hburn)": "35/84/147",
+    "Speed m/s -33% (Idle/Cruise/Hburn)": "35/67/118",
+    "Fuel (Capacity/Loiter Time/Range)": "900/10:00/60km (1,900 with Fuel Tanks)"
+   }
+  },
+  {
+   "name": "B-45 Sturgeon",
+   "section": "Spacecraft Mechanics › Craft Stats › OSP",
+   "fields": {
+    "Name": "B-45 Sturgeon",
+    "Type": "Bomber",
+    "Base Cost": "12",
+    "Size/Pad Size": "2/10x10",
+    "PD Threat Size": "3",
+    "HP": "135/+30",
+    "Armor": "3mm/+1.25mm",
+    "CMD Control Cap": "0/+6",
+    "Speed m/s (Idle/Cruise/Hburn)": "30/60/90",
+    "Speed m/s -17% (Idle/Cruise/Hburn)": "N/A",
+    "Speed m/s -33% (Idle/Cruise/Hburn)": "N/A",
+    "Fuel (Capacity/Loiter Time/Range)": "1700/13:36/41km"
+   }
+  }
+ ],
+ "tables": [
+  {
+   "section": "Spacecraft Mechanics › Controls › Right-Click Commands",
+   "header": "Object clicked",
+   "rows": 8,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 2,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 4,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 3,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 3,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 3,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 3,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 6,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 3,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 5,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 2,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 2,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 4,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Controls › Stance Controls",
+   "header": "State",
+   "rows": 3,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › ANS",
+   "header": "Name",
+   "rows": 4,
+   "used": 4,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › OSP",
+   "header": "Name",
+   "rows": 4,
+   "used": 4,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › Craft guns",
+   "header": "Gun",
+   "rows": 9,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › Craft Radar Stats",
+   "header": "Craft",
+   "rows": 8,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › Craft and missile cross-sections",
+   "header": "Craft",
+   "rows": 6,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › Detection ranges",
+   "header": "Target",
+   "rows": 10,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › Signature modifiers",
+   "header": "Source",
+   "rows": 5,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › Craft countermeasures",
+   "header": "",
+   "rows": 10,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › The chaff cloud",
+   "header": "Craft",
+   "rows": 7,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › When craft drop countermeasures",
+   "header": "Missile seeker",
+   "rows": 3,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Craft Stats › When craft drop countermeasures",
+   "header": "Setting",
+   "rows": 8,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (ANS)",
+   "header": "Classification",
+   "rows": 2,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (ANS)",
+   "header": "Component",
+   "rows": 6,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (ANS)",
+   "header": "Component",
+   "rows": 4,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (ANS)",
+   "header": "Classification",
+   "rows": 9,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (ANS)",
+   "header": "Component",
+   "rows": 6,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (ANS)",
+   "header": "Classification",
+   "rows": 5,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (ANS)",
+   "header": "Component",
+   "rows": 5,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (OSP)",
+   "header": "Classification",
+   "rows": 3,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (OSP)",
+   "header": "Component",
+   "rows": 6,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (OSP)",
+   "header": "Classification",
+   "rows": 11,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (OSP)",
+   "header": "Component",
+   "rows": 5,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (OSP)",
+   "header": "Classification",
+   "rows": 5,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (OSP)",
+   "header": "Component",
+   "rows": 5,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (OSP)",
+   "header": "Classification",
+   "rows": 10,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Loadouts (OSP)",
+   "header": "Component",
+   "rows": 4,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Spacecraft Mechanics › Designing Craft › Modules",
+   "header": "Type",
+   "rows": 12,
+   "used": 0,
+   "unused": []
+  }
+ ],
+ "sections": [
+  {
+   "heading": "(页面开头)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Spacecraft (or craft for short) are aircraft-like small vehicles that can be launched from hangars on larger ships. They can perform a number of roles, including scouting, electronic warfare, anti-missile and anti-craft fire, and anti-ship strikes. Their ability to receive orders after launch makes them more flexible than other tools such as cruise missiles."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics",
+   "blocks": []
+  },
+  {
+   "heading": "Spacecraft Mechanics › Controls",
+   "blocks": []
+  },
+  {
+   "heading": "Spacecraft Mechanics › Controls › Right-Click Commands",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Craft are controlled similarly to ships, but with context-sensitive actions depending on the item the cursor is pointing at when right-clicked. Where multiple valid controls exist, additional commands may be accessed by holding Shift."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Object clicked",
+       "Modifier",
+       "Requirements",
+       "Action",
+       "Explanation"
+      ],
+      [
+       "Space",
+       "",
+       "None",
+       "Move",
+       "Opens the dial widget to allow movement. Holding Shift will allow placement of waypoints as normal. May also be opened via the ship 'move to position' hotkey."
+      ],
+      [
+       "Friendly Ship",
+       "",
+       "None",
+       "Guard/Orbit",
+       "Craft will move into a holding pattern moving around the target ship. If it has anti-craft/missile armaments, it will be slaved to the ship's PD controller and will attack incoming threats."
+      ],
+      [
+       "Friendly Ship",
+       "Shift",
+       "Landing Pad",
+       "Land",
+       "Craft will line up and attempt to land on the target ship. It will orbit the ship until a landing pad is free and the ship is within flight quarters speeds."
+      ],
+      [
+       "Friendly Craft",
+       "",
+       "None",
+       "Guard/Orbit",
+       "Craft will move into a holding pattern moving around the target craft. If it has anti-craft/missile armaments, it will be slaved to the craft's PD controller and will attack incoming threats."
+      ],
+      [
+       "Friendly Craft",
+       "Shift",
+       "Target of same craft type",
+       "Merge flight",
+       "Craft will join with the target craft/flight to form a unified flight."
+      ],
+      [
+       "Enemy Ship",
+       "",
+       "None",
+       "Attack Ship",
+       "Craft will move towards the target ship and attempt to attack it with appropriate weapons. Behaviour is dependent on the craft's set stance toggles. Craft will automatically deauthorise weapons that cannot harm ships when given an attack ship order."
+      ],
+      [
+       "Enemy Ship",
+       "Shift",
+       "Craft has standoff illuminator/Jammer/EO module",
+       "Designate target for Illumination/Jamming/Scanning",
+       "Craft will move into range of the target with its module and enter a holding pattern, attempting to keep the target jammed/illuminated/scanned."
+      ],
+      [
+       "Enemy Craft",
+       "",
+       "None",
+       "Attack Craft",
+       "Craft will move toward the target craft/flight and attempt to attack it with appropriate weapons. Behaviour is dependent on the craft's set stance toggles. Craft will automatically deauthorise weapons that cannot harm craft when given an attack craft order."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Controls › Stance Controls",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Spacecraft behaviour is controlled by toggling behaviors in the craft stance control board, similarly to ship postures. Spacecraft launch with the default stances shown on the right. The stances are:"
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "OFF",
+       "Craft will fly at their cruise speed, using the regular amount of fuel."
+      ],
+      [
+       "ON",
+       "Craft will fly at their hard-burn speed, (usually 1.5x cruise speed) and increased fuel consumption (varies by craft type)"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "WEDGE",
+       "Craft flights will fly in a wedge-shaped pattern, pointing in the direction of travel."
+      ],
+      [
+       "LINE",
+       "Craft flights will fly in a line-shaped pattern, perpendicular to the direction of travel."
+      ],
+      [
+       "CROSS",
+       "Craft flights will fly in a cross-shaped pattern, perpendicular to the direction of travel."
+      ],
+      [
+       "ECHE",
+       "Craft flights will fly in an echelon (diagonal line) shaped pattern."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "Craft not in formation will speed up faster than their top speed in attempt to form up; this includes when swapping formation."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "DIRECT",
+       "Craft will fly straight towards their destination, and remain still when loitering."
+      ],
+      [
+       "JUKE",
+       "Craft will constantly make small directional changes as they fly or loiter."
+      ],
+      [
+       "EVADE",
+       "Craft will constantly make large directional changes as they fly or loiter."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "PSV",
+       "Craft will follow orders normally, unless dogfighting AI is triggered due to an enemy craft attack."
+      ],
+      [
+       "AGRSV",
+       "When not already attacking, craft attack the nearest enemy craft within about 5 km. Does not trigger on missiles."
+      ],
+      [
+       "EVASV",
+       "Craft will not automatically engage enemy craft, including when attacked or while guarding. They still dodge attacks with their normal evasion."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "SKOSH",
+       "Craft will automatically return to base once all missiles in the flight are expended."
+      ],
+      [
+       "WINCH",
+       "Craft will automatically return to base once all ammo, including guns, in the flight is expended."
+      ],
+      [
+       "NEVER",
+       "Craft will not automatically return to base."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "AUTO",
+       "Craft will attack multiple different targets if assigned to attack a craft/missile but will attack the selected target if ordered to attack a ship."
+      ],
+      [
+       "FOCUS",
+       "Craft will always attack the selected target."
+      ],
+      [
+       "SPLIT",
+       "Craft will always attack multiple different targets."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "AUTO",
+       "Craft will fire as if on UNLIM against ships but will reduce missile amounts against craft/missiles."
+      ],
+      [
+       "ONE",
+       "Craft will not fire more missiles against a target if one missile is already in flight for that target. Resets on re-issuing attack order."
+      ],
+      [
+       "TWO",
+       "Craft will not fire more missiles against a target if two missiles are already in flight for that target. Resets on re-issuing attack order."
+      ],
+      [
+       "THREE",
+       "Craft will not fire more missiles against a target if three missiles are already in flight for that target. Resets on re-issuing attack order."
+      ],
+      [
+       "FOUR",
+       "Craft will not fire more missiles against a target if four missiles are already in flight for that target. Resets on re-issuing attack order."
+      ],
+      [
+       "UNLIM",
+       "Craft will fire missiles regardless of missiles already in flight."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The following rules about craft behavior applies for all craft launched with missiles; craft launched only with guns will follow old behavior (i.e. always closing to the range of the shortest range weapon, which is the gun)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "* Craft ordered to attack other craft loiter at about 75% of their missiles' maximum range (and, on STND-IN, no farther than about 4 km), or where they already were if that was closer, and fire missiles at the enemy group."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Craft will not automatically close with the enemy group to use guns, even when out of missiles."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Craft will only dogfight with guns if the enemy is within about 1 km beyond gun range, or they were already in gun range when the attack order was issued."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Anti-Craft",
+       "Anti-Ship"
+      ],
+      [
+       "STND-IN",
+       "Close to 4000m or 75% of munition max range, whichever is closer",
+       "Close to 4000m or 95% of munition max range, whichever is closer"
+      ],
+      [
+       "STND-OF",
+       "Close to 75% of munition max range",
+       "Close to 95% of munition max range"
+      ],
+      [
+       "GUN",
+       "Close to gun range[1]",
+       "Same as STND-IN Anti-Ship"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "ALL",
+       "Craft target random aimpoints like a ship would"
+      ],
+      [
+       "ENGINE",
+       "Craft target drives and main thrusters"
+      ],
+      [
+       "DEFWEP",
+       "Craft target Point Defense weapons"
+      ],
+      [
+       "OFFWEP",
+       "Craft target Offensive weapons"
+      ],
+      [
+       "SENSOR",
+       "Craft target Radar Panels"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "ON",
+       "Craft turn Radar(s) on"
+      ],
+      [
+       "OFF",
+       "Craft turn Radar(s) off for a −5% Radar signature reduction, equivalent to a ×0.99 Detection range modifier"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "AUTO",
+       "Craft will evade missiles automatically according to the table here"
+      ],
+      [
+       "MAN",
+       "Evades missiles only during a 30 s window opened with Left Shift + Z. Pressing it again while the window is open restarts the window and makes every craft in the flight drop one pattern at once."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "AUTO",
+       "Evades missiles automatically. Craft will follow the default evasion behavior for the seeker targeting them described here."
+      ],
+      [
+       "NOTCH",
+       "Always notch, starting at 5 s from impact."
+      ],
+      [
+       "SCRAM",
+       "Always flee, starting at 5 s from impact.[2]"
+      ],
+      [
+       "OUT-G",
+       "Jink, starting later, at 3 s or less from impact. Craft will attempt to out-pull the missile as it gets close"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "State",
+       "Behaviour"
+      ],
+      [
+       "AUTO",
+       "As in the table here. With DFTAC set to NOTCH, SCRAM or OUT-G, a pattern is dropped only against radar or wake seekers."
+      ],
+      [
+       "ALL",
+       "A pattern on every evasion, even if the seeker type is not seduced by them, including evasions from enemy gunfire.[3]"
+      ],
+      [
+       "NEVER",
+       "No automatic patterns. Manual patterns using Left Shift + Z are still accepted"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "(Size, HP, Threat Size, etc.) Tanto/Pike/Barracuda each achieve cruise and Hburn speed 1 m/s faster than their stat screen indicates. The 33% top speed penalty brings them to their old speeds, the 17% top speed penalty is generated when a fighter's loadout is 1.0 weight, such as when equipping jam pods and no other weight."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › ANS",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Name",
+       "Type",
+       "Base Cost",
+       "Size/Pad Size",
+       "PD Threat Size",
+       "HP",
+       "Armor",
+       "CMD Control Cap",
+       "Speed m/s (Idle/Cruise/Hburn)",
+       "Speed m/s -17% (Idle/Cruise/Hburn)",
+       "Speed m/s -33% (Idle/Cruise/Hburn)",
+       "Fuel (Capacity/Loiter Time/Range)"
+      ],
+      [
+       "RS-35 Halberd",
+       "Skiff",
+       "15",
+       "1/6x6",
+       "1",
+       "130/+30",
+       "3mm",
+       "1/+1",
+       "20/45/68",
+       "N/A",
+       "N/A",
+       "1,200/33:20/36km"
+      ],
+      [
+       "E-44 Sundial",
+       "SEWAC",
+       "75",
+       "2/10x10",
+       "1",
+       "135/+30",
+       "3mm",
+       "0",
+       "25/60/90",
+       "N/A",
+       "N/A",
+       "2000/42:40/60km"
+      ],
+      [
+       "PF-440 Tanto",
+       "Interceptor",
+       "8",
+       "1/6x6",
+       "2",
+       "50/+30",
+       "1.75mm/+1.25mm",
+       "0/+1",
+       "35/113/169",
+       "35/94/141",
+       "35/75/113",
+       "1200/11:26/73km"
+      ],
+      [
+       "B-86 Claymore",
+       "Bomber",
+       "12",
+       "2/10x10",
+       "3",
+       "135/+30",
+       "3mm/+1.25mm",
+       "0/+6",
+       "30/65/98",
+       "N/A",
+       "N/A",
+       "2000/13:20/43km"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › OSP",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Name",
+       "Type",
+       "Base Cost",
+       "Size/Pad Size",
+       "PD Threat Size",
+       "HP",
+       "Armor",
+       "CMD Control Cap",
+       "Speed m/s (Idle/Cruise/Hburn)",
+       "Speed m/s -17% (Idle/Cruise/Hburn)",
+       "Speed m/s -33% (Idle/Cruise/Hburn)",
+       "Fuel (Capacity/Loiter Time/Range)"
+      ],
+      [
+       "RS-35 Halberd",
+       "Skiff",
+       "15",
+       "1/6x6",
+       "1",
+       "130/+30",
+       "3mm",
+       "1/+1",
+       "20/45/68",
+       "N/A",
+       "N/A",
+       "1,200/33:20/36km"
+      ],
+      [
+       "RF-286 Pike",
+       "Scout",
+       "8",
+       "1/6x6",
+       "1",
+       "40/+30",
+       "1mm",
+       "0",
+       "40/131/196",
+       "N/A",
+       "40/88/132",
+       "500/11:07/65km"
+      ],
+      [
+       "PF-386 Barracuda",
+       "Strike Fighter",
+       "8",
+       "1/6x6",
+       "2",
+       "60/+30",
+       "1.75mm/+1.25mm",
+       "0/+1",
+       "35/101/176",
+       "35/84/147",
+       "35/67/118",
+       "900/10:00/60km (1,900 with Fuel Tanks)"
+      ],
+      [
+       "B-45 Sturgeon",
+       "Bomber",
+       "12",
+       "2/10x10",
+       "3",
+       "135/+30",
+       "3mm/+1.25mm",
+       "0/+6",
+       "30/60/90",
+       "N/A",
+       "N/A",
+       "1700/13:36/41km"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › Craft guns",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Gun",
+       "Mounted on",
+       "Fire mode",
+       "Rate of fire",
+       "Ammo",
+       "Closes to",
+       "Max range",
+       "Spread at 1 km"
+      ],
+      [
+       "35mm Gun (turret)",
+       "RS-35 Halberd nose and mission package",
+       "Continuous",
+       "480 rpm",
+       "300",
+       "1,575 m",
+       "1,750 m",
+       "1.7 m"
+      ],
+      [
+       "35mm Gun (fixed)",
+       "PF-440 Tanto, PF-386 Barracuda nose",
+       "2 s bursts, 2 s pause",
+       "360 rpm",
+       "250",
+       "1,225 m",
+       "1,750 m",
+       "1.7 m"
+      ],
+      [
+       "20mm Gun",
+       "Tanto, Barracuda, RF-286 Pike nose",
+       "1 s bursts, 2 s pause",
+       "900 rpm",
+       "300",
+       "1,225 m",
+       "1,750 m",
+       "5.2 m"
+      ],
+      [
+       "15mm Coilgun (7 pts)",
+       "Tanto nose",
+       "Single shots",
+       "60 rpm",
+       "6",
+       "1,500 m",
+       "1,500 m (min. 400 m)",
+       "0.9 m"
+      ],
+      [
+       "35mm Gun Pods",
+       "Tanto wings",
+       "2 s bursts, 2 s pause",
+       "360 rpm",
+       "100",
+       "1,400 m",
+       "1,750 m",
+       "1.7 m"
+      ],
+      [
+       "35mm Gun Pods",
+       "Barracuda lower wings",
+       "2 s bursts, 2 s pause",
+       "360 rpm",
+       "100",
+       "1,225 m",
+       "1,750 m",
+       "1.7 m"
+      ],
+      [
+       "100mm Gun Pods",
+       "B-45 Sturgeon inner wings",
+       "Single shots, alternating barrels",
+       "120 rpm",
+       "20",
+       "5,760 m",
+       "7,200 m",
+       "8.7 m"
+      ],
+      [
+       "R-1 Rocket Pods",
+       "Barracuda wings",
+       "Single shots, alternating",
+       "60 rpm",
+       "6",
+       "2,380 m",
+       "2,975 m",
+       "17.5 m"
+      ],
+      [
+       "R-1 Rocket Pods",
+       "Sturgeon inner wings",
+       "Single shots, alternating",
+       "60 rpm",
+       "20",
+       "2,380 m",
+       "2,975 m",
+       "1.7 m"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "\"Closes to\" is the range craft approach to before firing. Once a target is in reach, a gun fires out to the full range of its ammunition."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "\"Spread at 1 km\" is the width of the firing cone 1 km out, as shown in the craft editor. The Barracuda's rocket pods spread 10 times wider than the Sturgeon's."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The Halberd's 35mm guns are turrets: 90°/s traverse, ±20° elevation. The nose turret is limited to ±90° traverse; the mission turret has no limit."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "A gun fires only when all of these hold:"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "the predicted lead point is lined up with the barrel, within 10–60 m depending on the gun;"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "the lead point is within range, and no closer than 5% of the ammunition's range: 88 m for 20mm and 35mm guns, 150 m for rockets, 360 m for the 100mm pods and 400 m for the coilgun;"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "no terrain or friendly ship is in the way."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Fixed guns need the whole craft pointed at the lead point."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Against ships, guns aim at a random point on the hull, picked again on each attack run, unless the ATGT setting selects a subsystem. Against craft and missiles they aim at the centre."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The 20mm Gun never fires at ships."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Craft dogfight with guns when the enemy craft is within gun range + 1 km, when they launched without missiles or rockets, or when RANGE is set to GUN."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "On a gun run, craft match the target's speed."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › Craft Radar Stats",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Craft radars are broadly very similar, though they have some small differences."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Craft",
+       "Radar Shape",
+       "FOV",
+       "Range",
+       "Radiated Power",
+       "Gain",
+       "Aperture Size",
+       "Sensitivity",
+       "Positional Error",
+       "Velocity Error",
+       "Can Lock?",
+       "Lock Error Mult."
+      ],
+      [
+       "RS-35 Halberd",
+       "Omnidirectional",
+       "360",
+       "4000m",
+       "750kW",
+       "60dB",
+       "20m2",
+       "-35",
+       "35m",
+       "1m/s",
+       "Yes",
+       ".05"
+      ],
+      [
+       "Internal Radar (Advanced)",
+       "Omnidirectional",
+       "360",
+       "8000m",
+       "750kW",
+       "90dBm",
+       "40m2",
+       "-39dB",
+       "40m",
+       "1m/s",
+       "Yes",
+       "0.05 (lock held only within 2,000 m)"
+      ],
+      [
+       "E-44 Sundial",
+       "Omnidirectional",
+       "360",
+       "10000m",
+       "750kW",
+       "100dB",
+       "80m2",
+       "-39",
+       "40m",
+       "1m/s",
+       "No",
+       "N/A"
+      ],
+      [
+       "PF-386 Barracuda",
+       "Front-Facing Cone",
+       "60 deg.",
+       "3000m",
+       "750kW",
+       "60dB",
+       "20m2",
+       "-35",
+       "25m",
+       "2.5m/s",
+       "Yes",
+       ".05"
+      ],
+      [
+       "PF-440 Tanto",
+       "Front-Facing Cone",
+       "60 deg.",
+       "3000m",
+       "750kW",
+       "60dB",
+       "20m2",
+       "-35",
+       "25m",
+       "2.5m/s",
+       "Yes",
+       ".05"
+      ],
+      [
+       "RF-286 Pike",
+       "Front-Facing Cone",
+       "60 deg.",
+       "3000m",
+       "750kW",
+       "60dB",
+       "20m2",
+       "-35",
+       "30m",
+       ".5m/s",
+       "No",
+       "N/A"
+      ],
+      [
+       "B-45 Sturgeon",
+       "Front-Facing Cone",
+       "60 deg.",
+       "4000m",
+       "750kW",
+       "60dB",
+       "20m2",
+       "-35",
+       "30m",
+       ".5m/s",
+       "Yes",
+       ".05"
+      ],
+      [
+       "B-86 Claymore",
+       "Front-Facing Cone",
+       "60 deg.",
+       "4000m",
+       "750kW",
+       "60dB",
+       "20m2",
+       "-35",
+       "25m",
+       ".5m/s",
+       "Yes",
+       ".05"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › How facing changes the return",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships use a fixed table of 162 directions. Their displayed signature is the maximum, and most angles are lower."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Craft and missiles use a radar box fixed to the airframe. Their radar cross-section (RCS) is the area of that box as the radar sees it: each face counts by how squarely it faces the radar.[4]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The return is smallest nose-on or tail-on."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "It is largest when the radar sees the side, top and nose at once, for example with the craft banked 45°. That happens about 57–63° off the nose for craft, and 65–75° for missiles."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "In level flight the largest return is only 1.24–1.35× the side-on value for craft, and 1.07–1.20× for missiles."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The displayed craft signature is the side-on value."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "For craft, the banked peak is 1.6–1.7× the displayed value, and nose-on is 0.73–0.91×."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "For missiles, the banked peak is about 1.5× the side-on value, and nose-on is 0.38–0.66×."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Pitch, yaw and roll all change the return, because the box turns with the airframe."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The same value is used by search radars on ships and craft, by track accuracy, and by missile seekers. A ship holding a fire-control lock reuses the last value computed for that target."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Detection range grows with the fourth root of the RCS: doubling the RCS gives about 19% more range."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "A craft seen nose-on is detected at 0.82–0.86× the range of its peak angle."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "A missile seen nose-on is detected at 0.71–0.81× that range."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › Craft and missile cross-sections",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Craft",
+       "Radar box, m (width × height × length)",
+       "Side-on (displayed)",
+       "Nose-on",
+       "45° off nose, level",
+       "Peak, banked 45° (angle off nose)"
+      ],
+      [
+       "PF-440 Tanto",
+       "42 × 42 × 46",
+       "1,932",
+       "1,764",
+       "2,613",
+       "3,252 (57°)"
+      ],
+      [
+       "RF-286 Pike",
+       "44 × 44 × 60",
+       "2,640",
+       "1,936",
+       "3,236",
+       "4,206 (63°)"
+      ],
+      [
+       "PF-386 Barracuda",
+       "57.5 × 57.5 × 70",
+       "4,025",
+       "3,306",
+       "5,184",
+       "6,583 (60°)"
+      ],
+      [
+       "B-86 Claymore",
+       "42.5 × 42.5 × 55",
+       "2,338",
+       "1,806",
+       "2,930",
+       "3,767 (61°)"
+      ],
+      [
+       "B-45 Sturgeon",
+       "77.5 × 77.5 × 90",
+       "6,975",
+       "6,006",
+       "9,179",
+       "11,549 (59°)"
+      ],
+      [
+       "RS-35 Halberd, E-44 Sundial",
+       "90 × 90 × 110",
+       "9,900",
+       "8,100",
+       "12,728",
+       "16,175 (60°)"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › Detection ranges",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Target",
+       "RS35 Frontline radar (8 km)",
+       "RS41 Spyglass radar (11.5 km)",
+       "R550 Early Warning radar (18 km)",
+       "E-44 Sundial",
+       "ADVR Skiff Radar"
+      ],
+      [
+       "PF-440 Tanto",
+       "5.0 / 5.1 / 5.8",
+       "8.5 / 8.7 / 9.9",
+       "9.9 / 10.2 / 11.6",
+       "8.5 / 8.7 / 9.95",
+       ""
+      ],
+      [
+       "Tanto with Stealth Coating",
+       "4.2 / 4.3 / 4.9",
+       "7.1 / 7.3 / 8.3",
+       "8.4 / 8.5 / 9.7",
+       "",
+       ""
+      ],
+      [
+       "RF-286 Pike",
+       "5.1 / 5.5 / 6.2",
+       "8.7 / 9.4 / 10.5",
+       "10.2 / 11.0 / 12.3",
+       "",
+       ""
+      ],
+      [
+       "PF-386 Barracuda",
+       "5.8 / 6.1 / 6.9",
+       "9.9 / 10.4 / 11.5†",
+       "11.6 / 12.2 / 13.8",
+       "",
+       ""
+      ],
+      [
+       "B-86 Claymore",
+       "5.0 / 5.4 / 6.0",
+       "8.5 / 9.1 / 10.2",
+       "10.0 / 10.7 / 12.0",
+       "",
+       ""
+      ],
+      [
+       "B-45 Sturgeon",
+       "6.8 / 7.0 / 8.0",
+       "11.5 / 11.5† / 11.5†",
+       "13.5 / 14.0 / 15.9",
+       "",
+       ""
+      ],
+      [
+       "RS-35 Halberd, E-44 Sundial",
+       "7.3 / 7.7 / 8.0†",
+       "11.5† / 11.5† / 11.5†",
+       "14.5 / 15.3 / 17.3",
+       "",
+       ""
+      ],
+      [
+       "S1-size missile",
+       "2.7 / 3.4 / 3.8",
+       "4.6 / 5.8 / 6.4",
+       "5.4 / 6.9 / 7.5",
+       "",
+       ""
+      ],
+      [
+       "S2-size missile",
+       "3.9 / 4.3 / 4.8",
+       "6.5 / 7.2 / 8.1",
+       "7.7 / 8.5 / 9.5",
+       "",
+       ""
+      ],
+      [
+       "SGT-300 Pilum",
+       "4.2 / 5.4 / 5.9",
+       "7.2 / 9.1 / 10.0",
+       "8.4 / 10.7 / 11.8",
+       "",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "† The radar's maximum range is reached first. The game adds half the target's length to the maximum, so these targets are seen up to 55 m beyond it."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Craft radars reach 3 km (fighters) or 4 km (Halberd, Claymore, Sturgeon). A 3 km craft radar sees every craft out to its full range. A 4 km one falls slightly short against the Tanto, Pike and Claymore from some angles (3.7–4.0 km)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Against small missiles craft radars fall well short. A 4 km craft radar sees a Balestra-size missile at 2.0 / 2.6 / 2.8 km."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The E-44 Sundial's 10 km radar sees a Tanto at 8.5 / 8.7 / 9.95 km."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › Signature modifiers",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Source",
+       "Radar signature",
+       "Detection range"
+      ],
+      [
+       "Stealth Coating (craft fuselage)",
+       "−50%",
+       "×0.84"
+      ],
+      [
+       "Flight of 6–10 craft",
+       "+15%",
+       "×1.04"
+      ],
+      [
+       "Flight of 11–15 craft",
+       "+30%",
+       "×1.07"
+      ],
+      [
+       "Flight radars off",
+       "−5%",
+       "×0.99"
+      ],
+      [
+       "Radar Absorbent Coating (missile support module)",
+       "−40%",
+       "×0.88"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Craft modifiers multiply: the craft's own stat × the flight's stat."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The flight-size values are the defaults in the game code. The values set for flights in the game data were not read."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "If a flight has two modifiers, the smaller one counts at only about 37% of its value. A flight of 6–10 craft with radars off is +13%, not +10%."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › Craft countermeasures",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "A pattern is a string of chaff packets dropped from under a craft as it flies. The packets form one decoy cloud that traces the craft's path. Every craft has a Countermeasures socket that holds one of three launchers."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "",
+       "Standard CM Launcher",
+       "High-Capacity CM Launcher",
+       "High-Coherence CM Launcher"
+      ],
+      [
+       "Cost (pts)",
+       "0",
+       "2",
+       "2"
+      ],
+      [
+       "Pattern Count",
+       "4",
+       "8",
+       "4"
+      ],
+      [
+       "Shots Per Pattern",
+       "10",
+       "10",
+       "20"
+      ],
+      [
+       "Shot Spacing",
+       "0.25 s",
+       "0.25 s",
+       "0.125 s"
+      ],
+      [
+       "Time to lay a pattern",
+       "2.25 s",
+       "2.25 s",
+       "2.375 s"
+      ],
+      [
+       "Packet lifetime",
+       "6 s",
+       "6 s",
+       "6 s"
+      ],
+      [
+       "Cloud lifetime",
+       "8.25 s",
+       "8.25 s",
+       "8.375 s"
+      ],
+      [
+       "Radar return multiplier",
+       "×1",
+       "×1",
+       "×2"
+      ],
+      [
+       "Wake strength",
+       "100",
+       "100",
+       "200"
+      ],
+      [
+       "Sets off missile fuzes",
+       "No",
+       "No",
+       "Blast-frag warheads, 33% per contact"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "The second to fourth rows use the in-game stat names. Each shot drops one chaff packet. The game shows the High-Coherence spacing as 0.13 s; the exact value is 0.125 s."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › The chaff cloud",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Packets drop 8 m below the craft and stay where they were dropped."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The cloud is one box around all live packets, padded by 10 m."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "Length = craft speed × 2.25 s + 10 m (2.375 s for High-Coherence)."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "Thickness is at least 10 m. Craft jink while evading, which makes it thicker."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The cloud is full size from the last packet until 6 s. After 6 s it shrinks from the oldest end. It is gone at 8.25 s (8.375 s for High-Coherence)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The box is aligned to the map axes, not to the flight path. A trail flown diagonally across the map makes a larger box."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Its radar return is the area of the box as the radar sees it, times the multiplier. Seen side-on, a cloud returns its length × 10 m. Seen end-on, it returns at least 100 m² (200 m² for High-Coherence)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Its wake can be seen from all directions. A craft's own wake is strength 1 before modifiers and can only be seen within 75° of its tail."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "It fools active radar, semi-active radar and wake seekers."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "It does nothing against EO (electro-optical), passive radar or home-on-jam seekers. Missiles with an EO validator reject it."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "It is not flagged as a point-defense target, so seekers set to ignore small targets still see it."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "It cannot be shot down."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Pattern counts refill when the craft is relaunched."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Craft",
+       "Cruise speed",
+       "Standard",
+       "High-Coherence",
+       "The craft itself, side-on"
+      ],
+      [
+       "RS-35 Halberd",
+       "45 m/s",
+       "1,110 m²",
+       "2,340 m²",
+       "9,900 m²"
+      ],
+      [
+       "E-44 Sundial",
+       "60 m/s",
+       "1,450 m²",
+       "3,050 m²",
+       "9,900 m²"
+      ],
+      [
+       "B-45 Sturgeon",
+       "60 m/s",
+       "1,450 m²",
+       "3,050 m²",
+       "6,975 m²"
+      ],
+      [
+       "B-86 Claymore",
+       "65 m/s",
+       "1,560 m²",
+       "3,290 m²",
+       "2,338 m²"
+      ],
+      [
+       "PF-386 Barracuda",
+       "100 m/s",
+       "2,350 m²",
+       "4,950 m²",
+       "4,025 m²"
+      ],
+      [
+       "PF-440 Tanto",
+       "112 m/s",
+       "2,620 m²",
+       "5,520 m²",
+       "1,932 m²"
+      ],
+      [
+       "RF-286 Pike",
+       "130 m/s",
+       "3,030 m²",
+       "6,380 m²",
+       "2,640 m²"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "Cruise speeds are from the spaceframe data. The wiki's craft table lists the Tanto, Barracuda and Pike at 1 m/s faster."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › When craft drop countermeasures",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Craft drop countermeasures only while evading. An evasion starts when a missile is 5 s or less from impact (3 s or less with DFTAC OUT-G)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Each evasion drops at most one pattern, at its start. An evasion lasts up to 6 s."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "When a different threat becomes the most urgent, a new evasion starts and drops a new pattern. A staggered salvo can use up several patterns."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "A new pattern can't start until 2.5 s after the previous one began."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Craft know the incoming missile's seeker types without needing intel on it."
+    },
+    {
+     "kind": "p",
+     "text": "Evasion manoeuvres:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Notch: fly straight away from the missile for 1.5 s (2.5 s when the Halberd, Barracuda, Pike or Tanto notches against a seeker that is neither radar nor wake), then turn across its path, presenting a side profile in the hopes that seduced missiles will be unable to re-acquire[5]. The pattern drops at the start, while the craft is still flying away, so the trail is usually not side-on to the missile."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Scoot: turn onto a new, partly random course. The code tilts the direction to the missile by angles fixed to the map, so the course is not at a set angle to the missile."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Flee: fly straight away from the threat."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Jink: turn hard across the line to the threat. DFTAC OUT-G uses this against missiles."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Sweeping turn: turn around to face an attacker behind the craft."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Missile seeker",
+       "Halberd, Barracuda, Pike, Tanto",
+       "Claymore, Sturgeon, Sundial"
+      ],
+      [
+       "Radar, or radar + wake",
+       "Notch + pattern",
+       "Notch + pattern"
+      ],
+      [
+       "Wake only",
+       "Scoot + pattern",
+       "Scoot + pattern"
+      ],
+      [
+       "Any other",
+       "Notch, no pattern",
+       "Flee + pattern"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "Against gunfire from enemy craft:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The Halberd, Barracuda and Pike jink when two or more enemy guns are firing at them and the fire is 1 s from impact. Two guns on one enemy craft count as two."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The Tanto turns to face an attacker behind it under the same conditions, and its flight-mates are ordered to attack the shooter."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The Claymore, Sturgeon and Sundial flee when gunfire is 5 s from impact."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The same gun can't trigger another evasion until 12 s after the last one started."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "None of these drop a pattern unless CMSR is set to ALL."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Setting",
+       "Behaviour"
+      ],
+      [
+       "CMSR (countermeasure use) AUTO",
+       "As in the table above. With DFTAC set to NOTCH, SCRAM or OUT-G, a pattern only against radar or wake seekers."
+      ],
+      [
+       "CMSR ALL",
+       "A pattern on every evasion, including evasions from enemy gunfire."
+      ],
+      [
+       "CMSR NEVER",
+       "No automatic patterns."
+      ],
+      [
+       "DEFND (missile self-defense) AUTO",
+       "Evades missiles automatically."
+      ],
+      [
+       "DEFND MAN",
+       "Evades missiles only during a 30 s window opened with Left Shift + Z. Pressing it again while the window is open restarts the window and makes every craft in the flight drop one pattern at once."
+      ],
+      [
+       "DFTAC (missile self-defense tactics) NOTCH",
+       "Always notch, starting at 5 s from impact."
+      ],
+      [
+       "DFTAC SCRAM",
+       "Always flee, starting at 5 s from impact."
+      ],
+      [
+       "DFTAC OUT-G",
+       "Jink, starting later, at 3 s or less from impact."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "Gunfire evasion does not depend on DEFND."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › High-Coherence and proximity fuzes",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The High-Coherence cloud is solid to missile proximity fuzes."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "A missile with a blast-fragmentation warhead has a 33% chance to detonate on the cloud each time its fuze touches it."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The only stock missile with an older-style proximity warhead, the FBU-15 bomb, is set to detonate on ships only, so it ignores the cloud."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Flak shells don't detect the cloud."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Standard and High-Capacity clouds don't set off fuzes."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Craft Stats › Other craft decoys",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Decoy Projector (B-86 Claymore, Support, 10 pts)"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "Fires when the Claymore launches a missile at a ship."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "Launches 3 decoys, 0.25 s apart, toward the target inside a 3° cone, at 1.04× the speed of the missile they cover."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "2 patterns per sortie, with a 5 s reset after each."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "Each decoy has 15 HP and flies for up to 20 s. Its radar box is a 100 m cube at ×2.5 return, about 25,000 m² seen face-on."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "Each decoy is flagged as both a point-defense target and a decoy. Enemy PD turrets give priority to decoys flying straight at them. Defensive missiles never engage decoys. Seekers set to ignore small targets ignore them."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Sprinter Masquerade (ANS RS-35 Halberd) and Ferryman Masquerade (OSP RS-35A Halberd)"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "Mission package, 15 pts, mass 4."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "The craft shows on enemy sensors as a Sprinter corvette or a Ferryman clipper until it is identified."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Designing Craft",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "(Different types of craft, ships that can carry craft, etc.)"
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Designing Craft › Craft Carrying Ships",
+   "blocks": []
+  },
+  {
+   "heading": "Spacecraft Mechanics › Designing Craft › Loadouts (ANS)",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Classification",
+       "N",
+       "E1",
+       "E2",
+       "E3",
+       "E4",
+       "MP"
+      ],
+      [
+       "Missiles & Pods",
+       "",
+       "S1",
+       "S1",
+       "S1",
+       "S1",
+       ""
+      ],
+      [
+       "Other Munitions",
+       "35mm*",
+       "",
+       "35mm*"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Component",
+       "Option 1",
+       "Option 2",
+       "Option 3"
+      ],
+      [
+       "Nose",
+       "35mm Gun",
+       ""
+      ],
+      [
+       "Mission Package",
+       "ELINT Sensor",
+       "Spring Masquerade",
+       "35mm Gun"
+      ],
+      [
+       "Avionics",
+       "Helmet-Mounted Display",
+       "Missile Control Computer",
+       ""
+      ],
+      [
+       "Fuselage",
+       "Ablative Foam",
+       ""
+      ],
+      [
+       "Engine",
+       "Articulated Nozzle",
+       "Shrouded Exhaust",
+       ""
+      ],
+      [
+       "Countermeasures",
+       "Standard CM Launcher",
+       "High-Capacity CM Launcher",
+       "High-Coherence CM Launcher"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "No Offensive Weapon Options"
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Component",
+       "Option 1",
+       "Option 2",
+       "Option 3"
+      ],
+      [
+       "Mission Package",
+       "ELINT Sensor",
+       ""
+      ],
+      [
+       "Fuselage",
+       "Ablative Foam",
+       ""
+      ],
+      [
+       "Engine",
+       "Articulated Nozzle",
+       "Shrouded Exhaust",
+       ""
+      ],
+      [
+       "Countermeasures",
+       "Standard CM Launcher",
+       "High-Capacity CM Launcher",
+       "High-Coherence CM Launcher"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Classification",
+       "N",
+       "W1",
+       "W2",
+       "B1",
+       "B2",
+       "B3",
+       "B4",
+       "W3",
+       "W4"
+      ],
+      [
+       "Pods",
+       "",
+       "Illum. Pods",
+       "",
+       "Illum. Pods"
+      ],
+      [
+       "",
+       "Jam. Pods",
+       "",
+       "Jam. Pods"
+      ],
+      [
+       "Mssiles & Bombs",
+       "",
+       "FBU-15",
+       "FBU-15",
+       "FBU-15*",
+       "FBU-15*",
+       "FBU-15*",
+       "FBU-15*",
+       "FBU-15",
+       "FBU-15"
+      ],
+      [
+       "",
+       "KBU-15",
+       "KBU-15",
+       "KBU-15*",
+       "KBU-15*",
+       "KBU-15*",
+       "KBU-15*",
+       "KBU-15",
+       "KBU-15"
+      ],
+      [
+       "",
+       "S1",
+       "S1",
+       "S1*",
+       "S1*",
+       "S1*",
+       "S1*",
+       "S1",
+       "S1"
+      ],
+      [
+       "",
+       "",
+       "S2*",
+       ""
+      ],
+      [
+       "Other Munitions",
+       "20mm*",
+       ""
+      ],
+      [
+       "15mm*",
+       ""
+      ],
+      [
+       "35mm *",
+       "35mm",
+       "",
+       "35mm"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Component",
+       "Option 1",
+       "Option 2",
+       "Option 3",
+       "Option 4"
+      ],
+      [
+       "Nose",
+       "20mm Gun",
+       "35mm Gun",
+       "15mm Gun",
+       "Nose Illuminator"
+      ],
+      [
+       "Centerline",
+       "S1 Missile Bays",
+       "S2 Missile Bays",
+       "Centerline Fuel Tank",
+       ""
+      ],
+      [
+       "Avionics",
+       "Helmet-Mounted Display",
+       "Missile Control Computer",
+       ""
+      ],
+      [
+       "Fuselage",
+       "Ablative Foam",
+       "Ceramic Tile",
+       "Stealth Coating",
+       ""
+      ],
+      [
+       "Engine",
+       "Articulated Nozzle",
+       "Shrouded Exhaust",
+       ""
+      ],
+      [
+       "Countermeasures",
+       "Standard CM Launcher",
+       "High-Capacity CM Launcher",
+       "High-Coherence CM Launcher",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Classification",
+       "B1",
+       "B2",
+       "B3",
+       "B4",
+       "B5",
+       "B6",
+       "B7",
+       "B8"
+      ],
+      [
+       "Bombs",
+       "KBU-22*",
+       "KBU-22",
+       "KBU-22*",
+       "KBU-22*",
+       "KBU-22",
+       "KBU-22*"
+      ],
+      [
+       "KBU-22",
+       "KBU-22"
+      ],
+      [
+       "CBU-40*",
+       "CBU-40*"
+      ],
+      [
+       "Missiles",
+       "S2*",
+       "S2*",
+       "S2*",
+       "S2*",
+       "S2*",
+       "S2*"
+      ],
+      [
+       "S3*",
+       "S3*"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Component",
+       "Option 1",
+       "Option 2",
+       "Option 3"
+      ],
+      [
+       "Centerline",
+       "S2 Missile Bays",
+       "S3 Missile Bays",
+       ""
+      ],
+      [
+       "Fuselage",
+       "Ablative Foam",
+       "Ceramic Tile",
+       "Stealth Coating"
+      ],
+      [
+       "Support",
+       "Missile Decoy Projector",
+       "Missile Control Computer",
+       ""
+      ],
+      [
+       "Engine",
+       "Shrouded Exhaust",
+       ""
+      ],
+      [
+       "Countermeasures",
+       "Standard CM Launcher",
+       "High-Capacity CM Launcher",
+       "High-Coherence CM Launcher"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Designing Craft › Loadouts (OSP)",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Classification",
+       "N",
+       "E1",
+       "E2",
+       "E3",
+       "E4",
+       "MP"
+      ],
+      [
+       "Missiles & Bombs",
+       "",
+       "S1",
+       "S1",
+       "S1",
+       "S1",
+       ""
+      ],
+      [
+       "Other Munitions",
+       "35mm*",
+       "",
+       "35mm*"
+      ],
+      [
+       "35mm Flech*",
+       "",
+       "35mm Flech*"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Component",
+       "Option 1",
+       "Option 2",
+       "Option 3",
+       "Option 4"
+      ],
+      [
+       "Nose",
+       "35mm Gun",
+       ""
+      ],
+      [
+       "Mission Package",
+       "Wake Sensor",
+       "Ferryman Masquerade",
+       "35mm Gun",
+       "Internal Radar (Advanced)"
+      ],
+      [
+       "Avionics",
+       "Helmet-Mounted Display",
+       "Missile Control Computer",
+       ""
+      ],
+      [
+       "Fuselage",
+       "Ablative Foam",
+       ""
+      ],
+      [
+       "Engine",
+       "Articulated Nozzle",
+       "Shrouded Exhaust",
+       ""
+      ],
+      [
+       "Countermeasures",
+       "Standard CM Launcher",
+       "High-Capacity CM Launcher",
+       "High-Coherence CM Launcher",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Classification",
+       "N",
+       "T1",
+       "T2",
+       "B1",
+       "B2",
+       "B3",
+       "B4",
+       "T3",
+       "T4"
+      ],
+      [
+       "Pods",
+       "",
+       "",
+       "Fuel Tanks",
+       "Fuel Tanks",
+       ""
+      ],
+      [
+       "",
+       "",
+       "Illum. Pods",
+       "",
+       "Illum. Pods",
+       ""
+      ],
+      [
+       "",
+       "",
+       "Jam. Pods",
+       "",
+       "Jam. Pods",
+       ""
+      ],
+      [
+       "Missiles & Bombs",
+       "",
+       "S1",
+       "S1",
+       "S1",
+       "S1",
+       "S1",
+       "S1",
+       "S1",
+       "S1"
+      ],
+      [
+       "",
+       "KBU-15",
+       "KBU-15",
+       "KBU-15",
+       "KBU-15",
+       "KBU-15",
+       "KBU-15",
+       "KBU-15",
+       "KBU-15"
+      ],
+      [
+       "",
+       "",
+       "R-1",
+       "",
+       "R-1",
+       "R-1",
+       "",
+       "R-1",
+       ""
+      ],
+      [
+       "",
+       "",
+       "R-2",
+       "R-2",
+       ""
+      ],
+      [
+       "",
+       "",
+       "S2",
+       "S2",
+       ""
+      ],
+      [
+       "Other Munitions",
+       "20mm*",
+       ""
+      ],
+      [
+       "35mm Flech.*",
+       "",
+       "35mm Flech.",
+       "35mm Flech.",
+       ""
+      ],
+      [
+       "35mm*",
+       "",
+       "35mm",
+       "35mm",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Component",
+       "Option 1",
+       "Option 2",
+       "Option 3"
+      ],
+      [
+       "Nose",
+       "20mm Gun",
+       "35mm Gun",
+       "Nose Illuminator"
+      ],
+      [
+       "Avionics",
+       "Helmet-Mounted Display",
+       "Missile Control Computer",
+       ""
+      ],
+      [
+       "Fuselage",
+       "Ablative Foam",
+       "Ceramic Tile",
+       ""
+      ],
+      [
+       "Engine",
+       "Articulated Nozzle",
+       "Shrouded Exhaust",
+       ""
+      ],
+      [
+       "Countermeasures",
+       "Standard CM Launcher",
+       "High-Capacity CM Launcher",
+       "High-Coherence CM Launcher"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Classification",
+       "N",
+       "E1",
+       "E2",
+       "E3",
+       "E4"
+      ],
+      [
+       "Pods",
+       "",
+       "Fuel Tanks",
+       "Fuel Tanks"
+      ],
+      [
+       "",
+       "Illum. Pods",
+       "Illum. Pods"
+      ],
+      [
+       "",
+       "Jam. Pods",
+       "Jam. Pods"
+      ],
+      [
+       "Missiles & Bombs",
+       "",
+       "S1",
+       "S1"
+      ],
+      [
+       "Other Munitions",
+       "20mm*",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Component",
+       "Option 1",
+       "Option 2",
+       "Option 3"
+      ],
+      [
+       "Nose",
+       "20mm Gun",
+       "Nose Illuminator",
+       ""
+      ],
+      [
+       "Fuselage",
+       "Ablative Foam"
+      ],
+      [
+       "Engine",
+       "Articulated Nozzle",
+       "Shrouded Exhaust",
+       ""
+      ],
+      [
+       "Countermeasures",
+       "Standard CM Launcher",
+       "High-Capacity CM Launcher",
+       "High-Coherence CM Launcher"
+      ],
+      [
+       "Top",
+       "EO Targeting Ball",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Classification",
+       "W1",
+       "W2",
+       "W3",
+       "W4",
+       "W5",
+       "W6",
+       "W7",
+       "W8"
+      ],
+      [
+       "Missiles & Bombs",
+       "",
+       "CBU-40",
+       "CBU-40",
+       ""
+      ],
+      [
+       "KBU-22",
+       "KBU-22",
+       "",
+       "KBU-22",
+       "KBU-22"
+      ],
+      [
+       "",
+       "R-1 Pod",
+       "R-1 Pod",
+       ""
+      ],
+      [
+       "R-2",
+       "R-2",
+       "",
+       "R-2",
+       "R-2"
+      ],
+      [
+       "",
+       "R-3",
+       "R-3",
+       ""
+      ],
+      [
+       "S2",
+       "S2",
+       "",
+       "S2",
+       "S2"
+      ],
+      [
+       "",
+       "S3",
+       "S3",
+       ""
+      ],
+      [
+       "Other Munitions",
+       "",
+       "100mm AP",
+       "100mm AP",
+       ""
+      ],
+      [
+       "",
+       "100mm HE",
+       "100mm HE",
+       ""
+      ],
+      [
+       "",
+       "100mm HE-HC",
+       "100mm HE-HC",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Component",
+       "Option 1",
+       "Option 2",
+       "Option 3"
+      ],
+      [
+       "Fuselage",
+       "Ablative Foam",
+       "Ceramic Tile",
+       ""
+      ],
+      [
+       "Support",
+       "Missile Control Computer",
+       ""
+      ],
+      [
+       "Engine",
+       "Shrouded Exhaust",
+       ""
+      ],
+      [
+       "Countermeasures",
+       "Standard CM Launcher",
+       "High-Capacity CM Launcher",
+       "High-Coherence CM Launcher"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Designing Craft › Modules",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Type",
+       "Name",
+       "Cost (pts)",
+       "Component Mass",
+       "Stats/ability",
+       "Restrictions"
+      ],
+      [
+       "Avionics",
+       "Helmet Mounted Display",
+       "2",
+       "0",
+       "Missile Launch Angle: +300%",
+       "Tanto, Barracuda, and Halberd only"
+      ],
+      [
+       "Avionics",
+       "Missile Control Computer",
+       "3",
+       "0",
+       "CMD Control Cap: +1",
+       "Tanto, Barracuda, and Halberd"
+      ],
+      [
+       "Support",
+       "Missile Decoy Projector",
+       "8",
+       "0",
+       "2 salvos of 3 decoys triggered when initiating any weapon launch; 5 second recycle time",
+       "Claymore"
+      ],
+      [
+       "Support",
+       "Missile Control Computer",
+       "5",
+       "0",
+       "CMD Control Cap: +6",
+       "Claymore and Sturgeon"
+      ],
+      [
+       "Fuselage",
+       "Ablative Foam",
+       "2",
+       "2",
+       "Frame Integrity: +30",
+       "None"
+      ],
+      [
+       "Fuselage",
+       "Ceramic Tiling",
+       "6",
+       "0",
+       "Skin Thickness: +1.25 mm",
+       "Only on Fighters & Bombers"
+      ],
+      [
+       "Fuselage",
+       "Stealth Coating",
+       "6",
+       "0",
+       "Radar Signature: -50%; Target Size: -66%[6]",
+       "Tanto and Claymore"
+      ],
+      [
+       "Engine",
+       "Articulated Nozzles",
+       "3",
+       "0",
+       "Turn Rate: +33%",
+       "Not on bombers (Claymore and Sturgeon have shrouded exhaust only)"
+      ],
+      [
+       "Engine",
+       "Shrouded Exhaust",
+       "2",
+       "0",
+       "Wake Signature: -33%",
+       "Useless"
+      ],
+      [
+       "Countermeasures",
+       "Standard CM Launcher",
+       "0",
+       "0",
+       "Pattern Shot: 4; Shots per Pattern: 10; Shot Spacing: 0.25s",
+       "None"
+      ],
+      [
+       "Countermeasures",
+       "High-Capacity CM Launcher",
+       "2",
+       "0",
+       "Pattern Shot: 8; Shots per Pattern: 10; Shot Spacing: 0.25s",
+       "None"
+      ],
+      [
+       "Countermeasures",
+       "High-Coherence CM Launcher",
+       "2",
+       "0",
+       "Pattern Shot: 4; Shots per Pattern: 20; Shot Spacing: 0.13s",
+       "Useless"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Designing Craft › Launch and Recovery Sequence",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Select Armaments -> Give Flight Sortie Command -> Arm on a pad or strikedown slot -> Launch -> pad stays busy for Deck Traversal Time -> Return -> Land -> Disarm while that pad spends its traversal time -> Stored -> Repair if a repair slot is free"
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Designing Craft › Arming/disarming time",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "A Craft must be readied before it can sortie from a carrier. This includes loading fuel and ordinance onto the Craft. The duration to complete the readying operation depends on the the size and ammunition loaded the time that. This ranges from arming a vehicle without armaments with virtually little to no time to a significant amount of time such as your bombers."
+    },
+    {
+     "kind": "p",
+     "text": "When a craft returns, any unspent ordinance must be removed and returned to stores, this occurs before the craft is repaired."
+    },
+    {
+     "kind": "p",
+     "text": "Some Carriers have bonuses to Arming Speed, and the Gear Deck Locker can increase the speed as well."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Designing Craft › Deck Traversal Time",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Deck Traversal Time is a pad turnaround. After a craft launches, or after it is recovered and stored, that pad cannot take another craft until the traversal time has elapsed. It does not delay the craft that is launching."
+    },
+    {
+     "kind": "p",
+     "text": "Recovering a craft also ties up the pad for the deck traversal time (after a short close delay). The craft is stored and starts disarming while that pad wait is still running."
+    },
+    {
+     "kind": "p",
+     "text": "Some Carriers have bonuses to Arming Speed, and the Flight Deck Traversal System can increase the speed as well."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Designing Craft › Craft Repair",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Damaged craft are repaired after disarming, one per free repair slot. A craft that is repairing, or still waiting for a slot, can still be launched, and it sorties with whatever damage it still has."
+    },
+    {
+     "kind": "p",
+     "text": "The number of slots that a craft can repair at is equal to the number of Spacecraft Repair Slots on the selected Hull. Carrier Hulls like the Levy, Moorline and Journeyman each have 1 slot and can only repair one craft at a time. Non-carrier hulls have no slots and cannot repair craft by default."
+    },
+    {
+     "kind": "p",
+     "text": "Each Spacecraft Repair Station adds one repair slot on top of the hull base. For example, a Marauder with 1 Spacecraft Repair Station can repair 1 Barracuda Strike Fighter at a time."
+    }
+   ]
+  },
+  {
+   "heading": "Spacecraft Mechanics › Designing Craft › Preflight Slots",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The number of slots that a carrier can arm craft is equal to the number of small and large launch pads on the selected Carrier. For example the Levy has 2 Large and 4 small pads, and the Journeyman 2 Large and 2 Small pads, while the number of pads for the Moorline is directly related to the number of Bank Hangar's installed. Both the Journeyman and Moorline can install additional small mounted hangars for additional size 1 preflight slots."
+    },
+    {
+     "kind": "p",
+     "text": "This number can be increased with Spacecraft Strikedown Stations, this will allow additional craft to be armed in addition to the ones that can be armed on the launch pads. Craft armed there move onto a launch pad as soon as one is free, which is after the previous launch or recovery finishes its deck-traversal wait, and they keep the arming progress already made. For example, a Levy or Journeyman with 2 Spacecraft Strikedown Stations can arm a 4 wing Claymore Torpedo Flight at the same time and launch them much faster than they would otherwise."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ This is a different value than a gun's maximum range, see the craft gun table"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Use this when equipping HICO"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Use this when equipping HICO"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ RCS = side area × the sideways part of the direction to the radar + top area × the upward part + nose area × the forward part, each part taken as a positive number, in the craft's own frame."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Very useful for craft equipped with stealth, as the side angle has lower chances of successful damage rolls on Blast Frag warheads"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ This brings Tantos and Claymores under the craft size threshold and into the missile size threshold, meaning BF warheads that fail their damage roll deal 0 damage instead of half damage."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 25 October 2026, at 03:50."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

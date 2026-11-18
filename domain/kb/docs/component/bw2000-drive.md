@@ -1,0 +1,24 @@
+# BW2000 Drive
+
+Tags: kind=module; type=propulsion; role=mobility; faction=Outlying Systems Protectorate (OSP); resources=provides power 2,000 kW
+Summary: module (Propulsion); 12x12x12 dims; 700 hp; 35 t; 15 pts; +2,000 kW; thrust (%) -15 Linear; -15 Angular; top speed (%) -10
+
+Section: Modules › Propulsion (20 entries in this section)
+Source: Official wiki (wiki.hoodedhorse.com), game 0.6.2.6:260903-1430
+
+## Stats
+
+- Dimensions: 12x12x12
+- Hitpoints: 700
+- Damage Threshold: 40
+- Mass (Tonnes): 35
+- Provided Power (kW): 2000
+- Reinforced: No
+- Top Speed (%): -10
+- Turn Rate (%): 0
+- Thrust (%): -15 Linear; -15 Angular
+- Flank Damage Probability (%): 0
+- Radar Signature (%): 0
+- Wake Signature Strength (%): -10
+- Cost (pts): 15
+- Faction (wiki logo): Outlying Systems Protectorate (OSP)

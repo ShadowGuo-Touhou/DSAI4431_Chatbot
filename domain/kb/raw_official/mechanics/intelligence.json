@@ -1,0 +1,726 @@
+{
+ "page": "Intelligence - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Intelligence",
+ "category": "mechanics",
+ "slug": "intelligence",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "(页面开头)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "When a radar track is picked up, intelligence on this track will start being gathered by related components. As intelligence accumulates, more info will be provided on this track, such as ship internal condition, point defense condition, and CIC/weapons/thrusters condition."
+    }
+   ]
+  },
+  {
+   "heading": "Intel Effort",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "When a track is detected, intel effort will be used to identify the track. Only the intel effort statistic from the component with the highest intel effort is used. For example, if a ship is being tracked by a Sprinter corvette with basic CIC(1pt/s), and the team has 2 Solomon battleship in communication range, with one fitting an intelligence center(15pt/s), and the other one also fitted with a analysis annex (15×(1+30%)=19.5pt/s), only the last Solomon's 19.5pt/s effort would be used."
+    },
+    {
+     "kind": "p",
+     "text": "Intel progress is made on all available radar and visual tracks simultaneously.[1] Intel cannot be gathered on burn tracks or ELINT. Progress already made is kept: an ELINT track still shows the identified name, with emitter categories in place of the status line, and a burn track shows the last status report but a locally held burn track hides the name."
+    }
+   ]
+  },
+  {
+   "heading": "Intel Packets",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Warships have an identification difficulty of 200 per identity step. Marauder and Moorline liner hulls (Bulk Hauler, Container Hauler, and their civilian and refit variants) have 300. A Signature Scrambler adds +100%, and the civilian Bulk Hauler hull modifier is -90%. These are the baseline sizes of intel packets. If a ship has higher identification difficulty, only the identity steps scale. The status report always costs a fixed 200 and does not scale. Identity is revealed in four stages, each costing the identification difficulty (200 on a normal warship). Once the track is known as a warship, a 200-effort status report is worked at the same time, and it is gathered again only when that report's state changes:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Packet 1 is of size 200."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Once the track is identified as a warship, a 200-point status report (ship status, COND%, PD%, debuffs) is gathered in parallel with the remaining identity steps; the first status information appears at about 400 cumulative intel effort."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "After the first status report, each change in reported status fields (Condition, Command, movement status, etc.) requires 200 additional intel effort to refresh the report."
+    },
+    {
+     "kind": "p",
+     "text": "The track info update would progress as follows:"
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Stage/report",
+       "Track information",
+       "Effort for this stage/report",
+       "Approximate time at 1 effort/s",
+       "Approximate time at 4 effort/s",
+       "Approximate time at 15 effort/s"
+      ],
+      [
+       "Initial",
+       "Track ####-Unknown",
+       "0",
+       "0s",
+       "0s",
+       "0s"
+      ],
+      [
+       "Identity 1",
+       "Warship",
+       "200",
+       "200s",
+       "50s",
+       "13.3s"
+      ],
+      [
+       "Identity 2",
+       "Warship (Class)",
+       "200",
+       "400s",
+       "100s",
+       "26.7s"
+      ],
+      [
+       "First status report (parallel)",
+       "Ship Status, COND%, PD%, debuffs",
+       "200 after Warship is known",
+       "about 400s",
+       "about 100s",
+       "about 26.7s"
+      ],
+      [
+       "Identity 3",
+       "Class (Hull)",
+       "200",
+       "600s",
+       "150s",
+       "40s"
+      ],
+      [
+       "Identity 4",
+       "Ship Name (Hull), with the already gathered status report",
+       "200",
+       "800s",
+       "200s",
+       "53.3s"
+      ],
+      [
+       "Status refresh",
+       "Updated report after a reported field changes",
+       "200 per refresh",
+       "200s after the change",
+       "50s after the change",
+       "13.3s after the change"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "Image of a track with the heading and velocity vectors labelled."
+    },
+    {
+     "kind": "p",
+     "text": "The intel gathered is shared to the entire team, and if the component providing intel is lost, other intel sources can continue where it left off assuming they can see the track.[2]"
+    },
+    {
+     "kind": "p",
+     "text": "Missile identity is four 20-point stages (the first shows that it is a missile, the last shows its name), and those stages are never penalized. The seeker combination is a separate 20-point report that starts once the track is known to be a missile. That report takes a 0.1x penalty unless the intel component's class matches, so an Intelligence Center (1.5/s on the report) finishes seekers at about 14.7 s while the name is already shown at about 5.3 s. A Scryer keeps 10/s, so seekers finish at about 4 s and the name at about 8 s."
+    },
+    {
+     "kind": "p",
+     "text": "Once the contact is held as a Visual, Tracked or Locked track, its heading and velocity will be displayed in the tactical view as a disconnected line pointing out of the track and a line with a circle respectively. The velocity stick approximately shows where the ship will be in 10 seconds.needs confirmation"
+    }
+   ]
+  },
+  {
+   "heading": "Ship Status",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "A ship track can have one of the following status displayed:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "EVACUATED: Ship has been evacuated"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NOT UNDER COMMAND: no command component is working (a CIC or Auxiliary Steering that is destroyed, unpowered, unmanned, or below its functioning threshold)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "IMMOBILISED: Drives no longer operational."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "HARMLESS: no offensive weapon (EW included) can fire, and the ship has no offensive craft and no offensive missiles of its own still in flight. Weapons count as unable to fire when all are disabled and no damage-control team is free, all are destroyed and no restores remain, or none has ammunition."
+    },
+    {
+     "kind": "p",
+     "text": "Statuses higher on this list have priority and will be displayed over lower statuses."
+    },
+    {
+     "kind": "p",
+     "text": "However, please do note that ship status are only updated at each update packet. It is completely normal to see a ship under way with the status of IMMOBLISED or NOT UNDER COMMAND for some period due to how this mechanic works."
+    }
+   ]
+  },
+  {
+   "heading": "Ship Status › Intel Accuracy and Details",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "COND% is determined by the percentage of functioning components (i.e, any component that's above its functioning threshold), and adds or subtracts up to the intel accuracy[3] to it (eg, a ship with two green components, and one red component will have COND: 66%, if the Intel source has 20% inaccuracy that number can vary from 46% to 86%)"
+    },
+    {
+     "kind": "p",
+     "text": "Debuff count is just the amount of debuffs, plus minus multiplied by the inaccuracy (e.g. a ship with 10 debuffs and a Intel accuracy of 20% will show anywhere from 8 to 12 debuffs)"
+    },
+    {
+     "kind": "p",
+     "text": "PD% condition is similar to COND%, but only looks at PD systems. Each PDT, decoy type, and PD missile type are counted as a component(e.g., if a ship has 5 PDTs, chaff, flares, active decoys, and two types of PD missiles, every PDT getting knocked out but all decoys and PDMs functional will result in PD: 50%). Note that this percentage is also subject to intel inaccuracy, same as COND%"
+    }
+   ]
+  },
+  {
+   "heading": "Working on remote tracks",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Most sources of intel can only work locally, which means that the intel source can only work on tracks that the ship itself sees. However, certain components such as intelligence centers can work on remote tracks, allowing them to work on all tracks that is shared to the ship by the team."
+    },
+    {
+     "kind": "p",
+     "text": "Note that the intel doesn't just work for the player bringing the intel center, it works for all players on the same team."
+    },
+    {
+     "kind": "p",
+     "text": "If an intel ship cannot recieve tracks (due to ships being comms jammed/comms off/comms destroyed), then it will not be able to work on that track."
+    },
+    {
+     "kind": "p",
+     "text": "Ships can still recieve intel if comms jammed or comms destroyed, as intel is automatically shared teamwide, with the information independent of the communication network[possibly a bug]"
+    }
+   ]
+  },
+  {
+   "heading": "Seeker intel distinguish",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "If a ship class and/or hull type is identified, Seekers with intel distinguish capability (Such as EO seekers) are capable of using that intel to identify and focusing on a specific class or hull if fired in TRK(track) mode. Note that this cannot seek out specific ships by name, it only gets as specific as the hull type."
+    }
+   ]
+  },
+  {
+   "heading": "Re-Acquisition of a Lost Track",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "After a track is broken, if it is re-acquired more than 2.5km from its last known position, then it will be assigned with a new track number with no intel. This would force the track to go through all the intel packets again before detailed information is regained. Likewise, if the track is re-established within 2.5km from the last known position, all information is preserved."
+    }
+   ]
+  },
+  {
+   "heading": "Decoy Container",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Decoy containers can mimic ship signatures of Ferrymans and Marauders. These decoy containers cannot be revealed by intel alone, and will require visual spotting to distinguish from a real target. Decoy containers will typically have their heading pointing in the direction in which they are moving, which is not necessarily typical behaviour for Marauders."
+    }
+   ]
+  },
+  {
+   "heading": "Visual",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Smoke (right) released by a dead shuttle in the testing range."
+    },
+    {
+     "kind": "p",
+     "text": "Ships within visual range will have their model revealed, which can reveal their loadout and current status. The ship's bridge lights switch to blue to amber when the ship has no more power (eg, all reactors disabled or destroyed) External modules show black smoke and sparks when destroyed."
+    }
+   ]
+  },
+  {
+   "heading": "Sound",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "[WIP] Sounds can be used to learn information about the ship. You can hear sound effects near the location of your camera, regardless of how far any friendly ships may be from the location."
+    }
+   ]
+  },
+  {
+   "heading": "Sound › Alarms",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Upon being destroyed, a ship sounds an evacuation alarm. If the ship is visible, an evacuation announcement follows about 7.5 seconds later. Lifepods begin launching 45 seconds after the alarm, one every 2.5 to 7.5 seconds."
+    }
+   ]
+  },
+  {
+   "heading": "Sound › Damage",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Visible ships have a chance to play a certain sound effect when some of its components are directly damaged (hits on structure before structurebreak will not play this sound). This chance starts at ~1.50% per hit, increases to ~3.00% at 130 damage, ~50% at 300 damage, then increases by 0.0317% per point of damage past 300 damage"
+    },
+    {
+     "kind": "p",
+     "text": "The sound effect can only play once every 2.5 seconds, and will only play if the model is visible."
+    },
+    {
+     "kind": "p",
+     "text": "If a ship gets structurebroken, a damage sound effect is played immediately, ignoring the above restrictions."
+    }
+   ]
+  },
+  {
+   "heading": "Sound › Weapon Sounds",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Most weapon types have unique sound effects when in use. Turrets have a distinctive sound when rotating, and missile tubes have distinctive sounds when launching missiles"
+    }
+   ]
+  },
+  {
+   "heading": "Sound › Intercom Chatter",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Intercom chatter can give clues to the status of a ship."
+    },
+    {
+     "kind": "p",
+     "text": "If the ship's model is visible and the player's viewpoint is close enough, radio chatter can be heard from the ship."
+    },
+    {
+     "kind": "p",
+     "text": "[transcript WIP]"
+    },
+    {
+     "kind": "p",
+     "text": "Fire will have a smouldering, crackling sound, and either a visible external yellow/orange fire or white sparks (electrical fire). The two different vfx are only a visual difference, the fire behaves the same."
+    },
+    {
+     "kind": "p",
+     "text": "Atmosphere leak will have a hissing, air leak sort of sound and a bright white cloud appearance"
+    }
+   ]
+  },
+  {
+   "heading": "Notes",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Note that visual tracks are not transmitted over the network, which means remote intel like intel center will not work on them."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ It seems like all ships on the team can receive intel even if their comms are destroyed."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ As a result, intel accuracy is often better described as intel inaccuracy, as a lower number is better"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 30 September 2026, at 09:16."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

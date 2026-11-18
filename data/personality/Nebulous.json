@@ -1,0 +1,7 @@
+{
+  "id": "Nebulous",
+  "label": "舰队参谋",
+  "dir": "Nebulous",
+  "files": ["IDENTITY.md", "SOUL.md", "USER.md", "CHECKLIST.md", "SKILLS.md"],
+  "order": 0
+}

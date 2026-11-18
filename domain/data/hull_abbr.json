@@ -1,0 +1,71 @@
+{
+  "_note": "玩家确认的舰级缩写（2026-11-14，2026-11-18 修正 Moorline 的 LN→CLN 并补 CVLN）。FFL 三个、BB 两个是实际情况：Worden 在设定上是改装战列舰，Draugr/Ferryman 玩家俗称 tug/shuttle。Mercator 没有缩写。LN 与 CLN 都是线列舰：Marauder 用 LN，Moorline 用 CLN，Moorline 的 refit 用 CVLN。",
+  "Axford Heavy Cruiser": {
+    "abbr": "CH",
+    "note": ""
+  },
+  "Keystone Destroyer": {
+    "abbr": "DD",
+    "note": ""
+  },
+  "Vauxhall Light Cruiser": {
+    "abbr": "CL",
+    "note": ""
+  },
+  "Solomon Battleship": {
+    "abbr": "BB",
+    "note": ""
+  },
+  "Raines Frigate": {
+    "abbr": "FF",
+    "note": ""
+  },
+  "Sprinter Corvette": {
+    "abbr": "FFL",
+    "note": "轻型护卫舰 / 侦查船"
+  },
+  "Levy Escort Carrier": {
+    "abbr": "CVE",
+    "note": "护航航母"
+  },
+  "Worden Fleet Carrier": {
+    "abbr": "CV",
+    "note": "舰队航母；设定上船体源自战列舰，但游戏里是 CV"
+  },
+  "Journeyman Light Carrier": {
+    "abbr": "CVL",
+    "note": "轻航母"
+  },
+  "Marauder Line Ship": {
+    "abbr": "LN",
+    "note": ""
+  },
+  "Moorline Line Ship": {
+    "abbr": "CLN",
+    "note": "集装箱班轮（Container Line Ship），分段舰体、整船 26 槽；旧表误写成 LN（LN 是 Marauder）"
+  },
+  "Container Hauler Refit": {
+    "abbr": "CVLN",
+    "note": "Moorline 的 refit 型（存档 HullType Stock/Container Hauler Refit）；分段与 Moorline 同用 Container 段"
+  },
+  "Ocello Command Cruiser": {
+    "abbr": "CC",
+    "note": ""
+  },
+  "Draugr Clipper": {
+    "abbr": "FFL",
+    "note": "玩家俗称 tug（拖船）"
+  },
+  "Ferryman Clipper": {
+    "abbr": "FFL",
+    "note": "玩家俗称 shuttle（交通艇）"
+  },
+  "Flathead Monitor": {
+    "abbr": "MN",
+    "note": "货舱补给船（cargo feeder），玩家仍称 MN"
+  },
+  "Mercator Replenishment Oiler": {
+    "abbr": "",
+    "note": "没有缩写，就叫 Replenishment Oiler"
+  }
+}

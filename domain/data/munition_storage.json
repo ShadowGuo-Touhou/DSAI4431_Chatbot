@@ -1,0 +1,268 @@
+{
+  "100mm AP Shell": {
+    "storage_volume_m3": 0.05,
+    "point_cost": 1,
+    "point_division": 250,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "100mm Grape": {
+    "storage_volume_m3": 0.05,
+    "point_cost": 1,
+    "point_division": 250,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "100mm HE Shell": {
+    "storage_volume_m3": 0.05,
+    "point_cost": 1,
+    "point_division": 250,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "100mm HE-HC Shell": {
+    "storage_volume_m3": 0.05,
+    "point_cost": 1,
+    "point_division": 250,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "120mm AP Shell": {
+    "storage_volume_m3": 0.05,
+    "point_cost": 1,
+    "point_division": 100,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "120mm HE Shell": {
+    "storage_volume_m3": 0.05,
+    "point_cost": 1,
+    "point_division": 100,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "120mm HE-RPF Shell": {
+    "storage_volume_m3": 0.05,
+    "point_cost": 1,
+    "point_division": 100,
+    "faction": "Alliance",
+    "bundle": "stock-f1"
+  },
+  "15mm Sandshot": {
+    "storage_volume_m3": 0.0025,
+    "point_cost": 1,
+    "point_division": 50,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "20mm Slug": {
+    "storage_volume_m3": 0.0025,
+    "point_cost": 1,
+    "point_division": 2000,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "250mm AP Shell": {
+    "storage_volume_m3": 0.15,
+    "point_cost": 1,
+    "point_division": 50,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "250mm Bomb Shell": {
+    "storage_volume_m3": 0.15,
+    "point_cost": 1,
+    "point_division": 50,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "250mm Flak Shell": {
+    "storage_volume_m3": 0.15,
+    "point_cost": 1,
+    "point_division": 100,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "250mm HE Shell": {
+    "storage_volume_m3": 0.15,
+    "point_cost": 1,
+    "point_division": 50,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "250mm HE-HC Shell": {
+    "storage_volume_m3": 0.15,
+    "point_cost": 1,
+    "point_division": 50,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "250mm HE-RPF Shell": {
+    "storage_volume_m3": 0.15,
+    "point_cost": 1,
+    "point_division": 50,
+    "faction": "Alliance",
+    "bundle": "stock-f1"
+  },
+  "300mm AP Rail Sabot": {
+    "storage_volume_m3": 0.75,
+    "point_cost": 1,
+    "point_division": 25,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "35mm Flechette": {
+    "storage_volume_m3": 0.005,
+    "point_cost": 1,
+    "point_division": 250,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "35mm Slug": {
+    "storage_volume_m3": 0.005,
+    "point_cost": 1,
+    "point_division": 1000,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "400mm Plasma Ampoule": {
+    "storage_volume_m3": 0.8,
+    "point_cost": 1,
+    "point_division": 25,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "450mm AP Shell": {
+    "storage_volume_m3": 0.8,
+    "point_cost": 1,
+    "point_division": 25,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "450mm HE Shell": {
+    "storage_volume_m3": 0.8,
+    "point_cost": 1,
+    "point_division": 25,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "500mm Fracturing Block": {
+    "storage_volume_m3": 0.75,
+    "point_cost": 1,
+    "point_division": 25,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "500mm Fragmentation Block": {
+    "storage_volume_m3": 0.75,
+    "point_cost": 1,
+    "point_division": 25,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "50mm Flak Shell": {
+    "storage_volume_m3": 0.01,
+    "point_cost": 1,
+    "point_division": 75,
+    "faction": "",
+    "bundle": "stock-f1"
+  },
+  "600mm Bomb Shell": {
+    "storage_volume_m3": 0.8,
+    "point_cost": 1,
+    "point_division": 25,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "600mm HE Shell": {
+    "storage_volume_m3": 0.8,
+    "point_cost": 1,
+    "point_division": 25,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "600mm HE-SH Shell": {
+    "storage_volume_m3": 0.8,
+    "point_cost": 1,
+    "point_division": 25,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "CM-400 Container": {
+    "storage_volume_m3": 30.0,
+    "point_cost": 0,
+    "point_division": 1,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "CM-S-400 Container": {
+    "storage_volume_m3": 30.0,
+    "point_cost": 0,
+    "point_division": 1,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "SDM-100 Lunge": {
+    "storage_volume_m3": 4.0,
+    "point_cost": 0,
+    "point_division": 1,
+    "faction": "",
+    "bundle": "stock"
+  },
+  "SDM-200 Typhoon": {
+    "storage_volume_m3": 20.0,
+    "point_cost": 2,
+    "point_division": 1,
+    "faction": "Protectorate",
+    "bundle": "stock"
+  },
+  "SGM-100 Balestra": {
+    "storage_volume_m3": 4.0,
+    "point_cost": 0,
+    "point_division": 1,
+    "faction": "",
+    "bundle": "stock"
+  },
+  "SGM-200 Tempest": {
+    "storage_volume_m3": 20.0,
+    "point_cost": 2,
+    "point_division": 1,
+    "faction": "",
+    "bundle": "stock"
+  },
+  "SGM-300 Flail": {
+    "storage_volume_m3": 30.0,
+    "point_cost": 4,
+    "point_division": 1,
+    "faction": "Protectorate",
+    "bundle": "stock-f2"
+  },
+  "SGM-H-200 Cyclone": {
+    "storage_volume_m3": 20.0,
+    "point_cost": 3,
+    "point_division": 1,
+    "faction": "Alliance",
+    "bundle": "stock-f1"
+  },
+  "SGM-H-300 Atlatl": {
+    "storage_volume_m3": 30.0,
+    "point_cost": 5,
+    "point_division": 1,
+    "faction": "Alliance",
+    "bundle": "stock-f1"
+  },
+  "SGT-300 Pilum": {
+    "storage_volume_m3": 30.0,
+    "point_cost": 1,
+    "point_division": 1,
+    "faction": "",
+    "bundle": "stock"
+  },
+  "SSM-100 Remise": {
+    "storage_volume_m3": 4.0,
+    "point_cost": 0,
+    "point_division": 1,
+    "faction": "",
+    "bundle": "stock"
+  }
+}

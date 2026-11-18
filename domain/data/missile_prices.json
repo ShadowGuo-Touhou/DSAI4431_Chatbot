@@ -1,0 +1,2687 @@
+{
+ "note": "玩家自制导弹单价：模板存档 + 舰队内嵌模板；cost 单位是点/发",
+ "count": 536,
+ "from_fleets": 467,
+ "prices": {
+  "-491APZt5UelPA5ml2kF9w": {
+   "cost": 10.0,
+   "designation": "SGM-H-205",
+   "source": "hc gun dd test 11.fleet"
+  },
+  "-c3RhRHJCUO3HnO0aoQS8A": {
+   "cost": 1.0,
+   "designation": "SGM-1",
+   "source": "Life Goes On LNG.fleet"
+  },
+  "-ImowmjgyEK7oJ6sMnnIOw": {
+   "cost": 9.0,
+   "designation": "SGM-207",
+   "source": "cmd test2.fleet"
+  },
+  "-SE2yxWMTEOUunW8u9Wymw": {
+   "cost": 1.0,
+   "designation": "SSM-1",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "-u-4fXFvC0CRasjCEJ1CXA": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "FF GUN test 2.fleet"
+  },
+  "4itcAzQSf0mvMz8Q7D7cag": {
+   "cost": 14.0,
+   "designation": "SGM-H-200",
+   "source": "sprinter test 2.fleet"
+  },
+  "4vuuYXrnz0ykKzt2P9fdrg": {
+   "cost": 12.0,
+   "designation": "SGM-H-200",
+   "source": "BB 12k.fleet"
+  },
+  "7gMm110btEWY0fOA6ztCaA Emergency Flare": {
+   "designation": "SGM-199",
+   "cost": 1.0,
+   "source": "missile template SGM-199 Emergency Flare.missile"
+  },
+  "9UidAAOH70aXRc2sAvWXtg template": {
+   "designation": "SGM-H-312",
+   "cost": 22.0,
+   "source": "missile template SGM-H-312 template.missile"
+  },
+  "_RrCeP-3aEaZ6ecS3aXiww": {
+   "cost": 1.0,
+   "designation": "SGM-102",
+   "source": "S2 DIR OCELLO.fleet"
+  },
+  "aTlRpxNf6kqMFUYgpmgZAQ": {
+   "cost": 4.0,
+   "designation": "SGM-112",
+   "source": "Shuttle 1.fleet"
+  },
+  "CcbFigSuo0mJoma_c2xvJA": {
+   "cost": 2.0,
+   "designation": "SGM-111",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "cdfHfuItUUyZ5n4ZRUxrmw Flail II": {
+   "designation": "SGM-302",
+   "cost": 13.0,
+   "source": "missile template SGM-302 Flail II.missile"
+  },
+  "CM-4": {
+   "cost": 11.0,
+   "designation": "CM-4",
+   "source": "Container Dumper.fleet"
+  },
+  "CM-4 Mine Container": {
+   "designation": "CM-4",
+   "cost": 14.0,
+   "source": "missile template CM-4 Mine Container.missile"
+  },
+  "CM-4 Rocket Container": {
+   "designation": "CM-4",
+   "cost": 8.0,
+   "source": "missile template CM-4 Rocket Container.missile"
+  },
+  "CM-400": {
+   "cost": 3.0,
+   "designation": "CM-400",
+   "source": "CC LN test 1.fleet"
+  },
+  "CM-400 Broken Spine": {
+   "cost": 5.0,
+   "designation": "CM-400",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-400 Container": {
+   "cost": 86.0,
+   "designation": "CM-400",
+   "source": "High Value Convoy (Max pt).fleet"
+  },
+  "CM-400 HHHJJJ": {
+   "cost": 3.0,
+   "designation": "CM-400",
+   "source": "CC LN test 1.fleet"
+  },
+  "CM-400 KKKJJJ": {
+   "cost": 3.0,
+   "designation": "CM-400",
+   "source": "CC LN test 1.fleet"
+  },
+  "CM-400 Whutever's breadstick": {
+   "cost": 4.0,
+   "designation": "CM-400",
+   "source": "CLN x2 test.fleet"
+  },
+  "CM-400 Whutever's Breakfast": {
+   "cost": 4.0,
+   "designation": "CM-400",
+   "source": "CLN x2 test.fleet"
+  },
+  "CM-401": {
+   "cost": 5.0,
+   "designation": "CM-401",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-401 Broken Spine II": {
+   "designation": "CM-401",
+   "cost": 5.0,
+   "source": "missile template CM-401 Broken Spine II.missile"
+  },
+  "CM-405": {
+   "cost": 4.0,
+   "designation": "CM-405",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-405 SEEW": {
+   "cost": 4.0,
+   "designation": "CM-405",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-406": {
+   "cost": 6.0,
+   "designation": "CM-406",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-406 Claymore": {
+   "cost": 6.0,
+   "designation": "CM-406",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-406 Rocket Container": {
+   "cost": 6.0,
+   "designation": "CM-406",
+   "source": "New CLN.fleet"
+  },
+  "CM-407 YUGE (Imported)": {
+   "designation": "CM-407",
+   "cost": 13.0,
+   "source": "missile template CM-407 YUGE (Imported).missile"
+  },
+  "CM-411": {
+   "cost": 10.0,
+   "designation": "CM-411",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-411 Beep Meep": {
+   "designation": "CM-411",
+   "cost": 10.0,
+   "source": "missile template CM-411 Beep Meep.missile"
+  },
+  "CM-412": {
+   "cost": 9.0,
+   "designation": "CM-412",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-412 Zimmerman": {
+   "cost": 9.0,
+   "designation": "CM-412",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-421": {
+   "cost": 3.0,
+   "designation": "CM-421",
+   "source": "New CLN.fleet"
+  },
+  "CM-421 Violence": {
+   "cost": 3.0,
+   "designation": "CM-421",
+   "source": "New CLN.fleet"
+  },
+  "CM-422": {
+   "cost": 6.0,
+   "designation": "CM-422",
+   "source": "New CLN.fleet"
+  },
+  "CM-422 Extreme Violence": {
+   "cost": 6.0,
+   "designation": "CM-422",
+   "source": "New CLN.fleet"
+  },
+  "CM-431": {
+   "cost": 5.0,
+   "designation": "CM-431",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-431 Longshot": {
+   "cost": 5.0,
+   "designation": "CM-431",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-455": {
+   "cost": 4.0,
+   "designation": "CM-455",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-455 Balloon": {
+   "cost": 4.0,
+   "designation": "CM-455",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-S-4-3": {
+   "cost": 27.0,
+   "designation": "CM-S-4-3",
+   "source": "Queen_Pom_450LNCap.fleet"
+  },
+  "CM-S-4-3 POMEGRANATE SEEDS": {
+   "cost": 27.0,
+   "designation": "CM-S-4-3",
+   "source": "Queen_Pom_450LNCap.fleet"
+  },
+  "CM-S-400": {
+   "cost": 27.0,
+   "designation": "CM-S-400",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-S-400 Toy Box": {
+   "cost": 27.0,
+   "designation": "CM-S-400",
+   "source": "Container Liner test 33.fleet"
+  },
+  "CM-S-401": {
+   "cost": 15.0,
+   "designation": "CM-S-401",
+   "source": "New CLN.fleet"
+  },
+  "CM-S-401 Bau Bau": {
+   "cost": 15.0,
+   "designation": "CM-S-401",
+   "source": "New CLN.fleet"
+  },
+  "CM-S-475": {
+   "cost": 13.0,
+   "designation": "CM-S-475",
+   "source": "Aircraft (target) launcher.fleet"
+  },
+  "CM-S-475 Target Drone (Aircraft)": {
+   "designation": "CM-S-475",
+   "cost": 12.0,
+   "source": "missile template CM-S-475 Target Drone (Aircraft).missile"
+  },
+  "CM-S-499": {
+   "cost": 3.0,
+   "designation": "CM-S-499",
+   "source": "Kyanite Squadron.fleet"
+  },
+  "CM-S-499 'Killjoy' Jammer Decoy [PD Prio Fired]": {
+   "cost": 3.0,
+   "designation": "CM-S-499",
+   "source": "Kyanite Squadron.fleet"
+  },
+  "D6HAL97ob02E3ok_6EVdrg": {
+   "cost": 6.0,
+   "designation": "SGM-202",
+   "source": "S2 DIR OCELLO.fleet"
+  },
+  "D80apbp0NkSqeHG1ZhBXNw": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "BB 12k.fleet"
+  },
+  "D8jCLoJDVUGSAki9Q6UhVg": {
+   "cost": 10.0,
+   "designation": "SGM-H-203",
+   "source": "HC Gun test 4.fleet"
+  },
+  "dClo2cj1WUGv9SJBNbq4Ww": {
+   "cost": 9.0,
+   "designation": "SGT-300",
+   "source": "大冲击.fleet"
+  },
+  "DQ10u0KDi0upxvfhm1TZSw": {
+   "cost": 6.0,
+   "designation": "SGM-200",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "EcAKwUE25EuRPL_lZJut7w": {
+   "cost": 18.0,
+   "designation": "SGM-H-334",
+   "source": "Mixed FFLs.fleet"
+  },
+  "EMJn4-3uQEGmj-1KvBqa7g": {
+   "cost": 13.0,
+   "designation": "SGT-3",
+   "source": "Wulfenite Squadron.fleet"
+  },
+  "FN-rqVU7_02Nt_UhdXSfPg": {
+   "cost": 10.0,
+   "designation": "SGM-H-201",
+   "source": "HC Missile test 7.fleet"
+  },
+  "FN-rqVU7_02Nt_UhdXSfPg ADASHs": {
+   "designation": "SGM-H-201",
+   "cost": 10.0,
+   "source": "missile template SGM-H-201 ADASHs.missile"
+  },
+  "FYfOTYaG3E6emnDQoT80KA": {
+   "cost": 1.0,
+   "designation": "SGM-101",
+   "source": "HC Gun test 4.fleet"
+  },
+  "GekW3xATXEyQ6zqOWDsEuw": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "meat CV.fleet"
+  },
+  "h7iFZjK_8EmI8nNShlTcYA": {
+   "cost": 1.0,
+   "designation": "SSM-1",
+   "source": "Rocket CV JR.fleet"
+  },
+  "hIO05lduHE-La5YpDlSb4g": {
+   "cost": 10.0,
+   "designation": "SGM-H-234",
+   "source": "BB test 52 no ic.fleet"
+  },
+  "hIO05lduHE-La5YpDlSb4g ACM 1 Block II": {
+   "designation": "SGM-H-234",
+   "cost": 10.0,
+   "source": "missile template SGM-H-234 ACM 1 Block II.missile"
+  },
+  "HX1hjxNdN0G1BnoxhwWF5g": {
+   "cost": 14.0,
+   "designation": "SGM-3",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "i594WzH0IECLtQ-IrojGcg": {
+   "cost": 10.0,
+   "designation": "SGM-200",
+   "source": "Hellbomb.fleet"
+  },
+  "IO3y1uk360eS-kxY94_IvQ": {
+   "cost": 4.0,
+   "designation": "CM-400",
+   "source": "CLN x2 test.fleet"
+  },
+  "iRVYra4Cg02sqgBJWislqg": {
+   "cost": 1.0,
+   "designation": "SSM-1",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "ja-bTozL0UCA0LczOO7n6g Close Cover Plus": {
+   "designation": "SGM-101",
+   "cost": 7.0,
+   "source": "missile template SGM-101 Close Cover Plus.missile"
+  },
+  "jAtxaI_EhUiZv29Ivn-Sgw": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "jNKvS_M3VUyJvNdlO4ac_g": {
+   "cost": 1.0,
+   "designation": "SSM-101",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "K-VS6QY7D0yGvnDzmnckTw": {
+   "cost": 6.0,
+   "designation": "SGM-27",
+   "source": "msl ln test.fleet"
+  },
+  "LDV_dSpF1UqSU6dtROVTcw": {
+   "cost": 13.0,
+   "designation": "SGM-H-200",
+   "source": "6k.fleet"
+  },
+  "LmE9gNGowEKImWoS05Un0A": {
+   "cost": 6.0,
+   "designation": "SGM-202",
+   "source": "HC Gun test 4.fleet"
+  },
+  "lMFpX0IUHEOLZ5iLnp8fgA": {
+   "cost": 15.0,
+   "designation": "SGM-300",
+   "source": "msl ln test.fleet"
+  },
+  "M0L0G5qJlE-FGiKcZexN0A": {
+   "cost": 2.0,
+   "designation": "SDM-103",
+   "source": "TF Maple.fleet"
+  },
+  "MdmN4yCC1U24xJn-o2tKPA template II": {
+   "designation": "SGM-H-313",
+   "cost": 46.0,
+   "source": "missile template SGM-H-313 template II.missile"
+  },
+  "Mk0sQMiAdkKWQa-16rbg-w": {
+   "cost": 9.0,
+   "designation": "SGT-3",
+   "source": "Amethyst Squadron.fleet"
+  },
+  "mT0rvhr38EiCnWPALx0BLQ": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "capper test.fleet"
+  },
+  "N_Ry-M2mhECMO4xGvkouEw": {
+   "cost": 8.0,
+   "designation": "SGM-200",
+   "source": "sprinter test 2.fleet"
+  },
+  "oJsNOtEhIUWDtMx2PzqVZg": {
+   "cost": 10.0,
+   "designation": "SGM-29",
+   "source": "msl ln test.fleet"
+  },
+  "P0TZ9BO9ZkyYKljJaYKzvg": {
+   "cost": 10.0,
+   "designation": "SGM-208",
+   "source": "cmd test2.fleet"
+  },
+  "PaS6aeITQ064vGno4fTZ0g": {
+   "cost": 25.0,
+   "designation": "SGM-3",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "Pr64k5Uml0uh2WY02i9W4g": {
+   "cost": 10.0,
+   "designation": "SGM-300",
+   "source": "CV .fleet"
+  },
+  "Q62SnAGhTUSTDod5N4FbwA": {
+   "cost": 4.0,
+   "designation": "CM-400",
+   "source": "CLN x2 test.fleet"
+  },
+  "QHlXO_1-I02pn68CLdWtug": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "Shuttle 1.fleet"
+  },
+  "qn_Ov-1cykeF_wogEGGDYw": {
+   "cost": 12.0,
+   "designation": "SGM-300",
+   "source": "CV .fleet"
+  },
+  "qn_Ov-1cykeF_wogEGGDYw Flail": {
+   "designation": "SGM-300",
+   "cost": 12.0,
+   "source": "missile template SGM-300 Flail.missile"
+  },
+  "QUoBzVIvJUWTBgd_xJznwQ": {
+   "cost": 13.0,
+   "designation": "SGM-312",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "rlhhYXHXB0qNpGUKBxWgVg": {
+   "cost": 7.0,
+   "designation": "SGM-291",
+   "source": "capper test.fleet"
+  },
+  "SDM-100": {
+   "cost": 2.0,
+   "designation": "SDM-100",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SDM-100 Lunge": {
+   "cost": 2.0,
+   "designation": "SDM-100",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SDM-100 WindBreaker": {
+   "cost": 3.0,
+   "designation": "SDM-100",
+   "source": "OSP carrier.fleet"
+  },
+  "SDM-103": {
+   "cost": 2.0,
+   "designation": "SDM-103",
+   "source": "TF Maple.fleet"
+  },
+  "SDM-103 Thorn": {
+   "cost": 2.0,
+   "designation": "SDM-103",
+   "source": "TF Maple.fleet"
+  },
+  "SDM-122": {
+   "cost": 2.0,
+   "designation": "SDM-122",
+   "source": "Amethyst Squadron.fleet"
+  },
+  "SDM-122 Spamraam": {
+   "cost": 2.0,
+   "designation": "SDM-122",
+   "source": "Amethyst Squadron.fleet"
+  },
+  "SDM-150": {
+   "cost": 6.0,
+   "designation": "SDM-150",
+   "source": "TF Hope.fleet"
+  },
+  "SDM-150 Chattini": {
+   "designation": "SDM-150",
+   "cost": 6.0,
+   "source": "missile template SDM-150 Chattini.missile"
+  },
+  "SDM-2": {
+   "cost": 8.0,
+   "designation": "SDM-2",
+   "source": "Kyanite Squadron.fleet"
+  },
+  "SDM-2 SAM": {
+   "cost": 8.0,
+   "designation": "SDM-2",
+   "source": "Kyanite Squadron.fleet"
+  },
+  "SDM-200": {
+   "cost": 5.0,
+   "designation": "SDM-200",
+   "source": "TF Purple Joy 2.fleet"
+  },
+  "SDM-200 Typhoon Block II": {
+   "cost": 5.0,
+   "designation": "SDM-200",
+   "source": "TF Purple Joy 2.fleet"
+  },
+  "SDM-200 红旗": {
+   "cost": 7.0,
+   "designation": "SDM-200",
+   "source": "新手舰队2CC.fleet"
+  },
+  "SDM-201": {
+   "cost": 5.0,
+   "designation": "SDM-201",
+   "source": "TF Purple Joy 2.fleet"
+  },
+  "SDM-201 HQ 10": {
+   "cost": 5.0,
+   "designation": "SDM-201",
+   "source": "CC mdln test 6.fleet"
+  },
+  "SDM-201 Magic": {
+   "cost": 5.0,
+   "designation": "SDM-201",
+   "source": "CVE test 34 S2.fleet"
+  },
+  "SDM-201 PL 15": {
+   "cost": 5.0,
+   "designation": "SDM-201",
+   "source": "TF Purple Joy 2.fleet"
+  },
+  "SDM-201 Sticker": {
+   "cost": 5.0,
+   "designation": "SDM-201",
+   "source": "CVLN test 5 Newbie.fleet"
+  },
+  "SDM-218": {
+   "cost": 5.0,
+   "designation": "SDM-218",
+   "source": "Zircon Squadron.fleet"
+  },
+  "SDM-218 Naginata": {
+   "cost": 5.0,
+   "designation": "SDM-218",
+   "source": "Zircon Squadron.fleet"
+  },
+  "SDM-220": {
+   "cost": 5.0,
+   "designation": "SDM-220",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SDM-220 Blossoms": {
+   "cost": 5.0,
+   "designation": "SDM-220",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SDM-221": {
+   "cost": 7.0,
+   "designation": "SDM-221",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SDM-221 Lilies": {
+   "cost": 7.0,
+   "designation": "SDM-221",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SDM-225": {
+   "cost": 5.0,
+   "designation": "SDM-225",
+   "source": "Rush B.fleet"
+  },
+  "SDM-225 Jetpack": {
+   "cost": 5.0,
+   "designation": "SDM-225",
+   "source": "Another 6k.fleet"
+  },
+  "SDM-225 Tornado": {
+   "designation": "SDM-225",
+   "cost": 4.0,
+   "source": "missile template SDM-225 Tornado.missile"
+  },
+  "SDM-225 Tornado N": {
+   "cost": 4.0,
+   "designation": "SDM-225",
+   "source": "TF Pilgrim.fleet"
+  },
+  "SDM-244": {
+   "cost": 5.0,
+   "designation": "SDM-244",
+   "source": "CVE.fleet"
+  },
+  "SDM-244 Tsunami": {
+   "cost": 5.0,
+   "designation": "SDM-244",
+   "source": "CVE.fleet"
+  },
+  "SDM-251": {
+   "cost": 8.0,
+   "designation": "SDM-251",
+   "source": "TF Hope.fleet"
+  },
+  "SDM-251 Chattino": {
+   "designation": "SDM-251",
+   "cost": 8.0,
+   "source": "missile template SDM-251 Chattino.missile"
+  },
+  "SDM-255": {
+   "cost": 5.0,
+   "designation": "SDM-255",
+   "source": "test.fleet"
+  },
+  "SDM-255 Whirlwind": {
+   "designation": "SDM-255",
+   "cost": 5.0,
+   "source": "missile template SDM-255 Whirlwind.missile"
+  },
+  "SDM-274": {
+   "cost": 8.0,
+   "designation": "SDM-274",
+   "source": "S2CC MkII.fleet"
+  },
+  "SDM-274 Punisher-ER CW": {
+   "cost": 8.0,
+   "designation": "SDM-274",
+   "source": "S2CC MkII.fleet"
+  },
+  "SDM-274 SM-2ER": {
+   "cost": 9.0,
+   "designation": "SDM-274",
+   "source": "S2 DIR OCELLO.fleet"
+  },
+  "SenkRvYnXE-wC5VLN6MPzw": {
+   "cost": 23.0,
+   "designation": "SGM-300",
+   "source": "CV .fleet"
+  },
+  "SgkyPRp9PEWNd93dytARuA": {
+   "cost": 11.0,
+   "designation": "SGM-305",
+   "source": "Rocket Shuttles but bigger.fleet"
+  },
+  "SGM-1": {
+   "cost": 1.0,
+   "designation": "SGM-1",
+   "source": "TF Ash.fleet"
+  },
+  "SGM-1 AM2H-3K-2HEEL33": {
+   "cost": 3.0,
+   "designation": "SGM-1",
+   "source": "Heteroteuthinae.fleet"
+  },
+  "SGM-1 AM3H-3K-2HEF65": {
+   "cost": 2.0,
+   "designation": "SGM-1",
+   "source": "Heteroteuthinae.fleet"
+  },
+  "SGM-1 Ceremonial Arming Missile": {
+   "cost": 1.0,
+   "designation": "SGM-1",
+   "source": "TF Ash.fleet"
+  },
+  "SGM-1 Crew's Personal Belongings": {
+   "cost": 1.0,
+   "designation": "SGM-1",
+   "source": "Life Goes On LNG.fleet"
+  },
+  "SGM-1 Scorch": {
+   "cost": 4.0,
+   "designation": "SGM-114",
+   "source": "Amethyst Squadron.fleet"
+  },
+  "SGM-1-1": {
+   "cost": 1.0,
+   "designation": "SGM-1-1",
+   "source": "tug blob.fleet"
+  },
+  "SGM-1-1 [ARM]": {
+   "cost": 1.0,
+   "designation": "SGM-1-1",
+   "source": "tug blob.fleet"
+  },
+  "SGM-1-1 Arming Missile": {
+   "cost": 1.0,
+   "designation": "SGM-1-1",
+   "source": "tug blob.fleet"
+  },
+  "SGM-100": {
+   "cost": 2.0,
+   "designation": "SGM-100",
+   "source": "TF Willow.fleet"
+  },
+  "SGM-100 1": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "emmmmmmmm.fleet"
+  },
+  "SGM-100 AA": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "Silver Squadron 2.fleet"
+  },
+  "SGM-100 AMM": {
+   "cost": 2.0,
+   "designation": "SGM-100",
+   "source": "zpzd 导弹FF.fleet"
+  },
+  "SGM-100 Arm": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "1- cc and shuttles.fleet"
+  },
+  "SGM-100 ARM": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "CVLN test 5 Newbie.fleet"
+  },
+  "SGM-100 Balestra": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "SGM-100 Balestra Block II": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "the old ways.fleet"
+  },
+  "SGM-100 Balestra Block III": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "Shuttle 1.fleet"
+  },
+  "SGM-100 Balestra Block IV": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "2- bb and 3dd ish 1.fleet"
+  },
+  "SGM-100 GS-25": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "SGM-100 I am Dangerous": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SGM-100 Rayovac High-Energy AA": {
+   "cost": 2.0,
+   "designation": "SGM-100",
+   "source": "please don_t play this.fleet"
+  },
+  "SGM-100 Riposte Block IV": {
+   "designation": "SGM-100",
+   "cost": 2.0,
+   "source": "missile template SGM-100 Riposte Block IV.missile"
+  },
+  "SGM-100 Riposte II": {
+   "cost": 2.0,
+   "designation": "SGM-100",
+   "source": "TF Willow.fleet"
+  },
+  "SGM-100 Riposte III": {
+   "cost": 3.0,
+   "designation": "SGM-100",
+   "source": "CL cap fleet 2.fleet"
+  },
+  "SGM-100 SpamPD ER": {
+   "cost": 2.0,
+   "designation": "SGM-100",
+   "source": "CV 6k.fleet"
+  },
+  "SGM-100 Technically a threat": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "Skirmishers                                                   V2 BiBlob ffl sprinter blob.fleet"
+  },
+  "SGM-100 THREAT": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "capper test.fleet"
+  },
+  "SGM-100 占点": {
+   "cost": 1.0,
+   "designation": "SGM-100",
+   "source": "concept.fleet"
+  },
+  "SGM-101": {
+   "cost": 2.0,
+   "designation": "SGM-101",
+   "source": "Kyanite Squadron.fleet"
+  },
+  "SGM-101 AA 2": {
+   "cost": 2.0,
+   "designation": "SGM-101",
+   "source": "Silver Squadron 2.fleet"
+  },
+  "SGM-101 Balestra": {
+   "cost": 4.0,
+   "designation": "SGM-101",
+   "source": "TF Purple Joy 2.fleet"
+  },
+  "SGM-101 Close Cover": {
+   "designation": "SGM-101",
+   "cost": 4.0,
+   "source": "missile template SGM-101 Close Cover.missile"
+  },
+  "SGM-101 Don't Shoot": {
+   "cost": 1.0,
+   "designation": "SGM-101",
+   "source": "HC Gun test 4.fleet"
+  },
+  "SGM-101 Interceptor": {
+   "cost": 2.0,
+   "designation": "SGM-101",
+   "source": "Kyanite Squadron.fleet"
+  },
+  "SGM-101 OA": {
+   "cost": 1.0,
+   "designation": "SGM-101",
+   "source": "CC 450 Test 4 Newbie.fleet"
+  },
+  "SGM-101 Parry I": {
+   "cost": 4.0,
+   "designation": "SGM-101",
+   "source": "TF Purple Joy 2.fleet"
+  },
+  "SGM-101 Violence": {
+   "designation": "SGM-101",
+   "cost": 2.0,
+   "source": "missile template SGM-101 Violence.missile"
+  },
+  "SGM-102": {
+   "cost": 2.0,
+   "designation": "SGM-102",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGM-102 AAM": {
+   "cost": 2.0,
+   "designation": "SGM-102",
+   "source": "CVLN test 5 Newbie.fleet"
+  },
+  "SGM-102 Don't Shoot": {
+   "cost": 1.0,
+   "designation": "SGM-102",
+   "source": "S2 DIR OCELLO.fleet"
+  },
+  "SGM-102 ECCM": {
+   "cost": 1.0,
+   "designation": "SGM-102",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SGM-102 Extreme Violence": {
+   "designation": "SGM-102",
+   "cost": 6.0,
+   "source": "missile template SGM-102 Extreme Violence.missile"
+  },
+  "SGM-102 Petals": {
+   "cost": 1.0,
+   "designation": "SGM-102",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SGM-102 Reprise": {
+   "cost": 2.0,
+   "designation": "SGM-102",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGM-102 Spam Block IV": {
+   "cost": 1.0,
+   "designation": "SGM-102",
+   "source": "CV 6k.fleet"
+  },
+  "SGM-103": {
+   "cost": 1.0,
+   "designation": "SGM-103",
+   "source": "TF Purple Joy 2.fleet"
+  },
+  "SGM-103 Balestra Block II": {
+   "cost": 1.0,
+   "designation": "SGM-103",
+   "source": "TF Purple Joy 2.fleet"
+  },
+  "SGM-103 Wake": {
+   "cost": 1.0,
+   "designation": "SGM-103",
+   "source": "CVLN test 5 Newbie.fleet"
+  },
+  "SGM-104": {
+   "cost": 2.0,
+   "designation": "SGM-104",
+   "source": "CVE test 34 S2.fleet"
+  },
+  "SGM-104 ACT AMM": {
+   "cost": 2.0,
+   "designation": "SGM-104",
+   "source": "CVE test 34 S2.fleet"
+  },
+  "SGM-105": {
+   "cost": 2.0,
+   "designation": "SGM-105",
+   "source": "Azurite Squadron.fleet"
+  },
+  "SGM-105 Halfstaff": {
+   "cost": 2.0,
+   "designation": "SGM-105",
+   "source": "Azurite Squadron.fleet"
+  },
+  "SGM-105 WAKE AAM": {
+   "cost": 1.0,
+   "designation": "SGM-105",
+   "source": "CVE test 34 S2.fleet"
+  },
+  "SGM-106": {
+   "cost": 4.0,
+   "designation": "SGM-106",
+   "source": "Azurite Squadron.fleet"
+  },
+  "SGM-106 Neostaff": {
+   "cost": 4.0,
+   "designation": "SGM-106",
+   "source": "Azurite Squadron.fleet"
+  },
+  "SGM-109": {
+   "cost": 1.0,
+   "designation": "SGM-109",
+   "source": "S2LN NEO.fleet"
+  },
+  "SGM-110": {
+   "cost": 2.0,
+   "designation": "SGM-110",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SGM-110 Calla": {
+   "cost": 2.0,
+   "designation": "SGM-110",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SGM-111": {
+   "cost": 2.0,
+   "designation": "SGM-111",
+   "source": "Azurite Squadron.fleet"
+  },
+  "SGM-111 AMM": {
+   "cost": 4.0,
+   "designation": "SGM-111",
+   "source": "Shuttle 1.fleet"
+  },
+  "SGM-111 Iron Gate": {
+   "cost": 2.0,
+   "designation": "SGM-111",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SGM-111 Night Dances": {
+   "cost": 2.0,
+   "designation": "SGM-111",
+   "source": "Azurite Squadron.fleet"
+  },
+  "SGM-112": {
+   "cost": 4.0,
+   "designation": "SGM-112",
+   "source": "Shuttle 1.fleet"
+  },
+  "SGM-112 KKV": {
+   "cost": 4.0,
+   "designation": "SGM-112",
+   "source": "Shuttle 1.fleet"
+  },
+  "SGM-112 Riposte": {
+   "designation": "SGM-112",
+   "cost": 4.0,
+   "source": "missile template SGM-112 Riposte.missile"
+  },
+  "SGM-112 Riposte Block V": {
+   "designation": "SGM-112",
+   "cost": 2.0,
+   "source": "missile template SGM-112 Riposte Block V.missile"
+  },
+  "SGM-113": {
+   "cost": 7.0,
+   "designation": "SGM-113",
+   "source": "Archer squadran.fleet"
+  },
+  "SGM-113 DELUTA": {
+   "designation": "SGM-113",
+   "cost": 9.0,
+   "source": "missile template SGM-113 DELUTA.missile"
+  },
+  "SGM-114": {
+   "cost": 4.0,
+   "designation": "SGM-114",
+   "source": "Amethyst Squadron.fleet"
+  },
+  "SGM-114 Far Riposte": {
+   "cost": 4.0,
+   "designation": "SGM-114",
+   "source": "Amethyst Squadron.fleet"
+  },
+  "SGM-114 Wuffer": {
+   "designation": "SGM-114",
+   "cost": 1.0,
+   "source": "missile template SGM-114 Wuffer.missile"
+  },
+  "SGM-114 Wuffer Offesive": {
+   "cost": 1.0,
+   "designation": "SGM-114",
+   "source": "Archer 2.0.fleet"
+  },
+  "SGM-115": {
+   "cost": 3.0,
+   "designation": "SGM-115",
+   "source": "Comet Squadron.fleet"
+  },
+  "SGM-115 Jetpack": {
+   "cost": 3.0,
+   "designation": "SGM-115",
+   "source": "Comet Squadron.fleet"
+  },
+  "SGM-123": {
+   "cost": 1.0,
+   "designation": "SGM-123",
+   "source": "All Craft Are Bastards.fleet"
+  },
+  "SGM-123 A Smile": {
+   "cost": 1.0,
+   "designation": "SGM-123",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SGM-123 Ghost Bird": {
+   "cost": 1.0,
+   "designation": "SGM-123",
+   "source": "All Craft Are Bastards.fleet"
+  },
+  "SGM-124": {
+   "cost": 3.0,
+   "designation": "SGM-124",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SGM-124 Leaps and Spirals": {
+   "cost": 3.0,
+   "designation": "SGM-124",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SGM-126": {
+   "cost": 1.0,
+   "designation": "SGM-126",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGM-126 Counter-Time": {
+   "cost": 1.0,
+   "designation": "SGM-126",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGM-131": {
+   "cost": 2.0,
+   "designation": "SGM-131",
+   "source": "2 OSP Support New.fleet"
+  },
+  "SGM-131 Parry SR": {
+   "cost": 2.0,
+   "designation": "SGM-131",
+   "source": "2 OSP Support New.fleet"
+  },
+  "SGM-149": {
+   "cost": 2.0,
+   "designation": "SGM-149",
+   "source": "24th-DACS 6k.fleet"
+  },
+  "SGM-149 Jetpack": {
+   "cost": 5.0,
+   "designation": "SGM-149",
+   "source": "TF Hope.fleet"
+  },
+  "SGM-149 Jetpack N": {
+   "cost": 2.0,
+   "designation": "SGM-149",
+   "source": "24th-DACS 6k.fleet"
+  },
+  "SGM-149 Jetpack-N": {
+   "cost": 2.0,
+   "designation": "SGM-149",
+   "source": "Funni 6k.fleet"
+  },
+  "SGM-156": {
+   "cost": 2.0,
+   "designation": "SGM-156",
+   "source": "Zircon Squadron.fleet"
+  },
+  "SGM-156 Guardian": {
+   "cost": 2.0,
+   "designation": "SGM-156",
+   "source": "Zircon Squadron.fleet"
+  },
+  "SGM-169": {
+   "cost": 1.0,
+   "designation": "SGM-169",
+   "source": "24th-DACS 6k.fleet"
+  },
+  "SGM-169 Signal Flare": {
+   "cost": 1.0,
+   "designation": "SGM-169",
+   "source": "24th-DACS 6k.fleet"
+  },
+  "SGM-169 Tryhard": {
+   "cost": 5.0,
+   "designation": "SGM-169",
+   "source": "Civilian Ships.fleet"
+  },
+  "SGM-171": {
+   "cost": 5.0,
+   "designation": "SGM-171",
+   "source": "Queen_Pom_450LNCap.fleet"
+  },
+  "SGM-171 Esunaga": {
+   "cost": 5.0,
+   "designation": "SGM-171",
+   "source": "Queen_Pom_450LNCap.fleet"
+  },
+  "SGM-177": {
+   "cost": 9.0,
+   "designation": "SGM-177",
+   "source": "Queen_Pom_450LNCap.fleet"
+  },
+  "SGM-177 Orichalcum Barrier": {
+   "cost": 9.0,
+   "designation": "SGM-177",
+   "source": "Queen_Pom_450LNCap.fleet"
+  },
+  "SGM-190": {
+   "cost": 2.0,
+   "designation": "SGM-190",
+   "source": "CV test.fleet"
+  },
+  "SGM-190 Bolt": {
+   "cost": 2.0,
+   "designation": "SGM-190",
+   "source": "CV test.fleet"
+  },
+  "SGM-199": {
+   "cost": 1.0,
+   "designation": "SGM-199",
+   "source": "Heteroteuthinae.fleet"
+  },
+  "SGM-199 DO NOT FIRE!!!": {
+   "cost": 1.0,
+   "designation": "SGM-199",
+   "source": "Heteroteuthinae.fleet"
+  },
+  "SGM-199 Signal Flare": {
+   "cost": 1.0,
+   "designation": "SGM-199",
+   "source": "Rocket Shuttles but bigger.fleet"
+  },
+  "SGM-2": {
+   "cost": 9.0,
+   "designation": "SGM-2",
+   "source": "Wulfenite Squadron.fleet"
+  },
+  "SGM-2 Banshee": {
+   "cost": 9.0,
+   "designation": "SGM-2",
+   "source": "Wulfenite Squadron.fleet"
+  },
+  "SGM-2 DunderHead": {
+   "cost": 7.0,
+   "designation": "SGM-2",
+   "source": "Missile_Dumper.fleet"
+  },
+  "SGM-200": {
+   "cost": 13.0,
+   "designation": "SGM-200",
+   "source": "大冲击.fleet"
+  },
+  "SGM-200 !!!SKIBIDI RIZZLER!!!": {
+   "cost": 10.0,
+   "designation": "SGM-200",
+   "source": "3_OSP_Carrier_ASW++.fleet"
+  },
+  "SGM-200 !!!Skibidi Sigma Sigma!!!": {
+   "cost": 10.0,
+   "designation": "SGM-200",
+   "source": "Cope Squadran 6k.fleet"
+  },
+  "SGM-200 BSSJ": {
+   "cost": 14.0,
+   "designation": "SGM-200",
+   "source": "CV 6k.fleet"
+  },
+  "SGM-200 FAF-15 Spear": {
+   "cost": 6.0,
+   "designation": "SGM-200",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SGM-200 I would stay Block II": {
+   "cost": 5.0,
+   "designation": "SGM-200",
+   "source": "比赛导弹车.fleet"
+  },
+  "SGM-200 Kill Joy": {
+   "cost": 6.0,
+   "designation": "SGM-200",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "SGM-200 KJ": {
+   "cost": 8.0,
+   "designation": "SGM-200",
+   "source": "BB test 52 no ic.fleet"
+  },
+  "SGM-200 Nothing to worry about": {
+   "cost": 10.0,
+   "designation": "SGM-200",
+   "source": "Hellbomb.fleet"
+  },
+  "SGM-200 NULL": {
+   "cost": 7.0,
+   "designation": "SGM-200",
+   "source": "CV 6k.fleet"
+  },
+  "SGM-200 SSJ": {
+   "cost": 10.0,
+   "designation": "SGM-200",
+   "source": "CV 6k.fleet"
+  },
+  "SGM-200 Tempest": {
+   "cost": 8.0,
+   "designation": "SGM-200",
+   "source": "Heteroteuthinae.fleet"
+  },
+  "SGM-200 Tempest Block II": {
+   "cost": 7.0,
+   "designation": "SGM-200",
+   "source": "Heteroteuthinae.fleet"
+  },
+  "SGM-200 Tempest Block III": {
+   "cost": 6.0,
+   "designation": "SGM-200",
+   "source": "CC ln test 6.fleet"
+  },
+  "SGM-200 Test": {
+   "cost": 11.0,
+   "designation": "SGM-200",
+   "source": "MSL platform.fleet"
+  },
+  "SGM-200 反小v1": {
+   "cost": 7.0,
+   "designation": "SGM-200",
+   "source": "concept.fleet"
+  },
+  "SGM-200 大冲击": {
+   "cost": 13.0,
+   "designation": "SGM-200",
+   "source": "大冲击.fleet"
+  },
+  "SGM-200 补刀": {
+   "cost": 5.0,
+   "designation": "SGM-200",
+   "source": "concept.fleet"
+  },
+  "SGM-201": {
+   "cost": 6.0,
+   "designation": "SGM-201",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-201 MLS-4X Commando": {
+   "cost": 8.0,
+   "designation": "SGM-201",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SGM-201 SSJ": {
+   "cost": 6.0,
+   "designation": "SGM-201",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-202": {
+   "cost": 6.0,
+   "designation": "SGM-202",
+   "source": "S2 DIR OCELLO.fleet"
+  },
+  "SGM-202 Bread Stick": {
+   "cost": 4.0,
+   "designation": "SGM-202",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "SGM-202 Bread Stick III": {
+   "cost": 6.0,
+   "designation": "SGM-202",
+   "source": "S2 DIR OCELLO.fleet"
+  },
+  "SGM-202 KKKJJJ": {
+   "cost": 6.0,
+   "designation": "SGM-202",
+   "source": "HC Gun test 4.fleet"
+  },
+  "SGM-206": {
+   "cost": 7.0,
+   "designation": "SGM-206",
+   "source": "cmd test2.fleet"
+  },
+  "SGM-206 Musket": {
+   "designation": "SGM-206",
+   "cost": 7.0,
+   "source": "missile template SGM-206 Musket.missile"
+  },
+  "SGM-206 Thunderhead": {
+   "designation": "SGM-206",
+   "cost": 6.0,
+   "source": "missile template SGM-206 Thunderhead.missile"
+  },
+  "SGM-207": {
+   "cost": 9.0,
+   "designation": "SGM-207",
+   "source": "cmd test2.fleet"
+  },
+  "SGM-207 Musket": {
+   "cost": 9.0,
+   "designation": "SGM-207",
+   "source": "cmd test2.fleet"
+  },
+  "SGM-207 Rain": {
+   "designation": "SGM-207",
+   "cost": 4.0,
+   "source": "missile template SGM-207 Rain.missile"
+  },
+  "SGM-208": {
+   "cost": 10.0,
+   "designation": "SGM-208",
+   "source": "cmd test2.fleet"
+  },
+  "SGM-208 Musket": {
+   "cost": 10.0,
+   "designation": "SGM-208",
+   "source": "cmd test2.fleet"
+  },
+  "SGM-210": {
+   "cost": 23.0,
+   "designation": "SGM-210",
+   "source": "CVLN test 5 Newbie.fleet"
+  },
+  "SGM-210 SEPD": {
+   "cost": 23.0,
+   "designation": "SGM-210",
+   "source": "CVLN test 5 Newbie.fleet"
+  },
+  "SGM-210 Squall": {
+   "designation": "SGM-210",
+   "cost": 9.0,
+   "source": "missile template SGM-210 Squall.missile"
+  },
+  "SGM-211": {
+   "cost": 32.0,
+   "designation": "SGM-211",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SGM-211 Ewar": {
+   "cost": 5.0,
+   "designation": "SGM-211",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SGM-211 SEPD": {
+   "cost": 32.0,
+   "designation": "SGM-211",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SGM-212": {
+   "cost": 25.0,
+   "designation": "SGM-212",
+   "source": "Archer 3.0.fleet"
+  },
+  "SGM-212 Comet": {
+   "designation": "SGM-212",
+   "cost": 15.0,
+   "source": "missile template SGM-212 Comet.missile"
+  },
+  "SGM-212 Comet Block II": {
+   "designation": "SGM-212",
+   "cost": 25.0,
+   "source": "missile template SGM-212 Comet Block II.missile"
+  },
+  "SGM-213": {
+   "cost": 12.0,
+   "designation": "SGM-213",
+   "source": "Archer 3.0.fleet"
+  },
+  "SGM-213 Hopium": {
+   "designation": "SGM-213",
+   "cost": 12.0,
+   "source": "missile template SGM-213 Hopium.missile"
+  },
+  "SGM-213 Hopium Block II": {
+   "designation": "SGM-213",
+   "cost": 22.0,
+   "source": "missile template SGM-213 Hopium Block II.missile"
+  },
+  "SGM-213 Moth": {
+   "cost": 10.0,
+   "designation": "SGM-213",
+   "source": "Taskforce 'Adventrix'.fleet"
+  },
+  "SGM-214": {
+   "cost": 8.0,
+   "designation": "SGM-214",
+   "source": "SAH spam.fleet"
+  },
+  "SGM-214 Seeker": {
+   "designation": "SGM-214",
+   "cost": 4.0,
+   "source": "missile template SGM-214 Seeker.missile"
+  },
+  "SGM-215 Cringe": {
+   "designation": "SGM-215",
+   "cost": 5.0,
+   "source": "missile template SGM-215 Cringe.missile"
+  },
+  "SGM-216 Moth": {
+   "designation": "SGM-216",
+   "cost": 9.0,
+   "source": "missile template SGM-216 Moth.missile"
+  },
+  "SGM-220": {
+   "cost": 6.0,
+   "designation": "SGM-220",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGM-220 Fleche": {
+   "cost": 6.0,
+   "designation": "SGM-220",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGM-220 Sunfish": {
+   "cost": 6.0,
+   "designation": "SGM-220",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGM-221": {
+   "cost": 13.0,
+   "designation": "SGM-221",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SGM-221 Ewar": {
+   "cost": 13.0,
+   "designation": "SGM-221",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SGM-222": {
+   "cost": 6.0,
+   "designation": "SGM-222",
+   "source": "24th-DACS 6k.fleet"
+  },
+  "SGM-222 Hurricane": {
+   "designation": "SGM-222",
+   "cost": 7.0,
+   "source": "missile template SGM-222 Hurricane.missile"
+  },
+  "SGM-222 Hurricane EX": {
+   "designation": "SGM-222",
+   "cost": 11.0,
+   "source": "missile template SGM-222 Hurricane EX.missile"
+  },
+  "SGM-230": {
+   "cost": 5.0,
+   "designation": "SGM-230",
+   "source": "TF Ash.fleet"
+  },
+  "SGM-230 Finisher": {
+   "cost": 5.0,
+   "designation": "SGM-230",
+   "source": "TF Ash.fleet"
+  },
+  "SGM-233 Gale": {
+   "designation": "SGM-233",
+   "cost": 3.0,
+   "source": "missile template SGM-233 Gale.missile"
+  },
+  "SGM-236": {
+   "cost": 11.0,
+   "designation": "SGM-236",
+   "source": "Queen_Pom_450LNCap.fleet"
+  },
+  "SGM-236 POMEGRANATE GRENADE": {
+   "cost": 11.0,
+   "designation": "SGM-236",
+   "source": "Queen_Pom_450LNCap.fleet"
+  },
+  "SGM-239": {
+   "cost": 6.0,
+   "designation": "SGM-239",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SGM-239 Comets": {
+   "cost": 6.0,
+   "designation": "SGM-239",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SGM-260": {
+   "cost": 7.0,
+   "designation": "SGM-260",
+   "source": "TF Sycamore.fleet"
+  },
+  "SGM-260 Thundercloud": {
+   "cost": 7.0,
+   "designation": "SGM-260",
+   "source": "TF Sycamore.fleet"
+  },
+  "SGM-262": {
+   "cost": 7.0,
+   "designation": "SGM-262",
+   "source": "Azurite Squadron.fleet"
+  },
+  "SGM-262 Hardtack": {
+   "cost": 7.0,
+   "designation": "SGM-262",
+   "source": "Azurite Squadron.fleet"
+  },
+  "SGM-266": {
+   "cost": 7.0,
+   "designation": "SGM-266",
+   "source": "TF Ponthera (4-2).fleet"
+  },
+  "SGM-266 Less Advanced Decoy": {
+   "cost": 7.0,
+   "designation": "SGM-266",
+   "source": "TF Ponthera (4-2).fleet"
+  },
+  "SGM-269": {
+   "cost": 7.0,
+   "designation": "SGM-269",
+   "source": "TF Ponthera (4-2).fleet"
+  },
+  "SGM-269 Cucumber": {
+   "cost": 5.0,
+   "designation": "SGM-269",
+   "source": "Another 6k (2).fleet"
+  },
+  "SGM-269 Cucumbers": {
+   "designation": "SGM-269",
+   "cost": 5.0,
+   "source": "missile template SGM-269 Cucumbers.missile"
+  },
+  "SGM-269 Cucumbers Cucumber MK II": {
+   "designation": "SGM-270",
+   "cost": 7.0,
+   "source": "missile template SGM-270 Cucumber MK II.missile"
+  },
+  "SGM-27": {
+   "cost": 6.0,
+   "designation": "SGM-27",
+   "source": "msl ln test.fleet"
+  },
+  "SGM-27 Florencia-Able": {
+   "cost": 6.0,
+   "designation": "SGM-27",
+   "source": "Life Goes On LNG.fleet"
+  },
+  "SGM-27 Florencia-Baker": {
+   "cost": 7.0,
+   "designation": "SGM-27",
+   "source": "Life Goes On LNG.fleet"
+  },
+  "SGM-27 Florencia-Charlotte": {
+   "cost": 10.0,
+   "designation": "SGM-27",
+   "source": "Life Goes On LNG.fleet"
+  },
+  "SGM-27 Fork": {
+   "cost": 6.0,
+   "designation": "SGM-27",
+   "source": "msl ln test.fleet"
+  },
+  "SGM-277": {
+   "cost": 12.0,
+   "designation": "SGM-277",
+   "source": "AA missle test.fleet"
+  },
+  "SGM-277 Chattini": {
+   "cost": 12.0,
+   "designation": "SGM-277",
+   "source": "AA missle test.fleet"
+  },
+  "SGM-28": {
+   "cost": 7.0,
+   "designation": "SGM-28",
+   "source": "msl ln test.fleet"
+  },
+  "SGM-28 Pin": {
+   "cost": 7.0,
+   "designation": "SGM-28",
+   "source": "msl ln test.fleet"
+  },
+  "SGM-29": {
+   "cost": 6.0,
+   "designation": "SGM-29",
+   "source": "S2 DIR OCELLO.fleet"
+  },
+  "SGM-29 EA29 Killjoy": {
+   "designation": "SGM-29",
+   "cost": 7.0,
+   "source": "missile template SGM-29 EA29 Killjoy.missile"
+  },
+  "SGM-29 Gambit": {
+   "cost": 10.0,
+   "designation": "SGM-29",
+   "source": "msl ln test.fleet"
+  },
+  "SGM-291": {
+   "cost": 7.0,
+   "designation": "SGM-291",
+   "source": "S2 DIR OCELLO.fleet"
+  },
+  "SGM-291 A LOT OF MISSILES": {
+   "cost": 15.0,
+   "designation": "SGM-291",
+   "source": "S2CC MkII.fleet"
+  },
+  "SGM-291 Blindness": {
+   "cost": 15.0,
+   "designation": "SGM-291",
+   "source": "Rush B.fleet"
+  },
+  "SGM-291 DO NOT SCARE ME": {
+   "designation": "SGM-291",
+   "cost": 15.0,
+   "source": "missile template SGM-291 DO NOT SCARE ME.missile"
+  },
+  "SGM-291 Farewell": {
+   "cost": 7.0,
+   "designation": "SGM-291",
+   "source": "Rush B.fleet"
+  },
+  "SGM-291 I WILL USE CHAFF": {
+   "designation": "SGM-291",
+   "cost": 7.0,
+   "source": "missile template SGM-291 I WILL USE CHAFF.missile"
+  },
+  "SGM-291 NightDance": {
+   "cost": 7.0,
+   "designation": "SGM-291",
+   "source": "capper test.fleet"
+  },
+  "SGM-291 SOFTKILL SKILLS TEST I": {
+   "cost": 9.0,
+   "designation": "SGM-291",
+   "source": "S2CC MkII.fleet"
+  },
+  "SGM-291 SOFTKILL SKILLS TEST II": {
+   "cost": 7.0,
+   "designation": "SGM-291",
+   "source": "S2CC MkII.fleet"
+  },
+  "SGM-299": {
+   "cost": 6.0,
+   "designation": "SGM-299",
+   "source": "TF Birch.fleet"
+  },
+  "SGM-299 'Killjoy' Jammer Decoy [PD Prio Fired]": {
+   "cost": 6.0,
+   "designation": "SGM-299",
+   "source": "TF Birch.fleet"
+  },
+  "SGM-299 Final Jab": {
+   "cost": 5.0,
+   "designation": "SGM-299",
+   "source": "6k Hybirds.fleet"
+  },
+  "SGM-3": {
+   "cost": 14.0,
+   "designation": "SGM-3",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "SGM-3 P-15": {
+   "cost": 25.0,
+   "designation": "SGM-3",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "SGM-3 P-270": {
+   "cost": 14.0,
+   "designation": "SGM-3",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "SGM-300": {
+   "cost": 15.0,
+   "designation": "SGM-300",
+   "source": "msl ln test.fleet"
+  },
+  "SGM-300 Dummy": {
+   "cost": 23.0,
+   "designation": "SGM-300",
+   "source": "CV .fleet"
+  },
+  "SGM-300 Flail": {
+   "cost": 15.0,
+   "designation": "SGM-300",
+   "source": "msl ln test.fleet"
+  },
+  "SGM-300 Flail Block II": {
+   "cost": 10.0,
+   "designation": "SGM-300",
+   "source": "CV .fleet"
+  },
+  "SGM-300 Flail Block III": {
+   "cost": 11.0,
+   "designation": "SGM-300",
+   "source": "msl ln test.fleet"
+  },
+  "SGM-305": {
+   "cost": 11.0,
+   "designation": "SGM-305",
+   "source": "Rocket Shuttles but bigger.fleet"
+  },
+  "SGM-305 Big Pomu Energy II": {
+   "cost": 11.0,
+   "designation": "SGM-305",
+   "source": "Rocket Shuttles but bigger.fleet"
+  },
+  "SGM-312": {
+   "cost": 13.0,
+   "designation": "SGM-312",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGM-312 Nunchuck": {
+   "cost": 13.0,
+   "designation": "SGM-312",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGM-H-2": {
+   "cost": 18.0,
+   "designation": "SGM-H-2",
+   "source": "TF Hemlock.fleet"
+  },
+  "SGM-H-2 Fylgja": {
+   "cost": 12.0,
+   "designation": "SGM-H-2",
+   "source": "TF Hemlock.fleet"
+  },
+  "SGM-H-2 Naseruta": {
+   "cost": 11.0,
+   "designation": "SGM-H-2",
+   "source": "TF Hemlock.fleet"
+  },
+  "SGM-H-2 Psykhe": {
+   "cost": 18.0,
+   "designation": "SGM-H-2",
+   "source": "TF Hemlock.fleet"
+  },
+  "SGM-H-200": {
+   "cost": 13.0,
+   "designation": "SGM-H-200",
+   "source": "concept.fleet"
+  },
+  "SGM-H-200 Cyclone": {
+   "cost": 14.0,
+   "designation": "SGM-H-200",
+   "source": "sprinter test 2.fleet"
+  },
+  "SGM-H-200 pee in your pants": {
+   "cost": 13.0,
+   "designation": "SGM-H-200",
+   "source": "axford_3.0.fleet"
+  },
+  "SGM-H-200 Sticky Bomb": {
+   "cost": 15.0,
+   "designation": "SGM-H-200",
+   "source": "axford_3.0.fleet"
+  },
+  "SGM-H-200 Suisei": {
+   "designation": "SGM-H-200",
+   "cost": 30.0,
+   "source": "missile template SGM-H-200 Suisei.missile"
+  },
+  "SGM-H-200 Suisei Block II": {
+   "designation": "SGM-H-200",
+   "cost": 30.0,
+   "source": "missile template SGM-H-200 Suisei Block II.missile"
+  },
+  "SGM-H-200 Suisei Block III": {
+   "designation": "SGM-H-200",
+   "cost": 22.0,
+   "source": "missile template SGM-H-200 Suisei Block III.missile"
+  },
+  "SGM-H-200 Suisei Block IV": {
+   "cost": 20.0,
+   "designation": "SGM-H-200",
+   "source": "Expermental Platform.fleet"
+  },
+  "SGM-H-200 zpzd002 尾焰": {
+   "cost": 12.0,
+   "designation": "SGM-H-200",
+   "source": "concept.fleet"
+  },
+  "SGM-H-200 zpzd002 雷达": {
+   "cost": 13.0,
+   "designation": "SGM-H-200",
+   "source": "concept.fleet"
+  },
+  "SGM-H-201": {
+   "cost": 18.0,
+   "designation": "SGM-H-201",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-H-201 ADASHs": {
+   "cost": 10.0,
+   "designation": "SGM-H-201",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-H-201 Copium": {
+   "designation": "SGM-H-201",
+   "cost": 19.0,
+   "source": "missile template SGM-H-201 Copium.missile"
+  },
+  "SGM-H-201 HASM-201": {
+   "cost": 18.0,
+   "designation": "SGM-H-201",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-H-201 Hoshimachi": {
+   "designation": "SGM-H-201",
+   "cost": 25.0,
+   "source": "missile template SGM-H-201 Hoshimachi.missile"
+  },
+  "SGM-H-201 Hoshimachi Block II": {
+   "designation": "SGM-H-201",
+   "cost": 25.0,
+   "source": "missile template SGM-H-201 Hoshimachi Block II.missile"
+  },
+  "SGM-H-201 Testbulous B": {
+   "cost": 24.0,
+   "designation": "SGM-H-201",
+   "source": "Testbulous.fleet"
+  },
+  "SGM-H-201 Testbulous B Block II": {
+   "cost": 25.0,
+   "designation": "SGM-H-201",
+   "source": "Testbulous.fleet"
+  },
+  "SGM-H-202": {
+   "cost": 12.0,
+   "designation": "SGM-H-202",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-H-202 HASM-201 II": {
+   "cost": 12.0,
+   "designation": "SGM-H-202",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-H-202 jkterjter": {
+   "designation": "SGM-H-202",
+   "cost": 25.0,
+   "source": "missile template SGM-H-202 jkterjter.missile"
+  },
+  "SGM-H-202 jkterjter Block II": {
+   "designation": "SGM-H-202",
+   "cost": 16.0,
+   "source": "missile template SGM-H-202 jkterjter Block II.missile"
+  },
+  "SGM-H-202 MoonBite": {
+   "cost": 11.0,
+   "designation": "SGM-H-202",
+   "source": "capper test.fleet"
+  },
+  "SGM-H-203": {
+   "cost": 10.0,
+   "designation": "SGM-H-203",
+   "source": "HC Gun test 4.fleet"
+  },
+  "SGM-H-203 Gunlance": {
+   "cost": 10.0,
+   "designation": "SGM-H-203",
+   "source": "HC Gun test 4.fleet"
+  },
+  "SGM-H-205": {
+   "cost": 10.0,
+   "designation": "SGM-H-205",
+   "source": "hc gun dd test 11.fleet"
+  },
+  "SGM-H-205 Shooting Star": {
+   "cost": 10.0,
+   "designation": "SGM-H-205",
+   "source": "hc gun dd test 11.fleet"
+  },
+  "SGM-H-210": {
+   "cost": 12.0,
+   "designation": "SGM-H-210",
+   "source": "TF Sycamore.fleet"
+  },
+  "SGM-H-210 Tombstone": {
+   "cost": 12.0,
+   "designation": "SGM-H-210",
+   "source": "TF Sycamore.fleet"
+  },
+  "SGM-H-211": {
+   "cost": 19.0,
+   "designation": "SGM-H-211",
+   "source": "TF Sycamore.fleet"
+  },
+  "SGM-H-211 Gravestone": {
+   "cost": 19.0,
+   "designation": "SGM-H-211",
+   "source": "TF Sycamore.fleet"
+  },
+  "SGM-H-220": {
+   "cost": 14.0,
+   "designation": "SGM-H-220",
+   "source": "TF Sycamore.fleet"
+  },
+  "SGM-H-220 Sepulchre": {
+   "cost": 14.0,
+   "designation": "SGM-H-220",
+   "source": "TF Sycamore.fleet"
+  },
+  "SGM-H-234": {
+   "cost": 10.0,
+   "designation": "SGM-H-234",
+   "source": "BB test 52 no ic.fleet"
+  },
+  "SGM-H-234 ACM 1 Block II": {
+   "cost": 10.0,
+   "designation": "SGM-H-234",
+   "source": "BB test 52 no ic.fleet"
+  },
+  "SGM-H-266": {
+   "cost": 8.0,
+   "designation": "SGM-H-266",
+   "source": "TF Ponthera (4-2).fleet"
+  },
+  "SGM-H-266 Jetpack": {
+   "cost": 8.0,
+   "designation": "SGM-H-266",
+   "source": "TF Ponthera (4-2).fleet"
+  },
+  "SGM-H-288": {
+   "cost": 26.0,
+   "designation": "SGM-H-288",
+   "source": "AA missle test.fleet"
+  },
+  "SGM-H-288 Chattino": {
+   "cost": 26.0,
+   "designation": "SGM-H-288",
+   "source": "AA missle test.fleet"
+  },
+  "SGM-H-296": {
+   "cost": 9.0,
+   "designation": "SGM-H-296",
+   "source": "TF Maple.fleet"
+  },
+  "SGM-H-296 Tornado": {
+   "cost": 9.0,
+   "designation": "SGM-H-296",
+   "source": "TF Maple.fleet"
+  },
+  "SGM-H-299": {
+   "cost": 20.0,
+   "designation": "SGM-H-299",
+   "source": "Archer 3.0.fleet"
+  },
+  "SGM-H-299 Final Jab": {
+   "cost": 20.0,
+   "designation": "SGM-H-299",
+   "source": "Archer 3.0.fleet"
+  },
+  "SGM-H-3": {
+   "cost": 43.0,
+   "designation": "SGM-H-3",
+   "source": "TF Hemlock.fleet"
+  },
+  "SGM-H-3 Delusion": {
+   "cost": 30.0,
+   "designation": "SGM-H-3",
+   "source": "TF Hemlock.fleet"
+  },
+  "SGM-H-3 Ether": {
+   "cost": 20.0,
+   "designation": "SGM-H-3",
+   "source": "TF Hemlock.fleet"
+  },
+  "SGM-H-3 Miasma": {
+   "cost": 23.0,
+   "designation": "SGM-H-3",
+   "source": "TF Hemlock.fleet"
+  },
+  "SGM-H-3 Rupture": {
+   "cost": 43.0,
+   "designation": "SGM-H-3",
+   "source": "TF Hemlock.fleet"
+  },
+  "SGM-H-300": {
+   "cost": 24.0,
+   "designation": "SGM-H-300",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "SGM-H-300 <line-height=65%>掷镖器</line-height>": {
+   "cost": 24.0,
+   "designation": "SGM-H-300",
+   "source": "1231414.fleet"
+  },
+  "SGM-H-300 Atlatl": {
+   "cost": 117.0,
+   "designation": "SGM-H-300",
+   "source": "Loading pls wait....fleet"
+  },
+  "SGM-H-300 Atlatl 1": {
+   "cost": 24.0,
+   "designation": "SGM-H-300",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "SGM-H-300 Atlatl Block II": {
+   "cost": 29.0,
+   "designation": "SGM-H-300",
+   "source": "CL cap fleet 2.fleet"
+  },
+  "SGM-H-300 BFR": {
+   "cost": 15.0,
+   "designation": "SGM-H-300",
+   "source": "BB test 55 Newbie.fleet"
+  },
+  "SGM-H-300 simp": {
+   "cost": 75.0,
+   "designation": "SGM-H-300",
+   "source": "missle spams.fleet"
+  },
+  "SGM-H-300 Simp Block II": {
+   "cost": 55.0,
+   "designation": "SGM-H-300",
+   "source": "'We can fix her' (3).fleet"
+  },
+  "SGM-H-300 simp Block II": {
+   "cost": 57.0,
+   "designation": "SGM-H-300",
+   "source": "Archer 3.0.fleet"
+  },
+  "SGM-H-300 Simp Block II L": {
+   "cost": 54.0,
+   "designation": "SGM-H-300",
+   "source": "True Legacy.fleet"
+  },
+  "SGM-H-300 Simp Block II R": {
+   "cost": 54.0,
+   "designation": "SGM-H-300",
+   "source": "True Legacy.fleet"
+  },
+  "SGM-H-300 simp Block II Simp Block II": {
+   "designation": "SGM-H-300",
+   "cost": 57.0,
+   "source": "missile template SGM-H-300 simp Block II.missile"
+  },
+  "SGM-H-300 Simp EX": {
+   "cost": 57.0,
+   "designation": "SGM-H-300",
+   "source": "Test 6k.fleet"
+  },
+  "SGM-H-300 simp Simp": {
+   "designation": "SGM-H-300",
+   "cost": 72.0,
+   "source": "missile template SGM-H-300 simp.missile"
+  },
+  "SGM-H-301": {
+   "cost": 43.0,
+   "designation": "SGM-H-301",
+   "source": "TF Birch.fleet"
+  },
+  "SGM-H-301 Atlatl 2": {
+   "cost": 32.0,
+   "designation": "SGM-H-301",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "SGM-H-301 Atlatl I": {
+   "cost": 25.0,
+   "designation": "SGM-H-301",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-H-301 Linebreaker A": {
+   "cost": 43.0,
+   "designation": "SGM-H-301",
+   "source": "TF Birch.fleet"
+  },
+  "SGM-H-301 Unicorn": {
+   "designation": "SGM-H-301",
+   "cost": 53.0,
+   "source": "missile template SGM-H-301 Unicorn.missile"
+  },
+  "SGM-H-302": {
+   "cost": 48.0,
+   "designation": "SGM-H-302",
+   "source": "TF Birch.fleet"
+  },
+  "SGM-H-302 Atlatl 3": {
+   "cost": 67.0,
+   "designation": "SGM-H-302",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "SGM-H-302 Atlatl II": {
+   "cost": 33.0,
+   "designation": "SGM-H-302",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-H-302 Bau Bau": {
+   "designation": "SGM-H-302",
+   "cost": 19.0,
+   "source": "missile template SGM-H-302 Bau Bau.missile"
+  },
+  "SGM-H-302 Bau Bau Block II": {
+   "designation": "SGM-H-302",
+   "cost": 20.0,
+   "source": "missile template SGM-H-302 Bau Bau Block II.missile"
+  },
+  "SGM-H-302 Linebreaker B": {
+   "cost": 48.0,
+   "designation": "SGM-H-302",
+   "source": "TF Birch.fleet"
+  },
+  "SGM-H-303": {
+   "cost": 46.0,
+   "designation": "SGM-H-303",
+   "source": "TF Birch.fleet"
+  },
+  "SGM-H-303 Atlatl 4": {
+   "cost": 32.0,
+   "designation": "SGM-H-303",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "SGM-H-303 Atlatl III": {
+   "cost": 50.0,
+   "designation": "SGM-H-303",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-H-303 Jkterjter": {
+   "designation": "SGM-H-303",
+   "cost": 54.0,
+   "source": "missile template SGM-H-303 Jkterjter.missile"
+  },
+  "SGM-H-303 Linebreaker C": {
+   "cost": 46.0,
+   "designation": "SGM-H-303",
+   "source": "TF Birch.fleet"
+  },
+  "SGM-H-305": {
+   "cost": 50.0,
+   "designation": "SGM-H-305",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "SGM-H-305 Atlatl 5": {
+   "cost": 50.0,
+   "designation": "SGM-H-305",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "SGM-H-310": {
+   "cost": 15.0,
+   "designation": "SGM-H-310",
+   "source": "hc gun dd test 11.fleet"
+  },
+  "SGM-H-310 BFR": {
+   "cost": 15.0,
+   "designation": "SGM-H-310",
+   "source": "hc gun dd test 11.fleet"
+  },
+  "SGM-H-312": {
+   "cost": 19.0,
+   "designation": "SGM-H-312",
+   "source": "TF Ash.fleet"
+  },
+  "SGM-H-312 Fleche": {
+   "cost": 19.0,
+   "designation": "SGM-H-312",
+   "source": "TF Ash.fleet"
+  },
+  "SGM-H-312 P.126 Hussar": {
+   "cost": 47.0,
+   "designation": "SGM-H-312",
+   "source": "TF_KATNIP_MK3.fleet"
+  },
+  "SGM-H-312 P.126 Selector": {
+   "cost": 51.0,
+   "designation": "SGM-H-312",
+   "source": "TF_KATNIP_MK3.fleet"
+  },
+  "SGM-H-312 S.126 Hussar": {
+   "cost": 47.0,
+   "designation": "SGM-H-312",
+   "source": "TF_KATNIP_MK3.fleet"
+  },
+  "SGM-H-312 S.126 Selector": {
+   "cost": 51.0,
+   "designation": "SGM-H-312",
+   "source": "TF_KATNIP_MK3.fleet"
+  },
+  "SGM-H-321": {
+   "cost": 18.0,
+   "designation": "SGM-H-321",
+   "source": "jam CL dad.fleet"
+  },
+  "SGM-H-321 BFR": {
+   "cost": 16.0,
+   "designation": "SGM-H-321",
+   "source": "HC Missile test 7.fleet"
+  },
+  "SGM-H-321 Hew": {
+   "cost": 18.0,
+   "designation": "SGM-H-321",
+   "source": "jam CL dad.fleet"
+  },
+  "SGM-H-321A 二一试艦対艦誘導弾 A": {
+   "designation": "SGM-H-369",
+   "cost": 45.0,
+   "source": "missile template SGM-H-369 二一试艦対艦誘導弾 A.missile"
+  },
+  "SGM-H-321B 二一试艦対艦誘導弾 B": {
+   "designation": "SGM-H-372",
+   "cost": 55.0,
+   "source": "missile template SGM-H-372 二一试艦対艦誘導弾 B.missile"
+  },
+  "SGM-H-321C 二一试艦対艦誘導弾 C": {
+   "designation": "SGM-H-379",
+   "cost": 52.0,
+   "source": "missile template SGM-H-379 二一试艦対艦誘導弾 C.missile"
+  },
+  "SGM-H-323": {
+   "cost": 17.0,
+   "designation": "SGM-H-323",
+   "source": "jam CL dad.fleet"
+  },
+  "SGM-H-323 Slash": {
+   "cost": 17.0,
+   "designation": "SGM-H-323",
+   "source": "jam CL dad.fleet"
+  },
+  "SGM-H-334": {
+   "cost": 18.0,
+   "designation": "SGM-H-334",
+   "source": "Mixed FFLs.fleet"
+  },
+  "SGM-H-334 Refraction": {
+   "cost": 18.0,
+   "designation": "SGM-H-334",
+   "source": "Mixed FFLs.fleet"
+  },
+  "SGM-H-369": {
+   "cost": 45.0,
+   "designation": "SGM-H-369",
+   "source": "sprinter test 2.fleet"
+  },
+  "SGM-H-369 二一试艦対艦誘導弾 A": {
+   "cost": 45.0,
+   "designation": "SGM-H-369",
+   "source": "sprinter test 2.fleet"
+  },
+  "SGM-H-371": {
+   "cost": 53.0,
+   "designation": "SGM-H-371",
+   "source": "Testbulous.fleet"
+  },
+  "SGM-H-371 Testbulous A": {
+   "cost": 53.0,
+   "designation": "SGM-H-371",
+   "source": "Testbulous.fleet"
+  },
+  "SGM-H-371 Testbulous A Block II": {
+   "cost": 54.0,
+   "designation": "SGM-H-371",
+   "source": "Testbulous.fleet"
+  },
+  "SGM-H-372": {
+   "cost": 55.0,
+   "designation": "SGM-H-372",
+   "source": "sprinter test 2.fleet"
+  },
+  "SGM-H-372 二一试艦対艦誘導弾 B": {
+   "cost": 55.0,
+   "designation": "SGM-H-372",
+   "source": "sprinter test 2.fleet"
+  },
+  "SGM-H-377": {
+   "cost": 29.0,
+   "designation": "SGM-H-377",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SGM-H-377 Black Amnesias": {
+   "cost": 29.0,
+   "designation": "SGM-H-377",
+   "source": "Corbeau Gaming for the New Age.fleet"
+  },
+  "SGM-H-378": {
+   "cost": 53.0,
+   "designation": "SGM-H-378",
+   "source": "Presidential_Escort.fleet"
+  },
+  "SGM-H-378 Tally-HJ3 11-5": {
+   "cost": 53.0,
+   "designation": "SGM-H-378",
+   "source": "Presidential_Escort.fleet"
+  },
+  "SGM-H-379": {
+   "cost": 52.0,
+   "designation": "SGM-H-379",
+   "source": "sprinter test 2.fleet"
+  },
+  "SGM-H-379 二一试艦対艦誘導弾 C": {
+   "cost": 52.0,
+   "designation": "SGM-H-379",
+   "source": "sprinter test 2.fleet"
+  },
+  "SGT-3": {
+   "cost": 9.0,
+   "designation": "SGT-3",
+   "source": "Amethyst Squadron.fleet"
+  },
+  "SGT-3 Bolas": {
+   "cost": 13.0,
+   "designation": "SGT-3",
+   "source": "Wulfenite Squadron.fleet"
+  },
+  "SGT-3 Truncheon": {
+   "cost": 9.0,
+   "designation": "SGT-3",
+   "source": "Amethyst Squadron.fleet"
+  },
+  "SGT-300": {
+   "cost": 9.0,
+   "designation": "SGT-300",
+   "source": "大冲击.fleet"
+  },
+  "SGT-300 Fang": {
+   "cost": 9.0,
+   "designation": "SGT-300",
+   "source": "36 Boa.fleet"
+  },
+  "SGT-300 Fang (Imported)": {
+   "designation": "SGT-300",
+   "cost": 9.0,
+   "source": "missile template SGT-300 Fang (Imported).missile"
+  },
+  "SGT-300 JackHammer": {
+   "cost": 10.0,
+   "designation": "SGT-300",
+   "source": "Mixed FFLs.fleet"
+  },
+  "SGT-300 Pilum": {
+   "cost": 14.0,
+   "designation": "SGT-300",
+   "source": "new update test.fleet"
+  },
+  "SGT-300 Pilum Block III": {
+   "cost": 8.0,
+   "designation": "SGT-300",
+   "source": "CVLN test 5 Newbie.fleet"
+  },
+  "SGT-300 pUUnch": {
+   "cost": 12.0,
+   "designation": "SGT-300",
+   "source": "OSP carrier.fleet"
+  },
+  "SGT-300 Rook 8": {
+   "cost": 7.0,
+   "designation": "SGT-300",
+   "source": "Presidential_Escort.fleet"
+  },
+  "SGT-300 主力打击": {
+   "cost": 10.0,
+   "designation": "SGT-300",
+   "source": "Mixed FFLs.fleet"
+  },
+  "SGT-300 大冲击": {
+   "cost": 9.0,
+   "designation": "SGT-300",
+   "source": "大冲击.fleet"
+  },
+  "SGT-301": {
+   "cost": 16.0,
+   "designation": "SGT-301",
+   "source": "TF Connect.fleet"
+  },
+  "SGT-301 Bau Bau": {
+   "cost": 16.0,
+   "designation": "SGT-301",
+   "source": "TF Connect.fleet"
+  },
+  "SGT-304": {
+   "cost": 16.0,
+   "designation": "SGT-304",
+   "source": "True Legacy.fleet"
+  },
+  "SGT-304 PP": {
+   "designation": "SGT-304",
+   "cost": 16.0,
+   "source": "missile template SGT-304 PP .missile"
+  },
+  "SGT-304 PP L": {
+   "cost": 16.0,
+   "designation": "SGT-304",
+   "source": "True Legacy.fleet"
+  },
+  "SGT-304 PP R": {
+   "cost": 16.0,
+   "designation": "SGT-304",
+   "source": "True Legacy.fleet"
+  },
+  "SGT-305": {
+   "cost": 9.0,
+   "designation": "SGT-305",
+   "source": "True Legacy.fleet"
+  },
+  "SGT-305 Big Pomu Energy": {
+   "designation": "SGT-305",
+   "cost": 9.0,
+   "source": "missile template SGT-305 Big Pomu Energy.missile"
+  },
+  "SGT-306": {
+   "cost": 9.0,
+   "designation": "SGT-306",
+   "source": "24th-DACS 6k.fleet"
+  },
+  "SGT-306 DokiDoki": {
+   "designation": "SGT-306",
+   "cost": 9.0,
+   "source": "missile template SGT-306 DokiDoki.missile"
+  },
+  "SGT-310": {
+   "cost": 12.0,
+   "designation": "SGT-310",
+   "source": "3k_The_Big_Slap.fleet"
+  },
+  "SGT-310 Ironcore D.2S": {
+   "cost": 12.0,
+   "designation": "SGT-310",
+   "source": "3k_The_Big_Slap.fleet"
+  },
+  "SGT-311 Firework": {
+   "designation": "SGT-311",
+   "cost": 279.0,
+   "source": "missile template SGT-311 Firework.missile"
+  },
+  "SGT-315": {
+   "cost": 14.0,
+   "designation": "SGT-315",
+   "source": "Azurite Squadron.fleet"
+  },
+  "SGT-315 Dazzlecore DS": {
+   "cost": 24.0,
+   "designation": "SGT-315",
+   "source": "3k_The_Big_Slap.fleet"
+  },
+  "SGT-315 Letter Opener": {
+   "cost": 14.0,
+   "designation": "SGT-315",
+   "source": "Azurite Squadron.fleet"
+  },
+  "SGT-335": {
+   "cost": 19.0,
+   "designation": "SGT-335",
+   "source": "CVE.fleet"
+  },
+  "SGT-335 Long bread": {
+   "cost": 19.0,
+   "designation": "SGT-335",
+   "source": "CVE.fleet"
+  },
+  "SGT-344": {
+   "cost": 10.0,
+   "designation": "SGT-344",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGT-344 Lance": {
+   "cost": 10.0,
+   "designation": "SGT-344",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "SGT-35": {
+   "cost": 13.0,
+   "designation": "SGT-35",
+   "source": "2S3CC 96TORP.fleet"
+  },
+  "SGT-35 I have some suprise": {
+   "cost": 13.0,
+   "designation": "SGT-35",
+   "source": "2S3CC 96TORP.fleet"
+  },
+  "SGT-35 Mace": {
+   "cost": 13.0,
+   "designation": "SGT-35",
+   "source": "2S3CC 96TORP.fleet"
+  },
+  "SGT-350 Mace": {
+   "designation": "SGT-350",
+   "cost": 10.0,
+   "source": "missile template SGT-350 Mace.missile"
+  },
+  "SGT-351": {
+   "cost": 15.0,
+   "designation": "SGT-351",
+   "source": "Presidential_Escort.fleet"
+  },
+  "SGT-351 Ninja L 3.2": {
+   "cost": 15.0,
+   "designation": "SGT-351",
+   "source": "Presidential_Escort.fleet"
+  },
+  "SGT-352": {
+   "cost": 11.0,
+   "designation": "SGT-352",
+   "source": "TF_KATNIP_MK3.fleet"
+  },
+  "SGT-352 P.521 Blackout": {
+   "cost": 11.0,
+   "designation": "SGT-352",
+   "source": "TF_KATNIP_MK3.fleet"
+  },
+  "SGT-352 S.521 Blackout": {
+   "cost": 11.0,
+   "designation": "SGT-352",
+   "source": "TF_KATNIP_MK3.fleet"
+  },
+  "SGT-375": {
+   "cost": 10.0,
+   "designation": "SGT-375",
+   "source": "TF Maple.fleet"
+  },
+  "SGT-375 Bardiche": {
+   "cost": 10.0,
+   "designation": "SGT-375",
+   "source": "TF Maple.fleet"
+  },
+  "SGT-375 Truncheon": {
+   "cost": 10.0,
+   "designation": "SGT-375",
+   "source": "TF Maple.fleet"
+  },
+  "SGT-377": {
+   "cost": 295.0,
+   "designation": "SGT-377",
+   "source": "Firing target.fleet"
+  },
+  "SGT-377 Firework": {
+   "cost": 295.0,
+   "designation": "SGT-377",
+   "source": "Firing target.fleet"
+  },
+  "SGT-398": {
+   "cost": 18.0,
+   "designation": "SGT-398",
+   "source": "Beam with a slapping hand.fleet"
+  },
+  "SGT-398 Angon": {
+   "cost": 9.0,
+   "designation": "SGT-398",
+   "source": "jam CL dad.fleet"
+  },
+  "SGT-398 Bau Bau (Expermental)": {
+   "cost": 18.0,
+   "designation": "SGT-398",
+   "source": "Beam with a slapping hand.fleet"
+  },
+  "SGT-399": {
+   "cost": 10.0,
+   "designation": "SGT-399",
+   "source": "jam CL dad.fleet"
+  },
+  "SGT-399 Francisca": {
+   "cost": 10.0,
+   "designation": "SGT-399",
+   "source": "jam CL dad.fleet"
+  },
+  "SSM-1": {
+   "cost": 1.0,
+   "designation": "SSM-1",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "SSM-1 IRM-S1": {
+   "cost": 1.0,
+   "designation": "SSM-1",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "SSM-1 IRM-S1 Block II": {
+   "cost": 1.0,
+   "designation": "SSM-1",
+   "source": "2cvl  s3 6km.fleet"
+  },
+  "SSM-100": {
+   "cost": 1.0,
+   "designation": "SSM-100",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SSM-100 Remise": {
+   "cost": 1.0,
+   "designation": "SSM-100",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SSM-101": {
+   "cost": 1.0,
+   "designation": "SSM-101",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SSM-101 Remise II": {
+   "cost": 1.0,
+   "designation": "SSM-101",
+   "source": "CVE test 33 SS2.fleet"
+  },
+  "SSM-172": {
+   "cost": 1.0,
+   "designation": "SSM-172",
+   "source": "TF Maple.fleet"
+  },
+  "SSM-172 Hengetort": {
+   "cost": 1.0,
+   "designation": "SSM-172",
+   "source": "TF Maple.fleet"
+  },
+  "SSM-172 Hengetort Block II": {
+   "cost": 1.0,
+   "designation": "SSM-172",
+   "source": "CV .fleet"
+  },
+  "tD92ITEF60udZ4wbUfWoOA": {
+   "cost": 9.0,
+   "designation": "SGM-2",
+   "source": "Wulfenite Squadron.fleet"
+  },
+  "UcegMLx7FU63tsCRCgLezQ": {
+   "cost": 13.0,
+   "designation": "SGM-200",
+   "source": "大冲击.fleet"
+  },
+  "ULjvAhVu5ke0ip-8ISpGiA": {
+   "cost": 7.0,
+   "designation": "SGM-28",
+   "source": "msl ln test.fleet"
+  },
+  "W8uy48uLREq3ArQXN_c9tw": {
+   "cost": 4.0,
+   "designation": "SGM-202",
+   "source": "HC Gun Missile test 8.fleet"
+  },
+  "WVvd5SkPd0-x7JSij39oYA": {
+   "cost": 8.0,
+   "designation": "SGM-H-266",
+   "source": "TF Ponthera (4-2).fleet"
+  },
+  "WVvd5SkPd0-x7JSij39oYA Jetpack": {
+   "designation": "SGM-H-266",
+   "cost": 8.0,
+   "source": "missile template SGM-H-266 Jetpack.missile"
+  },
+  "wxF7RHpNG0WMVVmJjB0eBA": {
+   "cost": 5.0,
+   "designation": "SGM-200",
+   "source": "比赛导弹车.fleet"
+  },
+  "YF_tfrjLd0O64Rmftg9hOg": {
+   "cost": 10.0,
+   "designation": "SGT-344",
+   "source": "Tantalum Squadron.fleet"
+  },
+  "YosJWdEppUidGuMnImC2fA": {
+   "cost": 5.0,
+   "designation": "SGM-200",
+   "source": "6k.fleet"
+  },
+  "Yrq3LwR4_02mo65Gd38yQw": {
+   "cost": 11.0,
+   "designation": "SGM-300",
+   "source": "msl ln test.fleet"
+  }
+ }
+}

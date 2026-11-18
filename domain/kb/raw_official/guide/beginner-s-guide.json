@@ -1,0 +1,692 @@
+{
+ "page": "Beginner's Guide - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Beginner's Guide",
+ "category": "guide",
+ "slug": "beginner-s-guide",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "Movement controls",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The movement controls are accessed by opening the Action Menu and pressing the MOVE button. If a formation action menu is opened movement controls will be applied to the guide ship."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Display",
+       "Setting",
+       "Effects"
+      ],
+      [
+       "ORB",
+       "Orbit Position",
+       "Move to a designated area and orbit around it"
+      ],
+      [
+       "POS",
+       "Move To Position",
+       "Move to a designated area and hold position"
+      ],
+      [
+       "CHD",
+       "Clear Hold Heading",
+       "Cancels a Hold Heading command"
+      ],
+      [
+       "HDG",
+       "Hold Heading",
+       "Face the selected direction regardless of heading"
+      ],
+      [
+       "CRS",
+       "Drive Course",
+       "Travel in a direction indefinitely"
+      ],
+      [
+       "CRL",
+       "Clear Roll Ship",
+       "Cancels a Roll Ship command"
+      ],
+      [
+       "ROL",
+       "Roll Ship",
+       "Selects a new direction as the \"up\" direction of the ship"
+      ],
+      [
+       "FRM",
+       "Form With Ship",
+       "Choose a ship to become a guide ship and then designate a position around it"
+      ],
+      [
+       "CLR",
+       "Clear HDG/ROL",
+       "Cancels Hold Heading and Roll Ship commands"
+      ],
+      [
+       "ALD",
+       "Assume Lead",
+       "Become the new guide ship of the formation"
+      ],
+      [
+       "ALL STOP",
+       "Hold Position",
+       "Cancels all movement commands"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Movement controls › Tactics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "ORB / Orbit Position allows dodging of most ballistic weapons at range."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "HDG / Hold Heading can be used to avoid exposing the critical/delicate parts of a ship to enemy fire."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "ROL / Roll Ship can be used to keep certain weapons or radar panels angled at an enemy ship. Ships can roll faster than enemy ships of the same size can position around them."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "ALD / Assume Lead is useful if the guide ship becomes disabled but the rest of the fleet need to carry on with their objective."
+    }
+   ]
+  },
+  {
+   "heading": "Weapon controls",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The weapon controls are accessed by opening the Action Menu and pressing the WEP button. The top bar displays the current targeting mode. TRK means the ship is using radar targeting, while VIZ means the ship is using optical targeting. POS is highlighted when targeting empty space and allows direct firing of weapons in any direction. Not all weapons support VIZ and POS mode."
+    },
+    {
+     "kind": "p",
+     "text": "Pressing the ammo button next to a kinetic weapon will show the available ammo types."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "AP (Armor Piercing) ammo is more effective against armor but will only deal internal damage directly in the shell's path."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "HE (High Explosive) ammo is less effective against armor but will only deal internal damage to everything nearby the impact area."
+    }
+   ]
+  },
+  {
+   "heading": "Tactical view",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The tactical view displays a lot of information that is normally hidden."
+    },
+    {
+     "kind": "p",
+     "text": "If a ship is selected the tactical view will show a distance range plane around it. The dotted lines represent the maximum ranges for the selected ship's systems. The red line indicates offensive weapons range, the blue line indicates sensor range and the green line indicates defensive systems range."
+    }
+   ]
+  },
+  {
+   "heading": "Detecting enemies",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Enemy ships can be detected by active radar, by visual observation at short range, and passively by picking up their radar emissions (ELINT bearing lines and crossfixes). Both can be obstructed by asteroids."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar detection is shared across the entire fleet as long as a ship's communications are online and allows all of a ship's weapons to fire on a detected target. Each ship has a number of radar panels that give full coverage around the ship. Radar panels or the radar controller can be destroyed, impairing radar functionality. Radar can also be jammed."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Visual detection is not shared across the fleet. It uses a 500 m grid and a 5-cell sight stat (2500 m nominal): depending on direction and where the ships sit in their cells, contact starts reliably near 2.7 km and can extend to about 4.4 km. Enemies detected by visual will only be visible if the ship detecting them is selected and cannot be attacked by other ships unless those also detected the enemy. Guns, beams, and unguided rockets can fire on visually detected enemies if radar detection is not functional. Guided missiles cannot, including command-guided missiles: they need a non-visual track."
+    },
+    {
+     "kind": "p",
+     "text": "The following present examples of what a player will see when they are on the receiving end of being Jammed, as well as some techniques that can be used to defeat the jamming. For more details on the impacts of Radar interference, detection, and track quality see the Radar and Electronic_Warfare sections."
+    }
+   ]
+  },
+  {
+   "heading": "Detecting enemies › Visual Detection",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The following is what a player sees in the tactical menu when they detect targets."
+    },
+    {
+     "kind": "p",
+     "text": "As can be seen, 5 targets are detected."
+    }
+   ]
+  },
+  {
+   "heading": "Detecting enemies › Jammed",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The following is what a player sees when a single Bellbird Jammer was used on a fleet with a Parallax Radar."
+    },
+    {
+     "kind": "p",
+     "text": "As can be seen none of the 5 targets are detected and multiple random yellow squares of artifacts show up indicating your radar is ineffective."
+    }
+   ]
+  },
+  {
+   "heading": "Detecting enemies › Jammed With Strobe",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "If you have a Strobe Correlator, you may be able to detect the direction in which the Jamming is coming from. If you have multiple strobe correlates on different ships you can generate a cross fix and a fireable track."
+    },
+    {
+     "kind": "p",
+     "text": "As can be seen in the Image the \"J\" in the tactical map shows the direction relative to the ship that detected the jamming (Note, it doesn't detect distance without a crossfix). Note you need to select an origin ship first (Identified with a blue dotted X on the ship I selected with a left click) for the J to appear."
+    }
+   ]
+  },
+  {
+   "heading": "Detecting enemies › Burn Through",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The following is a technique on some radar systems such as the Parallax that allows a burn through lock, in which a high powered \"sonar\" ping is able to see through the jamming for a moment in time."
+    },
+    {
+     "kind": "p",
+     "text": "As can be seen a purple circle is placed on each detected ship. Again, this track is a single moment in time, meaning that if the enemy ship moves away from the purple circle, your radar will not report its change in position and any shots you fire miss."
+    }
+   ]
+  },
+  {
+   "heading": "Detecting enemies › Burn Through Illuminate",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "A technique to use an illuminator such as a Spotlight Illuminator on a burn through target that is jamming your fleet may be used to offset the jamming interference generated on your fleet."
+    },
+    {
+     "kind": "p",
+     "text": "As can be seen, the jamming artifacts are still present, three of the 5 burn through illuminated targets are visible."
+    }
+   ]
+  },
+  {
+   "heading": "Detecting enemies › Detection Through Command Link",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Another option to avoid being jammed is to have another ship, outside of the enemy Radar Jamming detection cone. Either position your ships in such a way that the enemy is unable to jam both ships at once or rely on your team mates to provide radar detection on the jamming ship. If the receiving ship isn't under Command Jamming, it will receive the fire-able tracks on the jamming ship."
+    },
+    {
+     "kind": "p",
+     "text": "To know if your ships are in under a Command Jammer area of influence, you will need to look at the fleet screen in the upper left and look for the Command Jam Icon, as seen below."
+    }
+   ]
+  },
+  {
+   "heading": "Damage control",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Battle damage may case a fire inside a ship, indicated with an icon in the ships list. Fires cause constant damage to a ship and slow the working speed of damage control teams."
+    },
+    {
+     "kind": "p",
+     "text": "Damage control teams will attempt to repair damaged components. They will prioritize them in the order of how important a component is. Drives and reactors come first. CIC, the main search radars, and the large missile launchers are next. A component with a catastrophic event, such as a magazine cookoff, jumps ahead of the CIC, and anything you prioritize manually comes before all of these. Priority can be changed manually but repair teams will have to travel to the newly designated component to repair it, possibly taking up valuable time."
+    },
+    {
+     "kind": "p",
+     "text": "There is a limit to how much a component can be repaired. Maximum repair is the lowest health the component has reached, plus 10% of its maximum health, and never less than its functioning threshold plus that same 10%. A Damage Control Complex raises the allowance from 10% to 15%. In campaign, docking at certain stations will raise this repair threshold."
+    },
+    {
+     "kind": "p",
+     "text": "If a component has been destroyed completely, repairing it will require spending a Restoration Point, which can only be done manually. Each ship carries only a limited number of Restoration Points, depending on damage control components installed."
+    }
+   ]
+  },
+  {
+   "heading": "Damage control › Scramming",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Initiating a reactor scram can be done at any time and requires that you hold down the button until the progress bar completes, which takes about 3 seconds. This confirmation process can be skipped by pressing space while holding down the button, jumping the camera into the tactical map and immediately initiating the scram. The reactor scramming process takes 30 seconds and completes even without a DC team present. Power and mobility for the entire ship will be disabled for the duration of the process and 30 seconds after until these systems are brought back online. Scramming will only grey components that were over-loading before the process completed, other systems will be left intact. A general rule of thumb is that you should scram the reactor if you have 4 or more crits on it, as these crits are likely to slow down the progress of your DC teams. Special attention should be payed on larger ships to how long the DC teams are taking to actually reach the reactor in question as well as the status of any DC buffing components like Redundant Reactor Failsafes, Damage Control Central, Small Workshop, and Damage Control Complex, which do not provide their bonuses when they are below their functioning threshold; you may have less time than you expect to repair the reactor. Also be sure to check the current status of the powerplant components(s) in question about 40 seconds before detonation to determine if additional crits have been applied by enemy fire, ongoing fires, or other events in the minute or so since you last checked. If so, what was once a save-able overload may no longer be be saveable; Scramming will be necessary."
+    }
+   ]
+  },
+  {
+   "heading": "Starter Fleets",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "It is recommended playing/reviewing the Starter_Fleet_Guides that come with the game. These fleets are community developed to perform incredibly well in multiplayer and give quite a few ideas of optimal ship designs. The community maintainer of the guides are also listed and are frequently active in the Community Discord."
+    }
+   ]
+  },
+  {
+   "heading": "Testing Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "You may test your ships in one of two ways. The first is by starting a Skirmish and selecting your fleet and the AI fleet (note there is a map called \"Small Testing Range 4P\" that will have you start within 5km of a target and reduce the time it takes to get into position to test. This will result in an battle with the AI, this is particularly effective in determining if you will be victorious in a gun battle with a certain enemy fleet."
+    },
+    {
+     "kind": "p",
+     "text": "However, if you are determining effectiveness of missile strikes, your own missile defenses, jamming systems, or damage potential of an idle ship a test range Exists for this purpose."
+    },
+    {
+     "kind": "p",
+     "text": "Once you are in a fleet editor, if you hit the \"ESC\" key there will be an option for the \"Testing Range\" where you can select a hostile fleet to test your weapons again."
+    },
+    {
+     "kind": "p",
+     "text": "If you wish to test your effectiveness in E-War, it may also be useful to enable control of the enemy ships by using the \"dbgEnableEnemyControl True\" command in the F2 debug menu that is available in the testing range. For more information, see Console_Commands for more details."
+    },
+    {
+     "kind": "p",
+     "text": "Once you are comfortable understanding the different ships, you may want to look at the Ship_Building_Megaguide to dig into why ships are build the way they are."
+    }
+   ]
+  },
+  {
+   "heading": "Community Lingo",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The community playing this game has been marinating in weird lingo for years, and not all of it is intuitive. Kate has created and maintains a handy Glossaryon it. Much of it will be referenced within the wiki itself, though we do our best to define it when the terminology comes up."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 25 October 2026, at 04:06."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

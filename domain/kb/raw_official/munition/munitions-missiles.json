@@ -1,0 +1,5719 @@
+{
+ "page": "Munitions & Missiles - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Munitions & Missiles",
+ "category": "munition",
+ "slug": "munitions-missiles",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [
+  {
+   "name": "100mm AP Shell",
+   "section": "Ballistic › 100mm",
+   "fields": {
+    "Shell classification": "100mm AP Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "25",
+    "Range (m)": "7200",
+    "Speed (m/s)": "900",
+    "Penetration (cm)": "45",
+    "Armor strip radius (m)": "0.4",
+    "Cost (pts per X amount)": "1/250",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "100mm Grape",
+   "section": "Ballistic › 100mm",
+   "fields": {
+    "Shell classification": "100mm Grape",
+    "Shell type": "Ballistic/Canister",
+    "Role": "Dual-Purpose",
+    "Damage (Hp)": "25",
+    "Range (m)": "7997",
+    "Speed (m/s)": "1100",
+    "Penetration (cm)": "16",
+    "Armor strip radius (m)": "0.4",
+    "Cost (pts per X amount)": "1/250",
+    "Ability": "12.5m Pellet Spread Radius; Increased normal-debuff chance and crew damage (500%); cannot cause rare/critical debuffs"
+   }
+  },
+  {
+   "name": "100mm HE-HC Shell",
+   "section": "Ballistic › 100mm",
+   "fields": {
+    "Shell classification": "100mm HE-HC Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "70",
+    "Range (m)": "7200",
+    "Speed (m/s)": "900",
+    "Penetration (cm)": "8",
+    "Armor strip radius (m)": "0.4",
+    "Cost (pts per X amount)": "1/250",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "100mm HE Shell",
+   "section": "Ballistic › 100mm",
+   "fields": {
+    "Shell classification": "100mm HE Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "45",
+    "Range (m)": "7200",
+    "Speed (m/s)": "900",
+    "Penetration (cm)": "30",
+    "Armor strip radius (m)": "0.4",
+    "Cost (pts per X amount)": "1/250",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "120mm AP Shell",
+   "section": "Ballistic › 120mm",
+   "fields": {
+    "Shell classification": "120mm AP Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "30",
+    "Range (m)": "7200",
+    "Speed (m/s)": "800",
+    "Penetration (cm)": "45",
+    "Armor strip radius (m)": "0.4",
+    "Cost (pts per X amount)": "1/100",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "120mm HE-RPF Shell",
+   "section": "Ballistic › 120mm",
+   "fields": {
+    "Shell classification": "120mm HE-RPF Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Dual-Purpose",
+    "Damage (Hp)": "64/8",
+    "Range (m)": "7200",
+    "Speed (m/s)": "800",
+    "Penetration (cm)": "10",
+    "Armor strip radius (m)": "0.2",
+    "Cost (pts per X amount)": "1/100",
+    "Ability": "Once a target has been detected within a 37.5 meter zone infront of the shell (???), 8 fragments with 8 Hp worth of damage is sent towards the direction of the ship.",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "120mm HE Shell",
+   "section": "Ballistic › 120mm",
+   "fields": {
+    "Shell classification": "120mm HE Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "50",
+    "Range (m)": "7200",
+    "Speed (m/s)": "800",
+    "Penetration (cm)": "30",
+    "Armor strip radius (m)": "0.4",
+    "Cost (pts per X amount)": "1/100",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "250mm AP Shell",
+   "section": "Ballistic › 250mm",
+   "fields": {
+    "Shell classification": "250mm AP Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "70",
+    "Range (m)": "8000",
+    "Speed (m/s)": "800",
+    "Penetration (cm)": "60",
+    "Armor strip radius (m)": "0.8",
+    "Cost (pts per X amount)": "1/50",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "250mm HE-RPF Shell",
+   "section": "Ballistic › 250mm",
+   "fields": {
+    "Shell classification": "250mm HE-RPF Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Dual-Purpose",
+    "Damage (Hp)": "128/8",
+    "Range (m)": "8000",
+    "Speed (m/s)": "800",
+    "Penetration (cm)": "20",
+    "Armor strip radius (m)": "0.3",
+    "Cost (pts per X amount)": "1/50",
+    "Ability": "Once a target has been detected within a 45 meter zone infront of the shell (???), 8 fragments with 16 Hp worth of damage is sent towards the direction of the ship.",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "250mm HE Shell",
+   "section": "Ballistic › 250mm",
+   "fields": {
+    "Shell classification": "250mm HE Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "80",
+    "Range (m)": "8000",
+    "Speed (m/s)": "800",
+    "Penetration (cm)": "40",
+    "Armor strip radius (m)": "0.8",
+    "Cost (pts per X amount)": "1/50",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "250mm Bombshell",
+   "section": "Ballistic › 250mm",
+   "fields": {
+    "Shell classification": "250mm Bombshell",
+    "Shell type": "Ballistic/Chemical/Timed",
+    "Role": "Dual-Purpose",
+    "Damage (Hp)": "96 per target/6",
+    "Range (m)": "8000",
+    "Speed (m/s)": "800",
+    "Penetration (cm)": "22",
+    "Armor strip radius (m)": "0.5",
+    "Cost (pts per X amount)": "1/50",
+    "Ability": "For every eligible ship target in a 500 meter bubble around the shell's activation point, 6 fragments will be launched at each target, each with 16 HP of damage (fragments are not thrown at missiles, small craft, or lifeboats).",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "450mm AP Shell",
+   "section": "Ballistic › 450mm",
+   "fields": {
+    "Shell classification": "450mm AP Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "100",
+    "Range (m)": "11240",
+    "Speed (m/s)": "800",
+    "Penetration (cm)": "120",
+    "Armor strip radius (m)": "1.25",
+    "Cost ( pts per X amount)": "1/25",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "450mm HE Shell",
+   "section": "Ballistic › 450mm",
+   "fields": {
+    "Shell classification": "450mm HE Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "150",
+    "Range (m)": "11240",
+    "Speed (m/s)": "800",
+    "Penetration (cm)": "65",
+    "Armor strip radius (m)": "1.25",
+    "Cost ( pts per X amount)": "1/25",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "600mm Bomb Shell",
+   "section": "Ballistic › 600mm",
+   "fields": {
+    "Shell classification": "600mm Bomb Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "480 per target/12",
+    "Range (m)": "9800",
+    "Speed (m/s)": "700",
+    "Penetration (cm)": "40",
+    "Armor strip radius (m)": "0.5",
+    "Cost (pts per X amount)": "1/25",
+    "Ability": "For every ship in a 500 meter bubble around the shell's activation point, 12 fragments of 40 HP are launched. Missiles, small craft and lifeboats in that bubble are excluded."
+   }
+  },
+  {
+   "name": "600mm HE-SH Shell",
+   "section": "Ballistic › 600mm",
+   "fields": {
+    "Shell classification": "600mm HE-SH Shell",
+    "Shell type": "Ballistic/Chemical",
+    "Role": "Offensive",
+    "Damage (Hp)": "420/7",
+    "Range (m)": "9800",
+    "Speed (m/s)": "700",
+    "Penetration (cm)": "85",
+    "Armor strip radius (m)": "1.75",
+    "Cost (pts per X amount)": "1/25",
+    "Ability": "Damage model similar to HEI missile warheads with 7× 60 HP damage rays, but unlike those warheads it is affected by armor angling (effective thickness, can ricochet). Does not overpenetrate."
+   }
+  },
+  {
+   "name": "300mm AP Rail Sabot",
+   "section": "Ballistic › Energy Weapons (300mm / 400mm / 500mm)",
+   "fields": {
+    "Shell classification": "300mm AP Rail Sabot",
+    "Shell type": "Ballistic/Magnetic",
+    "Role": "Offensive",
+    "Damage (Hp)": "80",
+    "Range (m)": "21000",
+    "Speed (m/s)": "2000",
+    "Penetration (cm)": "200",
+    "Armor strip radius (m)": "1",
+    "Cost (pts per X amount)": "1/25",
+    "Ability": "Normal-debuff Crit chance of 10000%, which forces an ordinary debuff on a component that survives the hit; can apply fires and other normal debuffs, and cannot roll rare/critical debuffs.",
+    "Faction (wiki logo)": "Shelter Alliance (SA); Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "400mm Plasma Ampoule",
+   "section": "Ballistic › Energy Weapons (300mm / 400mm / 500mm)",
+   "fields": {
+    "Shell classification": "400mm Plasma Ampoule",
+    "Shell type": "Ballistic/Magnetic",
+    "Role": "Offensive",
+    "Damage (Hp)": "60",
+    "Range (m)": "7800",
+    "Speed (m/s)": "600",
+    "Penetration (cm)": "60",
+    "Armor strip radius (m)": "10",
+    "Cost (pts per X amount)": "1/25",
+    "Ability": "Armor strip falls off with range.",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "500mm Fracturing Block",
+   "section": "Ballistic › Energy Weapons (300mm / 400mm / 500mm)",
+   "fields": {
+    "Shell classification": "500mm Fracturing Block",
+    "Shell type": "Ballistic/Magnetic",
+    "Role": "Offensive",
+    "Damage (Hp)": "300/20",
+    "Range (m)": "21000",
+    "Speed (m/s)": "2000",
+    "Penetration (cm)": "120",
+    "Armor strip radius (m)": "1.5",
+    "Cost (pts per X amount)": "1/25",
+    "Ability": "Damage model similar to HEI missile warheads with 20x 15hp damage rays.",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "15mm Sandshot",
+   "section": "Point Defense",
+   "fields": {
+    "Shell classification": "15mm Sandshot",
+    "Shell type": "Ballistic/Magnetic",
+    "Damage (Hp)": "75",
+    "Range (m)": "8000",
+    "Speed (m/s)": "2500",
+    "Penetration (cm)": "0.275",
+    "Cost (pts per X amount)": "1/50",
+    "Ability": "Pellet Spread Radius: 7.5m"
+   }
+  },
+  {
+   "name": "20mm Slug",
+   "section": "Point Defense",
+   "fields": {
+    "Shell classification": "20mm Slug",
+    "Shell type": "Ballistic/Chemical",
+    "Damage (Hp)": "15",
+    "Range (m)": "1750",
+    "Speed (m/s)": "700",
+    "Penetration (cm)": "0.3",
+    "Cost (pts per X amount)": "1/2000",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "35mm Slug",
+   "section": "Point Defense",
+   "fields": {
+    "Shell classification": "35mm Slug",
+    "Shell type": "Ballistic/Chemical",
+    "Damage (Hp)": "15",
+    "Range (m)": "1750",
+    "Speed (m/s)": "700",
+    "Penetration (cm)": "4",
+    "Cost (pts per X amount)": "1/1000",
+    "Ability": "Duel-Purpose craft shell."
+   }
+  },
+  {
+   "name": "35mm Flechette",
+   "section": "Point Defense",
+   "fields": {
+    "Shell classification": "35mm Flechette",
+    "Shell type": "Ballistic/Chemical",
+    "Damage (Hp)": "15",
+    "Range (m)": "1750",
+    "Speed (m/s)": "700",
+    "Penetration (cm)": "0.1",
+    "Cost (pts per X amount)": "1/250",
+    "Ability": "Pellet Spread Radius of 3.3m.",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "50mm Flak Shell",
+   "section": "Point Defense",
+   "fields": {
+    "Shell classification": "50mm Flak Shell",
+    "Shell type": "Ballistic/Chemical/Timed",
+    "Damage (Hp)": "15",
+    "Range (m)": "2002",
+    "Speed (m/s)": "650",
+    "Penetration (cm)": "0.176",
+    "Cost (pts per X amount)": "1/75",
+    "Ability": "None"
+   }
+  },
+  {
+   "name": "SGM-100 Balestra Missile",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "SGM-100 Balestra Missile",
+    "Size": "1",
+    "Integrity": "10 HP",
+    "Wall Thickness": "0.05 cm",
+    "Socket Weight": "0.33x",
+    "Programming Time (s)": "6 sec",
+    "Components": "3",
+    "Main Speed (m/s)": "250-400 m/s",
+    "Thruster Speed (m/s)": "40-50 m/s",
+    "Range (m)": "1458-11911 m",
+    "Acceleration (G)": "35.7-76.5 G",
+    "Top Speed (s)": "0.3-1.1 sec",
+    "Turn Rate (G)": "3.9-13.3 G",
+    "Radar Cross Section (Front / Side)": "156 m2/400m 2",
+    "Body Cost": "0 pt"
+   }
+  },
+  {
+   "name": "SDM-100 Lunge Missile",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "SDM-100 Lunge Missile",
+    "Size": "1",
+    "Integrity": "10 HP",
+    "Wall Thickness": "0.05 cm",
+    "Socket Weight": "0.33x",
+    "Programming Time (s)": "6 sec",
+    "Components": "3",
+    "Main Speed (m/s)": "650-850 m/s Boost 250-400 m/s Main",
+    "Thruster Speed (m/s)": "30-40 m/s Boost 40-50 m/s Main",
+    "Range (m)": "1844-3759 m Boost 958-11911 m Main",
+    "Acceleration (G)": "153.1-204.1 G Boost 35.7-76.5 G Main",
+    "Top Speed (s)": "0.3-0.6 sec Boost 0.3-1.1 sec Main",
+    "Turn Rate (G)": "6.5-17.5 G Boost 3.9-13.3 G Main",
+    "Radar Cross Section (Front / Side)": "625 m2/950 m2",
+    "Body Cost": "0 pt"
+   }
+  },
+  {
+   "name": "SSM-100 Remise Missile",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "SSM-100 Remise Missile",
+    "Size": "1",
+    "Integrity": "10 HP",
+    "Wall Thickness": "0.05 cm",
+    "Socket Weight": "0.33x",
+    "Programming Time (s)": "6 sec",
+    "Components": "4",
+    "Main Speed (m/s)": "250-400 m/s",
+    "Thruster Speed (m/s)": "40-50 m/s",
+    "Range (m)": "1458-11911 m",
+    "Acceleration (G)": "35.7-76.5 G",
+    "Top Speed (s)": "0.3-1.1 sec",
+    "Turn Rate (G)": "3.9-13.3 G",
+    "Radar Cross Section (Front / Side)": "156 m2/400 m2",
+    "Body Cost": "0 pt"
+   }
+  },
+  {
+   "name": "SGM-200 Tempest Missile",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "SGM-200 Tempest Missile",
+    "Size": "2",
+    "Integrity": "30 HP",
+    "Wall Thickness": "0.05 cm",
+    "Socket Weight": "1x",
+    "Programming Time (s)": "8 sec",
+    "Components": "4",
+    "Main Speed (m/s)": "180-350 m/s",
+    "Thruster Speed (m/s)": "30-40 m/s",
+    "Range (m)": "2826-32284 m",
+    "Acceleration (G)": "14.3-30.6 G",
+    "Top Speed (s)": "0.6-2.5 sec",
+    "Turn Rate (G)": "1.7-6.0 G",
+    "Radar Cross Section (Front / Side)": "625 m2/950 m2",
+    "Body Cost": "2 pt"
+   }
+  },
+  {
+   "name": "SDM-200 Typhoon Missile",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "SDM-200 Typhoon Missile",
+    "Size": "2",
+    "Integrity": "25 HP",
+    "Wall Thickness": "0.05 cm",
+    "Socket Weight": "1.25x",
+    "Programming Time (s)": "10 sec",
+    "Components": "4",
+    "Main Speed (m/s)": "650-850 m/s Boost 225-150 m/s Main",
+    "Thruster Speed (m/s)": "30-40 m/s Boost 150-225 m/s Main",
+    "Range (m)": "4936-8098 m Boost 1165-7130 m Main",
+    "Acceleration (G)": "61.2-81.6 G Boost 16.3-32.7 G Main",
+    "Top Speed (s)": "1.4-0.8 sec Boost 1.4-0.5 sec Main",
+    "Turn Rate (G)": "4.4-12.8 G Boost 2.8-8.2 G Main",
+    "Radar Cross Section (Front / Side)": "625 m2/950 m2",
+    "Body Cost": "2 pt"
+   }
+  },
+  {
+   "name": "SGM-300 Flail Hybrid Missile",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "SGM-300 Flail Hybrid Missile",
+    "Size": "3",
+    "Integrity": "60 HP",
+    "Wall Thickness": "0.05 cm",
+    "Socket Weight": "1.5x",
+    "Programming Time (s)": "16 sec",
+    "Components": "5",
+    "Main Speed (m/s)": "150-250 m/s Cruise 250-450 m/s Terminal",
+    "Thruster Speed (m/s)": "20-40 m/s Cruise 250-450 m/s Terminal",
+    "Range (m)": "7425-26888 m Cruise 448-11125 m Terminal",
+    "Acceleration (G)": "10.2-15.3 G Cruise 25.5-61.2 G Terminal",
+    "Top Speed (s)": "1.0-2.5 sec Cruise 0.4-1.8 sec Terminal",
+    "Turn Rate (G)": "0.9-4 G Cruise 6.7-18.9 G Terminal",
+    "Radar Cross Section (Front / Side)": "1600 m2/3600 m2",
+    "Body Cost": "4 pt"
+   }
+  },
+  {
+   "name": "SGT-300 Pilum Torpedo",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "SGT-300 Pilum Torpedo",
+    "Size": "3",
+    "Integrity": "160 HP",
+    "Wall Thickness": "0.25 cm",
+    "Socket Weight": "3x",
+    "Programming Time (s)": "3 sec",
+    "Components": "4",
+    "Main Speed (m/s)": "175-300 m/s",
+    "Thruster Speed (m/s)": "20-35 m/s",
+    "Range (m)": "814-10135 m",
+    "Acceleration (G)": "15.3-25.5 G",
+    "Top Speed (s)": "0.7-2.0 sec",
+    "Turn Rate (G)": "1.2-5.5 G",
+    "Radar Cross Section (Front / Side)": "900 m2/2400 m2",
+    "Body Cost": "1 (+0-3 engine) pt"
+   }
+  },
+  {
+   "name": "SGM-H-200 Cyclone Hybrid Missile",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "SGM-H-200 Cyclone Hybrid Missile",
+    "Size": "2",
+    "Integrity": "25 HP",
+    "Wall Thickness": "0.05 cm",
+    "Socket Weight": "0.8x",
+    "Programming Time (s)": "10 sec",
+    "Components": "4",
+    "Main Speed (m/s)": "200-350 m/s Cruise 500-1000 m/s Sprint",
+    "Thruster Speed (m/s)": "7875-25750 m Cruise 438-10375 m Sprint",
+    "Range (m)": "8.2-16.3 G Cruise 102.0-204.1 G Sprint",
+    "Acceleration (G)": "1.3-4.4 sec Cruise 0.3-1.0 sec Sprint",
+    "Top Speed (s)": "0.8-3.2 G Cruise 14.8-31.9 G Sprint",
+    "Turn Rate (G)": "625 m2/950 m2",
+    "Radar Cross Section (Front / Side)": "3+2[3] pt"
+   }
+  },
+  {
+   "name": "SGM-H-300 Atlatl Hybrid Missile",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "SGM-H-300 Atlatl Hybrid Missile",
+    "Size": "3",
+    "Integrity": "60 HP",
+    "Wall Thickness": "0.05 cm",
+    "Socket Weight": "1.8x",
+    "Programming Time (s)": "16 sec",
+    "Components": "5",
+    "Main Speed (m/s)": "100-200 m/s Cruise 550-1000 m/s Sprint",
+    "Thruster Speed (m/s)": "20-40 m/s Cruise 550-1000 m/s Sprint",
+    "Range (m)": "7944-24917 m Cruise 271-13411 m Sprint",
+    "Acceleration (G)": "6.1-9.2 G Cruise 76.5-127.6 G Sprint",
+    "Top Speed (s)": "1.1-3.3 sec Cruise 0.4-1.3 sec Sprint",
+    "Turn Rate (G)": "0.5-2.5 G Cruise 16.9-40.8 G Sprint",
+    "Radar Cross Section (Front / Side)": "1600 m2/3600 m2",
+    "Body Cost": "5+3[4] pt"
+   }
+  },
+  {
+   "name": "CM-400 Container",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "CM-400 Container",
+    "Size": "4",
+    "Integrity": "150 HP",
+    "Wall Thickness": "0.2 cm",
+    "Socket Weight": "2x",
+    "Programming Time (s)": "20 sec",
+    "Components": "5",
+    "Main Speed (m/s)": "125-275 m/s",
+    "Thruster Speed (m/s)": "20-35 m/s",
+    "Range (m)": "1083-65943 m",
+    "Acceleration (G)": "19.1-6.4 G",
+    "Top Speed (s)": "4-12.8 sec",
+    "Turn Rate (G)": "1.1-4.0 G",
+    "Radar Cross Section (Front / Side)": "1600 m2/4000 m2",
+    "Body Cost": "0 pt"
+   }
+  },
+  {
+   "name": "CM-S-400 Container",
+   "section": "Missile Construction",
+   "fields": {
+    "Missile Body": "CM-S-400 Container",
+    "Size": "4",
+    "Integrity": "150 HP",
+    "Wall Thickness": "0.2 cm",
+    "Socket Weight": "4x",
+    "Programming Time (s)": "20 sec",
+    "Components": "5",
+    "Main Speed (m/s)": "125-275 m/s",
+    "Thruster Speed (m/s)": "20-35 m/s",
+    "Range (m)": "1083-65943 m",
+    "Acceleration (G)": "19.1-6.4 G",
+    "Top Speed (s)": "1.1-4.0 sec",
+    "Turn Rate (G)": "0.1-3.3 G",
+    "Radar Cross Section (Front / Side)": "1600 m2/4000 m2",
+    "Body Cost": "0 pt"
+   }
+  },
+  {
+   "name": "HE Impact",
+   "section": "Missile Construction › Payload",
+   "fields": {
+    "Payload": "HE Impact",
+    "Fuze": "Contact",
+    "Area Damage Type": "Shaped Angle 70 deg",
+    "Base Cost (pts)": "0.25"
+   }
+  },
+  {
+   "name": "HE Kinetic Penetrator",
+   "section": "Missile Construction › Payload",
+   "fields": {
+    "Payload": "HE Kinetic Penetrator",
+    "Fuze": "Delayed Contact",
+    "Area Damage Type": "Internal sphere blasts every 6.6 m along the penetration path (up to 26), sharing the explosive damage, at least 40% of it",
+    "Base Cost (pts)": "1.75",
+    "Notes": "Armor penetration scales with speed above 250 m/s and with warhead size. The editor shows that value at the missile's top terminal speed; a slower impact penetrates less. Penetration distance is capped at 175 m.",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Blast Fragmentation",
+   "section": "Missile Construction › Payload",
+   "fields": {
+    "Payload": "Blast Fragmentation",
+    "Fuze": "Proximity",
+    "Area Damage Type": "Blast Fragmentation Radius",
+    "Base Cost (pts)": "0.25",
+    "Notes": "Larger missiles increase the area damage radius as well"
+   }
+  },
+  {
+   "name": "Blast Fragmentation EL",
+   "section": "Missile Construction › Payload",
+   "fields": {
+    "Payload": "Blast Fragmentation EL",
+    "Fuze": "Proximity",
+    "Area Damage Type": "Blast Fragmentation Radius",
+    "Base Cost (pts)": "3.5",
+    "Notes": "Larger missiles increase the area damage radius as well"
+   }
+  },
+  {
+   "name": "Direct Guidance",
+   "section": "Missile Construction › Avionics Package",
+   "fields": {
+    "Avionics Package": "Direct Guidance",
+    "Description": "The simplest form of missile guidance system. This avionics package guides the missile in a straight line towards the target that has been acquired by the missile's seeker.",
+    "Base Cost (pts)": "0"
+   }
+  },
+  {
+   "name": "Cruise guidance",
+   "section": "Missile Construction › Avionics Package",
+   "fields": {
+    "Avionics Package": "Cruise guidance",
+    "Description": "A more advanced form of missile guidance that is capable of following a complex waypoint path to the target, enabling blind strikes around asteroids and more.",
+    "Base Cost (pts)": "2"
+   }
+  },
+  {
+   "name": "Command Receiver",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Command Receiver",
+    "Type": "COMMS",
+    "Range (M)": "Fleet",
+    "FOV (deg)": "Fleet",
+    "Validator Reliability (%)": "Fleet",
+    "Steerable": "Fleet",
+    "Position Trageting": "No",
+    "Measures Position": "Yes",
+    "Measures Velocity": "Yes",
+    "Base Cost / Validator Cost": "3.5 / 3"
+   }
+  },
+  {
+   "name": "Fixed Active Radar Seeker",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Fixed Active Radar Seeker",
+    "Type": "RADAR",
+    "Range (M)": "2000",
+    "FOV (deg)": "50",
+    "Validator Reliability (%)": "95",
+    "Steerable": "No",
+    "Position Trageting": "Yes",
+    "Measures Position": "Yes",
+    "Measures Velocity": "Yes",
+    "Base Cost / Validator Cost": "1 / 0.25"
+   }
+  },
+  {
+   "name": "Steerable Active Radar Seeker",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Steerable Active Radar Seeker",
+    "Type": "RADAR",
+    "Range (M)": "2000",
+    "FOV (deg)": "40",
+    "Validator Reliability (%)": "95",
+    "Steerable": "Yes",
+    "Position Trageting": "Yes",
+    "Measures Position": "Yes",
+    "Measures Velocity": "Yes",
+    "Base Cost / Validator Cost": "1.5 / 0.25"
+   }
+  },
+  {
+   "name": "Steerable Extended Active Radar Seeker",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Steerable Extended Active Radar Seeker",
+    "Type": "RADAR",
+    "Range (M)": "5000",
+    "FOV (deg)": "40",
+    "Validator Reliability (%)": "95",
+    "Steerable": "Yes",
+    "Position Trageting": "Yes",
+    "Measures Position": "Yes",
+    "Measures Velocity": "Yes",
+    "Base Cost / Validator Cost": "3 / 0.25"
+   }
+  },
+  {
+   "name": "Fixed Semi-Active Radar Seeker",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Fixed Semi-Active Radar Seeker",
+    "Type": "RADAR",
+    "Range (M)": "4000",
+    "FOV (deg)": "50",
+    "Validator Reliability (%)": "95",
+    "Steerable": "No",
+    "Position Trageting": "Yes",
+    "Measures Position": "Direction Only",
+    "Measures Velocity": "Yes",
+    "Base Cost / Validator Cost": "0.5 / 0.5"
+   }
+  },
+  {
+   "name": "Fixed Anti-Radiation Seeker",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Fixed Anti-Radiation Seeker",
+    "Type": "PSV RADAR",
+    "Range (M)": "3000",
+    "FOV (deg)": "50",
+    "Validator Reliability (%)": "93",
+    "Steerable": "No",
+    "Position Trageting": "Yes",
+    "Measures Position": "Direction Only",
+    "Measures Velocity": "No",
+    "Base Cost / Validator Cost": "2 / 2"
+   }
+  },
+  {
+   "name": "Fixed Anti-Radiation Seeker (Home On Jam)",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Fixed Anti-Radiation Seeker (Home On Jam)",
+    "Type": "PSV JAM",
+    "Range (M)": "∞",
+    "FOV (deg)": "50",
+    "Validator Reliability (%)": "93",
+    "Steerable": "No",
+    "Position Trageting": "Yes",
+    "Measures Position": "Direction Only",
+    "Measures Velocity": "No",
+    "Base Cost / Validator Cost": "0.5 / 0.5"
+   }
+  },
+  {
+   "name": "Fixed Anti-Radiation Seeker (Pulsed Radar)",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Fixed Anti-Radiation Seeker (Pulsed Radar)",
+    "Type": "PSV PULSED",
+    "Range (M)": "3000",
+    "FOV (deg)": "50",
+    "Validator Reliability (%)": "93",
+    "Steerable": "No",
+    "Position Trageting": "Yes",
+    "Measures Position": "Direction Only",
+    "Measures Velocity": "No",
+    "Base Cost / Validator Cost": "2.50 / 2.50"
+   }
+  },
+  {
+   "name": "Electro-Optical Seeker",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Electro-Optical Seeker",
+    "Type": "EO",
+    "Range (M)": "3000",
+    "FOV (deg)": "60",
+    "Validator Reliability (%)": "100",
+    "Steerable": "Yes",
+    "Position Trageting": "Yes",
+    "Measures Position": "Yes",
+    "Measures Velocity": "No",
+    "Base Cost / Validator Cost": "8 / 5",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Wake-Homing Seeker",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Wake-Homing Seeker",
+    "Type": "WAKE",
+    "Range (M)": "1500",
+    "FOV (deg)": "120",
+    "Validator Reliability (%)": "100",
+    "Steerable": "Yes",
+    "Position Trageting": "Yes",
+    "Measures Position": "Direction Only",
+    "Measures Velocity": "No",
+    "Base Cost / Validator Cost": "0.25 / 0.5"
+   }
+  },
+  {
+   "name": "Wake-Homing Seeker (THERM)",
+   "section": "Missile Construction › Seekers",
+   "fields": {
+    "Seeker": "Wake-Homing Seeker (THERM)",
+    "Type": "THERM",
+    "Range (M)": "1500",
+    "FOV (deg)": "120",
+    "Validator Reliability (%)": "100",
+    "Steerable": "Yes",
+    "Position Trageting": "Yes",
+    "Measures Position": "Direction Only",
+    "Measures Velocity": "No",
+    "Base Cost / Validator Cost": "0.25 / 3",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Cold Gas Bottle",
+   "section": "Missile Construction › Auxiliary",
+   "fields": {
+    "Auxiliary": "Cold Gas Bottle",
+    "Modifiers": "+150% Boost-Phase Strafe +100% Boost-Phase Turn Rate",
+    "Base Cost (pts)": "1"
+   }
+  },
+  {
+   "name": "Decoy Launcher",
+   "section": "Missile Construction › Auxiliary",
+   "fields": {
+    "Auxiliary": "Decoy Launcher",
+    "Modifiers": "+3 Decoys Fired",
+    "Base Cost (pts)": "12"
+   }
+  },
+  {
+   "name": "Cluster Decoy Launcher",
+   "section": "Missile Construction › Auxiliary",
+   "fields": {
+    "Auxiliary": "Cluster Decoy Launcher",
+    "Modifiers": "+6 Decoys Fired",
+    "Base Cost (pts)": "30"
+   }
+  },
+  {
+   "name": "Fast Startup Module",
+   "section": "Missile Construction › Auxiliary",
+   "fields": {
+    "Auxiliary": "Fast Startup Module",
+    "Modifiers": "-66% Programming Time +20% Failure Rate",
+    "Base Cost (pts)": "3"
+   }
+  },
+  {
+   "name": "Hardened Skin",
+   "section": "Missile Construction › Auxiliary",
+   "fields": {
+    "Auxiliary": "Hardened Skin",
+    "Modifiers": "+20 Body Integrity",
+    "Base Cost (pts)": "5"
+   }
+  },
+  {
+   "name": "Radar Absorbent Coating",
+   "section": "Missile Construction › Auxiliary",
+   "fields": {
+    "Auxiliary": "Radar Absorbent Coating",
+    "Modifiers": "-40% Radar Signature Bonus",
+    "Base Cost (pts)": "4"
+   }
+  },
+  {
+   "name": "Self-Screening Jammer",
+   "section": "Missile Construction › Auxiliary",
+   "fields": {
+    "Auxiliary": "Self-Screening Jammer",
+    "Modifiers": "RADAR - range: 2500m; radiated power: 5 kW; gain: 2 dB",
+    "Base Cost (pts)": "5"
+   }
+  },
+  {
+   "name": "Boosted Self-Screening Jammer",
+   "section": "Missile Construction › Auxiliary",
+   "fields": {
+    "Auxiliary": "Boosted Self-Screening Jammer",
+    "Modifiers": "RADAR - range: 5000m; radiated power: 5 kW; gain: 4 dB; beam width: 10 deg",
+    "Base Cost (pts)": "10"
+   }
+  },
+  {
+   "name": "M-30 'Mattock' Mine",
+   "section": "Special Missiles › Mines",
+   "fields": {
+    "Mine Body": "M-30 'Mattock' Mine",
+    "Range (m)": "3750",
+    "Cruise Speed (m/s)": "250",
+    "Cost (pts)": "5",
+    "Networked": "No"
+   }
+  },
+  {
+   "name": "M-30-N 'Mattock' Cooperative Mine",
+   "section": "Special Missiles › Mines",
+   "fields": {
+    "Mine Body": "M-30-N 'Mattock' Cooperative Mine",
+    "Range (m)": "3750",
+    "Cruise Speed (m/s)": "250",
+    "Cost (pts)": "6",
+    "Networked": "Yes"
+   }
+  },
+  {
+   "name": "M-50 'Auger' Sprint Mine",
+   "section": "Special Missiles › Mines",
+   "fields": {
+    "Mine Body": "M-50 'Auger' Sprint Mine",
+    "Range (m)": "3850",
+    "Cruise Speed (m/s)": "700",
+    "Cost (pts)": "10",
+    "Networked": "No"
+   }
+  },
+  {
+   "name": "FBU-15 Fragmentation Bomb",
+   "section": "Special Missiles › Bombs",
+   "fields": {
+    "Bomb Body": "FBU-15 Fragmentation Bomb",
+    "Size": "1",
+    "Range (m)": "3999",
+    "Cruise Speed (m/s)": "300",
+    "Wall Thickness (m/s)": "0.075",
+    "Body Integrity (m/s)": "25",
+    "Component Damage (Hp)": "700",
+    "Damage per Ray (Hp)": "20",
+    "Armor Penetration (cm)": "15",
+    "Cost (pts)": "1 per 3 units",
+    "Ability": "Yes ; Boosted bomb with Fragmentation effect similar to HE-RPF",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "KBU-15 Bomb",
+   "section": "Special Missiles › Bombs",
+   "fields": {
+    "Bomb Body": "KBU-15 Bomb",
+    "Size": "1",
+    "Range (m)": "2000",
+    "Cruise Speed (m/s)": "200",
+    "Wall Thickness (m/s)": "0.075",
+    "Body Integrity (m/s)": "25",
+    "Component Damage (Hp)": "500",
+    "Damage per Ray (Hp)": "75",
+    "Armor Penetration (cm)": "40",
+    "Cost (pts)": "1",
+    "Ability": "No"
+   }
+  },
+  {
+   "name": "KBU-22 Bomb",
+   "section": "Special Missiles › Bombs",
+   "fields": {
+    "Bomb Body": "KBU-22 Bomb",
+    "Size": "2",
+    "Range (m)": "2000",
+    "Cruise Speed (m/s)": "200",
+    "Wall Thickness (m/s)": "0.1",
+    "Body Integrity (m/s)": "40",
+    "Component Damage (Hp)": "2500",
+    "Damage per Ray (Hp)": "100",
+    "Armor Penetration (cm)": "60",
+    "Cost (pts)": "2",
+    "Ability": "No"
+   }
+  },
+  {
+   "name": "CBU-40 Cluster Bomb",
+   "section": "Special Missiles › Bombs",
+   "fields": {
+    "Bomb Body": "CBU-40 Cluster Bomb",
+    "Size": "3",
+    "Range (m)": "2250",
+    "Cruise Speed (m/s)": "200",
+    "Wall Thickness (m/s)": "0.5",
+    "Body Integrity (m/s)": "100",
+    "Component Damage (Hp)": "500 per submunition",
+    "Damage per Ray (Hp)": "75 per subminition",
+    "Armor Penetration (cm)": "40 per submunition",
+    "Cost (pts)": "5",
+    "Ability": "Yes; Releases 10 RBU-15 Boosted Bomblets"
+   }
+  },
+  {
+   "name": "R-1 'Perch' Rocket",
+   "section": "Special Missiles › Rockets",
+   "fields": {
+    "Rocket Body": "R-1 'Perch' Rocket",
+    "Size": "1",
+    "Body Integrity": "4",
+    "Wall Thickness": "0.15",
+    "Range (m)": "2975",
+    "Speed (m/s)": "350",
+    "Armor Penetration (cm)": "15",
+    "Component Damage (Hp)": "300",
+    "Cost (pts)": "1 per 6 units"
+   }
+  },
+  {
+   "name": "R-2 'Piranha' Rocket",
+   "section": "Special Missiles › Rockets",
+   "fields": {
+    "Rocket Body": "R-2 'Piranha' Rocket",
+    "Size": "2",
+    "Body Integrity": "8",
+    "Wall Thickness": "0.18",
+    "Range (m)": "7000",
+    "Speed (m/s)": "350",
+    "Armor Penetration (cm)": "38",
+    "Component Damage (Hp)": "850",
+    "Cost (pts)": "2"
+   }
+  },
+  {
+   "name": "R-3 'Spearfish' Rocket",
+   "section": "Special Missiles › Rockets",
+   "fields": {
+    "Rocket Body": "R-3 'Spearfish' Rocket",
+    "Size": "3",
+    "Body Integrity": "120",
+    "Wall Thickness": "0.25",
+    "Range (m)": "6000",
+    "Speed (m/s)": "300",
+    "Armor Penetration (cm)": "60",
+    "Component Damage (Hp)": "1500",
+    "Cost (pts)": "3"
+   }
+  },
+  {
+   "name": "CM-4D1 Decoy Container (Clipper)",
+   "section": "Special Missiles › Decoy Containers",
+   "fields": {
+    "Decoy Body": "CM-4D1 Decoy Container (Clipper)",
+    "Range (m)": "12528",
+    "Speed (m/s)": "54",
+    "Signatures": "RADAR; PSV RADAR",
+    "Cost (pts)": "4"
+   }
+  },
+  {
+   "name": "CM-4D1 Decoy Container (Line Ship)",
+   "section": "Special Missiles › Decoy Containers",
+   "fields": {
+    "Decoy Body": "CM-4D1 Decoy Container (Line Ship)",
+    "Range (m)": "10080",
+    "Speed (m/s)": "24",
+    "Signatures": "RADAR; PSV RADAR",
+    "Cost (pts)": "6"
+   }
+  }
+ ],
+ "tables": [
+  {
+   "section": "Ballistic › Guidelines › Ammo Selection",
+   "header": "OSP firing at...",
+   "rows": 11,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Ballistic › Guidelines › Ammo Selection",
+   "header": "ANS firing at...",
+   "rows": 10,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Ballistic › Guidelines › Hit Probability",
+   "header": "Track Quality",
+   "rows": 15,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Ballistic › Guidelines › Hit Probability",
+   "header": "Track Quality",
+   "rows": 15,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Ballistic › 100mm",
+   "header": "Shell classification",
+   "rows": 4,
+   "used": 4,
+   "unused": []
+  },
+  {
+   "section": "Ballistic › 120mm",
+   "header": "Shell classification",
+   "rows": 3,
+   "used": 3,
+   "unused": []
+  },
+  {
+   "section": "Ballistic › 250mm",
+   "header": "Shell classification",
+   "rows": 4,
+   "used": 4,
+   "unused": []
+  },
+  {
+   "section": "Ballistic › 450mm",
+   "header": "Shell classification",
+   "rows": 2,
+   "used": 2,
+   "unused": []
+  },
+  {
+   "section": "Ballistic › 600mm",
+   "header": "Shell classification",
+   "rows": 2,
+   "used": 2,
+   "unused": []
+  },
+  {
+   "section": "Ballistic › Energy Weapons (300mm / 400mm / 500mm)",
+   "header": "Shell classification",
+   "rows": 3,
+   "used": 3,
+   "unused": []
+  },
+  {
+   "section": "Point Defense",
+   "header": "Shell classification",
+   "rows": 5,
+   "used": 5,
+   "unused": []
+  },
+  {
+   "section": "Missile Construction",
+   "header": "Missile Body",
+   "rows": 11,
+   "used": 11,
+   "unused": []
+  },
+  {
+   "section": "Missile Construction › Missile radar cross-section",
+   "header": "Missile (and others with the same box)",
+   "rows": 7,
+   "used": 0,
+   "unused": []
+  },
+  {
+   "section": "Missile Construction › Payload",
+   "header": "Payload",
+   "rows": 4,
+   "used": 4,
+   "unused": []
+  },
+  {
+   "section": "Missile Construction › Avionics Package",
+   "header": "Avionics Package",
+   "rows": 2,
+   "used": 2,
+   "unused": []
+  },
+  {
+   "section": "Missile Construction › Seekers",
+   "header": "Seeker",
+   "rows": 11,
+   "used": 11,
+   "unused": []
+  },
+  {
+   "section": "Missile Construction › Auxiliary",
+   "header": "Auxiliary",
+   "rows": 8,
+   "used": 8,
+   "unused": []
+  },
+  {
+   "section": "Special Missiles › Mines",
+   "header": "Mine Body",
+   "rows": 3,
+   "used": 3,
+   "unused": []
+  },
+  {
+   "section": "Special Missiles › Bombs",
+   "header": "Bomb Body",
+   "rows": 4,
+   "used": 4,
+   "unused": []
+  },
+  {
+   "section": "Special Missiles › Rockets",
+   "header": "Rocket Body",
+   "rows": 3,
+   "used": 3,
+   "unused": []
+  },
+  {
+   "section": "Special Missiles › Decoy Containers",
+   "header": "Decoy Body",
+   "rows": 2,
+   "used": 2,
+   "unused": []
+  }
+ ],
+ "sections": [
+  {
+   "heading": "(页面开头)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Missiles and Munitions comprise the physical weapons fired and thrown around from both factions. From dedicated anti-ship missiles and Anti-Missile Missiles, to capital-grade shells and energy projectiles. Each faction has their own specific ammo types, but a lot of ammo types and calibres are shared between both."
+    },
+    {
+     "kind": "p",
+     "text": "Munitions comprise mainly of unguided shells with a specific calibre attributed to them. Unlike their missile counterparts, these weapons are unable to be decoyed or shot down, and have hardset statistics like speed and range."
+    },
+    {
+     "kind": "p",
+     "text": "Some, but not all, craft can share munitions with ships, although this is limited to only a few calibres."
+    }
+   ]
+  },
+  {
+   "heading": "Ballistic",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ballistic munitions make up the bulk of all ammo types found in the game, from 100mm grapeshot shells to 600mm HESH rounds, all of these shells serve to destroy and harm ships in some capacity."
+    },
+    {
+     "kind": "p",
+     "text": "Many of the ability sections are summaries of how the shell preforms in-game, for more detailed descriptions reference the component damage page."
+    }
+   ]
+  },
+  {
+   "heading": "Ballistic › Guidelines",
+   "blocks": []
+  },
+  {
+   "heading": "Ballistic › Guidelines › Ammo Selection",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ammo selection for a given targets can be accomplished visually in several steps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Start by shooting with AP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "If you’re shooting AP, and your shells punch out the back of the target, switch to HE."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "If you’re shooting HE, and you see showers of sparks for ricochets, switch to AP."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "If you’re firing at a small target, fire RPF/Bombshell/Grape until it stops evading, then HE to destroy"
+    },
+    {
+     "kind": "p",
+     "text": "Key: X -> Y = “shoot X to damage, then finish with Y” X or Y = “use X, but Y has situational uses”. Lack of bolding indicates either works X :-( = “your best option, but alas, it won’t do much”"
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "OSP firing at...",
+       "100mm",
+       "250mm",
+       "450mm",
+       "600mm"
+      ],
+      [
+       "FFL Sprinter",
+       "Grape -> HE",
+       "Bomb -> HE",
+       "HE",
+       "Bomb or HESH"
+      ],
+      [
+       "FF Raines",
+       "HE",
+       "Bomb -> HE",
+       "HE",
+       "Bomb or HESH"
+      ],
+      [
+       "DD Keystone",
+       "HE or AP",
+       "HE",
+       "HE",
+       "Bomb -> HESH"
+      ],
+      [
+       "CL Vauxhall (bow)",
+       "AP",
+       "AP",
+       "HE",
+       "Bomb -> HESH"
+      ],
+      [
+       "CL Vauxhall (side)",
+       "AP",
+       "HE",
+       "HE",
+       "Bomb -> HESH"
+      ],
+      [
+       "CVE Levy",
+       "HE",
+       "Bomb -> HE",
+       "HE",
+       "Bomb or HESH"
+      ],
+      [
+       "CH Axford (bow)",
+       "AP",
+       "AP",
+       "AP",
+       "HESH"
+      ],
+      [
+       "CH Axford (side)",
+       "AP",
+       "AP or HE",
+       "HE",
+       "HESH"
+      ],
+      [
+       "BB Solomon (bow)",
+       "AP :-(",
+       "AP",
+       "AP",
+       "HESH"
+      ],
+      [
+       "BB Solomon (side)",
+       "AP :-(",
+       "AP",
+       "HE",
+       "HESH"
+      ],
+      [
+       "Any plasma'd target",
+       "HE-HC",
+       "Bomb -> HE",
+       "HE",
+       "Bomb or HESH"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "ANS firing at...",
+       "120mm",
+       "250mm",
+       "450mm"
+      ],
+      [
+       "Shuttle/Ferryman",
+       "RPF-> HE",
+       "RPF -> HE",
+       "HE"
+      ],
+      [
+       "Tug/Draugr",
+       "RPF -> HE",
+       "RPF -> HE",
+       "HE"
+      ],
+      [
+       "MN Flathead (angle)",
+       "AP",
+       "HE",
+       "AP"
+      ],
+      [
+       "MN Flathead (flat)",
+       "AP",
+       "AP",
+       "HE -> AP"
+      ],
+      [
+       "CVL Journeyman",
+       "HE",
+       "HE",
+       "HE"
+      ],
+      [
+       "CC Ocello (bow)",
+       "AP",
+       "AP",
+       "AP"
+      ],
+      [
+       "CC Ocello (flat)",
+       "AP",
+       "HE",
+       "HE"
+      ],
+      [
+       "LN Marauder (bow)",
+       "AP or HE",
+       "HE or AP",
+       "HE or AP"
+      ],
+      [
+       "LN Marauder (flat)",
+       "HE or AP",
+       "HE",
+       "HE"
+      ],
+      [
+       "CLN Moorline",
+       "HE or AP",
+       "HE",
+       "HE"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Ballistic › Guidelines › Hit Probability",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The Hit Probability for a cannon is directly related to the Track Quality TQ, the Gun Dispersion, the target motion, the shell time on target TOT and the cross section of the target ship. Information on the Track Quality can be found in the Radar Section. The Gun Dispersion can be found below."
+    },
+    {
+     "kind": "p",
+     "text": "Track Quality is accuracy of the reported position of the target. The higher the TQ, the more accurate the shot is. The lower the TQ, the more likely that your guns aren't aiming at the target."
+    },
+    {
+     "kind": "p",
+     "text": "Gun Dispersion in Nebulous is square cone projected out onto the target. The closer the target is to your ship, the smaller the gun dispersion square is. The farther the target is the larger the target square. The shots are placed in a uniform distrubution on the projected square target. You gun dispersion can be reduced with Gun Plotting Center's and Gyro's. Often you will want to select the correct number of Gun Plotters and Gyros to raise the hit probability on target to acceptable levels for your ship and guns. Note larger guns will usually have larger dispersion."
+    },
+    {
+     "kind": "p",
+     "text": "Nebulous will predict the position of the target based on an instantaneous velocity at a moment in time. If the target is traveling at a constant velocity the guns will aim at where the ship will be (including inaccuracies from track quality). If your ship is accelerating faster, the shots will land behind the target. If the ship is decelerating the shots will land in front of the target. This is particularly useful for Orbit strafing, where you place an orbit command of minimum radius perpendicular to the shooter in which your ship will undergo constant acceleration and foil the predictive targeting computer of the shooter."
+    },
+    {
+     "kind": "p",
+     "text": "In addition to the target prediction above each Ship Radar and Fire Control raider has a velocity error accuracy. This velocity error accuracy is proportional to the Velocity of the ship."
+    },
+    {
+     "kind": "p",
+     "text": "For example when a ship is stopped the velocity error for target positioning will be 0, when it is at flank speed the velocity error might be 4m/s, for example."
+    },
+    {
+     "kind": "p",
+     "text": "This will directly institute error into the target prediction that is multiplied by the time on target, or time the projectile travels until it hits the target. For example, if a Ship is traveling forward with the 4m/s velocity error and the time on target is 10 seconds, the resulting shell will land 40 meters from the true projected position of the ship and may miss. For more details on this, see the Radar section."
+    },
+    {
+     "kind": "p",
+     "text": "Time on Target is the time it takes for the projectile to intersect the target. Each projectile fired is physicalized in Nebulous, this means that it will continue in Newtonian motion unless another object acts on it. Ideally the hostile ship, less ideally one of your ships. If the shot is unobstructed the time it takes to intersect the target is equal to the Distance to the Target Divided by the muzzle velocity of the gun. For example, if 450mm cannons are fired at a target at 8km away. With a muzzle velocity of 800 m/s, the shot will take 10 seconds to land on target. This means that the aim position of the guns are exactly 10 seconds behind where target currently is. If the target hasn't accelerated or decelerated, the shot will connect. If the target changes direction within those 10 seconds, your shots are much less likely to connect."
+    },
+    {
+     "kind": "p",
+     "text": "As detailed above the shot dispersion is a square super imposed on the enemy target. Depending on the enemy facing to your ship, such as nose on or side on. The probability of hitting the target is affected. When possible attempt to maneuver your ship to maximize the enemy cross sectional area facing your ship, as well as factoring in ship Armor for penetration."
+    },
+    {
+     "kind": "p",
+     "text": "The tables below were generated by FrozenIceman using a 10,000 sample Monte Carlo analysis firing 450mm rounds on a Ferryman and a Solomon with different numbers of Gun Plotters through all TQ levels. Both targets are stationary and have their bow facing the shooting ship, showing ideal shooting conditions."
+    },
+    {
+     "kind": "p",
+     "text": "The intention of these tables is to show the relative performance of adding gun plotters to your ship. As detailed above, depending on the target motion and the time on target of the projectile used, the probability to hit will be lower."
+    },
+    {
+     "kind": "p",
+     "text": "Note: a 250mm cannon dispersion is roughly equal to a 450mm cannon with 1 Gun Plotter. A 120mm cannon dispersion is roughly equal to a 450mm cannon with 2 Gun Plotters."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Track Quality",
+       "5km 0 Gun Plotter",
+       "10km 0 Gun Plotter",
+       "5km 1 Gun Plotter",
+       "10km 1 Gun Plotter",
+       "5km 2 Gun Plotters",
+       "10km 2 Gun Plotters"
+      ],
+      [
+       "TQ15",
+       "91%",
+       "28%",
+       "100%",
+       "56%",
+       "100%",
+       "100%"
+      ],
+      [
+       "TQ14",
+       "90%",
+       "28%",
+       "100%",
+       "56%",
+       "100%",
+       "96%"
+      ],
+      [
+       "TQ13",
+       "89%",
+       "28%",
+       "99%",
+       "56%",
+       "100%",
+       "94%"
+      ],
+      [
+       "TQ12",
+       "80%",
+       "28%",
+       "98%",
+       "54%",
+       "100%",
+       "88%"
+      ],
+      [
+       "TQ11",
+       "74%",
+       "28%",
+       "89%",
+       "52%",
+       "98%",
+       "82%"
+      ],
+      [
+       "TQ10",
+       "68%",
+       "27%",
+       "87%",
+       "49%",
+       "93%",
+       "75%"
+      ],
+      [
+       "TQ09",
+       "65%",
+       "27%",
+       "77%",
+       "46%",
+       "85%",
+       "66%"
+      ],
+      [
+       "TQ08",
+       "54%",
+       "27%",
+       "63%",
+       "42%",
+       "72%",
+       "57%"
+      ],
+      [
+       "TQ07",
+       "46%",
+       "26%",
+       "52%",
+       "36%",
+       "55%",
+       "49%"
+      ],
+      [
+       "TQ06",
+       "36%",
+       "23%",
+       "40%",
+       "31%",
+       "39%",
+       "38%"
+      ],
+      [
+       "TQ05",
+       "29%",
+       "22%",
+       "29%",
+       "27%",
+       "29%",
+       "29%"
+      ],
+      [
+       "TQ04",
+       "20%",
+       "18%",
+       "20%",
+       "20%",
+       "21%",
+       "21%"
+      ],
+      [
+       "TQ03",
+       "14%",
+       "13%",
+       "14%",
+       "14%",
+       "17%",
+       "14%"
+      ],
+      [
+       "TQ02",
+       "9%",
+       "9%",
+       "9%",
+       "9%",
+       "9%",
+       "9%"
+      ],
+      [
+       "TQ01",
+       "<9%",
+       "<9%",
+       "<9%",
+       "<9%",
+       "<9%",
+       "<9%"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Track Quality",
+       "5km 0 Gun Plotter",
+       "10km 0 Gun Plotter",
+       "5km 1 Gun Plotter",
+       "10km 1 Gun Plotter",
+       "5km 2 Gun Plotters",
+       "10km 2 Gun Plotters"
+      ],
+      [
+       "TQ15",
+       "11%",
+       "3%",
+       "22%",
+       "6%",
+       "56%",
+       "15%"
+      ],
+      [
+       "TQ14",
+       "11%",
+       "3%",
+       "22%",
+       "5%",
+       "38%",
+       "15%"
+      ],
+      [
+       "TQ13",
+       "11%",
+       "3%",
+       "22%",
+       "5%",
+       "31%",
+       "15%"
+      ],
+      [
+       "TQ12",
+       "10%",
+       "3%",
+       "21%",
+       "5%",
+       "29%",
+       "14%"
+      ],
+      [
+       "TQ11",
+       "10%",
+       "3%",
+       "18%",
+       "5%",
+       "27%",
+       "14%"
+      ],
+      [
+       "TQ10",
+       "10%",
+       "3%",
+       "16%",
+       "5%",
+       "18%",
+       "13%"
+      ],
+      [
+       "TQ09",
+       "9%",
+       "3%",
+       "11%",
+       "5%",
+       "12%",
+       "11%"
+      ],
+      [
+       "TQ08",
+       "8%",
+       "3%",
+       "8%",
+       "5%",
+       "8%",
+       "8%"
+      ],
+      [
+       "TQ07",
+       "6%",
+       "3%",
+       "6%",
+       "5%",
+       "6%",
+       "6%"
+      ],
+      [
+       "TQ06",
+       "4%",
+       "3%",
+       "4%",
+       "4%",
+       "6%",
+       "5%"
+      ],
+      [
+       "TQ05",
+       "3%",
+       "2%",
+       "3%",
+       "3%",
+       "3%",
+       "3%"
+      ],
+      [
+       "TQ04",
+       "2%",
+       "2%",
+       "2%",
+       "2%",
+       "2%",
+       "2%"
+      ],
+      [
+       "TQ03",
+       "1%",
+       "1%",
+       "1%",
+       "1%",
+       "1%",
+       "1%"
+      ],
+      [
+       "TQ02",
+       "1%",
+       "1%",
+       "1%",
+       "1%",
+       "1%",
+       "1%"
+      ],
+      [
+       "TQ01",
+       "<1%",
+       "<1%",
+       "<1%",
+       "<1%",
+       "<1%",
+       "<1%"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Ballistic › 100mm",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Shell classification",
+       "Shell type",
+       "Role",
+       "Damage (Hp)",
+       "Range (m)",
+       "Speed (m/s)",
+       "Penetration (cm)",
+       "Armor strip radius (m)",
+       "Cost (pts per X amount)",
+       "Ability"
+      ],
+      [
+       "100mm AP Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "25",
+       "7200",
+       "900",
+       "45",
+       "0.4",
+       "1/250",
+       "None"
+      ],
+      [
+       "100mm Grape",
+       "Ballistic/Canister",
+       "Dual-Purpose",
+       "25",
+       "7997",
+       "1100",
+       "16",
+       "0.4",
+       "1/250",
+       "12.5m Pellet Spread Radius; Increased normal-debuff chance and crew damage (500%); cannot cause rare/critical debuffs"
+      ],
+      [
+       "100mm HE-HC Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "70",
+       "7200",
+       "900",
+       "8",
+       "0.4",
+       "1/250",
+       "None"
+      ],
+      [
+       "100mm HE Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "45",
+       "7200",
+       "900",
+       "30",
+       "0.4",
+       "1/250",
+       "None"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Ballistic › 120mm",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Shell classification",
+       "Shell type",
+       "Role",
+       "Damage (Hp)",
+       "Range (m)",
+       "Speed (m/s)",
+       "Penetration (cm)",
+       "Armor strip radius (m)",
+       "Cost (pts per X amount)",
+       "Ability"
+      ],
+      [
+       "120mm AP Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "30",
+       "7200",
+       "800",
+       "45",
+       "0.4",
+       "1/100",
+       "None"
+      ],
+      [
+       "120mm HE-RPF Shell",
+       "Ballistic/Chemical",
+       "Dual-Purpose",
+       "64/8",
+       "7200",
+       "800",
+       "10",
+       "0.2",
+       "1/100",
+       "Once a target has been detected within a 37.5 meter zone infront of the shell (???), 8 fragments with 8 Hp worth of damage is sent towards the direction of the ship."
+      ],
+      [
+       "120mm HE Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "50",
+       "7200",
+       "800",
+       "30",
+       "0.4",
+       "1/100",
+       "None"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Ballistic › 250mm",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Shell classification",
+       "Shell type",
+       "Role",
+       "Damage (Hp)",
+       "Range (m)",
+       "Speed (m/s)",
+       "Penetration (cm)",
+       "Armor strip radius (m)",
+       "Cost (pts per X amount)",
+       "Ability"
+      ],
+      [
+       "250mm AP Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "70",
+       "8000",
+       "800",
+       "60",
+       "0.8",
+       "1/50",
+       "None"
+      ],
+      [
+       "250mm HE-RPF Shell",
+       "Ballistic/Chemical",
+       "Dual-Purpose",
+       "128/8",
+       "8000",
+       "800",
+       "20",
+       "0.3",
+       "1/50",
+       "Once a target has been detected within a 45 meter zone infront of the shell (???), 8 fragments with 16 Hp worth of damage is sent towards the direction of the ship."
+      ],
+      [
+       "250mm HE Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "80",
+       "8000",
+       "800",
+       "40",
+       "0.8",
+       "1/50",
+       "None"
+      ],
+      [
+       "250mm Bombshell",
+       "Ballistic/Chemical/Timed",
+       "Dual-Purpose",
+       "96 per target/6",
+       "8000",
+       "800",
+       "22",
+       "0.5",
+       "1/50",
+       "For every eligible ship target in a 500 meter bubble around the shell's activation point, 6 fragments will be launched at each target, each with 16 HP of damage (fragments are not thrown at missiles, small craft, or lifeboats)."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Ballistic › 450mm",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Shell classification",
+       "Shell type",
+       "Role",
+       "Damage (Hp)",
+       "Range (m)",
+       "Speed (m/s)",
+       "Penetration (cm)",
+       "Armor strip radius (m)",
+       "Cost ( pts per X amount)",
+       "Ability"
+      ],
+      [
+       "450mm AP Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "100",
+       "11240",
+       "800",
+       "120",
+       "1.25",
+       "1/25",
+       "None"
+      ],
+      [
+       "450mm HE Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "150",
+       "11240",
+       "800",
+       "65",
+       "1.25",
+       "1/25",
+       "None"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Ballistic › 600mm",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Shell classification",
+       "Shell type",
+       "Role",
+       "Damage (Hp)",
+       "Range (m)",
+       "Speed (m/s)",
+       "Penetration (cm)",
+       "Armor strip radius (m)",
+       "Cost (pts per X amount)",
+       "Ability"
+      ],
+      [
+       "600mm Bomb Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "480 per target/12",
+       "9800",
+       "700",
+       "40",
+       "0.5",
+       "1/25",
+       "For every ship in a 500 meter bubble around the shell's activation point, 12 fragments of 40 HP are launched. Missiles, small craft and lifeboats in that bubble are excluded."
+      ],
+      [
+       "600mm HE-SH Shell",
+       "Ballistic/Chemical",
+       "Offensive",
+       "420/7",
+       "9800",
+       "700",
+       "85",
+       "1.75",
+       "1/25",
+       "Damage model similar to HEI missile warheads with 7× 60 HP damage rays, but unlike those warheads it is affected by armor angling (effective thickness, can ricochet). Does not overpenetrate."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Ballistic › Energy Weapons (300mm / 400mm / 500mm)",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Shell classification",
+       "Shell type",
+       "Role",
+       "Damage (Hp)",
+       "Range (m)",
+       "Speed (m/s)",
+       "Penetration (cm)",
+       "Armor strip radius (m)",
+       "Cost (pts per X amount)",
+       "Ability"
+      ],
+      [
+       "300mm AP Rail Sabot",
+       "Ballistic/Magnetic",
+       "Offensive",
+       "80",
+       "21000",
+       "2000",
+       "200",
+       "1",
+       "1/25",
+       "Normal-debuff Crit chance of 10000%, which forces an ordinary debuff on a component that survives the hit; can apply fires and other normal debuffs, and cannot roll rare/critical debuffs."
+      ],
+      [
+       "400mm Plasma Ampoule",
+       "Ballistic/Magnetic",
+       "Offensive",
+       "60",
+       "7800",
+       "600",
+       "60",
+       "10",
+       "1/25",
+       "Armor strip falls off with range."
+      ],
+      [
+       "500mm Fracturing Block",
+       "Ballistic/Magnetic",
+       "Offensive",
+       "300/20",
+       "21000",
+       "2000",
+       "120",
+       "1.5",
+       "1/25",
+       "Damage model similar to HEI missile warheads with 20x 15hp damage rays."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Point Defense",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "These munitions are specifically made for defensive work, to destroy targets such as craft, missiles, and some light ships."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Shell classification",
+       "Shell type",
+       "Damage (Hp)",
+       "Range (m)",
+       "Speed (m/s)",
+       "Penetration (cm)",
+       "Cost (pts per X amount)",
+       "Ability"
+      ],
+      [
+       "15mm Sandshot",
+       "Ballistic/Magnetic",
+       "75",
+       "8000",
+       "2500",
+       "0.275",
+       "1/50",
+       "Pellet Spread Radius: 7.5m"
+      ],
+      [
+       "20mm Slug",
+       "Ballistic/Chemical",
+       "15",
+       "1750",
+       "700",
+       "0.3",
+       "1/2000",
+       "None"
+      ],
+      [
+       "35mm Slug",
+       "Ballistic/Chemical",
+       "15",
+       "1750",
+       "700",
+       "4",
+       "1/1000",
+       "Duel-Purpose craft shell."
+      ],
+      [
+       "35mm Flechette",
+       "Ballistic/Chemical",
+       "15",
+       "1750",
+       "700",
+       "0.1",
+       "1/250",
+       "Pellet Spread Radius of 3.3m."
+      ],
+      [
+       "50mm Flak Shell",
+       "Ballistic/Chemical/Timed",
+       "15",
+       "2002",
+       "650",
+       "0.176",
+       "1/75",
+       "None"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "p",
+     "text": "Missiles are the most powerful weapons a ship can carry but they have limited ammunition, can be shot down and fire slower than other weapons. The number of missiles that can be prepared to fire at the same time depends on the ship's missile programming channels."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics",
+   "blocks": []
+  },
+  {
+   "heading": "Missile Mechanics › Targeting",
+   "blocks": []
+  },
+  {
+   "heading": "Missile Mechanics › Targeting › Target Selection Cycle",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Most seekers choose targets with a lottery. Every 0.5 seconds, the seeker sweeps its cone for targets and adds them to a list. Note that this list is not stored between search cycles, the only thing the missile remembers is the \"current target\"."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Each target is given an initial score based on its power, how strong the signal is. All powers fall off with distance, so closer targets are usually scored higher initially."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "ACT and SAH power is based on the radar return power density. Also, targets further from the center of the missile's view are scored lower, down to 50% at the edge. ACT power is based on the distance from the missile to the target. SARH power uses both the illuminator-to-target distance, including where the target sits in the illuminator cone, and the target-to-missile distance."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "For the EO seeker, ship size does not matter; ships give off the same \"optical\" power, modified only by their distance to the seeker."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "If the missile has an active validator, the validator checks each target and marks it as valid or invalid (this is not saved between seeker cycles for validators other than [ARAD], which has a 30 second memory)"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "If the missile has multiple validators, every validator will check each target.[1]"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "If the seeker is set to accept unvalidated, and at least one target is valid, then every invalid is removed from the list. If no targets are valid, then the validator is ignored."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "If the seeker is set to reject unvalidated, invalid targets are always ignored."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The scores of the targets are then modified based on a few factors"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "If the missile has a current target, and that target appears in the list again, then:"
+    },
+    {
+     "kind": "li",
+     "depth": 3,
+     "text": "If the time to impact is less than the seeker's lock Target TTGI[2] stat (3.0 seconds for most vanilla seekers, 2.5s for ACT seekers, 2.0s for WAKE variants), the seeker is guaranteed to choose this target again."
+    },
+    {
+     "kind": "li",
+     "depth": 3,
+     "text": "Otherwise, its score is multiplied by the Target Affinity stat of the seeker (10x for most seekers, 3x for WAKE variants)."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "If the seeker is EO, and it was fired at a track with intel, all targets matching the same ship class have their scores multiplied by 250."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Select a random target weighted by the scores of the targets remaining in the list."
+    },
+    {
+     "kind": "p",
+     "text": "CMD seekers do not undergo this process as their only target is the track they were fired on."
+    },
+    {
+     "kind": "p",
+     "text": "If the seeker is under jamming, the target's return power has to exceed the combined jamming power felt by the seeker to detect the target and add it to the lottery. Note that this is slightly different from the search radar calculations, as the combined jamming power is compared directly without converting it to noise first. As a result, missile seekers are not affected by ambient noise at all."
+    },
+    {
+     "kind": "p",
+     "text": "If the seeker is jammed and cannot see any targets, it will follow a fake target, therefore causing the missile to veer off target. This fake target is placed 1km away from the missile, at a random point up to 4 degrees off the nose with a velocity of 10m/s in a random direction, and changes once every second. Equipping the missile with any validator and setting the seeker to reject unvalidated will push the fake target out to 50km, preventing premature staging if the seeker can detect range."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Targeting › Validation",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Comparison of dual-seeker and seeker-validator behavior. Diagram by smolcake."
+    },
+    {
+     "kind": "p",
+     "text": "All seekers can be set to validation mode. When a seeker is operating in Validation mode, it does NOT provide its original function. Instead, it validates target tracks spotted by the targeting seekers, and tags them valid or invalid."
+    },
+    {
+     "kind": "p",
+     "text": "The validator checks every track spotted by the targeting seekers, ignoring the validator's default range and seeker cone. These targets are tagged valid if the validator can also see it, and tagged invalid otherwise. Validators otherwise spot targets in the same way as if it was a targeting seeker. SAH Validation is broken and behaves like ACT validation. Multiple Validators on the same missile are also broken; only one will work at a time and appear to inconsistently alternate which functions."
+    },
+    {
+     "kind": "p",
+     "text": "Validator reliability is the chance that the validator will provide accurate info. The seeker rolls its validator chance once on launch. If the check fails, the validator will always be wrong (eg, an invalid target will be tagged valid, and a valid target will be tagged invalid)."
+    },
+    {
+     "kind": "p",
+     "text": "Validators can negate some secondary effects of jamming when paired with a targeting seeker set to reject unvalidated (assuming the validator itself is not jammed). The seeker will not follow the fake targets produced by jamming (unless the validator is also affected or attracted to the jamming source), and seekers will not stage early due to jamming (unless the seeker cannot detect distance, as the staging prevention comes from pushing the fake target from 1km to 50km). Both of these effects are not affected by validator reliability. Note that validators otherwise do not improve the seeker's ability to acquire targets through jamming; the targeting seeker will spot targets at the same range regardless if it has a validator or not."
+    },
+    {
+     "kind": "p",
+     "text": "Validators will apply to all targeting seekers in the missile, even if the targeting seeker is placed behind the validator."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Targeting › Backup Seeker",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Seekers in targeting mode placed in slots behind other seekers will function as backup seekers. They will only activate if the seekers ahead of them do not see a target. If a seeker has an active backup behind it, it can automatically turn itself off in the event of jamming, preventing early staging and following fake targets, and allowing the backup seeker to take over. However, note that the backup itself will not turn itself off when jammed, even if the primary has a clear view; the backup will only turn off if the primary finds a target or the backup also has another backup."
+    },
+    {
+     "kind": "p",
+     "text": "Backups will also utilize any existing validators, regardless of position."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Launching Missiles",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Missiles may be launched in one of two modes which behave differently based on the avionics/guidance package of the missile"
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Launching Missiles › Track mode (TRK)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Firing missiles in track mode is accomplished by right clicking an enemy track and selecting the weapon from the list. This will create a red firing vector and the volley confirmation window. When moused over a track you will see the number of missiles to be fired, the volley count, the distance to target, and the estimated intercept time. ALT will add missiles to the volley one at a time while SHIFT+ALT will add one volley worth of missiles (based on the firing ships missile programming channel count). Right click will remove missiles one at a time and escape cancels the firing selector entirely. Note that while Track mode automatically assigns one missile to the original track, subsequent missiles can be assigned to other tracks. Track mode is useful for quickly getting missiles launched but care should be used both to confirm the correct target and to ensure that the target will not move beyond the seeker cones range by the time the missiles near the target."
+    },
+    {
+     "kind": "p",
+     "text": "Missiles fired in track mode will try to plot an intercept using the reported position and velocity from the sensor network. An automatically fired defensive missile using Direct guidance flies straight at the target instead, and only when the target's velocity is within about 32 degrees of pointing at the launching ship (dot product at least 0.85). Player-ordered track shots, and cruise-guided shots, always lead."
+    },
+    {
+     "kind": "p",
+     "text": "Cruise missiles fired in track mode can also make use of TRP waypoints while in the mode. TRP waypoints are selected with CTRL while in track fire mode and can be used to route cruise missiles around obstacles or to put them on advantageous strike angles."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Launching Missiles › Position mode (POS)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "To position fire a missile right click on open space and select the weapon from the list. This will pull up the sphere widget and and show a red cone representing the missiles primary seeker detection cone. Unlike track fire mode every missile fired in position mode must be individually vectored (Volley size and time to the position are also available in the tooltip). Although more cumbersome than track firing there are number of advantages to position firing even for direct guidance missiles. It's possible to create a \"spread fire\" pattern with volleys of missiles if the whereabouts of the target are not certain. Also, if the target is moving quickly position fire can be used to lead the target based on its predicted path. Keep in mind unlike track fire mode the final left click confirmation while in position fire mode will add one additional missile to the volley fired."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Direct missiles fired in position mode will proceed straight on course with seeker active. Care should be used in the sphere tool because if a small sphere is used (adjustable with CTRL), even a few pixels distance between each missile vector will result in a large spread at distance. Note that the seeker will be active as soon as the missiles launch."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Cruise missiles fired in position mode receive a unique ability. While in position fire mode holding SHIFT and left clicking will create a waypoint for the missiles and move the sphere tool to the location selected. From there a further waypoints can be created. Using this method it is possible to create incredibly complex flight paths for cruise missiles which dodge or even curve behind obstacles. Once the final waypoint is chosen, individual or multiple missiles can be fired using the sphere tool. If multiple missiles are fired in a volley they will travel together to the final waypoint, then follow their individual vectors from there. Care should be used when creating cruise waypoints as the missile seekers are only activated upon reaching the final position from the final waypoint. It is possible to fly inactive cruise missiles directly past enemy fleets exposing them to PD fire."
+    },
+    {
+     "kind": "p",
+     "text": "If the target is too close to the launcher, a \"too close\" warning will be shown. This warning does not prevent firing or otherwise affect the missile. The specific range where the warning is shown depends on the seeker, (1000m for most seekers, 500m for Wake). A missile with multiple seekers will use the longest \"too close distance\" for the warning."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Launching Missiles › Programming",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Missile launches out of VLS tubes are affected by Programming Time and Programming Channels."
+    },
+    {
+     "kind": "p",
+     "text": "Each ship has a default number of programming channels available, which can be increased with Bus/Bus Array modules. No matter how many missile launchers are on the ship, only a set number of missiles up to the number of channels can be programmed at one time. If you queue more missiles to launch than there are channels available the remaining missiles are queued to program after the first salvo fires."
+    },
+    {
+     "kind": "p",
+     "text": "Programming time is the amount of time it takes to program the channels. Programming time can be reduced by the strike planning center, the missile parallel interface module, or by the Fast Startup missile support module."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Launching Missiles › Mixed Salvos",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ships with VLS can create and fire mixed salvos of missiles by pressing the \"+\" icon next to the missile in the weapon menu. Mixed salvos will remain in the weapon menu for reuse until a new mixed salvo is created. When creating mixed salvos for formations, the missile has to be present on every ship in the formation in order to add it into the mixed salvo."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Launching Missiles › MLS Launcher",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "MLS launchers use an autoloader system, enabling each launcher to fire a certain amount of missiles on demand without using channels or programming time. However, MLS launchers require a lengthy reload once it runs out of missiles or when changing missile type."
+    },
+    {
+     "kind": "p",
+     "text": "MLS launchers are not affected by programming channels or programming time, but ammunition elevators will speed up its reload time."
+    },
+    {
+     "kind": "p",
+     "text": "MLS will not fire defensive missiles automatically."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Defensive Missiles",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Also known as anti-missile missiles, or AMMs. Missiles set to \"defensive\" in their avionics and placed in VLS tubes will be fired by the ship for point defense."
+    },
+    {
+     "kind": "p",
+     "text": "When fired automatically, AMMs have no programming time (only limited by the time it takes to open the tubes), and their seekers are automatically set to only detect small targets and will not lock onto ships."
+    },
+    {
+     "kind": "p",
+     "text": "Multiple ships with AMMs and comms on will communicate with each other to \"deconflict\" AMM launches, which means only one of them will fire a salvo against incoming missiles rather than all of them firing individual salvos. Note that this will only work if the ship has full communication with the rest of the team, if comms are cut (by combat damage, comms jamming, or intentional emcon), then the ship will not participate in deconfliction and will fire AMMs at all applicable targets"
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Defensive Missiles › Defensive Targeting Doctrine",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Doctrine decides how defensive missiles are fired against incoming missiles. These settings can be overridden by the Point Defense Missile Setting if Fire Mode is switched away from DCTRN/D."
+    },
+    {
+     "kind": "p",
+     "text": "Threat size controls which missile threats the AMM will automatically launch against. Size 1, 2, and/or 3 can be toggled on or off. There is an additional switch which allows the missile to target all missiles (ALL), conventional missiles only (CONV),hybrid missiles only (HYBRID), and spacecraft (CRAFT). The threat types of some special missiles are listed below."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "SDM-1: Size 1 conventional"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "SDM-2: Size 2 Conventional"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "SGM-H-2: Size 2 Hybrid"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "SGM-H-3: Size 3 Hybrid"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "SGM-3: Size 3 Hybrid"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Containers: Size 3 conventional"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "R-2 Rockets: Size 1 conventional (size-2 body with its point-defense threat size overridden to 1)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Mines: Size 3 conventional"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Fighters: Size 2 spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Bombers: Size 3 spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "SEWAC / Skiff / Scout: Size 1 spacecraft"
+    },
+    {
+     "kind": "p",
+     "text": "Alternatively, a more in-depth matrix targeting system can be used. This presents all of the same information above but allows for more defined behavior; for instance a missile can be targeted towards specific types of craft and missiles. Missiles using this matrix system, even if the information in it is otherwise identical to the above system, is easier for the game to read and allows for more reliable use of multiple types of defensive missiles on the same ship."
+    },
+    {
+     "kind": "p",
+     "text": "The size ordering setting has three modes."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "DESCEND: The missile will be fired at the largest valid threat size first before firing against smaller threats."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "ASCEND: The missile will be fired at the smallest valid threat size first before firing against larger threats."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "EQUAL: The missile launch sequence will be unaffected by threat size so long as it is the correct size."
+    },
+    {
+     "kind": "p",
+     "text": "The salvo size setting controls whether 1, 2 or 3 AMMs will be fired at a threat."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEAR-TO-FAR: The missile will be fired at the closest threats first before firing against further threats."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "FAR-TO-NEAR: The missile will be fired at the furthest threats first before firing against closer threats."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Mechanics › Defensive Missiles › Point Defense Missile Setting",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The Point Defense Missile Settings (PDMSL) are settings which control the behaviour of ships' and formations' AMMs and can override the AMMs' defensive targeting doctrines. The default values for these settings can be changed in the Settings screen off the Main Menu. These settings are abbreviated when displayed in the ship's control console (e.g. Fire Mode DCTRN / Fire Policy 1 Salvo / Salvo Size 1 / Last Salvo Yes will be displayed as D 1 1 Y)."
+    },
+    {
+     "kind": "p",
+     "text": "The fire mode controls the logic that governs automatic launching of AMMs."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "DCTRN (D): The AMMs will launch automatically according to their defensive targeting doctrine."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "ALL (A): The AMMs will be indiscriminately launched against all nearby threats."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "MAN (M): AMMs will only launch against prioritized threats (ones the player has 'Z'+clicked on)."
+    },
+    {
+     "kind": "p",
+     "text": "The fire policy controls the number of salvoes launched against a threat (not including last salvo)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "1 Salvo (1): One salvo will be launched."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "2 Salvo (2): Two salvoes will be launched."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "MAX DOF (M): Follow-up salvoes will be launched after the previous salvo's India time (time to intercept) has elapsed until the threat is destroyed."
+    },
+    {
+     "kind": "p",
+     "text": "Salvo size controls the number of AMMs launched in a single salvo against a threat."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "1 (1): One AMM will be fired pre salvo."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "2 (2): Two AMMs will be fired per salvo."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "3 (3): Three AMMs will be fired per salvo."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "DCTRN (D): The AMMs' salvo size setting will be followed."
+    },
+    {
+     "kind": "p",
+     "text": "Last salvo controls whether or not a final salvo of missiles will be fired at the last possible moment regardless of fire policy or if other AMMs are in flight."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "YES (Y): A last salvo will be fired."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NO (N): A last salvo will not be fired."
+    },
+    {
+     "kind": "p",
+     "text": "This setting appears to have been removed in favor of the NEZ setting in the carriers update"
+    }
+   ]
+  },
+  {
+   "heading": "Missile Construction",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Missiles can be designed and colored in the fleet editor. If a design is deleted it will be removed from all missile launchers in the fleet."
+    },
+    {
+     "kind": "p",
+     "text": "Selecting a missile's engine will show the engine configuration triangle, allowing the engine to be focused on Top Speed, Burn Duration or Maneuverability."
+    },
+    {
+     "kind": "p",
+     "text": "Note that some of the missile body stats are exaggerated, specifically engine tunings like max speed. While it is possible to make a 15km range sdm-1, you will most likely be on the lower end or middle of the spectrum of range. These statistics where made with EXTREME values. The missile body cost has engine cost considered as well, as while the SGM-H-200 Cyclone has a missile body cost of 3, the actual minimum cost is closer to 5 with no components added."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Missile Body",
+       "Size",
+       "Integrity",
+       "Wall Thickness",
+       "Socket Weight",
+       "Programming Time (s)",
+       "Components",
+       "Main Speed (m/s)",
+       "Thruster Speed (m/s)",
+       "Range (m)",
+       "Acceleration (G)",
+       "Top Speed (s)",
+       "Turn Rate (G)",
+       "Radar Cross Section (Front / Side)",
+       "Body Cost",
+       "Faction"
+      ],
+      [
+       "SGM-100 Balestra Missile",
+       "1",
+       "10 HP",
+       "0.05 cm",
+       "0.33x",
+       "6 sec",
+       "3",
+       "250-400 m/s",
+       "40-50 m/s",
+       "1458-11911 m",
+       "35.7-76.5 G",
+       "0.3-1.1 sec",
+       "3.9-13.3 G",
+       "156 m2/400m 2",
+       "0 pt",
+       ""
+      ],
+      [
+       "SDM-100 Lunge Missile",
+       "1",
+       "10 HP",
+       "0.05 cm",
+       "0.33x",
+       "6 sec",
+       "3",
+       "650-850 m/s Boost 250-400 m/s Main",
+       "30-40 m/s Boost 40-50 m/s Main",
+       "1844-3759 m Boost 958-11911 m Main",
+       "153.1-204.1 G Boost 35.7-76.5 G Main",
+       "0.3-0.6 sec Boost 0.3-1.1 sec Main",
+       "6.5-17.5 G Boost 3.9-13.3 G Main",
+       "625 m2/950 m2",
+       "0 pt",
+       ""
+      ],
+      [
+       "SSM-100 Remise Missile",
+       "1",
+       "10 HP",
+       "0.05 cm",
+       "0.33x",
+       "6 sec",
+       "4",
+       "250-400 m/s",
+       "40-50 m/s",
+       "1458-11911 m",
+       "35.7-76.5 G",
+       "0.3-1.1 sec",
+       "3.9-13.3 G",
+       "156 m2/400 m2",
+       "0 pt",
+       ""
+      ],
+      [
+       "SGM-200 Tempest Missile",
+       "2",
+       "30 HP",
+       "0.05 cm",
+       "1x",
+       "8 sec",
+       "4",
+       "180-350 m/s",
+       "30-40 m/s",
+       "2826-32284 m",
+       "14.3-30.6 G",
+       "0.6-2.5 sec",
+       "1.7-6.0 G",
+       "625 m2/950 m2",
+       "2 pt",
+       ""
+      ],
+      [
+       "SDM-200 Typhoon Missile",
+       "2",
+       "25 HP",
+       "0.05 cm",
+       "1.25x",
+       "10 sec",
+       "4",
+       "650-850 m/s Boost 225-150 m/s Main",
+       "30-40 m/s Boost 150-225 m/s Main",
+       "4936-8098 m Boost 1165-7130 m Main",
+       "61.2-81.6 G Boost 16.3-32.7 G Main",
+       "1.4-0.8 sec Boost 1.4-0.5 sec Main",
+       "4.4-12.8 G Boost 2.8-8.2 G Main",
+       "625 m2/950 m2",
+       "2 pt",
+       ""
+      ],
+      [
+       "SGM-300 Flail Hybrid Missile",
+       "3",
+       "60 HP",
+       "0.05 cm",
+       "1.5x",
+       "16 sec",
+       "5",
+       "150-250 m/s Cruise 250-450 m/s Terminal",
+       "20-40 m/s Cruise 250-450 m/s Terminal",
+       "7425-26888 m Cruise 448-11125 m Terminal",
+       "10.2-15.3 G Cruise 25.5-61.2 G Terminal",
+       "1.0-2.5 sec Cruise 0.4-1.8 sec Terminal",
+       "0.9-4 G Cruise 6.7-18.9 G Terminal",
+       "1600 m2/3600 m2",
+       "4 pt",
+       ""
+      ],
+      [
+       "SGT-300 Pilum Torpedo",
+       "3",
+       "160 HP",
+       "0.25 cm",
+       "3x",
+       "3 sec",
+       "4",
+       "175-300 m/s",
+       "20-35 m/s",
+       "814-10135 m",
+       "15.3-25.5 G",
+       "0.7-2.0 sec",
+       "1.2-5.5 G",
+       "900 m2/2400 m2",
+       "1 (+0-3 engine) pt",
+       ""
+      ],
+      [
+       "SGM-H-200 Cyclone Hybrid Missile",
+       "2",
+       "25 HP",
+       "0.05 cm",
+       "0.8x",
+       "10 sec",
+       "4",
+       "200-350 m/s Cruise 500-1000 m/s Sprint",
+       "7875-25750 m Cruise 438-10375 m Sprint",
+       "8.2-16.3 G Cruise 102.0-204.1 G Sprint",
+       "1.3-4.4 sec Cruise 0.3-1.0 sec Sprint",
+       "0.8-3.2 G Cruise 14.8-31.9 G Sprint",
+       "625 m2/950 m2",
+       "3+2[3] pt",
+       ""
+      ],
+      [
+       "SGM-H-300 Atlatl Hybrid Missile",
+       "3",
+       "60 HP",
+       "0.05 cm",
+       "1.8x",
+       "16 sec",
+       "5",
+       "100-200 m/s Cruise 550-1000 m/s Sprint",
+       "20-40 m/s Cruise 550-1000 m/s Sprint",
+       "7944-24917 m Cruise 271-13411 m Sprint",
+       "6.1-9.2 G Cruise 76.5-127.6 G Sprint",
+       "1.1-3.3 sec Cruise 0.4-1.3 sec Sprint",
+       "0.5-2.5 G Cruise 16.9-40.8 G Sprint",
+       "1600 m2/3600 m2",
+       "5+3[4] pt",
+       ""
+      ],
+      [
+       "CM-400 Container",
+       "4",
+       "150 HP",
+       "0.2 cm",
+       "2x",
+       "20 sec",
+       "5",
+       "125-275 m/s",
+       "20-35 m/s",
+       "1083-65943 m",
+       "19.1-6.4 G",
+       "4-12.8 sec",
+       "1.1-4.0 G",
+       "1600 m2/4000 m2",
+       "0 pt",
+       ""
+      ],
+      [
+       "CM-S-400 Container",
+       "4",
+       "150 HP",
+       "0.2 cm",
+       "4x",
+       "20 sec",
+       "5",
+       "125-275 m/s",
+       "20-35 m/s",
+       "1083-65943 m",
+       "19.1-6.4 G",
+       "1.1-4.0 sec",
+       "0.1-3.3 G",
+       "1600 m2/4000 m2",
+       "0 pt",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-SGM-1_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-SDM-1_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-SSM-1_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-SGM-2_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-SDM-2_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-OSP_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-SGM-3_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-OSP_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-SGT-3_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-SGM-H-2_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-SGM-H-3_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-Rocket_Container_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-OSP_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-Rocket_Container_Icon.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-OSP_Roundel.png"
+       ]
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Missile Construction › Wall Thickness",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Missile wall thickness is armor for the missile, though unlike ship armor, missiles use a far simpler system. If the AP of the incoming attack is less than the wall thickness, it will only deal half damage to the missile. It is measured in centimeters, i.e. 0.2 wall thickness is 0.2cm or 2mm."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Construction › Missile radar cross-section",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Missile (and others with the same box)",
+       "Radar box, m (width × height × length)",
+       "Side-on",
+       "Nose-on",
+       "45° off nose, level",
+       "Peak, banked 45° (angle off nose)"
+      ],
+      [
+       "SGM-100 Balestra, SSM-100 Remise, R-1, R-2, KBU-15, and FBU-15",
+       "12.5 × 12.5 × 32",
+       "400",
+       "156",
+       "393",
+       "587 (75°)"
+      ],
+      [
+       "SDM-100 Lunge, SDM-200 Typhoon, SGM-200 Tempest, and SGM-H-200 Cyclone",
+       "25 × 25 × 38",
+       "950",
+       "625",
+       "1,114",
+       "1,482 (65°)"
+      ],
+      [
+       "SGM-300 Flail and SGM-H-300 Atlatl",
+       "40 × 40 × 90",
+       "3,600",
+       "1,600",
+       "3,677",
+       "5,337 (73°)"
+      ],
+      [
+       "SGT-300 Pilum",
+       "30 × 30 × 80",
+       "2,400",
+       "900",
+       "2,333",
+       "3,511 (75°)"
+      ],
+      [
+       "CM-400 and CM-S-400 Container",
+       "40 × 40 × 100",
+       "4,000",
+       "1,600",
+       "3,960",
+       "5,879 (74°)"
+      ],
+      [
+       "KBU-22, CBU-40",
+       "15 × 15 × 40",
+       "600",
+       "225",
+       "583",
+       "878 (75°)"
+      ],
+      [
+       "R-3 Spearfish",
+       "20 × 20 × 45",
+       "900",
+       "400",
+       "919",
+       "1,334 (73°)"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "A missile flying straight at the ship it is attacking presents close to its minimum return."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Construction › Payload",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The payload determines how a missile inflicts damage. The exact damage type depends on the size of the missile. SSM-1, SDM-1 and SDM-2 missiles can only equip Blast Fragmentation and Blast Fragmentation EL warheads."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Payload",
+       "Fuze",
+       "Area Damage Type",
+       "Base Cost (pts)",
+       "Notes"
+      ],
+      [
+       "HE Impact",
+       "Contact",
+       "Shaped Angle 70 deg",
+       "0.25",
+       ""
+      ],
+      [
+       "HE Kinetic Penetrator",
+       "Delayed Contact",
+       "Internal sphere blasts every 6.6 m along the penetration path (up to 26), sharing the explosive damage, at least 40% of it",
+       "1.75",
+       "Armor penetration scales with speed above 250 m/s and with warhead size. The editor shows that value at the missile's top terminal speed; a slower impact penetrates less. Penetration distance is capped at 175 m."
+      ],
+      [
+       "Blast Fragmentation",
+       "Proximity",
+       "Blast Fragmentation Radius",
+       "0.25",
+       "Larger missiles increase the area damage radius as well"
+      ],
+      [
+       "Blast Fragmentation EL",
+       "Proximity",
+       "Blast Fragmentation Radius",
+       "3.5",
+       "Larger missiles increase the area damage radius as well"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Warhead_shaped.png"
+       ],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Warhead_hekp.png",
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Warhead_frag.png"
+       ],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Warhead_frag_el.png"
+       ],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Missile Construction › Payload › Support Components in warhead sockets",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Some missiles can equip support components in their resizable warhead sockets, allowing for support components to scale to larger sizes similar to warheads"
+    },
+    {
+     "kind": "p",
+     "text": "A scalable support component in a length 1 warhead will act as if it was in a normal support socket. Longer lengths will linearly multiply the support component's power. e.g. a regular decoy put in a length 2 socket will increase the decoy count from 3 to 6, increasing the length to 4 will increase the decoy count to 12, etc. Costs will also increase at the same rate, the support components in the previous example will have"
+    },
+    {
+     "kind": "p",
+     "text": "Only decoy launchers support socket scaling. All other support modules will not be boosted by larger sizes."
+    },
+    {
+     "kind": "p",
+     "text": "Socket weight does not have an effect on support components."
+    }
+   ]
+  },
+  {
+   "heading": "Missile Construction › Avionics Package",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The avionics package determines how the missile is controlled. It has the following configuration options:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Weapon Role sets how the missile may be launched:"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "DEFENSIVE: Missiles can be launched manually and by the point defense system."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "OFFENSIVE: Missiles can be launched manually."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Launch Type sets the behavior immediately after launching:"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "HOT: The missile's engine will ignite immediately, good for getting the missile moving quickly when fired in range of enemy point defenses."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "COLD: The missile will maneuver around the launching ship with thrusters until it has an unobstructed line to the target or first waypoint before igniting the main engines."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Target Lost Behavior sets what the missile will do if it loses the target:"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "RESUME SEARCH: The missile will search for a new target."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "SELF DESTRUCT: The missile will self destruct."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Terminal Maneuvers sets what evasive maneuvers the missile will perform on its terminal approach to the target:"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "NONE: No evasive maneuvers."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "WEAVE: Missile will weave from side to side."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "CORKSCREW: Missile will spiral towards the target."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Trajectory Preference sets the approach angle the guidance system will try to maintain."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "FREE APPRAOCH: Missile will fly directly towards the target."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "MINIMUM ANGLE: The missile stays on the line between the launching ship and the target, which usually produces a head-on approach. Only Direct Guidance has this option, and it is on by default."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Avionics Package",
+       "Description",
+       "Base Cost (pts)"
+      ],
+      [
+       "Direct Guidance",
+       "The simplest form of missile guidance system. This avionics package guides the missile in a straight line towards the target that has been acquired by the missile's seeker.",
+       "0"
+      ],
+      [
+       "Cruise guidance",
+       "A more advanced form of missile guidance that is capable of following a complex waypoint path to the target, enabling blind strikes around asteroids and more.",
+       "2"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Avionics_basic.png"
+       ],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Avionics_cruise.png"
+       ],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Missile Construction › Seekers",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The seeker determines the method the missile uses to track its target. Most seekers can choose whether to ignore small targets such as other missiles or not. If a missile has two seekers the secondary one (the one not placed at the nose of the missile) can be set to a Seeker Mode:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "TARGETING: Secondary seeker will be used to acquire a target if the primary seeker does not find any."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "VALIDATION: Secondary seeker will be used to validate targets. Missile will favor targets validated by both seekers, greatly reducing the effectiveness of enemy decoys."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "STUN: When dazzled, EO seekers are \"Stunned\", causing it to remain jammed for 1 second after leaving a dazzler's area of effect."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Seeker",
+       "Type",
+       "Range (M)",
+       "FOV (deg)",
+       "Validator Reliability (%)",
+       "Steerable",
+       "Position Trageting",
+       "Measures Position",
+       "Measures Velocity",
+       "Base Cost / Validator Cost"
+      ],
+      [
+       "Command Receiver",
+       "COMMS",
+       "Fleet",
+       "Fleet",
+       "Fleet",
+       "Fleet",
+       "No",
+       "Yes",
+       "Yes",
+       "3.5 / 3"
+      ],
+      [
+       "Fixed Active Radar Seeker",
+       "RADAR",
+       "2000",
+       "50",
+       "95",
+       "No",
+       "Yes",
+       "Yes",
+       "Yes",
+       "1 / 0.25"
+      ],
+      [
+       "Steerable Active Radar Seeker",
+       "RADAR",
+       "2000",
+       "40",
+       "95",
+       "Yes",
+       "Yes",
+       "Yes",
+       "Yes",
+       "1.5 / 0.25"
+      ],
+      [
+       "Steerable Extended Active Radar Seeker",
+       "RADAR",
+       "5000",
+       "40",
+       "95",
+       "Yes",
+       "Yes",
+       "Yes",
+       "Yes",
+       "3 / 0.25"
+      ],
+      [
+       "Fixed Semi-Active Radar Seeker",
+       "RADAR",
+       "4000",
+       "50",
+       "95",
+       "No",
+       "Yes",
+       "Direction Only",
+       "Yes",
+       "0.5 / 0.5"
+      ],
+      [
+       "Fixed Anti-Radiation Seeker",
+       "PSV RADAR",
+       "3000",
+       "50",
+       "93",
+       "No",
+       "Yes",
+       "Direction Only",
+       "No",
+       "2 / 2"
+      ],
+      [
+       "Fixed Anti-Radiation Seeker (Home On Jam)",
+       "PSV JAM",
+       "∞",
+       "50",
+       "93",
+       "No",
+       "Yes",
+       "Direction Only",
+       "No",
+       "0.5 / 0.5"
+      ],
+      [
+       "Fixed Anti-Radiation Seeker (Pulsed Radar)",
+       "PSV PULSED",
+       "3000",
+       "50",
+       "93",
+       "No",
+       "Yes",
+       "Direction Only",
+       "No",
+       "2.50 / 2.50"
+      ],
+      [
+       "Electro-Optical Seeker",
+       "EO",
+       "3000",
+       "60",
+       "100",
+       "Yes",
+       "Yes",
+       "Yes",
+       "No",
+       "8 / 5"
+      ],
+      [
+       "Wake-Homing Seeker",
+       "WAKE",
+       "1500",
+       "120",
+       "100",
+       "Yes",
+       "Yes",
+       "Direction Only",
+       "No",
+       "0.25 / 0.5"
+      ],
+      [
+       "Wake-Homing Seeker (THERM)",
+       "THERM",
+       "1500",
+       "120",
+       "100",
+       "Yes",
+       "Yes",
+       "Direction Only",
+       "No",
+       "0.25 / 3"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_command.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_active_fixed.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_active_steerable.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_active_steerable.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_semiactive_fixed.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_arh_fixed.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_arh_fixed.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_arh_fixed.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_eo.png",
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_wake.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Seeker_wake.png",
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Missile Construction › Auxiliary",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Auxiliary components can be used to grant a bonus to the missile. They can only be used on missiles that include at least 4 components."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Auxiliary",
+       "Modifiers",
+       "Base Cost (pts)"
+      ],
+      [
+       "Cold Gas Bottle",
+       "+150% Boost-Phase Strafe +100% Boost-Phase Turn Rate",
+       "1"
+      ],
+      [
+       "Decoy Launcher",
+       "+3 Decoys Fired",
+       "12"
+      ],
+      [
+       "Cluster Decoy Launcher",
+       "+6 Decoys Fired",
+       "30"
+      ],
+      [
+       "Fast Startup Module",
+       "-66% Programming Time +20% Failure Rate",
+       "3"
+      ],
+      [
+       "Hardened Skin",
+       "+20 Body Integrity",
+       "5"
+      ],
+      [
+       "Radar Absorbent Coating",
+       "-40% Radar Signature Bonus",
+       "4"
+      ],
+      [
+       "Self-Screening Jammer",
+       "RADAR - range: 2500m; radiated power: 5 kW; gain: 2 dB",
+       "5"
+      ],
+      [
+       "Boosted Self-Screening Jammer",
+       "RADAR - range: 5000m; radiated power: 5 kW; gain: 4 dB; beam width: 10 deg",
+       "10"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Support_coldgas.png"
+       ],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Support_decoys.png"
+       ],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Support_decoys_cluster.png"
+       ],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Support_fastboot.png"
+       ],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Support_armor.png"
+       ],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Support_stealth.png"
+       ],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Support_jammer.png"
+       ],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Support_jammer.png"
+       ],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Missile Construction › Auxiliary › Warheads in support sockets",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Some missiles (such as the CM-S-400) can equip warheads in the support sockets. This is effectively treated as a length 1 warhead, and is affected by slot scaling. e.g. an HEI warhead placed in the support socket in a CM-S-400 will deal 960 damage, exactly the same as a 1 length warhead on a CM-400, or a length 4 warhead on a SGM-2"
+    }
+   ]
+  },
+  {
+   "heading": "Special Missiles",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "There are certain types of ammunition that could be loaded into launchers and operate just like missiles, but cannot be modified."
+    }
+   ]
+  },
+  {
+   "heading": "Special Missiles › Mines",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Mines are loitering traps that can be deployed to destroy passing ships and delay enemy movement"
+    },
+    {
+     "kind": "p",
+     "text": "Upon deployment, mines will move up to 500m away. They take 90 seconds to arm, and are triggered by a magnetic detector with an activation range of 2000m. A non-friendly ship that comes within 2km will trigger the mine. Notably, the mine identifies friendly ships via Comms signal. If the comms signal is disrupted (e.g. manually turning off comms, antenna destroyed from battle damage, mine jammed by comms jammer[5]) the mine will not be able to identify the friendly ship and will trigger on it. All mines have a wall thickness of 0.2, with a body integrity of 40, and are classified as size 3."
+    },
+    {
+     "kind": "p",
+     "text": "Unlike other missiles, the seeker on mines will not differentiate between friendly or hostile shops, even with comms on. A mine tripped by an enemy ship that then misses can then seek onto a friendly ship and hit it. In this case, friendly PD will not fire on the incoming mine."
+    },
+    {
+     "kind": "p",
+     "text": "Mines use an HEI payload, but with 100 damage fragments rather than 50 damage fragments, allowing it to destroy components much more easily on ships with a high damage resistance and damage threshold statistic."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Mine Body",
+       "Range (m)",
+       "Cruise Speed (m/s)",
+       "Cost (pts)",
+       "Networked"
+      ],
+      [
+       "M-30 'Mattock' Mine",
+       "3750",
+       "250",
+       "5",
+       "No"
+      ],
+      [
+       "M-30-N 'Mattock' Cooperative Mine",
+       "3750",
+       "250",
+       "6",
+       "Yes"
+      ],
+      [
+       "M-50 'Auger' Sprint Mine",
+       "3850",
+       "700",
+       "10",
+       "No"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "p",
+     "text": "Mines can be deployed from the ML-9 'Mine' Launcher."
+    }
+   ]
+  },
+  {
+   "heading": "Special Missiles › Bombs",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Bombs are an unguided dumb munition meant to either finish or disable ships. Mainly used by spacecraft such as fighters and bombers as finisher weapons, they utilize their high damage fragments similar to mines to break components with a high high damage resistance and damage threshold. Bombs have fratricide, meaning they detonate when destroyed, chain-reacting with other bombs in the radius. Despite being in the bomb category, FBU-15 behaves like a rocket."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Bomb Body",
+       "Size",
+       "Range (m)",
+       "Cruise Speed (m/s)",
+       "Wall Thickness (m/s)",
+       "Body Integrity (m/s)",
+       "Component Damage (Hp)",
+       "Damage per Ray (Hp)",
+       "Armor Penetration (cm)",
+       "Cost (pts)",
+       "Ability",
+       "Faction"
+      ],
+      [
+       "FBU-15 Fragmentation Bomb",
+       "1",
+       "3999",
+       "300",
+       "0.075",
+       "25",
+       "700",
+       "20",
+       "15",
+       "1 per 3 units",
+       "Yes ; Boosted bomb with Fragmentation effect similar to HE-RPF",
+       ""
+      ],
+      [
+       "KBU-15 Bomb",
+       "1",
+       "2000",
+       "200",
+       "0.075",
+       "25",
+       "500",
+       "75",
+       "40",
+       "1",
+       "No",
+       ""
+      ],
+      [
+       "KBU-22 Bomb",
+       "2",
+       "2000",
+       "200",
+       "0.1",
+       "40",
+       "2500",
+       "100",
+       "60",
+       "2",
+       "No",
+       ""
+      ],
+      [
+       "CBU-40 Cluster Bomb",
+       "3",
+       "2250",
+       "200",
+       "0.5",
+       "100",
+       "500 per submunition",
+       "75 per subminition",
+       "40 per submunition",
+       "5",
+       "Yes; Releases 10 RBU-15 Boosted Bomblets",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-FBU-15.png",
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-KBU-15.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-KBU-22.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ]
+      ],
+      [
+       [
+        "25px-CBU-40.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ]
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Special Missiles › Rockets",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Rockets are unguided missiles. They are not perfectly accurate and will slightly drift off course over time. Rockets are used exclusively by OSP."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Rocket Body",
+       "Size",
+       "Body Integrity",
+       "Wall Thickness",
+       "Range (m)",
+       "Speed (m/s)",
+       "Armor Penetration (cm)",
+       "Component Damage (Hp)",
+       "Cost (pts)"
+      ],
+      [
+       "R-1 'Perch' Rocket",
+       "1",
+       "4",
+       "0.15",
+       "2975",
+       "350",
+       "15",
+       "300",
+       "1 per 6 units"
+      ],
+      [
+       "R-2 'Piranha' Rocket",
+       "2",
+       "8",
+       "0.18",
+       "7000",
+       "350",
+       "38",
+       "850",
+       "2"
+      ],
+      [
+       "R-3 'Spearfish' Rocket",
+       "3",
+       "120",
+       "0.25",
+       "6000",
+       "300",
+       "60",
+       "1500",
+       "3"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-R-1_perch.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-R-2_pirhana.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-R-3_spearfish.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Special Missiles › Decoy Containers",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Decoy Body",
+       "Range (m)",
+       "Speed (m/s)",
+       "Signatures",
+       "Cost (pts)"
+      ],
+      [
+       "CM-4D1 Decoy Container (Clipper)",
+       "12528",
+       "54",
+       "RADAR; PSV RADAR",
+       "4"
+      ],
+      [
+       "CM-4D1 Decoy Container (Line Ship)",
+       "10080",
+       "24",
+       "RADAR; PSV RADAR",
+       "6"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "p",
+     "text": "Decoy containers appear as a ship, similar to the effects of a masquerade. These missiles are given a randomly generated name and take fleet prefixes friendly ships when being identified by enemy intelligence. These containers also emit radar signals that appear similar to a search radar which will show up on ELINT and attract ARAD seekers."
+    },
+    {
+     "kind": "p",
+     "text": "Decoy containers have 150hp, 2.0cm wall thickness, and unlike most other missiles, decoy containers can be hit and damaged by all weapons and projectiles.[6]"
+    }
+   ]
+  },
+  {
+   "heading": "Trivia",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile number codes do not need to be filled out, a tempest can have the code SGM-21 or SGM-2 and the game will allow it. The game will also allow multiple missiles to have the same number (though same name missiles will overwrite templates)"
+    }
+   ]
+  },
+  {
+   "heading": "External Links",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Puppy's online missile engine tuner"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Marion's Neb Missile Range Isoline Calculator"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "TTGI Calculator"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Salvo Leapfrog Calculator"
+    }
+   ]
+  },
+  {
+   "heading": "Notes",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ It can be assumed that the final result will either require all validators or only one validator in order to count as passed, but there appears to be a bug where the pass/fail status is set by an assignment operator rather than a bitwise operator, making each validator overwrite the previous one, resulting in only the last validator in the list having an impact."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Stands for Time To Go to Intercept. This is measured using the missile's current speed. In addition, it's measured using the target's actual position, so direction only seekers will still benefit"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Minimum Sprint Engine Cost is 2"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Minimum Sprint Engine Cost is 3"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Mine comms are similar to CMD but do not check for same jammer cone"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Oddly, damage types that emit multiple rays (HEI, frac blocks, HE-SH) will only hit decoy containers with one ray, which results in strange behavior such as HEI always dealing 50 damage per hit regardless of warhead size, or fracturing blocks taking ten hits to destroy decoy containers. Decoy containers will also be hit by RPF fragments, unlike every other missile."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 11 November 2026, at 08:19."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

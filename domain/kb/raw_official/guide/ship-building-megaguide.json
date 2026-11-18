@@ -1,0 +1,1493 @@
+{
+ "page": "Ship Building Megaguide - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Ship Building Megaguide",
+ "category": "guide",
+ "slug": "ship-building-megaguide",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "(页面开头)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "structure:"
+    },
+    {
+     "kind": "p",
+     "text": "basic description of category under header"
+    },
+    {
+     "kind": "p",
+     "text": "link to guide pages including short primer for guide pages with some exceptions"
+    }
+   ]
+  },
+  {
+   "heading": "Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ships are the fundamental unit of Nebulous: Fleet Command, coming in a variety of different basic hulls that may be further customized to the user's liking."
+    },
+    {
+     "kind": "p",
+     "text": "Note, the Starter Fleets in the Starter_Fleet_Guides were generated and maintained by the community and are designed to be competitive in multiplayer. It is recommended to review those ships build in the fleet editor to see some of the design philosophies presented below in action."
+    }
+   ]
+  },
+  {
+   "heading": "Ships › Links to guide pages",
+   "blocks": []
+  },
+  {
+   "heading": "Ships › Links to guide pages › Beginner's Guide (Basics of Shipbuilding)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The beginner's guide section on shipbuilding covers the basics that apply to any ship build, without getting too far into the specifics for any one ship."
+    }
+   ]
+  },
+  {
+   "heading": "Ships › Links to guide pages › ANS",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Sprinters are the least expensive and fastest ship on ANS' roster, and serve in a variety of roles between being an inexpensive escort or ultralight capturing asset, to being the basis for missile-focused backline hunters or a difficult to discover and fast sensor platform."
+    },
+    {
+     "kind": "p",
+     "text": "Similar to the Sprinter, the Raines is a hull which fulfills a large variety of roles, costing a bit more and with worse mobility in exchange for stronger mount selection, better armor, and much better power generation. These qualities make the Raines decent as a choice of supporting ship for the rest of your fleet, letting it win gunfights against lighter targets or bring higher power cost modules inexpensively, but reduce its utility as a capture asset or backline hunter."
+    },
+    {
+     "kind": "p",
+     "text": "The Keystone is a hull which breaks the prior trends; while it does still offer more mounts and power generation than its predecessors, this is rarely useful except for powering its unique spinal weapons and keeping itself alive owing to its poor mobility and cost efficiency compared to prior options. None of that is to say the keystone isn't worth using: it is simply defined by its spinals, giving you an option between an exceptionally dangerous close-range weapon and an exceptionally annoying long-range weapon."
+    },
+    {
+     "kind": "p",
+     "text": "The Vauxhall is a hull which is fairly singular in purpose, being fast and well-armed in exchange for its lacking armor scheme. Vauxhalls exist to skirmish with the enemy and defeat smaller assets with 250mm guns, though they are more than capable of posing a threat to heavy assets along the way. Alternative builds tend to make use of missiles to some extent, though this is far less common than simple gun-based Vauxhalls."
+    },
+    {
+     "kind": "p",
+     "text": "Axfords are ANS' second heaviest frontline asset, taking a lot of damage to kill and being able to shrug off heavy gunfire for much longer than almost anything else available to the faction. Axfords are a cornerstone of ANS fleet compositions as a result, existing to simply take and deal damage while the rest of the team can try to give the frontline an advantage. It's worth mentioning that while the Axford is largely defined by its frontline utility and importance, it is also good as a missile asset due to its relatively low cost, generous mounts, and ability to mount a turreted beam for self-defense."
+    },
+    {
+     "kind": "p",
+     "text": "Unlike the previous ships, there is no ambiguity in what a Levy wants to do: the Levy exists to carry and launch craft, serving as its primary weapons as well as strong supporting tools for the rest of the team. A Levy can be built to do extra things on top of launching craft, but these extra things serve as bonuses to using craft."
+    },
+    {
+     "kind": "p",
+     "text": "The Soloman is ANS' heaviest frontline asset, and its most expensive ship overall. Unlike the Axford, there isn't much room for what a Soloman should do: it exists to shoot guns and have guns shot at it. Alternative schemes for what a Soloman should do are usually very difficult to use, point inefficient, or both; 450mm gunfire is the Soloman's comfort zone."
+    },
+    {
+     "kind": "p",
+     "text": "TODO, Note this is a Campaign Ship and isn't visible in the Fleet builder."
+    },
+    {
+     "kind": "p",
+     "text": "TODO, Note this is a Campaign Ship and isn't visible in the Fleet builder."
+    }
+   ]
+  },
+  {
+   "heading": "Ships › Links to guide pages › OSPN",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The Ferryman is analogous to ANS' Sprinter, being OSP's least expensive and fastest ship. Unlike the Sprinter, the Ferryman is fairly limited in what roles it can readily fulfill: it will typically act as a rocket-based ambusher, an inexpensive capture asset, an inexpensive skirmisher, or a jamming asset. Despite this, it is still a crucial asset for OSP fleets, and extremely dangerous in the right conditions."
+    },
+    {
+     "kind": "p",
+     "text": "The Draugr is analogous to ANS' Raines, fulfilling the same niche as an overmatch asset against light targets and in being an auxiliary sensors asset, in exchange for losing some versatility overall especially as an escorting asset."
+    },
+    {
+     "kind": "p",
+     "text": "The Monitor is like ANS' Keystone in that it is slow, but unlike the Keystone in most other ways. Where the Keystone struggles in direct combat, the Monitor is designed for frontline combat, taking and dealing damage much in the same way as ANS' Axford and Soloman hulls. When not in a frontline role, Monitors are mostly used for their potentially very generous magazine capacity with missiles, or very occasionally as a defender for a capture point."
+    },
+    {
+     "kind": "p",
+     "text": "As with ANS' Levy, the Journeyman is singularly devoted to launching and using Craft, though it is much lower in cost in exchange for its much lower carrying capacity. While the Journeyman can also do some things in addition to using its craft, it similarly should use these in support of using craft."
+    },
+    {
+     "kind": "p",
+     "text": "The Ocello is directly analogous to ANS' Axford, being a medium weight cruiser which uses 450mm guns and expects to take 450mm gunfire in turn. Its main distinction is as the only OSP ship that may take ANS-unique mounts, enabling it to bring a stronger roster of EWAR and PDT options than any other OSP ship. As a result, the Ocello tends to be employed as an anchor against enemy missile play, while also being one of OSP's strongest frontline combatants."
+    },
+    {
+     "kind": "p",
+     "text": "The Marauder is quite nimble and carries very heavy firepower, in exchange for being extremely large and relatively fragile. Marauders are employed in a wide variety of roles owing to their very generous compartment and mount layout, as well as their aggressive price; missile Marauders, 450mm Marauders, 250mm Marauders, and 100mm/Plasma Marauders are all staples at time of writing."
+    },
+    {
+     "kind": "p",
+     "text": "Like the Journeyman and Levy, the Moorline is fairly restrained in what roles it can fulfill; unlike the two dedicated Carriers, the Moorline gets a choice between two roles instead of one. Moorlines should virtually always be using all four of their uniquely large slots for equipping either large amounts of CM4 container missiles, or for equipping container bank hangars filled with craft. Poor mobility, cost efficiency, and protection mean that the Moorline should spend all its time in the backline, firing cruise missiles or launching craft to remotely effect the game."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Mounts consist of anything which goes on the exterior surfaces of your ships, covering a wide range of options."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Links to guide pages",
+   "blocks": []
+  },
+  {
+   "heading": "Mounts › Links to guide pages › Communications, Ewar, & Sensors",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The mounts in this category can vary somewhat in role and functionality but very generally exist as supporting infrastructure for your other mounts. Even electronic warfare is generally best used as a supplement to some other mount's purpose rather than on its own merits."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Links to guide pages › Flight Support",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The mounts in this category are all used for storing and launching craft. As with the above category, Flight Support mounts are typically best used as a supporting asset for your other mounts, with Container Bank Hangars being a notable exception."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Links to guide pages › Missile Launchers",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The mounts in this category are used for launching missiles, either from the magazine or from storage within the mount itself. Unlike the mounts mentioned so far, the vast majority of these are used offensively, though some missile launchers are still primarily used defensively or in support of other missiles/mounts."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Links to guide pages › Point Defense Turrets",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The mounts in this category are used for destroying enemy missiles and craft; all mounts in this category cannot be used against other ships."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Links to guide pages › Projectile Weapons",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The mounts in this category are all offensive gunfire projectile weapons, primarily used for damaging and destroying enemy ships, though some mounts may also take ammunition types which make them dangerous to enemy craft or missiles as well."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Links to guide pages › Energy Weapons",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The mounts in this category differ fairly dramatically in role and purpose, with the points of commonality between them being their role as offensive weapons, and high power draw in exchange for devastating effect."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Links to guide pages › Spinal Weapons",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The mounts in this category also differ from the norm, with their main point of commonality being that they are all offensive weapons."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Links to guide pages › Integrated",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Integrated mounts may not be purposefully added nor removed in the fleet editor, but are described here for posterity."
+    }
+   ]
+  },
+  {
+   "heading": "Compartments",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Compartments take up internal space in your ship in exchange for some benefit. Unlike modules, some compartments will scale based on the size of the compartment they are fitted into, but otherwise compartments and modules are fairly similar."
+    },
+    {
+     "kind": "p",
+     "text": "what does each compartment do? why do you take each compartment? where should each compartment be? are there any special considerations to make for this compartment?"
+    }
+   ]
+  },
+  {
+   "heading": "Compartments › Links to guide pages",
+   "blocks": []
+  },
+  {
+   "heading": "Compartments › Links to guide pages › Command",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Command compartments are what enable your ships to enact any orders at all, with CICs specifically allowing your ship to enact orders more complicated than moving to a position. At least one CIC is virtually mandatory, with more CICs being a common sight on increasingly heavy assets."
+    }
+   ]
+  },
+  {
+   "heading": "Compartments › Links to guide pages › Damage Control",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Damage Control compartments allow ships which have taken fire to repair and restore themselves. Damage Control compartments are more relevant on ships which expect to take more damage, but are virtually always recommended."
+    }
+   ]
+  },
+  {
+   "heading": "Compartments › Links to guide pages › Flight Support",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Flight Support compartments store or buff craft. Ships which don't have any craft onboard shouldn't take Flight Support compartments, while ships that do have craft onboard will situationally want Flight Support compartments."
+    }
+   ]
+  },
+  {
+   "heading": "Compartments › Links to guide pages › Miscellaneous",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The compartments listed here vary in role and importance, though you should always have at least one magazine per ship (your first magazine is always free!)"
+    }
+   ]
+  },
+  {
+   "heading": "Modules",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Modules take up internal space within module slots, each conferring some benefit (and, sometimes, a downside.) Unlike compartments, there are no modules which scale with the size of the compartment they're fitted to: modules should generally be put in the smallest slot available for that module."
+    },
+    {
+     "kind": "p",
+     "text": "in each page:"
+    },
+    {
+     "kind": "p",
+     "text": "same as compartments"
+    }
+   ]
+  },
+  {
+   "heading": "Modules › Links to guide pages",
+   "blocks": []
+  },
+  {
+   "heading": "Modules › Links to guide pages › Radars",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Radars are what allow your ship to see anything past visual range, as well as being mandatory for proper functioning of PD turrets and automatic softkill. The various choices in this category are chosen largely based on how well they detect targets and how well they can defeat jamming."
+    }
+   ]
+  },
+  {
+   "heading": "Modules › Links to guide pages › Propulsion",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Propulsion modules enable your ship to move at all, with the options available giving various buffs and debuffs over the default drive. It is worth mentioning that large drives should be taken over small drives in almost every situation where they are available, owing to their higher health and better power generation."
+    }
+   ]
+  },
+  {
+   "heading": "Modules › Links to guide pages › Powerplants",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Powerplants inexpensively give your ship substantially more power than propulsion modules, the tradeoff being that they monopolize highly valuable 3x3x3 or 5x5x5 slots which could otherwise go to strong Weapon Support or Propulsion modules."
+    }
+   ]
+  },
+  {
+   "heading": "Modules › Links to guide pages › Weapon Support",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "As implied by the title, Weapon Support modules support the weapons on your ship, though they are also capable of buffing mounts which are not explicitly used offensively. In most cases, you should have a decent number of these modules."
+    }
+   ]
+  },
+  {
+   "heading": "Modules › Links to guide pages › Miscellaneous",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "As with compartments, there are a number of modules which are not under any of the above categories, with a wide variety in their importance and role."
+    }
+   ]
+  },
+  {
+   "heading": "Craft",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "in each page:"
+    },
+    {
+     "kind": "p",
+     "text": "what do you take each craft to do? what is each craft good or bad at? why do or don't you take x amount of craft? why do you take some modules but not others?"
+    }
+   ]
+  },
+  {
+   "heading": "Craft › Links to guide pages",
+   "blocks": []
+  },
+  {
+   "heading": "Craft › Links to guide pages › Sensor craft",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Carriers get access to some of the strongest recon tools in the game, which can serve to support your own operations or that of your teammates."
+    }
+   ]
+  },
+  {
+   "heading": "Craft › Links to guide pages › Fighter craft",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Fighters are the primary tool via which carriers may counter other carriers or missiles, though their utility against ships is substantially more limited. While it's easy to conceptualize fighters as only useful offensively, against enemy craft, they are also extremely strong when defending friendly ships."
+    }
+   ]
+  },
+  {
+   "heading": "Craft › Links to guide pages › Strike Craft",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Strike craft are the main way that carriers incapacitate enemy ships, and are functionally their offensive weapons."
+    }
+   ]
+  },
+  {
+   "heading": "Missiles",
+   "blocks": []
+  },
+  {
+   "heading": "Missiles › Links to guide pages",
+   "blocks": []
+  },
+  {
+   "heading": "Missiles › Links to guide pages › Missile Bodies",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The underlying body for a missile makes a substantial difference in its usable roles and how it may be implemented for said roles."
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › Avionics Package",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Avionics dictate your missile's programming, as well as being where you may pay to enable cruise behavior on a missile or add in automatic evasion behaviors to better defeat kinetic hardkill point-defense."
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › Warhead Types",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Different warheads dictate what happens when a missile is either nearby or misses a target, with choice in warhead varying based on the missile's stats and intended usage."
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › Seekers",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Different seekers will dramatically impact the effectiveness of missiles no matter their role, with more expensive seekers generally (but not always!) indicating a higher difficulty of your opponent defeating a missile."
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › Introduction to the Seeker Quick Look Up Tables",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Below you will see quick reference tables of popular Missile Seeker Combinations courtesy of Kate. Note, there are other combinations of Seekers as this is not an exhaustive list of options."
+    },
+    {
+     "kind": "p",
+     "text": "Nomenclature"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "A Seeker such as \"ACT\" is a Tracking Seeker. It will track the target."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "A Seeker in brackets such as \"[ACT]\" is a Validation Seeker. It will validate the tracking seeker's target and make the primary seeker reject targets it wouldn't have otherwise ignored. If the Track Seeker is disabled the missile will go wild (such as ACT if it is undergoing RADAR Jamming)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "A Track Seeker with a r or ! such as \"ACTr\" or \"ACT!\" are set to Reject targets that aren't validated."
+    },
+    {
+     "kind": "p",
+     "text": "Some Missile combinations are identified as making the missile a \"StraightRunner\" when they do not detect a target they will continue on the course it was last on which may impact the target. These are identified in the table below. For additional details please see Missile_Defense page."
+    },
+    {
+     "kind": "p",
+     "text": "To see further details on the purpose of different seekers and their combinations please see the Missile_Defense page."
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › ACT Seeker Family",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The ACT Seeker family are popular cruise missile seeker combos that can also be used as direct missile seekers. They are characterized by an active radar primary with a validation seeker."
+    },
+    {
+     "kind": "p",
+     "text": "Note, many of the ACT seekers can be replaced with SACT or SEACT depending on the missile maneuverability and range to target for optimal missile strikes."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Base Cost",
+       "Primary Seeker",
+       "Secondary Seeker",
+       "StraightRunner",
+       "Pro",
+       "Con",
+       "Susceptibility Method",
+       "Notes"
+      ],
+      [
+       "4",
+       "ACT",
+       "[CMD]r",
+       "Y",
+       "Cannot be decoyed Full target discrimination",
+       "Requires decent quality track Must use TRP for cruise",
+       "Command Jammer + Killjoy & Command Jammer + Shipboard Jamming",
+       "Avoid using Shipboard jamming because the CMD/HOJ or ARAD/ACT seeker combo may be mixed in. Against close-in launches, may require 2 Killjoys to defeat when defending large ships, otherwise the missile will not wiggle in time to miss."
+      ],
+      [
+       "6",
+       "ACT",
+       "[EO]r",
+       "Y",
+       "Cannot be decoyed Full cruise functionality",
+       "No target discrimination",
+       "Dazzler + Killjoy & Dazzler + Shipboard Jamming",
+       "Avoid using Shipboard jamming because ARAD/ACT seeker combo may be mixed in."
+      ],
+      [
+       "5",
+       "SEACT",
+       "[ARAD]",
+       "N",
+       "Can resist basic decoys",
+       "Behavioral, can fail to acquire an AFK EMCONed ship Defeated automatically by Conure Active Decoys",
+       "Conure & EMCOM + Liner Container Decoy/Chaff & Killjoy + Chaff & Shipboard Jammer & EMCOM + Chaff",
+       "If you have been acquired by ARAD validator memory, you can use your jammer and then immediately EMCOM. This will wipe the validator memory and you no longer emit radar for this, then it is a matter of popping chaff. Use the above tangent method but don’t keep the jammer on because the ARAD/ACT combo is often mixed in with this. Against SEACT, you have to do EMCOM + Chaff before the missile is 5 km away because ARAD has validator memory sufficient for that entire time of flight, this is also gambled with needing good chaff geometry and ship radar sig smaller than chaff. SEACT is selected such that if SEACT seeker is seduced and the target switches to EMCOM, the longer range will capitalize on the 30 second ARAD seeker validation and still hit the target."
+      ],
+      [
+       "1.5",
+       "ACT",
+       "[WAKE]",
+       "N",
+       "Can resist basic decoys Requires rear arc and target to be burning main thrusters",
+       "Behavioral, can fail to acquire an AFK ship",
+       "Conure + All Stop/Move Backwards & Liner Decoy + All Stop/Move Backwards & Killjoy & Chaff + All Stop/Move Backwards & Shipboard Jamming + All Stop / Move Backwards",
+       ""
+      ],
+      [
+       "4",
+       "ACT",
+       "[THERM]",
+       "N",
+       "Can resist basic decoys Works in forward arc",
+       "Behavioral, can fail to acquire an AFK ship Expensive",
+       "Conure + All Stop/Move Backwards & Liner Decoy + All Stop/Move Backwards & Killjoy & Chaff + All Stop/Move Backwards & Shipboard Jamming + All Stop / Move Backwards",
+       "This is the same Susceptibility as Wake, the performance improvement for the cost isn't optimal."
+      ],
+      [
+       "1",
+       "ACT",
+       "",
+       "N",
+       "Cheap",
+       "Relies entirely on gambling",
+       "Chaff & Shipboard Jammer & Conure & Liner Container Decoy",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › CMD Seeker Family",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The CMD Seeker family are popular direct missile seeker combos. They use Command seeker as primary with a secondary seeker that enables them to straightrun when they are under Command Jamming. They are reliant on their launching ship's antenna, the more radiated power, the harder it is for Command jamming to affect them. They do require a fire control lock or high enough track quality for them to hit their target properly."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Base Cost",
+       "Primary Seeker",
+       "Secondary Seeker",
+       "StraightRunner",
+       "Pro",
+       "Con",
+       "Susceptibility Method",
+       "Notes"
+      ],
+      [
+       "4",
+       "CMD",
+       "HOJ",
+       "Y",
+       "Cheaper than a CMD/HOJ Seeker and if Radar and CMD Jamming is projected from the target ship will guide onto the target",
+       "Due to its popularity is often one of the first counters thought of for a ship",
+       "Command Jammer + Killjoy",
+       "This is incredibly popular"
+      ],
+      [
+       "4",
+       "CMD",
+       "SAH",
+       "Y",
+       "Relatively cheap and if CMD jammed will usually still hit the target. Increases the target macro actions to successfully counter",
+       "If you forget you are illuminating a target and they chaff the SAH will miss the target",
+       "Command Jammer + Self-Illumination & Command Jammer + Killjoy & Command Jammer + Shipboard Jamming",
+       "Avoid using Shipboard jamming because the CMD/HOJ or ARAD/ACT seeker combo may be mixed in."
+      ],
+      [
+       "3.25",
+       "CMD",
+       "WAKE",
+       "Y",
+       "Incredibly cheap and often the enemy won't have flares",
+       "Wake only tracks within 120 of engine so best on fast moving ships",
+       "Command Jammer + Flare Decoy",
+       "If you are OSPN, Therm seeker may be a better secondary seeker."
+      ],
+      [
+       "5.5",
+       "CMD",
+       "ARAD",
+       "Y",
+       "Similar to CMD/HOJ with an increased EMCON action increasing actions required to counter",
+       "More expensive than CMD/HOJ",
+       "Command Jammer + EMCOM + Killjoy & Command Jammer + Conure & Command Jammer + EMCOM + Liner Container Decoy",
+       "Premium seeker, normally reserved for already expensive missile tunings such as Ocello Killers. Try to use the Killjoy method because they can also be mixed with other CMD family seekers."
+      ],
+      [
+       "3.5",
+       "CMD",
+       "",
+       "N",
+       "Cheap and is the most accurate seeker",
+       "Easily countered by CMD Jammer which is standard in most fleets.",
+       "Command Jammer",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › EO Seeker Family",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Premium Seeker family only seen in some rare specialized missile archetypes. Characterized by EO primary with a secondary seeker to enable it to straightrun under Dazzler jamming"
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Base Cost",
+       "Primary Seeker",
+       "Secondary Seeker",
+       "StraightRunner",
+       "Pro",
+       "Con",
+       "Susceptibility Method",
+       "Notes"
+      ],
+      [
+       "8.25",
+       "EO",
+       "WAKE",
+       "Y",
+       "EO requires a Dazzler to effective counter and Few people bring Flares if they do",
+       "Expensive, backup needs to be seeing rear drive cone",
+       "Dazzler + Flare Decoy",
+       "Premium seeker, only seen on some premium anti-shuttle S3H."
+      ],
+      [
+       "8.5",
+       "EO",
+       "HOJ",
+       "Y",
+       "EO requires a Dazzler to effective counter",
+       "Expensive",
+       "Dazzler + Killjoy",
+       "Due to the low cost of HOJ, this is a very popular seeker."
+      ],
+      [
+       "8.5",
+       "EO",
+       "SAH",
+       "Y",
+       "EO requires a Dazzler to effective counter",
+       "Expensive",
+       "Dazzler + Self-Illumination & Dazzler + Killjoy",
+       ""
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › ARAD Seeker Family",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Cheap and basic 'good enough' seeker family with an important role. It is often mixed with the ACT family to mitigate their common con of being vulnerable to radar jammers. Other times you may find them to be good enough against players who don't EMCOM."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Base Cost",
+       "Primary Seeker",
+       "Secondary Seeker",
+       "StraightRunner",
+       "Pro",
+       "Con",
+       "Susceptibility Method",
+       "Notes"
+      ],
+      [
+       "3",
+       "ARAD",
+       "ACT",
+       "N",
+       "Defeats Jamming & Forces Emcon",
+       "Behavioral, can fail to acquire an AFK EMCONed ship Defeated automatically by Conure Active Decoys",
+       "Conure & EMCOM + Liner Container Decoy & EMCOM + Chaff Decoy & EMCOM + Killjoy",
+       ""
+      ],
+      [
+       "2",
+       "ARAD",
+       "",
+       "Y",
+       "Defeats Jamming & Forces and can be Emcon Technically a straight-runner On S2 and S3 missiles frees up a second seeker hardpoint for Missile Salvo Penetration aides to improve overall Missile Salvo hit rate",
+       "Behavioral, will fail to acquire an AFK EMCONed ship Defeated automatically by Conure Active Decoys",
+       "EMCOM + Killjoy & EMCOM",
+       "If ARAD tracks you before you EMCOM it will straight run and you will need an emitting decoy such as Killjoy/Conure/Container Decoy to pull it away. However this straight-runner behavior is not very effective as it does not know range-to-target to properly lead"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › Wake/Therm Seeker Family",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Base Cost",
+       "Primary Seeker",
+       "Secondary Seeker",
+       "StraightRunner",
+       "Pro",
+       "Con",
+       "Susceptibility Method",
+       "Notes"
+      ],
+      [
+       "1.25",
+       "Wake/Therm",
+       "[ACT]",
+       "Y",
+       "Can resist basic decoys",
+       "Requires rear arc and target to be burning main thrusters Behavioral, can fail to acquire an AFK ship",
+       "All Stop/Move Backwards",
+       ""
+      ],
+      [
+       "0.25",
+       "Wake/Therm",
+       "",
+       "N",
+       "Sometimes people forget it exists",
+       "Yes Behavioral, can fail to acquire an AFK ship Defeated automatically by flares Softkills itself roughly 50% of the time by failing to follow a wake trail correctly",
+       "All Stop + Flare",
+       "Note, Wake and Therm primary seekers requires to be 120° of Rear engine cone."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › SAH Seeker Family",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "This seeker family is similar to the ACT family with similar advantages and disadvantages. The SAH family requires external illumination to track the target, as the launch Ship/Spacecraft can often mount illuminators, this is a method to reduce Missile Cost. Similarly if the target isn't illuminated, the SAH seeker won't be seduced by Chaff and will operate as a StraightRunner."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Base Cost",
+       "Primary Seeker",
+       "Secondary Seeker",
+       "StraightRunner",
+       "Pro",
+       "Con",
+       "Susceptibility Method",
+       "Notes"
+      ],
+      [
+       "1",
+       "SAH",
+       "HOJ",
+       "Y",
+       "Cheap and will ignore a Killjoy if the enemy doesn't self illuminate",
+       "If you forget you are illuminating the target and they chaff, this will miss",
+       "Self-Illumination & Killjoy (preferably stack 2 of them) & Chaff Decoy, stay close to the chaff so they can’t micromanage the illuminator but not clip the ship itself into the chaff.",
+       ""
+      ],
+      [
+       "0.75",
+       "SAH",
+       "WAKE",
+       "Y",
+       "Cheap and effective on small faster ships",
+       "WAKE seeker has limited use",
+       "Self-Illumination & Killjoy (preferably stack 2 of them) + Flare Decoy & Conure & Chaff Decoy & Shipboard Jammer",
+       "Conure stay close to the conure so they can’t micromanage the illuminator but not clip the ship itself into the conure. Chaff Decoy, stay close to the chaff so they can’t micromanage the illuminator but not clip the ship itself into the chaff. Try not to use Shipbroad Jammer because the SAH/HOJ seeker combo is often mixed in."
+      ],
+      [
+       "2.5",
+       "SAH",
+       "[ARAD]",
+       "N",
+       "Is able to discrimate from Self illumination if the enemy didn't EMCON before the missile was within 4000m",
+       "Expensive for a SAH missile",
+       "Self-Illumination & Killjoy (preferably stack 2 of them) + Flare Decoy & Conure & Chaff Decoy & Shipboard Jammer",
+       "Conure stay close to the conure so they can’t micromanage the illuminator but not clip the ship itself into the conure. Chaff Decoy, stay close to the chaff so they can’t micromanage the illuminator but not clip the ship itself into the chaff. Try not to use Shipbroad Jammer because the SAH/HOJ seeker combo is often mixed in."
+      ],
+      [
+       "0.5",
+       "SAH",
+       "",
+       "N",
+       "Cheap",
+       "Cheap",
+       "Self-Illumination & Killjoy (preferably stack 2 of them) + & Conure & Chaff Decoy & Shipboard Jammer",
+       "As Spacecraft are able to mount illumination pods, this seeker type can be used to significantly reduce the cost of Spacecraft Ordinance for saturation attacks."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Missiles › Links to guide pages › Bad/Mistaken Seeker Combinations",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Primary Seeker",
+       "Secondary Seeker",
+       "Why is it bad?"
+      ],
+      [
+       "ACT",
+       "ARAD",
+       "This seeker costs the same as ACT/[ARAD] and ARAD/ACT Seeker combinations, and provides far less jamming resistance for the same seeker cost. If a target Chaff's but keeps its pulse Radar on, this missile will be seduced by the Chaff, while the ACT[ARAD] would reject the Chaff and hit the target. I"
+      ],
+      [
+       "ACT",
+       "[HOJ]",
+       "This seeker will track ships and reject Chaff as the Chaff won't emit a Jam signal. However on board Radar jamming is incredibly common in most fleets and if jammed would loose its ability to be a Straightrunner missile and fly off widely."
+      ],
+      [
+       "WAKE",
+       "[THERM]",
+       "... You know what you did."
+      ],
+      [
+       "ACT",
+       "CMD",
+       "As both are targeting seekers, the only way the CMD seeker will be given control of the missile direction is if the ACT is jammed. Effectively this seeker combination is easily defeated with a simple Chaff and serves to increase cost of the missile."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Misc",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "anything i forgot idk"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 11 November 2026, at 08:19."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

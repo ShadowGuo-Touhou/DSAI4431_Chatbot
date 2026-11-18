@@ -1,0 +1,1133 @@
+{
+ "page": "List of Maps - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "List of Maps",
+ "category": "map",
+ "slug": "list-of-maps",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [
+  {
+   "name": "Artefact",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Artefact",
+    "Max Players": "10",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Canyon",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Canyon",
+    "Max Players": "10",
+    "Creator": "Vanilla"
+   }
+  },
+  {
+   "name": "Cysts",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Cysts",
+    "Max Players": "10",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Nyx's Eye",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Nyx's Eye",
+    "Max Players": "10",
+    "Creator": "Vanilla"
+   }
+  },
+  {
+   "name": "Nyx's Eye 7cap",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Nyx's Eye 7cap",
+    "Max Players": "10",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Ralas",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Ralas",
+    "Max Players": "10",
+    "Creator": "Khall"
+   }
+  },
+  {
+   "name": "Salar",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Salar",
+    "Max Players": "10",
+    "Creator": "Khall"
+   }
+  },
+  {
+   "name": "Aorta",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Aorta",
+    "Max Players": "8",
+    "Creator": "Khall"
+   }
+  },
+  {
+   "name": "Arroyo",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Arroyo",
+    "Max Players": "8",
+    "Creator": "Khall"
+   }
+  },
+  {
+   "name": "Bloodmoon",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Bloodmoon",
+    "Max Players": "8",
+    "Creator": "HELL CRINGE"
+   }
+  },
+  {
+   "name": "Breach",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Breach",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Caltrop",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Caltrop",
+    "Max Players": "8",
+    "Creator": "Vanilla"
+   }
+  },
+  {
+   "name": "Caltrop 5cap",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Caltrop 5cap",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Canyon 4v4",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Canyon 4v4",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Gold Rush",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Gold Rush",
+    "Max Players": "8",
+    "Creator": "Khall"
+   }
+  },
+  {
+   "name": "Hippodrome",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Hippodrome",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Honeycomb",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Honeycomb",
+    "Max Players": "8",
+    "Creator": "Khall"
+   }
+  },
+  {
+   "name": "Lavender",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Lavender",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Pillars",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Pillars",
+    "Max Players": "8",
+    "Creator": "Vanilla"
+   }
+  },
+  {
+   "name": "Pillars 7cap",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Pillars 7cap",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Shattered Giant",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Shattered Giant",
+    "Max Players": "8",
+    "Creator": "PuppyFromHell"
+   }
+  },
+  {
+   "name": "Siphon",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Siphon",
+    "Max Players": "8",
+    "Creator": "Teewurst-Psycho"
+   }
+  },
+  {
+   "name": "Starfish",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Starfish",
+    "Max Players": "8",
+    "Creator": "Teewurst-Psycho"
+   }
+  },
+  {
+   "name": "Styx",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Styx",
+    "Max Players": "8",
+    "Creator": "Khall"
+   }
+  },
+  {
+   "name": "Synapse",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Synapse",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "The Bulwark",
+   "section": "List of maps",
+   "fields": {
+    "Name": "The Bulwark",
+    "Max Players": "8",
+    "Creator": "Khall"
+   }
+  },
+  {
+   "name": "Tombstones",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Tombstones",
+    "Max Players": "8",
+    "Creator": "Khall"
+   }
+  },
+  {
+   "name": "Tumbleweed",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Tumbleweed",
+    "Max Players": "8",
+    "Creator": "Vanilla"
+   }
+  },
+  {
+   "name": "Tumbleweed 7cap",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Tumbleweed 7cap",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Valley",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Valley",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Winter Palace",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Winter Palace",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Yukon",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Yukon",
+    "Max Players": "8",
+    "Creator": "Khall"
+   }
+  },
+  {
+   "name": "Caldarium",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Caldarium",
+    "Max Players": "6",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Ligaments",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Ligaments",
+    "Max Players": "6",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "White Tower",
+   "section": "List of maps",
+   "fields": {
+    "Name": "White Tower",
+    "Max Players": "8",
+    "Creator": "SubtleHubris"
+   }
+  },
+  {
+   "name": "Cliff",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Cliff",
+    "Max Players": "4",
+    "Creator": "Vanilla"
+   }
+  },
+  {
+   "name": "Abyssal",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Abyssal",
+    "Max Players": "8[1]",
+    "Creator": "Vanilla"
+   }
+  },
+  {
+   "name": "Small Testing Range[2]",
+   "section": "List of maps",
+   "fields": {
+    "Name": "Small Testing Range[2]",
+    "Max Players": "8[1]",
+    "Creator": "Vanilla"
+   }
+  }
+ ],
+ "tables": [
+  {
+   "section": "List of maps",
+   "header": "Name",
+   "rows": 38,
+   "used": 38,
+   "unused": []
+  }
+ ],
+ "sections": [
+  {
+   "heading": "List of maps",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Name",
+       "Max Players",
+       "Creator"
+      ],
+      [
+       "Artefact",
+       "10",
+       "SubtleHubris"
+      ],
+      [
+       "Canyon",
+       "10",
+       "Vanilla"
+      ],
+      [
+       "Cysts",
+       "10",
+       "SubtleHubris"
+      ],
+      [
+       "Nyx's Eye",
+       "10",
+       "Vanilla"
+      ],
+      [
+       "Nyx's Eye 7cap",
+       "10",
+       "SubtleHubris"
+      ],
+      [
+       "Ralas",
+       "10",
+       "Khall"
+      ],
+      [
+       "Salar",
+       "10",
+       "Khall"
+      ],
+      [
+       "Aorta",
+       "8",
+       "Khall"
+      ],
+      [
+       "Arroyo",
+       "8",
+       "Khall"
+      ],
+      [
+       "Bloodmoon",
+       "8",
+       "HELL CRINGE"
+      ],
+      [
+       "Breach",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "Caltrop",
+       "8",
+       "Vanilla"
+      ],
+      [
+       "Caltrop 5cap",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "Canyon 4v4",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "Gold Rush",
+       "8",
+       "Khall"
+      ],
+      [
+       "Hippodrome",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "Honeycomb",
+       "8",
+       "Khall"
+      ],
+      [
+       "Lavender",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "Pillars",
+       "8",
+       "Vanilla"
+      ],
+      [
+       "Pillars 7cap",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "Shattered Giant",
+       "8",
+       "PuppyFromHell"
+      ],
+      [
+       "Siphon",
+       "8",
+       "Teewurst-Psycho"
+      ],
+      [
+       "Starfish",
+       "8",
+       "Teewurst-Psycho"
+      ],
+      [
+       "Styx",
+       "8",
+       "Khall"
+      ],
+      [
+       "Synapse",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "The Bulwark",
+       "8",
+       "Khall"
+      ],
+      [
+       "Tombstones",
+       "8",
+       "Khall"
+      ],
+      [
+       "Tumbleweed",
+       "8",
+       "Vanilla"
+      ],
+      [
+       "Tumbleweed 7cap",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "Valley",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "Winter Palace",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "Yukon",
+       "8",
+       "Khall"
+      ],
+      [
+       "Caldarium",
+       "6",
+       "SubtleHubris"
+      ],
+      [
+       "Ligaments",
+       "6",
+       "SubtleHubris"
+      ],
+      [
+       "White Tower",
+       "8",
+       "SubtleHubris"
+      ],
+      [
+       "Cliff",
+       "4",
+       "Vanilla"
+      ],
+      [
+       "Abyssal",
+       "8[1]",
+       "Vanilla"
+      ],
+      [
+       "Small Testing Range[2]",
+       "8[1]",
+       "Vanilla"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "p",
+     "text": "Note that although more than the above numbers of people can join a lobby, the host will be unable to start the game unless the map supports that number of people."
+    }
+   ]
+  },
+  {
+   "heading": "Game modes",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Annihilation: Teams fight until all ships on a side are destroyed, or the timer runs out."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Control: Teams must capture zones to win. Each friendly zone gives the team score points over time. The match ends when all ships on a side are destroyed, one team reaches the required number of points, or the timer runs out. Points only come from captured zones. Capture zones are 2km across and each zone gives 2pts every 10 seconds to the team that controls it"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Tug-of-War: Control, but when a team gains points, the enemy team loses the same number."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Capture the Flag: Flags spawn on the enemy team's end. Ships must go to the other side of the map, take the flag, then make it back to the friendly zone. A ship that is destroyed with the flag \"drops\" it, allowing it to be picked up by another ship and moved again. Flags can be manually dropped by clicking on the flag icon. A team wins when they get the required number of flags."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Centerflag: Capture the Flag, but the flags are in the center of the map."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Station Capture: There is one zone around a station on the Red team's side. The Attackers must capture this zone to win. The game ends when the station is captured, all ships on a side are destroyed, or the timer runs out."
+    },
+    {
+     "kind": "p",
+     "text": "Capture points for Control and Tug of War take 60 seconds to capture. In Control, control points confer 2 points every 10 seconds. In Tug of War, the score shifts by [math]\\displaystyle{ 2\\times \\left|\\Delta p\\right| }[/math] (where [math]\\displaystyle{ \\Delta p }[/math] is the difference in points controlled by the two teams) every 10 seconds in favor of the team holding more points."
+    }
+   ]
+  },
+  {
+   "heading": "Notes",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ 1.0 1.1 Map is listed as a 4P map, but will allow 8 player games."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Initial Formations are disabled for Small Testing Range."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 9 September 2026, at 23:44."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,247 @@
+{
+ "note": "舰载机单价：存档舰队 <CraftTypes><CraftTemplate><Cost>，按 SaveKey 归并",
+ "count": 48,
+ "seat": {
+  "$CRAFT$/PF-440V Tanto": {
+   "nickname": "Tanto",
+   "cost": 17.0,
+   "frame": "Stock/AN Interceptor"
+  },
+  "$CRAFT$/B-86T Claymore": {
+   "nickname": "Claymore",
+   "cost": 19.0,
+   "frame": "Stock/AN Bomber"
+  },
+  "$CRAFT$/E-448 Sundial": {
+   "nickname": "Sundial",
+   "cost": 77.0,
+   "frame": "Stock/AN SEWAC"
+  },
+  "$CRAFT$/AZ-8944blEG5p9V_8VJs5A": {
+   "nickname": "Arbiter VI",
+   "cost": 14.0,
+   "frame": "Stock/OSP Interceptor"
+  },
+  "$CRAFT$/RABhB3TXHkySJCPviOEfVQ": {
+   "nickname": "Oasis",
+   "cost": 54.0,
+   "frame": "Stock/OSP Skiff"
+  },
+  "$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q": {
+   "nickname": "Steelhead",
+   "cost": 19.0,
+   "frame": "Stock/OSP Bomber"
+  },
+  "$CRAFT$/EboxtbmndECUofbkPAyV5A": {
+   "nickname": "Barracuda",
+   "cost": 10.0,
+   "frame": "Stock/OSP Interceptor"
+  },
+  "$CRAFT$/RS-35P Halberd": {
+   "nickname": "Halberd",
+   "cost": 15.0,
+   "frame": "Stock/OSP Skiff"
+  },
+  "$CRAFT$/CVfNDRyI1USIlaAIeCoQyQ": {
+   "nickname": "Oasis",
+   "cost": 54.0,
+   "frame": "Stock/OSP Skiff"
+  },
+  "$CRAFT$/kq9U5ZJ6rEaprhRdRdkuKQ": {
+   "nickname": "Arbiter VI",
+   "cost": 14.0,
+   "frame": "Stock/OSP Interceptor"
+  },
+  "$CRAFT$/l1okulthsU-aAtFcmYT9iA": {
+   "nickname": "Inquisitor II",
+   "cost": 19.0,
+   "frame": "Stock/OSP Bomber"
+  },
+  "$CRAFT$/PF-440A Super Sylph": {
+   "nickname": "Super Sylph",
+   "cost": 12.0,
+   "frame": "Stock/AN Interceptor"
+  },
+  "$CRAFT$/E-44 Sundial": {
+   "nickname": "Sundial",
+   "cost": 77.0,
+   "frame": "Stock/AN SEWAC"
+  },
+  "$CRAFT$/B-86D Eagle D": {
+   "nickname": "Eagle",
+   "cost": 25.0,
+   "frame": "Stock/AN Bomber"
+  },
+  "$CRAFT$/PF-4401 Wyvern": {
+   "nickname": "Wyvern",
+   "cost": 12.0,
+   "frame": "Stock/AN Interceptor"
+  },
+  "$CRAFT$/RS-35 Halberd": {
+   "nickname": "Halberd",
+   "cost": 15.0,
+   "frame": "Stock/AN Skiff"
+  },
+  "$CRAFT$/PF-440O Tanto-VY": {
+   "nickname": "Tanto-VY",
+   "cost": 8.0,
+   "frame": "Stock/AN Interceptor"
+  },
+  "$CRAFT$/PF-440P Tanto-VX": {
+   "nickname": "Tanto-VX",
+   "cost": 8.0,
+   "frame": "Stock/AN Interceptor"
+  },
+  "$CRAFT$/B-86H Highmore": {
+   "nickname": "Highmore",
+   "cost": 15.0,
+   "frame": "Stock/AN Bomber"
+  },
+  "$CRAFT$/PF-440Q Tanto-VZ": {
+   "nickname": "Tanto-VZ",
+   "cost": 8.0,
+   "frame": "Stock/AN Interceptor"
+  },
+  "$CRAFT$/E-44C Cringedial": {
+   "nickname": "Cringedial",
+   "cost": 75.0,
+   "frame": "Stock/AN SEWAC"
+  },
+  "$CRAFT$/B-45X Sigma": {
+   "nickname": "Sigma",
+   "cost": 26.0,
+   "frame": "Stock/OSP Bomber"
+  },
+  "$CRAFT$/PF-3860 Salmon": {
+   "nickname": "Salmon",
+   "cost": 10.0,
+   "frame": "Stock/OSP Interceptor"
+  },
+  "$CRAFT$/RS-35S Halberd": {
+   "nickname": "Halberd",
+   "cost": 50.0,
+   "frame": "Stock/OSP Skiff"
+  },
+  "$CRAFT$/RF-2860 Lookie": {
+   "nickname": "Lookie",
+   "cost": 20.0,
+   "frame": "Stock/OSP Scout"
+  },
+  "$CRAFT$/B-45 Sturgeon": {
+   "nickname": "Sturgeon",
+   "cost": 23.0,
+   "frame": "Stock/OSP Bomber"
+  },
+  "$CRAFT$/B-45B Sturgeon": {
+   "nickname": "Sturgeon",
+   "cost": 15.0,
+   "frame": "Stock/OSP Bomber"
+  },
+  "$CRAFT$/RS-35P If you kill this you are gay": {
+   "nickname": "If you kill this you are gay",
+   "cost": 50.0,
+   "frame": "Stock/OSP Skiff"
+  },
+  "$CRAFT$/PF-386A Barracuda": {
+   "nickname": "TA-30",
+   "cost": 8.0,
+   "frame": "Stock/OSP Interceptor"
+  },
+  "$CRAFT$/B-45A Sturgeon": {
+   "nickname": "AB-4",
+   "cost": 19.0,
+   "frame": "Stock/OSP Bomber"
+  },
+  "$CRAFT$/irfJbmxVPkqE7RYEgPTJMw": {
+   "nickname": "Uh-90",
+   "cost": 30.0,
+   "frame": "Stock/OSP Skiff"
+  },
+  "$CRAFT$/JMY2uu6hVE2VfIFQzfPRAw": {
+   "nickname": "Sturgeon",
+   "cost": 17.0,
+   "frame": "Stock/OSP Bomber"
+  },
+  "$CRAFT$/wa2KeFmnv06rco-MA8T0Gw": {
+   "nickname": "Goofish Tanto",
+   "cost": 8.0,
+   "frame": "Stock/OSP Interceptor"
+  },
+  "$CRAFT$/sVJrXxN2nkS5Y5yBrBuEWg": {
+   "nickname": "TA-30",
+   "cost": 10.0,
+   "frame": "Stock/OSP Interceptor"
+  },
+  "$CRAFT$/fGD9Kf5kD0-a5Mety2GQlA": {
+   "nickname": "Pike",
+   "cost": 8.0,
+   "frame": "Stock/OSP Scout"
+  },
+  "$CRAFT$/PF-386 Barracuda": {
+   "nickname": "Barracuda",
+   "cost": 8.0,
+   "frame": "Stock/OSP Interceptor"
+  },
+  "$CRAFT$/PF-440B Wyvern": {
+   "nickname": "Wyvern",
+   "cost": 14.0,
+   "frame": "Stock/AN Interceptor"
+  },
+  "$CRAFT$/RF-286 Pike": {
+   "nickname": "Pike",
+   "cost": 8.0,
+   "frame": "Stock/OSP Scout"
+  },
+  "$CRAFT$/RS-35R Sentry-R": {
+   "nickname": "Sentry-R",
+   "cost": 50.0,
+   "frame": "Stock/OSP Skiff"
+  },
+  "$CRAFT$/B-45R Runfish": {
+   "nickname": "Runfish",
+   "cost": 14.0,
+   "frame": "Stock/OSP Bomber"
+  },
+  "$CRAFT$/RS-35I Xavier": {
+   "nickname": "Xavier",
+   "cost": 15.0,
+   "frame": "Stock/AN Skiff"
+  },
+  "$CRAFT$/B-86R Highmore": {
+   "nickname": "Highmore",
+   "cost": 15.0,
+   "frame": "Stock/AN Bomber"
+  },
+  "$CRAFT$/PF-440 Tanto": {
+   "nickname": "Tanto",
+   "cost": 15.0,
+   "frame": "Stock/AN Interceptor"
+  },
+  "$CRAFT$/PF-440V Katana": {
+   "nickname": "Katana",
+   "cost": 15.0,
+   "frame": "Stock/AN Interceptor"
+  },
+  "$CRAFT$/B-86T Longsword": {
+   "nickname": "Longsword",
+   "cost": 15.0,
+   "frame": "Stock/AN Bomber"
+  },
+  "$CRAFT$/E-448 Hourglass": {
+   "nickname": "Hourglass",
+   "cost": 100.0,
+   "frame": "Stock/AN SEWAC"
+  },
+  "$CRAFT$/RF-286 A6M2": {
+   "nickname": "A6M2",
+   "cost": 20.0,
+   "frame": "Stock/OSP Scout"
+  },
+  "$CRAFT$/RF-286A A6M1": {
+   "nickname": "A6M1",
+   "cost": 8.0,
+   "frame": "Stock/OSP Scout"
+  }
+ },
+ "unpriced": []
+}

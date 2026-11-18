@@ -1,0 +1,1338 @@
+{
+ "fleets": 344,
+ "errors": 0,
+ "factions": {
+  "Alliance": 5437,
+  "OSP": 3434,
+  "United": 46,
+  "Falcata Republic": 160,
+  "Nationless Yards": 63,
+  "Aeveria": 58,
+  "Betel": 92,
+  "Orion": 30,
+  "Zaretian": 26,
+  "kuiper": 378
+ },
+ "parts": 360,
+ "exclusive": 258,
+ "shared": 102,
+ "data": {
+  "Stock/RS35 'Frontline' Radar": {
+   "Alliance": 110,
+   "OSP": 4,
+   "United": 1
+  },
+  "Stock/ES32 'Scryer' Missile ID System": {
+   "Alliance": 120,
+   "OSP": 52,
+   "Betel": 2
+  },
+  "Stock/Large DC Locker": {
+   "Alliance": 123,
+   "OSP": 53,
+   "United": 1,
+   "Falcata Republic": 4,
+   "Nationless Yards": 2,
+   "Aeveria": 2
+  },
+  "munition:Stock/EA12 Chaff Decoy": {
+   "Alliance": 152,
+   "OSP": 65,
+   "United": 1,
+   "Falcata Republic": 2,
+   "Nationless Yards": 2,
+   "kuiper": 9
+  },
+  "Stock/Mk20 'Defender' PDT": {
+   "Alliance": 136,
+   "OSP": 10,
+   "United": 1,
+   "Nationless Yards": 1
+  },
+  "Stock/Reinforced CIC": {
+   "Alliance": 132,
+   "OSP": 90,
+   "United": 1,
+   "Falcata Republic": 4,
+   "Nationless Yards": 2,
+   "kuiper": 7
+  },
+  "Stock/FR4800 Reactor": {
+   "Alliance": 144,
+   "OSP": 30,
+   "Nationless Yards": 2
+  },
+  "Stock/FM240 'Dragonfly' Drive": {
+   "Alliance": 59,
+   "OSP": 1
+  },
+  "Stock/Focused Particle Accelerator": {
+   "Alliance": 55,
+   "United": 1,
+   "Nationless Yards": 2,
+   "kuiper": 4
+  },
+  "munition:Stock/20mm Slug": {
+   "Alliance": 139,
+   "OSP": 51,
+   "United": 1,
+   "Falcata Republic": 5,
+   "Nationless Yards": 2
+  },
+  "Stock/Reinforced Magazine": {
+   "Alliance": 149,
+   "OSP": 73,
+   "United": 1,
+   "Falcata Republic": 3,
+   "Nationless Yards": 2,
+   "Aeveria": 4,
+   "Betel": 2,
+   "Orion": 2,
+   "Zaretian": 2,
+   "kuiper": 11
+  },
+  "Stock/RF101 'Bullseye' Radar": {
+   "Alliance": 124,
+   "OSP": 47,
+   "United": 1,
+   "Nationless Yards": 1
+  },
+  "Stock/Rapid DC Locker": {
+   "Alliance": 123,
+   "OSP": 65,
+   "United": 1,
+   "Falcata Republic": 2,
+   "Nationless Yards": 2,
+   "Betel": 2,
+   "Orion": 2,
+   "Zaretian": 2
+  },
+  "Stock/Mk600 Beam Cannon": {
+   "Alliance": 43,
+   "United": 1,
+   "Nationless Yards": 2
+  },
+  "Stock/VLS-1-23 Launcher": {
+   "Alliance": 125,
+   "OSP": 50,
+   "United": 1,
+   "Falcata Republic": 4,
+   "Nationless Yards": 2,
+   "kuiper": 7
+  },
+  "Stock/FR3300 Micro Reactor": {
+   "Alliance": 154,
+   "OSP": 36,
+   "United": 1,
+   "Falcata Republic": 4
+  },
+  "Stock/Reinforced DC Locker": {
+   "Alliance": 103,
+   "OSP": 57,
+   "Falcata Republic": 2,
+   "Nationless Yards": 2,
+   "Betel": 2
+  },
+  "Stock/E90 'Blanket' Jammer": {
+   "Alliance": 75,
+   "OSP": 20,
+   "United": 1,
+   "kuiper": 5
+  },
+  "Stock/Intelligence Center": {
+   "Alliance": 55,
+   "OSP": 36,
+   "United": 1,
+   "Falcata Republic": 2,
+   "Nationless Yards": 2,
+   "kuiper": 1
+  },
+  "Stock/ES22 'Pinard' Electronic Support Module": {
+   "Alliance": 29
+  },
+  "Stock/Plant Control Center": {
+   "Alliance": 88,
+   "OSP": 29,
+   "United": 1,
+   "Nationless Yards": 2,
+   "Aeveria": 4,
+   "Betel": 2,
+   "kuiper": 6
+  },
+  "Stock/Berthing": {
+   "Alliance": 53,
+   "OSP": 24
+  },
+  "Stock/E15 'Masquerade' Signature Booster": {
+   "Alliance": 40,
+   "OSP": 1
+  },
+  "Stock/Missile Programming Bus": {
+   "Alliance": 52,
+   "OSP": 3,
+   "kuiper": 1
+  },
+  "Stock/CLS-3 Launcher": {
+   "Alliance": 55,
+   "OSP": 4
+  },
+  "Stock/RS41 'Spyglass' Radar": {
+   "Alliance": 113,
+   "OSP": 15
+  },
+  "Stock/VLS-2 Launcher": {
+   "Alliance": 79,
+   "OSP": 16,
+   "Nationless Yards": 2
+  },
+  "Stock/Strike Planning Center": {
+   "Alliance": 24,
+   "OSP": 18
+  },
+  "Stock/Missile Programming Bus Array": {
+   "Alliance": 49,
+   "OSP": 15
+  },
+  "Stock/FM530 'Whiplash' Drive": {
+   "Alliance": 73,
+   "OSP": 22,
+   "United": 1,
+   "Nationless Yards": 2
+  },
+  "Stock/Adaptive Radar Receiver": {
+   "Alliance": 40,
+   "OSP": 26,
+   "United": 1,
+   "Nationless Yards": 2
+  },
+  "Stock/CR70 Antenna": {
+   "Alliance": 53,
+   "kuiper": 1
+  },
+  "Stock/Track Correlator": {
+   "Alliance": 9,
+   "OSP": 30,
+   "United": 1,
+   "Zaretian": 2
+  },
+  "munition:Stock/EA20 Flare Decoy": {
+   "Alliance": 55,
+   "OSP": 24,
+   "kuiper": 2
+  },
+  "Stock/FM500 Drive": {
+   "Alliance": 18,
+   "OSP": 7
+  },
+  "Stock/Auxiliary Steering": {
+   "Alliance": 87,
+   "OSP": 47,
+   "Betel": 2,
+   "kuiper": 5
+  },
+  "Stock/Small DC Locker": {
+   "Alliance": 94,
+   "OSP": 60,
+   "United": 1,
+   "Falcata Republic": 2,
+   "Aeveria": 2,
+   "Orion": 2
+  },
+  "Stock/Basic CIC": {
+   "Alliance": 99,
+   "OSP": 79,
+   "Falcata Republic": 1,
+   "kuiper": 10
+  },
+  "Stock/VLS-1-46 Launcher": {
+   "Alliance": 84,
+   "OSP": 67,
+   "United": 1,
+   "kuiper": 5
+  },
+  "munition:Stock/EA99 Active Decoy": {
+   "Alliance": 55,
+   "Nationless Yards": 2
+  },
+  "Stock/Missile Parallel Interface": {
+   "Alliance": 11,
+   "OSP": 12
+  },
+  "Stock/E57 'Floodlight' Illuminator": {
+   "Alliance": 35,
+   "OSP": 20,
+   "United": 1,
+   "kuiper": 4
+  },
+  "Stock/Citadel CIC": {
+   "Alliance": 35,
+   "OSP": 11,
+   "Nationless Yards": 2,
+   "kuiper": 2
+  },
+  "Stock/Damage Control Central": {
+   "Alliance": 65,
+   "OSP": 11,
+   "Falcata Republic": 2,
+   "Nationless Yards": 2,
+   "kuiper": 5
+  },
+  "Stock/FM30X 'Prowler' Drive": {
+   "Alliance": 17
+  },
+  "Stock/Ammunition Elevators": {
+   "Alliance": 98,
+   "OSP": 51,
+   "United": 1,
+   "Falcata Republic": 4,
+   "Betel": 2,
+   "kuiper": 2
+  },
+  "Stock/Mk62 Cannon": {
+   "Alliance": 51
+  },
+  "munition:Stock/250mm HE-RPF Shell": {
+   "Alliance": 39,
+   "United": 1
+  },
+  "munition:Stock/250mm AP Shell": {
+   "Alliance": 36,
+   "OSP": 19,
+   "United": 1
+  },
+  "Stock/FM230 'Whiplash' Drive": {
+   "Alliance": 109,
+   "OSP": 7,
+   "United": 1
+  },
+  "munition:Stock/250mm HE Shell": {
+   "Alliance": 37,
+   "OSP": 21,
+   "United": 1
+  },
+  "munition:Stock/120mm AP Shell": {
+   "Alliance": 51
+  },
+  "Stock/Mk64 Cannon": {
+   "Alliance": 35
+  },
+  "munition:Stock/120mm HE Shell": {
+   "Alliance": 60
+  },
+  "munition:Stock/120mm HE-RPF Shell": {
+   "Alliance": 58
+  },
+  "Stock/FM540 'Dragonfly' Drive": {
+   "Alliance": 52,
+   "OSP": 9,
+   "Nationless Yards": 2
+  },
+  "Stock/RM50 'Parallax' Radar": {
+   "Alliance": 99,
+   "OSP": 41,
+   "United": 1,
+   "Nationless Yards": 2
+  },
+  "munition:Stock/450mm AP Shell": {
+   "Alliance": 73,
+   "OSP": 42,
+   "United": 1
+  },
+  "munition:Stock/450mm HE Shell": {
+   "Alliance": 73,
+   "OSP": 42,
+   "United": 1
+  },
+  "Stock/Mk29 'Stonewall' PDT": {
+   "Alliance": 49,
+   "OSP": 2
+  },
+  "Stock/Mk66 Cannon": {
+   "Alliance": 71,
+   "OSP": 34,
+   "United": 1
+  },
+  "munition:Stock/Flak Round": {
+   "Alliance": 61,
+   "OSP": 19
+  },
+  "Stock/Mk68 Cannon": {
+   "Alliance": 71
+  },
+  "Stock/Deck Gear Locker": {
+   "Alliance": 18,
+   "OSP": 24,
+   "Falcata Republic": 2,
+   "kuiper": 1
+  },
+  "Stock/Flight Deck Traversal System": {
+   "Alliance": 18,
+   "OSP": 23,
+   "kuiper": 1
+  },
+  "Stock/Bulk Magazine": {
+   "Alliance": 60,
+   "OSP": 55,
+   "Falcata Republic": 4,
+   "kuiper": 1
+  },
+  "Stock/FM200 Drive": {
+   "Alliance": 46
+  },
+  "Stock/Spacecraft Strikedown Station": {
+   "Alliance": 11,
+   "OSP": 3
+  },
+  "munition:Stock/50mm Slug": {
+   "Alliance": 7,
+   "OSP": 3
+  },
+  "Stock/Bulk Internal Hangar": {
+   "Alliance": 20,
+   "OSP": 6,
+   "Falcata Republic": 2,
+   "kuiper": 1
+  },
+  "Stock/Spacecraft Repair Station": {
+   "Alliance": 8,
+   "OSP": 5,
+   "Falcata Republic": 2
+  },
+  "Stock/E55 'Spotlight' Illuminator": {
+   "Alliance": 6,
+   "OSP": 2
+  },
+  "Stock/Mk95 'Sarissa' PDT": {
+   "Alliance": 18,
+   "OSP": 17,
+   "United": 1
+  },
+  "munition:Stock/15mm Sandshot": {
+   "Alliance": 24,
+   "OSP": 17,
+   "United": 1
+  },
+  "Stock/Small Reactor Booster": {
+   "Alliance": 16,
+   "OSP": 6,
+   "Nationless Yards": 2,
+   "kuiper": 4
+  },
+  "Stock/E71 'Hangup' Jammer": {
+   "Alliance": 30,
+   "kuiper": 2
+  },
+  "Stock/Mount Gyros": {
+   "Alliance": 58,
+   "OSP": 15,
+   "United": 1,
+   "Falcata Republic": 4,
+   "Betel": 2,
+   "kuiper": 2
+  },
+  "Stock/Gun Plotting Center": {
+   "Alliance": 44,
+   "OSP": 36,
+   "United": 1,
+   "Betel": 2
+  },
+  "munition:Stock/300mm AP Rail Sabot": {
+   "Alliance": 11,
+   "OSP": 4
+  },
+  "Stock/Energy Regulator": {
+   "Alliance": 13,
+   "OSP": 15,
+   "Aeveria": 2,
+   "Zaretian": 2,
+   "kuiper": 2
+  },
+  "Stock/Small Energy Regulator": {
+   "Alliance": 7,
+   "OSP": 3,
+   "Nationless Yards": 2,
+   "Aeveria": 2,
+   "Zaretian": 2
+  },
+  "Stock/Mk550 Mass Driver": {
+   "Alliance": 8
+  },
+  "Stock/CR10 Antenna": {
+   "Alliance": 8,
+   "OSP": 13
+  },
+  "Stock/FM580 'Raider' Drive": {
+   "Alliance": 44,
+   "OSP": 14
+  },
+  "Stock/Small Workshop": {
+   "Alliance": 46,
+   "OSP": 6,
+   "United": 1,
+   "Falcata Republic": 2,
+   "Nationless Yards": 2
+  },
+  "Stock/Mk65 Cannon": {
+   "Alliance": 6,
+   "OSP": 2,
+   "United": 1
+  },
+  "Stock/Mk25 'Rebound' PDT": {
+   "Alliance": 21
+  },
+  "Stock/Mk610 Beam Turret": {
+   "Alliance": 19
+  },
+  "Stock/Actively Cooled Amplifiers": {
+   "Alliance": 25,
+   "OSP": 2,
+   "kuiper": 2
+  },
+  "Stock/VLS-3 Launcher": {
+   "Alliance": 34,
+   "kuiper": 1
+  },
+  "Stock/E70 'Interruption' Jammer": {
+   "Alliance": 58,
+   "OSP": 25,
+   "United": 1,
+   "Nationless Yards": 1
+  },
+  "Stock/FM280 'Raider' Drive": {
+   "Alliance": 14
+  },
+  "Stock/Mk90 'Aurora' PDT": {
+   "Alliance": 13,
+   "OSP": 47,
+   "kuiper": 1
+  },
+  "munition:Stock/S1 Prox Bomb": {
+   "Alliance": 4
+  },
+  "Stock/C5 Large Mount Hangar": {
+   "Alliance": 2
+  },
+  "munition:Stock/S2 Glide Bomb": {
+   "Alliance": 9,
+   "OSP": 11
+  },
+  "Stock/Mk61 Cannon": {
+   "Alliance": 13
+  },
+  "munition:Stock/S1 Glide Bomb": {
+   "Alliance": 7,
+   "OSP": 9,
+   "kuiper": 1
+  },
+  "Stock/FM200R Drive": {
+   "Alliance": 2
+  },
+  "Stock/Reinforced Thruster Nozzles": {
+   "Alliance": 1,
+   "OSP": 7,
+   "Nationless Yards": 2
+  },
+  "Stock/Rapid-Cycle Cradle": {
+   "Alliance": 5,
+   "OSP": 25
+  },
+  "Stock/Analysis Annex": {
+   "Alliance": 4,
+   "OSP": 1
+  },
+  "Stock/Supplementary Radio Amplifiers": {
+   "Alliance": 4,
+   "OSP": 2,
+   "kuiper": 1
+  },
+  "munition:Stock/S3 Cluster Bomb": {
+   "Alliance": 2,
+   "OSP": 9
+  },
+  "Stock/Mk81 Railgun": {
+   "Alliance": 3,
+   "OSP": 4
+  },
+  "Stock/Signature Scrambler": {
+   "Alliance": 3,
+   "OSP": 1
+  },
+  "Stock/Battle Dressing Station": {
+   "Alliance": 1
+  },
+  "Stock/Torpedo Turret": {
+   "Alliance": 1
+  },
+  "Stock/FM500R Drive": {
+   "Alliance": 1
+  },
+  "Stock/Launcher Deluge System": {
+   "Alliance": 1
+  },
+  "Stock/Redundant Reactor Failsafes": {
+   "Alliance": 1,
+   "OSP": 3
+  },
+  "Stock/Fire Suppression System": {
+   "Alliance": 3,
+   "OSP": 2
+  },
+  "Stock/C4 Medium Mount Hangar": {
+   "Alliance": 3
+  },
+  "Stock/BW2000 Drive": {
+   "OSP": 13
+  },
+  "Stock/C4 Mount Hangar": {
+   "OSP": 21
+  },
+  "munition:Stock/100mm Grapeshot": {
+   "OSP": 43
+  },
+  "munition:Stock/S0 Rocket": {
+   "OSP": 11
+  },
+  "munition:Stock/100mm HE Shell": {
+   "OSP": 53
+  },
+  "munition:Stock/35mm Flechette": {
+   "OSP": 13
+  },
+  "Stock/Large DC Storage": {
+   "OSP": 34,
+   "United": 1
+  },
+  "munition:Stock/S3 Rocket": {
+   "OSP": 17
+  },
+  "munition:Stock/100mm AP Shell": {
+   "OSP": 38
+  },
+  "Stock/Container Bank Hangar": {
+   "OSP": 22
+  },
+  "Stock/Light Civilian Reactor": {
+   "OSP": 57
+  },
+  "Stock/Boosted Reactor": {
+   "OSP": 66,
+   "United": 1
+  },
+  "Stock/Damage Control Complex": {
+   "OSP": 43,
+   "United": 1
+  },
+  "Stock/Civilian Reactor": {
+   "OSP": 60
+  },
+  "Stock/R550 Early Warning Radar": {
+   "OSP": 34,
+   "United": 1
+  },
+  "Stock/L50 Laser Dazzler": {
+   "OSP": 43,
+   "United": 1,
+   "Nationless Yards": 1
+  },
+  "munition:Stock/EA14 Chaff Decoy": {
+   "OSP": 43,
+   "kuiper": 2
+  },
+  "Stock/Citadel Magazine": {
+   "OSP": 41,
+   "United": 1
+  },
+  "Stock/S2 Bandit Launcher": {
+   "OSP": 7
+  },
+  "Stock/BW1500 Drive": {
+   "OSP": 33
+  },
+  "Stock/Bulwark Huntress": {
+   "OSP": 40
+  },
+  "Stock/BW800 Drive": {
+   "OSP": 45
+  },
+  "munition:Stock/S1 Rocket": {
+   "OSP": 27
+  },
+  "Stock/Sundrive Racing Pro": {
+   "OSP": 34
+  },
+  "munition:Stock/250mm Bomb Shell": {
+   "OSP": 6
+  },
+  "Stock/Ithaca Bridgemaster": {
+   "OSP": 83
+  },
+  "Stock/CHI-7700 Drive": {
+   "OSP": 26
+  },
+  "Stock/MLS-2 Launcher": {
+   "OSP": 18
+  },
+  "Stock/T20 Cannon": {
+   "OSP": 26
+  },
+  "Stock/TE45 Mass Driver": {
+   "OSP": 12
+  },
+  "munition:Stock/500mm Fracturing Block": {
+   "OSP": 12
+  },
+  "Stock/RF44 'Pinpoint' Radar": {
+   "OSP": 52
+  },
+  "Stock/C65 Cannon": {
+   "OSP": 15
+  },
+  "Stock/R400 Radar": {
+   "OSP": 24,
+   "United": 1
+  },
+  "Stock/J75 Jammer": {
+   "OSP": 17
+  },
+  "munition:Stock/600mm Bomb Shell": {
+   "OSP": 3
+  },
+  "munition:Stock/600mm HE Shell": {
+   "OSP": 4
+  },
+  "Stock/C90 Cannon": {
+   "OSP": 4
+  },
+  "Stock/RL18 Launcher": {
+   "OSP": 12
+  },
+  "Stock/J15 Jammer": {
+   "OSP": 15
+  },
+  "munition:Stock/100mm Flak": {
+   "OSP": 7
+  },
+  "Stock/C53 Cannon": {
+   "OSP": 17
+  },
+  "Stock/T81 Plasma Cannon": {
+   "OSP": 13
+  },
+  "munition:Stock/100mm HE-HC Shell": {
+   "OSP": 15
+  },
+  "Stock/ML-9 Mine Launcher": {
+   "OSP": 7
+  },
+  "Stock/T30 Cannon": {
+   "OSP": 17
+  },
+  "munition:Stock/400mm Plasma Ampoule": {
+   "OSP": 19
+  },
+  "munition:Stock/S3 Mine": {
+   "OSP": 2
+  },
+  "Stock/BW800-R Drive": {
+   "OSP": 13
+  },
+  "Stock/C81 Plasma Cannon": {
+   "OSP": 7
+  },
+  "munition:Stock/Decoy Container (Clipper)": {
+   "OSP": 9
+  },
+  "Stock/J360 Jammer": {
+   "OSP": 5
+  },
+  "Stock/Container Stack Launcher": {
+   "OSP": 15
+  },
+  "Stock/P20 Flak PDT": {
+   "OSP": 17
+  },
+  "Stock/E20 'Lighthouse' Illuminator": {
+   "OSP": 3
+  },
+  "Stock/P11 PDT": {
+   "OSP": 23
+  },
+  "Stock/CHI-777 Yard Drive": {
+   "OSP": 14,
+   "United": 1
+  },
+  "Stock/P60 Laser PDT": {
+   "OSP": 7
+  },
+  "Stock/CHI-9100 Long Haul Drive": {
+   "OSP": 6
+  },
+  "Stock/Container Bank Launcher": {
+   "OSP": 9
+  },
+  "munition:Stock/Mine Container": {
+   "OSP": 4
+  },
+  "Stock/Container Datalink Array": {
+   "OSP": 7
+  },
+  "munition:Stock/Decoy Container (Line Ship)": {
+   "OSP": 6
+  },
+  "munition:Stock/S3 Net Mine": {
+   "OSP": 1
+  },
+  "Stock/Jury-Rigged Reactor": {
+   "OSP": 3
+  },
+  "Stock/MLS-3 Launcher": {
+   "OSP": 6
+  },
+  "munition:Stock/S3 Sprint Mine": {
+   "OSP": 4
+  },
+  "Stock/BW1500-R Drive": {
+   "OSP": 4
+  },
+  "Stock/C30 Cannon": {
+   "OSP": 4
+  },
+  "Stock/C54 Cannon": {
+   "OSP": 8
+  },
+  "Stock/RL36 Launcher": {
+   "OSP": 1
+  },
+  "Stock/S2 Twin Bandit Launcher": {
+   "OSP": 9
+  },
+  "Falcata Republic/FM250 'Hussar' Drive": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/RHI-3380 Cannon": {
+   "Falcata Republic": 2
+  },
+  "munition:Falcata Republic/380mm AP Shell": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/WY-137 Railgun": {
+   "Falcata Republic": 4
+  },
+  "Falcata Republic/FM470 'Cuirassier' Drive": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/RHI-2150 Cannon": {
+   "Falcata Republic": 4
+  },
+  "Falcata Republic/UC-RS64 'L'aigle' Radar": {
+   "Falcata Republic": 4
+  },
+  "Falcata Republic/Identification Deception Suite": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/BAE-47 'Estoc' PDT": {
+   "Falcata Republic": 2
+  },
+  "munition:Falcata Republic/150mm Flak Shell": {
+   "Falcata Republic": 4
+  },
+  "munition:Falcata Republic/380mm CLU Shell": {
+   "Falcata Republic": 2
+  },
+  "munition:Falcata Republic/380mm HE Shell": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/Intelligence CIC": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/WY-190 'Merit' PDT": {
+   "Falcata Republic": 4
+  },
+  "Falcata Republic/FR5400 Reactor": {
+   "Falcata Republic": 5
+  },
+  "munition:Falcata Republic/90mm Flak Shell": {
+   "Falcata Republic": 4
+  },
+  "Falcata Republic/Fire Suppression Center": {
+   "Falcata Republic": 4
+  },
+  "munition:Falcata Republic/37mm Sandshot": {
+   "Falcata Republic": 4
+  },
+  "Falcata Republic/Plant Control Center": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/RHI-S1700 Kinetic Artillery": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/RHI-4380 Cannon": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/FM270 'Cuirassier' Drive": {
+   "Falcata Republic": 2
+  },
+  "munition:Falcata Republic/150mm AP-S Shell": {
+   "Falcata Republic": 4
+  },
+  "munition:Falcata Republic/700mm KART-KP Shell": {
+   "Falcata Republic": 2
+  },
+  "munition:Falcata Republic/150mm HE Shell": {
+   "Falcata Republic": 4
+  },
+  "munition:Falcata Republic/700mm KART-HEI Shell": {
+   "Falcata Republic": 2
+  },
+  "munition:Falcata Republic/37mm Pinshot": {
+   "Falcata Republic": 4
+  },
+  "Falcata Republic/MED-320 'Guardian' PDT": {
+   "Falcata Republic": 4
+  },
+  "munition:VanillaSoft/EA45 Ship Decoy": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/FM660 'Cavalier' Drive": {
+   "Falcata Republic": 4
+  },
+  "munition:Falcata Republic/200mm RP-HEI Shell": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/BAE-39 'Glance' PDT": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/Capacitor Bank": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/WY-237 Railgun": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/Gun Plotting Center": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/Hydraulic Actuator": {
+   "Falcata Republic": 2
+  },
+  "Falcata Republic/FM200 Drive": {
+   "Falcata Republic": 1
+  },
+  "Falcata Republic/UC-RS44 'Redoubt' Radar": {
+   "Falcata Republic": 1
+  },
+  "munition:VanillaSoft/EA68 'Seagull' Guided Radiation Decoy": {
+   "Nationless Yards": 2
+  },
+  "State Yards Surplus/M3-65 ALC": {
+   "Nationless Yards": 2
+  },
+  "munition:State Yards Surplus/78mm HE Shell": {
+   "Nationless Yards": 2
+  },
+  "munition:State Yards Surplus/78mm AP Shell": {
+   "Nationless Yards": 2
+  },
+  "munition:VanillaSoft/EA65 'Mockingbird' JComms Buoy": {
+   "Nationless Yards": 1
+  },
+  "EAW/Floodlight RI56 Illuminator": {
+   "Aeveria": 2
+  },
+  "munition:EAW/Spray Chaff Decoy": {
+   "Aeveria": 2
+  },
+  "EAW/Standard CIC": {
+   "Aeveria": 4,
+   "Orion": 2,
+   "Zaretian": 2
+  },
+  "EAW/Carrack HC Drive": {
+   "Aeveria": 2
+  },
+  "EAW/Eridani 225 Light Reactor": {
+   "Aeveria": 4
+  },
+  "EAW/Eridani 420 Reactor": {
+   "Aeveria": 4
+  },
+  "EAW/Shortbow VLS1-23 Launcher": {
+   "Aeveria": 2
+  },
+  "EAW/Echo RS40 Radar": {
+   "Aeveria": 2
+  },
+  "EAW/Rampart PDC20 Point Defense Cannon": {
+   "Aeveria": 2
+  },
+  "munition:EAW/25mm Slug": {
+   "Aeveria": 2
+  },
+  "EAW/Rapier TPB200 Plasma Beam Turret": {
+   "Aeveria": 4
+  },
+  "EAW/Doppler FCR20 Radar": {
+   "Aeveria": 2
+  },
+  "EAW/Crescendo RA15 Radar Amplifier": {
+   "Aeveria": 2
+  },
+  "EAW/Resonator RS50 Radar": {
+   "Aeveria": 2
+  },
+  "EAW/Brigantine HS Drive": {
+   "Aeveria": 2
+  },
+  "EAW/Sarissa SRG300 Spinal Railgun": {
+   "Aeveria": 2
+  },
+  "EAW/Sabre TPB400 Plasma Beam Turret": {
+   "Aeveria": 2
+  },
+  "munition:EAW/220mm Muxer Shell": {
+   "Betel": 2
+  },
+  "EAW/Lock-on Combat Radar": {
+   "Betel": 2
+  },
+  "munition:EAW/15mm Slug": {
+   "Betel": 2
+  },
+  "EAW/Hematite Hex Howitzer": {
+   "Betel": 2
+  },
+  "EAW/Crashquake Howitzer": {
+   "Betel": 2
+  },
+  "EAW/Bulk DC Locker": {
+   "Betel": 2
+  },
+  "EAW/Fast-Response Frigate Drive": {
+   "Betel": 2
+  },
+  "EAW/Squint Watch Radar": {
+   "Betel": 2
+  },
+  "munition:EAW/52mm Flak Shell": {
+   "Betel": 2
+  },
+  "EAW/Malov Generator": {
+   "Betel": 2
+  },
+  "EAW/Signalled Comm Cluster": {
+   "Betel": 2
+  },
+  "EAW/Hammerblast Flak Cannon": {
+   "Betel": 2
+  },
+  "EAW/Large Rapid DC Locker": {
+   "Betel": 2,
+   "Orion": 2
+  },
+  "EAW/Speckle Anti-Jam Radar": {
+   "Betel": 2
+  },
+  "EAW/RIPPLEFIST Heavy Duty Drive": {
+   "Betel": 2
+  },
+  "EAW/Tridic CIWS Cannon": {
+   "Betel": 2
+  },
+  "EAW/Arphaxad Shell Spinal": {
+   "Betel": 2
+  },
+  "munition:EAW/200mm Lado Ampoule": {
+   "Betel": 2
+  },
+  "EAW/Horizon Super-Watch Radar": {
+   "Betel": 2
+  },
+  "EAW/Theatre CIC": {
+   "Betel": 2
+  },
+  "munition:EAW/230mm Arphaxad Shell": {
+   "Betel": 2
+  },
+  "EAW/Junk Pile": {
+   "Betel": 2
+  },
+  "EAW/Small Launcher Cluster": {
+   "Betel": 2
+  },
+  "EAW/Speltzbolt-Steered Heavy Duty Drive": {
+   "Betel": 2
+  },
+  "munition:EAW/350mm Hematite Shell": {
+   "Betel": 2
+  },
+  "EAW/Custom Juke Drive": {
+   "Betel": 2
+  },
+  "EAW/Expanded CIC": {
+   "Betel": 2
+  },
+  "EAW/Muxer Twin Turret": {
+   "Betel": 2
+  },
+  "EAW/Quant Volleycannon": {
+   "Betel": 2
+  },
+  "munition:EAW/Big Chaff Decoy": {
+   "Betel": 2
+  },
+  "EAW/Andigen Power Plant": {
+   "Betel": 2
+  },
+  "EAW/Shard AA Cannon": {
+   "Betel": 2
+  },
+  "EAW/Supplementary Fuel Injector": {
+   "Betel": 2
+  },
+  "EAW/Lado Single Laser Cannon": {
+   "Betel": 2
+  },
+  "munition:EAW/115mm HE Shell": {
+   "Betel": 2
+  },
+  "munition:EAW/12mm Light Shard Shell": {
+   "Betel": 2
+  },
+  "munition:EAW/580mm Bomb Shell": {
+   "Betel": 2
+  },
+  "EAW/R-250-M Radical Drive": {
+   "Orion": 2
+  },
+  "EAW/Orion R-95 Balefire Fire Control Radar": {
+   "Orion": 2
+  },
+  "EAW/R-327 Large Crystal Heatsink": {
+   "Orion": 2
+  },
+  "EAW/R-4000 Light Reactor": {
+   "Orion": 2
+  },
+  "EAW/R-140 Light Crystal Catalyst": {
+   "Orion": 2
+  },
+  "EAW/R-415 Oblivion Spinal Extended Beam": {
+   "Orion": 2
+  },
+  "EAW/R-1090 Seer Radar Suite": {
+   "Orion": 2
+  },
+  "EAW/R-145 Crystal Catalyst Array": {
+   "Orion": 2
+  },
+  "EAW/R-4950 Overdriven Reactor": {
+   "Orion": 2
+  },
+  "EAW/R-205-S Tempest Drive": {
+   "Orion": 2
+  },
+  "EAW/RS30 'Seeker' Radar": {
+   "Zaretian": 2
+  },
+  "EAW/FD420-M 'Spinster' Drive": {
+   "Zaretian": 2
+  },
+  "EAW/Pattern 300 'Demolisher' Spinal Railgun": {
+   "Zaretian": 2
+  },
+  "EAW/SFR2250 Light Reactor": {
+   "Zaretian": 2
+  },
+  "EAW/FD250-M 'Spinster' Drive": {
+   "Zaretian": 2
+  },
+  "munition:EAW/340mm AP Rail Sabot": {
+   "Zaretian": 2
+  },
+  "EAW/SFR4200 Reactor": {
+   "Zaretian": 2
+  },
+  "KUIPER/Model 76 MK6 Micro Reactor": {
+   "kuiper": 11
+  },
+  "KUIPER/Model 70 MK68 Capital Reactor": {
+   "kuiper": 9
+  },
+  "munition:KUIPER/50mm Coilgun Slug": {
+   "kuiper": 7
+  },
+  "KUIPER/Type 20B 'Magnum' Coilgun": {
+   "kuiper": 5
+  },
+  "KUIPER/Model CW80 MK5 Radar Suite Integrator": {
+   "kuiper": 12
+  },
+  "KUIPER/Model C89 Pulsed Search Generator": {
+   "kuiper": 8
+  },
+  "KUIPER/Model C70 HDC Locker": {
+   "kuiper": 8
+  },
+  "munition:KUIPER/15mm Coilgun slug": {
+   "kuiper": 11
+  },
+  "KUIPER/Model 50 Fusion Torch": {
+   "kuiper": 10
+  },
+  "KUIPER/Large Redundant Charging Pathways": {
+   "kuiper": 5
+  },
+  "KUIPER/Type 20 'Magnum' Coilgun": {
+   "kuiper": 4
+  },
+  "munition:KUIPER/20mm Airburst Coilgun Shell": {
+   "kuiper": 9
+  },
+  "KUIPER/Model C84 Integrated Fire Control Processor": {
+   "kuiper": 10
+  },
+  "munition:KUIPER/50mm HE-RPF Coilgun Shell": {
+   "kuiper": 7
+  },
+  "munition:KUIPER/50mm Fragmentation Slug": {
+   "kuiper": 7
+  },
+  "KUIPER/Type 15 'Goalkeeper' Point Defense Turret": {
+   "kuiper": 10
+  },
+  "KUIPER/Type 10 'Castle' Coilgun Turret": {
+   "kuiper": 8
+  },
+  "KUIPER/Model C72B Reinforced HDC Locker": {
+   "kuiper": 5
+  },
+  "KUIPER/Model C71 Fast DC Locker": {
+   "kuiper": 11
+  },
+  "KUIPER/Model C81 Range Extender": {
+   "kuiper": 10
+  },
+  "KUIPER/Model C83 Error Correction Suite": {
+   "kuiper": 2
+  },
+  "munition:KUIPER/20mm Coilgun Slug": {
+   "kuiper": 9
+  },
+  "KUIPER/Redundant Charging Pathways": {
+   "kuiper": 6
+  },
+  "KUIPER/Type X40S Particle Lance": {
+   "kuiper": 4
+  },
+  "KUIPER/Model 73 MK23 Reactor": {
+   "kuiper": 5
+  },
+  "KUIPER/Model C70B HDC Locker": {
+   "kuiper": 5
+  },
+  "KUIPER/Small Redundant Charging Pathways": {
+   "kuiper": 3
+  },
+  "KUIPER/Type 5B 'Backstop' Flak Turret": {
+   "kuiper": 5
+  },
+  "KUIPER/Model C78B CNC Shop": {
+   "kuiper": 6
+  },
+  "munition:KUIPER/40mm HE-RPF Shell": {
+   "kuiper": 7
+  },
+  "KUIPER/Type X20C 'Magnum' Coilgun": {
+   "kuiper": 2
+  },
+  "KUIPER/Model 65 Reinforced Fusion Torch": {
+   "kuiper": 1
+  },
+  "KUIPER/Model C79C Augmented DC Locker": {
+   "kuiper": 4
+  },
+  "KUIPER/Model 51 'Harpy' Fusion Torch": {
+   "kuiper": 2
+  },
+  "KUIPER/Cubesat Launcher": {
+   "kuiper": 2
+  },
+  "KUIPER/Model 54 'Falcon' Fusion Torch": {
+   "kuiper": 5
+  },
+  "munition:KUIPER/16.7mm Coilgun Slug": {
+   "kuiper": 2
+  },
+  "KUIPER/Helendir Strikedown": {
+   "kuiper": 1
+  },
+  "KUIPER/Model 64 'Falcon' Fusion Torch": {
+   "kuiper": 2
+  },
+  "KUIPER/TLS-1": {
+   "kuiper": 1
+  },
+  "KUIPER/Model C78 CNC Shop": {
+   "kuiper": 1
+  },
+  "KUIPER/Helendir Craft Hangar": {
+   "kuiper": 1
+  },
+  "munition:KUIPER/19mm AP Hybrid Coilgun Shell": {
+   "kuiper": 2
+  },
+  "munition:KUIPER/100mm Coilgun AP Slug": {
+   "kuiper": 1
+  },
+  "KUIPER/Type 30B 'Onager' Heavy Coilgun System": {
+   "kuiper": 1
+  },
+  "munition:KUIPER/100mm Coilgun Fragmentation Slug": {
+   "kuiper": 1
+  },
+  "KUIPER/Model C76B Additive Manufactory": {
+   "kuiper": 2
+  },
+  "KUIPER/Type 15B 'Watchman' Point Defense Turret": {
+   "kuiper": 1
+  },
+  "KUIPER/Model C79B Augmented DC Locker": {
+   "kuiper": 2
+  },
+  "munition:KUIPER/308mm HE Shell": {
+   "kuiper": 2
+  },
+  "munition:KUIPER/308mm HVAP Shell": {
+   "kuiper": 2
+  },
+  "KUIPER/Type 31 'Long Rifle' Autocannon": {
+   "kuiper": 2
+  },
+  "KUIPER/Model 63 'Phoenix' Fusion Torch": {
+   "kuiper": 2
+  },
+  "KUIPER/Type 31B 'Long Rifle' Autocannon": {
+   "kuiper": 1
+  },
+  "munition:KUIPER/Particle Array": {
+   "kuiper": 1
+  },
+  "munition:KUIPER/105mm HVAP Shell": {
+   "kuiper": 1
+  },
+  "munition:KUIPER/70mm Coilgun Slug": {
+   "kuiper": 1
+  },
+  "KUIPER/Model C85 Passive Sensor Processing Suite": {
+   "kuiper": 1
+  },
+  "KUIPER/TLS-2": {
+   "kuiper": 1
+  },
+  "KUIPER/TLS-3": {
+   "kuiper": 1
+  },
+  "KUIPER/Cubesat Landing Pad": {
+   "kuiper": 1
+  }
+ }
+}

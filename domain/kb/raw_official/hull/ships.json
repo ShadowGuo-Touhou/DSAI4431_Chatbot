@@ -1,0 +1,1319 @@
+{
+ "page": "Ships - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Ships",
+ "category": "hull",
+ "slug": "ships",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [
+  {
+   "name": "Sprinter Corvette Class",
+   "section": "Ship hulls › Shelter Alliance hulls",
+   "fields": {
+    "Name": "Sprinter Corvette Class",
+    "Mass (tonnes)": "3000",
+    "Armor Thickness (cm)": "8",
+    "Component DR (%)": "0",
+    "Crew": "55",
+    "Crew Vulnerability (%)": "60",
+    "Structural Integrity": "1000",
+    "Radar Signature (m2)": "2890",
+    "Slots": "4 Mounts 4 Compartments 4 Modules",
+    "Modifiers": "-20% Flank Damage Probability +20% Sensitivity -15% Positional Error",
+    "Point Cost": "75"
+   }
+  },
+  {
+   "name": "Raines Frigate Class",
+   "section": "Ship hulls › Shelter Alliance hulls",
+   "fields": {
+    "Name": "Raines Frigate Class",
+    "Mass (tonnes)": "5000",
+    "Armor Thickness (cm)": "15",
+    "Component DR (%)": "5",
+    "Crew": "50",
+    "Crew Vulnerability (%)": "60",
+    "Structural Integrity": "3000",
+    "Radar Signature (m2)": "3783",
+    "Slots": "4 Mounts 5 Compartments 5 Modules",
+    "Modifiers": "-15% Flank Damage Probability +1 Missile Programming Channels",
+    "Point Cost": "125"
+   }
+  },
+  {
+   "name": "Keystone Destroyer Class",
+   "section": "Ship hulls › Shelter Alliance hulls",
+   "fields": {
+    "Name": "Keystone Destroyer Class",
+    "Mass (tonnes)": "8000",
+    "Armor Thickness (cm)": "22",
+    "Component DR (%)": "10",
+    "Crew": "50",
+    "Crew Vulnerability (%)": "45",
+    "Structural Integrity": "4000",
+    "Radar Signature (m2)": "6282",
+    "Slots": "7 Mounts 7 Compartments 7 Modules",
+    "Modifiers": "+1 Missile Programming Channels -50% Overheat Damage Chance (Beam) +25% Powerplant Efficiency",
+    "Point Cost": "200"
+   }
+  },
+  {
+   "name": "Vauxhall Light Cruiser Class",
+   "section": "Ship hulls › Shelter Alliance hulls",
+   "fields": {
+    "Name": "Vauxhall Light Cruiser Class",
+    "Mass (tonnes)": "10000",
+    "Armor Thickness (cm)": "26",
+    "Component DR (%)": "20",
+    "Crew": "75",
+    "Crew Vulnerability (%)": "25",
+    "Structural Integrity": "5500",
+    "Radar Signature (m2)": "11727",
+    "Slots": "10 Mounts 9 Compartments 9 Modules",
+    "Modifiers": "+2 Missile Programming Channels",
+    "Point Cost": "350"
+   }
+  },
+  {
+   "name": "Axford Heavy Cruiser Class",
+   "section": "Ship hulls › Shelter Alliance hulls",
+   "fields": {
+    "Name": "Axford Heavy Cruiser Class",
+    "Mass (tonnes)": "13000",
+    "Armor Thickness (cm)": "40",
+    "Component DR (%)": "40",
+    "Crew": "90",
+    "Crew Vulnerability (%)": "25",
+    "Structural Integrity": "6500",
+    "Radar Signature (m2)": "14332",
+    "Slots": "11 Mounts 11 Compartments 12 Modules",
+    "Modifiers": "+2 Missile Programming Channels +10% Max Repair +20% Spacecraft Arming Speed",
+    "Point Cost": "600"
+   }
+  },
+  {
+   "name": "Levy Escort Carrier Class",
+   "section": "Ship hulls › Shelter Alliance hulls",
+   "fields": {
+    "Name": "Levy Escort Carrier Class",
+    "Mass (tonnes)": "12000",
+    "Armor Thickness (cm)": "15",
+    "Component DR (%)": "25",
+    "Crew": "100",
+    "Crew Vulnerability (%)": "25",
+    "Structural Integrity": "6500",
+    "Radar Signature (m2)": "16516",
+    "Slots": "4 Mounts 10 Compartments 8 Modules",
+    "Modifiers": "+50% Spacecraft Arming Speed",
+    "Point Cost": "500"
+   }
+  },
+  {
+   "name": "Solomon Battleship Class",
+   "section": "Ship hulls › Shelter Alliance hulls",
+   "fields": {
+    "Name": "Solomon Battleship Class",
+    "Mass (tonnes)": "21000",
+    "Armor Thickness (cm)": "56",
+    "Component DR (%)": "40",
+    "Crew": "150",
+    "Crew Vulnerability (%)": "30",
+    "Structural Integrity": "8000",
+    "Radar Signature (m2)": "27876",
+    "Slots": "14 Mounts 16 Compartments 15 Modules",
+    "Modifiers": "+20% Reload Time (Energy) +20% Spacecraft Arming Speed",
+    "Point Cost": "1000"
+   }
+  },
+  {
+   "name": "Worden Fleet Carrier Class",
+   "section": "Ship hulls › Shelter Alliance hulls",
+   "fields": {
+    "Name": "Worden Fleet Carrier Class",
+    "Mass (tonnes)": "19000",
+    "Armor Thickness (cm)": "30",
+    "Component DR (%)": "30",
+    "Crew": "250",
+    "Crew Vulnerability (%)": "40",
+    "Structural Integrity": "5000",
+    "Radar Signature (m2)": "34357",
+    "Slots": "13 Mounts 20 Compartments 14 Modules",
+    "Modifiers": "+20% Spacecraft Arming Speed",
+    "Point Cost": "3000"
+   }
+  },
+  {
+   "name": "Mercator Replenishment Oiler Class",
+   "section": "Ship hulls › Shelter Alliance hulls",
+   "fields": {
+    "Name": "Mercator Replenishment Oiler Class",
+    "Mass (tonnes)": "18000",
+    "Armor Thickness (cm)": "15",
+    "Component DR (%)": "5",
+    "Crew": "50",
+    "Crew Vulnerability (%)": "60",
+    "Structural Integrity": "3000",
+    "Radar Signature (m2)": "3783",
+    "Slots": "3 Mounts 8 Compartments 4 Modules",
+    "Point Cost": "3000"
+   }
+  },
+  {
+   "name": "Ferryman Clipper Class",
+   "section": "Ship hulls › Outlying Systems Protectorate hulls",
+   "fields": {
+    "Name": "Ferryman Clipper Class",
+    "Mass (tonnes)": "1500",
+    "Armor Thickness (cm)": "5",
+    "Component DR (%)": "0",
+    "Crew": "55",
+    "Crew Vulnerability (%)": "60",
+    "Structural Integrity": "1000",
+    "Radar Signature (m2)": "2890",
+    "Slots": "3 Mounts 3 Compartments 4 Modules",
+    "Modifiers": "-20% Flank Damage Probability",
+    "Point Cost": "50"
+   }
+  },
+  {
+   "name": "Draugr Clipper Class",
+   "section": "Ship hulls › Outlying Systems Protectorate hulls",
+   "fields": {
+    "Name": "Draugr Clipper Class",
+    "Mass (tonnes)": "3500",
+    "Armor Thickness (cm)": "5",
+    "Component DR (%)": "0",
+    "Crew": "40",
+    "Crew Vulnerability (%)": "60",
+    "Structural Integrity": "1000",
+    "Radar Signature (m2)": "4685",
+    "Slots": "5 Mounts 5 Compartments 4 Modules",
+    "Modifiers": "+1 Missile Programming Channels",
+    "Point Cost": "100"
+   }
+  },
+  {
+   "name": "Flathead Monitor Class",
+   "section": "Ship hulls › Outlying Systems Protectorate hulls",
+   "fields": {
+    "Name": "Flathead Monitor Class",
+    "Mass (tonnes)": "5000",
+    "Armor Thickness (cm)": "48",
+    "Component DR (%)": "20",
+    "Crew": "40",
+    "Crew Vulnerability (%)": "60",
+    "Structural Integrity": "1000",
+    "Radar Signature (m2)": "9869",
+    "Slots": "6 Mounts 6 Compartments 7 Modules",
+    "Modifiers": "+1 Missile Programming Channels",
+    "Point Cost": "200"
+   }
+  },
+  {
+   "name": "Journeyman Light Carrier Class",
+   "section": "Ship hulls › Outlying Systems Protectorate hulls",
+   "fields": {
+    "Name": "Journeyman Light Carrier Class",
+    "Mass (tonnes)": "3000",
+    "Armor Thickness (cm)": "12",
+    "Component DR (%)": "20",
+    "Crew": "40",
+    "Crew Vulnerability (%)": "60",
+    "Structural Integrity": "1000",
+    "Radar Signature (m2)": "14182",
+    "Slots": "3 Mounts 8 Compartments 6 Modules",
+    "Point Cost": "300"
+   }
+  },
+  {
+   "name": "Ocello Command Cruiser Class",
+   "section": "Ship hulls › Outlying Systems Protectorate hulls",
+   "fields": {
+    "Name": "Ocello Command Cruiser Class",
+    "Mass (tonnes)": "12000",
+    "Armor Thickness (cm)": "30",
+    "Component DR (%)": "40",
+    "Crew": "80",
+    "Crew Vulnerability (%)": "25",
+    "Structural Integrity": "6500",
+    "Radar Signature (m2)": "15745",
+    "Slots": "11 Mounts 9 Compartments 10 Modules",
+    "Modifiers": "+2 Missile Programming Channels +5% Max Repair +10% Powerplant Efficiency",
+    "Point Cost": "575"
+   }
+  },
+  {
+   "name": "Marauder Line Ship Class",
+   "section": "Ship hulls › Outlying Systems Protectorate hulls",
+   "fields": {
+    "Name": "Marauder Line Ship Class",
+    "Mass (tonnes)": "15000",
+    "Armor Thickness (cm)": "20",
+    "Component DR (%)": "35",
+    "Crew": "100",
+    "Crew Vulnerability (%)": "75",
+    "Structural Integrity": "4000",
+    "Radar Signature (m2)": "31,045–47,400 m[math]\\displaystyle{ ^2 }[/math][1]",
+    "Slots": "17 Mounts 9 Compartments 8 Modules",
+    "Modifiers": "+20% Team Move Speed +1 Missile Programming Channel",
+    "Point Cost": "375"
+   }
+  },
+  {
+   "name": "Moorline Line Ship Class",
+   "section": "Ship hulls › Outlying Systems Protectorate hulls",
+   "fields": {
+    "Name": "Moorline Line Ship Class",
+    "Mass (tonnes)": "15000",
+    "Armor Thickness (cm)": "20",
+    "Component DR (%)": "20",
+    "Crew": "100",
+    "Crew Vulnerability (%)": "75",
+    "Structural Integrity": "3000",
+    "Radar Signature (m2)": "33,781–50,424 m[math]\\displaystyle{ ^2 }[/math][2]",
+    "Slots": "10 Mounts 9 Compartments 6 Modules",
+    "Modifiers": "+1 Missile Programming Channels",
+    "Point Cost": "600"
+   }
+  }
+ ],
+ "tables": [
+  {
+   "section": "Ship hulls › Shelter Alliance hulls",
+   "header": "Name",
+   "rows": 9,
+   "used": 9,
+   "unused": []
+  },
+  {
+   "section": "Ship hulls › Outlying Systems Protectorate hulls",
+   "header": "Name",
+   "rows": 7,
+   "used": 7,
+   "unused": []
+  }
+ ],
+ "sections": [
+  {
+   "heading": "Posture controls",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Posture controls determine how a ship will operate and maneuver and which sensor and defensive systems are enabled."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Display",
+       "Full name",
+       "Settings"
+      ],
+      [
+       "THRTL",
+       "Throttle Control",
+       "1/3: Ship will move at 1/3 of max speed. 2/3: Ship will move at 2/3 of max speed. FULL: Ship will move at max speed. FLANK: Ship will move above max speed. Causes damage to engines. FQ (carriers only): speed is limited so spacecraft can take off and land. While heading and velocity stay within the green-deck angle (default 7.5 degrees) the cap is about one-third of max speed; otherwise it drops to a 5 m/s crawl."
+      ],
+      [
+       "MNVR",
+       "Maneuvering Posture",
+       "DIRECT: Ship will move in a straight line. EVADE: Ship will make random course changes to attempt to avoid incoming fire."
+      ],
+      [
+       "FORM",
+       "Formation Positioning",
+       "REL: Ships will have the same orientation of the guide ship. The guide will wait for other ships to catch up. TRU: Escorts keep the same true bearing and distance from the guide when the guide turns. They are still steered to the guide's heading. The guide will wait for other ships to catch up. LOOSE: The guide will not wait for other ships to catch up."
+      ],
+      [
+       "BSHRT",
+       "Battle-Short",
+       "OFF: Continuous-use equipment that honors battle short (beams, jammers, illuminators, dazzlers) shuts down for cooldown once its own burst duration is exceeded, at 7.5 seconds for the Mk600 and Mk610 beams and anywhere from 40 to 180 seconds for electronic-warfare sets. ON: Continuous-use equipment that honors battle short (beams, jammers, illuminators, dazzlers) keeps running past its own burst duration; each second past the limit it has a per-component chance to take self-damage. The Mk610, for example, rolls a 60% chance of 20 damage starting after 7.5 seconds"
+      ],
+      [
+       "RADAR",
+       "Radar Emissions Control",
+       "ON: Ship sensors are active. OFF: Ship sensors are inactive. -25% signature."
+      ],
+      [
+       "COMM",
+       "Communications Emissions Control",
+       "XMIT: Ship comms are active. RECV: Ship sensors are inactive. -10% signature."
+      ],
+      [
+       "ESUPT",
+       "Electronic Support Modules",
+       "ON: Passive electronic-support sensors operate. OFF: Passive sensors are switched off, so this ship generates no new passive tracks. This does not reduce signature. It can be used to cut clutter once a track is held."
+      ],
+      [
+       "WCON",
+       "Weapons Control",
+       "FREE: Ship will automatically return fire with non-missile weapons on targets that are firing at them. TIGHT: Ship will not attack except when given a target. HOLD: Ship will not attack, and dual-purpose weapons hold fire. Dedicated point-defense turrets, defensive missiles, and decoys still operate. Turrets will still bear on any current target."
+      ],
+      [
+       "PDTRT",
+       "Point Defenses - Turrets",
+       "AUTO: Dedicated point defense turrets and dual-purpose weapons will target the closest missiles. DEDI: Dedicated point defense turrets will target the closest missiles. MAN: Point defense turrets will only shoot at designated missiles."
+      ],
+      [
+       "PDSML",
+       "Point Defenses - Missiles",
+       "Controls the firing of interceptor missiles. Click to open policy settings."
+      ],
+      [
+       "DECOY",
+       "Point Defenses - Decoys",
+       "LEAST: Only the lowest-capability decoy necessary to defeat a given threat will be deployed. If the missile type is unknown all decoys will be fired. BEST: Only the highest-capability decoy necessary to defeat a given threat will be deployed. If the missile type is unknown all decoys will be fired. AUTO: All decoys compatible with the threat will be deployed. If the missile type is unknown all decoys will be fired. MAN: Decoys can only be deployed manually via the Action Menu."
+      ],
+      [
+       "PDZNE",
+       "Point Defense Zone",
+       "AREA: Point defenses will target all missiles, prioritizing the ones threatening the ship. POINT: Point defenses will target only missiles threatening the ship."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Integrity rating",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "A ship's integrity directly affects how resistant its components are to damage. Lots of empty space means less structural members to absorb damage and protect components. A ship with at least 60% of its slots filled (mounts, compartments, and modules) gets the full hull Damage Reduction. From 60% down to 20% fill the protection falls linearly, and at 20% fill or less it is 25% of the hull value."
+    }
+   ]
+  },
+  {
+   "heading": "Ship hulls",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ship hulls determine a ship's base stats as well as how many components it can have."
+    }
+   ]
+  },
+  {
+   "heading": "Ship hulls › Shelter Alliance hulls",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Shelter Alliance ships scale linearly. Larger ships are more resilient and carry more components but are slower and more expensive."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Name",
+       "Mass (tonnes)",
+       "Armor Thickness (cm)",
+       "Component DR (%)",
+       "Crew",
+       "Crew Vulnerability (%)",
+       "Structural Integrity",
+       "Radar Signature (m2)",
+       "Slots",
+       "Modifiers",
+       "Point Cost"
+      ],
+      [
+       "Sprinter Corvette Class",
+       "3000",
+       "8",
+       "0",
+       "55",
+       "60",
+       "1000",
+       "2890",
+       "4 Mounts 4 Compartments 4 Modules",
+       "-20% Flank Damage Probability +20% Sensitivity -15% Positional Error",
+       "75"
+      ],
+      [
+       "Raines Frigate Class",
+       "5000",
+       "15",
+       "5",
+       "50",
+       "60",
+       "3000",
+       "3783",
+       "4 Mounts 5 Compartments 5 Modules",
+       "-15% Flank Damage Probability +1 Missile Programming Channels",
+       "125"
+      ],
+      [
+       "Keystone Destroyer Class",
+       "8000",
+       "22",
+       "10",
+       "50",
+       "45",
+       "4000",
+       "6282",
+       "7 Mounts 7 Compartments 7 Modules",
+       "+1 Missile Programming Channels -50% Overheat Damage Chance (Beam) +25% Powerplant Efficiency",
+       "200"
+      ],
+      [
+       "Vauxhall Light Cruiser Class",
+       "10000",
+       "26",
+       "20",
+       "75",
+       "25",
+       "5500",
+       "11727",
+       "10 Mounts 9 Compartments 9 Modules",
+       "+2 Missile Programming Channels",
+       "350"
+      ],
+      [
+       "Axford Heavy Cruiser Class",
+       "13000",
+       "40",
+       "40",
+       "90",
+       "25",
+       "6500",
+       "14332",
+       "11 Mounts 11 Compartments 12 Modules",
+       "+2 Missile Programming Channels +10% Max Repair +20% Spacecraft Arming Speed",
+       "600"
+      ],
+      [
+       "Levy Escort Carrier Class",
+       "12000",
+       "15",
+       "25",
+       "100",
+       "25",
+       "6500",
+       "16516",
+       "4 Mounts 10 Compartments 8 Modules",
+       "+50% Spacecraft Arming Speed",
+       "500"
+      ],
+      [
+       "Solomon Battleship Class",
+       "21000",
+       "56",
+       "40",
+       "150",
+       "30",
+       "8000",
+       "27876",
+       "14 Mounts 16 Compartments 15 Modules",
+       "+20% Reload Time (Energy) +20% Spacecraft Arming Speed",
+       "1000"
+      ],
+      [
+       "Worden Fleet Carrier Class",
+       "19000",
+       "30",
+       "30",
+       "250",
+       "40",
+       "5000",
+       "34357",
+       "13 Mounts 20 Compartments 14 Modules",
+       "+20% Spacecraft Arming Speed",
+       "3000"
+      ],
+      [
+       "Mercator Replenishment Oiler Class",
+       "18000",
+       "15",
+       "5",
+       "50",
+       "60",
+       "3000",
+       "3783",
+       "3 Mounts 8 Compartments 4 Modules",
+       "",
+       "3000"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "160px-Sprinter_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "160px-Raines_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "160px-Keystone_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "160px-Vauxhall_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "160px-Axford_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "160px-Levy.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "160px-Solomon_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "160px-Worden.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "160px-Mercator.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "p",
+     "text": "Worden Fleet Carrier and Mercator Replenishment Oiler are hidden from the skirmish fleet editor. They show up when editing a campaign fleet, or after the FleetEditorShowHidden console command, which tags them HIDDEN."
+    }
+   ]
+  },
+  {
+   "heading": "Ship hulls › Outlying Systems Protectorate hulls",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Outlying Systems Protectorate are more specialized, with each ship hull being made for different roles."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Name",
+       "Mass (tonnes)",
+       "Armor Thickness (cm)",
+       "Component DR (%)",
+       "Crew",
+       "Crew Vulnerability (%)",
+       "Structural Integrity",
+       "Radar Signature (m2)",
+       "Slots",
+       "Modifiers",
+       "Point Cost"
+      ],
+      [
+       "Ferryman Clipper Class",
+       "1500",
+       "5",
+       "0",
+       "55",
+       "60",
+       "1000",
+       "2890",
+       "3 Mounts 3 Compartments 4 Modules",
+       "-20% Flank Damage Probability",
+       "50"
+      ],
+      [
+       "Draugr Clipper Class",
+       "3500",
+       "5",
+       "0",
+       "40",
+       "60",
+       "1000",
+       "4685",
+       "5 Mounts 5 Compartments 4 Modules",
+       "+1 Missile Programming Channels",
+       "100"
+      ],
+      [
+       "Flathead Monitor Class",
+       "5000",
+       "48",
+       "20",
+       "40",
+       "60",
+       "1000",
+       "9869",
+       "6 Mounts 6 Compartments 7 Modules",
+       "+1 Missile Programming Channels",
+       "200"
+      ],
+      [
+       "Journeyman Light Carrier Class",
+       "3000",
+       "12",
+       "20",
+       "40",
+       "60",
+       "1000",
+       "14182",
+       "3 Mounts 8 Compartments 6 Modules",
+       "",
+       "300"
+      ],
+      [
+       "Ocello Command Cruiser Class",
+       "12000",
+       "30",
+       "40",
+       "80",
+       "25",
+       "6500",
+       "15745",
+       "11 Mounts 9 Compartments 10 Modules",
+       "+2 Missile Programming Channels +5% Max Repair +10% Powerplant Efficiency",
+       "575"
+      ],
+      [
+       "Marauder Line Ship Class",
+       "15000",
+       "20",
+       "35",
+       "100",
+       "75",
+       "4000",
+       "31,045–47,400 m[math]\\displaystyle{ ^2 }[/math][1]",
+       "17 Mounts 9 Compartments 8 Modules",
+       "+20% Team Move Speed +1 Missile Programming Channel",
+       "375"
+      ],
+      [
+       "Moorline Line Ship Class",
+       "15000",
+       "20",
+       "20",
+       "100",
+       "75",
+       "3000",
+       "33,781–50,424 m[math]\\displaystyle{ ^2 }[/math][2]",
+       "10 Mounts 9 Compartments 6 Modules",
+       "+1 Missile Programming Channels",
+       "600"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "170px-Shuttle_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "170px-Tugboat_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "170px-Cargo_Feeder_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "170px-Journeyman.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "170px-Ocello_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "170px-Bulk_Freighter_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "170px-Container_Liner_Screenshot.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Fleet editor shows a placeholder 15,745.41 m² (Ocello box) before segments assemble; detection uses the assembled hull."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Fleet editor shows a placeholder 15,745.41 m² (Ocello box) before segments assemble; detection uses the assembled hull."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 25 October 2026, at 19:52."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

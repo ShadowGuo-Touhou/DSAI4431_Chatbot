@@ -1,0 +1,834 @@
+{
+ "page": "Movement - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Movement",
+ "category": "mechanics",
+ "slug": "movement",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "(页面开头)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ship movement in Nebulous Fleet Command is similar to that of submarines or oceangoing ships, with max speeds and drag."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Thrust: speed limit as a fraction of max speed. Options are 1/3 (33%), 2/3 (66%), Full (100%), Flank (150%), and Flight Quarters (FQ, 100%, with carrier green-deck handling). Acceleration uses full thrust at every setting; only Flank adds 50% forward thrust."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Acceleration: This mostly is affected by the drives, however the mass of the ship based on installed components slightly affects acceleration."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Flank Speed: Boosts top speed by 50% (does not affect turn speed or turn acceleration). When flanking, every active thruster checks for flank damage once per second, and takes 5 damage if the check fails. Forward acceleration is additionally increased by 50%"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Heading/Roll: Holds the ship pointing in a certain direction or oriented \"up\" a certain way"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Drives as main modifier"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Dodging & Evasive: EVADE posture applies a slight \"corkscrew\" to travel. This allows small ships to sometimes dodge shots. Skilled players may issue move orders or the orbit command to dodge shots, which is far more effective than the EVADE setting."
+    },
+    {
+     "kind": "p",
+     "text": "When a target is lost and there are no remaining roll drivers, the ship will issue itself a temporary ROL order to prevent re-masking weapons."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Linear thrust multipliers in non-forward directions by ship"
+      ],
+      [
+       "ANS Ships",
+       "Lateral",
+       "Reverse",
+       "OSP Ships",
+       "Lateral",
+       "Reverse"
+      ],
+      [
+       "Sprinter",
+       "90%",
+       "95%",
+       "Ferryman",
+       "75%",
+       "80%"
+      ],
+      [
+       "Raines",
+       "80%",
+       "90%",
+       "Draugr",
+       "75%",
+       "80%"
+      ],
+      [
+       "Keystone",
+       "80%",
+       "90%",
+       "Flathead",
+       "75%",
+       "80%"
+      ],
+      [
+       "Vauxhall",
+       "90%",
+       "95%",
+       "Ocello",
+       "75%",
+       "85%"
+      ],
+      [
+       "Axford",
+       "75%",
+       "85%",
+       "Marauder",
+       "40%",
+       "100%"
+      ],
+      [
+       "Levy",
+       "75%",
+       "85%",
+       "Journeyman",
+       "75%",
+       "75%"
+      ],
+      [
+       "Solomon",
+       "75%",
+       "85%",
+       "Moorline",
+       "40%",
+       "100%"
+      ],
+      [
+       "Worden",
+       "75%",
+       "UNKNOWN%"
+      ],
+      [
+       "Mercator",
+       "80%",
+       "UNKNOWN%"
+      ]
+     ],
+     "imgs": [
+      [
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "Ships have their thrust power scaled by a multiplier for lateral and reverse movement, with lateral thrust (side to side / up down) usually being the weakest. Main forward thrusters are always at 1.00x."
+    },
+    {
+     "kind": "p",
+     "text": "Tracks are annotated by two lines: one fixed length line that indicates the heading of the track (if the track is a warship), and one variable length line with a circle on the end that indicates the track's velocity. The velocity line represents the track's predicted location after 10 seconds."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Linear Acceleration",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ships have to accelerate to max speed, and having higher thrust makes that happen faster. [todo: enter similar equation as below with drag]"
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Turning",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ships have an angular thrust for turning and rolling. It is possible to calculate the time to turn a ship's nose 180°."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Hull",
+       "Inertia Factor [math]\\displaystyle{ F_y }[/math]"
+      ],
+      [
+       "Sprinter",
+       "1.59"
+      ],
+      [
+       "Raines",
+       "2.16"
+      ],
+      [
+       "Keystone",
+       "4.09"
+      ],
+      [
+       "Vauxhall",
+       "8.32"
+      ],
+      [
+       "Axford",
+       "8.72"
+      ],
+      [
+       "Solomon",
+       "17.2"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "[math]\\displaystyle{ P \\equiv \\text{Angular Thrust (as seen in-game)} }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "[math]\\displaystyle{ M \\equiv \\text{Ship Mass (as seen in-game)} }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "[math]\\displaystyle{ F \\equiv \\text{Ship Inertia Factor (see chart)} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "Because of damping, ships will accelerate only to a certain maximum speed given by (in radians per second), [math]\\displaystyle{ \\omega_\\text{max} = \\frac{1000P}{MF} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "The time in seconds, [math]\\displaystyle{ t }[/math], to turn 180° is: [math]\\displaystyle{ \\large{{t \\approx \\frac{\\pi}{\\omega_\\text{max}} + 10}} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "([math]\\displaystyle{ \\omega_\\text{max} }[/math] is usually smaller than the listed max turn rate, [math]\\displaystyle{ R }[/math], except for buffed light ships and possibly when rolling. To compare the two, take [math]\\displaystyle{ R }[/math], multiply by [math]\\displaystyle{ \\pi }[/math], and divide by 180. If the result is [math]\\displaystyle{ < \\omega_\\text{max} }[/math], then replace [math]\\displaystyle{ \\omega_\\text{max} }[/math] in the equation above by the result.)"
+    }
+   ]
+  },
+  {
+   "heading": "Controls",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Abbreviation",
+       "Name",
+       "Default Keybind",
+       "Description"
+      ],
+      [
+       "ORB",
+       "Orbit Position",
+       "O",
+       "Orbit around a point"
+      ],
+      [
+       "POS",
+       "Move to Position",
+       "M",
+       "Move to a point"
+      ],
+      [
+       "CRS",
+       "Drive Course",
+       "SHIFT + M",
+       "Move continuously in one direction"
+      ],
+      [
+       "HDG",
+       "Hold Heading",
+       "H",
+       "Point towards a direction"
+      ],
+      [
+       "CHD",
+       "Clear Hold Heading",
+       "Not Bound",
+       "Clears heading command"
+      ],
+      [
+       "ROL",
+       "Roll Ship",
+       "Shift + H",
+       "Roll to a specific rotation"
+      ],
+      [
+       "CRL",
+       "Clear Roll Ship",
+       "Not Bound",
+       "Clears roll command"
+      ],
+      [
+       "CLR",
+       "Clear HDG/ROL",
+       "Not Bound",
+       "Clears both heading and roll commands"
+      ],
+      [
+       "FRM",
+       "Form With Ship",
+       "Shift + F",
+       "Join formation with another ship"
+      ],
+      [
+       "ALD",
+       "Assume Lead",
+       "Ctrl + F",
+       "Become leader of current formation"
+      ],
+      [
+       "ALL STOP",
+       "Hold Position",
+       "Shift + Space",
+       "Clears move command"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Formation",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Formations allow for ships to be grouped together and commanded as one unit. Ships in a formation will attempt to maintain a certain position relative to the guide/lead ship, and will match speed and heading with the lead ship. If the formation becomes too separated while manoeuvring, ships will slow down to allow other ships to catch up."
+    },
+    {
+     "kind": "p",
+     "text": "Formations have 3 modes:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Rel: Maintains relative positions around the lead ship according to its heading, allowing the formation to rotate with the lead ship."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Tru: Maintains a fixed position around the lead ship, and does not adjust the formation if the lead rotates. Ships will still rotate to match the lead's heading"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Loose: Similar to Tru, but the formation will not slow down for the slower ships and will be allowed to outrun each-other."
+    },
+    {
+     "kind": "p",
+     "text": "Holding shift and giving orders issues the order to the entire formation. This includes changing settings on the status panel. If you select a ship in the formation that is not the lead ship, and give it a movement order, the ship will exit the formation to complete its order."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 26 October 2026, at 00:32."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,486 @@
+{
+ "page": "Starter Fleet Guides - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Starter Fleet Guides",
+ "category": "guide",
+ "slug": "starter-fleet-guides",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "Overview",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The Starter fleets are a selection of fleets that come already pre-installed on your files on download of the game in their respective OSP and ANS folders. They are curated by selected community members as a way to give newer players a frame of reference for what the average 3000 point fleet looks like."
+    },
+    {
+     "kind": "p",
+     "text": "Keep in mind that all of the starter fleets are held to a certain standard and have to uphold certain requirements, meaning they cannot be fully optimized or take compromises in order to make them beginner-freindly. They are not designed to be meta or high end by most regards, but BY THEMSELVES serve well enough to be used in the standard multiplayer match."
+    }
+   ]
+  },
+  {
+   "heading": "ANS",
+   "blocks": []
+  },
+  {
+   "heading": "ANS › TF Oak",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Frontline Fleet: Dual Axford Heavy Cruisers optimized for winning gunfights against other heavy frontline assets."
+    }
+   ]
+  },
+  {
+   "heading": "ANS › TF Birch",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Frontline Fleet: Double Vauxhall Light Cruisers with high-end missile backpacks and Sprinter EWAR Corvette."
+    }
+   ]
+  },
+  {
+   "heading": "ANS › TF Hemlock",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Backline Fleet: Solo Axford Missile Cruiser."
+    }
+   ]
+  },
+  {
+   "heading": "ANS › TF Redwood",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Frontline Fleet: 4TC Axford Heavy Cruiser backed up by dual Keystone Rail Destroyers and Sprinter Lockvette."
+    }
+   ]
+  },
+  {
+   "heading": "ANS › TF Ash",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ambush Fleet: Triple Keystone Beam Destroyer Array and an Sprinter EWAR Corvette."
+    }
+   ]
+  },
+  {
+   "heading": "ANS › TF Sycamore",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Backline Fleet: Five ship Sprinter Bomber formation."
+    }
+   ]
+  },
+  {
+   "heading": "ANS › TF Maple",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Backline Fleet: Solo Levy Escort Carrier backed up by dual Air Defense Raines Frigates."
+    }
+   ]
+  },
+  {
+   "heading": "ANS › TF Willow",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Cap fleet: Three Keystone Beam Destroyers, Two Sprinter ELINT Corvettes, Three Capping Sprinters."
+    }
+   ]
+  },
+  {
+   "heading": "OSP",
+   "blocks": []
+  },
+  {
+   "heading": "OSP › Cobalt Squadron",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Frontline Fleet: Dual Ocello Command Cruisers optimized for winning gunfights against other heavy frontline assets."
+    }
+   ]
+  },
+  {
+   "heading": "OSP › Garnet Squadron",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Frontline Fleet: Five ship Flathead Monitor formation optimized for fighting in plasma range and zoning ANS skirmish assets with bomb shell."
+    }
+   ]
+  },
+  {
+   "heading": "OSP › Kyanite Squadron",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Frontline Fleet: Dual Marauder Line Ships optimized for winning gunfights against other heavy frontline assets and One LRT Draugr Tug"
+    }
+   ]
+  },
+  {
+   "heading": "OSP › Zircon Squadron",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ambush Fleet: Dual Marauder Line Ships optimized for fighting in plasma range and One Sensor Draugr Tug"
+    }
+   ]
+  },
+  {
+   "heading": "OSP › Azurite Squadron",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ambush Fleet: Solo Torpedo Cruiser backed up by One Sensor Draugr Tug and Two Rocket Shuttles."
+    }
+   ]
+  },
+  {
+   "heading": "OSP › Amethyst Squadron",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Backline Fleet: Solo Moorline Carrier."
+    }
+   ]
+  },
+  {
+   "heading": "OSP › Wulfenite Squadron",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Cap Fleet: Two Journeyman Light Carriers and Three Capping Ferryman Shuttles."
+    }
+   ]
+  },
+  {
+   "heading": "OSP › Tantalum Squadron",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Cap Fleet: Tantalum is designed to engage in scout warfare. Scouting and killing scouts with a dispersed network of Draugr Multi-Mission Tugs and Ferryman Shuttles while utilizing a Flathead Monitor as a cruise missile platform against isolated targets of opportunity."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 23 September 2026, at 19:51."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

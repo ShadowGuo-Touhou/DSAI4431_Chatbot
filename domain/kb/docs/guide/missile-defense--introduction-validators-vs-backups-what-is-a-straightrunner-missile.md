@@ -1,0 +1,12 @@
+# Missile Defense › Introduction › Validators Vs Backups › What is a "Straightrunner" Missile?
+
+Source: Official wiki (wiki.hoodedhorse.com), game 0.6.2.6:260903-1430
+
+## Body
+Now that we have covered over all seekers and their counters, its time to get more specific with softkill and the threats you will face. One of the deadliest and most common missile seeker setup you will encounter in matches is the "Straightrunner" missile.
+
+Nearly every capital-kiilling missile salvo has some form of straightrunning technology. Ocellokillers, craft torpedoes, Torpcellos, S2Cellos, ect all use the same format of missile seeker combination. The most common straight runner missile combos you will encounter are those of CMD/backup, usually SAH, WAKE, and ARAD in all 3 of its forms, although some others exist in the form of ACT/[CMD] REJECT, ACT/EO REJECT, EO/backups, ect. They all follow the same pattern of intended behavior, if one of their seekers gets jammed out (usually the primary except for ACT/[CMD] where it relies on the CMD validator being jammed out) It will switch to its backup seeker. In practice this means that the primary seeker will first lead the missile towards where it thinks it will intercept a ship, and when it eventually gets jammed out the backup seeker will continue going in a straight line from where the primary last had the missile pointed at. The backup exhibits a similar behavior to a missile coming out of a waypoint, seeking in a straight line.
+
+These seeker combos are some of the hardest to counter for a new player, as it requires multiple dedicated mounts and timing to do correctly. Self illumination, decoying, Killjoy jammer decoys, EMCON, Command Jamming, all need to be used to decoy these missiles fully and 4 of these alone need a dedicated mount or ship to preform. If not preformed correctly, the missile will simply slam into your ship regardless.
+
+ACT/[CMD] REJECT and ACT/[EO] REJECT are a bit different, you need to jam out both seekers in order to fully softkill these straightrunner setups. In practice, simply jamming out the CMD/EO validator will make it not accept any ACT sigs, so its your main option. To completely defeat the missile you also have to jam out the radar, either with a shipboard/craft radar jammer or a Killjoy jammer decoy. The symbology used to indicated these straight-running validator missiles is inconsistent; ACT/[CMD] REJECT, ACTr/[CMD], ACT!/[CMD] are all in use and all mean the same thing.
