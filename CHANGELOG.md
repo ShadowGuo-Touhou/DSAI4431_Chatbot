@@ -48,6 +48,25 @@ samples: ["450 CH - Moral Failing", "450 CH - Value Judgement"], name: "3k Two A
 配套：`zh/舰队文件怎么拿.md`（KB）、人设**技能 3.6**（要文件就调工具、别手写 XML、别把 XML 贴进聊天）、
 `domain/tools/test_chat.py` 与主程序一样同时发两个工具。
 
+## 0.1 船名：用户点名就照办，没点名按舰级连号
+
+原来的槽点：文件出来了，船还叫样板原名（`Umber Ox`、`Moral Failing`），十条舰队十条 `Umber Ox II`，
+没法对号入座。现在 `build_fleet_file` 有三档命名：
+
+| 情况 | 模型怎么填 | 结果 |
+| --- | --- | --- |
+| 用户点了名（「叫 灰烬一号」「命名为 …」） | `renames: ["灰烬一号", "灰烬二号"]` | 按顺序逐条改名 |
+| 用户没提名字（多数情况） | **不填 `renames`** | 按舰级自动连号：`450 CH 1`、`450 CH 2`、`450 CC 1` |
+| 用户说「保留原名」 | `keep_names: true` | 沿用样板原名 |
+
+- 前缀取自 `Ship Builds.txt` 的舰级名：去括号说明、抹平老拼写（`missle`→`missile`）、摘掉引号、
+  把末尾舰种缩写大写（`450 ln`→`450 LN`、`A Cap ffl (sprinter or shuttle)`→`A Cap FFL`）。
+- 同舰级在同一文件里连号，不同舰级各自从 1 开始；重名自动补序号。
+- 工具返回的摘要多一行 `船名：…`，模型据此在回答里列出名字；人设技能 3.6 写明这档规则。
+
+实测：`帮我配一条 3000 点的舰队，两艘 450 CH，第一艘叫「灰烬一号」…` → `灰烬一号`/`灰烬二号`；
+不点名 → `450 CH 1`/`450 CH 2`（两条都 `validate_fleet` 0 issues）。
+
 ---
 
 ## 1. 框架侧的三处改动（`src/`、`data/personality/`）

@@ -32,6 +32,26 @@ LIBRARIES = ("MissileTypes", "CraftTypes")
 # 输出目录（仓库根下，和 `sample fleets/` 并列，不进 git）
 OUT_DIRNAME = "fleet output"
 BAD_CHARS = re.compile(r'[\\/:*?"<>|]')
+# 自动命名时要把这些舰种缩写大写成玩家习惯的样子（`450 ln` → `450 LN`）
+HULL_CODES = {
+    "ln", "ch", "cc", "bb", "dd", "cl", "mn", "cvl", "cve", "cln",
+    "ffl", "ff", "tug", "cvl/n", "mmt", "ruttle",
+}
+PAREN = re.compile(r"\([^)]*\)")
+SPACES = re.compile(r"\s+")
+QUOTES = re.compile(r"[\"“”'‘’]")
+# `Ship Builds.txt` 里沿用了几处老拼写，船名前缀里顺手抹平
+TYPO_FIX = {"missle": "missile", "misslies": "missiles"}
+
+
+def short_label(class_name: str) -> str:
+    """`A Cap ffl (sprinter or shuttle)` → `A Cap FFL`；用作自动船名的前缀。"""
+    text = PAREN.sub(" ", str(class_name or "")).strip()
+    text = SPACES.sub(" ", QUOTES.sub("", text))
+    words = [TYPO_FIX.get(word.lower(), word) for word in text.split(" ")]
+    if words and words[-1].lower() in HULL_CODES:
+        words[-1] = words[-1].upper()
+    return " ".join(word for word in words if word) or str(class_name or "ship")
 
 
 def samples_dir() -> Path:
@@ -156,11 +176,14 @@ def compose(
     name: str = "",
     out: Path | str | None = None,
     renames: list[str] | None = None,
+    keep_names: bool = False,
     description: str = "",
 ) -> dict:
     """按样板船列表拼一条舰队并写盘。
 
-    `entries` 是样板船文件名（可重复，重复几次就是几艘）；`renames` 可选，逐条改船名。
+    `entries` 是样板船文件名（可重复，重复几次就是几艘）；
+    `renames` 可选，逐条改船名（用户点了名就传它）；
+    否则按舰级自动编号命名（`450 CH 1`、`450 CH 2`），`keep_names=True` 时保留样板原名。
     """
     picks, errors = _resolve(entries)
     if errors:
@@ -194,6 +217,8 @@ def compose(
     total = 0.0
     warnings: list[str] = []
     used_names: set[str] = set()
+    counters: dict[str, int] = {}
+    ship_names: list[str] = []
     rename_list = [str(x).strip() for x in (renames or [])]
 
     for index, pick in enumerate(picks, start=1):
@@ -211,20 +236,26 @@ def compose(
         number = node.find("Number")
         if number is not None:
             number.text = str(index)
+        # 命名：用户点了名就用用户的；否则按舰级编号（450 CH 1、450 CH 2…）
         wanted = rename_list[index - 1] if index - 1 < len(rename_list) else ""
         if wanted:
-            name_node = node.find("Name")
-            if name_node is not None:
-                name_node.text = wanted
-        # 同名船在舰队里会互相覆盖，补个序号
-        display = (node.findtext("Name") or "").strip()
-        if display in used_names:
+            display = wanted
+        elif keep_names:
+            display = (node.findtext("Name") or "").strip() or f"Ship {index}"
+        else:
+            label = short_label(pick["class"])
+            counters[label] = counters.get(label, 0) + 1
+            display = f"{label} {counters[label]}"
+        if display in used_names:                 # 同名船在舰队里会互相覆盖
             display = f"{display} {index}"
-            name_node = node.find("Name")
-            if name_node is not None:
-                name_node.text = display
             warnings.append(f"第 {index} 艘与前面同名，已改成「{display}」")
         used_names.add(display)
+        name_node = node.find("Name")
+        if name_node is not None:
+            name_node.text = display
+        else:
+            ET.SubElement(node, "Name").text = display
+        ship_names.append(display)
         total += _ship_cost(node)
         ships_node.append(node)
 
@@ -262,6 +293,7 @@ def compose(
             "points": round(total, 1),
             "faction": (sorted(factions)[0] if factions else ""),
             "sources": [p["name"] for p in picks],
+            "ship_names": ship_names,
             "templates": {tag: len(items) for tag, items in libraries.items()},
             "warnings": warnings + report.get("warnings", []),
         }
@@ -342,6 +374,10 @@ def summary_text(report: dict) -> str:
             + " / 舰载机 "
             + str(templates.get("CraftTypes", 0))
         )
+    names = report.get("ship_names") or []
+    if names:
+        shown = names if len(names) <= 8 else names[:8] + [f"…共 {len(names)} 艘"]
+        bits.append("船名：" + "、".join(shown))
     bits.append("校验通过（能解析、guide 无断链、模板库齐全、每条船点数 > 0）")
     if report.get("warnings"):
         bits.append("注意：" + "；".join(report["warnings"][:4]))

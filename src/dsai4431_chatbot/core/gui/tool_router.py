@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 from dataclasses import dataclass
 
@@ -68,6 +69,9 @@ FLEET_TOOL_SPEC = {
             "手写的 `MT1`/`CMP1` 会被游戏当成无效 key 静默跳过，槽位全空。\n"
             "samples 填样板船的文件名（`sample fleets/` 里那 61 条，形如 `gun MN - Excuse The Interruption`），"
             "**留空就返回全部可选项**；重复写同一个名字 = 多带几艘。名字可以只写舰级或模糊关键词。\n"
+            "命名：用户点了名（「叫 XX 一号」「命名为 …」）就逐条填 `renames`；"
+            "没点名就**不要**填，工具会按舰级自动编号（`450 CH 1`、`450 CH 2`、`450 CC 1`），"
+            "比样板原名（`Umber Ox`）清楚得多；用户说「保留原名」才填 `keep_names: true`。\n"
             "ship 阵营不能混：一条 `.fleet` 只有一个 `FactionKey`，混了会被拒绝。"
         ),
         "parameters": {
@@ -85,7 +89,14 @@ FLEET_TOOL_SPEC = {
                 "renames": {
                     "type": "array",
                     "items": {"type": "string"},
-                    "description": "可选：按顺序给每艘船改的新名字",
+                    "description": (
+                        "可选：按顺序给每艘船起的新名字（用户明确点名时才填）。"
+                        "个数少于船数时，剩下的按舰级自动编号。"
+                    ),
+                },
+                "keep_names": {
+                    "type": "boolean",
+                    "description": "可选：保留样板船原来的名字（只在用户明确要求时用）",
                 },
             },
             "required": [],
@@ -294,6 +305,10 @@ class ToolRouter:
         if isinstance(renames, str):
             renames = [renames]
         renames = [str(x).strip() for x in renames]
+        # 模型偶尔把一串名字塞进一个字符串里
+        if len(renames) == 1 and ("," in renames[0] or "、" in renames[0]):
+            renames = [x.strip() for x in re.split(r"[,、]", renames[0]) if x.strip()]
+        keep_names = bool(args.get("keep_names"))
 
         try:
             if not samples:
@@ -314,7 +329,9 @@ class ToolRouter:
                     elapsed_ms=int((time.perf_counter() - started) * 1000),
                     call_id=call_id,
                 )
-            report = compose.compose(samples, name=name, renames=renames)
+            report = compose.compose(
+                samples, name=name, renames=renames, keep_names=keep_names
+            )
         except Exception as exc:                  # noqa: BLE001 - 工具不能把异常抛给模型
             return ToolOutcome(
                 ok=False,
