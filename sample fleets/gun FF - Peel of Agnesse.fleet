@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fleet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>gun FF · Peel of Agnesse</Name>
+  <Version>3</Version>
+  <TotalPoints>397</TotalPoints>
+  <FactionKey>Stock/Alliance</FactionKey>
+  <Description>样板船：Peel of Agnesse（HC Gun Missile test 8），舰体 Raines Frigate Class，原存档点数 397。来自 HC Gun Missile test 8.fleet，未做任何改动。</Description>
+  <Ships>
+    <Ship>
+      <Key>fc815ef4-b99d-4b23-bf03-1ac1f82684d1</Key>
+      <Name>Peel of Agnesse</Name>
+      <Cost>397</Cost>
+      <Callsign>Gun FF</Callsign>
+      <Number>716</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Stock/Raines Frigate</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>PDKmGfvpykODc3XHDQ7WBw</Key>
+          <ComponentName>Stock/Mk62 Cannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>WwMGqYiU7E6lp7ID47phqA</Key>
+          <ComponentName>Stock/Mk62 Cannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>gkfIwYzn7kGhG6MW9uxBmw</Key>
+          <ComponentName>Stock/Mk64 Cannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>D3zoB0PetEC973iUck_mNQ</Key>
+          <ComponentName>Stock/Mk64 Cannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>98N-YI_1WUOs--qPYlt-7g</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>6Tzo7268MEqgyFxnGvLKUg</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>BIr4-VcAHUOt5vnGWxYkLA</MagazineKey>
+                <MunitionKey>Stock/250mm HE Shell</MunitionKey>
+                <Quantity>200</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>EQgRzyYZokmqseD2UbxApg</MagazineKey>
+                <MunitionKey>Stock/250mm HE-RPF Shell</MunitionKey>
+                <Quantity>200</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>fah90hy_80GHmd9aolZxcg</MagazineKey>
+                <MunitionKey>Stock/250mm AP Shell</MunitionKey>
+                <Quantity>200</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>_z_bmPscPkKxnHi5xWWd5g</MagazineKey>
+                <MunitionKey>Stock/120mm HE Shell</MunitionKey>
+                <Quantity>500</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>wsXGVKDB30eM8zHc3xBShA</MagazineKey>
+                <MunitionKey>Stock/120mm HE-RPF Shell</MunitionKey>
+                <Quantity>500</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>wuH_npolGkOqHKRvLurEeQ</MagazineKey>
+                <MunitionKey>Stock/120mm AP Shell</MunitionKey>
+                <Quantity>500</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>O_Y-AJc7r0alOg36rvY6MQ</Key>
+          <ComponentName>Stock/Small DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>5APOD4UfSkGdkm9WWdAvLA</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>lorATFhkTkeZQYThYOHazg</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>bRgUlaoQJ0S7M91zMpdAdA</Key>
+          <ComponentName>Stock/FR4800 Reactor</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Jmtnwo0KQki5QyEPPlBHrA</Key>
+          <ComponentName>Stock/FM200 Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>V42tXibIR0e4u6riIHYZOw</Key>
+          <ComponentName>Stock/ES32 'Scryer' Missile ID System</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>p-m7ijS6ukuqzuBT5NE_lA</Key>
+          <ComponentName>Stock/Ammunition Elevators</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>foApM84hT0GpEw4GaFv38w</Key>
+          <ComponentName>Stock/RM50 'Parallax' Radar</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="250mm">
+          <MemberKeys>
+            <string>gkfIwYzn7kGhG6MW9uxBmw</string>
+            <string>D3zoB0PetEC973iUck_mNQ</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="120mm">
+          <MemberKeys>
+            <string>PDKmGfvpykODc3XHDQ7WBw</string>
+            <string>WwMGqYiU7E6lp7ID47phqA</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <InitialFormation>
+        <GuideKey>fc815ef4-b99d-4b23-bf03-1ac1f82684d1</GuideKey>
+        <RelativePosition>
+          <x>24.4107132</x>
+          <y>0</y>
+          <z>-12.2510071</z>
+        </RelativePosition>
+      </InitialFormation>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+  </Ships>
+  <MissileTypes>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/SGM-100 Balestra</SaveKey>
+      <Designation>SGM-100</Designation>
+      <Nickname>Balestra</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_PASSIVE_ABBREV(&lt;color=#D4211D&gt;WAKE&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-100 Balestra&lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SGM-1 body, which is a nimble general-purpose missile.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using a Passive Wake seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_PASSIVE_CAPS (&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)
+
+$MISSILESTAT_SPEED: 300 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 3,507 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.6 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 7.7 $UNIT_GS
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_NONE|None|
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 31$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 317$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 10 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 6 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>1</Cost>
+      <BodyKey>Stock/SGM-1 Body</BodyKey>
+      <TemplateKey>488bc242-2d72-4333-a71f-32ebe0875e7c</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>0.4862745</g>
+        <b>0</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.254901975</r>
+        <g>0.254901975</g>
+        <b>0.254901975</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveSeekerSettings">
+            <ComponentKey>Stock/Wake-Homing Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>0</ConvSalvo>
+              <HybridSalvo>0</HybridSalvo>
+              <CraftSalvo>0</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.333333343</A>
+              <B>0.333333343</B>
+              <C>0.333333343</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/SGM-H-300 Atlatl 1</SaveKey>
+      <Designation>SGM-H-300</Designation>
+      <Nickname>Atlatl 1</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_CRUISE - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt;/$MISSILESEEKER_MODE_ARAD_HOJ_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-H-300 Atlatl 1&lt;/noparse&gt; is a size 3 waypoint-capable cruise missile.  It is based on the SGM-H-3 body, which is a high speed hybrid missile designed to strike heavy targets.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using command guidance from its launching ship.  If the primary seeker does not find a target or is jammed, it can fall back on a Radar Home-on-Jam seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_CRUISE_LONG
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK[+$MISSILESTAT_TARGETINGMODE_TRP]&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+$MISSILESTAT_BACKUPSEEKER: HOME-ON-JAM (&lt;color=#3BC81E&gt;RADAR&lt;/color&gt; JAMMING Signals Only)
+
+&lt;b&gt;$MISSILEENGINE_STAGE_CRUISE|Cruise|&lt;/b&gt;
+$MISSILESTAT_SPEED: 180 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 14,175 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 2.7 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.1 $UNIT_GS
+
+&lt;b&gt;$MISSILEENGINE_STAGE_SPRINT|Sprint|&lt;/b&gt;
+$MISSILESTAT_SPEED: 582 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,340 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.8 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 17.5 $UNIT_GS
+
+: Stage Trigger at 3,570m from Target
+
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_WEAVE|Weave|
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 95$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 3,024$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 80  (&lt;color=#3BC81E&gt;+20 &lt;/color&gt;)
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 16 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>24</Cost>
+      <BodyKey>Stock/SGM-H-3 Body</BodyKey>
+      <TemplateKey>a8203264-d391-4c5f-b2e6-b0c67144fee7</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.117647059</r>
+        <g>0.6313726</g>
+        <b>0.192156866</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>JammingOnly</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Hardened Skin</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>7</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.07125622</A>
+              <B>0.9286678</B>
+              <C>7.599592E-05</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.8027424</A>
+              <B>0</B>
+              <C>0.197257578</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/SGM-H-302 Atlatl 3</SaveKey>
+      <Designation>SGM-H-302</Designation>
+      <Nickname>Atlatl 3</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_CRUISE - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt;/$MISSILESEEKER_MODE_SEMIACTIVE_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_HEKP</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-H-302 Atlatl 3&lt;/noparse&gt; is a size 3 waypoint-capable cruise missile.  It is based on the SGM-H-3 body, which is a high speed hybrid missile designed to strike heavy targets.  This missile will deliver a Delayed Contact Fuze, High Explosive, Kinetic Penetrator warhead.  It homes in on its target using command guidance from its launching ship.  If the primary seeker does not find a target or is jammed, it can fall back on a Semi-Active Radar seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_CRUISE_LONG
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK[+$MISSILESTAT_TARGETINGMODE_TRP]&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+$MISSILESTAT_BACKUPSEEKER: $MISSILESEEKER_MODE_SEMIACTIVE_CAPS &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+
+&lt;b&gt;$MISSILEENGINE_STAGE_CRUISE|Cruise|&lt;/b&gt;
+$MISSILESTAT_SPEED: 185 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 14,561 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 2.9 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.0 $UNIT_GS
+
+&lt;b&gt;$MISSILEENGINE_STAGE_SPRINT|Sprint|&lt;/b&gt;
+$MISSILESTAT_SPEED: 738 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,864 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.9 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 22.6 $UNIT_GS
+
+: Stage Trigger at 4,000m from Target (&lt;color=#D3D11F&gt;Limited By Seeker Range&lt;/color&gt;)
+
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_WEAVE|Weave|
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEKP
+
+&lt;b&gt;$MISSILESTAT_PENETRATOR&lt;/b&gt;
+$MISSILESTAT_ARMORDAMAGE: 502 $UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 232 $UNIT_HP
+
+&lt;b&gt;$MISSILESTAT_EXPLOSIVE&lt;/b&gt;
+$MISSILESTAT_COMPONENTDAMAGE: 4,320 $UNIT_HP
+
+$MISSILESTAT_HEALTH: 60 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 16 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>67</Cost>
+      <BodyKey>Stock/SGM-H-3 Body</BodyKey>
+      <TemplateKey>ee3a2d63-382d-424c-9f85-73660bb9bd08</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.117647059</r>
+        <g>0.6313726</g>
+        <b>0.192156866</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Fixed Semi-Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Cluster Decoy Launcher</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>6</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Kinetic Penetrator</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.417812079</A>
+              <B>0.480392963</B>
+              <C>0.101794958</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.8534519</A>
+              <B>5.56173374E-09</B>
+              <C>0.146548092</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/SGM-H-303 Atlatl 4</SaveKey>
+      <Designation>SGM-H-303</Designation>
+      <Nickname>Atlatl 4</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_CRUISE - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt;/$MISSILESEEKER_MODE_ARAD_PULSED_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-H-303 Atlatl 4&lt;/noparse&gt; is a size 3 waypoint-capable cruise missile.  It is based on the SGM-H-3 body, which is a high speed hybrid missile designed to strike heavy targets.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using command guidance from its launching ship.  If the primary seeker does not find a target or is jammed, it can fall back on a Radar Anti-Radiation seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_CRUISE_LONG
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK[+$MISSILESTAT_TARGETINGMODE_TRP]&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+$MISSILESTAT_BACKUPSEEKER: ANTI-RADIATION (All &lt;color=#3BC81E&gt;RADAR&lt;/color&gt; Signals)
+
+&lt;b&gt;$MISSILEENGINE_STAGE_CRUISE|Cruise|&lt;/b&gt;
+$MISSILESTAT_SPEED: 185 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 14,561 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 2.9 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.0 $UNIT_GS
+
+&lt;b&gt;$MISSILEENGINE_STAGE_SPRINT|Sprint|&lt;/b&gt;
+$MISSILESTAT_SPEED: 717 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,708 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.9 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 23.7 $UNIT_GS
+
+: Stage Trigger at 3,880m from Target
+
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_WEAVE|Weave|
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 88$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 2,592$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 60 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 16 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>32</Cost>
+      <BodyKey>Stock/SGM-H-3 Body</BodyKey>
+      <TemplateKey>f6409288-9787-46cc-8b16-e1a2017ab019</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.117647059</r>
+        <g>0.6313726</g>
+        <b>0.192156866</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>All</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Boosted Self-Screening Jammer</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>6</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.371894717</A>
+              <B>0.473152339</B>
+              <C>0.154952943</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.8534519</A>
+              <B>5.56173374E-09</B>
+              <C>0.146548092</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/SGM-H-305 Atlatl 5</SaveKey>
+      <Designation>SGM-H-305</Designation>
+      <Nickname>Atlatl 5</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_CRUISE - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt;/$MISSILESEEKER_MODE_SEMIACTIVE_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_HEKP</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-H-305 Atlatl 5&lt;/noparse&gt; is a size 3 waypoint-capable cruise missile.  It is based on the SGM-H-3 body, which is a high speed hybrid missile designed to strike heavy targets.  This missile will deliver a Delayed Contact Fuze, High Explosive, Kinetic Penetrator warhead.  It homes in on its target using command guidance from its launching ship.  If the primary seeker does not find a target or is jammed, it can fall back on a Semi-Active Radar seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_CRUISE_LONG
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK[+$MISSILESTAT_TARGETINGMODE_TRP]&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+$MISSILESTAT_BACKUPSEEKER: $MISSILESEEKER_MODE_SEMIACTIVE_CAPS &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+
+&lt;b&gt;$MISSILEENGINE_STAGE_CRUISE|Cruise|&lt;/b&gt;
+$MISSILESTAT_SPEED: 185 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 14,561 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 2.9 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.0 $UNIT_GS
+
+&lt;b&gt;$MISSILEENGINE_STAGE_SPRINT|Sprint|&lt;/b&gt;
+$MISSILESTAT_SPEED: 811 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,911 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 1.1 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 20.7 $UNIT_GS
+
+: Stage Trigger at 4,000m from Target (&lt;color=#D3D11F&gt;Limited By Seeker Range&lt;/color&gt;)
+
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_WEAVE|Weave|
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEKP
+
+&lt;b&gt;$MISSILESTAT_PENETRATOR&lt;/b&gt;
+$MISSILESTAT_ARMORDAMAGE: 577 $UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 232 $UNIT_HP
+
+&lt;b&gt;$MISSILESTAT_EXPLOSIVE&lt;/b&gt;
+$MISSILESTAT_COMPONENTDAMAGE: 4,320 $UNIT_HP
+
+$MISSILESTAT_HEALTH: 60 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 16 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>50</Cost>
+      <BodyKey>Stock/SGM-H-3 Body</BodyKey>
+      <TemplateKey>c0e7cec7-3be8-4f02-bfbb-c650022100ce</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.117647059</r>
+        <g>0.6313726</g>
+        <b>0.192156866</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Fixed Semi-Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Decoy Launcher</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>6</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Kinetic Penetrator</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.579041839</A>
+              <B>0.420958161</B>
+              <C>0</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.8534519</A>
+              <B>5.56173374E-09</B>
+              <C>0.146548092</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/SGM-H-301 Atlatl 2</SaveKey>
+      <Designation>SGM-H-301</Designation>
+      <Nickname>Atlatl 2</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_CRUISE - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt;/$MISSILESEEKER_MODE_ARAD_HOJ_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-H-301 Atlatl 2&lt;/noparse&gt; is a size 3 waypoint-capable cruise missile.  It is based on the SGM-H-3 body, which is a high speed hybrid missile designed to strike heavy targets.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using command guidance from its launching ship.  If the primary seeker does not find a target or is jammed, it can fall back on a Radar Home-on-Jam seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_CRUISE_LONG
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK[+$MISSILESTAT_TARGETINGMODE_TRP]&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+$MISSILESTAT_BACKUPSEEKER: HOME-ON-JAM (&lt;color=#3BC81E&gt;RADAR&lt;/color&gt; JAMMING Signals Only)
+
+&lt;b&gt;$MISSILEENGINE_STAGE_CRUISE|Cruise|&lt;/b&gt;
+$MISSILESTAT_SPEED: 180 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 14,190 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 2.7 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.1 $UNIT_GS
+
+&lt;b&gt;$MISSILEENGINE_STAGE_SPRINT|Sprint|&lt;/b&gt;
+$MISSILESTAT_SPEED: 664 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,959 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.8 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 22.8 $UNIT_GS
+
+: Stage Trigger at 4,000m from Target (&lt;color=#D3D11F&gt;Limited By Seeker Range&lt;/color&gt;)
+
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_WEAVE|Weave|
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 88$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 2,592$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 60 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 16 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>32</Cost>
+      <BodyKey>Stock/SGM-H-3 Body</BodyKey>
+      <TemplateKey>01840ded-fd67-4ee6-9b97-685dd8841d6d</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.117647059</r>
+        <g>0.6313726</g>
+        <b>0.192156866</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>JammingOnly</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Decoy Launcher</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CruiseGuidanceSettings">
+            <ComponentKey>Stock/Cruise Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>6</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.254396</A>
+              <B>0.58734107</B>
+              <C>0.158262938</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.8039955</A>
+              <B>0.000169023086</B>
+              <C>0.195835486</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/DQ10u0KDi0upxvfhm1TZSw</SaveKey>
+      <Designation>SGM-200</Designation>
+      <Nickname>Kill Joy</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_PASSIVE_ABBREV(&lt;color=#D4211D&gt;WAKE&lt;/color&gt;) - $MISSILESTAT_NONE</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-200 Kill Joy&lt;/noparse&gt; is a size 2 direct guidance missile.  It is based on the SGM-2 body, which is a flexible mainstay anti-ship missile.  This missile will deliver no payload.  It homes in on its target using a Passive Wake seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_PASSIVE_CAPS (&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)
+
+$MISSILESTAT_SPEED: 180 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 9,998 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.6 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 5.4 $UNIT_GS
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_NONE|None|
+
+$MISSILESTAT_HEALTH: 30 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 8 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>6</Cost>
+      <BodyKey>Stock/SGM-2 Body</BodyKey>
+      <TemplateKey>bb740d0d-8342-4b8b-a9c6-f7e19b54d94b</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.7058824</r>
+        <g>0.129411772</g>
+        <b>0.129411772</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveSeekerSettings">
+            <ComponentKey>Stock/Wake-Homing Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>true</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Defensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>Conventional</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Self-Screening Jammer</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>9</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0</A>
+              <B>0.137959734</B>
+              <C>0.8620403</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/W8uy48uLREq3ArQXN_c9tw</SaveKey>
+      <Designation>SGM-202</Designation>
+      <Nickname>Bread Stick</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_ACTIVE_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/$MISSILESEEKER_MODE_PASSIVE_ABBREV(&lt;color=#D4211D&gt;WAKE&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_BLASTFRAG</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-202 Bread Stick&lt;/noparse&gt; is a size 2 direct guidance missile.  It is based on the SGM-2 body, which is a flexible mainstay anti-ship missile.  This missile will deliver a Proximity Fuze, High Explosive, Blast Fragmentation warhead.  It homes in on its target using an Active Radar seeker.  If the primary seeker does not find a target or is jammed, it can fall back on a Passive Wake seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_ACTIVE_CAPS &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+$MISSILESTAT_BACKUPSEEKER: $MISSILESEEKER_MODE_PASSIVE_CAPS (&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)
+
+$MISSILESTAT_SPEED: 244 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 7,999 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 1.1 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 4.5 $UNIT_GS
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_NONE|None|
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_BLASTFRAG
+$MISSILESTAT_ARMORDAMAGE: 0.36$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 113.74$UNIT_HP
+$MISSILESTAT_BLASTRADIUS: 81 $UNIT_METERS
+
+$MISSILESTAT_HEALTH: 30 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 8 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>4</Cost>
+      <BodyKey>Stock/SGM-2 Body</BodyKey>
+      <TemplateKey>e3b2cb5b-8bcb-4a44-b702-b41737f73db7</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.7058824</r>
+        <g>0.129411772</g>
+        <b>0.129411772</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Fixed Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>true</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveSeekerSettings">
+            <ComponentKey>Stock/Wake-Homing Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>true</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Defensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>SmallCraft</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Blast Fragmentation</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>6</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.378164232</A>
+              <B>0.09674377</B>
+              <C>0.525092</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+  </MissileTypes>
+</Fleet>

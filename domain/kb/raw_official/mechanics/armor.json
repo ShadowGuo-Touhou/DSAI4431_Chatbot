@@ -1,0 +1,868 @@
+{
+ "page": "Armor - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Armor",
+ "category": "mechanics",
+ "slug": "armor",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "(页面开头)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "All ships in nebulous are covered with a layer of armor. In order to damage components, the attack must first penetrate armor. Armor in neb can be degraded in specific areas by attacks, both penetrating and nonpenetrating. In specific terms: Armor health is stored as a texture mask layered across that takes localized damage only where it is hit. Armor is layered across the hull equally, protecting turrets, radar panels, and thrusters to the same degree as everything else."
+    }
+   ]
+  },
+  {
+   "heading": "Guidelines",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ammo selection for a given targets can be accomplished visually in several steps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Start by shooting with AP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "If you’re shooting AP, and your shells punch out the back of the target, switch to HE."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "If you’re shooting HE, and you see showers of sparks for ricochets, switch to AP."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "If you’re firing at a small target, fire RPF/Bombshell/Grape until it stops evading, then HE to destroy"
+    },
+    {
+     "kind": "p",
+     "text": "Key: X -> Y = “shoot X to damage, then finish with Y” X or Y = “use X, but Y has situational uses”. Lack of bolding indicates either works X :-( = “your best option, but alas, it won’t do much”"
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "OSP firing at...",
+       "100mm",
+       "250mm",
+       "450mm",
+       "600mm"
+      ],
+      [
+       "FFL Sprinter",
+       "Grape -> HE",
+       "Bomb -> HE",
+       "HE",
+       "Bomb or HESH"
+      ],
+      [
+       "FF Raines",
+       "HE",
+       "Bomb -> HE",
+       "HE",
+       "Bomb or HESH"
+      ],
+      [
+       "DD Keystone",
+       "HE or AP",
+       "HE",
+       "HE",
+       "Bomb -> HESH"
+      ],
+      [
+       "CL Vauxhall (bow)",
+       "AP",
+       "AP",
+       "HE",
+       "Bomb -> HESH"
+      ],
+      [
+       "CL Vauxhall (side)",
+       "AP",
+       "HE",
+       "HE",
+       "Bomb -> HESH"
+      ],
+      [
+       "CVE Levy",
+       "HE",
+       "Bomb -> HE",
+       "HE",
+       "Bomb or HESH"
+      ],
+      [
+       "CH Axford (bow)",
+       "AP",
+       "AP",
+       "AP",
+       "HESH"
+      ],
+      [
+       "CH Axford (side)",
+       "AP",
+       "AP or HE",
+       "HE",
+       "HESH"
+      ],
+      [
+       "BB Solomon (bow)",
+       "AP :-(",
+       "AP",
+       "AP",
+       "HESH"
+      ],
+      [
+       "BB Solomon (side)",
+       "AP :-(",
+       "AP",
+       "HE",
+       "HESH"
+      ],
+      [
+       "Any plasma'd target",
+       "HE-HC",
+       "Bomb -> HE",
+       "HE",
+       "Bomb or HESH"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "ANS firing at...",
+       "120mm",
+       "250mm",
+       "450mm"
+      ],
+      [
+       "Shuttle/Ferryman",
+       "RPF-> HE",
+       "RPF -> HE",
+       "HE"
+      ],
+      [
+       "Tug/Draugr",
+       "RPF -> HE",
+       "RPF -> HE",
+       "HE"
+      ],
+      [
+       "MN Flathead (angle)",
+       "AP :-(",
+       "AP",
+       "AP"
+      ],
+      [
+       "MN Flathead (flat)",
+       "AP :-(",
+       "AP",
+       "HE -> AP"
+      ],
+      [
+       "CVL Journeyman",
+       "HE",
+       "HE",
+       "HE"
+      ],
+      [
+       "CC Ocello (bow)",
+       "AP",
+       "AP",
+       "AP"
+      ],
+      [
+       "CC Ocello (flat)",
+       "AP",
+       "HE",
+       "HE"
+      ],
+      [
+       "LN Marauder (bow)",
+       "AP or HE",
+       "HE or AP",
+       "HE or AP"
+      ],
+      [
+       "LN Marauder (flat)",
+       "HE or AP",
+       "HE",
+       "HE"
+      ],
+      [
+       "CLN Moorline",
+       "HE or AP",
+       "HE",
+       "HE"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics",
+   "blocks": []
+  },
+  {
+   "heading": "Mechanics › Armor Damage",
+   "blocks": []
+  },
+  {
+   "heading": "Mechanics › Armor Damage › Terminology",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "Nominal armor (NA)"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "NA is the actual thickness of the armor as listed in the hull description."
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "Effective armor (EA)"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "EA is based on the angle of the armor relative to the incoming projectile, increased from NA due to the projectile having to travel through more armor. This is capped at 2.5x nominal armor."
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "[math]\\displaystyle{ \\text{EA} = \\min\\left(\\frac{\\text{NA}}{\\cos\\theta}\\, ,\\, 2.5\\times\\text{NA}\\right) }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "where [math]\\displaystyle{ \\theta }[/math] is the angle from the normal to the incoming projectile."
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "Some weapons ignore armor angling, so for these EA simply equals NA."
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "Remaining armor (RA)"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "RA is the remaining effective armor, i.e. EA times the current armor health in that location."
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "[math]\\displaystyle{ \\text{RA} = \\text{current armor health fraction}\\times\\text{EA} }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "Armor Penetration (AP)"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "AP is the base penetration stat of the weapon."
+    },
+    {
+     "kind": "p",
+     "text": "If [math]\\displaystyle{ \\text{AP} \\geq \\text{RA} }[/math] then the attack penetrates and shreds all the armor at that location. If not, then the armor is damaged according to the process below."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Armor Damage › Ricochet",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Shells can ricochet off of armor at steep angles with reduced shredding and a visual effect."
+    },
+    {
+     "kind": "p",
+     "text": "If a shell does not have the AP to penetrate, it will ricochet if the angle to the normal is greater than 80 degrees:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ \\text{ricochet if}\\quad \\theta\\geq 80^\\circ }[/math] Ignoring armor angling does not by itself prevent a ricochet: the ricochet test still uses the real impact angle. Missiles, rockets, mines, bombs and beams never ricochet because they set NeverRicochet. Plasma ignores angling for thickness and can still ricochet.[1]"
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Armor Damage › Damage Formula",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "For shells that do not ignore armor angling, AP is modified based on the impact angle and amount of armor remaining. Simply, AP is scaled by the fraction of itself over RA."
+    },
+    {
+     "kind": "p",
+     "text": "Putting it all together, the actual shredding applied to the armor is"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ \\text{actualDamage} = \\text{AP}\\times\\rho\\times\\min\\left(\\frac{\\text{AP}}{\\text{RA}}\\, ,\\, 1\\right) }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "where [math]\\displaystyle{ \\rho }[/math] is 0.2 if the shot ricochets or 1 if it does not. Then [math]\\displaystyle{ \\text{actualDamage} }[/math] is shredded from the armor in a rough circle across the armor shredding radius centered at the point of impact."
+    },
+    {
+     "kind": "p",
+     "text": "For example, a 120mm AP Shell strikes a Solomon at at 30 degree angle from the normal."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "AP = 45 cm."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "EA = NA / cos(30) = 64.7 cm."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "RA = EA (because this Solomon has not taken any hits there)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Does not ricochet."
+    },
+    {
+     "kind": "p",
+     "text": "Then the actualDamage done is [math]\\displaystyle{ \\text{actualDamage} = 45 \\times \\frac{45}{64.7} = 31.3\\, \\text{cm} }[/math]. So the Solomon would have 24.7 cm of armor remaining in that spot."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Note that even if armor is reduced to zero, the attack will not penetrate unless the earlier [math]\\displaystyle{ \\text{AP} \\geq \\text{RA} }[/math] condition is fulfilled. This generally happens at steeper angles, eg 60cm pen vs 56cm armor at 30 degrees will not penetrate, but will fully strip armor.[needs confirmation]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Some damage types such as HEI warheads (missiles, rockets, mines), and Plasma ignore armor angle and will strip listed penetration regardless of angle. Beams never ricochet but still use effective armor thickness (nominal thickness divided by cos θ, capped at 2.5× nominal), so angled hits shred armor more slowly than perpendicular hits. [2]"
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Armor Damage Radius",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The damage from the equations above are applied to the mask with a brushsize roughly equal to the armor damage radius. This shredding radius is not listed in game but can be viewed in the specific Munitions & Missiles page."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Overpenetration",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Further information: component damage: overpenetration"
+    },
+    {
+     "kind": "p",
+     "text": "If a shell is able to penetrate and does not stop inside the hull, it makes another check to penetrate the armor on the other side to exit the hull. The armor penetration is reduced by the distance traveled through the ship's interior density[needs confirmation]. If the second penetration check succeeds, the round overpenetrates and does reduced damage."
+    }
+   ]
+  },
+  {
+   "heading": "Notes",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Plasma can still ricochet. If it fails to penetrate at 80 degrees or more, it shreds 20% and applies no heat, and it does not go on to damage components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Damage types ignoring angling appears to be a property of the damage type rather than a serializable field in most cases."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 30 September 2026, at 06:32."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

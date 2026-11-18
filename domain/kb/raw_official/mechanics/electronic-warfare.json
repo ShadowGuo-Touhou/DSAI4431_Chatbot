@@ -1,0 +1,961 @@
+{
+ "page": "Electronic Warfare - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Electronic Warfare",
+ "category": "mechanics",
+ "slug": "electronic-warfare",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "Sensor Jamming",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Sensor jamming attempts to bombard the opponent's radars with random noise to prevent tracking of friendly assets. Ships know when they are jammed and most search radars provide a jamming Line of Bearing (LoB). The R400 Bloodhound, the R550 Early Warning Radar, and fire-control radars do not. As such, this does not completely prevent the enemy from detecting your presence. However, jamming can be instrumental for reducing situational awareness of the opponent and preventing accurate fire on friendly assets."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Jammer power[1]",
+       "Multiplier per Jammer",
+       "Total[2]"
+      ],
+      [
+       "Strongest Jammer",
+       "1.000",
+       "1.000"
+      ],
+      [
+       "2nd Strongest",
+       "0.876",
+       "1.876"
+      ],
+      [
+       "3rd Strongest",
+       "0.589",
+       "2.465"
+      ],
+      [
+       "4th",
+       "0.304",
+       "2.770"
+      ],
+      [
+       "5th",
+       "0.121",
+       "2.890"
+      ],
+      [
+       "6th",
+       "0.037",
+       "2.927"
+      ],
+      [
+       "7th",
+       "0.009",
+       "2.935"
+      ],
+      [
+       "8th",
+       "0.002",
+       "2.937"
+      ],
+      [
+       "9th",
+       "<0.001",
+       "2.937"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Sensor Jamming › Jammed Volume",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "When a Sensor jammer hits a shipborne sensor, it creates a \"jammed volume\" on that sensor. Given the distance between the jammer and the sensor [math]\\displaystyle{ D_{j} }[/math] and the effect area ratio[3] of the jammer, [math]\\displaystyle{ E_r }[/math]. The jammed volume is a rectangular box centered on the jammer, with a length [math]\\displaystyle{ =2D_{j} }[/math], and a width/height equal to [math]\\displaystyle{ =2D_{j}E_r }[/math], with the length pointed toward the spotter. e.g. a jammer that is 5km away from a spotter will give that spotter a jammed volume 10km long and 4km wide."
+    },
+    {
+     "kind": "p",
+     "text": "If the sensor tries to spot a track within the jammed volume, the sensor will have to overcome the jamming power inflicted on it by the jammer."
+    }
+   ]
+  },
+  {
+   "heading": "Sensor Jamming › Jammer Noise Power",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Given the jammer's radiated power, [math]\\displaystyle{ P_j }[/math], and gain, [math]\\displaystyle{ G_j }[/math], the jamming power on a target at distance [math]\\displaystyle{ d }[/math] is given by"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ j = \\frac{{P_j}{G_j}}{4\\pi d^2} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "If a track is within multiple jammed volumes due to multiple jammers, the sensor will have to overcome the combined power of the jammers. The combined power is not a simple total, each additional jammer after the strongest will only add a fraction of its power to the final combined power. The power multiplier for a given jammer is calculated by [math]\\displaystyle{ e^{-(n/2.75)^2} }[/math], where [math]\\displaystyle{ n }[/math] is the number of jammers imparting greater jamming power than this jammer. As a result, total combined jamming power will never exceed ~2.938× of the strongest jammer.[4]"
+    },
+    {
+     "kind": "p",
+     "text": "Then the total jamming power seen by the target for a single jammer is:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ N_j = \\frac{P_jG_jG_t}{4\\pi d^2} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "where [math]\\displaystyle{ G_t }[/math] is the target radar's gain. For [math]\\displaystyle{ N }[/math] jammers with power, gain, and range [math]\\displaystyle{ P_{j,n}, G_{j,n}, d_n }[/math] respectively and ordered in descending order, the jamming power seen by the target is:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ N_j = \\sum_{n=1}^N \\frac{P_{j,n}G_{j,n}G_t}{4\\pi d_n^2}e^{-((n-1)/2.75)^2} }[/math]"
+    }
+   ]
+  },
+  {
+   "heading": "Sensor Jamming › Detection range vs jammers",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The distance that a target can be spotted by a radar when covered by jamming is complicated and depends greatly on the geometry. Here we present the formulas for a jammer against a radar under two scenarios:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The jamming source is near or on the target. This is called \"stand-in jamming.\" This commonly occurs with a tight formation of ships with jammers, or self-screening jammers on missiles."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The jamming source is behind the target at a fixed range [math]\\displaystyle{ d_j }[/math]. This is called \"stand-off jamming.\" This commonly occurs with direct fire missile fleets that use ship jammers to cover missiles rather than self-screening jammers."
+    },
+    {
+     "kind": "p",
+     "text": "We also assume that there is only one jammer, and this jammer is significantly more powerful than the ambient noise. Refer to the Radar page for an explanation of the key equations."
+    },
+    {
+     "kind": "p",
+     "text": "In the case of multiple jammers at the same range, calculate the power density at the target [math]\\displaystyle{ j }[/math] as given above for each jammer, and order the jammers from 1 to N decreasing in [math]\\displaystyle{ j }[/math]. We then compute the effective total radiated power as:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ (P_j G_j)_{\\textrm{eff}} = \\sum_{n=1}^N P_{j,n} G_{j,n} \\, e^{-((n-1)/2.75)^2} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "Substitute this in place of the product [math]\\displaystyle{ P_j G_j }[/math] to go from the one-jammer case to the multiple-jammer case."
+    },
+    {
+     "kind": "p",
+     "text": "If multiple jammers are at different ranges, there is no simple substitution. This situation is rare, and typically only occurs when a ship launches direct fire missiles, the missiles have self-screening jammers, and the ship is providing offset jamming, e.g. CCKs. If needed this can be approximated by splitting the jammers into groups at the same range, computing the detection range for each, and taking the minimum. The minimum approach will overestimate the detection range by at most 40% and will never underestimate detection range."
+    },
+    {
+     "kind": "p",
+     "text": "Consider a search radar with:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "radiated power, [math]\\displaystyle{ P_\\text{t} }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "gain, [math]\\displaystyle{ G_t }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "aperture size, [math]\\displaystyle{ A }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "and noise filtering, [math]\\displaystyle{ \\nu }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "Assume the target hidden by jamming has Radar Cross Section (RCS) [math]\\displaystyle{ \\sigma }[/math]. Recall that you should divide the RCS number provided in-game by 10 to get the RCS for these equations. Assume the hidden target is at distance [math]\\displaystyle{ d }[/math], and the jammers are at distance [math]\\displaystyle{ d_j }[/math]. Note that stand-in jamming is equivalent to setting [math]\\displaystyle{ d_j = d }[/math]. So for stand-in jamming:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{P_t\\,G_t \\,\\sigma A}{4\\pi \\,P_j \\, G_j} \\right)^{1/2} \\cdot 10^{-\\nu/20} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "And for stand-off jamming:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{P_t\\,G_t \\,\\sigma A \\,d_j^2}{4\\pi \\,P_j \\, G_j} \\right)^{1/4} \\cdot 10^{-\\nu/40} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "Fire control radars function nearly identical to search radars, with the additional stat [math]\\displaystyle{ \\textrm{SNR}_\\textrm{min} }[/math]."
+    },
+    {
+     "kind": "p",
+     "text": "For stand-in jamming:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{P_t\\,G_t \\,\\sigma A}{4\\pi \\,P_j \\, G_j} \\right)^{1/2} \\cdot 10^{(- \\textrm{SNR}_\\textrm{min} -\\nu)/20} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "And for stand-off jamming:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{P_t\\,G_t \\,\\sigma A \\,d_j^2}{4\\pi \\,P_j \\, G_j} \\right)^{1/4} \\cdot 10^{(-\\textrm{SNR}_\\textrm{min}-\\nu)/40} }[/math]"
+    }
+   ]
+  },
+  {
+   "heading": "Sensor Jamming › Countering Jamming",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The simplest approach to counter jamming is simply to get within the maximum range. However this may be impractical if the enemy is maneuvering or firing back. There are several tools available to raise the effective spotting range:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Fire Control Radars such as the RF101 Bullseye or RF44 Pinpoint have better stats than search radars, and can greatly increase range once a lock is acquired."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Burnthrough Sweeps greatly increase the transmitted power by the radar for a single pulse, providing a one-off track that can be used for a FCR to lock or RPF/Bombshell to get some fire on the target. Be aware that not every radar is capable of performing a Burnthrough Sweep."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Illuminators, especially the E57 Floodlight, increase the return power. The general rule of thumb is that one Floodlight defeats one jammer."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The Adaptive Radar Receiver improves noise filtering (i.e. makes it more negative)."
+    },
+    {
+     "kind": "p",
+     "text": "The other primary way to defeat jamming is to simply not be in the jamming cone. The longest range for vanilla radar jammers is 10km for both the Blanket and Bellbird. The R400 Bloodhound (14 km, fixed, 10 degree beam) and the Early Warning Radar can stay beyond 10 km and still detect ships inside a vanilla radar jammer. The RS41 Spyglass (11.5 km instrumented) only does this against destroyer-size and larger targets: at best aspect it is signal-limited to about 9.6 km against a corvette and about 10.2 km against a frigate. Similarly, ships can move laterally to get outside of the enemy jamming cone, allowing them to spot the target and relay that to the team (called \"offset spotters\"). A team spread across a wide area is much more resistant to radar jamming compared to a team that is tightly grouped."
+    },
+    {
+     "kind": "p",
+     "text": "Jamming only works on active radar sensors, and therefore other sensors are unaffected. All ships can detect targets visually around themselves (roughly 3km around every ship), and ELINT systems such as the Pinard can detect enemy radar emissions even when jammed. Note that the Pinard cannot detect the jamming itself."
+    },
+    {
+     "kind": "p",
+     "text": "Most search radars will be able to produce a line of bearing (LOB) toward any jammers that are affecting the radar. The R400 Bloodhound, the R550 Early Warning Radar, and fire-control radars produce none. Jamming LOBs will remember the last range to the ship that is doing the jamming, provided a track on the ship was held within 30 seconds of when the jamming started (the stored range jitters by about 100 m). Any later track on that ship replaces it, and a bearing-only track (ELINT, or one ship's strobe correlator) places the contact about 100 km out along the bearing. This LOB range can be updated via crossfix, briefly regaining the track, or burn pings. Time-fuzed shells can base their timing on this last known range. While the accuracy of this Jam LOB varies from radar to radar, and is rarely accurate enough for gunfire or other dumb weaponry, the LOB is still useful for quickly responding with counterfire, whether it be RPF/Bombshell, missiles, sending jamming back at the enemy, or just knowing where to close in. LOBs can be crossfixed via strobe correlator."
+    },
+    {
+     "kind": "p",
+     "text": "Additionally, the purple LOB produced by the strobe correlator can be locked by a ship's FCR, unlike a normal red jamming LOB."
+    }
+   ]
+  },
+  {
+   "heading": "Communication Jamming",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Comms jamming visualized. Not to scale. Diagram by jraamus"
+    },
+    {
+     "kind": "p",
+     "text": "Communication jamming in the game works by saturating the victim's receiving antenna, effectively denying them from receiving data from their allies."
+    },
+    {
+     "kind": "p",
+     "text": "Note that:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Comms jamming does NOT stop a ship from transmitting its own information."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Both comms jamming and transmission fall off as the inverse square of distance."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "While communication antennae are not occluded by terrain, comms jammers ARE occluded by terrain and can be blocked by rocks"
+    },
+    {
+     "kind": "p",
+     "text": "In most cases, a comms reciever (such as a ship, a CMD missile, or a mine) is successfully comms jammed and isolated from the comms network if the jamming strength is greater than the transmission strength of the strongest ally transmission (out of all allies who are not also jammed). With one ship doing the comms jamming, we can find the distance required to successfully jam."
+    },
+    {
+     "kind": "p",
+     "text": "Given:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The distance from transmitting ally to the target, [math]\\displaystyle{ d_A }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The transmitting ally's antenna strength, [math]\\displaystyle{ P_A }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The ally's antenna gain [math]\\displaystyle{ G_A }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The target's antenna gain [math]\\displaystyle{ G_T }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "And with [math]\\displaystyle{ K = PG }[/math] for the comms jammer (or the sum for multiple jammers; no stacking penalty),"
+    },
+    {
+     "kind": "p",
+     "text": "Then the maximum distance, [math]\\displaystyle{ d_c }[/math], at which the target is comms jammed is given by [math]\\displaystyle{ d_c = d_A \\sqrt{\\frac{G_TK}{G_AG_TP_A - (4\\times 10^{-7})\\pi d_A^2}} \\approx d_A\\sqrt{\\frac{K}{P_AG_A}} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "Only the simpler approximation is needed for normal situations. For example, if the target's allies are using CR10 antennas ([math]\\displaystyle{ P_AG_A = 2500 }[/math]), then one Hangup jammer ([math]\\displaystyle{ K = 7500 }[/math]) can jam at a distance [math]\\displaystyle{ \\sqrt{3} = 1.73 }[/math] times further than the transmitting ally. If the allies are using a CR75 ([math]\\displaystyle{ P_AG_A = 30000 }[/math]), then one hangup has to be at half the distance as the CR75. Receiver gain is not factored in as receiver gain amplifies both incoming transmissions and incoming jamming, which effectively cancels it out except in the rare case where ambient noise is a significant factor (as gain does not amplify ambient noise)"
+    },
+    {
+     "kind": "p",
+     "text": "In addition, ships within the same comms jamming cone (or sphere) will not be able to directly transmit to eachother, but the jammed ships can transmit out, and if an external ship can communicate in, the two ships will still be connected indirectly via the external relay ship."
+    }
+   ]
+  },
+  {
+   "heading": "Jamming vs Missile",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Successfully jamming a missile seeker (that is not equipped with a backup seeker) to the point where it detects no targets, will cause the seeker to follow a fake target and therefore causing the missile to drift off target."
+    },
+    {
+     "kind": "p",
+     "text": "Jamming an EO missile with the Dazzler will \"stun\" the missile, causing it to remain jammed for 1 second after leaving a dazzler's area of effect."
+    },
+    {
+     "kind": "p",
+     "text": "further information: Missiles - Target Selection Cycle"
+    }
+   ]
+  },
+  {
+   "heading": "Radar Illumination",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Radar illumination works in the game by painting targets inside the cone and increase their return power. Illuminators work similarly to jammers when it comes to calculating power on target over range, but instead the power is used to boost return power for all radars (search FC, and missiles radars). It is often used as guidance for SARH(Semi Active Radar Homing) missiles, but can also aid in radar searching and locking."
+    }
+   ]
+  },
+  {
+   "heading": "Radar Illumination › Illumination angle",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "An Illuminator has to be within 90 deg offset from the radar for the radar to see the reflected illumination, if the illuminator is more than 90 deg offset, the radar will not be able to see the illuminator reflection and therefore will not benefit."
+    },
+    {
+     "kind": "p",
+     "text": "Viewing angle otherwise does not affect the reflected power, radars will receive the same amount of reflected power regardless if the illuminator is on the same ship or offset by 85 deg."
+    }
+   ]
+  },
+  {
+   "heading": "Radar Illumination › Edge falloff",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "All ship illuminators have \"edge falloff\"; this means that signatures near the edge of their cone will be illuminated less than signatures in the center of the cone. The falloff is calculated by [math]\\displaystyle{ 1 - (F\\cdot\\theta)^2 }[/math] where [math]\\displaystyle{ F }[/math] is the edge falloff stat of the illuminator, and [math]\\displaystyle{ \\theta }[/math] is how close the signature is to the edge of the cone (e.g. at the very edge of the cone [math]\\displaystyle{ \\theta }[/math] will be 1.0; at the center of the cone [math]\\displaystyle{ \\theta }[/math] will be 0)."
+    },
+    {
+     "kind": "p",
+     "text": "Edge falloff for the Lighthouse and Spotlight is 0.75, and will be reduced to ∼44% power at the edge of their FoV. Edge falloff for the Floodlight is 0.4, and will be reduced to 84% instead. All craft illuminator pods are hardcoded to have 0 edge falloff.[5]"
+    }
+   ]
+  },
+  {
+   "heading": "Radar Illumination › SAH Missile Guidance",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Todo"
+    }
+   ]
+  },
+  {
+   "heading": "Radar Illumination › Radar Buffing",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The most common use of illuminators is to counter jamming by increasing the return power from a target ship. The illuminator effectively adds another copy of the radar calculations to the return power. Compute the radar-only return power as in the Radar page as [math]\\displaystyle{ P_{r, \\textrm{mono}} }[/math][6]. And find the following parameters:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "illuminator radiated power, [math]\\displaystyle{ P_i }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "illuminator gain, [math]\\displaystyle{ G_i }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "edge falloff stat [math]\\displaystyle{ F }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "edge falloff angle [math]\\displaystyle{ \\theta }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "radar gain [math]\\displaystyle{ G_r }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "aperture size, [math]\\displaystyle{ A }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "distance from the illuminator to the target [math]\\displaystyle{ d_i }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "distance from the radar to the target [math]\\displaystyle{ d_r }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "target RCS [math]\\displaystyle{ \\sigma }[/math][7]"
+    },
+    {
+     "kind": "p",
+     "text": "Then the return power is:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ P_{r, \\textrm{total}} = P_{r, \\textrm{mono}} + \\frac{P_i\\, G_i\\, (1 - (F \\cdot \\theta)^2)\\, G_r \\, \\sigma A}{16\\pi^2 d_i^2 \\, d_r^2} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "If there are multiple illuminators striking the same target, simply add up each of the return power terms. There is no diminishing returns, unlike radar jamming. See the main radar page for a longer discussion on how this impacts performance into jamming. In short: the Spotlight and Lighthouse have little effect on radar performance. The Floodlight acts roughly as a second copy of the radar. Thus [math]\\displaystyle{ N }[/math] Floodlights improves detection range by roughly a factor of [math]\\displaystyle{ \\sqrt{N+1} }[/math]."
+    },
+    {
+     "kind": "p",
+     "text": "In the rare event that you want to illuminate a Conure, be aware that the Conure has a reduced RCS for illumination. See below."
+    }
+   ]
+  },
+  {
+   "heading": "Decoys",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The EA12 chaff decoy will burst into a cloud of radar-reflective chaff, creating a radar false-target with considerable RCS. This creates a stationary false contact on enemy and friendly radar, and also seduce ACT seekers of any type, and if it is located within the cone of radar illuminator, also has the chance of seducing SAH seekers. The decoy's signature starts out at ~22,000m2 signature and decays over time, down to ~14,500m2 after 38 seconds, and rapidly down to ∼3,300m2 when it expires after 45 seconds."
+    },
+    {
+     "kind": "p",
+     "text": "The more expensive EA14 decoy exclusive to OSP works in a similar way, but has ~40,000m2 sig instead, and decays down to ~26,400m2 after 38 seconds, and down to ∼6,000m2 when it expires after 45 seconds."
+    },
+    {
+     "kind": "p",
+     "text": "The EA20 flare decoy upon deployment will spray out a cloud of hot particles that seduce WAKE seekers. This decoy decays over time, down to 85% after 24 seconds, and down to 15% when it expires at 40 seconds"
+    },
+    {
+     "kind": "p",
+     "text": "The EA99 active decoy exclusive to ANS imitates ship active and passive signature, seducing ACT ARAD and SAH(if illuminated). The decoy travels at 20m/s in a direction for 30 seconds before it expires and has a constant signature. Active decoys have an incredibly high signature size of ~400,000m2 However, the active decoy is only 1.0% as effective at reflecting illuminators, and therefore may struggle to attract SAH in certain cases. While EA99 decoys will not be fired by the untargeted decoy button or the decoy hotkey, Fire Decoy in the action menu opened on a track will launch them, and automatic point-defense decoy launch can launch them too. They can also be fired manually from the EWAR menu (although their slow speed and short range limits the utility of this function)"
+    },
+    {
+     "kind": "p",
+     "text": "A special note about chaff is that they are assigned radar track numbers in a fixed order: if I deploy five chaff, with track numbers 1000, 1001, 1002, 1003, and 1004, upon the first chaff expiring redeploying chaff will see track number 1000 assigned to that new chaff cloud. This has practical applications via CMD; if a CMD missile were fired at track 1002 from the above example, it will guide onto the third chaff cloud deployed until it expires; I can then fire three more chaff, and the CMD guidance will re-acquire on the third chaff deployed."
+    },
+    {
+     "kind": "p",
+     "text": "One quirk of this is that chaff clouds use the same fixed order for all chaff clouds in the game, seemingly as long as said chaff clouds are tracked by your team. Thus, if one ship deploys chaff, another ship deploys chaff, and a third ship deploys chaff on the enemy team, they have numbers 1000, 1001, and 1002, as normal. This sequence can also break, under unknown circumstances."
+    },
+    {
+     "kind": "p",
+     "text": "The Craft countermeasures mounted onto each Spacecraft operate slightly different from the above decoys. Specifically the craft decoys are combination chaff and flare decoy that will seduce RADAR, WAKE, and THERM seekers. In addition they do not leave an additional sensor track when deployed."
+    }
+   ]
+  },
+  {
+   "heading": "ELINT",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "ELINT detectors (such as the Pinard) allows a ship to passively detect enemy radar emissions, such as those from search radars or fire control radars, at up to 1.25x of that radar's max range. One ELINT module will show a rough line of bearing toward the emitter; a crossfix requires bearing-only tracks from ELINT on two or more different friendly ships on the team network (two modules on the same ship do not crossfix each other). ELINT will also be able to identify what type of radar it is (or more specifically, it can reveal the ELINT category of the radar) and will display it on the ELINT LOB or crossfix. If the ship is equipped with multiple types of radars, the track will display all detected types."
+    },
+    {
+     "kind": "p",
+     "text": "The categories are generally self explanatory, most internal search radars (spyglass, huntress, etc) are Search/Track. All turreted fire control radars (Bullseye, Pinpoint) are Fire Control. The Early Warning Radar is the only radar that will be specified as Early Warning. Parallax using the locking function will still classify as Search/Track. Bloodhound is classified as Long Range Tracking, the only radar with that category."
+    },
+    {
+     "kind": "p",
+     "text": "Most directional radars like FCRs also have sidelobe patterns, allowing ELINT to detect these radars at reduced range even if they're not pointed at the ELINT set. These sidelobe patterns can be viewed on their component page here: http://nebfltcom.wikidot.com/component:list."
+    },
+    {
+     "kind": "p",
+     "text": "ELINT is not able to detect jamming."
+    },
+    {
+     "kind": "p",
+     "text": "ELINT is not able to detect integrated FCRs on PD turrets"
+    },
+    {
+     "kind": "p",
+     "text": "ELINT is not able to detect illuminators."
+    },
+    {
+     "kind": "p",
+     "text": "ELINT is not masked by hull, and a ship with an ELINT detector on either side will not have a blindspot between the ELINT sets (as ELINT is measured from the center of the ship rather than from the set itself)."
+    }
+   ]
+  },
+  {
+   "heading": "Trivia",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Due to the modelling of the E70 'Interruption' Jammer, it is nicknamed as \"disco ball\"."
+    }
+   ]
+  },
+  {
+   "heading": "External Links",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NotSoLoneWolf's Radar Calculator V8.3 - can simulate radar and comms jamming across a wide variety of parameters"
+    }
+   ]
+  },
+  {
+   "heading": "Notes",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ THis is sorted by the effective jamming power on target, not the raw output of the jammer."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ The total assumes all jammers are the same type, at the same range, if combining jammers from multiple different distances or different types, refer to the multiplier per jammer."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ All vanilla jammers have an effect area ratio of 0.4, except for reactor blooms which have 1.0 instead"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ The amount of jammers that can be combined this way is explicitly hardcapped to 20 strongest jammers, likely for lag reduction reasons, but the increase is already less than a hundreth of a percent after the 8th jammer"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Technically, all directional ewar emitters including radar and comms jammers have an edge falloff stat, but all of them (besides the illuminators) have 0.0 edge falloff which means they have no falloff at the edge of their FoV"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ A radar with the transmitter and receiver in the same location is referred to as a \"monostatic\" radar. Illuminators have the transmitter and receiver in different locations, creating a \"bistatic\" radar"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Since RCS is angle dependent, this uses the angle between the target and the radar. The illuminator angle is not used."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 7 October 2026, at 05:28."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

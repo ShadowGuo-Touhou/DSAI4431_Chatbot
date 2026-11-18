@@ -1,0 +1,1176 @@
+{
+ "page": "Component Damage - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Component Damage",
+ "category": "mechanics",
+ "slug": "component-damage",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "(页面开头)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Each Component (surface mount, internal compartment, module) on a ship has its own separate health pool. When armor has been penetrated, damage is dealt to components depending on direction of hit and the component's position in the ship."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Mechanics",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Most attacks will use some kind of ray or sphere collider (aka hitboxes) to determine which components are hit and damaged, with the specifics varying depending on damage type (some attacks even use multiple colliders)."
+    },
+    {
+     "kind": "p",
+     "text": "Components that are damaged below 0 HP will be destroyed (greyed out). Destroyed components generally can't be hit by further attacks, and cannot be repaired unless a restore is used."
+    },
+    {
+     "kind": "p",
+     "text": "However, there are two mechanics that can prevent a component from being destroyed at 0 HP: Damage Threshold, and (Reinforced)."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Mechanics › Damage Threshold",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "In order to destroy a component, the final \"killing\" hit has to deal more damage than the Damage Threshold (DT). If not, the component is brought down to 0 HP and disabled (shows as red), but is not destroyed, and therefore can be repaired without needing restores. This is checked after Damage Reduction (DR) is applied, which can make DT much more effective on ships with high DR."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Mechanics › Reinforced",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "A reinforced component can only be killed once it's at 0 HP. Any hit when the component is above 0 HP will only bring it down to 0 HP This means that a reinforced component with a DC team repairing it must be hit twice within the 0.25 second window between repair ticks or else the DC team will bring the component above 0 HP (Note that DC teams inside nearly destroyed modules are very vulnerable to damage and can be killed quickly)"
+    },
+    {
+     "kind": "p",
+     "text": "The two hits do not have to be the same; any hit that brings the component down to 0 HP will count for the first hit, regardless of how little damage it deals or if it beats the component's DT. However, the second \"greying\" hit will have to beat DT as usual"
+    },
+    {
+     "kind": "p",
+     "text": "Note that the reinforced tag is only \"stripped\" in the next frame, two hits in the same frame will both be resisted by reinforced, but if the second hit is delayed a moment afterwards, it will break through as expected."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Mechanics › Damage Reduction",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "A Hull's Damage Reduction stat reduces incoming damage by the percentage shown. For example, 40% DR will reduce 100 damage to 60 damage."
+    },
+    {
+     "kind": "p",
+     "text": "This modifier applies before damage threshold checks, and therefore massively amplifies the protective effect of Damage Threshold, especially against smaller munitions."
+    },
+    {
+     "kind": "p",
+     "text": "DR is 25% of the hull's base component DR when 20% or fewer component slots are filled, then rises linearly and reaches its full value at 60% filled. Slot size does not matter, only the number of slots filled. Damage Reduction does not change as modules are destroyed (as these modules are still present in their destroyed state)."
+    },
+    {
+     "kind": "p",
+     "text": "Damage reduction does not affect fire, bshort, or burnthrough damage. Some attacks ignore DR."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Mechanics › Interior Density and Penetration Depth",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Just like real life ships, all ships in Nebulous also have internal structural bulkheads to provide redundancy against threats in space. In game, internal hull structure is generalized as a homogeneous interior density (Interior Armor Density Equivalent) measured in cm of armor per meter, with different hull classes having different densities. Some damage types use internal density to determine pendepth (see damage type section below). For example, if HEKP hits a Solomon and has 180cm of pen left over after penetrating armor, the Solomon's 1.2cm/m density means the penetrator can go up to 150 meters into the hull."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "ANS Hull",
+       "Interior Density (cm/m)",
+       "Size (Length/Width/Height)",
+       "Total Armor Equivalent (Front/Side/Top)",
+       "Internal Armor Equivalent (F/S/T)"
+      ],
+      [
+       "Sprinter",
+       "0.5",
+       "80/37/28m",
+       "56/35/30cm",
+       "40/19/14cm"
+      ],
+      [
+       "Raines",
+       "0.5",
+       "96/35/40m",
+       "78/48/50cm",
+       "48/18/20cm"
+      ],
+      [
+       "Keystone",
+       "0.5",
+       "130/50/45m",
+       "109/69/67cm",
+       "65/25/23cm"
+      ],
+      [
+       "Vauxhall",
+       "1.00",
+       "215/62/60m",
+       "267/114/112cm",
+       "215/62/60cm"
+      ],
+      [
+       "Axford",
+       "1.20",
+       "195/70/75m",
+       "314/164/170cm",
+       "234/84/90cm"
+      ],
+      [
+       "Solomon",
+       "1.20",
+       "285/80/105m",
+       "454/208/238cm",
+       "342/96/126cm"
+      ],
+      [
+       "OSP Hull",
+       "Interior Density (cm/m)",
+       "Size (L/W/H)",
+       "Total Armor Equivalent (F/S/T)",
+       "Internal Armor Equivalent (F/S/T)"
+      ],
+      [
+       "Ferryman",
+       "0.5",
+       "68/36/23m",
+       "44/28/22cm",
+       "34/18/12cm"
+      ],
+      [
+       "Draugr",
+       "0.5",
+       "87/53/40m",
+       "54/37/30cm",
+       "44/27/20cm"
+      ],
+      [
+       "Flathead",
+       "0.75",
+       "128/56/52m",
+       "192/138/135cm",
+       "96/42/39cm"
+      ],
+      [
+       "Ocello",
+       "1.2",
+       "210/50/75m",
+       "312/120/150cm",
+       "252/60/90cm"
+      ],
+      [
+       "Marauder",
+       "0.25",
+       "309/90/115m[1]",
+       "118/63/69cm[1]",
+       "78/23/29cm[1]"
+      ],
+      [
+       "Moorline",
+       "0.25",
+       "345/100/110m[1]",
+       "127/65/68cm[1]",
+       "87/25/28cm[1]"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "Most damage types have a minimum pendepth of 15m. Even if the leftover penetration is 1cm, as long as it penetrates armor it will penetrate to 15m deep"
+    },
+    {
+     "kind": "p",
+     "text": "Some damage types have conditions that can stop the attack early or limit penetration depth, even if it would normally penetrate deeper."
+    },
+    {
+     "kind": "p",
+     "text": "Some shells[2] have a \"Penetration Depth Override\"[3]; These shells only use pendepth for calculating overpen, and if the shell does not overpen, the shell's pendepth is guarenteed to reach the override distance. This override is not usually limited by anything, and is applied after the overpen check which means the override cannot cause an overpen on its own."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Mechanics › Overpenetration",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Shells that penetrate armor and don't stop inside the hull due to fuzing, internal density, or armor at the exit point, will overpenetrate (overpen) and usually deal reduced damage against the ship (determined by the shell's overpenetration modifier). Most shell types also have reduced damage and different damage behaviors when overpenetrating."
+    },
+    {
+     "kind": "p",
+     "text": "A shell that overpenetrates can continue on and hit other targets. On a single hull, entry and exit armor consume penetration depth from that impact (for example, a shell with 110 cm pen against 15 cm armor may use about 30 cm ignoring angling and internal density to exit). Against a later target, stock kinetic shells apply their full listed penetration again rather than a reduced remainder (the same 110 cm shell does not carry only 80 cm pen into the next ship)."
+    },
+    {
+     "kind": "p",
+     "text": "In some cases, the overpenetration vfx will play, but the shell will not exit the ship. In this case the hit is still treated as an overpenetrating hit even if the shell doesn't visibly exit."
+    },
+    {
+     "kind": "p",
+     "text": "Most other attacks besides shells don't overpenetrate. Some attack still make an overpenetration check for the purposes of vfx but this usually does not apply any explicit damage penalties and usually cannot damage further targets."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Mechanics › Structure break",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Structure boxes of the different hulls. Diagram by PuppyFromHell"
+    },
+    {
+     "kind": "p",
+     "text": "All ships have a \"Structure hitbox\". If an attack's path crosses the structure hitbox and no component collider, destroyed components included, the damage is dealt to the structure. Hits below 20 damage after damage reduction do not count toward structure HP. Once enough damage has been dealt to the structure, the ship becomes structure broken, and any more damage to the structure is redirected to a random component, as if it had hit that components instead. In this state, crew also take 50% more damage"
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Behavior of AP and HE shells as they penetrate an Axford. Not to scale. Diagram by smolcake."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › HE (Shell)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "HE shells create an explosion (sphere) inside the ship at a point along their path of travel. Any components that touch this sphere are damaged. The damage of the round is spread between all components equally. For example, a 150 damage shell will do 30 damage to 5 components or 75 damage to 2 components. If they overpen, the round does not create an explosion and the reduced damage is spread equally among all components that the round intersected with."
+    },
+    {
+     "kind": "p",
+     "text": "The explosion position is determined by the pendepth and the penetration envelope stat. Most HE shells have a penetration envelope of 0.8, which places the explosion at a random point between 20% and 180% of pendepth (the code lerps from 1 - envelope to 1 + envelope, so the average is 100%). The component tooltip says 80-100%, but the placement method does not do that."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › AP (Shell)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "AP shells damage the first non-destroyed component in their path; all subsequent components along it's pendepth are not damaged. If they overpen, the reduced damage is spread equally among all components that the round intersected with. Grapeshot as well as individual fragments from bomb and RPF shells act like AP shells."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › AP (Shell) › AP Sabot (Rail)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "AP Sabot always spreads their damage across all components hit, dealing a certain fraction of damage to each component that falls off for each component hit, depending on the overpen multiplier. This applies even if the shot overpens.[4]"
+    },
+    {
+     "kind": "p",
+     "text": "e.g, a 300mm AP Rail Sabot with 80 damage and 50% overpen multiplier will deal 40 damage to the first component, 20 damage to the second, 10 damage to the third, etc"
+    },
+    {
+     "kind": "p",
+     "text": "AP Sabot will always cause a critical event (crit) in a random component if they hit the structure hitbox, even if the ship is not structure-broken."
+    },
+    {
+     "kind": "p",
+     "text": "AP Sabot will never trigger catastrophic events (but the subsequent fires can cause catastrophics)"
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › RPF (Shell)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "RPF shells fire multiple fragmentations in a tight cone towards the nearest target (simulating the few fragments that would potentially threaten the target, out of the dozens of fragments). Each fragment acts like an AP shell, and totals up to the listed damage (eg, 250mm HE-RPF Shells deal 16 damage per fragment, for a total of 128 damage)."
+    },
+    {
+     "kind": "p",
+     "text": "Most RPF shells ignore normal penetration depth mechanics; if the fragment penetrates armor, they will always penetrate a certain depth into the hull regardless of interior density or leftover penetration."
+    },
+    {
+     "kind": "p",
+     "text": "RPF will also fuze on missiles and craft, and has a 50% chance of damaging missiles and craft within its blast radius (20 damage, 0.1cm pen, 37.5m fuze, 110m radius for 120mm RPF; 30 damage, 0.2cm pen, 45m fuze, 200m radius for 250mm RPF). This blast radius is purely antimissile/craft and does not affect ships."
+    },
+    {
+     "kind": "p",
+     "text": "RPF will trigger on terrain."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › RPF (Shell) › Bomb (Shell)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Bomb shells hit all ships within their blast radius (500m radius for both 600mm and 250mm bomb shells) with multiple fragments. These fragments are distributed randomly across the target's bounding radius. Or in other words, if you imagine a circle that circumscribes the ship, the fragments fired at that ship will be distributed randomly inside that circle. Each fragment acts like an AP shell. 600mm Bomb Shells emit 12 fragments per target, each dealing 40 damage. 250mm Bomb shells emit 6 fragments per target, each dealing 16 damage. The listed damage assumes 5 targets for 600mm bomb shells and 4 targets for 250mm bomb shells."
+    },
+    {
+     "kind": "p",
+     "text": "This can result in some fragments missing the ship, e.g. 600mm bomb shells will not always score 12 hits on every ship in its radius as ships do not fully encompass their bounding radius. In addition, these fragments can strike other targets inside the blast radius besides their intended target. Each bomb shell fragment will now try up to several times to to find a ray which hits the target's hull, twice for 250mm bomb shells and 3 times for 600mm bomb shells."
+    },
+    {
+     "kind": "p",
+     "text": "Bomb shell fragments ignore normal penetration depth mechanics; if the fragment penetrates armor, they will always penetrate a certain depth into the hull regardless of interior density or leftover penetration."
+    },
+    {
+     "kind": "p",
+     "text": "Bomb shells explode with a timed fuze. When firing on tracks, that timed fuze is stepped back by 0.35 seconds (600mm) or 0.1875 seconds (250mm), and randomly varies ±0.2 seconds (600mm) or ±0.15 seconds (250mm)"
+    },
+    {
+     "kind": "p",
+     "text": "Bomb shell fragments have a crit rate of 2%."
+    },
+    {
+     "kind": "p",
+     "text": "Missiles and Craft within 300m of a 600mm bomb shell explosion have a 25% chance of being damaged for 30 damage, 0.2cm pen. Missiles and Craft within 100m of a 250mm bomb shell explosion have a 50% chance of being damaged for 30 damage, 0.1cm pen. This blast radius is purely antimissile/craft and does not affect ships."
+    },
+    {
+     "kind": "p",
+     "text": "500mm Fracturing Block fired by Mass Drivers also has an on-hit bombshell fragment effect, with fragments cast at nearby ships that are visible from the impact point."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › Plasma",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Plasma splits its damage across all components in its blast radius."
+    },
+    {
+     "kind": "p",
+     "text": "Plasma no longer casts additional splash rays (splash ray count is 0). Armor shredding comes only from the main hit."
+    },
+    {
+     "kind": "p",
+     "text": "Plasma armor shredding ignores armor angle. Both component damage and shredding falls off over distance, down to 30% at max range."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › Beam",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Beams deal damage five times a second, and therefore their damage per hit is 1/5 of the listed damage per second. Beams damage the first component in their path, have a fixed penetration depth of 150m (width of 6.66m), and cannot overpenetrate."
+    },
+    {
+     "kind": "p",
+     "text": "Beams deal reduced damage and armor penetration at longer ranges, reduced by 5% (x0.95) at half of max range, and reduced by 50% (x0.50) at max range."
+    },
+    {
+     "kind": "p",
+     "text": "see also: Puppy's beam damage tool"
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › HEI (Missile)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Diagram of the behavior of HEI and HEKP warheads on an Axford. Not to scale. By smolcake."
+    },
+    {
+     "kind": "p",
+     "text": "HEI splits its damage into multiple fragments (aka rays), each dealing 50 dmg. The amount of fragments totals up to the listed damage value. e.g. a missile that has a listed damage of 1440 will split its damage into 28 fragments dealing 50 dmg, with one fragment left over dealing 40 dmg."
+    },
+    {
+     "kind": "p",
+     "text": "These fragments spray out from the impact location in a 35 deg cone pattern in the direction of the missile (note that the cone angles given on this page use internal values, and are therefore only half of the full angle). Each fragment splits their damage among all components in a 70m line (ignores pendepth mechanics), and do not overpenetrate. (e.g. the damage ray hitting two components will deal 25 damage to each, hitting three components will deal ~17 damage to each)"
+    },
+    {
+     "kind": "p",
+     "text": "HEI warheads ignore armor angling."
+    },
+    {
+     "kind": "p",
+     "text": "For missiles, HE armor shredding radius gradually increases with the warhead's armor penetration stat as warhead size increases. The shredding radius curve starts at 3.5m, goes to 5m at 1500 cm penetration, 8m at 5000 cm penetration. However HE Impact armor penetration stays about 27-150 cm, so the radius stays near the curve's start (about 3.5 in raw brush size) and does not reach the values listed at 5 and 8 m in practice, which sit at 1500 cm and 5000 cm of armor penetration."
+    },
+    {
+     "kind": "p",
+     "text": "Rockets function similarly, but with a slightly wider 45 deg cone and a variable ray length from 40m to 60m"
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › HEI (Missile) › HEI (Mine)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Works similarly to standard HEI, but the fragments deal 100 damage instead (times 50, for 5000 damage in total), with 100m-150m long rays, in a 50 degree cone."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › HEI (Missile) › Mass driver/Fracturing block",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSP Fracturing blocks have a similar damage type compared to HEI, but instead deal only 15 damage per fragment, times 20 fragments, in a 35 deg cone. Fracturing block rays are emitted from the impact location, length of the rays is determined by penetration depth of the attack (for 500mm fracturing blocks, this is capped at 30m and has no penetration depth override). Fracturing block damage rays ignore damage reduction."
+    },
+    {
+     "kind": "p",
+     "text": "Fracturing blocks can overpenetrate and keep flying. The impact cone still deals the same ray damage, but an overpenetrating hit does not emit the splash fragments against other ships; those fragments are fired only when the hit is penetrated or stopped. As a side effect, the block itself also loses no damage after overpenning, which means if it hits a second target and penetrates, that target will also take full damage."
+    },
+    {
+     "kind": "p",
+     "text": "Unlike missile HEI, Mass drivers are affected by armor angling."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › HEI (Missile) › HE-SH (Shell)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "600mm HE-SH works similarly to fracturing blocks. It applies 7× 60 damage rays, 50m maximum ray length, 15 deg cone. HE-SH cannot overpenetrate hulls."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › HEKP (Missile)",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "ANS Hull",
+       "Armor",
+       "Internal Density (cm/m)",
+       "HEKP Pen"
+      ],
+      [
+       "Sprinter",
+       "8cm",
+       "0.50",
+       "106cm"
+      ],
+      [
+       "Raines",
+       "15cm",
+       "0.50",
+       "124cm"
+      ],
+      [
+       "Keystone",
+       "22cm",
+       "0.50",
+       "141cm"
+      ],
+      [
+       "Vauxhall",
+       "26cm",
+       "1.00",
+       "237cm"
+      ],
+      [
+       "Axford",
+       "40cm",
+       "1.20",
+       "306cm"
+      ],
+      [
+       "Solomon",
+       "56cm",
+       "1.20",
+       "346cm"
+      ],
+      [
+       "OSP Hull",
+       "Armor",
+       "Internal Density (cm/m)",
+       "HEKP Pen"
+      ],
+      [
+       "Ferryman",
+       "5cm",
+       "0.50",
+       "99cm"
+      ],
+      [
+       "Draugr",
+       "5cm",
+       "0.50",
+       "99cm"
+      ],
+      [
+       "Flathead",
+       "48cm",
+       "0.75",
+       "249cm"
+      ],
+      [
+       "Ocello",
+       "30cm",
+       "1.20",
+       "281cm"
+      ],
+      [
+       "Marauder",
+       "20cm",
+       "0.25",
+       "93cm"
+      ],
+      [
+       "Moorline",
+       "20cm",
+       "0.25",
+       "93cm"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "The HEKP penetrator is a spherical hitbox 10m wide and hits all components in a straight line up to 175m from the impact location. It spreads its listed damage equally among all hit components. The penetrator has a 2.0m armor shredding radius"
+    },
+    {
+     "kind": "p",
+     "text": "The HEKP explosive creates a line of explosions along the path of the penetrator, and deals more overall damage as penetration depth increases, up to its listed maximum damage at 175m. HEKP does not suffer an explicit overpen penalty, but smaller hulls may not be large enough to allow the HEKP penetrator to travel 175m for maximum damage."
+    },
+    {
+     "kind": "p",
+     "text": "HEKP's explosion pattern is fixed, and broadly does not change regardless of warhead size, missile speed, or other factors. The HEKP Explosive splits its damage among 26 explosions[6]. It tries to drop one explosion exactly every 6.6m (up to the maximum depth of 175m). If the explosive cannot drop all 26 explosions (either because the ship's hull is thinner than 175m, or the Penetrator did not travel 175m), then the damage in those explosions are lost. However, the total explosion damage will never go below 40%; The remaining explosions will have their damage scaled up to meet the 40% minimum."
+    },
+    {
+     "kind": "p",
+     "text": "Explosion count is rounded down, one per 6.6 m. A hit that fails to penetrate creates none, but a penetrating hit is given at least 15 m of pendepth, so it always creates at least 2 explosions and those explosions are scaled up to the 40% damage minimum."
+    },
+    {
+     "kind": "p",
+     "text": "HEKP explosion radius varies throughout the explosion chain, peaking at ~25m radius at the 18th/19th explosion (~119m deep) and dropping off to ~7.5m radius near the beginning and end. Damage per explosion is the same for each explosion. Damage per explosion is distributed between components similarly to an HE shell. Armor shredding radius scales in a similar way, peaking at 6.0m (12m diameter in the best case) and dropping off to ~1.8m at the beginning and end. This is measured from the explosion point, not from the nearest surface.[7]"
+    },
+    {
+     "kind": "p",
+     "text": "While the explosion damage and armor shredding value scales with warhead size, the shredding and damage radius are fixed regardless of warhead size"
+    }
+   ]
+  },
+  {
+   "heading": "Damage Type Overviews › Blast Frag (Missile)",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Type",
+       "Head-On",
+       "Side",
+       "Rear"
+      ],
+      [
+       "BF",
+       "50%",
+       "20%",
+       "80%"
+      ],
+      [
+       "BF-EL",
+       "85%",
+       "65%",
+       "95%"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "Blast Frag detonates on the first enemy that comes within fuze range (regardless if it's the current target or not, as the fuze is separate from the seeker), and has a chance of hitting against all missiles in its AoE. The fuze is a box whose edge is 1.8 times the blast radius, capped at 50 m. Stock warheads hit that cap, so the box reaches about 42 m ahead, 25 m to each side, and 8 m behind. The damage radius is the blast radius, which is larger. The fuze will trigger on everything, including other ships and terrain (But does not damage ships whatsoever, and a detonation on a ship is counted as a hit. Terrain impacts, and contact before the fuze is armed, are counted as misses)"
+    },
+    {
+     "kind": "p",
+     "text": "Each missile within range of a blast frag detonation only has a chance of taking damage depending on the angle of intercept (based on the velocity vectors between the two missiles)[8]. A blast frag missile hitting another missile head on has a moderate chance of dealing damage, a side-on hit has a low chance of damage, and a rear, or chasing hit, has the greatest chance of damage"
+    }
+   ]
+  },
+  {
+   "heading": "External Links",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Puppy's damage mechanics tool - visualizes various hull damage mechanics (such as an armor penetration, beam damage falloff over distance with varying amounts of Focused Particle Accelerators)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Puppy's All-in-one Calculator - contains raw data on a variety of mechanics in Nebulous (Such as blast frag hit chances, flak AoE multipliers, HEKP explosion multiplers, etc)"
+    }
+   ]
+  },
+  {
+   "heading": "Notes",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ 1.0 1.1 1.2 1.3 1.4 1.5 Lineships have variable dimensions due to their randomized layouts, and therefore the interior armor density stats are not accurate for all layouts."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ 120mm RPF, 250mm RPF, 250mm Bomb, 600mm Bomb"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Listed as _overrideComponentSearchDistance internally"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Technically, railguns are counted as always overpenetrating, which is how their damage type is changed from the standard AP shell to the unique type described."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Not all ships are that long. Consult the interior density and penetration depth table"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ The explosion count is not explicitly defined, rather the game derives the explosion count by dividing the maximum penetration depth by the distance between explosions. As a result, HEKP actually needs only 171.6m pendepth to reach the maximum explosion count"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ While in game HEKP is modeled as a line of explosions, this is intended to emulate the effect of a single large explosion moving through a confined environment at high speed, such as a supersonic missile impact: https://www.military.com/video/guided-missiles/antiship-missiles/russian-supersonic-missile-blows-away-vessel/4156566704001"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ This is calculated using the dot product between the normalized velocity vectors of the two missiles, which is effectively just calculating the cosine of the angle."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 17 October 2026, at 19:10."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

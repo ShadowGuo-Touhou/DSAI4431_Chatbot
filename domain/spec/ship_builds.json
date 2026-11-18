@@ -1,0 +1,1718 @@
+{
+  "baseline": {
+    "must": [
+      "have at least 1 drive",
+      "have at least 1 CIC",
+      "have at least 1 ammo storage",
+      "Required power < 110% provided (with exceptions for some ships)",
+      "for ships with cannons, there must be enough ammo for at least 10 minutes of firing",
+      "for ships with hardkill PDT, there must be enough ammo for at least 1 minute of firing"
+    ],
+    "should": [
+      "Have a radar",
+      "have at least 1 reinforced ammo storage",
+      "Have 1 arming missile (offensive S1 that cost 1 point)",
+      "Required power =< 100% provided",
+      "for ships with cannons, there is enough ammo for at least 20 minutes of firing",
+      "for ships with hardkill PDT, there is enough ammo for at least 2 minutes of firing"
+    ],
+    "avoid": [
+      "have Engineering modules",
+      "have more than 1 internal radar (radar that are not EWR radar or LRT radar)",
+      "have more than 2 ammo storage",
+      "have TLS launchers"
+    ]
+  },
+  "classes": [
+    {
+      "name": "A Cap ffl (sprinter or shuttle)",
+      "raw_name": "A Cap ffl (sprinter or shuttle)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        100,
+        200
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have no turrets",
+        "does not satisfy any other class"
+      ],
+      "should": [
+        "have 1 arming missile (offensive S1 that cost 1 point)",
+        "have a fast drive (FM230 whiplash or sundrive)"
+      ],
+      "optional": [
+        "have a Radar",
+        "have minimal DC (1 rapid DC Locker)",
+        "have 1 reinforced CIC",
+        "have minimal softkill"
+      ],
+      "avoid": [],
+      "hulls": [
+        "Sprinter",
+        "Ferryman"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "A Cap (Any ship)",
+      "raw_name": "A Cap (Any ship) (Bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "does not satisfy any other class"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [],
+      "hulls_from": ""
+    },
+    {
+      "name": "gun/cap ffl  (sprinter or shuttle)",
+      "raw_name": "gun/cap ffl  (sprinter or shuttle)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        150,
+        300
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 turret (T20 or Mk61,Mk62,Mk64)"
+      ],
+      "should": [
+        "have minimal DC (1 rapid DC Locker)"
+      ],
+      "optional": [
+        "have minimal softkill",
+        "have minimal hardkill",
+        "have Mk64 (for sprinter mount 1)",
+        "have 1 reinforced CIC",
+        "have better DC (1 restore)"
+      ],
+      "avoid": [],
+      "hulls": [
+        "Sprinter",
+        "Ferryman"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "scout ffl (sprinter or shuttle)",
+      "raw_name": "scout ffl (sprinter or shuttle)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        110,
+        250
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have a long range radar (huntress or spyglass)"
+      ],
+      "should": [],
+      "optional": [
+        "have minimal softkill",
+        "have minimal hardkill",
+        "have minimal DC (1 rapid DC Locker)"
+      ],
+      "avoid": [],
+      "hulls": [
+        "Sprinter",
+        "Ferryman"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "support ffl (sprinter or shuttle)",
+      "raw_name": "support ffl (sprinter or shuttle)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        150,
+        400
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 jammer and/or illuminator"
+      ],
+      "should": [
+        "have minimal DC (1 Rapid DC Locker)",
+        "have minimal softkill"
+      ],
+      "optional": [
+        "have minimal hardkill",
+        "have at least 2 jammer and/or illuminator",
+        "have better DC (at least 1 restore)",
+        "have 1 reinforced CIC"
+      ],
+      "avoid": [],
+      "hulls": [
+        "Sprinter",
+        "Ferryman"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "rocket shuttle (ruttle)",
+      "raw_name": "rocket shuttle (ruttle)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        260,
+        300
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have minimal DC (at least 1 restore)",
+        "have at least 1 RL-18 launcher",
+        "have minimal softkill",
+        "have R2 rockets"
+      ],
+      "should": [
+        "have the max amount of R2 Rockets it can carry (18 for each launcher it has)"
+      ],
+      "optional": [
+        "have 2 RL-18 launchers",
+        "have 1 T20 turret",
+        "have pinpoint"
+      ],
+      "avoid": [],
+      "hulls": [
+        "Ferryman"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "missile sprinter",
+      "raw_name": "missile sprinter",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        300,
+        500
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have 1 large vls-2, vls-3 or cls-3 launcher (mount 1)",
+        "have >30 points of offensive missiles"
+      ],
+      "should": [
+        "have minimal DC (1 rapid DC Locker)",
+        "have >80 points of offensive missiles",
+        "minimal softkill",
+        "minimal hardkill"
+      ],
+      "optional": [
+        "have 1 blanket jammer",
+        "have 1 bullseye jammer",
+        "have better DC (at least 1 restore)",
+        "have 1 reinforced CIC",
+        "have 1 floodlight illuminator"
+      ],
+      "avoid": [],
+      "hulls": [
+        "Sprinter"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "gun tug",
+      "raw_name": "gun tug",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        250,
+        400
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 cannon or turret"
+      ],
+      "should": [
+        "have minimal softkill",
+        "have a reinforced CIC",
+        "have a reinforced Magazine",
+        "have minimal DC (at least 1 restore)",
+        "have 2 CIC and/or Auxiliary Steering"
+      ],
+      "optional": [
+        "have pinpoint",
+        "have a bellbird jammer",
+        "have huntress radar",
+        "have adaptive radar receiver"
+      ],
+      "avoid": [],
+      "hulls": [
+        "Draugr",
+        "Tug"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "multi mission tug (mmt)",
+      "raw_name": "multi mission tug (mmt) (variant of gun tug)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "gun tug",
+      "cost": [
+        400,
+        500
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have 1 mls launcher",
+        "have >20 points of direct offensive missiles"
+      ],
+      "should": [
+        "have >50 points of direct offensive missiles"
+      ],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "Draugr",
+        "Tug"
+      ],
+      "hulls_from": "gun tug"
+    },
+    {
+      "name": "EWR/LRT tug",
+      "raw_name": "EWR/LRT tug",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        170,
+        300
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have a LRT radar or Early Warning Radar (EWR)"
+      ],
+      "should": [
+        "have at least 1 Track Correlator",
+        "have minimal DC (at least 1 rapid DC)",
+        "have minimal softkill"
+      ],
+      "optional": [
+        "have at least 2 Track Correlators",
+        "have both LRT and EWR (this overrides power requirement, in this case power is only required to support both radar individually)",
+        "have minimal hardkill",
+        "have jammers"
+      ],
+      "avoid": [],
+      "hulls": [
+        "Draugr",
+        "Tug"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "support tug",
+      "raw_name": "support tug",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        250,
+        400
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 jammer and/or illuminator"
+      ],
+      "should": [
+        "have minimal DC (at least 1 rapid DC)",
+        "have minimal softkill"
+      ],
+      "optional": [
+        "have at least 2 jammer and/or illuminator",
+        "have minimal hardkill",
+        "have good softkill"
+      ],
+      "avoid": [],
+      "hulls": [
+        "Draugr",
+        "Tug"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "gun FF",
+      "raw_name": "gun FF",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        250,
+        400
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 2 120 turrets"
+      ],
+      "should": [
+        "have at least 3 gun turrets",
+        "have minimal DC (have at least 1 restore)"
+      ],
+      "optional": [
+        "have at least 1 250 turret",
+        "have 1 parallax radar or spyglass radar",
+        "have Track Correlator if spyglass radar",
+        "have minimal softkill",
+        "have 1 jammer of any type"
+      ],
+      "avoid": [],
+      "hulls": [
+        "FF"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "missle FF",
+      "raw_name": "missle FF",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        750,
+        1000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 2 vls-2, vls-3 or cls-3 launchers",
+        "have >400 points of offensive missiles"
+      ],
+      "should": [
+        "have >700 points of offensive missiles",
+        "have minimal DC (1 rapid DC Locker)",
+        "have minimal softkill",
+        "have at least 1 Missile Programming Bus/ Missile Programming Bus Array"
+      ],
+      "optional": [
+        "have better DC (at least 1 restore)",
+        "have 1 reinforced CIC",
+        "have at least 2 Missile Programming Bus/ Missile Programming Bus Array",
+        "have 1 spyglass radar"
+      ],
+      "avoid": [],
+      "hulls": [
+        "FF"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "support FF",
+      "raw_name": "support FF",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        300,
+        700
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have no turrets"
+      ],
+      "should": [
+        "have minimal DC (at least 1 restore)",
+        "have minimal softkill"
+      ],
+      "optional": [
+        "have at least 1 Sarissa PDT",
+        "have 1 vls-2 launcher",
+        "^have defensive missiles",
+        "have jammer of any type",
+        "have better softkill"
+      ],
+      "avoid": [],
+      "hulls": [
+        "FF"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "Beam DD",
+      "raw_name": "Beam DD",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        400,
+        800
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have 1 Mk600 beam as spinal weapon (mount 7)"
+      ],
+      "should": [
+        "have bullseye",
+        "have minimal DC (at least 2 restores)",
+        "have at least 1 Focused Particle Accelerator",
+        "have minimal softkill",
+        "have minimal hardkill"
+      ],
+      "optional": [
+        "have better DC (at least 3 restores)",
+        "have at least 2 Focused Particle Accelerators",
+        "have at least 1 Aurora PDT",
+        "have 1  vls-3 or cls-3 launchers",
+        "^have offensive S3 missiles",
+        "have 1 blanket jammer"
+      ],
+      "avoid": [],
+      "hulls": [
+        "DD"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "Rail DD",
+      "raw_name": "Rail DD",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        400,
+        800
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have 1 Mk550 railgun as spinal weapon (mount 7)"
+      ],
+      "should": [
+        "have minimal DC (1 rapid DC Locker)",
+        "have at least 1 Energy Regulator",
+        "have minimal softkill"
+      ],
+      "optional": [
+        "have minimal hardkill",
+        "have better DC (at least 1 restores)",
+        "have at least 2 Energy Regulator"
+      ],
+      "avoid": [],
+      "hulls": [
+        "DD"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "General DD",
+      "raw_name": "General DD (Bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have no spinal weapon (Mk600 beam or Mk550 railgun)"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "DD"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "250 gun CL",
+      "raw_name": "250 gun CL",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        800,
+        1200
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 250mm turret (mount 1-4, 6)"
+      ],
+      "should": [
+        "have at least 4 250 turret (mount 1-4, 6)",
+        "have minimal DC (at least 2 restores)",
+        "have minimal softkill",
+        "have minimal hardkill",
+        "have at least 2 CIC and/or Auxiliary Steering",
+        "have 1 FM230/FM530 whiplash drive"
+      ],
+      "optional": [
+        "have better DC (at least 3 restores)",
+        "have 1 blanket jammer",
+        "have good softkill",
+        "have 1 parallax radar or spyglass radar",
+        "^have Track Correlator if spyglass radar",
+        "have 1 ES32 Missile ID"
+      ],
+      "avoid": [
+        "have 120mm turret"
+      ],
+      "hulls": [
+        "CL"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "120 gun CL",
+      "raw_name": "120 gun CL (bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have at least 1 120mm turret"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CL"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "missile CL",
+      "raw_name": "missile CL (bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have at least 2 vls-2 and/or vls-3 and/or cls-3 launchers"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CL"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "gun MN",
+      "raw_name": "gun MN",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        450,
+        650
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have turret and/or cannon"
+      ],
+      "should": [
+        "have a C90 cannon (mount 1)",
+        "have 1 T30 turret",
+        "have 1 T81 turret",
+        "have minimal softkill",
+        "have 1 Damage control Complex (Compartment 5 or 6)",
+        "have 1 Citadel Magazine (Compartment 5 or 6)",
+        "have minimal DC other than the Damage Control Complex (at least 1 restore)",
+        "have 1 reinforced CIC",
+        "have at least 1 ammo elevator"
+      ],
+      "optional": [
+        "have at least 2 CIC and/or Auxiliary Steering",
+        "have a huntress radar",
+        "have a pinpoint",
+        "have better softkill"
+      ],
+      "avoid": [
+        "have anything other than cannon on spinal mount (mount 1)"
+      ],
+      "hulls": [
+        "MN"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "S2 MN",
+      "raw_name": "S2 MN",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        800,
+        1500
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 2 mls launchers",
+        "have >500 points of offensive missiles"
+      ],
+      "should": [
+        "have at least 4 mls launchers",
+        "all mls launchers are of the same type",
+        "all offensive missiles should be cruise guidance",
+        "have minimal DC (at least 1 restore)",
+        "have minimal softkill"
+      ],
+      "optional": [
+        "have 5 mls",
+        "have better DC (at least 2 restores)",
+        "have ammo elevators",
+        "have 2 ammo storage"
+      ],
+      "avoid": [],
+      "hulls": [
+        "MN"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "EWR MN",
+      "raw_name": "EWR MN (bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have a EWR radar and/or LRT radar"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "MN"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "\"CV\" MN",
+      "raw_name": "\"CV\" MN (bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have at least 1 Mount Hanger"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "MN"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "450 CH",
+      "raw_name": "450 CH",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        1400,
+        1600
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 450 turrets (mount 1,3)"
+      ],
+      "should": [
+        "have at least 2 450 turrets (mount 1,3)",
+        "have good hardkill or  good softkill",
+        "have bullseye",
+        "have good DC (at least 4 restores)",
+        "have at least 2 CIC and/or Auxiliary Steering",
+        "have at least 2 Drives",
+        "have at least 3 ammo elevators"
+      ],
+      "optional": [
+        "have 2 ammo storage",
+        "have 1 parallax radar or spyglass radar",
+        "^have Track Correlator if spyglass radar",
+        "have 1 ES32 Missile ID"
+      ],
+      "avoid": [
+        "have rail turret",
+        "have 250 turret"
+      ],
+      "hulls": [
+        "CH"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "greed CH",
+      "raw_name": "greed CH (variant of 450 CH)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "450 CH",
+      "cost": [
+        1400,
+        1600
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 2 450 turrets (mount 1,3)",
+        "have at least 3 120 turrets"
+      ],
+      "should": [
+        "have good softkill",
+        "have at least 1 floodlight illuminator"
+      ],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CH"
+      ],
+      "hulls_from": "450 CH"
+    },
+    {
+      "name": "250 CH",
+      "raw_name": "250 CH (bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have at least 2 250 turrets"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CH"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "Command Cruiser killer (CCK) CH",
+      "raw_name": "Command Cruiser killer (CCK) CH",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        1600,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have 2 250 or 450 turrets",
+        "have 1 large VLS or CLS (mount 1-3)"
+      ],
+      "should": [
+        "have 2 450 turrets (on mount 1,3)",
+        "have at least 1 Missile Programming Bus / Missile Programming Bus Array",
+        "have > 500 pts of offensive missiles",
+        "have hardkill or softkill",
+        "have bullseye",
+        "have good DC (at least 4 restores)",
+        "have at least 2 CIC",
+        "have at least 2 Drives",
+        "have at least 3 ammo elevators"
+      ],
+      "optional": [
+        "have 1 parallax radar or spyglass radar",
+        "have Track Correlator if using spyglass radar",
+        "have 1 ES32 Missile ID",
+        "have extra antenna"
+      ],
+      "avoid": [
+        "have rail turret",
+        "have 250 turret",
+        "have 120 turret",
+        "have a beam turret"
+      ],
+      "hulls": [
+        "CH"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "missile CH",
+      "raw_name": "missile CH",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        2000,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 2 large vls or cls (mount 1-3)",
+        "have >1000 points of offensive missiles"
+      ],
+      "should": [
+        "have full softkill",
+        "have bullseye",
+        "have minimal DC (at least 2 restores)",
+        "have at least 2 CIC and/or Auxillary Steering",
+        "have at least 2  Missile Programming Bus / Missile Programming Bus Array"
+      ],
+      "optional": [
+        "have a beam turret",
+        "have minimal hardkill",
+        "have good DC (at least 4 restores)",
+        "have 1 parallax radar or spyglass radar",
+        "have Track Correlator if using spyglass radar",
+        "have 1 ES32 Missile ID",
+        "have extra antenna"
+      ],
+      "avoid": [
+        "have a craft launch pad",
+        "have rail turret",
+        "have 250 turret",
+        "have 120 turret"
+      ],
+      "hulls": [
+        "CH"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "S2CH",
+      "raw_name": "S2CH (variant of missile CH)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "missile CH",
+      "cost": [
+        2500,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have >1000 points of S2 direct straightrunner offensive missiles"
+      ],
+      "should": [
+        "have at least 2 blanket jammers"
+      ],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CH"
+      ],
+      "hulls_from": "missile CH"
+    },
+    {
+      "name": "rail CH",
+      "raw_name": "rail CH (bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have at least 2 rail turrets"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CH"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "450 CC",
+      "raw_name": "450 CC",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        1400,
+        1600
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 2 450 turrets (mount 1-3)"
+      ],
+      "should": [
+        "have 3 450 turrets",
+        "have good hardkill and minimal softkill",
+        "have bullseye",
+        "have good DC (at least 4 restores)",
+        "have at least 2 CIC and/or Auxiliary Steering",
+        "have at least 2 Drives",
+        "have at least 3 ammo elevators",
+        "have at least 2 aurora PDT"
+      ],
+      "optional": [
+        "have 2 ammo storage",
+        "have 1 parallax radar or spyglass radar",
+        "have Track Correlator if using spyglass radar",
+        "have 1 ES32 Missile ID",
+        "have good softkill",
+        "have 2 Sarissa PDT",
+        "have 1 floodlight illuminator"
+      ],
+      "avoid": [
+        "have a craft launch pad",
+        "have non-450 turret",
+        "have OSP equipment when better ANS alternative is available"
+      ],
+      "hulls": [
+        "CC"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "250 CC",
+      "raw_name": "250 CC (bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have at least 2 250 turrets"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CC"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "missile CC",
+      "raw_name": "missile CC",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        2000,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have 2-3 large vls or cls (mount 1-3)",
+        "have >700 points of offensive missiles"
+      ],
+      "should": [
+        "have full softkill",
+        "have bullseye",
+        "have minimal DC (at least 2 restores)",
+        "have at least 2 CIC and/or Auxiliary Steering",
+        "have at least 2  Missile Programming Bus / Missile Programming Bus Array",
+        "have >1000 points of offensive missiles"
+      ],
+      "optional": [
+        "have a beam turret",
+        "have minimal hardkill",
+        "have good DC (at least 4 restores)",
+        "have 1 parallax radar or spyglass radar",
+        "have Track Correlator if using spyglass radar",
+        "have 1 ES32 Missile ID",
+        "have extra antenna"
+      ],
+      "avoid": [
+        "have a craft launch pad",
+        "have gun turret",
+        "have OSP equipment when better ANS alternative is available"
+      ],
+      "hulls": [
+        "CC"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "S2CC",
+      "raw_name": "S2CC (variant of missile CC)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "missile CC",
+      "cost": [
+        2500,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have >1000 points of S2 direct straightrunner offensive missiles"
+      ],
+      "should": [
+        "have at least 2 blanket jammers"
+      ],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CC"
+      ],
+      "hulls_from": "missile CC"
+    },
+    {
+      "name": "Rail CC",
+      "raw_name": "Rail CC",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        1200,
+        1600
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 2 rail turrets (mount 1-3)"
+      ],
+      "should": [
+        "have 3rail turrets",
+        "have good hardkill or good softkill",
+        "have bullseye",
+        "have minimal DC (at least 2 restores)",
+        "have at least 3 energy regulators or small energy regulators"
+      ],
+      "optional": [
+        "have 1 parallax radar or spyglass radar",
+        "have Track Correlator if using spyglass radar",
+        "have 1 ES32 Missile ID",
+        "have at least 2 CIC",
+        "have good softkill",
+        "have 2 Sarissa PDT",
+        "have 2 aurora PDT",
+        "have at least 2 Drives",
+        "have 1 floodlight illuminator"
+      ],
+      "avoid": [
+        "have a craft launch pad",
+        "have non-rail turret",
+        "have OSP equipment when better ANS alternative is available"
+      ],
+      "hulls": [
+        "CC"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "450 BB",
+      "raw_name": "450 BB",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        2000,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 450 turrets (mount 1,2,4)"
+      ],
+      "should": [
+        "have at least 3 450 turrets (mount 1,2,4)",
+        "have hardkill and good softkill",
+        "have bullseye",
+        "have good DC (at least 6 restores)",
+        "have at least 2 CIC",
+        "have at least 2 Drives",
+        "have at least 3 ammo elevators",
+        "have 2 ammo storage"
+      ],
+      "optional": [
+        "have 1 parallax radar or spyglass radar",
+        "have Track Correlator if spyglass radar",
+        "have 1 ES32 Missile ID",
+        "have full softkill",
+        "have a beam turret (mount 3 only)",
+        "have a large vls (mount 3 only)",
+        "have offensive direct missiles",
+        "have defensive direct missiles",
+        "have extra antenna"
+      ],
+      "avoid": [
+        "have rail turret",
+        "have 250 turret",
+        "have 120 turret",
+        "have a craft launch pad"
+      ],
+      "hulls": [
+        "BB"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "TCSG BB",
+      "raw_name": "TCSG BB (variant of 450 BB)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "450 BB",
+      "cost": [
+        2200,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 3 450 turrets (mount 1,2,4)",
+        "have spyglass radar"
+      ],
+      "should": [
+        "have at least 3 Track Correlators"
+      ],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "BB"
+      ],
+      "hulls_from": "450 BB"
+    },
+    {
+      "name": "250 BB",
+      "raw_name": "250 BB (Bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have at least 2 250 turrets"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "BB"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "Beam BB",
+      "raw_name": "Beam BB",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        1900,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 2 beam turrets (mount 1,4)"
+      ],
+      "should": [
+        "have at least 3 beam turrets (mount 1,3,4)",
+        "have good hardkill or good softkill",
+        "have bullseye",
+        "have good DC (at least 6 restores)",
+        "have at least 2 CIC",
+        "have at least 2 Drives",
+        "have at least 2 Focused Particle Accelerator"
+      ],
+      "optional": [
+        "have 1 parallax radar",
+        "have 1 ES32 Missile ID",
+        "have full softkill",
+        "have a 250 turret (mount 2 only)",
+        "have a large vls or cls(mount 2,4)",
+        "have offensive direct missiles",
+        "have defensive direct missiles",
+        "have extra antenna"
+      ],
+      "avoid": [
+        "have rail turret",
+        "have 450 turret",
+        "have 120 turret",
+        "have a craft launch pad"
+      ],
+      "hulls": [
+        "BB"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "rail BB",
+      "raw_name": "rail BB(bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have at least 2 rail turrets"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "BB"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "450 ln",
+      "raw_name": "450 ln",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        1100,
+        1300
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 450 cannons"
+      ],
+      "should": [
+        "all cannons face the same direction",
+        "have exactly 4 450 cannons total",
+        "have good DC (include a large DC Storage and a Damage Control Complex)",
+        "have at least 2 CIC and/or Auxiliary Steering",
+        "have good softkill",
+        "have at least 2 ammo elevators",
+        "have at least 2 Rapid-Cycle Cradle"
+      ],
+      "optional": [
+        "have 2 ammo storage",
+        "have hardkill",
+        "have T20 turrets",
+        "have extra antenna",
+        "have at least 1 Container Stack Launcher",
+        "^have Decoy Container and/or killjoy container"
+      ],
+      "avoid": [
+        "having more or less cannons than 4",
+        "have 250 cannons",
+        "have C30 cannons",
+        "have plasma cannons",
+        "have mass drivers",
+        "have mls launchers",
+        "have turret on main mount  (mount 1-8)"
+      ],
+      "hulls": [
+        "LN"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "250 ln",
+      "raw_name": "250 ln",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        900,
+        1100
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 250 cannons"
+      ],
+      "should": [
+        "all cannons face the same direction",
+        "have exactly 4 250 cannons total",
+        "have 2 ammo storage",
+        "have good DC (include a large DC Storage and a Damage Control Complex)",
+        "have at least 2 CIC and/or Auxiliary",
+        "have good softkill",
+        "have at least 2 ammo elevators",
+        "have at least 2 Rapid-Cycle Cradle"
+      ],
+      "optional": [
+        "have hardkill",
+        "have T20 turrets",
+        "have extra antenna"
+      ],
+      "avoid": [
+        "having more or less cannons than 4",
+        "have 450 cannons",
+        "have C30 cannons",
+        "have mass drivers",
+        "have plasma cannons",
+        "have mls launchers",
+        "have turret on main mount  (mount 1-8)"
+      ],
+      "hulls": [
+        "LN"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "100 ln",
+      "raw_name": "100 ln",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        900,
+        1100
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 T30 turrets or C30 cannons"
+      ],
+      "should": [
+        "have exactly 8 turrets on main mount (mount 1-8)",
+        "all 8 turrets are either T30 or T81",
+        "at least 3 turret is T81",
+        "at least 4 turret is T30",
+        "have 2 ammo storage",
+        "have good DC (include a large DC Storage and a Damage Control Complex)",
+        "have at least 2 CIC and/or Auxiliary",
+        "have good softkill",
+        "have at least 2 ammo elevators",
+        "have at least 2 Rapid-Cycle Cradle"
+      ],
+      "optional": [
+        "have good hardkill",
+        "have T20 turrets",
+        "have extra antenna"
+      ],
+      "avoid": [
+        "having more or less cannons than 4",
+        "have 450 cannons",
+        "have 250 cannons",
+        "have C30 cannons",
+        "have mass drivers",
+        "have mls launchers",
+        "have things other than T30 or t81 on main mount  (mount 1-8)"
+      ],
+      "hulls": [
+        "LN"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "missle ln",
+      "raw_name": "missle ln",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        1400,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 4 mls launchers in main mounts (mount 1-8)",
+        "have >400 points of offensive missiles"
+      ],
+      "should": [
+        "have exactly 8 mls launchers in main mounts (mount 1-8)",
+        "all mls launchers are of the same type",
+        "have >1300 points of offensive missiles",
+        "have minimal DC (at least 2 restores)",
+        "have minimal softkill"
+      ],
+      "optional": [
+        "have >1800 points of offensive missiles",
+        "have at least 2 ammo elevators",
+        "have good softkill",
+        "have T20 cannon",
+        "have at least 2 CIC"
+      ],
+      "avoid": [
+        "have different type of mls",
+        "have anything other than mls in main mounts (mount 1-8)"
+      ],
+      "hulls": [
+        "LN"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "mass driver (md) ln",
+      "raw_name": "mass driver (md) ln",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        1000,
+        1300
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 mass drivers"
+      ],
+      "should": [
+        "all mass drivers face the same direction",
+        "have 3 - 4 mass drivers total",
+        "have minimal DC (at least 2 restores)",
+        "have at least 1 Reinforced CIC",
+        "have minimal softkill",
+        "have at least 2 Energy Regulators"
+      ],
+      "optional": [
+        "have exactly 3 mass drivers total",
+        "have at least 2 CIC and/or Auxiliary Steering",
+        "have good DC (more than 2 restores)",
+        "have hardkill",
+        "have good softkill",
+        "have T20 turrets",
+        "have extra antenna"
+      ],
+      "avoid": [
+        "having more or less mass drivers than 3",
+        "have 250 cannons",
+        "have C30 cannons",
+        "have 450 cannons",
+        "have plasma cannons",
+        "have mls launchers",
+        "have turret on main mount  (mount 1-8)",
+        "have LRT radar",
+        "have >16000kW power required"
+      ],
+      "hulls": [
+        "LN"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "\"CV\" ln",
+      "raw_name": "\"CV\" ln (bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        0,
+        0
+      ],
+      "any_cost": true,
+      "recommend": false,
+      "must": [
+        "have more than 2 Mount hanger"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "LN"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "half cve/cvl",
+      "raw_name": "half cve/cvl",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        1300,
+        1700
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CVE",
+        "CVL"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "full cve (ANS)",
+      "raw_name": "full cve (ANS)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        2000,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CVE"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "CLN (OSP)",
+      "raw_name": "CLN (OSP)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        2000,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 Container Bank Launcher"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [],
+      "hulls_from": ""
+    },
+    {
+      "name": "CVLN (OSP)",
+      "raw_name": "CVLN (OSP)",
+      "prev_line": "",
+      "bad": false,
+      "variant_of": "",
+      "cost": [
+        2500,
+        3000
+      ],
+      "any_cost": false,
+      "recommend": true,
+      "must": [
+        "have at least 1 Container Bank Hanger"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "Container"
+      ],
+      "hulls_from": ""
+    },
+    {
+      "name": "CV (ANS)",
+      "raw_name": "CV (ANS) (Bad)",
+      "prev_line": "",
+      "bad": true,
+      "variant_of": "",
+      "cost": [
+        3000,
+        12000
+      ],
+      "any_cost": false,
+      "recommend": false,
+      "must": [],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [
+        "CV"
+      ],
+      "hulls_from": "HULL_OVERRIDE"
+    },
+    {
+      "name": "unarmed (any hull)",
+      "cost": [
+        0,
+        12000
+      ],
+      "any_cost": true,
+      "bad": false,
+      "recommend": false,
+      "variant_of": "",
+      "must": [
+        "have no offensive weapons (no cannon, no turret, no offensive missile, no arming missile, no jammer)"
+      ],
+      "should": [],
+      "optional": [],
+      "avoid": [],
+      "hulls": [],
+      "hulls_from": "all hulls"
+    }
+  ],
+  "glossary": {
+    "hardkill": [
+      "minimal: 1-4 defender/Pavise PDT",
+      "good: >6 PDT, with a mixture of CIWS and Flak"
+    ],
+    "softkill": [
+      "minimal: a single vls-1 with chaff, the same vls is usually used to house the arming missile",
+      "full: refer to a series of countermeasures that counter all form of missile seekers, these include:",
+      "cmd \"ball jammer\" - E70 and J75",
+      "chaff and it's better counterpart: EA99 for ANS (the latter requires a vls-2 to house)",
+      "killjoy missiles",
+      "and for OSP, the Blackjack EO Jammer",
+      "Good: Good/better softkill falls between the last two - a ship with good softkill is expect to have a part of the full softkill equipment on top of the minimal vls-1. Multiple ships with \"good\" softkill are usually formed together in a fleet with complementing equipment to achieve full softkill as a group/pair."
+    ],
+    "Damage Control (DC)": [
+      "Damage Control refers to the series of compartments responsible for providing Damage Control teams and restores to a ship. But for \"Good\"/\"Better\" DC, this can also include other compartments that gives buff to damage control teams, such as Damage Control Central and Small Workshop."
+    ]
+  }
+}

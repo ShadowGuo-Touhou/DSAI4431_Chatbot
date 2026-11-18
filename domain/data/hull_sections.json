@@ -1,0 +1,64 @@
+{
+  "_what": "Segment GUIDs for the three hulls that are assembled from bow/core/stern prefabs. A <SegmentConfiguration><Key> in a .fleet is one of these.",
+  "_source": [
+    "other info/NLHC-0.1.0-win64/assets/hulls/catalog.json (pieces[*].key)",
+    "cross-checked against every .fleet in sample fleets/, other info/ and the game Saves/Fleets: 339 segmented ships, 0 unknown GUIDs"
+  ],
+  "_families": {
+    "Bulk": "The Marauder's sections. NLHC's catalog names these pieces `CivBulk - <letter> - <part>`; `hull_sockets.json` carries the full 34-socket table under the prefix `Bulk` and only the 3 sockets that differ under `CivBulk`, so the socket table and the segment GUIDs legitimately use different names.",
+    "Container": "The CLN and CVLN sections. The asset tree also has `Container Refit - *` bow/core pieces, but no saved hull uses them (0 of 339), so Container Hauler Refit builds from `Container` as well."
+  },
+  "families": {
+    "Bulk": {
+      "catalog_name": "CivBulk",
+      "guid": {
+        "A": {
+          "Bow": "38e7a28f-1b06-4b73-98ee-f03d1d8a81fe",
+          "Core": "d4c9a66d-81e6-49ee-9b33-82d7a1522bbf",
+          "Stern": "78d72a9a-893c-41c6-bddd-f198dfcf77ee"
+        },
+        "B": {
+          "Bow": "29eb9c63-6c47-40f2-8f46-4ed4da8d3386",
+          "Core": "e2c11e02-b770-495e-a3c2-3dc998eac5a6",
+          "Stern": "2f2b451c-4776-405c-9914-cad4764f1072"
+        },
+        "C": {
+          "Bow": "c534a876-3f8a-4315-a194-5dda0f84c2b3",
+          "Core": "429f178e-e369-4f51-8054-2e01dd0abea1",
+          "Stern": "a8bf77b9-b7e3-4498-bf91-d3e777a7f688"
+        }
+      }
+    },
+    "Container": {
+      "catalog_name": "Container",
+      "guid": {
+        "A": {
+          "Bow": "2d7c228c-cbd6-425e-9590-a2f8ae8d5915",
+          "Core": "18a6bc15-58b0-479c-82c3-1722768f033d",
+          "Stern": "674e0528-3e0c-48e4-8e5e-d3a559869104"
+        },
+        "B": {
+          "Bow": "541cf476-4952-4234-a35a-5f1aa9089316",
+          "Core": "09354e51-953c-451a-b415-3e3361812650",
+          "Stern": "2dbd82fe-d365-4367-aef5-9bb2d3528528"
+        },
+        "C": {
+          "Bow": "bb034299-84c2-456f-b271-c91249cd4375",
+          "Core": "2c68a462-a143-4c89-aea0-df09d4786e92",
+          "Stern": "aff1eba2-048e-4477-956b-574f4d468f1d"
+        }
+      }
+    }
+  },
+  "superstructures": {
+    "1": "42d07c1a-156b-4057-aaca-7a2024751423",
+    "2": "c9d04445-3558-46b4-b6fc-7dca8617d438",
+    "3": "9ebcea74-e9c9-45b3-b616-e12e3f491024",
+    "4": "59344a67-9e7b-43df-9f7c-505ad9a0ab87"
+  },
+  "hulls": {
+    "Stock/Bulk Hauler": "Bulk",
+    "Stock/Container Hauler": "Container",
+    "Stock/Container Hauler Refit": "Container"
+  }
+}

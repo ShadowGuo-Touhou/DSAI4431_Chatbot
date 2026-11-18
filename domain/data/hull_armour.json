@@ -1,0 +1,22 @@
+{
+  "_provenance": "玩家在游戏内船体面板实测（2026-11-17 提供）。单位 cm；整条船表面是同一个值，不分艏/侧/艉。",
+  "_read_as": "装甲值 = 该船的有效装甲厚度基准（cm）。命中点还受入射角与残余装甲影响，见 zh/装甲与伤害机制.md。",
+  "hulls": {
+    "Sprinter": 8,
+    "Raines": 15,
+    "Keystone": 22,
+    "Vauxhall": 26,
+    "Axford": 40,
+    "Levy": 15,
+    "Solomon": 56,
+    "Worden": 30,
+    "Mercator": 15,
+    "Ferryman": 5,
+    "Draugr": 5,
+    "Flathead": 48,
+    "Journeyman": 12,
+    "Ocello": 30,
+    "Marauder": 20,
+    "Moorline": 20
+  }
+}

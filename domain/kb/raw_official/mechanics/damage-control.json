@@ -1,0 +1,1519 @@
+{
+ "page": "Damage Control - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Damage Control",
+ "category": "mechanics",
+ "slug": "damage-control",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "(页面开头)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Shooting weapons at hostiles is just one part of space combat, and the other part often involves taking shots. Sooner or later, your ship will catch on fire, have a leak, or have its internal components damaged beyond use. And when that happens, your on-board damage control team will kick in and save your day."
+    }
+   ]
+  },
+  {
+   "heading": "Definition of components",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Everything on a ship is considered a component by damage control, no matter if it is a thruster, a compartment, a mount, or a module. When a components receives damage, it will usually lose certain amounts of HP. This section explains the mechanics of component malfunction and repairs. For detailed information on damage mechanics, see Component Damage."
+    }
+   ]
+  },
+  {
+   "heading": "Definition of components › Inoperable components",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Most components have a hidden attribute called Functioning Threshold, (aka Functioning Threshold). If a component's HP is reduced below this threshold, it will cease to function, and requires repairs to operate again."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Control teams",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Damaged components can be repaired. However, instead of repairing it back to 100%, your damage control teams can only repair a component to a certain percentage above its lowest condition percentage. This stat is known as the Max Repair stat (also colloquially known as repair cap); for most ships it starts at 10%. eg, if a component is damage down to 50% hp, repair teams on that ship will only be able to bring it back up to 60% hp"
+    },
+    {
+     "kind": "p",
+     "text": "There is one an exception to this rule, a component can always be repaired to it's minimum functioning threshold hp + Max Repair, regardless of how much damage they take below the threshold. e.g. a Large Reinforced Drive (1500hp, 50hp minimum functioning) can always be repaired up to 200hp (50 from min function + 150 from 10% max repair), a Reinforced CIC (200hp, 10 minimum function threshold) can always be repaired up to 30hp (10 + 20)"
+    },
+    {
+     "kind": "p",
+     "text": "Each component can only be repaired by three teams at once, one team for repairing HP and two teams for repairing debuffs. If there are no debuffs then only the one team will repair HP; and vice versa if there is no more hp to repair then only two teams will repair debuffs"
+    },
+    {
+     "kind": "p",
+     "text": "Damage control teams tick once every 0.25 sec, applying the equivalent hp/sec as repair work. This is not modified by the amount of team members, a 1/5 team will repair at the same rate as a 5/5 team"
+    },
+    {
+     "kind": "p",
+     "text": "Damage control team speed in m/s is the move-speed stat in hull units per second, times 10. The fleet editor shows that stat times 4 (2 for a 0.5 field, 4 for the Rapid locker's 1.0 field), so metres per second equal the editor number times 2.5. The movement column in the locker table below is in m/s."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Control teams › Damage Control priorities",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Every ship has a damage control dispatcher that assigns DC teams to repair jobs and manages repair priorities."
+    },
+    {
+     "kind": "p",
+     "text": "DC dispatcher example list"
+    },
+    {
+     "kind": "p",
+     "text": "Given a ship that has: - damaged drive (Critical prio) with atmo leak, fire, overload - damaged cic (high prio) - damaged magazine (med prio) with ammo cookoff - damaged DC locker (low prio)"
+    },
+    {
+     "kind": "p",
+     "text": "the lists will look something like this:"
+    },
+    {
+     "kind": "p",
+     "text": "Primary: - Drive Overload - Drive Atmo leak - Magazine Ammo cookoff - CIC hp"
+    },
+    {
+     "kind": "p",
+     "text": "Secondary: -Drive HP -Magazine HP -DC locker HP"
+    },
+    {
+     "kind": "p",
+     "text": "The dispatcher has a primary and secondary repair job list. These lists are filled with repair jobs, which include both damaged components and debuffs (aka critical events) that need repair. Each component adds its repair jobs in order of a sort key: DC priority (Low/Medium/High/Critical), plus one Critical step if it has a catastrophic event and a small step if it is on fire. Manually prioritized components always come first."
+    },
+    {
+     "kind": "p",
+     "text": "Within each component, up to two debuffs events are added to the list. Catastrophics are prioritized first and always added to the primary list. Then, regular debuffs are added (up to the two debuff cap), starting from the top of the component's debuffs list as seen in the DC board. The first regular debuff that still fits under the two-debuff cap goes to the primary list if the component is alive or manually prioritized, and to the secondary list otherwise. Any further regular debuff that still fits goes to the secondary list; regulars past the cap are not listed. On a destroyed, unprioritized component, every regular debuff that fits goes to secondary. Then, the component adds its HP repair to the secondary list. If the component has no debuffs and has medium or higher DC priority, it instead adds its HP repair to the primary list"
+    },
+    {
+     "kind": "p",
+     "text": "Using these lists, the DC team then assigns teams to the repair jobs in the list, satisfying all jobs in the primary list before filling secondary jobs"
+    },
+    {
+     "kind": "p",
+     "text": "Damage control teams from DC lockers higher in the component list are tasked to jobs first. eg, DC teams from compartment 1's locker will be assigned to tasks before DC teams from compartment 2's locker, regardless of difference in team move speed, repair speed, or distance to damaged component. The only exception to this rule is if there is already a DC team in that component; it will be tasked to work on repairs immediately. However, this will not be performed for repair jobs in the secondary list, those jobs will summon another DC team even if there is an idle DC team in the same component."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Control teams › Repair team casualties",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Damage control teams themselves will only take losses if their current component is below 50% hp. DC teams currently do not replenish, even if there is spare crew available see: Crew"
+    }
+   ]
+  },
+  {
+   "heading": "Restore",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "A component becomes Destroyed only when a hit reduces it to 0 HP and that hit is larger than its damage threshold. A reinforced component must already be at 0 HP before that hit. A component at 0 HP that has not been destroyed can still be repaired normally. In this state, the component can no longer be hit by any further damage (and is therefore treated as empty space by attacks), nor will it be automatically repaired by the control team. To bring it back online, you need to spend the Restores provided in DC Lockers. By Shift+LClicking a destroyed component, you can order a damage control team to preform a restore on the destroyed component. After the restore progress is completed, the component is instantly repaired to its minimum functioning HP plus its max repair. Restores require 50 \"hp\" worth of work to apply."
+    },
+    {
+     "kind": "p",
+     "text": "Restores are taken first from a docked repair service if one is supplying them, otherwise from non-reinforced lockers, then from lockers with the lowest damage threshold, then from lockers with the fewest restores remaining. Distance does not matter. The restore is consumed when the restore work finishes."
+    }
+   ]
+  },
+  {
+   "heading": "Ship Status Board",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "On the top left of the game screen, every ship has a ship status board that shows the ship's information. At the bottom right of the board, ship damage control status would be displayed."
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "Fire Icon"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "If there are at least one fire on board, a fire icon would light up. Hovering displays the total fire count on board."
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "Active Debuffs"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "If there are at least one active debuff on board, a orange number would show up on ship status board. Hovering lists where and what are the debuffs on board."
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "Destroyed components"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "If at least one component is non-functional (disabled below its functioning threshold, or destroyed), a red number will show up on ship status board. Hovering lists Disabled and Destroyed components separately."
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "Catastrophic Event"
+    },
+    {
+     "kind": "li",
+     "depth": 0,
+     "text": "If there is a catastrophic event on board, a red exclamation icon and a timer counting down would be displayed to the right of the corresponding ship's status board. If there is more than 1 event on board, only the shortest timer would be displayed. If the count down reaches zero, usually a big bang takes place."
+    }
+   ]
+  },
+  {
+   "heading": "Debuffs/Catastrophic Events",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Components can suffer various types of Critical Events (aka debuffs) in game, some would slow down the work speed of your damage control team, while others may degrade your ship's performance, or even obliterate your ship entirely."
+    },
+    {
+     "kind": "p",
+     "text": "Damage has a chance of causing debuffs on components. This chance is calculated by [math]\\displaystyle{ \\exp\\left( -3Hp-0.5\\right)\\times C }[/math] where [math]\\displaystyle{ Hp }[/math] is the current Hp percentage as a decimal and [math]\\displaystyle{ C }[/math] is the critical event multiplier of the damage. This means baseline debuff chance for damage with 1x critical event multiplier starts at ∼3% and increases to ∼60% as the component takes damage."
+    },
+    {
+     "kind": "p",
+     "text": "This crit then has a chance of being a catastrophic based on the component's Catastrophic event probability."
+    },
+    {
+     "kind": "p",
+     "text": "The time to repair a debuff is determined by the repair speed of the DC team and the repair work required"
+    }
+   ]
+  },
+  {
+   "heading": "Debuffs/Catastrophic Events › Debuffs list",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "In game name",
+       "Internal name",
+       "Stat Affected",
+       "Modifier",
+       "RepairWork"
+      ],
+      [
+       "Atmosphere Leak",
+       "Atmosphere Leak",
+       "component-workspeed",
+       "-50%",
+       "10"
+      ],
+      [
+       "Fire",
+       "Fire",
+       "component-workspeed",
+       "-20%",
+       "10"
+      ],
+      [
+       "Fuel Line Fire",
+       "Fuel Line Fire",
+       "component-workspeed",
+       "-20%",
+       "40"
+      ],
+      [
+       "Magazine Cookoff",
+       "Magazine Cookoff",
+       "component-workspeed",
+       "-20%",
+       "30"
+      ],
+      [
+       "Reactor Overload",
+       "Reactor Overload",
+       "powerplant-prodefficiency",
+       "+25%",
+       "65"
+      ],
+      [
+       "Main Bus Short",
+       "Main Bus Short",
+       "powerplant-prodefficiency",
+       "-50%",
+       "30"
+      ],
+      [
+       "Cell Cookoff",
+       "Cell Launcher Cookoff",
+       "component-workspeed",
+       "-20%",
+       "30"
+      ],
+      [
+       "Container Bank Cookoff",
+       "Container Bank Cookoff",
+       "component-workspeed",
+       "-20%",
+       "60"
+      ],
+      [
+       "Ammunition Loader Jammed",
+       "Ammunition Loader Jammed",
+       "discreteweapon-reload, discreteweapon-recycle",
+       "+75%, +75%",
+       "15"
+      ],
+      [
+       "FC Waveguide Bent",
+       "FC Waveguide Bent",
+       "sensor-power",
+       "-50%",
+       "10"
+      ],
+      [
+       "Gyroscope Drift",
+       "Gyro Drift",
+       "muzzle-accuracy (spread)",
+       "+75%",
+       "10"
+      ],
+      [
+       "Heatsink Ruptured",
+       "Heatsink Ruptured",
+       "continuousweapon-cooldown, continuousweapon-overheatdamageprob",
+       "+75%, +90%",
+       "15"
+      ],
+      [
+       "Antenna Bent",
+       "Sensor Antenna Bent",
+       "sensor-gain",
+       "-50%",
+       "10"
+      ],
+      [
+       "Antenna Bent",
+       "Sensor Oscillator Drift",
+       "sensor-maxposerror, sensor-maxvelerror",
+       "+100%, +100%",
+       "10"
+      ],
+      [
+       "Bearing Surface Bent",
+       "Turret Bearing Surface Bent",
+       "turret-traverse, turret-elevate (rotation speed)",
+       "-80%, -80%",
+       "20"
+      ],
+      [
+       "Focusing Element Misaligned",
+       "Focusing Element Misaligned",
+       "continuousweapon-directdamagemultiplier",
+       "-66%",
+       "15"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "component-workspeed affects the repair speed of the DC teams inside the component; penalty cannot reduce workspeed below 33%"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "There are two types of Antenna Bent, and while they have different internal names, in-game there's no way to tell which type of debuff is in effect."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "In game name",
+       "Internal name",
+       "Affected class",
+       "Required Condition",
+       "Casualty class",
+       "On-hitOnly",
+       "Rare (catastrophic)"
+      ],
+      [
+       "Atmosphere Leak",
+       "Atmosphere Leak",
+       "CrewedComponent",
+       "none",
+       "Decompression",
+       "TRUE",
+       "FALSE"
+      ],
+      [
+       "Fire",
+       "Fire",
+       "HullComponent",
+       "none",
+       "Fire",
+       "FALSE",
+       "FALSE"
+      ],
+      [
+       "Fuel Line Fire",
+       "Fuel Line Fire",
+       "DriveComponent",
+       "none",
+       "Fire",
+       "TRUE",
+       "TRUE"
+      ],
+      [
+       "Magazine Cookoff",
+       "Magazine Cookoff",
+       "BulkMagazineComponent[1]",
+       "ContainsAnyAmmo",
+       "Fire",
+       "TRUE",
+       "TRUE"
+      ],
+      [
+       "Reactor Overload",
+       "Reactor Overload",
+       "PowerplantComponent",
+       "none",
+       "Engineering",
+       "FALSE",
+       "TRUE"
+      ],
+      [
+       "Main Bus Short",
+       "Main Bus Short",
+       "PowerplantComponent",
+       "none",
+       "Engineering",
+       "FALSE",
+       "FALSE"
+      ],
+      [
+       "Cell Cookoff",
+       "Cell Launcher Cookoff",
+       "BaseCellLauncherComponent",
+       "ContainsAnyAmmo",
+       "CombatSystems",
+       "TRUE",
+       "TRUE"
+      ],
+      [
+       "Container Bank Cookoff",
+       "Container Bank Cookoff",
+       "Container Bank[2]",
+       "ContainsAnyAmmo",
+       "CombatSystems",
+       "TRUE",
+       "TRUE"
+      ],
+      [
+       "Ammunition Loader Jammed",
+       "Ammunition Loader Jammed",
+       "DiscreteWeaponComponent",
+       "none",
+       "CombatSystems",
+       "FALSE",
+       "FALSE"
+      ],
+      [
+       "FC Waveguide Bent",
+       "FC Waveguide Bent",
+       "WeaponComponent",
+       "HasIntegratedFC",
+       "CombatSystems",
+       "FALSE",
+       "FALSE"
+      ],
+      [
+       "Gyroscope Drift",
+       "Gyro Drift",
+       "WeaponComponent",
+       "none",
+       "CombatSystems",
+       "FALSE",
+       "FALSE"
+      ],
+      [
+       "Heatsink Ruptured",
+       "Heatsink Ruptured",
+       "ContinuousWeaponComponent",
+       "HasCooldown",
+       "CombatSystems",
+       "FALSE",
+       "FALSE"
+      ],
+      [
+       "Antenna Bent",
+       "Sensor Antenna Bent",
+       "BaseActiveSensorComponent, PassiveSensorComponent",
+       "none",
+       "CombatSystems",
+       "FALSE",
+       "FALSE"
+      ],
+      [
+       "Antenna Bent",
+       "Sensor Oscillator Drift",
+       "BaseActiveSensorComponent, PassiveSensorComponent",
+       "none",
+       "CombatSystems",
+       "FALSE",
+       "FALSE"
+      ],
+      [
+       "Bearing Surface Bent",
+       "Turret Bearing Surface Bent",
+       "TurretedDiscreteWeaponComponent, FixedDiscreteWeaponComponent, TurretedContinuousWeaponComponent",
+       "none",
+       "CombatSystems",
+       "FALSE",
+       "FALSE"
+      ],
+      [
+       "Focusing Element Misaligned",
+       "Focusing Element Misaligned",
+       "Beams[3]",
+       "none",
+       "CombatSystems",
+       "TRUE",
+       "FALSE"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Debuffs/Catastrophic Events › Debuffs list › Fire",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Fires deal damage over time and can spread to different components Every 30 seconds, fires deal 5% of the component's max HP as damage (ignores DR), with 10% crew vulnerability modifier Every 45 seconds, fires have a 25% chance to spread to a component within 12.5m"
+    },
+    {
+     "kind": "p",
+     "text": "A few other debuffs will also deal damage like fire, but will not spread. This includes Cookoffs and Reactor Overloads"
+    }
+   ]
+  },
+  {
+   "heading": "Debuffs/Catastrophic Events › Rare Debuffs/Catastrophic Events",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "There are currently 4 types of catastrophic events in game. Reactor Overload, Fuel Line Fire, Magazine Cookoff (cell-launcher cookoff uses the same explosion), and Container Bank Cookoff."
+    }
+   ]
+  },
+  {
+   "heading": "Debuffs/Catastrophic Events › Rare Debuffs/Catastrophic Events › Reactor Overload",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Reactor Overload is a event that would require immediate intervention of the damage control team to prevent a devastating explosion. If 65 points of repair work is not completed within 120 seconds, the reactor detonates in a gigantic explosion that completely destroys ship, and shreds a significant amount of armor off other nearby ships caught within the 1.5km explosion radius. The explosion also creates very strong radar jamming effect in all directions that is strong enough to break bullseye locks."
+    },
+    {
+     "kind": "p",
+     "text": "Reactor Overload explosions have a blast radius of 1.5km, dealing less damage against ships at the edge of the radius. The explosion shreds 200cm-20cm of armor, and if it fully shreds armor, will deal 1500 - 450 damage spread across the ship. Reactor overloads are guarenteed to hit every munition (missiles, mines, etc) in radius."
+    },
+    {
+     "kind": "p",
+     "text": "The jamming effect has a maximum range of 7.5km, 2500kw, 1dB gain, and lasts for 20 seconds."
+    },
+    {
+     "kind": "p",
+     "text": "Emergency reactor shutdowns can be initiated by the player to clear reactor overloads. They will stop all power and propulsion on the ship for 60 seconds."
+    },
+    {
+     "kind": "p",
+     "text": "30 seconds into the shutdown, all reactor overloads will be cleared, and any component that had an overload will be destroyed."
+    },
+    {
+     "kind": "p",
+     "text": "Note that shutdown is only effective on overloads, and will not stop fuel fires or cookoffs."
+    }
+   ]
+  },
+  {
+   "heading": "Debuffs/Catastrophic Events › Rare Debuffs/Catastrophic Events › Fuel Line Fires",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Fuel Line fires can appear only on drives. A drive can also roll Reactor Overload, because drives are powerplants; a reactor cannot roll Fuel Line Fire. If 40 points of repair work is not completed within 80 seconds, it will cause multiple small purple explosions to erupt across the ship, dealing heavy damage across the ship"
+    },
+    {
+     "kind": "p",
+     "text": "it specifically causes 2 to 4 explosions per 10 m of bounding radius, rounded up (2n through 4n-1, where n = ceil(half the longest select-box side in 10 m units)),[4] e.g. a Sprinter suffers 8-15 explosions and a Solomon 28-55."
+    },
+    {
+     "kind": "p",
+     "text": "Each explosion appears in a random position inside the hull and deals 200 damage in a 15m radius, and shreds armor in a 15m radius. Explosions happen every 0.2-0.5 secs until the amount of explosions are reached."
+    }
+   ]
+  },
+  {
+   "heading": "Debuffs/Catastrophic Events › Rare Debuffs/Catastrophic Events › Magazine/Cell Cookoff",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Magazine/Cell Cookoffs can appear on magazines and VLS cells. If 30 points of repair work is not completed within 80 seconds, an internal explosion occurs around the hit position that triggered the cookoff. It distributes up to 3000 component damage per batch among components within 50 m, processed in batches of up to 20 components and reduced by hull Component DR. The armor damage uses brush size 6, corresponding to about a 15 m radius on current hulls. When a Magazine Cook-off is in progress, you can hear crackling sound effects in the vicinity of the ship."
+    },
+    {
+     "kind": "p",
+     "text": "Container bank cookoffs require 60 points of repair work within 120 seconds instead, and deal 15000 damage (reduced by each part's component DR) split evenly among up to 20 parts at a time within 75 m of the launcher; the game repeats this for each further batch of up to 20 parts in range. Armor is stripped by 30 brush hits of size 10 (about 25 m radius each on current hulls) spread along the container bank, not by one 100 m sphere."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Control Board",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The Damage Control Board is displayed at the bottom right of the screen, whenever a ship is selected. It shows the ship's silhouette with colored boxes depicting the ships components. The color of the box indicates the component's health: bright green(high health), yellow(medium health), red(low health) and grey(destroyed).[5]"
+    },
+    {
+     "kind": "p",
+     "text": "Aside from the ship's abstract, a couple of numbers are shown on the top of DC Board."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Control Board › DMG",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "DMG shows how many components on ship is damaged or destroyed, individual thrusters and integrated antennas are also included."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Control Board › TMS",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "TMS shows how many damage control teams are still operational, and how many are working. For example, for a indication of 1/2, it means 1 of the 2 teams are currently assigned with tasks."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Control Board › RES",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "RES shows how many available restores do you have on ship. DC lockers that are destroyed with restores in them would not contribute to this number. However, it is feasible to spend 1 restore to repair a destroyed Large DC Locker with 2 restores in it, to get 1 additional restore back. This is often referred to as chain restoring. Restore would only be conducted if the player explicitly commanded this operation by Shift+LClicking a destroyed component, this would add a purple dotted outline over the component."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Control Board › Prioritize",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Player can prioritize the repair of a non-destroyed component by Shift+LClicking it, this is indicated by a blue dotted outline around the component."
+    }
+   ]
+  },
+  {
+   "heading": "Damage Control Board › Filtering",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "When the DC Board is expanded, there is a filter provided at the top left of the board. Player may select/deselect different categories to reduce clutter on the DC Board."
+    }
+   ]
+  },
+  {
+   "heading": "DC Components",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "There are currently 3 types of DC-related components."
+    }
+   ]
+  },
+  {
+   "heading": "DC Components › DC Lockers",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Each DC lockers provide you with certain numbers of DC Teams and Restores."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "DC Locker Type",
+       "DC Teams",
+       "Repair Rate",
+       "Movement Speed (m/s)",
+       "Restores"
+      ],
+      [
+       "General",
+       "Restore",
+       "Firefighting",
+       "Reactor Overload"
+      ],
+      [
+       "Small DC Locker",
+       "2",
+       "0.2",
+       "0.2",
+       "0.2",
+       "0.2",
+       "5",
+       "1"
+      ],
+      [
+       "Reinforced DC Locker",
+       "2",
+       "0.2",
+       "0.2",
+       "0.2",
+       "0.2",
+       "5",
+       "1"
+      ],
+      [
+       "Damage Control Complex",
+       "3",
+       "0.2",
+       "0.2",
+       "0.2",
+       "0.2",
+       "5",
+       "2"
+      ],
+      [
+       "Large DC Locker",
+       "3",
+       "0.2",
+       "0.2",
+       "0.2",
+       "0.2",
+       "5",
+       "2"
+      ],
+      [
+       "Large DC Storage",
+       "1",
+       "0.2",
+       "0.2",
+       "0.2",
+       "0.2",
+       "5",
+       "4"
+      ],
+      [
+       "Rapid DC Locker",
+       "1",
+       "0.3",
+       "0",
+       "0.3",
+       "0.3",
+       "10",
+       "0"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "DC Components › DC Buffing Components",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Component",
+       "Repair Speed",
+       "Move Speed",
+       "Max Repair"
+      ],
+      [
+       "Small Workshop",
+       "30%",
+       "N/A",
+       "N/A"
+      ],
+      [
+       "Damage Control Central",
+       "10%",
+       "50%",
+       "N/A"
+      ],
+      [
+       "Damage Control Complex",
+       "10%",
+       "30%",
+       "5%"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "DC Components › Safety Components",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Fire Suppression System:",
+       "Catastrophic Event Prob. (Cell launcher): -50% Catastrophic Event Prob. (Magazine): -50% Firefighting Speed: +50%"
+      ],
+      [
+       "Redundant Reactor Failsafes:",
+       "Catastrophic Event Prob. (Reactor): -33% Reactor Overload Repair Speed: +30%"
+      ],
+      [
+       "Reinforced Thruster Nozzles:",
+       "Flank Damage Probability: -20%"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Notes",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ BulkMagazineComponents include all types of magazines, including reinforced and citadel magazines."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Container bank cookoffs do not have an explicit affected class, but container banks have container bank cookoffs set as a unique debuff. it is unknown if container bank cookoffs can also suffer regular cell cookoffs or if it's overwritten. Magazine cookoff and cell cookoff can block eachother as they have identical keys, but container cookoff appears to have a different key. Additionally, unique debuffs are only added after the regular debuffs, which means container banks likely has a different key as otherwise the regular cell cookoff would block it."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Similar to container bank cookoffs. Is explicitly defined in both the spinal beam and beam turret."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ n = ceil(BoundingVolumeRadius / 1 world unit). The count is an integer Random.Range(2n, 4n), so the top end is exclusive."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ These colors are for the default color settings. Colorblindness settings will change the colors."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 30 September 2026, at 08:52."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

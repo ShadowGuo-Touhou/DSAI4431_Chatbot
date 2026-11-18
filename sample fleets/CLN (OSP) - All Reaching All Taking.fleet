@@ -1,0 +1,1432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fleet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>CLN (OSP) · All Reaching All Taking</Name>
+  <Version>3</Version>
+  <TotalPoints>3000</TotalPoints>
+  <FactionKey>Stock/Protectorate</FactionKey>
+  <Description>样板船：All Reaching All Taking（Amethyst Squadron），舰体 Moorline Line Ship Class，原存档点数 3000。来自 Amethyst Squadron.fleet，未做任何改动。</Description>
+  <Ships>
+    <Ship>
+      <Key>7f3f3826-57c3-4059-a9d9-cc1db7a0773f</Key>
+      <Name>All Reaching All Taking</Name>
+      <Cost>3000</Cost>
+      <Callsign />
+      <Number>25</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Stock/Container Hauler Refit</HullType>
+      <HullConfig xsi:type="RandomHullConfiguration">
+        <PrimaryStructure>
+          <SegmentConfiguration>
+            <Key>541cf476-4952-4234-a35a-5f1aa9089316</Key>
+            <Dressing>
+              <int>1</int>
+            </Dressing>
+          </SegmentConfiguration>
+          <SegmentConfiguration>
+            <Key>09354e51-953c-451a-b415-3e3361812650</Key>
+            <Dressing>
+              <int>1</int>
+              <int>0</int>
+              <int>0</int>
+            </Dressing>
+          </SegmentConfiguration>
+          <SegmentConfiguration>
+            <Key>674e0528-3e0c-48e4-8e5e-d3a559869104</Key>
+            <Dressing>
+              <int>1</int>
+            </Dressing>
+          </SegmentConfiguration>
+        </PrimaryStructure>
+        <SecondaryStructure>
+          <SecondaryStructureConfig>
+            <Key>9ebcea74-e9c9-45b3-b616-e12e3f491024</Key>
+            <Segment>2</Segment>
+            <SnapPoint>0</SnapPoint>
+          </SecondaryStructureConfig>
+        </SecondaryStructure>
+        <HullTint>
+          <r>0.388560563</r>
+          <g>0.388560563</g>
+          <b>0.388560563</b>
+          <a>1</a>
+        </HullTint>
+        <TextureVariation>
+          <x>-65.35828</x>
+          <y>209.241974</y>
+          <z>-820.4021</z>
+        </TextureVariation>
+      </HullConfig>
+      <SocketMap>
+        <HullSocket>
+          <Key>uLHDwjLFekuYaY3h0JwZoQ</Key>
+          <ComponentName>Stock/Container Bank Hangar</ComponentName>
+          <ComponentData xsi:type="CraftHangarData">
+            <StoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/RABhB3TXHkySJCPviOEfVQ</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+            </StoredCraft>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>44SMwZSbRkOQyQmJ458Y1Q</Key>
+          <ComponentName>Stock/Container Bank Hangar</ComponentName>
+          <ComponentData xsi:type="CraftHangarData">
+            <StoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/RABhB3TXHkySJCPviOEfVQ</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+            </StoredCraft>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>VkODw--0zk-K4FkajpPjwQ</Key>
+          <ComponentName>Stock/Container Bank Hangar</ComponentName>
+          <ComponentData xsi:type="CraftHangarData">
+            <StoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+            </StoredCraft>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>F-nHNZm4Z0WZMJakJAwlPw</Key>
+          <ComponentName>Stock/Container Bank Hangar</ComponentName>
+          <ComponentData xsi:type="CraftHangarData">
+            <StoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+              <SavedStoredCraft>
+                <CraftTemplateKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</CraftTemplateKey>
+              </SavedStoredCraft>
+            </StoredCraft>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>6HbbAtLFGUOi-kq06ErQdA</Key>
+          <ComponentName>Stock/T30 Cannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>KuKTAiCM50uIV7XV1S8wrw</Key>
+          <ComponentName>Stock/VLS-1-46 Launcher</ComponentName>
+          <ComponentData xsi:type="CellLauncherData">
+            <MissileLoad>
+              <MagSaveData>
+                <MagazineKey>FufytZ8y_Eq46HwFfe2o1w</MagazineKey>
+                <MunitionKey>Stock/EA14 Chaff Decoy</MunitionKey>
+                <Quantity>5</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>Uvx9u7XD806v0wIVnnI_pA</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Scorch</MunitionKey>
+                <Quantity>12</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>W3sy_3M8EESMcbNirf7Bqw</MagazineKey>
+                <MunitionKey>$MODMIS$/SGM-1 Ceremonial Arming Missile</MunitionKey>
+                <Quantity>1</Quantity>
+              </MagSaveData>
+            </MissileLoad>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>iWiBr9uCyUCBub-IIW2bZg</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>R2VmfV-wl022GPVL09yLHg</MagazineKey>
+                <MunitionKey>$MODMIS$/Mk0sQMiAdkKWQa-16rbg-w</MunitionKey>
+                <Quantity>32</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>p7UOA5FzdEiGyjPijU-c6Q</MagazineKey>
+                <MunitionKey>Stock/S3 Rocket</MunitionKey>
+                <Quantity>8</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>Xwj4Kp71-0iNB-Lv7jnKxQ</MagazineKey>
+                <MunitionKey>Stock/S1 Rocket</MunitionKey>
+                <Quantity>80</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>8DpL5738oEWEIXFBRVj-wA</MagazineKey>
+                <MunitionKey>Stock/S3 Cluster Bomb</MunitionKey>
+                <Quantity>8</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>AdkzwW22wEWOuhWp2FnXpA</MagazineKey>
+                <MunitionKey>Stock/S2 Glide Bomb</MunitionKey>
+                <Quantity>8</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>WaWkp3yfH0eQldymHrl0yA</MagazineKey>
+                <MunitionKey>$MODMIS$/SDM-122 Spamraam</MunitionKey>
+                <Quantity>120</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>ng71EZ-HGUGRyu0yw44Ekg</MagazineKey>
+                <MunitionKey>Stock/100mm Grapeshot</MunitionKey>
+                <Quantity>250</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>AvXGj3fTjkSlhdns_jfaYg</MagazineKey>
+                <MunitionKey>Stock/100mm HE Shell</MunitionKey>
+                <Quantity>500</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>9lWeg8dlFkK2RzWdgG-qIQ</MagazineKey>
+                <MunitionKey>Stock/35mm Flechette</MunitionKey>
+                <Quantity>10000</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>y1Cs8LR0KUyCKUAJBIOyOg</Key>
+          <ComponentName>Stock/Damage Control Complex</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>QhdtovcTk0WSpMAUsBIF6Q</Key>
+          <ComponentName>Stock/Large DC Storage</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>T9TN0ZYumUaCxcSRjO_qTw</Key>
+          <ComponentName>Stock/Reinforced CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>T4d-8WnA_UiHSJh6PXiXpA</Key>
+          <ComponentName>Stock/Deck Gear Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>hs-SaPpehUu8ZbwsuJSvXw</Key>
+          <ComponentName>Stock/Auxiliary Steering</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>jhY0RlqxLkW69clFCGXELA</Key>
+          <ComponentName>Stock/Deck Gear Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>OE8qVccIYEGwfvJXsiFgoA</Key>
+          <ComponentName>Stock/Deck Gear Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>yxnQxeuUHUO22pm-LQu4Cg</Key>
+          <ComponentName>Stock/CHI-9100 Long Haul Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>_uEQzHKRzEqqIqa1c8wJcw</Key>
+          <ComponentName>Stock/Civilian Reactor</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>cXpBal32p0-R2pA6hN056w</Key>
+          <ComponentName>Stock/Flight Deck Traversal System</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>OY726V7rAUKDR92MQM7gnQ</Key>
+          <ComponentName>Stock/Ithaca Bridgemaster</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="Deck Gun">
+          <MemberKeys>
+            <string>6HbbAtLFGUOi-kq06ErQdA</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+  </Ships>
+  <MissileTypes>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/SDM-122 Spamraam</SaveKey>
+      <Designation>SDM-122</Designation>
+      <Nickname>Spamraam</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_ACTIVE_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_BLASTFRAG</Description>
+      <LongDescription>The &lt;noparse&gt;SDM-122 Spamraam&lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SDM-1 body, which is a flexible defensive missile with a booster.  This missile will deliver a Proximity Fuze, High Explosive, Blast Fragmentation warhead.  It homes in on its target using an Active Radar seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_ACTIVE_CAPS &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+
+&lt;b&gt;$MISSILEENGINE_STAGE_BOOST|Boost|&lt;/b&gt;
+$MISSILESTAT_SPEED: 775 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 3,000 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.5 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 7.3 $UNIT_GS
+
+&lt;b&gt;$MISSILEENGINE_STAGE_MAIN|Main|&lt;/b&gt;
+$MISSILESTAT_SPEED: 300 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 3,470 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.9 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 4.3 $UNIT_GS
+
+: Stage Trigger at 2,000m from Target or On Burnout (&lt;color=#D3D11F&gt;Limited By Seeker Range&lt;/color&gt;)
+
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_NONE|None|
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_BLASTFRAG
+$MISSILESTAT_ARMORDAMAGE: 0.23$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 73.05$UNIT_HP
+$MISSILESTAT_BLASTRADIUS: 52 $UNIT_METERS
+
+$MISSILESTAT_HEALTH: 10 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 6 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>2</Cost>
+      <BodyKey>Stock/SDM-1 Body</BodyKey>
+      <TemplateKey>c6e0b515-d423-433c-beab-f2c346d45bce</TemplateKey>
+      <BaseColor>
+        <r>0.6658101</r>
+        <g>0.6658101</g>
+        <b>0.6658101</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.206679</r>
+        <g>0.66070807</g>
+        <b>0.117425375</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Steerable Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>true</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Defensive</Role>
+            <HotLaunch>true</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Matrix</Mode>
+              <TargetSizeMask>4</TargetSizeMask>
+              <TargetType>SmallCraft</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16777472</ConvSalvo>
+              <HybridSalvo>16777472</HybridSalvo>
+              <CraftSalvo>16843009</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>5</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Blast Fragmentation</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>2</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.333844</A>
+              <B>0.666156</B>
+              <C>0</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.6227876</A>
+              <B>0.3772124</B>
+              <C>0</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/Mk0sQMiAdkKWQa-16rbg-w</SaveKey>
+      <Designation>SGT-3</Designation>
+      <Nickname>Truncheon</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_ACTIVE_ABBREV(&lt;color=#3BC81E&gt;RADAR&lt;/color&gt;)/[&lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt;] - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;SGT-3 Truncheon&lt;/noparse&gt; is a size 3 direct guidance missile.  It is based on the SGT-3 body, which is a heavy anti-ship torpedo.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using an Active Radar seeker, validating that it is the correct target using command guidance from its launching ship.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#D3D11F&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_ACTIVE_CAPS &lt;color=#3BC81E&gt;RADAR&lt;/color&gt;
+$MISSILESTAT_VALIDATOR: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+
+$MISSILESTAT_SPEED: 272 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,444 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 1.8 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.4 $UNIT_GS
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_WEAVE|Weave|
+(&lt;color=#D3D11F&gt;$MISSILESTAT_TERMINALS_WARN_RANGE&lt;/color&gt;)
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 93$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 2,880$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 160 
+$MISSILESTAT_WALLTHICKNESS: 0.25
+$MISSILESTAT_PROGTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>9</Cost>
+      <BodyKey>Stock/SGT-3 Body</BodyKey>
+      <TemplateKey>402c4d32-80c8-4276-9641-afb5eab6e0fb</TemplateKey>
+      <BaseColor>
+        <r>0.272952944</r>
+        <g>0.272952944</g>
+        <b>0.272952944</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.8509804</r>
+        <g>0.180392131</g>
+        <b>0.180392131</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Fixed Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>true</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Validation</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>Weave</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>10</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.776966631</A>
+              <B>0.206556723</B>
+              <C>0.0164766461</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/SGM-1 Scorch</SaveKey>
+      <Designation>SGM-114</Designation>
+      <Nickname>Far Riposte</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - &lt;color=#D3D11F&gt;$MISSILESEEKER_MODE_COMMAND_ABBREV&lt;/color&gt; - $MISSILEWARHEAD_SHORT_BLASTFRAG</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-114 Far Riposte&lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SGM-1 body, which is a nimble general-purpose missile.  This missile will deliver a Proximity Fuze, High Explosive, Blast Fragmentation warhead.  It homes in on its target using command guidance from its launching ship.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#D4211D&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_COMMAND_CAPS (&lt;color=#D3D11F&gt;$MISSILESEEKER_COMMAND_COMMSNOTE&lt;/color&gt;)
+
+$MISSILESTAT_SPEED: 275 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 4,800 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.7 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 5.8 $UNIT_GS
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_NONE|None|
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_BLASTFRAG
+$MISSILESTAT_ARMORDAMAGE: 0.21$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 65.34$UNIT_HP
+$MISSILESTAT_BLASTRADIUS: 47 $UNIT_METERS
+
+$MISSILESTAT_HEALTH: 10 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 6 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>4</Cost>
+      <BodyKey>Stock/SGM-1 Body</BodyKey>
+      <TemplateKey>30e6c90d-c606-4327-906d-a252495dc53c</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>0.4862745</g>
+        <b>0</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.254901975</r>
+        <g>0.254901975</g>
+        <b>0.254901975</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="CommandSeekerSettings">
+            <ComponentKey>Stock/Command Receiver</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Defensive</Role>
+            <HotLaunch>true</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Matrix</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Ascending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>0</ConvSalvo>
+              <HybridSalvo>131328</HybridSalvo>
+              <CraftSalvo>256</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>false</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Blast Fragmentation</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.165376738</A>
+              <B>0.6551749</B>
+              <C>0.179448351</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/SGM-1 Ceremonial Arming Missile</SaveKey>
+      <Designation>SGM-1</Designation>
+      <Nickname>Ceremonial Arming Missile</Nickname>
+      <AssociatedTemplateName>SGM-1 Ceremonial Arming Missile</AssociatedTemplateName>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_PASSIVE_ABBREV(&lt;color=#D4211D&gt;WAKE&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>The &lt;noparse&gt;SGM-1 Ceremonial Arming Missile&lt;/noparse&gt; is a size 1 direct guidance missile.  It is based on the SGM-1 body, which is a nimble general-purpose missile.  This missile will deliver a Contact Fuze, High Explosive, Shaped warhead.  It homes in on its target using a Passive Wake seeker.
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_PASSIVE_CAPS (&lt;color=#D4211D&gt;WAKE&lt;/color&gt;)
+
+$MISSILESTAT_SPEED: 250 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 1,458 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.3 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 13.3 $UNIT_GS
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_NONE|None|
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 31$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 317$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 10 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 6 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>1</Cost>
+      <BodyKey>Stock/SGM-1 Body</BodyKey>
+      <TemplateKey>45fb28a6-a762-49a4-81ec-7078ba511a28</TemplateKey>
+      <BaseColor>
+        <r>0.272952944</r>
+        <g>0.272952944</g>
+        <b>0.272952944</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.436218262</r>
+        <g>0</g>
+        <b>0</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveSeekerSettings">
+            <ComponentKey>Stock/Wake-Homing Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>3</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0</A>
+              <B>-0</B>
+              <C>1</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+  </MissileTypes>
+  <CraftTypes>
+    <CraftTemplate>
+      <SaveKey>$CRAFT$/AZ-8944blEG5p9V_8VJs5A</SaveKey>
+      <DesignationSuffix />
+      <Nickname>Arbiter VI</Nickname>
+      <LongDescription>$CRAFTSTAT_FRAMEMODEL: Barracuda
+$CRAFTSTAT_FRAMECLASS: $CRAFTFRAMECLASS_STRIKE_FIGHTER|Strike Fighter|
+$CRAFTSTAT_BASECOST: 8
+$CRAFTSTAT_STORAGESIZE: 1
+$CRAFTSTAT_PADSIZE: 6 x 6
+$CRAFTSTAT_PDTHREATSIZE: 2
+
+$CRAFTSTAT_HEALTH: 60 
+$CRAFTSTAT_SKIN: 3 $UNIT_MILLIMETERS (&lt;link="craft-health-skinthickness"&gt;&lt;color=#3BC81E&gt;+1.25 $UNIT_MILLIMETERS&lt;/color&gt;&lt;/link&gt;)
+$CRAFTSTAT_TARGETSIZE: 0.75 
+$CRAFTSTAT_DR: 50 %
+
+$CRAFTSTAT_RADARSIG: 100 %
+$CRAFTSTAT_WAKESIG: 100 %
+$CRAFTSTAT_MISSILESBOMBS
+$CRAFTSTAT_CMDCAPACITY: 0 
+$CRAFTSTAT_MISSILEANGLE: 30 $UNIT_DEGREES
+$CRAFTSTAT_BOMBLEVELTIME: 0.5 $UNIT_SECONDS_MED
+
+Pre-Flight Work: 48.25
+$CRAFTSTAT_PREFLIGHTTIME
+$CRAFTSTAT_PREFLIGHT_NOSHIPS
+
+Inventory
+ - 35mm Flechette: 250
+ - SDM-122 Spamraam: 2
+Cost To Arm: 5.00
+
+$CRAFTSTAT_IDLESPEED: 35 $UNIT_METERSPERSEC
+$CRAFTSTAT_CRUISESPEED: 100 $UNIT_METERSPERSEC
+$CRAFTSTAT_HBRNSPEED: 175 $UNIT_METERSPERSEC
+$CRAFTSTAT_COMBATSPEED: 175 $UNIT_METERSPERSEC
+
+$CRAFTSTAT_FUELCAPACITY: 1,900
+$CRAFTSTAT_LOITERTIME: 21:07
+$CRAFTSTAT_CRUISERANGE: 127 $UNIT_KILOMETERS
+
+$CRAFTSTAT_THRUSTERPOWER: 45 
+$CRAFTSTAT_TURNRATE: 45 
+$CRAFTSTAT_OFFANGLETHRUST: 135 $UNIT_DEGREES
+$CRAFTSTAT_OFFANGLETURN: 90 $UNIT_DEGREES
+$CRAFTSTAT_FRAMEMASS: 10.00
+$CRAFTSTAT_LOADOUTMASS: -
+$CRAFTSTAT_TOTALMASS: 10.00
+Thrust-to-Weight: 3.38
+
+&lt;b&gt;$CRAFTSTAT_COMPONENTS:&lt;/b&gt;
+$CRAFTSOCKETNAME_NOSE|Nose|: $CRAFTCOMPNAME_35MM_GUN|35mm Gun|
+$CRAFTSOCKETNAME_AVIONICS|Avionics|: $GEN_NONE
+$CRAFTSOCKETNAME_FUSELAGE|Fuselage|: $CRAFTCOMPNAME_CERAMIC_TILING|Ceramic Tiling|
+$CRAFTSOCKETNAME_ENGINE|Engine|: $GEN_NONE
+$CRAFTSOCKETNAME_COUNTERMEASURES|Countermeasures|: $CRAFTCOMPNAME_STANDARD_CM_LAUNCHER|Standard CM Launcher|
+
+&lt;b&gt;$CRAFTSTAT_LOADOUTS:&lt;/b&gt;
+Standoff Superiority: 250x $AMMONAME_35MM_FLECHETTE|35mm Flechette|, 2x &lt;noparse&gt;SDM-122 Spamraam&lt;/noparse&gt;, 2x &lt;noparse&gt;SDM-122 Spamraam&lt;/noparse&gt;
+Standoff Patrol: 250x $AMMONAME_35MM_FLECHETTE|35mm Flechette|, 2x &lt;noparse&gt;SDM-122 Spamraam&lt;/noparse&gt;
+Strike (Slow): 250x $AMMONAME_35MM_FLECHETTE|35mm Flechette|, 2x $AMMONAME_R_2_PIRANHA_ROCKET|R-2 'Piranha' Rocket|
+Jammer Scramble: 250x $AMMONAME_35MM_FLECHETTE|35mm Flechette|</LongDescription>
+      <Cost>14</Cost>
+      <FrameKey>Stock/OSP Interceptor</FrameKey>
+      <TemplateKey>f7bc9f01-1b8e-4194-b9a7-d57ff1526ce4</TemplateKey>
+      <InstalledComponents>
+        <SerializedCraftSocket>
+          <SocketKey>nose</SocketKey>
+          <ComponentKey>nose_gun50mm</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>fuselage</SocketKey>
+          <ComponentKey>fuselage-ceramictiling</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>countermeasures</SocketKey>
+          <ComponentKey>cml-standard</ComponentKey>
+        </SerializedCraftSocket>
+      </InstalledComponents>
+      <Loadouts>
+        <CraftLoadout>
+          <LoadoutName>Standoff Superiority</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/35mm Flechette</AmmoKey>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingtopin</SocketKey>
+              <ComponentKey>wingtopin_s1pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>wingtopin</SocketKey>
+                <MissileKeys>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingbottomin</SocketKey>
+              <ComponentKey>wingbottomin_s1pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>wingbottomin</SocketKey>
+                <MissileKeys>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+        <CraftLoadout>
+          <LoadoutName>Standoff Patrol</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/35mm Flechette</AmmoKey>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingtopin</SocketKey>
+              <ComponentKey>wingtopin_s1pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>wingtopin</SocketKey>
+                <MissileKeys>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingbottomin</SocketKey>
+              <ComponentKey>wingbottomin_fuelpods</ComponentKey>
+              <Loadout xsi:type="SimpleOccupiedElement" />
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+        <CraftLoadout>
+          <LoadoutName>Strike (Slow)</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/35mm Flechette</AmmoKey>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingbottomin</SocketKey>
+              <ComponentKey>wingbottomin_s2pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>wingbottomin</SocketKey>
+                <MissileKeys>
+                  <string>Stock/S1 Rocket</string>
+                  <string>Stock/S1 Rocket</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+        <CraftLoadout>
+          <LoadoutName>Jammer Scramble</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/35mm Flechette</AmmoKey>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingbottomout</SocketKey>
+              <ComponentKey>wingbottomout_radarjammer</ComponentKey>
+              <Loadout xsi:type="SimpleOccupiedElement" />
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+      </Loadouts>
+      <TemplateMissileTypes />
+      <ModDependencies />
+    </CraftTemplate>
+    <CraftTemplate>
+      <SaveKey>$CRAFT$/RABhB3TXHkySJCPviOEfVQ</SaveKey>
+      <DesignationSuffix>R</DesignationSuffix>
+      <Nickname>Oasis</Nickname>
+      <LongDescription>$CRAFTSTAT_FRAMEMODEL: Halberd
+$CRAFTSTAT_FRAMECLASS: $CRAFTFRAMECLASS_SKIFF|Skiff|
+$CRAFTSTAT_BASECOST: 15
+$CRAFTSTAT_STORAGESIZE: 1
+$CRAFTSTAT_PADSIZE: 6 x 6
+$CRAFTSTAT_PDTHREATSIZE: 1
+
+$CRAFTSTAT_HEALTH: 160  (&lt;link="craft-health-hp"&gt;&lt;color=#3BC81E&gt;+30 &lt;/color&gt;&lt;/link&gt;)
+$CRAFTSTAT_SKIN: 3 $UNIT_MILLIMETERS
+$CRAFTSTAT_TARGETSIZE: 1 
+$CRAFTSTAT_DR: 50 %
+
+$CRAFTSTAT_RADARSIG: 100 %
+$CRAFTSTAT_WAKESIG: 100 %
+$CRAFTSTAT_MISSILESBOMBS
+$CRAFTSTAT_CMDCAPACITY: 1 
+$CRAFTSTAT_MISSILEANGLE: 120 $UNIT_DEGREES (&lt;link="craft-missile-ontargetangle"&gt;&lt;color=#3BC81E&gt;+300%&lt;/color&gt;&lt;/link&gt;)
+$CRAFTSTAT_BOMBLEVELTIME: 3 $UNIT_SECONDS_MED
+
+$CRAFTSTAT_IDLESPEED: 20 $UNIT_METERSPERSEC
+$CRAFTSTAT_CRUISESPEED: 45 $UNIT_METERSPERSEC
+$CRAFTSTAT_HBRNSPEED: 68 $UNIT_METERSPERSEC
+$CRAFTSTAT_COMBATSPEED: 68 $UNIT_METERSPERSEC
+
+$CRAFTSTAT_FUELCAPACITY: 1,200
+$CRAFTSTAT_LOITERTIME: 33:20
+$CRAFTSTAT_CRUISERANGE: 36 $UNIT_KILOMETERS
+
+$CRAFTSTAT_THRUSTERPOWER: 250 
+$CRAFTSTAT_TURNRATE: 20 
+$CRAFTSTAT_FRAMEMASS: 30.00
+$CRAFTSTAT_LOADOUTMASS: -
+$CRAFTSTAT_TOTALMASS: 30.00
+Thrust-to-Weight: 6.25
+
+&lt;b&gt;$CRAFTSTAT_COMPONENTS:&lt;/b&gt;
+$CRAFTSOCKETNAME_NOSE|Nose|: $CRAFTCOMPNAME_35MM_GUN|35mm Gun|
+$CRAFTSOCKETNAME_MISSION_PACKAGE|Mission Package|: $CRAFTCOMPNAME_INTERNAL_RADAR_ADVANCED_|Internal Radar (Advanced)|
+$CRAFTSOCKETNAME_AVIONICS|Avionics|: $CRAFTCOMPNAME_HELMET_MOUNTED_DISPLAY|Helmet-Mounted Display|
+$CRAFTSOCKETNAME_FUSELAGE|Fuselage|: $CRAFTCOMPNAME_ABLATIVE_FOAM|Ablative Foam|
+$CRAFTSOCKETNAME_ENGINE|Engine|: $GEN_NONE
+$CRAFTSOCKETNAME_COUNTERMEASURES|Countermeasures|: $CRAFTCOMPNAME_STANDARD_CM_LAUNCHER|Standard CM Launcher|
+
+&lt;b&gt;$CRAFTSTAT_LOADOUTS:&lt;/b&gt;
+8km Radar Missiles: 300x $AMMONAME_35MM_FLECHETTE|35mm Flechette|, 4x &lt;noparse&gt;SDM-122 Spamraam&lt;/noparse&gt;
+8km Radar: 300x $AMMONAME_35MM_FLECHETTE|35mm Flechette|</LongDescription>
+      <Cost>54</Cost>
+      <FrameKey>Stock/OSP Skiff</FrameKey>
+      <TemplateKey>07610044-d774-4c1e-9224-23ef88e11f55</TemplateKey>
+      <InstalledComponents>
+        <SerializedCraftSocket>
+          <SocketKey>nose</SocketKey>
+          <ComponentKey>nose_gun50mm</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>mission</SocketKey>
+          <ComponentKey>mission_advancedradar</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>avionics</SocketKey>
+          <ComponentKey>avionics-hmd</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>fuselage</SocketKey>
+          <ComponentKey>fuselage-ablativefoam</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>countermeasures</SocketKey>
+          <ComponentKey>cml-standard</ComponentKey>
+        </SerializedCraftSocket>
+      </InstalledComponents>
+      <Loadouts>
+        <CraftLoadout>
+          <LoadoutName>8km Radar Missiles</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/35mm Flechette</AmmoKey>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>outboard</SocketKey>
+              <ComponentKey>outboard_s1pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>outboard</SocketKey>
+                <MissileKeys>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+        <CraftLoadout>
+          <LoadoutName>8km Radar</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/35mm Flechette</AmmoKey>
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+      </Loadouts>
+      <TemplateMissileTypes />
+      <ModDependencies />
+    </CraftTemplate>
+    <CraftTemplate>
+      <SaveKey>$CRAFT$/JdCFentT7E-ZJ9kV9vfj7Q</SaveKey>
+      <DesignationSuffix />
+      <Nickname>Steelhead</Nickname>
+      <LongDescription>$CRAFTSTAT_FRAMEMODEL: Sturgeon
+$CRAFTSTAT_FRAMECLASS: $CRAFTFRAMECLASS_BOMBER|Bomber|
+$CRAFTSTAT_BASECOST: 12
+$CRAFTSTAT_STORAGESIZE: 2
+$CRAFTSTAT_PADSIZE: 10 x 10
+$CRAFTSTAT_PDTHREATSIZE: 3
+
+$CRAFTSTAT_HEALTH: 165  (&lt;link="craft-health-hp"&gt;&lt;color=#3BC81E&gt;+30 &lt;/color&gt;&lt;/link&gt;)
+$CRAFTSTAT_SKIN: 3 $UNIT_MILLIMETERS
+$CRAFTSTAT_TARGETSIZE: 1 
+$CRAFTSTAT_DR: 50 %
+
+$CRAFTSTAT_RADARSIG: 100 %
+$CRAFTSTAT_WAKESIG: 100 %
+$CRAFTSTAT_MISSILESBOMBS
+$CRAFTSTAT_CMDCAPACITY: 6  (&lt;link="craft-missile-cmdcapacity"&gt;&lt;color=#3BC81E&gt;+6 &lt;/color&gt;&lt;/link&gt;)
+$CRAFTSTAT_MISSILEANGLE: 30 $UNIT_DEGREES
+$CRAFTSTAT_BOMBLEVELTIME: 0.5 $UNIT_SECONDS_MED
+
+Pre-Flight Work: 87.33
+$CRAFTSTAT_PREFLIGHTTIME
+$CRAFTSTAT_PREFLIGHT_NOSHIPS
+
+Inventory
+ - CBU-40 Cluster Bomb: 1
+ - KBU-22 Bomb: 1
+ - R-2 'Piranha' Rocket: 1
+ - R-3 'Spearfish' Rocket: 1
+Cost To Arm: 12.00
+
+$CRAFTSTAT_IDLESPEED: 30 $UNIT_METERSPERSEC
+$CRAFTSTAT_CRUISESPEED: 60 $UNIT_METERSPERSEC
+$CRAFTSTAT_HBRNSPEED: 90 $UNIT_METERSPERSEC
+$CRAFTSTAT_COMBATSPEED: 90 $UNIT_METERSPERSEC
+
+$CRAFTSTAT_FUELCAPACITY: 1,700
+$CRAFTSTAT_LOITERTIME: 13:36
+$CRAFTSTAT_CRUISERANGE: 41 $UNIT_KILOMETERS
+
+$CRAFTSTAT_THRUSTERPOWER: 100 
+$CRAFTSTAT_TURNRATE: 25 
+$CRAFTSTAT_OFFANGLETHRUST: 90 $UNIT_DEGREES
+$CRAFTSTAT_OFFANGLETURN: 45 $UNIT_DEGREES
+$CRAFTSTAT_FRAMEMASS: 25.00
+$CRAFTSTAT_LOADOUTMASS: -
+$CRAFTSTAT_TOTALMASS: 25.00
+Thrust-to-Weight: 4.00
+
+&lt;b&gt;$CRAFTSTAT_COMPONENTS:&lt;/b&gt;
+$CRAFTSOCKETNAME_FUSELAGE|Fuselage|: $CRAFTCOMPNAME_ABLATIVE_FOAM|Ablative Foam|
+$CRAFTSOCKETNAME_SUPPORT|Support|: $CRAFTCOMPNAME_MISSILE_CONTROL_COMPUTER|Missile Control Computer|
+$CRAFTSOCKETNAME_ENGINE|Engine|: $GEN_NONE
+$CRAFTSOCKETNAME_COUNTERMEASURES|Countermeasures|: $CRAFTCOMPNAME_STANDARD_CM_LAUNCHER|Standard CM Launcher|
+
+&lt;b&gt;$CRAFTSTAT_LOADOUTS:&lt;/b&gt;
+Torpedo Anti-Capital: 2x &lt;noparse&gt;SGT-3 Truncheon&lt;/noparse&gt;
+Rocket/Bomb Finisher: 1x $AMMONAME_R_2_PIRANHA_ROCKET|R-2 'Piranha' Rocket|, 1x $AMMONAME_KBU_22_BOMB|KBU-22 Bomb|, 1x $AMMONAME_R_3_SPEARFISH_ROCKET|R-3 'Spearfish' Rocket|, 1x $AMMONAME_CBU_40_CLUSTER_BOMB|CBU-40 Cluster Bomb|
+Light Guns + Rockets: 4x $AMMONAME_R_2_PIRANHA_ROCKET|R-2 'Piranha' Rocket|, 20x $AMMONAME_100MM_HE_SHELL|100mm HE Shell|
+Light Guns: 20x $AMMONAME_100MM_HE_SHELL|100mm HE Shell|</LongDescription>
+      <Cost>19</Cost>
+      <FrameKey>Stock/OSP Bomber</FrameKey>
+      <TemplateKey>7a85d025-537b-4fec-9927-d915f6f7e3ed</TemplateKey>
+      <InstalledComponents>
+        <SerializedCraftSocket>
+          <SocketKey>fuselage</SocketKey>
+          <ComponentKey>fuselage-ablativefoam</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>support</SocketKey>
+          <ComponentKey>support-mcc-bomber</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>countermeasures</SocketKey>
+          <ComponentKey>cml-standard</ComponentKey>
+        </SerializedCraftSocket>
+      </InstalledComponents>
+      <Loadouts>
+        <CraftLoadout>
+          <LoadoutName>Torpedo Anti-Capital</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>innerwing</SocketKey>
+              <ComponentKey>innerwing_s3pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>innerwing</SocketKey>
+                <MissileKeys>
+                  <string>$MODMIS$/Mk0sQMiAdkKWQa-16rbg-w</string>
+                  <string>$MODMIS$/Mk0sQMiAdkKWQa-16rbg-w</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+        <CraftLoadout>
+          <LoadoutName>Rocket/Bomb Finisher</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>outerwing</SocketKey>
+              <ComponentKey>outerwing_s2pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>outerwing</SocketKey>
+                <MissileKeys>
+                  <string xsi:nil="true" />
+                  <string>Stock/S1 Rocket</string>
+                  <string>Stock/S2 Glide Bomb</string>
+                  <string xsi:nil="true" />
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>innerwing</SocketKey>
+              <ComponentKey>innerwing_s3pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>innerwing</SocketKey>
+                <MissileKeys>
+                  <string>Stock/S3 Rocket</string>
+                  <string>Stock/S3 Cluster Bomb</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+        <CraftLoadout>
+          <LoadoutName>Light Guns + Rockets</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>outerwing</SocketKey>
+              <ComponentKey>outerwing_s2pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>outerwing</SocketKey>
+                <MissileKeys>
+                  <string>Stock/S1 Rocket</string>
+                  <string>Stock/S1 Rocket</string>
+                  <string>Stock/S1 Rocket</string>
+                  <string>Stock/S1 Rocket</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>innerwing</SocketKey>
+              <ComponentKey>wings_100mmguns</ComponentKey>
+              <Loadout xsi:type="SimpleAmmoSelection">
+                <SocketKey>innerwing</SocketKey>
+                <AmmoKey>Stock/100mm HE Shell</AmmoKey>
+              </Loadout>
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+        <CraftLoadout>
+          <LoadoutName>Light Guns</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>innerwing</SocketKey>
+              <ComponentKey>wings_100mmguns</ComponentKey>
+              <Loadout xsi:type="SimpleAmmoSelection">
+                <SocketKey>innerwing</SocketKey>
+                <AmmoKey>Stock/100mm HE Shell</AmmoKey>
+              </Loadout>
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+      </Loadouts>
+      <TemplateMissileTypes />
+      <ModDependencies />
+    </CraftTemplate>
+    <CraftTemplate>
+      <SaveKey>$CRAFT$/EboxtbmndECUofbkPAyV5A</SaveKey>
+      <Nickname>Barracuda</Nickname>
+      <LongDescription>$CRAFTSTAT_FRAMEMODEL: Barracuda
+$CRAFTSTAT_FRAMECLASS: $CRAFTFRAMECLASS_STRIKE_FIGHTER|Strike Fighter|
+$CRAFTSTAT_BASECOST: 8
+$CRAFTSTAT_STORAGESIZE: 1
+$CRAFTSTAT_PADSIZE: 6 x 6
+$CRAFTSTAT_PDTHREATSIZE: 2
+
+$CRAFTSTAT_HEALTH: 90  (&lt;link="craft-health-hp"&gt;&lt;color=#3BC81E&gt;+30 &lt;/color&gt;&lt;/link&gt;)
+$CRAFTSTAT_SKIN: 1.75 $UNIT_MILLIMETERS
+$CRAFTSTAT_TARGETSIZE: 0.75 
+$CRAFTSTAT_DR: 50 %
+
+$CRAFTSTAT_RADARSIG: 100 %
+$CRAFTSTAT_WAKESIG: 100 %
+$CRAFTSTAT_MISSILESBOMBS
+$CRAFTSTAT_CMDCAPACITY: 0 
+$CRAFTSTAT_MISSILEANGLE: 30 $UNIT_DEGREES
+$CRAFTSTAT_BOMBLEVELTIME: 0.5 $UNIT_SECONDS_MED
+
+$CRAFTSTAT_IDLESPEED: 35 $UNIT_METERSPERSEC
+$CRAFTSTAT_CRUISESPEED: 100 $UNIT_METERSPERSEC
+$CRAFTSTAT_HBRNSPEED: 175 $UNIT_METERSPERSEC
+$CRAFTSTAT_COMBATSPEED: 175 $UNIT_METERSPERSEC
+
+$CRAFTSTAT_FUELCAPACITY: 900
+$CRAFTSTAT_LOITERTIME: 10:00
+$CRAFTSTAT_CRUISERANGE: 60 $UNIT_KILOMETERS
+
+$CRAFTSTAT_THRUSTERPOWER: 45 
+$CRAFTSTAT_TURNRATE: 45 
+$CRAFTSTAT_OFFANGLETHRUST: 135 $UNIT_DEGREES
+$CRAFTSTAT_OFFANGLETURN: 90 $UNIT_DEGREES
+$CRAFTSTAT_FRAMEMASS: 10.00
+$CRAFTSTAT_LOADOUTMASS: -
+$CRAFTSTAT_TOTALMASS: 10.00
+Thrust-to-Weight: 3.38
+
+&lt;b&gt;$CRAFTSTAT_COMPONENTS:&lt;/b&gt;
+$CRAFTSOCKETNAME_NOSE|Nose|: $CRAFTCOMPNAME_35MM_GUN|35mm Gun|
+$CRAFTSOCKETNAME_AVIONICS|Avionics|: $GEN_NONE
+$CRAFTSOCKETNAME_FUSELAGE|Fuselage|: $CRAFTCOMPNAME_ABLATIVE_FOAM|Ablative Foam|
+$CRAFTSOCKETNAME_ENGINE|Engine|: $GEN_NONE
+$CRAFTSOCKETNAME_COUNTERMEASURES|Countermeasures|: $CRAFTCOMPNAME_STANDARD_CM_LAUNCHER|Standard CM Launcher|
+
+&lt;b&gt;$CRAFTSTAT_LOADOUTS:&lt;/b&gt;
+Strike Fighter: 250x $AMMONAME_35MM_FLECHETTE|35mm Flechette|, 2x &lt;noparse&gt;SDM-122 Spamraam&lt;/noparse&gt;, 2x $AMMONAME_R_2_PIRANHA_ROCKET|R-2 'Piranha' Rocket|
+Friendly Escort: 250x $AMMONAME_35MM_FLECHETTE|35mm Flechette|, 2x &lt;noparse&gt;SDM-122 Spamraam&lt;/noparse&gt;, 2x &lt;noparse&gt;SDM-122 Spamraam&lt;/noparse&gt;
+Jammer Scramble: 250x $AMMONAME_35MM_FLECHETTE|35mm Flechette|</LongDescription>
+      <Cost>10</Cost>
+      <FrameKey>Stock/OSP Interceptor</FrameKey>
+      <TemplateKey>b531ba11-a7b9-4074-94a1-f6e43c0c95e4</TemplateKey>
+      <InstalledComponents>
+        <SerializedCraftSocket>
+          <SocketKey>nose</SocketKey>
+          <ComponentKey>nose_gun50mm</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>fuselage</SocketKey>
+          <ComponentKey>fuselage-ablativefoam</ComponentKey>
+        </SerializedCraftSocket>
+        <SerializedCraftSocket>
+          <SocketKey>countermeasures</SocketKey>
+          <ComponentKey>cml-standard</ComponentKey>
+        </SerializedCraftSocket>
+      </InstalledComponents>
+      <Loadouts>
+        <CraftLoadout>
+          <LoadoutName>Strike Fighter</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/35mm Flechette</AmmoKey>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingtopin</SocketKey>
+              <ComponentKey>wingtopin_s1pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>wingtopin</SocketKey>
+                <MissileKeys>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingbottomin</SocketKey>
+              <ComponentKey>wingbottomin_s2pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>wingbottomin</SocketKey>
+                <MissileKeys>
+                  <string>Stock/S1 Rocket</string>
+                  <string>Stock/S1 Rocket</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+        <CraftLoadout>
+          <LoadoutName>Friendly Escort</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/35mm Flechette</AmmoKey>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingtopout</SocketKey>
+              <ComponentKey>wingtopout_s1pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>wingtopout</SocketKey>
+                <MissileKeys>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingtopin</SocketKey>
+              <ComponentKey>wingtopin_s1pylons</ComponentKey>
+              <Loadout xsi:type="MissileSelection">
+                <SocketKey>wingtopin</SocketKey>
+                <MissileKeys>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                  <string>$MODMIS$/SDM-122 Spamraam</string>
+                </MissileKeys>
+              </Loadout>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingbottomout</SocketKey>
+              <ComponentKey>wingbottomout_radarjammer</ComponentKey>
+              <Loadout xsi:type="SimpleOccupiedElement" />
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingbottomin</SocketKey>
+              <ComponentKey>wingbottomin_fuelpods</ComponentKey>
+              <Loadout xsi:type="SimpleOccupiedElement" />
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+        <CraftLoadout>
+          <LoadoutName>Jammer Scramble</LoadoutName>
+          <Elements>
+            <GeneralLoadoutElement xsi:type="SimpleAmmoSelection">
+              <SocketKey>nose</SocketKey>
+              <AmmoKey>Stock/35mm Flechette</AmmoKey>
+            </GeneralLoadoutElement>
+            <GeneralLoadoutElement xsi:type="VariableSocketLoadout">
+              <SocketKey>wingbottomout</SocketKey>
+              <ComponentKey>wingbottomout_radarjammer</ComponentKey>
+              <Loadout xsi:type="SimpleOccupiedElement" />
+            </GeneralLoadoutElement>
+          </Elements>
+        </CraftLoadout>
+      </Loadouts>
+      <TemplateMissileTypes />
+      <ModDependencies />
+    </CraftTemplate>
+  </CraftTypes>
+</Fleet>

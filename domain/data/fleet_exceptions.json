@@ -1,0 +1,9 @@
+{
+ "_note": "Manual exceptions: fleets/ships that must be in the corpus regardless of the date or mod filters (user-approved one-off cases).",
+ "fleets": [
+  {
+   "path": "E:\\SteamLibrary\\steamapps\\common\\Nebulous\\Saves\\Fleets\\Imported\\S2LN NEO.fleet",
+   "reason": "user-approved exception 2026-11-17: mtime 2026-07-14 (before the 0.6.2.6 update) but the ship 'Blot Out The Sun With Our Arrows' fully satisfies missle ln"
+  }
+ ]
+}

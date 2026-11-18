@@ -1,0 +1,1208 @@
+[
+ {
+  "file": "CM-401 Broken Spine II.missile",
+  "name": "CM-401 Broken Spine II",
+  "designation": "CM-401",
+  "nickname": "Broken Spine II",
+  "description": "mode cruise - mode arad pulsed abbrev(RADAR)/[mode passive abbrev(WAKE)]/mode active abbrev(RADAR) - short heimpact",
+  "long": "The CM-401 Broken Spine II is a size 4 waypoint-capable cruise missile. It is based on the CM-4 body, which is a heavy anti-ship torpedo. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using a Radar Anti-Radiation seeker, validating that it is the correct target using a Passive Wake seeker. If the primary seeker does not find a target or is jammed, it can fall back on an Active Radar seeker.\n\ncontrolmethod: mode cruise long\ntargetingmode: targetingmode pos targetingmode track[+targetingmode trp]\n\nprimaryseeker: ANTI-RADIATION (All RADAR Signals)\nvalidator: mode passive caps (WAKE)\nbackupseeker: mode active caps RADAR\n\nspeed: 210 m/s\ndistance: 24,368 m\ntopspeedtime: 2.4 s\nturnrate: 2.0 G\nterminals: None\n\nwarhead: detail heimpact\narmordamage: 76cm\ncomponentdamage: 1,920hp\nblastangle: 70 deg\ndamageperfragment: 50.0\n\nhealth: 150 \nwallthickness: 0.2\nprogtime: 20 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "5",
+  "body": "CM-4 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "PassiveARHSeekerSettings",
+    "key": "Fixed Anti-Radiation Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "TargetType": "All"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveSeekerSettings",
+    "key": "Wake-Homing Seeker",
+    "settings": {
+     "Mode": "Validation",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "CruiseGuidanceSettings",
+    "key": "Cruise Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=0, HybridSalvo=0, CraftSalvo=0, FarthestFirst=false"
+    }
+   },
+   {
+    "size": "4",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "10",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Steerable Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   }
+  ]
+ },
+ {
+  "file": "CM-411 Beep Meep.missile",
+  "name": "CM-411 Beep Meep",
+  "designation": "CM-411",
+  "nickname": "Beep Meep",
+  "description": "mode cruise - mode active abbrev(RADAR)/[mode arad pulsed abbrev(RADAR)]/mode passive abbrev(WAKE) - short subm",
+  "long": "The CM-411 Beep Meep is a size 4 waypoint-capable cruise missile. It is based on the CM-4 body, which is a heavy anti-ship torpedo. This missile will deliver a Submunition Delivery warhead. It homes in on its target using an Active Radar seeker, validating that it is the correct target using a Radar Anti-Radiation seeker. If the primary seeker does not find a target or is jammed, it can fall back on a Passive Wake seeker.\n\ncontrolmethod: mode cruise long\ntargetingmode: targetingmode pos targetingmode track[+targetingmode trp]\n\nprimaryseeker: mode active caps RADAR\nvalidator: ANTI-RADIATION (All RADAR Signals)\nbackupseeker: mode passive caps (WAKE)\n\nspeed: 195 m/s\ndistance: 33,829 m\ntopspeedtime: 2.6 s\nturnrate: 1.6 G\nterminals: None\n\nwarhead: detail subm\nsumbtype: R-2 'Piranha' Rocket\nsubmcount: 3\nsubmtotalvolume: 27.00 squaremeters\nsubmspread: NARROW CONE\nsubmtime: SHORT (0.25s)\n\nhealth: 150 \nwallthickness: 0.2\nprogtime: 20 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "10",
+  "body": "CM-4 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Steerable Extended Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveARHSeekerSettings",
+    "key": "Fixed Anti-Radiation Seeker",
+    "settings": {
+     "Mode": "Validation",
+     "RejectUnvalidated": "false",
+     "TargetType": "All"
+    }
+   },
+   {
+    "size": "1",
+    "type": "CruiseGuidanceSettings",
+    "key": "Cruise Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=0, HybridSalvo=0, CraftSalvo=0, FarthestFirst=false"
+    }
+   },
+   {
+    "size": "5",
+    "type": "SelectableSubmunitionWarheadSettings",
+    "key": "Selectable Submunition",
+    "settings": {
+     "Mode": "TargetAcquisition",
+     "SpreadOption": "0",
+     "Range": "164",
+     "SubmunitionKey": "Stock/S1 Rocket",
+     "Interval": "1"
+    }
+   },
+   {
+    "size": "9",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "PassiveSeekerSettings",
+    "key": "Wake-Homing Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   }
+  ]
+ },
+ {
+  "file": "SDM-225 Tornado.missile",
+  "name": "SDM-225 Tornado",
+  "designation": "SDM-225",
+  "nickname": "Tornado",
+  "description": "DIRECT - ACT(RADAR)/PSV(WAKE) - HE FRAG",
+  "long": "The SDM-225 Tornado is a size 2 direct guidance missile. It is based on the SDM-2 body, which is a flexible defensive missile with a booster. This missile will deliver a Proximity Fuze, High Explosive, Blast Fragmentation warhead. It homes in on its target using an Active Radar seeker If the primary seeker does not find a target or is jammed, it can fall back on a Passive Wake seeker.\n\nControl Method: DIRECT\nTargeting Modes: POSITION TRACK\n\nPrimary Seeker: ACTIVE RADAR\nBackup Seeker: PASSIVE (WAKE)\n\nBoost\nSpeed: 850 m/s\nDistance: 7,898 m\nTop Speed In: 1.4 s\nTurn Rate: 5.0 G\n\nMain\nSpeed: 150 m/s\nDistance: 1,765 m\nTop Speed In: 0.5 s\nTurn Rate: 8.2 G\n\n: Stage Trigger at 820m from Target or On Burnout\n\nTerminal Maneuvers: None\n\nWarhead: Proximity Fuze, High Explosive, Blast Fragmentation\nArmor: 0.31cm\nComponent: 98.50hp\nBlast Radius: 70 m\n\nBody Integrity: 25 \nWall Thickness: 0.05\nProgramming Time: 10 s\nRadar Signature Bonus: 100 %\nBoost-Phase Duration: 3 s\nBoost-Phase Strafe: 100 %\nBoost-Phase Turn Rate: 100 %\nFailure Rate: 0 %",
+  "cost": "4",
+  "body": "SDM-2 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Fixed Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveSeekerSettings",
+    "key": "Wake-Homing Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Defensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "TargetSizeMask=12, TargetType=SmallCraft, TargetSizeOrdering=Descending, SalvoSize=0, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "4",
+    "type": "",
+    "key": "Blast Fragmentation",
+    "settings": {}
+   },
+   {
+    "size": "3",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-101 Close Cover.missile",
+  "name": "SGM-101 Close Cover",
+  "designation": "SGM-101",
+  "nickname": "Close Cover",
+  "description": "mode direct - mode command abbrev - short blastfrag",
+  "long": "The SGM-101 Close Cover is a size 1 direct guidance missile. It is based on the SGM-1 body, which is a nimble general-purpose missile. This missile will deliver a Proximity Fuze, High Explosive, Blast Fragmentation warhead. It homes in on its target using command guidance from its launching ship.\n\ncontrolmethod: mode direct\ntargetingmode: targetingmode pos targetingmode track\n\nprimaryseeker: mode command caps (command commsnote)\n\nspeed: 278 m/s\ndistance: 2,166 m\ntopspeedtime: 0.4 s\nturnrate: 12.4 G\nterminals: None\n\nwarhead: detail blastfrag\narmordamage: 0.18cm\ncomponentdamage: 56.58hp\nblastradius: 40 m\n\nhealth: 10 \nwallthickness: 0.05\nprogtime: 6 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "4",
+  "body": "SGM-1 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "CommandSeekerSettings",
+    "key": "Command Receiver",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Defensive",
+     "HotLaunch": "true",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Matrix, TargetSizeMask=14, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=131329, HybridSalvo=131329, CraftSalvo=65793, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "3",
+    "type": "",
+    "key": "Blast Fragmentation",
+    "settings": {}
+   },
+   {
+    "size": "4",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-101 Close Cover Plus.missile",
+  "name": "SGM-101 Close Cover Plus",
+  "designation": "SGM-101",
+  "nickname": "Close Cover Plus",
+  "description": "mode direct - mode command abbrev - short blastfrag",
+  "long": "The SGM-101 Close Cover Plus is a size 1 direct guidance missile. It is based on the SGM-1 body, which is a nimble general-purpose missile. This missile will deliver a Proximity Fuze, High Explosive, Blast Fragmentation warhead. It homes in on its target using command guidance from its launching ship.\n\ncontrolmethod: mode direct\ntargetingmode: targetingmode pos targetingmode track\n\nprimaryseeker: mode command caps (command commsnote)\n\nspeed: 278 m/s\ndistance: 2,166 m\ntopspeedtime: 0.4 s\nturnrate: 12.4 G\nterminals: None\n\nwarhead: detail blastfrag\narmordamage: 0.27cm\ncomponentdamage: 56.58hp\nblastradius: 53 m\n\nhealth: 10 \nwallthickness: 0.05\nprogtime: 6 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "7",
+  "body": "SGM-1 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "CommandSeekerSettings",
+    "key": "Command Receiver",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Defensive",
+     "HotLaunch": "true",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Matrix, TargetSizeMask=14, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=131329, HybridSalvo=131329, CraftSalvo=65793, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "3",
+    "type": "",
+    "key": "Blast Fragmentation EL",
+    "settings": {}
+   },
+   {
+    "size": "4",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-101 Violence.missile",
+  "name": "SGM-101 Violence",
+  "designation": "SGM-101",
+  "nickname": "Violence",
+  "description": "DIRECT - ACT(RADAR) - HE SHAPED",
+  "long": "The SGM-101 Violence is a size 1 direct guidance missile. It is based on the SGM-1 body, which is a nimble general-purpose missile. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using an Active Radar seeker.\n\nControl Method: DIRECT\nTargeting Modes:\n POSITION TRACK\nPrimary Seeker: ACTIVE RADAR\n\n301 m/s for 7,050 m, top speed in 0.9 s\nTerminal Maneuvers: None\n\nContact Fuze, High Explosive, Shaped\nArmor: 27cm Component: 238hp\nBlast Angle: 70 deg\nDamage Per Fragment: 50.0\n\nBody Integrity: 10 \nWall Thickness: 0.5\nProgramming Time: 6 s\nRadar Signature Bonus: 100 %\nBoost-Phase Duration: 3 s\nBoost-Phase Strafe: 100 %\nBoost-Phase Turn Rate: 100 %\nFailure Rate: 0 %",
+  "cost": "2",
+  "body": "SGM-1 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Fixed Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "true",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, FarthestFirst=false",
+     "ApproachAngleControl": "false"
+    }
+   },
+   {
+    "size": "3",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "4",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-206 Musket.missile",
+  "name": "SGM-206 Musket",
+  "designation": "SGM-206",
+  "nickname": "Musket",
+  "description": "mode cruise - mode active abbrev(RADAR)/[mode passive abbrev(WAKE)] - short heimpact",
+  "long": "The SGM-206 Musket is a size 2 waypoint-capable cruise missile. It is based on the SGM-2 body, which is a flexible mainstay anti-ship missile. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using an Active Radar seeker, validating that it is the correct target using a Passive Wake seeker.\n\ncontrolmethod: mode cruise long\ntargetingmode: targetingmode pos targetingmode track[+targetingmode trp]\n\nprimaryseeker: mode active caps RADAR\nvalidator: mode passive caps (WAKE)\n\nspeed: 240 m/s\ndistance: 17,000 m\ntopspeedtime: 1.7 s\nturnrate: 1.9 G\nterminals: Weave\n(terminals warn range)\n\nwarhead: detail heimpact\narmordamage: 60cm\ncomponentdamage: 1,200hp\nblastangle: 70 deg\ndamageperfragment: 50.0\n\nhealth: 30 \nwallthickness: 0.05\nprogtime: 8 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "7",
+  "body": "SGM-2 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Fixed Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveSeekerSettings",
+    "key": "Wake-Homing Seeker",
+    "settings": {
+     "Mode": "Validation",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "CruiseGuidanceSettings",
+    "key": "Cruise Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "true",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "Weave",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=16843008, HybridSalvo=16843008, CraftSalvo=16843008, FarthestFirst=false"
+    }
+   },
+   {
+    "size": "5",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "5",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-269 Cucumbers.missile",
+  "name": "SGM-269 Cucumbers",
+  "designation": "SGM-269",
+  "nickname": "Cucumbers",
+  "description": "mode direct - mode active abbrev(RADAR)/mode arad hoj abbrev(RADAR) - short blastfrag",
+  "long": "The SGM-269 Cucumbers is a size 2 direct guidance missile. It is based on the SGM-2 body, which is a flexible mainstay anti-ship missile. This missile will deliver a Proximity Fuze, High Explosive, Blast Fragmentation warhead. It homes in on its target using an Active Radar seeker. If the primary seeker does not find a target or is jammed, it can fall back on a Radar Home-on-Jam seeker.\n\ncontrolmethod: mode direct\ntargetingmode: targetingmode pos targetingmode track\n\nprimaryseeker: mode active caps RADAR\nbackupseeker: HOME-ON-JAM (RADAR JAMMING Signals Only)\n\nspeed: 200 m/s\ndistance: 6,000 m\ntopspeedtime: 0.8 s\nturnrate: 4.7 G\nterminals: None\n\nwarhead: detail blastfrag\narmordamage: 0.44cm\ncomponentdamage: 139.30hp\nblastradius: 99 m\n\nhealth: 30 \nwallthickness: 0.05\nprogtime: 8 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "5",
+  "body": "SGM-2 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Steerable Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "true"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveARHSeekerSettings",
+    "key": "Fixed Anti-Radiation Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "TargetType": "JammingOnly"
+    }
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Defensive",
+     "HotLaunch": "true",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Matrix, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=16908544, HybridSalvo=16777216, CraftSalvo=16908544, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "6",
+    "type": "",
+    "key": "Blast Fragmentation",
+    "settings": {}
+   },
+   {
+    "size": "4",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-270 Cucumber MK II.missile",
+  "name": "SGM-270 Cucumber MK II",
+  "designation": "SGM-270",
+  "nickname": "Cucumber MK II",
+  "description": "mode direct - mode command abbrev/mode arad hoj abbrev(RADAR) - short heimpact",
+  "long": "The SGM-270 Cucumber MK II is a size 2 direct guidance missile. It is based on the SGM-2 body, which is a flexible mainstay anti-ship missile. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using command guidance from its launching ship. If the primary seeker does not find a target or is jammed, it can fall back on a Radar Home-on-Jam seeker.\n\ncontrolmethod: mode direct\ntargetingmode: targetingmode pos targetingmode track\n\nprimaryseeker: mode command caps (command commsnote)\nbackupseeker: HOME-ON-JAM (RADAR JAMMING Signals Only)\n\nspeed: 200 m/s\ndistance: 6,000 m\ntopspeedtime: 0.8 s\nturnrate: 4.7 G\nterminals: None\n\nwarhead: detail heimpact\narmordamage: 66cm\ncomponentdamage: 1,440hp\nblastangle: 70 deg\ndamageperfragment: 50.0\n\nhealth: 30 \nwallthickness: 0.05\nprogtime: 8 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "7",
+  "body": "SGM-2 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "CommandSeekerSettings",
+    "key": "Command Receiver",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveARHSeekerSettings",
+    "key": "Fixed Anti-Radiation Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "TargetType": "JammingOnly"
+    }
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "true",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Matrix, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=16908544, HybridSalvo=16777216, CraftSalvo=16908544, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "6",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "4",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-29 EA29 Killjoy.missile",
+  "name": "SGM-29 EA29 Killjoy",
+  "designation": "SGM-29",
+  "nickname": "EA29 Killjoy",
+  "description": "mode direct - mode active abbrev(RADAR) - none",
+  "long": "The SGM-29 EA29 Killjoy is a size 2 direct guidance missile. It is based on the SGM-2 body, which is a flexible mainstay anti-ship missile. This missile will deliver no payload. It homes in on its target using an Active Radar seeker.\n\ncontrolmethod: mode direct\ntargetingmode: targetingmode pos targetingmode track\n\nprimaryseeker: mode active caps RADAR\n\nspeed: 180 m/s\ndistance: 22,064 m\ntopspeedtime: 0.9 s\nturnrate: 3.2 G\nterminals: None\n\nhealth: 30 \nwallthickness: 0.05\nprogtime: 8 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "7",
+  "body": "SGM-2 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Fixed Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "",
+    "key": "Self-Screening Jammer",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Defensive",
+     "HotLaunch": "true",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Matrix, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=0, HybridSalvo=0, CraftSalvo=0, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "1",
+    "type": "",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "9",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-300 Flail.missile",
+  "name": "SGM-300 Flail",
+  "designation": "SGM-300",
+  "nickname": "Flail",
+  "description": "mode direct - mode active abbrev(RADAR)/[mode command abbrev] - short heimpact",
+  "long": "The SGM-300 Flail is a size 3 direct guidance missile. It is based on the SGM-3 body, which is a TODO. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using an Active Radar seeker, validating that it is the correct target using command guidance from its launching ship.\n\ncontrolmethod: mode direct\ntargetingmode: targetingmode pos targetingmode track\n\nprimaryseeker: mode active caps RADAR\nvalidator: mode command caps (command commsnote)\n\nCruise\nspeed: 250 m/s\ndistance: 12,188 m\ntopspeedtime: 2.5 s\nturnrate: 1.0 G\n\nTerminal\nspeed: 440 m/s\ndistance: 4,041 m\ntopspeedtime: 1.7 s\nturnrate: 9.2 G\n\n: Stage Trigger at 3,470m from Target\n\nterminals: None\n\nwarhead: detail heimpact\narmordamage: 73cm\ncomponentdamage: 1,800hp\nblastangle: 70 deg\ndamageperfragment: 50.0\n\nhealth: 60 \nwallthickness: 0.05\nprogtime: 16 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "12",
+  "body": "SGM-3 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Steerable Extended Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "true",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "CommandSeekerSettings",
+    "key": "Command Receiver",
+    "settings": {
+     "Mode": "Validation",
+     "RejectUnvalidated": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "true",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=16843008, HybridSalvo=16843008, CraftSalvo=16843008, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "5",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "5",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-302 Flail II.missile",
+  "name": "SGM-302 Flail II",
+  "designation": "SGM-302",
+  "nickname": "Flail II",
+  "description": "mode cruise - mode active abbrev(RADAR)/mode arad pulsed abbrev(RADAR) - short heimpact",
+  "long": "The SGM-302 Flail II is a size 3 waypoint-capable cruise missile. It is based on the SGM-3 body, which is a TODO. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using an Active Radar seeker. If the primary seeker does not find a target or is jammed, it can fall back on a Radar Anti-Radiation seeker.\n\ncontrolmethod: mode cruise long\ntargetingmode: targetingmode pos targetingmode track[+targetingmode trp]\n\nprimaryseeker: mode active caps RADAR\nbackupseeker: ANTI-RADIATION (All RADAR Signals)\n\nCruise\nspeed: 210 m/s\ndistance: 19,686 m\ntopspeedtime: 2.0 s\nturnrate: 1.1 G\n\nTerminal\nspeed: 440 m/s\ndistance: 4,041 m\ntopspeedtime: 1.7 s\nturnrate: 9.2 G\n\n: Stage Trigger at 3,450m from Target\n\nterminals: None\n\nwarhead: detail heimpact\narmordamage: 73cm\ncomponentdamage: 1,800hp\nblastangle: 70 deg\ndamageperfragment: 50.0\n\nhealth: 60 \nwallthickness: 0.05\nprogtime: 16 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "13",
+  "body": "SGM-3 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Steerable Extended Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "true",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveARHSeekerSettings",
+    "key": "Fixed Anti-Radiation Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "TargetType": "All"
+    }
+   },
+   {
+    "size": "1",
+    "type": "",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "CruiseGuidanceSettings",
+    "key": "Cruise Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=16843008, HybridSalvo=16843008, CraftSalvo=16843008, FarthestFirst=false"
+    }
+   },
+   {
+    "size": "5",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "5",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-H-200 Suisei Block II.missile",
+  "name": "SGM-H-200 Suisei Block II",
+  "designation": "SGM-H-200",
+  "nickname": "Suisei Block II",
+  "description": "CRUISE - PSV(EO)/ACT(RADAR) - HEKP",
+  "long": "The SGM-H-200 Suisei Block II is a size 2 waypoint-capable cruise missile. It is based on the SGM-H-2 body, which is a multi-purpose hybrid missile designed to penetrate point defense grids. This missile will deliver a Delayed Contact Fuze, High Explosive, Kinetic Penetrator warhead. It homes in on its target using a Passive Electro-Optical seeker If the primary seeker does not find a target or is jammed, it can fall back on an Active Radar seeker.\n\nControl Method: CRUISE (Waypoint Capable)\nTargeting Modes:\n POSITION TRACK[+TRP]\nPrimary Seeker: PASSIVE (EO)\nBackup Seeker(s): ACTIVE RADAR\n\nCruise: 210 m/s for 15,685 m, top speed in 2.0 s\nSprint: 500 m/s for 4,375 m, top speed in 0.5 s\n Stage Trigger at 3,570m from Target\nTerminal Maneuvers: Corkscrew\n\nDelayed Contact Fuze, High Explosive, Kinetic Penetrator\nPenetrator:\n Armor: 157 cm\n Component: 141 hp\nExplosive:\n Component: 1,600 hp\n\nBody Integrity: 25 \nWall Thickness: 0.5\nProgramming Time: 10 s\nRadar Signature Bonus: 100 %\nBoost-Phase Duration: 3 s\nBoost-Phase Strafe: 100 %\nBoost-Phase Turn Rate: 100 %\nFailure Rate: 0 %",
+  "cost": "30",
+  "body": "SGM-H-2 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "PassiveSeekerSettings",
+    "key": "Electro-Optical Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Steerable Extended Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "CruiseGuidanceSettings",
+    "key": "Cruise Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "Corkscrew",
+     "DefensiveDoctrine": "TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, FarthestFirst=false"
+    }
+   },
+   {
+    "size": "5",
+    "type": "",
+    "key": "HE Kinetic Penetrator",
+    "settings": {}
+   },
+   {
+    "size": "3",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-H-201 ADASHs.missile",
+  "name": "SGM-H-201 ADASHs",
+  "designation": "SGM-H-201",
+  "nickname": "ADASHs",
+  "description": "mode direct - mode command abbrev/mode passive abbrev(WAKE) - short heimpact",
+  "long": "The SGM-H-201 ADASHs is a size 2 direct guidance missile. It is based on the SGM-H-2 body, which is a multi-purpose hybrid missile designed to penetrate point defense grids. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using command guidance from its launching ship. If the primary seeker does not find a target or is jammed, it can fall back on a Passive Wake seeker.\n\ncontrolmethod: mode direct\ntargetingmode: targetingmode pos targetingmode track\n\nprimaryseeker: mode command caps (command commsnote)\nbackupseeker: mode passive caps (WAKE)\n\nCruise\nspeed: 308 m/s\ndistance: 11,858 m\ntopspeedtime: 3.0 s\nturnrate: 1.6 G\n\nSprint\nspeed: 503 m/s\ndistance: 3,212 m\ntopspeedtime: 0.4 s\nturnrate: 21.7 G\n\n: Stage Trigger at 2,630m from Target\n\nterminals: None\n\nwarhead: detail heimpact\narmordamage: 54cm\ncomponentdamage: 960hp\nblastangle: 70 deg\ndamageperfragment: 50.0\n\nhealth: 25 \nwallthickness: 0.05\nprogtime: 10 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "10",
+  "body": "SGM-H-2 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "CommandSeekerSettings",
+    "key": "Command Receiver",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveSeekerSettings",
+    "key": "Wake-Homing Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "true"
+    }
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Defensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=14, TargetType=SmallCraft, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=16843008, HybridSalvo=16843008, CraftSalvo=16843008, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "5",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "3",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-H-202 jkterjter Block II.missile",
+  "name": "SGM-H-202 jkterjter Block II",
+  "designation": "SGM-H-202",
+  "nickname": "jkterjter Block II",
+  "description": "mode cruise - mode active abbrev(RADAR)/[mode command abbrev] - short heimpact",
+  "long": "The SGM-H-202 jkterjter Block II is a size 2 waypoint-capable cruise missile. It is based on the SGM-H-2 body, which is a multi-purpose hybrid missile designed to penetrate point defense grids. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using an Active Radar seeker, validating that it is the correct target using command guidance from its launching ship.\n\ncontrolmethod: mode cruise long\ntargetingmode: targetingmode pos targetingmode track[+targetingmode trp]\n\nprimaryseeker: mode active caps RADAR\nvalidator: mode command caps (command commsnote)\n\nCruise\nspeed: 238 m/s\ndistance: 25,176 m\ntopspeedtime: 3.0 s\nturnrate: 0.9 G\n\nSprint\nspeed: 750 m/s\ndistance: 5,620 m\ntopspeedtime: 0.7 s\nturnrate: 19.5 G\n\n: Stage Trigger at 4,620m from Target\n\nterminals: None\n\nwarhead: detail heimpact\narmordamage: 48cm\ncomponentdamage: 768hp\nblastangle: 70 deg\ndamageperfragment: 50.0\n\nhealth: 25 \nwallthickness: 0.05\nprogtime: 10 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "16",
+  "body": "SGM-H-2 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Steerable Extended Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "CommandSeekerSettings",
+    "key": "Command Receiver",
+    "settings": {
+     "Mode": "Validation",
+     "RejectUnvalidated": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "CruiseGuidanceSettings",
+    "key": "Cruise Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=0, HybridSalvo=0, CraftSalvo=0, FarthestFirst=false"
+    }
+   },
+   {
+    "size": "4",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "4",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-H-266 Jetpack.missile",
+  "name": "SGM-H-266 Jetpack",
+  "designation": "SGM-H-266",
+  "nickname": "Jetpack",
+  "description": "mode direct - mode active abbrev(RADAR)/mode passive abbrev(WAKE) - short blastfrag",
+  "long": "The SGM-H-266 Jetpack is a size 2 direct guidance missile. It is based on the SGM-H-2 body, which is a multi-purpose hybrid missile designed to penetrate point defense grids. This missile will deliver a Proximity Fuze, High Explosive, Blast Fragmentation warhead. It homes in on its target using an Active Radar seeker. If the primary seeker does not find a target or is jammed, it can fall back on a Passive Wake seeker.\n\ncontrolmethod: mode direct\ntargetingmode: targetingmode pos targetingmode track\n\nprimaryseeker: mode active caps RADAR\nbackupseeker: mode passive caps (WAKE)\n\nCruise\nspeed: 350 m/s\ndistance: 13,234 m\ntopspeedtime: 4.4 s\nturnrate: 0.9 G\n\nSprint\nspeed: 500 m/s\ndistance: 4,375 m\ntopspeedtime: 0.5 s\nturnrate: 14.8 G\n\n: Stage Trigger at 2,000m from Target (Limited By Seeker Range)\n\nterminals: None\n\nwarhead: detail blastfrag\narmordamage: 0.36cm\ncomponentdamage: 113.74hp\nblastradius: 81 m\n\nhealth: 25 \nwallthickness: 0.05\nprogtime: 10 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "8",
+  "body": "SGM-H-2 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Steerable Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "true"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveSeekerSettings",
+    "key": "Wake-Homing Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "true"
+    }
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Defensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=16843008, HybridSalvo=16843008, CraftSalvo=16843008, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "5",
+    "type": "",
+    "key": "Blast Fragmentation",
+    "settings": {}
+   },
+   {
+    "size": "3",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-H-302 Bau Bau.missile",
+  "name": "SGM-H-302 Bau Bau",
+  "designation": "SGM-H-302",
+  "nickname": "Bau Bau",
+  "description": "mode direct - mode command abbrev/mode arad pulsed abbrev(RADAR) - short heimpact",
+  "long": "The SGM-H-302 Bau Bau is a size 3 direct guidance missile. It is based on the SGM-H-3 body, which is a high speed hybrid missile designed to strike heavy targets. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using command guidance from its launching ship. If the primary seeker does not find a target or is jammed, it can fall back on a Radar Anti-Radiation seeker.\n\ncontrolmethod: mode direct\ntargetingmode: targetingmode pos targetingmode track\n\nprimaryseeker: mode command caps (command commsnote)\nbackupseeker: ANTI-RADIATION (All RADAR Signals)\n\nCruise\nspeed: 150 m/s\ndistance: 18,306 m\ntopspeedtime: 2.2 s\nturnrate: 1.1 G\n\nSprint\nspeed: 645 m/s\ndistance: 4,939 m\ntopspeedtime: 0.8 s\nturnrate: 22.9 G\n\n: Stage Trigger at 4,000m from Target (Limited By Seeker Range)\n\nterminals: Weave\n(terminals warn range)\n\nwarhead: detail heimpact\narmordamage: 88cm\ncomponentdamage: 2,592hp\nblastangle: 70 deg\ndamageperfragment: 50.0\n\nhealth: 60 \nwallthickness: 0.05\nprogtime: 16 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "19",
+  "body": "SGM-H-3 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "CommandSeekerSettings",
+    "key": "Command Receiver",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveARHSeekerSettings",
+    "key": "Fixed Anti-Radiation Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "TargetType": "All"
+    }
+   },
+   {
+    "size": "1",
+    "type": "",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "Weave",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=0, HybridSalvo=0, CraftSalvo=0, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "6",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "4",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-H-312 template.missile",
+  "name": "SGM-H-312 template",
+  "designation": "SGM-H-312",
+  "nickname": "template",
+  "description": "mode cruise - mode active abbrev(RADAR)/mode arad pulsed abbrev(RADAR) - short heimpact",
+  "long": "The SGM-H-312 template is a size 3 waypoint-capable cruise missile. It is based on the SGM-H-3 body, which is a high speed hybrid missile designed to strike heavy targets. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using an Active Radar seeker. If the primary seeker does not find a target or is jammed, it can fall back on a Radar Anti-Radiation seeker.\n\ncontrolmethod: mode cruise long\ntargetingmode: targetingmode pos targetingmode track[+targetingmode trp]\n\nprimaryseeker: mode active caps RADAR\nbackupseeker: ANTI-RADIATION (All RADAR Signals)\n\nCruise\nspeed: 150 m/s\ndistance: 20,050 m\ntopspeedtime: 2.3 s\nturnrate: 1.0 G\n\nSprint\nspeed: 725 m/s\ndistance: 6,101 m\ntopspeedtime: 0.9 s\nturnrate: 23.0 G\n\n: Stage Trigger at 3,000m from Target (Limited By Seeker Range)\n\nterminals: Corkscrew\n(terminals warn range)\n\nwarhead: detail heimpact\narmordamage: 80cm\ncomponentdamage: 2,160hp\nblastangle: 70 deg\ndamageperfragment: 50.0\n\nhealth: 60 \nwallthickness: 0.05\nprogtime: 16 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "22",
+  "body": "SGM-H-3 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "ActiveSeekerSettings",
+    "key": "Steerable Active Radar Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "DetectPDTargets": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveARHSeekerSettings",
+    "key": "Fixed Anti-Radiation Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "TargetType": "All"
+    }
+   },
+   {
+    "size": "1",
+    "type": "",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "CruiseGuidanceSettings",
+    "key": "Cruise Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "Corkscrew",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=0, HybridSalvo=0, CraftSalvo=0, FarthestFirst=false"
+    }
+   },
+   {
+    "size": "5",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "5",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGM-H-313 template II.missile",
+  "name": "SGM-H-313 template II",
+  "designation": "SGM-H-313",
+  "nickname": "template II",
+  "description": "mode direct - mode command abbrev/mode arad hoj abbrev(RADAR) - short hekp",
+  "long": "The SGM-H-313 template II is a size 3 direct guidance missile. It is based on the SGM-H-3 body, which is a high speed hybrid missile designed to strike heavy targets. This missile will deliver a Delayed Contact Fuze, High Explosive, Kinetic Penetrator warhead. It homes in on its target using command guidance from its launching ship. If the primary seeker does not find a target or is jammed, it can fall back on a Radar Home-on-Jam seeker.\n\ncontrolmethod: mode direct\ntargetingmode: targetingmode pos targetingmode track\n\nprimaryseeker: mode command caps (command commsnote)\nbackupseeker: HOME-ON-JAM (RADAR JAMMING Signals Only)\n\nCruise\nspeed: 200 m/s\ndistance: 15,667 m\ntopspeedtime: 3.3 s\nturnrate: 0.7 G\n\nSprint\nspeed: 830 m/s\ndistance: 4,994 m\ntopspeedtime: 1.0 s\nturnrate: 25.0 G\n\n: Stage Trigger at 4,000m from Target (Limited By Seeker Range)\n\nterminals: Weave\n(terminals warn range)\n\nwarhead: detail hekp\n\npenetrator\narmordamage: 544 cm\ncomponentdamage: 212 hp\n\nexplosive\ncomponentdamage: 3,600 hp\n\nhealth: 60 \nwallthickness: 0.05\nprogtime: 16 s\nradarsig: 100 %\nboosttime: 3 s\nbooststrafe: 100 %\nboostturn: 100 %\nfailrate: 0 %",
+  "cost": "46",
+  "body": "SGM-H-3 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "CommandSeekerSettings",
+    "key": "Command Receiver",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveARHSeekerSettings",
+    "key": "Fixed Anti-Radiation Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "TargetType": "JammingOnly"
+    }
+   },
+   {
+    "size": "1",
+    "type": "",
+    "key": "Decoy Launcher",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "Weave",
+     "DefensiveDoctrine": "Mode=Uniform, TargetSizeMask=12, TargetType=All, TargetSizeOrdering=Descending, SalvoSize=0, ConvSalvo=16843008, HybridSalvo=16843008, CraftSalvo=16843008, FarthestFirst=false",
+     "ApproachAngleControl": "true"
+    }
+   },
+   {
+    "size": "5",
+    "type": "",
+    "key": "HE Kinetic Penetrator",
+    "settings": {}
+   },
+   {
+    "size": "5",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   },
+   {
+    "size": "1",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ },
+ {
+  "file": "SGT-300 Fang (Imported).missile",
+  "name": "SGT-300 Fang (Imported)",
+  "designation": "SGT-300",
+  "nickname": "Fang (Imported)",
+  "description": "DIRECT - CMD/HOJ(RADAR) - HE SHAPED",
+  "long": "The SGT-300 Fang (Imported) is a size 3 direct guidance missile. It is based on the SGT-3 body, which is a heavy anti-ship torpedo. This missile will deliver a Contact Fuze, High Explosive, Shaped warhead. It homes in on its target using command guidance from its launching ship If the primary seeker does not find a target or is jammed, it can fall back on a Radar Home-on-Jam seeker.\n\nControl Method: DIRECT\nTargeting Modes:\n POSITION TRACK\nPrimary Seeker: COMMAND (Requires COMMS Enabled)\nBackup Seeker(s): HOME-ON-JAM (RADAR JAMMING Signals Only)\n\n244 m/s for 4,674 m, top speed in 1.5 s\nTerminal Maneuvers: None\n\nContact Fuze, High Explosive, Shaped\nArmor: 93cm Component: 2,880hp\nBlast Angle: 70 deg\nDamage Per Fragment: 50.0\n\nBody Integrity: 160 \nProgramming Time: 3 s\nRadar Signature Bonus: 100 %\nBoost-Phase Duration: 3 s\nBoost-Phase Strafe: 100 %\nBoost-Phase Turn Rate: 100 %\nFailure Rate: 0 %",
+  "cost": "9",
+  "body": "SGT-3 Body",
+  "sockets": [
+   {
+    "size": "1",
+    "type": "CommandSeekerSettings",
+    "key": "Command Receiver",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false"
+    }
+   },
+   {
+    "size": "1",
+    "type": "PassiveARHSeekerSettings",
+    "key": "Fixed Anti-Radiation Seeker",
+    "settings": {
+     "Mode": "Targeting",
+     "RejectUnvalidated": "false",
+     "TargetType": "JammingOnly"
+    }
+   },
+   {
+    "size": "1",
+    "type": "DirectGuidanceSettings",
+    "key": "Direct Guidance",
+    "settings": {
+     "Role": "Offensive",
+     "HotLaunch": "false",
+     "SelfDestructOnLost": "false",
+     "Maneuvers": "None",
+     "DefensiveDoctrine": "TargetSizeMask=12, TargetSizeOrdering=Descending, SalvoSize=0, FarthestFirst=false",
+     "ApproachAngleControl": "false"
+    }
+   },
+   {
+    "size": "4",
+    "type": "",
+    "key": "HE Impact",
+    "settings": {}
+   },
+   {
+    "size": "10",
+    "type": "MissileEngineSettings",
+    "key": "",
+    "settings": {}
+   }
+  ]
+ }
+]

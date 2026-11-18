@@ -1,0 +1,9331 @@
+{
+ "page": "Components - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Components",
+ "category": "component",
+ "slug": "components",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [
+  {
+   "name": "CR10 Antenna",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "CR10 Antenna",
+    "Category": "Communications",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "4",
+    "Required Power (kW)": "250",
+    "Cost (pts)": "5",
+    "Ability": "Serves as a backup antenna, Note that the most powerful antenna array on a warship will serve as the active communications path, even if the integrated array is still functional.",
+    "Faction (wiki logo)": "Shelter Alliance (SA); Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "CR70 Antenna",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "CR70 Antenna",
+    "Category": "Communications",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "250",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "7",
+    "Required Power (kW)": "600",
+    "Cost (pts)": "15",
+    "Ability": "Serves as the active antenna when its 1250 kW transmit power exceeds that of the ship's other functional arrays; otherwise it provides a backup. The most powerful functional antenna is the active communications path.",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "E15 'Masquerade' Signature Booster",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "E15 'Masquerade' Signature Booster",
+    "Category": "EWar",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "5",
+    "Required Power (kW)": "600",
+    "Cost (pts)": "20",
+    "Ability": "Radar Signature: set to the chosen identity's cross-section, never reduced. A Sprinter imitating a Solomon is about +864% (289 to 2787 in signature units). Imitating an equal or smaller class is +0%.",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "E55 'Spotlight' Illuminator",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "E55 'Spotlight' Illuminator",
+    "Category": "EWar",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "2",
+    "Required Power (kW)": "750",
+    "Cost (pts)": "15",
+    "Ability": "Illuminator; burst duration (emitters): 90s; Cooldown Time (emitters): 60s; overheat damage chance: 8.5%; - range:12000 m; beam width: 5 deg; radiated power: 1000 kW; gain: 60 dB +10% Radar Signature",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "E55 'Floodlight' Illuminator",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "E55 'Floodlight' Illuminator",
+    "Category": "EWar",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "2",
+    "Required Power (kW)": "1500",
+    "Cost (pts)": "15",
+    "Ability": "Illuminator; burst duration (emitters): 90s; Cooldown Time (emitters): 60s; overheat damage chance: 8.5%; - range:10000 m; beam width: 40 deg; radiated power: 3250 kW; gain: 40 dB +10% Radar Signature",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "E70 'Interruption' Jammer",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "E70 'Interruption' Jammer",
+    "Category": "EWar",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "5",
+    "Required Power (kW)": "600",
+    "Cost (pts)": "55",
+    "Ability": "Jammer - type: COMM; burst duration (emitters): 180s; Cooldown Time (emitters): 60s; overheat damage chance: 5%; range: 4000 m; radiated power: 750 kW; gain: 1 dB; Omnidirectional",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "E71 'Hangup' Jammer",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "E71 'Hangup' Jammer",
+    "Category": "EWar",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "2",
+    "Required Power (kW)": "500",
+    "Cost (pts)": "45",
+    "Ability": "Jammer - type: COMM; burst duration (emitters): 120s; Cooldown Time (emitters): 60s; overheat damage chance: 5%; range: 20000 m; radiated power: 300 kW; gain: 25 dB; beam width: 20 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "E90 'Blanket' Jammer",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "E90 'Blanket' Jammer",
+    "Category": "EWar",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "2",
+    "Required Power (kW)": "1000",
+    "Cost (pts)": "50",
+    "Ability": "Jammer - type: RADAR; burst duration (emitters): 90s; Cooldown Time (emitters): 60s; overheat damage chance: 10%; range: 10000 m; radiated power: 1 kW; gain: 20 dB; beam width: 40 deg +10% Radar Signature",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "ES22 'Pinard' Electronic Support Module",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "ES22 'Pinard' Electronic Support Module",
+    "Category": "Sensors",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "50",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "200",
+    "Cost (pts)": "30",
+    "Ability": "Passive detection of enemy Radar emissions out to 125% of that radar's maximum range (less off its main lobe). Coverage is the hemisphere above the mount.",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "RF101 'Bullseye' Radar",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "RF101 'Bullseye' Radar",
+    "Category": "Sensors",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "70",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "2",
+    "Required Power (kW)": "300",
+    "Cost (pts)": "40",
+    "Ability": "Fire Control Radar; FOV: 20 deg; Max Range: 9km; Radiated power: 1500 kW; Gain: 80dB; Aperture size: 20m2; Positional Error: 2m; Velocity Error 0 m/s",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "E20 'Lighthouse' Illuminator",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "E20 'Lighthouse' Illuminator",
+    "Category": "EWar",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "2",
+    "Required Power (kW)": "600",
+    "Cost (pts)": "15",
+    "Ability": "Illuminator; burst duration (emitters): 60s; Cooldown Time (emitters): 45s; overheat damage chance: 8.5%; - range:10000 m; beam width: 5 deg; radiated power: 900 kW; gain: 50 dB +10% Radar Signature",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "J15 'Bellbird' Jammer",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "J15 'Bellbird' Jammer",
+    "Category": "EWar",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "2",
+    "Required Power (kW)": "850",
+    "Cost (pts)": "50",
+    "Ability": "Jammer - type: RADAR; burst duration (emitters): 45s; Cooldown Time (emitters): 60s; overheat damage chance: 15%; range: 10000 m; radiated power: 1.25 kW; gain: 20 dB",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "J360 'Lyrebird' Jammer",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "J360 'Lyrebird' Jammer",
+    "Category": "EWar",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "10",
+    "Required Power (kW)": "500",
+    "Cost (pts)": "75",
+    "Ability": "Jammer - type: RADAR; burst duration (emitters): 180s; Cooldown Time (emitters): 60s; overheat damage chance: 5%; range: 4000 m; radiated power: 10 kW; gain: 2 dB",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "J75 'Warbler' Jammer",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "J75 'Warbler' Jammer",
+    "Category": "EWar",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "10",
+    "Required Power (kW)": "500",
+    "Cost (pts)": "50",
+    "Ability": "Jammer - type: COMM; burst duration (emitters): 40s; Cooldown Time (emitters): 30s; overheat damage chance: 5%; range: 2500 m; radiated power: 1250 kW; gain: 1 dB",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "L50 'Blackjack' Laser Dazzler",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "L50 'Blackjack' Laser Dazzler",
+    "Category": "EWar",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "2",
+    "Required Power (kW)": "750",
+    "Cost (pts)": "40",
+    "Ability": "Jammer - type: EO; burst duration (emitters): 90s; Cooldown Time (emitters): 60s; overheat damage chance: 10%; range: 8000 m; radiated power: 100 kW; gain: 20 dB Weapon - role: dual-purpose; turret traverse rate: 80 deg/s; turret elevation rate: 80 deg/s; elevation limits: +89deg, -5 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "RF44 'Pinpoint' Radar",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "RF44 'Pinpoint' Radar",
+    "Category": "Sensors",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "70",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "2",
+    "Required Power (kW)": "250",
+    "Cost (pts)": "10",
+    "Ability": "Fire Control Radar; FOV: 20 deg; Max Range: 6.5km; Radiated power: 1500 kW; Gain: 60dB; Aperture size: 40m2; Positional Error: 3m; Velocity Error 0 m/s",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "R400 'Bloodhound' LRT Radar",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "R400 'Bloodhound' LRT Radar",
+    "Category": "Sensors",
+    "Dimensions": "2x5x2",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "0",
+    "Required Power (kW)": "3000",
+    "Cost (pts)": "15",
+    "Ability": "Long-range tracking Radar: manually directed 10 deg cone, no continuous scan, cannot lock",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "R550 Early Warning Radar",
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "fields": {
+    "Mount": "R550 Early Warning Radar",
+    "Category": "Sensors",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "10",
+    "Required Power (kW)": "4500",
+    "Cost (pts)": "40",
+    "Ability": "Early-warning Radar: manually directed 45 deg cone, no continuous scan, cannot lock, positional error 150 m, large side and back lobes",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Large Mounted Hangar",
+   "section": "Mounts › Flight Support",
+   "fields": {
+    "Mount": "Large Mounted Hangar",
+    "Dimensions": "8x7x8",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "0",
+    "Required Power (kW)": "1",
+    "Cost (pts)": "10",
+    "Can Draw From Internal Hangars": "Yes[1]",
+    "Ability": "Launches and stores up to 4 size 1 craft. Adds 3 additional pre-flight slots",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Medium Mounted Hangar",
+   "section": "Mounts › Flight Support",
+   "fields": {
+    "Mount": "Medium Mounted Hangar",
+    "Dimensions": "6x4x6",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "0",
+    "Required Power (kW)": "1",
+    "Cost (pts)": "10",
+    "Can Draw From Internal Hangars": "Yes[2]",
+    "Ability": "Launches and stores up to 2 size 1 craft. Adds 1 additional pre-flight slot",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Small Mounted Hangar",
+   "section": "Mounts › Flight Support",
+   "fields": {
+    "Mount": "Small Mounted Hangar",
+    "Dimensions": "6x4x6",
+    "Hitpoints": "300",
+    "Damage Threshold": "20",
+    "Mass (Tonnes)": "0",
+    "Required Power (kW)": "1",
+    "Cost (pts)": "10",
+    "Can Draw From Internal Hangars": "Yes",
+    "Ability": "Launches and stores 1 size 1 craft.",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Container Bank Hangar",
+   "section": "Mounts › Flight Support",
+   "fields": {
+    "Mount": "Container Bank Hangar",
+    "Dimensions": "20x5x20",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "0",
+    "Required Power (kW)": "1",
+    "Cost (pts)": "100",
+    "Can Draw From Internal Hangars": "Yes",
+    "Ability": "Launches and stores at minimum 16 craft.",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "VLS-1-23 Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "VLS-1-23 Launcher",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "50",
+    "Cost (pts)": "5",
+    "Missile Size": "1",
+    "Capacity (cells, minimum)": "23",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Shelter Alliance (SA); Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "VLS-1-46 Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "VLS-1-46 Launcher",
+    "Dimensions": "3x2x3",
+    "Hitpoints": "125",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "10",
+    "Required Power (kW)": "50",
+    "Cost (pts)": "5",
+    "Missile Size": "1",
+    "Capacity (cells, minimum)": "46",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Shelter Alliance (SA); Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "VLS-2 Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "VLS-2 Launcher",
+    "Dimensions": "3x4x3",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "5",
+    "Required Power (kW)": "200",
+    "Cost (pts)": "10",
+    "Missile Size": "2",
+    "Capacity (cells, minimum)": "16 (Class 2)",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "VLS-3 Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "VLS-3 Launcher",
+    "Dimensions": "3x4x3",
+    "Hitpoints": "250",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "20",
+    "Required Power (kW)": "200",
+    "Cost (pts)": "20",
+    "Missile Size": "3",
+    "Capacity (cells, minimum)": "4 (Class 2)",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "CLS-3 Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "CLS-3 Launcher",
+    "Dimensions": "3x4x3",
+    "Hitpoints": "250",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "20",
+    "Required Power (kW)": "200",
+    "Cost (pts)": "20",
+    "Missile Size": "3",
+    "Capacity (cells, minimum)": "4 (Class 2)",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "TLS-3 Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "TLS-3 Launcher",
+    "Dimensions": "3x1x5",
+    "Hitpoints": "350",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "25",
+    "Required Power (kW)": "250",
+    "Cost (pts)": "20",
+    "Missile Size": "3",
+    "Capacity (cells, minimum)": "6 (Class 3)",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "RL18 Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "RL18 Launcher",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "8",
+    "Required Power (kW)": "50",
+    "Cost (pts)": "30",
+    "Missile Size": "2",
+    "Capacity (cells, minimum)": "18",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "RL36 Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "RL36 Launcher",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "175",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "13",
+    "Required Power (kW)": "75",
+    "Cost (pts)": "30",
+    "Missile Size": "2",
+    "Capacity (cells, minimum)": "36",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "MLS-2 Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "MLS-2 Launcher",
+    "Dimensions": "2x2x5",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "7.5",
+    "Required Power (kW)": "50",
+    "Cost (pts)": "15",
+    "Missile Size": "2",
+    "Capacity (cells, minimum)": "4 (Magazine-fed)",
+    "Catastrophic Event probability (%)": "0%",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "MLS-3 Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "MLS-3 Launcher",
+    "Dimensions": "2x2x5",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "15",
+    "Required Power (kW)": "50",
+    "Cost (pts)": "15",
+    "Missile Size": "3",
+    "Capacity (cells, minimum)": "2 (Magazine-fed)",
+    "Catastrophic Event probability (%)": "0%",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "SALS-2 'Ward' Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "SALS-2 'Ward' Launcher",
+    "Dimensions": "3x4x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "10",
+    "Required Power (kW)": "50",
+    "Cost (pts)": "5",
+    "Missile Size": "2",
+    "Capacity (cells, minimum)": "1 (Magazine-fed)",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "TALS-2 'Talisman' Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "TALS-2 'Talisman' Launcher",
+    "Dimensions": "3x4x5",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "15",
+    "Required Power (kW)": "50",
+    "Cost (pts)": "10",
+    "Missile Size": "2",
+    "Capacity (cells, minimum)": "2 (Magazine-fed)",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "ML-9 'Mine' Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "ML-9 'Mine' Launcher",
+    "Dimensions": "3x2x3",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "7.5",
+    "Required Power (kW)": "100",
+    "Cost (pts)": "10",
+    "Missile Size": "3",
+    "Capacity (cells, minimum)": "5",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Container Stack Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "Container Stack Launcher",
+    "Dimensions": "6x1x6",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "50",
+    "Cost (pts)": "5",
+    "Missile Size": "4",
+    "Capacity (cells, minimum)": "2",
+    "Catastrophic Event probability (%)": "5%",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Container Bank Launcher",
+   "section": "Mounts › Missile Launchers",
+   "fields": {
+    "Weapon": "Container Bank Launcher",
+    "Dimensions": "20x5x10",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "50",
+    "Required Power (kW)": "200",
+    "Cost (pts)": "25",
+    "Missile Size": "4",
+    "Capacity (cells, minimum)": "48",
+    "Catastrophic Event probability (%)": "35%",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Mk20 'Defender' PDT",
+   "section": "Mounts › Point defense weapons",
+   "fields": {
+    "Weapon": "Mk20 'Defender' PDT",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "175",
+    "Cost (pts)": "25",
+    "Integrated FC": "Yes",
+    "Optical Backup": "No",
+    "Ammo": "Ballistic/Chemical - 20mm",
+    "Accuracy": "3m@1km",
+    "Turret": "traverse/elevation: 100 deg/s elevation limits: +89 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk25 'Rebound' PDT",
+   "section": "Mounts › Point defense weapons",
+   "fields": {
+    "Weapon": "Mk25 'Rebound' PDT",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "20",
+    "Cost (pts)": "15",
+    "Integrated FC": "No",
+    "Optical Backup": "Yes",
+    "Ammo": "Ballistic/Chemical/Timed - 50mm",
+    "Accuracy": "35m@1km",
+    "Turret": "traverse/elevation: 80 deg/s elevation limits: +89 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk29 'Stonewall' PDT",
+   "section": "Mounts › Point defense weapons",
+   "fields": {
+    "Weapon": "Mk29 'Stonewall' PDT",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "7",
+    "Required Power (kW)": "40",
+    "Cost (pts)": "30",
+    "Integrated FC": "No",
+    "Optical Backup": "Yes",
+    "Ammo": "Ballistic/Chemical/Timed - 50mm",
+    "Accuracy": "35m@1km",
+    "Turret": "traverse/elevation: 30 deg/s elevation limits: +89 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk90 'Aurora' PDT",
+   "section": "Mounts › Point defense weapons",
+   "fields": {
+    "Weapon": "Mk90 'Aurora' PDT",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "1250",
+    "Cost (pts)": "55",
+    "Integrated FC": "Yes",
+    "Optical Backup": "No",
+    "Ammo": "laser",
+    "Accuracy": "[email protected] 1m@3km",
+    "Turret": "traverse/elevation: 100 deg/s elev. limit: +85 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk95 'Sarissa' PDT",
+   "section": "Mounts › Point defense weapons",
+   "fields": {
+    "Weapon": "Mk95 'Sarissa' PDT",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "7",
+    "Required Power (kW)": "1250",
+    "Cost (pts)": "65",
+    "Integrated FC": "Yes",
+    "Optical Backup": "Yes",
+    "Ammo": "Ballistic/Magnetic - 15mm",
+    "Accuracy": "3m@3km 5m@6km",
+    "Turret": "traverse/elevation: 30 deg/s elev. limit: +65 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "P11 'Pavise' PDT",
+   "section": "Mounts › Point defense weapons",
+   "fields": {
+    "Weapon": "P11 'Pavise' PDT",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "4",
+    "Required Power (kW)": "150",
+    "Cost (pts)": "20",
+    "Integrated FC": "Yes",
+    "Optical Backup": "No",
+    "Ammo": "Ballistic/Chemical - 20mm",
+    "Accuracy": "5m@1km",
+    "Turret": "traverse/elevation: 100 deg/s elev. limit: +89 deg, -5 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "P20 'Bastion' PDT",
+   "section": "Mounts › Point defense weapons",
+   "fields": {
+    "Weapon": "P20 'Bastion' PDT",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "7",
+    "Required Power (kW)": "40",
+    "Cost (pts)": "15",
+    "Integrated FC": "No",
+    "Optical Backup": "Yes",
+    "Ammo": "Ballistic/Chemical/Timed - 50mmBallistic/Chemical/Timed - 50mm",
+    "Accuracy": "52m@1km",
+    "Turret": "traverse/elevation: 30 deg/s elev. limit: +89 deg, -5 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "P60 'Grazer' PDT",
+   "section": "Mounts › Point defense weapons",
+   "fields": {
+    "Weapon": "P60 'Grazer' PDT",
+    "Dimensions": "2x1x2",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "1500",
+    "Cost (pts)": "35",
+    "Integrated FC": "Yes",
+    "Optical Backup": "Yes",
+    "Ammo": "laser",
+    "Accuracy": "[email protected] 0m@1km",
+    "Turret": "traverse/elevation: 100 deg/s elev. limit: +85 deg, -5 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Mk61 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "Mk61 Cannon",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "50",
+    "Cost (pts)": "10",
+    "Role": "Dual-Purpose",
+    "Ammo": "Ballistic/Chemical - 120mm",
+    "Accuracy": "[email protected] 9m@5km",
+    "Recycle Time (s)": "1",
+    "Autoloader Capacity": "1",
+    "Reload time (s)": "5.5",
+    "Turret / Casemate": "traverse: 35 deg/s elevation: 35 deg/s elev. limit: +70 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk62 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "Mk62 Cannon",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "6",
+    "Required Power (kW)": "50",
+    "Cost (pts)": "20",
+    "Role": "Dual-Purpose",
+    "Ammo": "Ballistic/Chemical - 120mm",
+    "Accuracy": "[email protected] 9m@5km",
+    "Recycle Time (s)": "1",
+    "Autoloader Capacity": "1",
+    "Reload time (s)": "4",
+    "Turret / Casemate": "traverse: 35 deg/s elevation: 35 deg/s elev. limit: +70 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk64 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "Mk64 Cannon",
+    "Dimensions": "3x1x5",
+    "Hitpoints": "225",
+    "Damage Threshold": "20",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "125",
+    "Cost (pts)": "30",
+    "Role": "Dual-Purpose",
+    "Ammo": "Ballistic/Chemical - 250mm",
+    "Accuracy": "[email protected] 26m@5km [email protected]",
+    "Recycle Time (s)": "0",
+    "Autoloader Capacity": "1",
+    "Reload time (s)": "10",
+    "Turret / Casemate": "traverse: 12.5 deg/s elevation: 18 deg/s elev. limit: +40 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk65 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "Mk65 Cannon",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "450",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "12",
+    "Required Power (kW)": "180",
+    "Cost (pts)": "40",
+    "Role": "Dual-Purpose",
+    "Ammo": "Ballistic/Chemical - 250mm; Ballistic/Chemical/Timed - 250mm",
+    "Accuracy": "[email protected] 35m@5km [email protected]",
+    "Recycle Time (s)": "0.5",
+    "Autoloader Capacity": "3",
+    "Reload time (s)": "13",
+    "Turret / Casemate": "traverse: 7.5 deg/s elevation: 15 deg/s elev. limit: +40 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk66 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "Mk66 Cannon",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "450",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "25",
+    "Required Power (kW)": "200",
+    "Cost (pts)": "45",
+    "Role": "Offensive",
+    "Ammo": "Ballistic/Chemical - 450mm",
+    "Accuracy": "44m@5km 87m@10km",
+    "Recycle Time (s)": "0.5",
+    "Autoloader Capacity": "2",
+    "Reload time (s)": "20",
+    "Turret / Casemate": "traverse: 7.5 deg/s elevation: 15 deg/s elev. limit: +40 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk68 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "Mk68 Cannon",
+    "Dimensions": "8x5x8",
+    "Hitpoints": "550",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "40",
+    "Required Power (kW)": "225",
+    "Cost (pts)": "75",
+    "Role": "Offensive",
+    "Ammo": "Ballistic/Chemical - 450mm",
+    "Accuracy": "44m@5km 87m@10km",
+    "Recycle Time (s)": "0.5",
+    "Autoloader Capacity": "3",
+    "Reload time (s)": "20",
+    "Turret / Casemate": "traverse: 7.5 deg/s elevation: 15 deg/s elev. limit: +40 deg, -5 deg",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk81 Railgun",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "Mk81 Railgun",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "125",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "20",
+    "Required Power (kW)": "1500",
+    "Cost (pts)": "75",
+    "Role": "Offensive",
+    "Ammo": "Ballistic/Magnetic - 300mm",
+    "Accuracy": "13m@5km 26m@10km 52m@20km",
+    "Recycle Time (s)": "2.5",
+    "Autoloader Capacity": "3",
+    "Reload time (s)": "100",
+    "Turret / Casemate": "traverse: 6 deg/s elevation: 5 deg/s elev. limit: +25 deg, -3 deg +1000% Radar Signature for 18 seconds after firing",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "C30 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "C30 Cannon",
+    "Dimensions": "2x5x2",
+    "Hitpoints": "350",
+    "Damage Threshold": "20",
+    "Mass (Tonnes)": "15",
+    "Required Power (kW)": "100",
+    "Cost (pts)": "20",
+    "Role": "Offensive",
+    "Ammo": "Ballistic/Chemical - 100mm; Ballistic/Canister - 100mm",
+    "Accuracy": "[email protected] 17m@5km",
+    "Recycle Time (s)": "1",
+    "Autoloader Capacity": "24",
+    "Reload time (s)": "30",
+    "Turret / Casemate": "traverse: 20 deg/s elevation: 0 deg/s trav. limit: +45 deg, -45 deg; elev. limit: 0 deg, 0 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "C53 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "C53 Cannon",
+    "Dimensions": "2x4x2",
+    "Hitpoints": "300",
+    "Damage Threshold": "20",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "100",
+    "Cost (pts)": "10",
+    "Role": "Offensive",
+    "Ammo": "Ballistic/Chemical - 250mm; Ballistic/Chemical/Timed - 250mm",
+    "Accuracy": "[email protected] 26m@5km [email protected]",
+    "Recycle Time (s)": "2",
+    "Autoloader Capacity": "8",
+    "Reload time (s)": "50",
+    "Turret / Casemate": "traverse: 10 deg/s elevation: 10 deg/s elev. limit: +35 deg, -35 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "C56 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "C56 Cannon",
+    "Dimensions": "4x6x4",
+    "Hitpoints": "350",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "100",
+    "Cost (pts)": "20",
+    "Role": "Offensive",
+    "Ammo": "Ballistic/Chemical - 250mm; Ballistic/Chemical/Timed - 250mm",
+    "Accuracy": "[email protected] 26m@5km [email protected]",
+    "Recycle Time (s)": "2",
+    "Autoloader Capacity": "15",
+    "Reload time (s)": "70",
+    "Turret / Casemate": "traverse: 10 deg/s elevation: 10 deg/s elev. limit: +35 deg, -35 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "C65 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "C65 Cannon",
+    "Dimensions": "6x10x6",
+    "Hitpoints": "500",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Required Power (kW)": "300",
+    "Cost (pts)": "40",
+    "Role": "Offensive",
+    "Ammo": "Ballistic/Chemical - 450mm",
+    "Accuracy": "35m@5km 70m@10km",
+    "Recycle Time (s)": "4",
+    "Autoloader Capacity": "8",
+    "Reload time (s)": "90",
+    "Turret / Casemate": "traverse: 5 deg/s elevation: 0 deg/s trav. limit: +25 deg, -25 deg; elev. limit: 0 deg, 0 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "C90 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "C90 Cannon",
+    "Dimensions": "6x12x6",
+    "Hitpoints": "500",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "59",
+    "Required Power (kW)": "200",
+    "Cost (pts)": "60",
+    "Role": "Offensive",
+    "Ammo": "Ballistic/Chemical - 600mm; Ballistic/Chemical/Timed - 600mm",
+    "Accuracy": "22m@5km 44m@10km",
+    "Recycle Time (s)": "Single Shot",
+    "Autoloader Capacity": "1",
+    "Reload time (s)": "18",
+    "Turret / Casemate": "traverse: 5 deg/s elevation: 0 deg/s trav. limit: +5 deg, -5 deg; elev. limit: 0 deg, 0 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "T20 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "T20 Cannon",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "30",
+    "Cost (pts)": "15",
+    "Role": "Dual-Purpose",
+    "Ammo": "Ballistic/Chemical - 100mm; Ballistic/Canister - 100mm",
+    "Accuracy": "[email protected] 9m@5km",
+    "Recycle Time (s)": "1",
+    "Autoloader Capacity": "4",
+    "Reload time (s)": "15",
+    "Turret / Casemate": "traverse: 35 deg/s elevation: 35 deg/s elev. limit: +80 deg, -5 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "T30 Cannon",
+   "section": "Mounts › Projectile weapons",
+   "fields": {
+    "Weapon": "T30 Cannon",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "200",
+    "Damage Threshold": "25",
+    "Mass (Tonnes)": "50",
+    "Required Power (kW)": "120",
+    "Cost (pts)": "20",
+    "Role": "Dual-Purpose",
+    "Ammo": "Ballistic/Chemical - 100mm; Ballistic/Canister - 100mm",
+    "Accuracy": "[email protected] 17m@5km",
+    "Recycle Time (s)": "1",
+    "Autoloader Capacity": "16",
+    "Reload time (s)": "30",
+    "Turret / Casemate": "traverse: 20 deg/s elevation: 20 deg/s elev. limit: +75 deg, -5 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Mk610 Beam Turret",
+   "section": "Mounts › Energy weapons",
+   "fields": {
+    "Weapon": "Mk610 Beam Turret",
+    "Dimensions": "8x5x8",
+    "Hitpoints": "400",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "50",
+    "Required Power (kW)": "3000",
+    "Cost (pts)": "80",
+    "Ammo": "Beam",
+    "Accuracy": "[email protected] 0m@5km",
+    "Reload time (s)": "45",
+    "Recycle Time (s)": "N/A[3]",
+    "Autoloader Capacity / Burst Duration": "7.5 sec",
+    "Turret / Casemate": "traverse: 5 deg/s elevation: 12.5 deg/s elev. limit: +20 deg, -5 deg",
+    "Properties": "range: 5000 m; armor pen: 180 cm/s; component damage: 300 hp/s; Battle Short: 60% Overheat Damage Chance",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "C81 Plasma Cannon",
+   "section": "Mounts › Energy weapons",
+   "fields": {
+    "Weapon": "C81 Plasma Cannon",
+    "Dimensions": "4x6x4",
+    "Hitpoints": "500",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "80",
+    "Required Power (kW)": "1200",
+    "Cost (pts)": "30",
+    "Ammo": "Ballistic/Magnetic - 400mm amploule",
+    "Accuracy": "26m@5km 52m@10km",
+    "Reload time (s)": "12",
+    "Recycle Time (s)": "1",
+    "Autoloader Capacity / Burst Duration": "1",
+    "Turret / Casemate": "traverse: 5 deg/s elevation: 0 deg/s trav. limit: +25 deg, -25 deg; elev. limit: 0 deg, 0 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "T81 Plasma Cannon",
+   "section": "Mounts › Energy weapons",
+   "fields": {
+    "Weapon": "T81 Plasma Cannon",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "300",
+    "Damage Threshold": "25",
+    "Mass (Tonnes)": "80",
+    "Required Power (kW)": "1500",
+    "Cost (pts)": "45",
+    "Ammo": "Ballistic/Magnetic - 400mm amploule",
+    "Accuracy": "44m@5km 87m@10km",
+    "Reload time (s)": "40",
+    "Recycle Time (s)": "5",
+    "Autoloader Capacity / Burst Duration": "8",
+    "Turret / Casemate": "traverse: 5 deg/s elevation: 5 deg/s elev. limit: +60 deg, -5 deg",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Mk550 Railgun",
+   "section": "Mounts › Spinal weapons",
+   "fields": {
+    "Weapon": "Mk550 Railgun",
+    "Hitpoints": "450",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "100",
+    "Required Power (kW)": "2000",
+    "Ammo": "Ballistic/Magnetic - 300mm",
+    "Cost (pts)": "75",
+    "Reload Time (s)": "15 s",
+    "Accuracy": "11m@5km 13m@10km 45m@20km",
+    "Autoloader Capacity / Burst Duration": "Single Shot",
+    "Casemate": "+0 deg., -0 deg.",
+    "Properties": "+1200% Radar Signature for 18 seconds after firing",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mk600 Beam Cannon",
+   "section": "Mounts › Spinal weapons",
+   "fields": {
+    "Weapon": "Mk600 Beam Cannon",
+    "Hitpoints": "450",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "100",
+    "Required Power (kW)": "3000",
+    "Ammo": "Beam",
+    "Cost (pts)": "75",
+    "Reload Time (s)": "30 s",
+    "Accuracy": "0m@3km 0m@6km",
+    "Autoloader Capacity / Burst Duration": "7.5 s Battle Short Available: 60% Overheat Damage Chance",
+    "Casemate": "+0 deg., -0 deg.",
+    "Properties": "range: 6000 m; armor penetration: 180 cm/s; component damage: 300 hp/s",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "TE45 Mass Driver",
+   "section": "Mounts › Spinal weapons",
+   "fields": {
+    "Weapon": "TE45 Mass Driver",
+    "Hitpoints": "150",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "100",
+    "Required Power (kW)": "4250",
+    "Ammo": "Ballistic/Magnetic - 500mm",
+    "Cost (pts)": "100",
+    "Reload Time (s)": "25 s",
+    "Accuracy": "11m@5km 13m@10km 45m@20km",
+    "Autoloader Capacity / Burst Duration": "Single Shot",
+    "Casemate": "+0 deg., -0 deg.",
+    "Properties": "+1500% Radar Signature for 20 seconds after firing",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Plant Control Center",
+   "section": "Compartments",
+   "fields": {
+    "Compartment": "Plant Control Center",
+    "Category": "Engineering",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "7",
+    "Reinforced": "No",
+    "Cost (pts)": "25",
+    "Effects": "+20% Powerplant Efficiency"
+   }
+  },
+  {
+   "name": "Jury-Rigged Reactor",
+   "section": "Compartments",
+   "fields": {
+    "Compartment": "Jury-Rigged Reactor",
+    "Category": "Powerplant",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "300",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "100",
+    "Reinforced": "No",
+    "Cost (pts)": "20",
+    "Effects": "+25% Reload Time (Energy) +2500 kW Power 30% Catastrophic Event Probability (Reactor)",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Analysis Annex",
+   "section": "Compartments",
+   "fields": {
+    "Compartment": "Analysis Annex",
+    "Category": "Intelligence",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "10",
+    "Reinforced": "No",
+    "Cost (pts)": "20",
+    "Effects": "+30% Intelligence Effort -30% Intelligence Accuracy[4]"
+   }
+  },
+  {
+   "name": "Intelligence Center",
+   "section": "Compartments",
+   "fields": {
+    "Compartment": "Intelligence Center",
+    "Category": "Intelligence",
+    "Dimensions": "6x1x8",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "25",
+    "Reinforced": "No",
+    "Cost (pts)": "90",
+    "Effects": "Analyzes All Tracks Intelligence Effort: 15 Intelligence Accuracy: 15%"
+   }
+  },
+  {
+   "name": "Bulk Magazine",
+   "section": "Compartments",
+   "fields": {
+    "Compartment": "Bulk Magazine",
+    "Category": "Storage",
+    "Dimensions": "1x1x1",
+    "Hitpoints": "100",
+    "Damage Threshold": "25",
+    "Mass (Tonnes)": "1",
+    "Reinforced": "No",
+    "Cost (pts)": "0, 20 after 1x compounding cost; only the single most expensive magazine on the ship is free",
+    "Effects": "+15 m Storage Capacity per slot size 10% Catastrophic Event Probability"
+   }
+  },
+  {
+   "name": "Reinforced Magazine",
+   "section": "Compartments",
+   "fields": {
+    "Compartment": "Reinforced Magazine",
+    "Category": "Storage",
+    "Dimensions": "1x1x1",
+    "Hitpoints": "150",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "2",
+    "Reinforced": "Yes",
+    "Cost (pts)": "0, 40 after 1x compounding cost; only the single most expensive magazine on the ship is free",
+    "Effects": "+10 m Storage Capacity per slot size 4% Catastrophic Event Probability"
+   }
+  },
+  {
+   "name": "Citadel Magazine",
+   "section": "Compartments",
+   "fields": {
+    "Compartment": "Citadel Magazine",
+    "Category": "Storage",
+    "Dimensions": "1x3x1",
+    "Hitpoints": "300",
+    "Damage Threshold": "50",
+    "Mass (Tonnes)": "6",
+    "Reinforced": "Yes",
+    "Cost (pts)": "0, 150 after 1x compounding cost; only the single most expensive magazine on the ship is free",
+    "Effects": "+10 m³ Storage Capacity per 1x3x1 tile (about 3.33 m³ per unit of socket volume) 4% Catastrophic Event Probability",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Gun Plotting Center",
+   "section": "Compartments",
+   "fields": {
+    "Compartment": "Gun Plotting Center",
+    "Category": "Weapon Support",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "7",
+    "Reinforced": "No",
+    "Cost (pts)": "30",
+    "Effects": "-30% Spread -50 kW Power"
+   }
+  },
+  {
+   "name": "Strike Planning Center",
+   "section": "Compartments",
+   "fields": {
+    "Compartment": "Strike Planning Center",
+    "Category": "Weapon Support",
+    "Dimensions": "6x1x8",
+    "Hitpoints": "100",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "10",
+    "Reinforced": "No",
+    "Cost (pts)": "70",
+    "Effects": "+60% Missile Programming Speed"
+   }
+  },
+  {
+   "name": "Container Datalink Array",
+   "section": "Compartments",
+   "fields": {
+    "Compartment": "Container Datalink Array",
+    "Category": "Weapon Support",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "300",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "40",
+    "Reinforced": "No",
+    "Cost (pts)": "200",
+    "Effects": "+30% Missile Programming Speed +2 Missile Programming Channels",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Auxiliary Steering",
+   "section": "Compartments › Command",
+   "fields": {
+    "Compartment": "Auxiliary Steering",
+    "Category": "Command",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "300",
+    "Damage Threshold": "20",
+    "Mass (Tonnes)": "10",
+    "Reinforced": "Yes",
+    "Commands Enabled": "MOVE",
+    "Intelligence Effort": "0",
+    "Intelligence Accuracy (%)": "0",
+    "Cost (pts)": "10; 1x Compounding cost"
+   }
+  },
+  {
+   "name": "Basic CIC",
+   "section": "Compartments › Command",
+   "fields": {
+    "Compartment": "Basic CIC",
+    "Category": "Command",
+    "Dimensions": "4x1x6",
+    "Hitpoints": "200",
+    "Damage Threshold": "25",
+    "Mass (Tonnes)": "15",
+    "Reinforced": "No",
+    "Commands Enabled": "ALL",
+    "Intelligence Effort": "1",
+    "Intelligence Accuracy (%)": "30",
+    "Cost (pts)": "10; 1x Compounding cost"
+   }
+  },
+  {
+   "name": "Reinforced CIC",
+   "section": "Compartments › Command",
+   "fields": {
+    "Compartment": "Reinforced CIC",
+    "Category": "Command",
+    "Dimensions": "4x1x6",
+    "Hitpoints": "200",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Reinforced": "Yes",
+    "Commands Enabled": "ALL",
+    "Intelligence Effort": "1",
+    "Intelligence Accuracy (%)": "30",
+    "Cost (pts)": "25; 1x Compounding cost"
+   }
+  },
+  {
+   "name": "Citadel CIC",
+   "section": "Compartments › Command",
+   "fields": {
+    "Compartment": "Citadel CIC",
+    "Category": "Command",
+    "Dimensions": "6x1x8",
+    "Hitpoints": "400",
+    "Damage Threshold": "50",
+    "Mass (Tonnes)": "70",
+    "Reinforced": "Yes",
+    "Commands Enabled": "ALL",
+    "Intelligence Effort": "4",
+    "Intelligence Accuracy (%)": "25",
+    "Cost (pts)": "75; 1x Compounding cost"
+   }
+  },
+  {
+   "name": "Rapid DC Locker",
+   "section": "Compartments › Damage control",
+   "fields": {
+    "Compartment": "Rapid DC Locker",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "1.5",
+    "Required Power (kW)": "0",
+    "Reinforced": "No",
+    "Repair Speed (HP/sec)": "1.2",
+    "Team Move Speed": "4",
+    "Repair Teams": "1 (flying)",
+    "Restores Provided": "0",
+    "Max Repair": "0",
+    "Cost (pts)": "10"
+   }
+  },
+  {
+   "name": "Small DC Locker",
+   "section": "Compartments › Damage control",
+   "fields": {
+    "Compartment": "Small DC Locker",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "1.5",
+    "Required Power (kW)": "0",
+    "Reinforced": "No",
+    "Repair Speed (HP/sec)": "0.8",
+    "Team Move Speed": "2",
+    "Repair Teams": "2",
+    "Restores Provided": "1",
+    "Max Repair": "0",
+    "Cost (pts)": "20"
+   }
+  },
+  {
+   "name": "Large DC Locker",
+   "section": "Compartments › Damage control",
+   "fields": {
+    "Compartment": "Large DC Locker",
+    "Dimensions": "3x1x6",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "3",
+    "Required Power (kW)": "0",
+    "Reinforced": "No",
+    "Repair Speed (HP/sec)": "0.8",
+    "Team Move Speed": "2",
+    "Repair Teams": "3",
+    "Restores Provided": "2",
+    "Max Repair": "0",
+    "Cost (pts)": "45"
+   }
+  },
+  {
+   "name": "Reinforced DC Locker",
+   "section": "Compartments › Damage control",
+   "fields": {
+    "Compartment": "Reinforced DC Locker",
+    "Dimensions": "3x1x6",
+    "Hitpoints": "250",
+    "Damage Threshold": "35",
+    "Mass (Tonnes)": "1.5",
+    "Required Power (kW)": "0",
+    "Reinforced": "Yes",
+    "Repair Speed (HP/sec)": "0.8",
+    "Team Move Speed": "2",
+    "Repair Teams": "2",
+    "Restores Provided": "1",
+    "Max Repair": "0",
+    "Cost (pts)": "45"
+   }
+  },
+  {
+   "name": "Damage Control Central",
+   "section": "Compartments › Damage control",
+   "fields": {
+    "Compartment": "Damage Control Central",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "200",
+    "Damage Threshold": "35",
+    "Mass (Tonnes)": "7",
+    "Required Power (kW)": "50",
+    "Reinforced": "No",
+    "Repair Speed (HP/sec)": "+10%",
+    "Team Move Speed": "+50%",
+    "Repair Teams": "0",
+    "Restores Provided": "0",
+    "Max Repair": "0",
+    "Cost (pts)": "20"
+   }
+  },
+  {
+   "name": "Small Workshop",
+   "section": "Compartments › Damage control",
+   "fields": {
+    "Compartment": "Small Workshop",
+    "Dimensions": "3x1x3",
+    "Hitpoints": "150",
+    "Damage Threshold": "35",
+    "Mass (Tonnes)": "7",
+    "Required Power (kW)": "50",
+    "Reinforced": "No",
+    "Repair Speed (HP/sec)": "+30%",
+    "Team Move Speed": "0",
+    "Repair Teams": "0",
+    "Restores Provided": "0",
+    "Max Repair": "0",
+    "Cost (pts)": "20"
+   }
+  },
+  {
+   "name": "Damage Control Complex",
+   "section": "Compartments › Damage control",
+   "fields": {
+    "Compartment": "Damage Control Complex",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "600",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "20",
+    "Required Power (kW)": "0",
+    "Reinforced": "Yes",
+    "Repair Speed (HP/sec)": "+10% (0.8)",
+    "Team Move Speed": "+30% (2)",
+    "Repair Teams": "3",
+    "Restores Provided": "2",
+    "Max Repair": "+5%",
+    "Cost (pts)": "55, 4x compounding cost",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Large DC Storage",
+   "section": "Compartments › Damage control",
+   "fields": {
+    "Compartment": "Large DC Storage",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "300",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "7",
+    "Required Power (kW)": "0",
+    "Reinforced": "No",
+    "Repair Speed (HP/sec)": "0.8",
+    "Team Move Speed": "2",
+    "Repair Teams": "1",
+    "Restores Provided": "4",
+    "Max Repair": "0",
+    "Cost (pts)": "45",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Bulk Internal Hangar",
+   "section": "Compartments › Flight Support",
+   "fields": {
+    "Compartment": "Bulk Internal Hangar",
+    "Dimensions": "6x3x6",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "1",
+    "Required Power (kW)": "0",
+    "Reinforced": "No",
+    "Cost (pts)": "10",
+    "Effects": "None"
+   }
+  },
+  {
+   "name": "Deck Gear Locker",
+   "section": "Compartments › Flight Support",
+   "fields": {
+    "Compartment": "Deck Gear Locker",
+    "Dimensions": "3x1x6",
+    "Hitpoints": "120",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "2",
+    "Required Power (kW)": "0",
+    "Reinforced": "No",
+    "Cost (pts)": "30",
+    "Effects": "+50% Spacecraft Arming Speed"
+   }
+  },
+  {
+   "name": "Spacecraft Repair Station",
+   "section": "Compartments › Flight Support",
+   "fields": {
+    "Compartment": "Spacecraft Repair Station",
+    "Dimensions": "3x1x6",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "5",
+    "Required Power (kW)": "0",
+    "Reinforced": "No",
+    "Cost (pts)": "15",
+    "Effects": "Adds 1 spacecraft repair slot to the hull, repairing for 4 HP/s"
+   }
+  },
+  {
+   "name": "Spacecraft Strikedown Station",
+   "section": "Compartments › Flight Support",
+   "fields": {
+    "Compartment": "Spacecraft Strikedown Station",
+    "Dimensions": "3x1x6",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "5",
+    "Required Power (kW)": "0",
+    "Reinforced": "No",
+    "Cost (pts)": "75",
+    "Effects": "Adds 1 spacecraft work slot for pre-flight arming and fuelling and for post-flight turnaround (no repair)"
+   }
+  },
+  {
+   "name": "Supplementary Radio Amplifiers",
+   "section": "Modules",
+   "fields": {
+    "Module": "Supplementary Radio Amplifiers",
+    "Category": "Communications",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "40",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "4",
+    "Power (kW)": "-100",
+    "Cost (pts)": "20",
+    "Effects": "+25% Transmit Power"
+   }
+  },
+  {
+   "name": "Fire Suppression System",
+   "section": "Modules",
+   "fields": {
+    "Module": "Fire Suppression System",
+    "Category": "Damage Control",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "150",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "30",
+    "Power (kW)": "-100",
+    "Cost (pts)": "20",
+    "Effects": "-50% Catastrophic Event Probability (Cell Launcher) -50% Catastrophic Event Probability (Magazine) +50% Repair Speed (Fire)"
+   }
+  },
+  {
+   "name": "Redundant Reactor Failsafes",
+   "section": "Modules",
+   "fields": {
+    "Module": "Redundant Reactor Failsafes",
+    "Category": "Engineering",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "150",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "5",
+    "Power (kW)": "-100",
+    "Cost (pts)": "10",
+    "Effects": "-33% Catastrophic Event Probability (Reactor) +30% Repair Speed (Overload)"
+   }
+  },
+  {
+   "name": "Reinforced Thruster Nozzles",
+   "section": "Modules",
+   "fields": {
+    "Module": "Reinforced Thruster Nozzles",
+    "Category": "Engineering",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "50",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "4",
+    "Power (kW)": "0",
+    "Cost (pts)": "10",
+    "Effects": "-20% Flank Damage Probability"
+   }
+  },
+  {
+   "name": "Small Reactor Booster",
+   "section": "Modules",
+   "fields": {
+    "Module": "Small Reactor Booster",
+    "Category": "Engineering",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "40",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "4",
+    "Power (kW)": "0",
+    "Cost (pts)": "10",
+    "Effects": "+10% Powerplant Efficiency +5% Radar Signature"
+   }
+  },
+  {
+   "name": "Signature Scrambler",
+   "section": "Modules",
+   "fields": {
+    "Module": "Signature Scrambler",
+    "Category": "EWar",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "50",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "4",
+    "Power (kW)": "-450",
+    "Cost (pts)": "35",
+    "Effects": "+100% Identification Difficulty -10% Sensitivity"
+   }
+  },
+  {
+   "name": "Flight Deck Traversal System",
+   "section": "Modules",
+   "fields": {
+    "Module": "Flight Deck Traversal System",
+    "Category": "Flight Support",
+    "Dimensions": "3x3x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "30",
+    "Power (kW)": "-200",
+    "Cost (pts)": "20",
+    "Effects": "-30% Deck Traversal Time"
+   }
+  },
+  {
+   "name": "Adaptive Radar Receiver",
+   "section": "Modules",
+   "fields": {
+    "Module": "Adaptive Radar Receiver",
+    "Category": "Sensors",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "40",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "4",
+    "Power (kW)": "-200",
+    "Cost (pts)": "30",
+    "Effects": "+25% Sensitivity -0.7 dB Noise Filtering +5% Positional Error +2.5% Velocity Error"
+   }
+  },
+  {
+   "name": "ES32 'Scryer' Missile ID System",
+   "section": "Modules",
+   "fields": {
+    "Module": "ES32 'Scryer' Missile ID System",
+    "Category": "Sensors",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "5",
+    "Power (kW)": "-300",
+    "Cost (pts)": "10",
+    "Effects": "Analyzes Local Threats Subject Class: Missile Intelligence Effort: 10 Intelligence Accuracy: 0%"
+   }
+  },
+  {
+   "name": "Strobe Correlator",
+   "section": "Modules",
+   "fields": {
+    "Module": "Strobe Correlator",
+    "Category": "Sensors",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "40",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "4",
+    "Power (kW)": "-150",
+    "Cost (pts)": "15",
+    "Effects": "-30% Jamming LOB Accuracy Broadcast LOBs to the sensor network, allowing them to be crossfixed with other LOBs to produce a fireable fix."
+   }
+  },
+  {
+   "name": "Track Correlator",
+   "section": "Modules",
+   "fields": {
+    "Module": "Track Correlator",
+    "Category": "Sensors",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "40",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "4",
+    "Power (kW)": "-150",
+    "Cost (pts)": "25",
+    "Effects": "-20% Positional Error -20% Velocity Error"
+   }
+  },
+  {
+   "name": "Bulwark Huntress",
+   "section": "Modules › Radar",
+   "fields": {
+    "Module": "Bulwark Huntress",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "200",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "5",
+    "Power (kW)": "-2000",
+    "Cost (pts)": "30",
+    "Max Range (km)": "10",
+    "Radiated Power (kW)": "4000",
+    "Gain (dB)": "40",
+    "Aperture Size (m2)": "60",
+    "Sensitivity (dBm)": "-38",
+    "Positional Error (m)": "45",
+    "Velocity Error (m/s)": "0.15",
+    "Can Lock": "No",
+    "Jamming LOB": "Yes; Accuracy: 1 deg",
+    "Burnthrough": "Yes; burn-through power mult.: 4; burn-through damage change: 33%",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Ithaca Bridgemaster",
+   "section": "Modules › Radar",
+   "fields": {
+    "Module": "Ithaca Bridgemaster",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "200",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "5",
+    "Power (kW)": "-1200",
+    "Cost (pts)": "10",
+    "Max Range (km)": "8.5",
+    "Radiated Power (kW)": "3100",
+    "Gain (dB)": "40",
+    "Aperture Size (m2)": "60",
+    "Sensitivity (dBm)": "-34",
+    "Positional Error (m)": "20",
+    "Velocity Error (m/s)": "0.15",
+    "Can Lock": "No",
+    "Jamming LOB": "Yes; jamming LOBs accuracy: 2 deg",
+    "Burnthrough": "No",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "RM50 'Parallax' Radar",
+   "section": "Modules › Radar",
+   "fields": {
+    "Module": "RM50 'Parallax' Radar",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "300",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "7.5",
+    "Power (kW)": "-3600",
+    "Cost (pts)": "45",
+    "Max Range (km)": "9.5",
+    "Radiated Power (kW)": "4100",
+    "Gain (dB)": "50",
+    "Aperture Size (m2)": "30",
+    "Sensitivity (dBm)": "-38.5",
+    "Positional Error (m)": "30",
+    "Velocity Error (m/s)": "0.1",
+    "Can Lock": "Yes; min. lock SNR: 3; lock error mult.: 0.15",
+    "Jamming LOB": "Yes; jamming LOBs accuracy: 0.75 deg",
+    "Burnthrough": "Yes; burn-through power mult.: 12; burn-through damage change: 20%",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "RS35 'Frontline' Radar",
+   "section": "Modules › Radar",
+   "fields": {
+    "Module": "RS35 'Frontline' Radar",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "200",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "5",
+    "Power (kW)": "-2000",
+    "Cost (pts)": "10",
+    "Max Range (km)": "8",
+    "Radiated Power (kW)": "3500",
+    "Gain (dB)": "40",
+    "Aperture Size (m2)": "25",
+    "Sensitivity (dBm)": "-36",
+    "Positional Error (m)": "30",
+    "Velocity Error (m/s)": "0.1",
+    "Can Lock": "No",
+    "Jamming LOB": "Yes; jamming LOBs accuracy: 1.5 deg",
+    "Burnthrough": "Yes; burn-through power mult.: 8; burn-through damage change: 20%",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "RS41 'Spyglass' Radar",
+   "section": "Modules › Radar",
+   "fields": {
+    "Module": "RS41 'Spyglass' Radar",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "200",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "5",
+    "Power (kW)": "-4000",
+    "Cost (pts)": "25",
+    "Max Range (km)": "11.5",
+    "Radiated Power (kW)": "4500",
+    "Gain (dB)": "60",
+    "Aperture Size (m2)": "40",
+    "Sensitivity (dBm)": "-38.5",
+    "Positional Error (m)": "60",
+    "Velocity Error (m/s)": "0.5",
+    "Can Lock": "No",
+    "Jamming LOB": "Yes; jamming LOBs accuracy: 3.5 deg",
+    "Burnthrough": "No",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Boosted Reactor",
+   "section": "Modules › Powerplants",
+   "fields": {
+    "Module": "Boosted Reactor",
+    "Category": "Powerplant",
+    "Dimensions": "5x5x5",
+    "Hitpoints": "300",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "40",
+    "Power (kW)": "+5000",
+    "Cost (pts)": "10",
+    "Effects": "25% Catastrophic Event Probability (Reactor)",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Civilian Reactor",
+   "section": "Modules › Powerplants",
+   "fields": {
+    "Module": "Civilian Reactor",
+    "Category": "Powerplant",
+    "Dimensions": "5x5x5",
+    "Hitpoints": "300",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "40",
+    "Power (kW)": "+3650",
+    "Cost (pts)": "10",
+    "Effects": "5% Catastrophic Event Probability (Reactor)",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "FR3300 Micro Reactor",
+   "section": "Modules › Powerplants",
+   "fields": {
+    "Module": "FR3300 Micro Reactor",
+    "Category": "Powerplant",
+    "Dimensions": "3x3x3",
+    "Hitpoints": "200",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "25",
+    "Power (kW)": "+2250",
+    "Cost (pts)": "10",
+    "Effects": "5% Catastrophic Event Probability (Reactor)",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FR4800 Reactor",
+   "section": "Modules › Powerplants",
+   "fields": {
+    "Module": "FR4800 Reactor",
+    "Category": "Powerplant",
+    "Dimensions": "5x5x5",
+    "Hitpoints": "300",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "40",
+    "Power (kW)": "+4200",
+    "Cost (pts)": "10",
+    "Effects": "5% Catastrophic Event Probability (Reactor)",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Light Civilian Reactor",
+   "section": "Modules › Powerplants",
+   "fields": {
+    "Module": "Light Civilian Reactor",
+    "Category": "Powerplant",
+    "Dimensions": "3x3x3",
+    "Hitpoints": "200",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "25",
+    "Power (kW)": "+1850",
+    "Cost (pts)": "10",
+    "Effects": "5% Catastrophic Event Probability (Reactor)",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "FM200 Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM200 Drive",
+    "Dimensions": "5x3x5",
+    "Hitpoints": "250",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "500",
+    "Reinforced": "No",
+    "Top Speed (%)": "0",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "0",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "10",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FM200R Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM200R Drive",
+    "Dimensions": "5x3x5",
+    "Hitpoints": "500",
+    "Damage Threshold": "60",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "500",
+    "Reinforced": "Yes",
+    "Top Speed (%)": "0",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "0",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "20",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FM230 'Whiplash' Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM230 'Whiplash' Drive",
+    "Dimensions": "5x3x5",
+    "Hitpoints": "250",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "650",
+    "Reinforced": "No",
+    "Top Speed (%)": "+20",
+    "Turn Rate (%)": "-15",
+    "Thrust (%)": "-20 Angular",
+    "Flank Damage Probability (%)": "-15",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "20",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FM240 'Dragonfly' Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM240 'Dragonfly' Drive",
+    "Dimensions": "5x3x5",
+    "Hitpoints": "250",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "500",
+    "Reinforced": "No",
+    "Top Speed (%)": "-7.5",
+    "Turn Rate (%)": "+40",
+    "Thrust (%)": "+30 Angular",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "20",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FM280 'Raider' Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM280 'Raider' Drive",
+    "Dimensions": "5x3x5",
+    "Hitpoints": "250",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "0",
+    "Reinforced": "No",
+    "Top Speed (%)": "0",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "+30 Linear",
+    "Flank Damage Probability (%)": "+50",
+    "Radar Signature (%)": "+20",
+    "Wake Signature Strength (%)": "+20",
+    "Cost (pts)": "20",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FM30X 'Prowler' Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM30X 'Prowler' Drive",
+    "Dimensions": "5x3x5",
+    "Hitpoints": "200",
+    "Damage Threshold": "25",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "350",
+    "Reinforced": "No",
+    "Top Speed (%)": "-15",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "-10 Angular",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "-25",
+    "Wake Signature Strength (%)": "-33",
+    "Cost (pts)": "25",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FM500 Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM500 Drive",
+    "Dimensions": "10x8x10",
+    "Hitpoints": "1000",
+    "Damage Threshold": "70",
+    "Mass (Tonnes)": "80",
+    "Provided Power (kW)": "1000",
+    "Reinforced": "No",
+    "Top Speed (%)": "0",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "0",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "15",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FM500R Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM500R Drive",
+    "Dimensions": "10x8x10",
+    "Hitpoints": "1500",
+    "Damage Threshold": "80",
+    "Mass (Tonnes)": "80",
+    "Provided Power (kW)": "1000",
+    "Reinforced": "Yes",
+    "Top Speed (%)": "0",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "0",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "30",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FM530 'Whiplash' Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM530 'Whiplash' Drive",
+    "Dimensions": "10x8x10",
+    "Hitpoints": "1000",
+    "Damage Threshold": "70",
+    "Mass (Tonnes)": "80",
+    "Provided Power (kW)": "1500",
+    "Reinforced": "No",
+    "Top Speed (%)": "+15",
+    "Turn Rate (%)": "-20",
+    "Thrust (%)": "-20 Angular",
+    "Flank Damage Probability (%)": "-15",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "30",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FM540 'Dragonfly' Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM540 'Dragonfly' Drive",
+    "Dimensions": "10x8x10",
+    "Hitpoints": "1000",
+    "Damage Threshold": "70",
+    "Mass (Tonnes)": "80",
+    "Provided Power (kW)": "1000",
+    "Reinforced": "No",
+    "Top Speed (%)": "-10",
+    "Turn Rate (%)": "+45",
+    "Thrust (%)": "+40 Angular",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "30",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "FM580 'Raider' Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "FM580 'Raider' Drive",
+    "Dimensions": "10x8x10",
+    "Hitpoints": "1000",
+    "Damage Threshold": "70",
+    "Mass (Tonnes)": "80",
+    "Provided Power (kW)": "500",
+    "Reinforced": "No",
+    "Top Speed (%)": "0",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "+30 Linear",
+    "Flank Damage Probability (%)": "+50",
+    "Radar Signature (%)": "+25",
+    "Wake Signature Strength (%)": "+25",
+    "Cost (pts)": "30",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "BW800 Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "BW800 Drive",
+    "Dimensions": "5x3x5",
+    "Hitpoints": "250",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "300",
+    "Reinforced": "No",
+    "Top Speed (%)": "0",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "0",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "10",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "BW800-R Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "BW800-R Drive",
+    "Dimensions": "5x3x5",
+    "Hitpoints": "400",
+    "Damage Threshold": "50",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "300",
+    "Reinforced": "Yes",
+    "Top Speed (%)": "0",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "0",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "20",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Sundrive Racing Pro",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "Sundrive Racing Pro",
+    "Dimensions": "5x3x5",
+    "Hitpoints": "200",
+    "Damage Threshold": "30",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "200",
+    "Reinforced": "No",
+    "Top Speed (%)": "+25",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "-25 Angular",
+    "Flank Damage Probability (%)": "-20",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "+50",
+    "Cost (pts)": "20",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "CHI-777 Yard Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "CHI-777 Yard Drive",
+    "Dimensions": "5x3x5",
+    "Hitpoints": "250",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "300",
+    "Reinforced": "No",
+    "Top Speed (%)": "-7.5",
+    "Turn Rate (%)": "+45",
+    "Thrust (%)": "+40 Angular; +15 Linear",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "+20",
+    "Cost (pts)": "20",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "BW1500 Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "BW1500 Drive",
+    "Dimensions": "12x12x12",
+    "Hitpoints": "700",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "300",
+    "Reinforced": "No",
+    "Top Speed (%)": "0",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "0",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "10",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "BW1500-R Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "BW1500-R Drive",
+    "Dimensions": "12x12x12",
+    "Hitpoints": "1400",
+    "Damage Threshold": "70",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "300",
+    "Reinforced": "Yes",
+    "Top Speed (%)": "0",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "0",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "20",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "BW2000 Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "BW2000 Drive",
+    "Dimensions": "12x12x12",
+    "Hitpoints": "700",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "2000",
+    "Reinforced": "No",
+    "Top Speed (%)": "-10",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "-15 Linear; -15 Angular",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "-10",
+    "Cost (pts)": "15",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "CHI-9100 Long Haul Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "CHI-9100 Long Haul Drive",
+    "Dimensions": "12x12x12",
+    "Hitpoints": "700",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "300",
+    "Reinforced": "No",
+    "Top Speed (%)": "+20",
+    "Turn Rate (%)": "0",
+    "Thrust (%)": "-10 Angular",
+    "Flank Damage Probability (%)": "+25",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "0",
+    "Cost (pts)": "20",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "CHI-7700 Drive",
+   "section": "Modules › Propulsion",
+   "fields": {
+    "Module": "CHI-7700 Drive",
+    "Dimensions": "12x12x12",
+    "Hitpoints": "700",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "35",
+    "Provided Power (kW)": "300",
+    "Reinforced": "No",
+    "Top Speed (%)": "-15",
+    "Turn Rate (%)": "+40",
+    "Thrust (%)": "+35 Angular; +30 Linear",
+    "Flank Damage Probability (%)": "0",
+    "Radar Signature (%)": "0",
+    "Wake Signature Strength (%)": "+30",
+    "Cost (pts)": "20",
+    "Faction (wiki logo)": "Outlying Systems Protectorate (OSP)"
+   }
+  },
+  {
+   "name": "Actively Cooled Amplifiers",
+   "section": "Modules › Weapon support",
+   "fields": {
+    "Module": "Actively Cooled Amplifiers",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "40",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "4",
+    "Required Power (kW)": "175",
+    "Cost (pts)": "25",
+    "Modifiers": "+25% Burst Duration (Emitters) -20% Cooldown Time (Emitters) -10% Overheat Damage Chance (Emitters)"
+   }
+  },
+  {
+   "name": "Ammunition Elevators",
+   "section": "Modules › Weapon support",
+   "fields": {
+    "Module": "Ammunition Elevators",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "30",
+    "Required Power (kW)": "150",
+    "Cost (pts)": "20",
+    "Modifiers": "-15% Reload Time -15% Launcher Reload Time +20 Spacecraft Arming Speed"
+   }
+  },
+  {
+   "name": "Focused Particle Accelerator",
+   "section": "Modules › Weapon support",
+   "fields": {
+    "Module": "Focused Particle Accelerator",
+    "Dimensions": "3x3x3",
+    "Hitpoints": "150",
+    "Damage Threshold": "40",
+    "Mass (Tonnes)": "45",
+    "Required Power (kW)": "800",
+    "Cost (pts)": "25",
+    "Modifiers": "+25% Damage Multiplier (Beam) -5% Burst Duration (Beam)",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Missile Parallel Interface",
+   "section": "Modules › Weapon support",
+   "fields": {
+    "Module": "Missile Parallel Interface",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "5",
+    "Required Power (kW)": "150",
+    "Cost (pts)": "40",
+    "Modifiers": "+35% Missile Programming Speed"
+   }
+  },
+  {
+   "name": "Missile Programming Bus",
+   "section": "Modules › Weapon support",
+   "fields": {
+    "Module": "Missile Programming Bus",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "80",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "5",
+    "Required Power (kW)": "200",
+    "Cost (pts)": "30",
+    "Modifiers": "+1 Missile Programming Channels",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Missile Programming Bus Array",
+   "section": "Modules › Weapon support",
+   "fields": {
+    "Module": "Missile Programming Bus Array",
+    "Dimensions": "3x3x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "5",
+    "Required Power (kW)": "350",
+    "Cost (pts)": "50",
+    "Modifiers": "+2 Missile Programming Channels",
+    "Faction (wiki logo)": "Shelter Alliance (SA)"
+   }
+  },
+  {
+   "name": "Mount Gyros",
+   "section": "Modules › Weapon support",
+   "fields": {
+    "Module": "Mount Gyros",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "40",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "4",
+    "Required Power (kW)": "150",
+    "Cost (pts)": "20",
+    "Modifiers": "-7.5% Spread +25% Traverse Rate +20% Elevation Rate +15% Casemate Traverse Rate +15% Casemate Elevation Rate"
+   }
+  },
+  {
+   "name": "Rapid-Cycle Cradle",
+   "section": "Modules › Weapon support",
+   "fields": {
+    "Module": "Rapid-Cycle Cradle",
+    "Dimensions": "3x3x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "30",
+    "Required Power (kW)": "150",
+    "Cost (pts)": "20",
+    "Modifiers": "-25% Recycle Time"
+   }
+  },
+  {
+   "name": "Energy Regulator",
+   "section": "Modules › Weapon support",
+   "fields": {
+    "Module": "Energy Regulator",
+    "Dimensions": "3x3x3",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Mass (Tonnes)": "30",
+    "Required Power (kW)": "650",
+    "Cost (pts)": "30",
+    "Modifiers": "-20% Reload Time (Energy) -20% Cooldown Time (Energy) -20% Cooldown Time (Beam)"
+   }
+  },
+  {
+   "name": "Small Energy Regulator",
+   "section": "Modules › Weapon support",
+   "fields": {
+    "Module": "Small Energy Regulator",
+    "Dimensions": "2x2x2",
+    "Hitpoints": "75",
+    "Damage Threshold": "10",
+    "Mass (Tonnes)": "20",
+    "Required Power (kW)": "400",
+    "Cost (pts)": "20",
+    "Modifiers": "-12% Reload Time (Energy) -12% Cooldown Time (Energy) -12% Cooldown Time (Beam)"
+   }
+  },
+  {
+   "name": "CR10",
+   "section": "Integrated Components",
+   "fields": {
+    "Name": "CR10",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "HP to Func.": "10",
+    "DC Prio": "Medium",
+    "Output": "500W",
+    "Gain": "5 dB",
+    "Bandwidth": "500 Baud"
+   }
+  },
+  {
+   "name": "CR75",
+   "section": "Integrated Components",
+   "fields": {
+    "Name": "CR75",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "HP to Func.": "10",
+    "DC Prio": "Medium",
+    "Output": "1500W",
+    "Gain": "20 dB",
+    "Bandwidth": "1000 Baud"
+   }
+  },
+  {
+   "name": "Radar Panel",
+   "section": "Integrated Components",
+   "fields": {
+    "Name": "Radar Panel",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "HP to Func.": "10",
+    "DC Prio": "Medium"
+   }
+  },
+  {
+   "name": "Radar Array",
+   "section": "Integrated Components",
+   "fields": {
+    "Name": "Radar Array",
+    "Hitpoints": "200",
+    "Damage Threshold": "15",
+    "HP to Func.": "10",
+    "DC Prio": "Medium"
+   }
+  },
+  {
+   "name": "Sprinter Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Sprinter",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Sprinter Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Sprinter",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.9"
+   }
+  },
+  {
+   "name": "Sprinter Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Sprinter",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.95"
+   }
+  },
+  {
+   "name": "Raines Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Raines",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Raines Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Raines",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.8"
+   }
+  },
+  {
+   "name": "Raines Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Raines",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.9"
+   }
+  },
+  {
+   "name": "Keystone Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Keystone",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Keystone Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Keystone",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.8"
+   }
+  },
+  {
+   "name": "Keystone Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Keystone",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.9"
+   }
+  },
+  {
+   "name": "Vauxhall Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Vauxhall",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Vauxhall Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Vauxhall",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.9"
+   }
+  },
+  {
+   "name": "Vauxhall Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Vauxhall",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.95"
+   }
+  },
+  {
+   "name": "Axford Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Axford",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "25",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Axford Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Axford",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "20",
+    "Lateral Power": "0.75"
+   }
+  },
+  {
+   "name": "Axford Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Axford",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "25",
+    "Lateral Power": "0.85"
+   }
+  },
+  {
+   "name": "Levy Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Levy",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "25",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Levy Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Levy",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "20",
+    "Lateral Power": "0.75"
+   }
+  },
+  {
+   "name": "Levy Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Levy",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "25",
+    "Lateral Power": "0.85"
+   }
+  },
+  {
+   "name": "Solomon Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Solomon",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "25",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Solomon Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Solomon",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "20",
+    "Lateral Power": "0.75"
+   }
+  },
+  {
+   "name": "Solomon Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Solomon",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "25",
+    "Lateral Power": "0.85"
+   }
+  },
+  {
+   "name": "Worden Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Worden",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "25",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Worden Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Worden",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "20",
+    "Lateral Power": "0.75"
+   }
+  },
+  {
+   "name": "Worden Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Worden",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "25",
+    "Lateral Power": "0.85"
+   }
+  },
+  {
+   "name": "Mercator Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Mercator",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Mercator Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Mercator",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.8"
+   }
+  },
+  {
+   "name": "Mercator Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Mercator",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.9"
+   }
+  },
+  {
+   "name": "Ferryman Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Ferryman",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Ferryman Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Ferryman",
+    "Type": "Angular",
+    "Hitpoints": "25",
+    "Damage Threshold": "6",
+    "Lateral Power": "0.75"
+   }
+  },
+  {
+   "name": "Ferryman Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Ferryman",
+    "Type": "Braking",
+    "Hitpoints": "50",
+    "Damage Threshold": "6",
+    "Lateral Power": "0.8"
+   }
+  },
+  {
+   "name": "Draugr Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Draugr",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Draugr Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Draugr",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.75"
+   }
+  },
+  {
+   "name": "Draugr Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Draugr",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.8"
+   }
+  },
+  {
+   "name": "Flathead Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Flathead",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "25",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Flathead Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Flathead",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "25",
+    "Lateral Power": "0.75"
+   }
+  },
+  {
+   "name": "Flathead Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Flathead",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "25",
+    "Lateral Power": "0.8"
+   }
+  },
+  {
+   "name": "Journeyman Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Journeyman",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Journeyman Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Journeyman",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.75"
+   }
+  },
+  {
+   "name": "Journeyman Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Journeyman",
+    "Type": "Braking",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.75"
+   }
+  },
+  {
+   "name": "Ocello Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Ocello",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Ocello Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Ocello",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.75"
+   }
+  },
+  {
+   "name": "Ocello Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Ocello",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.85"
+   }
+  },
+  {
+   "name": "Marauder Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Marauder",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Marauder Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Marauder",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.4"
+   }
+  },
+  {
+   "name": "Marauder Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Marauder",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Moorline Main",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Moorline",
+    "Type": "Main",
+    "Hitpoints": "150",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Moorline Angular",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Moorline",
+    "Type": "Angular",
+    "Hitpoints": "75",
+    "Damage Threshold": "15",
+    "Lateral Power": "0.4"
+   }
+  },
+  {
+   "name": "Moorline Braking",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Moorline",
+    "Type": "Braking",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "Lateral Power": "1"
+   }
+  },
+  {
+   "name": "Levy Large Pad",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Levy",
+    "Type": "Large Pad",
+    "Hitpoints": "300",
+    "Damage Threshold": "20",
+    "HP to Func.": "25",
+    "DC Prio": "Medium",
+    "Resource Demand": "5 kW"
+   }
+  },
+  {
+   "name": "Levy Small Pad",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Levy",
+    "Type": "Small Pad",
+    "Hitpoints": "300",
+    "Damage Threshold": "20",
+    "HP to Func.": "25",
+    "DC Prio": "Medium",
+    "Resource Demand": "5 kW"
+   }
+  },
+  {
+   "name": "Worden Large Pad",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Worden",
+    "Type": "Large Pad",
+    "Hitpoints": "300",
+    "Damage Threshold": "20",
+    "HP to Func.": "25",
+    "DC Prio": "Medium",
+    "Resource Demand": "1 kW"
+   }
+  },
+  {
+   "name": "Worden Small Pad",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Worden",
+    "Type": "Small Pad",
+    "Hitpoints": "300",
+    "Damage Threshold": "20",
+    "HP to Func.": "25",
+    "DC Prio": "Medium",
+    "Resource Demand": "1 kW"
+   }
+  },
+  {
+   "name": "Journeyman Large Pad",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Journeyman",
+    "Type": "Large Pad",
+    "Hitpoints": "300",
+    "Damage Threshold": "20",
+    "HP to Func.": "25",
+    "DC Prio": "Medium",
+    "Resource Demand": "None"
+   }
+  },
+  {
+   "name": "Journeyman Small Pad",
+   "section": "Integrated Components",
+   "fields": {
+    "Ship": "Journeyman",
+    "Type": "Small Pad",
+    "Hitpoints": "300",
+    "Damage Threshold": "20",
+    "HP to Func.": "25",
+    "DC Prio": "Medium",
+    "Resource Demand": "None"
+   }
+  },
+  {
+   "name": "Resupply",
+   "section": "Integrated Components",
+   "fields": {
+    "Name": "Resupply",
+    "Hitpoints": "100",
+    "Damage Threshold": "15",
+    "HP to Func.": "10",
+    "DC Prio": "Medium"
+   }
+  }
+ ],
+ "tables": [
+  {
+   "section": "Mounts › Communications, Ewar, & Sensors",
+   "header": "Mount",
+   "rows": 18,
+   "used": 18,
+   "unused": []
+  },
+  {
+   "section": "Mounts › Flight Support",
+   "header": "Mount",
+   "rows": 4,
+   "used": 4,
+   "unused": []
+  },
+  {
+   "section": "Mounts › Missile Launchers",
+   "header": "Weapon",
+   "rows": 15,
+   "used": 15,
+   "unused": []
+  },
+  {
+   "section": "Mounts › Point defense weapons",
+   "header": "Weapon",
+   "rows": 8,
+   "used": 8,
+   "unused": []
+  },
+  {
+   "section": "Mounts › Projectile weapons",
+   "header": "Weapon",
+   "rows": 14,
+   "used": 14,
+   "unused": []
+  },
+  {
+   "section": "Mounts › Energy weapons",
+   "header": "Weapon",
+   "rows": 3,
+   "used": 3,
+   "unused": []
+  },
+  {
+   "section": "Mounts › Spinal weapons",
+   "header": "Weapon",
+   "rows": 3,
+   "used": 3,
+   "unused": []
+  },
+  {
+   "section": "Compartments",
+   "header": "Compartment",
+   "rows": 10,
+   "used": 10,
+   "unused": []
+  },
+  {
+   "section": "Compartments › Command",
+   "header": "Compartment",
+   "rows": 4,
+   "used": 4,
+   "unused": []
+  },
+  {
+   "section": "Compartments › Damage control",
+   "header": "Compartment",
+   "rows": 8,
+   "used": 8,
+   "unused": []
+  },
+  {
+   "section": "Compartments › Flight Support",
+   "header": "Compartment",
+   "rows": 4,
+   "used": 4,
+   "unused": []
+  },
+  {
+   "section": "Modules",
+   "header": "Module",
+   "rows": 11,
+   "used": 11,
+   "unused": []
+  },
+  {
+   "section": "Modules › Radar",
+   "header": "Module",
+   "rows": 5,
+   "used": 5,
+   "unused": []
+  },
+  {
+   "section": "Modules › Powerplants",
+   "header": "Module",
+   "rows": 5,
+   "used": 5,
+   "unused": []
+  },
+  {
+   "section": "Modules › Propulsion",
+   "header": "Module",
+   "rows": 20,
+   "used": 20,
+   "unused": []
+  },
+  {
+   "section": "Modules › Weapon support",
+   "header": "Module",
+   "rows": 10,
+   "used": 10,
+   "unused": []
+  },
+  {
+   "section": "Integrated Components",
+   "header": "Name",
+   "rows": 2,
+   "used": 2,
+   "unused": []
+  },
+  {
+   "section": "Integrated Components",
+   "header": "Name",
+   "rows": 2,
+   "used": 2,
+   "unused": []
+  },
+  {
+   "section": "Integrated Components",
+   "header": "Ship",
+   "rows": 48,
+   "used": 48,
+   "unused": []
+  },
+  {
+   "section": "Integrated Components",
+   "header": "Ship",
+   "rows": 6,
+   "used": 6,
+   "unused": []
+  },
+  {
+   "section": "Integrated Components",
+   "header": "Name",
+   "rows": 1,
+   "used": 1,
+   "unused": []
+  }
+ ],
+ "sections": [
+  {
+   "heading": "(页面开头)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "For best efficiency and redundancy, all ship components should be placed far away from components that fulfill the same function. Smaller components can be installed in slots supporting larger components though they retain their same integrity, leaving them more vulnerable."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Mount components are installed on the exterior of the ship's hull and grant the ship certain capabilities, whether that be utility, defense, or offensive capability. Almost all mounts are faction-exclusive, with only a few cross-compatible mountings between factions like the VLS-1 launchers. Some ships even have access to mountings from other factions, like the Ocello class Command Cruiser on OSP."
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Communications, Ewar, & Sensors",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Mount",
+       "Category",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Required Power (kW)",
+       "Cost (pts)",
+       "Ability"
+      ],
+      [
+       "CR10 Antenna",
+       "Communications",
+       "2x1x2",
+       "100",
+       "15",
+       "4",
+       "250",
+       "5",
+       "Serves as a backup antenna, Note that the most powerful antenna array on a warship will serve as the active communications path, even if the integrated array is still functional."
+      ],
+      [
+       "CR70 Antenna",
+       "Communications",
+       "2x1x2",
+       "250",
+       "30",
+       "7",
+       "600",
+       "15",
+       "Serves as the active antenna when its 1250 kW transmit power exceeds that of the ship's other functional arrays; otherwise it provides a backup. The most powerful functional antenna is the active communications path."
+      ],
+      [
+       "E15 'Masquerade' Signature Booster",
+       "EWar",
+       "3x1x3",
+       "100",
+       "15",
+       "5",
+       "600",
+       "20",
+       "Radar Signature: set to the chosen identity's cross-section, never reduced. A Sprinter imitating a Solomon is about +864% (289 to 2787 in signature units). Imitating an equal or smaller class is +0%."
+      ],
+      [
+       "E55 'Spotlight' Illuminator",
+       "EWar",
+       "2x1x2",
+       "75",
+       "15",
+       "2",
+       "750",
+       "15",
+       "Illuminator; burst duration (emitters): 90s; Cooldown Time (emitters): 60s; overheat damage chance: 8.5%; - range:12000 m; beam width: 5 deg; radiated power: 1000 kW; gain: 60 dB +10% Radar Signature"
+      ],
+      [
+       "E55 'Floodlight' Illuminator",
+       "EWar",
+       "2x1x2",
+       "75",
+       "15",
+       "2",
+       "1500",
+       "15",
+       "Illuminator; burst duration (emitters): 90s; Cooldown Time (emitters): 60s; overheat damage chance: 8.5%; - range:10000 m; beam width: 40 deg; radiated power: 3250 kW; gain: 40 dB +10% Radar Signature"
+      ],
+      [
+       "E70 'Interruption' Jammer",
+       "EWar",
+       "3x1x3",
+       "100",
+       "15",
+       "5",
+       "600",
+       "55",
+       "Jammer - type: COMM; burst duration (emitters): 180s; Cooldown Time (emitters): 60s; overheat damage chance: 5%; range: 4000 m; radiated power: 750 kW; gain: 1 dB; Omnidirectional"
+      ],
+      [
+       "E71 'Hangup' Jammer",
+       "EWar",
+       "2x1x2",
+       "75",
+       "15",
+       "2",
+       "500",
+       "45",
+       "Jammer - type: COMM; burst duration (emitters): 120s; Cooldown Time (emitters): 60s; overheat damage chance: 5%; range: 20000 m; radiated power: 300 kW; gain: 25 dB; beam width: 20 deg"
+      ],
+      [
+       "E90 'Blanket' Jammer",
+       "EWar",
+       "2x1x2",
+       "75",
+       "15",
+       "2",
+       "1000",
+       "50",
+       "Jammer - type: RADAR; burst duration (emitters): 90s; Cooldown Time (emitters): 60s; overheat damage chance: 10%; range: 10000 m; radiated power: 1 kW; gain: 20 dB; beam width: 40 deg +10% Radar Signature"
+      ],
+      [
+       "ES22 'Pinard' Electronic Support Module",
+       "Sensors",
+       "3x1x3",
+       "50",
+       "15",
+       "3",
+       "200",
+       "30",
+       "Passive detection of enemy Radar emissions out to 125% of that radar's maximum range (less off its main lobe). Coverage is the hemisphere above the mount."
+      ],
+      [
+       "RF101 'Bullseye' Radar",
+       "Sensors",
+       "2x1x2",
+       "70",
+       "10",
+       "2",
+       "300",
+       "40",
+       "Fire Control Radar; FOV: 20 deg; Max Range: 9km; Radiated power: 1500 kW; Gain: 80dB; Aperture size: 20m2; Positional Error: 2m; Velocity Error 0 m/s"
+      ],
+      [
+       "E20 'Lighthouse' Illuminator",
+       "EWar",
+       "2x1x2",
+       "75",
+       "15",
+       "2",
+       "600",
+       "15",
+       "Illuminator; burst duration (emitters): 60s; Cooldown Time (emitters): 45s; overheat damage chance: 8.5%; - range:10000 m; beam width: 5 deg; radiated power: 900 kW; gain: 50 dB +10% Radar Signature"
+      ],
+      [
+       "J15 'Bellbird' Jammer",
+       "EWar",
+       "3x1x3",
+       "150",
+       "15",
+       "2",
+       "850",
+       "50",
+       "Jammer - type: RADAR; burst duration (emitters): 45s; Cooldown Time (emitters): 60s; overheat damage chance: 15%; range: 10000 m; radiated power: 1.25 kW; gain: 20 dB"
+      ],
+      [
+       "J360 'Lyrebird' Jammer",
+       "EWar",
+       "3x1x3",
+       "100",
+       "15",
+       "10",
+       "500",
+       "75",
+       "Jammer - type: RADAR; burst duration (emitters): 180s; Cooldown Time (emitters): 60s; overheat damage chance: 5%; range: 4000 m; radiated power: 10 kW; gain: 2 dB"
+      ],
+      [
+       "J75 'Warbler' Jammer",
+       "EWar",
+       "3x1x3",
+       "100",
+       "15",
+       "10",
+       "500",
+       "50",
+       "Jammer - type: COMM; burst duration (emitters): 40s; Cooldown Time (emitters): 30s; overheat damage chance: 5%; range: 2500 m; radiated power: 1250 kW; gain: 1 dB"
+      ],
+      [
+       "L50 'Blackjack' Laser Dazzler",
+       "EWar",
+       "2x1x2",
+       "75",
+       "15",
+       "2",
+       "750",
+       "40",
+       "Jammer - type: EO; burst duration (emitters): 90s; Cooldown Time (emitters): 60s; overheat damage chance: 10%; range: 8000 m; radiated power: 100 kW; gain: 20 dB Weapon - role: dual-purpose; turret traverse rate: 80 deg/s; turret elevation rate: 80 deg/s; elevation limits: +89deg, -5 deg"
+      ],
+      [
+       "RF44 'Pinpoint' Radar",
+       "Sensors",
+       "2x1x2",
+       "70",
+       "10",
+       "2",
+       "250",
+       "10",
+       "Fire Control Radar; FOV: 20 deg; Max Range: 6.5km; Radiated power: 1500 kW; Gain: 60dB; Aperture size: 40m2; Positional Error: 3m; Velocity Error 0 m/s"
+      ],
+      [
+       "R400 'Bloodhound' LRT Radar",
+       "Sensors",
+       "2x5x2",
+       "200",
+       "15",
+       "0",
+       "3000",
+       "15",
+       "Long-range tracking Radar: manually directed 10 deg cone, no continuous scan, cannot lock"
+      ],
+      [
+       "R550 Early Warning Radar",
+       "Sensors",
+       "3x1x3",
+       "150",
+       "15",
+       "10",
+       "4500",
+       "40",
+       "Early-warning Radar: manually directed 45 deg cone, no continuous scan, cannot lock, positional error 150 m, large side and back lobes"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Flight Support",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Flight Support Mountings are used to store and launch craft."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Mount",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Required Power (kW)",
+       "Cost (pts)",
+       "Can Draw From Internal Hangars",
+       "Ability"
+      ],
+      [
+       "Large Mounted Hangar",
+       "8x7x8",
+       "200",
+       "15",
+       "0",
+       "1",
+       "10",
+       "Yes[1]",
+       "Launches and stores up to 4 size 1 craft. Adds 3 additional pre-flight slots"
+      ],
+      [
+       "Medium Mounted Hangar",
+       "6x4x6",
+       "200",
+       "15",
+       "0",
+       "1",
+       "10",
+       "Yes[2]",
+       "Launches and stores up to 2 size 1 craft. Adds 1 additional pre-flight slot"
+      ],
+      [
+       "Small Mounted Hangar",
+       "6x4x6",
+       "300",
+       "20",
+       "0",
+       "1",
+       "10",
+       "Yes",
+       "Launches and stores 1 size 1 craft."
+      ],
+      [
+       "Container Bank Hangar",
+       "20x5x20",
+       "200",
+       "15",
+       "0",
+       "1",
+       "100",
+       "Yes",
+       "Launches and stores at minimum 16 craft."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Missile Launchers",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Shelter Alliance missile weapons have a catastrophic event probability of 5%."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Weapon",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Required Power (kW)",
+       "Cost (pts)",
+       "Missile Size",
+       "Capacity (cells, minimum)",
+       "Catastrophic Event probability (%)"
+      ],
+      [
+       "VLS-1-23 Launcher",
+       "2x2x2",
+       "75",
+       "15",
+       "3",
+       "50",
+       "5",
+       "1",
+       "23",
+       "5%"
+      ],
+      [
+       "VLS-1-46 Launcher",
+       "3x2x3",
+       "125",
+       "15",
+       "10",
+       "50",
+       "5",
+       "1",
+       "46",
+       "5%"
+      ],
+      [
+       "VLS-2 Launcher",
+       "3x4x3",
+       "200",
+       "15",
+       "5",
+       "200",
+       "10",
+       "2",
+       "16 (Class 2)",
+       "5%"
+      ],
+      [
+       "VLS-3 Launcher",
+       "3x4x3",
+       "250",
+       "15",
+       "20",
+       "200",
+       "20",
+       "3",
+       "4 (Class 2)",
+       "5%"
+      ],
+      [
+       "CLS-3 Launcher",
+       "3x4x3",
+       "250",
+       "15",
+       "20",
+       "200",
+       "20",
+       "3",
+       "4 (Class 2)",
+       "5%"
+      ],
+      [
+       "TLS-3 Launcher",
+       "3x1x5",
+       "350",
+       "15",
+       "25",
+       "250",
+       "20",
+       "3",
+       "6 (Class 3)",
+       "5%"
+      ],
+      [
+       "RL18 Launcher",
+       "3x1x3",
+       "100",
+       "15",
+       "8",
+       "50",
+       "30",
+       "2",
+       "18",
+       "5%"
+      ],
+      [
+       "RL36 Launcher",
+       "6x3x6",
+       "175",
+       "15",
+       "13",
+       "75",
+       "30",
+       "2",
+       "36",
+       "5%"
+      ],
+      [
+       "MLS-2 Launcher",
+       "2x2x5",
+       "200",
+       "15",
+       "7.5",
+       "50",
+       "15",
+       "2",
+       "4 (Magazine-fed)",
+       "0%"
+      ],
+      [
+       "MLS-3 Launcher",
+       "2x2x5",
+       "200",
+       "15",
+       "15",
+       "50",
+       "15",
+       "3",
+       "2 (Magazine-fed)",
+       "0%"
+      ],
+      [
+       "SALS-2 'Ward' Launcher",
+       "3x4x3",
+       "100",
+       "15",
+       "10",
+       "50",
+       "5",
+       "2",
+       "1 (Magazine-fed)",
+       "5%"
+      ],
+      [
+       "TALS-2 'Talisman' Launcher",
+       "3x4x5",
+       "150",
+       "15",
+       "15",
+       "50",
+       "10",
+       "2",
+       "2 (Magazine-fed)",
+       "5%"
+      ],
+      [
+       "ML-9 'Mine' Launcher",
+       "3x2x3",
+       "200",
+       "15",
+       "7.5",
+       "100",
+       "10",
+       "3",
+       "5",
+       "5%"
+      ],
+      [
+       "Container Stack Launcher",
+       "6x1x6",
+       "200",
+       "15",
+       "3",
+       "50",
+       "5",
+       "4",
+       "2",
+       "5%"
+      ],
+      [
+       "Container Bank Launcher",
+       "20x5x10",
+       "200",
+       "15",
+       "50",
+       "200",
+       "25",
+       "4",
+       "48",
+       "35%"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png",
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Point defense weapons",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Weapon",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Required Power (kW)",
+       "Cost (pts)",
+       "Integrated FC",
+       "Optical Backup",
+       "Ammo",
+       "Accuracy",
+       "Turret"
+      ],
+      [
+       "Mk20 'Defender' PDT",
+       "2x1x2",
+       "100",
+       "15",
+       "3",
+       "175",
+       "25",
+       "Yes",
+       "No",
+       "Ballistic/Chemical - 20mm",
+       "3m@1km",
+       "traverse/elevation: 100 deg/s elevation limits: +89 deg, -5 deg"
+      ],
+      [
+       "Mk25 'Rebound' PDT",
+       "2x1x2",
+       "100",
+       "15",
+       "3",
+       "20",
+       "15",
+       "No",
+       "Yes",
+       "Ballistic/Chemical/Timed - 50mm",
+       "35m@1km",
+       "traverse/elevation: 80 deg/s elevation limits: +89 deg, -5 deg"
+      ],
+      [
+       "Mk29 'Stonewall' PDT",
+       "3x1x3",
+       "150",
+       "15",
+       "7",
+       "40",
+       "30",
+       "No",
+       "Yes",
+       "Ballistic/Chemical/Timed - 50mm",
+       "35m@1km",
+       "traverse/elevation: 30 deg/s elevation limits: +89 deg, -5 deg"
+      ],
+      [
+       "Mk90 'Aurora' PDT",
+       "2x1x2",
+       "100",
+       "15",
+       "3",
+       "1250",
+       "55",
+       "Yes",
+       "No",
+       "laser",
+       "[email protected] 1m@3km",
+       "traverse/elevation: 100 deg/s elev. limit: +85 deg, -5 deg"
+      ],
+      [
+       "Mk95 'Sarissa' PDT",
+       "3x1x3",
+       "150",
+       "15",
+       "7",
+       "1250",
+       "65",
+       "Yes",
+       "Yes",
+       "Ballistic/Magnetic - 15mm",
+       "3m@3km 5m@6km",
+       "traverse/elevation: 30 deg/s elev. limit: +65 deg, -5 deg"
+      ],
+      [
+       "P11 'Pavise' PDT",
+       "2x1x2",
+       "100",
+       "15",
+       "4",
+       "150",
+       "20",
+       "Yes",
+       "No",
+       "Ballistic/Chemical - 20mm",
+       "5m@1km",
+       "traverse/elevation: 100 deg/s elev. limit: +89 deg, -5 deg"
+      ],
+      [
+       "P20 'Bastion' PDT",
+       "2x1x2",
+       "150",
+       "15",
+       "7",
+       "40",
+       "15",
+       "No",
+       "Yes",
+       "Ballistic/Chemical/Timed - 50mmBallistic/Chemical/Timed - 50mm",
+       "52m@1km",
+       "traverse/elevation: 30 deg/s elev. limit: +89 deg, -5 deg"
+      ],
+      [
+       "P60 'Grazer' PDT",
+       "2x1x2",
+       "100",
+       "15",
+       "3",
+       "1500",
+       "35",
+       "Yes",
+       "Yes",
+       "laser",
+       "[email protected] 0m@1km",
+       "traverse/elevation: 100 deg/s elev. limit: +85 deg, -5 deg"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Projectile weapons",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "All projectile weapons have an optical backup."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Weapon",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Required Power (kW)",
+       "Cost (pts)",
+       "Role",
+       "Ammo",
+       "Accuracy",
+       "Recycle Time (s)",
+       "Autoloader Capacity",
+       "Reload time (s)",
+       "Turret / Casemate"
+      ],
+      [
+       "Mk61 Cannon",
+       "3x1x3",
+       "150",
+       "15",
+       "3",
+       "50",
+       "10",
+       "Dual-Purpose",
+       "Ballistic/Chemical - 120mm",
+       "[email protected] 9m@5km",
+       "1",
+       "1",
+       "5.5",
+       "traverse: 35 deg/s elevation: 35 deg/s elev. limit: +70 deg, -5 deg"
+      ],
+      [
+       "Mk62 Cannon",
+       "3x1x3",
+       "150",
+       "15",
+       "6",
+       "50",
+       "20",
+       "Dual-Purpose",
+       "Ballistic/Chemical - 120mm",
+       "[email protected] 9m@5km",
+       "1",
+       "1",
+       "4",
+       "traverse: 35 deg/s elevation: 35 deg/s elev. limit: +70 deg, -5 deg"
+      ],
+      [
+       "Mk64 Cannon",
+       "3x1x5",
+       "225",
+       "20",
+       "3",
+       "125",
+       "30",
+       "Dual-Purpose",
+       "Ballistic/Chemical - 250mm",
+       "[email protected] 26m@5km [email protected]",
+       "0",
+       "1",
+       "10",
+       "traverse: 12.5 deg/s elevation: 18 deg/s elev. limit: +40 deg, -5 deg"
+      ],
+      [
+       "Mk65 Cannon",
+       "6x3x6",
+       "450",
+       "40",
+       "12",
+       "180",
+       "40",
+       "Dual-Purpose",
+       "Ballistic/Chemical - 250mm; Ballistic/Chemical/Timed - 250mm",
+       "[email protected] 35m@5km [email protected]",
+       "0.5",
+       "3",
+       "13",
+       "traverse: 7.5 deg/s elevation: 15 deg/s elev. limit: +40 deg, -5 deg"
+      ],
+      [
+       "Mk66 Cannon",
+       "6x3x6",
+       "450",
+       "40",
+       "25",
+       "200",
+       "45",
+       "Offensive",
+       "Ballistic/Chemical - 450mm",
+       "44m@5km 87m@10km",
+       "0.5",
+       "2",
+       "20",
+       "traverse: 7.5 deg/s elevation: 15 deg/s elev. limit: +40 deg, -5 deg"
+      ],
+      [
+       "Mk68 Cannon",
+       "8x5x8",
+       "550",
+       "40",
+       "40",
+       "225",
+       "75",
+       "Offensive",
+       "Ballistic/Chemical - 450mm",
+       "44m@5km 87m@10km",
+       "0.5",
+       "3",
+       "20",
+       "traverse: 7.5 deg/s elevation: 15 deg/s elev. limit: +40 deg, -5 deg"
+      ],
+      [
+       "Mk81 Railgun",
+       "6x3x6",
+       "125",
+       "15",
+       "20",
+       "1500",
+       "75",
+       "Offensive",
+       "Ballistic/Magnetic - 300mm",
+       "13m@5km 26m@10km 52m@20km",
+       "2.5",
+       "3",
+       "100",
+       "traverse: 6 deg/s elevation: 5 deg/s elev. limit: +25 deg, -3 deg +1000% Radar Signature for 18 seconds after firing"
+      ],
+      [
+       "C30 Cannon",
+       "2x5x2",
+       "350",
+       "20",
+       "15",
+       "100",
+       "20",
+       "Offensive",
+       "Ballistic/Chemical - 100mm; Ballistic/Canister - 100mm",
+       "[email protected] 17m@5km",
+       "1",
+       "24",
+       "30",
+       "traverse: 20 deg/s elevation: 0 deg/s trav. limit: +45 deg, -45 deg; elev. limit: 0 deg, 0 deg"
+      ],
+      [
+       "C53 Cannon",
+       "2x4x2",
+       "300",
+       "20",
+       "3",
+       "100",
+       "10",
+       "Offensive",
+       "Ballistic/Chemical - 250mm; Ballistic/Chemical/Timed - 250mm",
+       "[email protected] 26m@5km [email protected]",
+       "2",
+       "8",
+       "50",
+       "traverse: 10 deg/s elevation: 10 deg/s elev. limit: +35 deg, -35 deg"
+      ],
+      [
+       "C56 Cannon",
+       "4x6x4",
+       "350",
+       "40",
+       "3",
+       "100",
+       "20",
+       "Offensive",
+       "Ballistic/Chemical - 250mm; Ballistic/Chemical/Timed - 250mm",
+       "[email protected] 26m@5km [email protected]",
+       "2",
+       "15",
+       "70",
+       "traverse: 10 deg/s elevation: 10 deg/s elev. limit: +35 deg, -35 deg"
+      ],
+      [
+       "C65 Cannon",
+       "6x10x6",
+       "500",
+       "40",
+       "35",
+       "300",
+       "40",
+       "Offensive",
+       "Ballistic/Chemical - 450mm",
+       "35m@5km 70m@10km",
+       "4",
+       "8",
+       "90",
+       "traverse: 5 deg/s elevation: 0 deg/s trav. limit: +25 deg, -25 deg; elev. limit: 0 deg, 0 deg"
+      ],
+      [
+       "C90 Cannon",
+       "6x12x6",
+       "500",
+       "40",
+       "59",
+       "200",
+       "60",
+       "Offensive",
+       "Ballistic/Chemical - 600mm; Ballistic/Chemical/Timed - 600mm",
+       "22m@5km 44m@10km",
+       "Single Shot",
+       "1",
+       "18",
+       "traverse: 5 deg/s elevation: 0 deg/s trav. limit: +5 deg, -5 deg; elev. limit: 0 deg, 0 deg"
+      ],
+      [
+       "T20 Cannon",
+       "3x1x3",
+       "150",
+       "15",
+       "3",
+       "30",
+       "15",
+       "Dual-Purpose",
+       "Ballistic/Chemical - 100mm; Ballistic/Canister - 100mm",
+       "[email protected] 9m@5km",
+       "1",
+       "4",
+       "15",
+       "traverse: 35 deg/s elevation: 35 deg/s elev. limit: +80 deg, -5 deg"
+      ],
+      [
+       "T30 Cannon",
+       "6x3x6",
+       "200",
+       "25",
+       "50",
+       "120",
+       "20",
+       "Dual-Purpose",
+       "Ballistic/Chemical - 100mm; Ballistic/Canister - 100mm",
+       "[email protected] 17m@5km",
+       "1",
+       "16",
+       "30",
+       "traverse: 20 deg/s elevation: 20 deg/s elev. limit: +75 deg, -5 deg"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Energy weapons",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "All energy weapons have an optical backup."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Weapon",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Required Power (kW)",
+       "Cost (pts)",
+       "Ammo",
+       "Accuracy",
+       "Reload time (s)",
+       "Recycle Time (s)",
+       "Autoloader Capacity / Burst Duration",
+       "Turret / Casemate",
+       "Properties"
+      ],
+      [
+       "Mk610 Beam Turret",
+       "8x5x8",
+       "400",
+       "40",
+       "50",
+       "3000",
+       "80",
+       "Beam",
+       "[email protected] 0m@5km",
+       "45",
+       "N/A[3]",
+       "7.5 sec",
+       "traverse: 5 deg/s elevation: 12.5 deg/s elev. limit: +20 deg, -5 deg",
+       "range: 5000 m; armor pen: 180 cm/s; component damage: 300 hp/s; Battle Short: 60% Overheat Damage Chance"
+      ],
+      [
+       "C81 Plasma Cannon",
+       "4x6x4",
+       "500",
+       "40",
+       "80",
+       "1200",
+       "30",
+       "Ballistic/Magnetic - 400mm amploule",
+       "26m@5km 52m@10km",
+       "12",
+       "1",
+       "1",
+       "traverse: 5 deg/s elevation: 0 deg/s trav. limit: +25 deg, -25 deg; elev. limit: 0 deg, 0 deg"
+      ],
+      [
+       "T81 Plasma Cannon",
+       "6x3x6",
+       "300",
+       "25",
+       "80",
+       "1500",
+       "45",
+       "Ballistic/Magnetic - 400mm amploule",
+       "44m@5km 87m@10km",
+       "40",
+       "5",
+       "8",
+       "traverse: 5 deg/s elevation: 5 deg/s elev. limit: +60 deg, -5 deg"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Mounts › Spinal weapons",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The Mk550 Railgun and Mk600 Beam Cannon are 4x12x4 and fit the Keystone's 4x12x4 mount. The TE45 Mass Driver is 4x10x4 and fits Protectorate mounts at least that large, including Marauder 6x10x6 mounts and the Flathead 6x12x6 mount. All three are offensive and have an optical backup."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Weapon",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Required Power (kW)",
+       "Ammo",
+       "Cost (pts)",
+       "Reload Time (s)",
+       "Accuracy",
+       "Autoloader Capacity / Burst Duration",
+       "Casemate",
+       "Properties"
+      ],
+      [
+       "Mk550 Railgun",
+       "450",
+       "40",
+       "100",
+       "2000",
+       "Ballistic/Magnetic - 300mm",
+       "75",
+       "15 s",
+       "11m@5km 13m@10km 45m@20km",
+       "Single Shot",
+       "+0 deg., -0 deg.",
+       "+1200% Radar Signature for 18 seconds after firing"
+      ],
+      [
+       "Mk600 Beam Cannon",
+       "450",
+       "40",
+       "100",
+       "3000",
+       "Beam",
+       "75",
+       "30 s",
+       "0m@3km 0m@6km",
+       "7.5 s Battle Short Available: 60% Overheat Damage Chance",
+       "+0 deg., -0 deg.",
+       "range: 6000 m; armor penetration: 180 cm/s; component damage: 300 hp/s"
+      ],
+      [
+       "TE45 Mass Driver",
+       "150",
+       "30",
+       "100",
+       "4250",
+       "Ballistic/Magnetic - 500mm",
+       "100",
+       "25 s",
+       "11m@5km 13m@10km 45m@20km",
+       "Single Shot",
+       "+0 deg., -0 deg.",
+       "+1500% Radar Signature for 20 seconds after firing"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Compartments",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Compartment components are installed on the interior of the ship's hull. Most of them do not require any power."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Compartment",
+       "Category",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Reinforced",
+       "Cost (pts)",
+       "Effects"
+      ],
+      [
+       "Plant Control Center",
+       "Engineering",
+       "3x1x3",
+       "100",
+       "10",
+       "7",
+       "No",
+       "25",
+       "+20% Powerplant Efficiency"
+      ],
+      [
+       "Jury-Rigged Reactor",
+       "Powerplant",
+       "6x3x6",
+       "300",
+       "30",
+       "100",
+       "No",
+       "20",
+       "+25% Reload Time (Energy) +2500 kW Power 30% Catastrophic Event Probability (Reactor)"
+      ],
+      [
+       "Analysis Annex",
+       "Intelligence",
+       "3x1x3",
+       "100",
+       "10",
+       "10",
+       "No",
+       "20",
+       "+30% Intelligence Effort -30% Intelligence Accuracy[4]"
+      ],
+      [
+       "Intelligence Center",
+       "Intelligence",
+       "6x1x8",
+       "200",
+       "15",
+       "25",
+       "No",
+       "90",
+       "Analyzes All Tracks Intelligence Effort: 15 Intelligence Accuracy: 15%"
+      ],
+      [
+       "Bulk Magazine",
+       "Storage",
+       "1x1x1",
+       "100",
+       "25",
+       "1",
+       "No",
+       "0, 20 after 1x compounding cost; only the single most expensive magazine on the ship is free",
+       "+15 m Storage Capacity per slot size 10% Catastrophic Event Probability"
+      ],
+      [
+       "Reinforced Magazine",
+       "Storage",
+       "1x1x1",
+       "150",
+       "40",
+       "2",
+       "Yes",
+       "0, 40 after 1x compounding cost; only the single most expensive magazine on the ship is free",
+       "+10 m Storage Capacity per slot size 4% Catastrophic Event Probability"
+      ],
+      [
+       "Citadel Magazine",
+       "Storage",
+       "1x3x1",
+       "300",
+       "50",
+       "6",
+       "Yes",
+       "0, 150 after 1x compounding cost; only the single most expensive magazine on the ship is free",
+       "+10 m³ Storage Capacity per 1x3x1 tile (about 3.33 m³ per unit of socket volume) 4% Catastrophic Event Probability"
+      ],
+      [
+       "Gun Plotting Center",
+       "Weapon Support",
+       "3x1x3",
+       "100",
+       "10",
+       "7",
+       "No",
+       "30",
+       "-30% Spread -50 kW Power"
+      ],
+      [
+       "Strike Planning Center",
+       "Weapon Support",
+       "6x1x8",
+       "100",
+       "10",
+       "10",
+       "No",
+       "70",
+       "+60% Missile Programming Speed"
+      ],
+      [
+       "Container Datalink Array",
+       "Weapon Support",
+       "6x3x6",
+       "300",
+       "30",
+       "40",
+       "No",
+       "200",
+       "+30% Missile Programming Speed +2 Missile Programming Channels"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Compartments › Command",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Command compartments are used to relay orders throughout the ship and analyze local tracks. A ship without operational command compartments cannot receive any orders."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Compartment",
+       "Category",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Reinforced",
+       "Commands Enabled",
+       "Intelligence Effort",
+       "Intelligence Accuracy (%)",
+       "Cost (pts)"
+      ],
+      [
+       "Auxiliary Steering",
+       "Command",
+       "3x1x3",
+       "300",
+       "20",
+       "10",
+       "Yes",
+       "MOVE",
+       "0",
+       "0",
+       "10; 1x Compounding cost"
+      ],
+      [
+       "Basic CIC",
+       "Command",
+       "4x1x6",
+       "200",
+       "25",
+       "15",
+       "No",
+       "ALL",
+       "1",
+       "30",
+       "10; 1x Compounding cost"
+      ],
+      [
+       "Reinforced CIC",
+       "Command",
+       "4x1x6",
+       "200",
+       "40",
+       "35",
+       "Yes",
+       "ALL",
+       "1",
+       "30",
+       "25; 1x Compounding cost"
+      ],
+      [
+       "Citadel CIC",
+       "Command",
+       "6x1x8",
+       "400",
+       "50",
+       "70",
+       "Yes",
+       "ALL",
+       "4",
+       "25",
+       "75; 1x Compounding cost"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Compartments › Damage control",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Damage control compartments are used to repair damage during combat."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Compartment",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Required Power (kW)",
+       "Reinforced",
+       "Repair Speed (HP/sec)",
+       "Team Move Speed",
+       "Repair Teams",
+       "Restores Provided",
+       "Max Repair",
+       "Cost (pts)"
+      ],
+      [
+       "Rapid DC Locker",
+       "3x1x3",
+       "100",
+       "15",
+       "1.5",
+       "0",
+       "No",
+       "1.2",
+       "4",
+       "1 (flying)",
+       "0",
+       "0",
+       "10"
+      ],
+      [
+       "Small DC Locker",
+       "3x1x3",
+       "150",
+       "15",
+       "1.5",
+       "0",
+       "No",
+       "0.8",
+       "2",
+       "2",
+       "1",
+       "0",
+       "20"
+      ],
+      [
+       "Large DC Locker",
+       "3x1x6",
+       "200",
+       "15",
+       "3",
+       "0",
+       "No",
+       "0.8",
+       "2",
+       "3",
+       "2",
+       "0",
+       "45"
+      ],
+      [
+       "Reinforced DC Locker",
+       "3x1x6",
+       "250",
+       "35",
+       "1.5",
+       "0",
+       "Yes",
+       "0.8",
+       "2",
+       "2",
+       "1",
+       "0",
+       "45"
+      ],
+      [
+       "Damage Control Central",
+       "3x1x3",
+       "200",
+       "35",
+       "7",
+       "50",
+       "No",
+       "+10%",
+       "+50%",
+       "0",
+       "0",
+       "0",
+       "20"
+      ],
+      [
+       "Small Workshop",
+       "3x1x3",
+       "150",
+       "35",
+       "7",
+       "50",
+       "No",
+       "+30%",
+       "0",
+       "0",
+       "0",
+       "0",
+       "20"
+      ],
+      [
+       "Damage Control Complex",
+       "6x3x6",
+       "600",
+       "40",
+       "20",
+       "0",
+       "Yes",
+       "+10% (0.8)",
+       "+30% (2)",
+       "3",
+       "2",
+       "+5%",
+       "55, 4x compounding cost"
+      ],
+      [
+       "Large DC Storage",
+       "6x3x6",
+       "300",
+       "30",
+       "7",
+       "0",
+       "No",
+       "0.8",
+       "2",
+       "1",
+       "4",
+       "0",
+       "45"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Compartments › Flight Support",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Flight support compartments are used to support spacecraft being launched and recovered from ships. Remember that carrier hulls receive 1 Spacecraft repair slot built in."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Compartment",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Required Power (kW)",
+       "Reinforced",
+       "Cost (pts)",
+       "Effects"
+      ],
+      [
+       "Bulk Internal Hangar",
+       "6x3x6",
+       "200",
+       "15",
+       "1",
+       "0",
+       "No",
+       "10",
+       "None"
+      ],
+      [
+       "Deck Gear Locker",
+       "3x1x6",
+       "120",
+       "15",
+       "2",
+       "0",
+       "No",
+       "30",
+       "+50% Spacecraft Arming Speed"
+      ],
+      [
+       "Spacecraft Repair Station",
+       "3x1x6",
+       "150",
+       "15",
+       "5",
+       "0",
+       "No",
+       "15",
+       "Adds 1 spacecraft repair slot to the hull, repairing for 4 HP/s"
+      ],
+      [
+       "Spacecraft Strikedown Station",
+       "3x1x6",
+       "150",
+       "15",
+       "5",
+       "0",
+       "No",
+       "75",
+       "Adds 1 spacecraft work slot for pre-flight arming and fuelling and for post-flight turnaround (no repair)"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Modules",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Module components are installed on the interior of the ship's hull."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Module",
+       "Category",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Power (kW)",
+       "Cost (pts)",
+       "Effects"
+      ],
+      [
+       "Supplementary Radio Amplifiers",
+       "Communications",
+       "2x2x2",
+       "40",
+       "10",
+       "4",
+       "-100",
+       "20",
+       "+25% Transmit Power"
+      ],
+      [
+       "Fire Suppression System",
+       "Damage Control",
+       "2x2x2",
+       "150",
+       "10",
+       "30",
+       "-100",
+       "20",
+       "-50% Catastrophic Event Probability (Cell Launcher) -50% Catastrophic Event Probability (Magazine) +50% Repair Speed (Fire)"
+      ],
+      [
+       "Redundant Reactor Failsafes",
+       "Engineering",
+       "2x2x2",
+       "150",
+       "10",
+       "5",
+       "-100",
+       "10",
+       "-33% Catastrophic Event Probability (Reactor) +30% Repair Speed (Overload)"
+      ],
+      [
+       "Reinforced Thruster Nozzles",
+       "Engineering",
+       "2x2x2",
+       "50",
+       "10",
+       "4",
+       "0",
+       "10",
+       "-20% Flank Damage Probability"
+      ],
+      [
+       "Small Reactor Booster",
+       "Engineering",
+       "2x2x2",
+       "40",
+       "10",
+       "4",
+       "0",
+       "10",
+       "+10% Powerplant Efficiency +5% Radar Signature"
+      ],
+      [
+       "Signature Scrambler",
+       "EWar",
+       "2x2x2",
+       "50",
+       "10",
+       "4",
+       "-450",
+       "35",
+       "+100% Identification Difficulty -10% Sensitivity"
+      ],
+      [
+       "Flight Deck Traversal System",
+       "Flight Support",
+       "3x3x3",
+       "100",
+       "15",
+       "30",
+       "-200",
+       "20",
+       "-30% Deck Traversal Time"
+      ],
+      [
+       "Adaptive Radar Receiver",
+       "Sensors",
+       "2x2x2",
+       "40",
+       "10",
+       "4",
+       "-200",
+       "30",
+       "+25% Sensitivity -0.7 dB Noise Filtering +5% Positional Error +2.5% Velocity Error"
+      ],
+      [
+       "ES32 'Scryer' Missile ID System",
+       "Sensors",
+       "2x2x2",
+       "150",
+       "15",
+       "5",
+       "-300",
+       "10",
+       "Analyzes Local Threats Subject Class: Missile Intelligence Effort: 10 Intelligence Accuracy: 0%"
+      ],
+      [
+       "Strobe Correlator",
+       "Sensors",
+       "2x2x2",
+       "40",
+       "10",
+       "4",
+       "-150",
+       "15",
+       "-30% Jamming LOB Accuracy Broadcast LOBs to the sensor network, allowing them to be crossfixed with other LOBs to produce a fireable fix."
+      ],
+      [
+       "Track Correlator",
+       "Sensors",
+       "2x2x2",
+       "40",
+       "10",
+       "4",
+       "-150",
+       "25",
+       "-20% Positional Error -20% Velocity Error"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Modules › Radar",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Radar components are installed on the interior of the ship's hull, and are used to spot targets and threats."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Module",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Power (kW)",
+       "Cost (pts)",
+       "Max Range (km)",
+       "Radiated Power (kW)",
+       "Gain (dB)",
+       "Aperture Size (m2)",
+       "Sensitivity (dBm)",
+       "Positional Error (m)",
+       "Velocity Error (m/s)",
+       "Can Lock",
+       "Jamming LOB",
+       "Burnthrough"
+      ],
+      [
+       "Bulwark Huntress",
+       "2x2x2",
+       "200",
+       "30",
+       "5",
+       "-2000",
+       "30",
+       "10",
+       "4000",
+       "40",
+       "60",
+       "-38",
+       "45",
+       "0.15",
+       "No",
+       "Yes; Accuracy: 1 deg",
+       "Yes; burn-through power mult.: 4; burn-through damage change: 33%"
+      ],
+      [
+       "Ithaca Bridgemaster",
+       "2x2x2",
+       "200",
+       "30",
+       "5",
+       "-1200",
+       "10",
+       "8.5",
+       "3100",
+       "40",
+       "60",
+       "-34",
+       "20",
+       "0.15",
+       "No",
+       "Yes; jamming LOBs accuracy: 2 deg",
+       "No",
+       ""
+      ],
+      [
+       "RM50 'Parallax' Radar",
+       "2x2x2",
+       "300",
+       "40",
+       "7.5",
+       "-3600",
+       "45",
+       "9.5",
+       "4100",
+       "50",
+       "30",
+       "-38.5",
+       "30",
+       "0.1",
+       "Yes; min. lock SNR: 3; lock error mult.: 0.15",
+       "Yes; jamming LOBs accuracy: 0.75 deg",
+       "Yes; burn-through power mult.: 12; burn-through damage change: 20%"
+      ],
+      [
+       "RS35 'Frontline' Radar",
+       "2x2x2",
+       "200",
+       "30",
+       "5",
+       "-2000",
+       "10",
+       "8",
+       "3500",
+       "40",
+       "25",
+       "-36",
+       "30",
+       "0.1",
+       "No",
+       "Yes; jamming LOBs accuracy: 1.5 deg",
+       "Yes; burn-through power mult.: 8; burn-through damage change: 20%"
+      ],
+      [
+       "RS41 'Spyglass' Radar",
+       "2x2x2",
+       "200",
+       "30",
+       "5",
+       "-4000",
+       "25",
+       "11.5",
+       "4500",
+       "60",
+       "40",
+       "-38.5",
+       "60",
+       "0.5",
+       "No",
+       "Yes; jamming LOBs accuracy: 3.5 deg",
+       "No"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Modules › Powerplants",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Powerplants provide the majority of a ship's power."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Module",
+       "Category",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Power (kW)",
+       "Cost (pts)",
+       "Effects"
+      ],
+      [
+       "Boosted Reactor",
+       "Powerplant",
+       "5x5x5",
+       "300",
+       "40",
+       "40",
+       "+5000",
+       "10",
+       "25% Catastrophic Event Probability (Reactor)"
+      ],
+      [
+       "Civilian Reactor",
+       "Powerplant",
+       "5x5x5",
+       "300",
+       "40",
+       "40",
+       "+3650",
+       "10",
+       "5% Catastrophic Event Probability (Reactor)"
+      ],
+      [
+       "FR3300 Micro Reactor",
+       "Powerplant",
+       "3x3x3",
+       "200",
+       "30",
+       "25",
+       "+2250",
+       "10",
+       "5% Catastrophic Event Probability (Reactor)"
+      ],
+      [
+       "FR4800 Reactor",
+       "Powerplant",
+       "5x5x5",
+       "300",
+       "40",
+       "40",
+       "+4200",
+       "10",
+       "5% Catastrophic Event Probability (Reactor)"
+      ],
+      [
+       "Light Civilian Reactor",
+       "Powerplant",
+       "3x3x3",
+       "200",
+       "30",
+       "25",
+       "+1850",
+       "10",
+       "5% Catastrophic Event Probability (Reactor)"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Modules › Propulsion",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Propulsion modules enable ship movement and provide additional power to the ship. All propulsion modules have a catastrophic event probability of 5% and require 10 crew to operate."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Module",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Provided Power (kW)",
+       "Reinforced",
+       "Top Speed (%)",
+       "Turn Rate (%)",
+       "Thrust (%)",
+       "Flank Damage Probability (%)",
+       "Radar Signature (%)",
+       "Wake Signature Strength (%)",
+       "Cost (pts)"
+      ],
+      [
+       "FM200 Drive",
+       "5x3x5",
+       "250",
+       "40",
+       "35",
+       "500",
+       "No",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "10"
+      ],
+      [
+       "FM200R Drive",
+       "5x3x5",
+       "500",
+       "60",
+       "35",
+       "500",
+       "Yes",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "20"
+      ],
+      [
+       "FM230 'Whiplash' Drive",
+       "5x3x5",
+       "250",
+       "40",
+       "35",
+       "650",
+       "No",
+       "+20",
+       "-15",
+       "-20 Angular",
+       "-15",
+       "0",
+       "0",
+       "20"
+      ],
+      [
+       "FM240 'Dragonfly' Drive",
+       "5x3x5",
+       "250",
+       "40",
+       "35",
+       "500",
+       "No",
+       "-7.5",
+       "+40",
+       "+30 Angular",
+       "0",
+       "0",
+       "0",
+       "20"
+      ],
+      [
+       "FM280 'Raider' Drive",
+       "5x3x5",
+       "250",
+       "40",
+       "35",
+       "0",
+       "No",
+       "0",
+       "0",
+       "+30 Linear",
+       "+50",
+       "+20",
+       "+20",
+       "20"
+      ],
+      [
+       "FM30X 'Prowler' Drive",
+       "5x3x5",
+       "200",
+       "25",
+       "35",
+       "350",
+       "No",
+       "-15",
+       "0",
+       "-10 Angular",
+       "0",
+       "-25",
+       "-33",
+       "25"
+      ],
+      [
+       "FM500 Drive",
+       "10x8x10",
+       "1000",
+       "70",
+       "80",
+       "1000",
+       "No",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "15"
+      ],
+      [
+       "FM500R Drive",
+       "10x8x10",
+       "1500",
+       "80",
+       "80",
+       "1000",
+       "Yes",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "30"
+      ],
+      [
+       "FM530 'Whiplash' Drive",
+       "10x8x10",
+       "1000",
+       "70",
+       "80",
+       "1500",
+       "No",
+       "+15",
+       "-20",
+       "-20 Angular",
+       "-15",
+       "0",
+       "0",
+       "30"
+      ],
+      [
+       "FM540 'Dragonfly' Drive",
+       "10x8x10",
+       "1000",
+       "70",
+       "80",
+       "1000",
+       "No",
+       "-10",
+       "+45",
+       "+40 Angular",
+       "0",
+       "0",
+       "0",
+       "30"
+      ],
+      [
+       "FM580 'Raider' Drive",
+       "10x8x10",
+       "1000",
+       "70",
+       "80",
+       "500",
+       "No",
+       "0",
+       "0",
+       "+30 Linear",
+       "+50",
+       "+25",
+       "+25",
+       "30"
+      ],
+      [
+       "BW800 Drive",
+       "5x3x5",
+       "250",
+       "40",
+       "35",
+       "300",
+       "No",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "10"
+      ],
+      [
+       "BW800-R Drive",
+       "5x3x5",
+       "400",
+       "50",
+       "35",
+       "300",
+       "Yes",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "20"
+      ],
+      [
+       "Sundrive Racing Pro",
+       "5x3x5",
+       "200",
+       "30",
+       "35",
+       "200",
+       "No",
+       "+25",
+       "0",
+       "-25 Angular",
+       "-20",
+       "0",
+       "+50",
+       "20"
+      ],
+      [
+       "CHI-777 Yard Drive",
+       "5x3x5",
+       "250",
+       "40",
+       "35",
+       "300",
+       "No",
+       "-7.5",
+       "+45",
+       "+40 Angular; +15 Linear",
+       "0",
+       "0",
+       "+20",
+       "20"
+      ],
+      [
+       "BW1500 Drive",
+       "12x12x12",
+       "700",
+       "40",
+       "35",
+       "300",
+       "No",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "10"
+      ],
+      [
+       "BW1500-R Drive",
+       "12x12x12",
+       "1400",
+       "70",
+       "35",
+       "300",
+       "Yes",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "20"
+      ],
+      [
+       "BW2000 Drive",
+       "12x12x12",
+       "700",
+       "40",
+       "35",
+       "2000",
+       "No",
+       "-10",
+       "0",
+       "-15 Linear; -15 Angular",
+       "0",
+       "0",
+       "-10",
+       "15"
+      ],
+      [
+       "CHI-9100 Long Haul Drive",
+       "12x12x12",
+       "700",
+       "40",
+       "35",
+       "300",
+       "No",
+       "+20",
+       "0",
+       "-10 Angular",
+       "+25",
+       "0",
+       "0",
+       "20"
+      ],
+      [
+       "CHI-7700 Drive",
+       "12x12x12",
+       "700",
+       "40",
+       "35",
+       "300",
+       "No",
+       "-15",
+       "+40",
+       "+35 Angular; +30 Linear",
+       "0",
+       "0",
+       "+30",
+       "20"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-OSP_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Modules › Weapon support",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Weapon support modules improve the performance of weapons at the cost of ship power."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Module",
+       "Dimensions",
+       "Hitpoints",
+       "Damage Threshold",
+       "Mass (Tonnes)",
+       "Required Power (kW)",
+       "Cost (pts)",
+       "Modifiers"
+      ],
+      [
+       "Actively Cooled Amplifiers",
+       "2x2x2",
+       "40",
+       "10",
+       "4",
+       "175",
+       "25",
+       "+25% Burst Duration (Emitters) -20% Cooldown Time (Emitters) -10% Overheat Damage Chance (Emitters)"
+      ],
+      [
+       "Ammunition Elevators",
+       "2x2x2",
+       "100",
+       "15",
+       "30",
+       "150",
+       "20",
+       "-15% Reload Time -15% Launcher Reload Time +20 Spacecraft Arming Speed"
+      ],
+      [
+       "Focused Particle Accelerator",
+       "3x3x3",
+       "150",
+       "40",
+       "45",
+       "800",
+       "25",
+       "+25% Damage Multiplier (Beam) -5% Burst Duration (Beam)"
+      ],
+      [
+       "Missile Parallel Interface",
+       "2x2x2",
+       "100",
+       "15",
+       "5",
+       "150",
+       "40",
+       "+35% Missile Programming Speed"
+      ],
+      [
+       "Missile Programming Bus",
+       "2x2x2",
+       "80",
+       "15",
+       "5",
+       "200",
+       "30",
+       "+1 Missile Programming Channels"
+      ],
+      [
+       "Missile Programming Bus Array",
+       "3x3x3",
+       "100",
+       "15",
+       "5",
+       "350",
+       "50",
+       "+2 Missile Programming Channels"
+      ],
+      [
+       "Mount Gyros",
+       "2x2x2",
+       "40",
+       "10",
+       "4",
+       "150",
+       "20",
+       "-7.5% Spread +25% Traverse Rate +20% Elevation Rate +15% Casemate Traverse Rate +15% Casemate Elevation Rate"
+      ],
+      [
+       "Rapid-Cycle Cradle",
+       "3x3x3",
+       "100",
+       "15",
+       "30",
+       "150",
+       "20",
+       "-25% Recycle Time"
+      ],
+      [
+       "Energy Regulator",
+       "3x3x3",
+       "100",
+       "15",
+       "30",
+       "650",
+       "30",
+       "-20% Reload Time (Energy) -20% Cooldown Time (Energy) -20% Cooldown Time (Beam)"
+      ],
+      [
+       "Small Energy Regulator",
+       "2x2x2",
+       "75",
+       "10",
+       "20",
+       "400",
+       "20",
+       "-12% Reload Time (Energy) -12% Cooldown Time (Energy) -12% Cooldown Time (Beam)"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [
+        "25px-Alliance_Roundel.png"
+       ],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    }
+   ]
+  },
+  {
+   "heading": "Integrated Components",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Integrated Components are found on all ships, have no cost, and are un-customizable and irremovable. They come in 7 types: Antennas, Radar panels/arrays, Landing Pads, Replenishment Docks, Main Thrusters, Braking Thrusters, and Maneuvering Thrusters."
+    },
+    {
+     "kind": "p",
+     "text": "Values are each part's base stats in game version 0.6.2.6. Lateral Power is a thruster's share of the ship's thrust, not a force. Radar panels and arrays set which directions the ship's radar can see; its range and power come from the radar component fitted."
+    },
+    {
+     "kind": "p",
+     "text": "No Integral component is reinforced. Mains and Braking thrusters are the only thrusters that receive increased thrust on flank. Mains are the only thrusters that generate a wake root signature when active. Non-main non-braking thrusters are also used for angular rotation; though neither their angular thrust nor the ship's maximum rotation speed are affected by the condition of these thrusters. DC priority of all thrusters is low. HP to function of all thrusters is 10."
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Name",
+       "Hitpoints",
+       "Damage Threshold",
+       "HP to Func.",
+       "DC Prio",
+       "Output",
+       "Gain",
+       "Bandwidth"
+      ],
+      [
+       "CR10",
+       "100",
+       "15",
+       "10",
+       "Medium",
+       "500W",
+       "5 dB",
+       "500 Baud"
+      ],
+      [
+       "CR75",
+       "100",
+       "15",
+       "10",
+       "Medium",
+       "1500W",
+       "20 dB",
+       "1000 Baud"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Name",
+       "Hitpoints",
+       "Damage Threshold",
+       "HP to Func.",
+       "DC Prio"
+      ],
+      [
+       "Radar Panel",
+       "100",
+       "15",
+       "10",
+       "Medium"
+      ],
+      [
+       "Radar Array",
+       "200",
+       "15",
+       "10",
+       "Medium"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Ship",
+       "Type",
+       "Hitpoints",
+       "Damage Threshold",
+       "Lateral Power"
+      ],
+      [
+       "Sprinter",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Sprinter",
+       "Angular",
+       "75",
+       "15",
+       "0.9"
+      ],
+      [
+       "Sprinter",
+       "Braking",
+       "100",
+       "15",
+       "0.95"
+      ],
+      [
+       "Raines",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Raines",
+       "Angular",
+       "75",
+       "15",
+       "0.8"
+      ],
+      [
+       "Raines",
+       "Braking",
+       "100",
+       "15",
+       "0.9"
+      ],
+      [
+       "Keystone",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Keystone",
+       "Angular",
+       "75",
+       "15",
+       "0.8"
+      ],
+      [
+       "Keystone",
+       "Braking",
+       "100",
+       "15",
+       "0.9"
+      ],
+      [
+       "Vauxhall",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Vauxhall",
+       "Angular",
+       "75",
+       "15",
+       "0.9"
+      ],
+      [
+       "Vauxhall",
+       "Braking",
+       "100",
+       "15",
+       "0.95"
+      ],
+      [
+       "Axford",
+       "Main",
+       "150",
+       "25",
+       "1"
+      ],
+      [
+       "Axford",
+       "Angular",
+       "75",
+       "20",
+       "0.75"
+      ],
+      [
+       "Axford",
+       "Braking",
+       "100",
+       "25",
+       "0.85"
+      ],
+      [
+       "Levy",
+       "Main",
+       "150",
+       "25",
+       "1"
+      ],
+      [
+       "Levy",
+       "Angular",
+       "75",
+       "20",
+       "0.75"
+      ],
+      [
+       "Levy",
+       "Braking",
+       "100",
+       "25",
+       "0.85"
+      ],
+      [
+       "Solomon",
+       "Main",
+       "150",
+       "25",
+       "1"
+      ],
+      [
+       "Solomon",
+       "Angular",
+       "75",
+       "20",
+       "0.75"
+      ],
+      [
+       "Solomon",
+       "Braking",
+       "100",
+       "25",
+       "0.85"
+      ],
+      [
+       "Worden",
+       "Main",
+       "150",
+       "25",
+       "1"
+      ],
+      [
+       "Worden",
+       "Angular",
+       "75",
+       "20",
+       "0.75"
+      ],
+      [
+       "Worden",
+       "Braking",
+       "100",
+       "25",
+       "0.85"
+      ],
+      [
+       "Mercator",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Mercator",
+       "Angular",
+       "75",
+       "15",
+       "0.8"
+      ],
+      [
+       "Mercator",
+       "Braking",
+       "100",
+       "15",
+       "0.9"
+      ],
+      [
+       "Ferryman",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Ferryman",
+       "Angular",
+       "25",
+       "6",
+       "0.75"
+      ],
+      [
+       "Ferryman",
+       "Braking",
+       "50",
+       "6",
+       "0.8"
+      ],
+      [
+       "Draugr",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Draugr",
+       "Angular",
+       "75",
+       "15",
+       "0.75"
+      ],
+      [
+       "Draugr",
+       "Braking",
+       "100",
+       "15",
+       "0.8"
+      ],
+      [
+       "Flathead",
+       "Main",
+       "150",
+       "25",
+       "1"
+      ],
+      [
+       "Flathead",
+       "Angular",
+       "75",
+       "25",
+       "0.75"
+      ],
+      [
+       "Flathead",
+       "Braking",
+       "100",
+       "25",
+       "0.8"
+      ],
+      [
+       "Journeyman",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Journeyman",
+       "Angular",
+       "75",
+       "15",
+       "0.75"
+      ],
+      [
+       "Journeyman",
+       "Braking",
+       "75",
+       "15",
+       "0.75"
+      ],
+      [
+       "Ocello",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Ocello",
+       "Angular",
+       "75",
+       "15",
+       "0.75"
+      ],
+      [
+       "Ocello",
+       "Braking",
+       "100",
+       "15",
+       "0.85"
+      ],
+      [
+       "Marauder",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Marauder",
+       "Angular",
+       "75",
+       "15",
+       "0.4"
+      ],
+      [
+       "Marauder",
+       "Braking",
+       "100",
+       "15",
+       "1"
+      ],
+      [
+       "Moorline",
+       "Main",
+       "150",
+       "15",
+       "1"
+      ],
+      [
+       "Moorline",
+       "Angular",
+       "75",
+       "15",
+       "0.4"
+      ],
+      [
+       "Moorline",
+       "Braking",
+       "100",
+       "15",
+       "1"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Ship",
+       "Type",
+       "Hitpoints",
+       "Damage Threshold",
+       "HP to Func.",
+       "DC Prio",
+       "Resource Demand"
+      ],
+      [
+       "Levy",
+       "Large Pad",
+       "300",
+       "20",
+       "25",
+       "Medium",
+       "5 kW"
+      ],
+      [
+       "Levy",
+       "Small Pad",
+       "300",
+       "20",
+       "25",
+       "Medium",
+       "5 kW"
+      ],
+      [
+       "Worden",
+       "Large Pad",
+       "300",
+       "20",
+       "25",
+       "Medium",
+       "1 kW"
+      ],
+      [
+       "Worden",
+       "Small Pad",
+       "300",
+       "20",
+       "25",
+       "Medium",
+       "1 kW"
+      ],
+      [
+       "Journeyman",
+       "Large Pad",
+       "300",
+       "20",
+       "25",
+       "Medium",
+       "None"
+      ],
+      [
+       "Journeyman",
+       "Small Pad",
+       "300",
+       "20",
+       "25",
+       "Medium",
+       "None"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Name",
+       "Hitpoints",
+       "Damage Threshold",
+       "HP to Func.",
+       "DC Prio"
+      ],
+      [
+       "Resupply",
+       "100",
+       "15",
+       "10",
+       "Medium"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ],
+     "entity_table": true
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ On all ships of ANS make this never comes up; any such ship that can equip these mounted hangars cannot equip internal hangars, and vice versa"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ On all ships of ANS make this never comes up; any such ship that can equip these mounted hangars cannot equip internal hangars, and vice versa"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Beams deal damage every 0.2 seconds, and therefore their damage per hit is 1/5 of the listed damage per second"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ While the numerical here sounds like it's \"reducing accuracy\", what it does is reduce the \"Deviation\" that COND and PD reports have."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 28 October 2026, at 21:36."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

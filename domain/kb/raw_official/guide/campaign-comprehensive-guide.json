@@ -1,0 +1,1259 @@
+{
+ "page": "Campaign Comprehensive Guide - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Campaign Comprehensive Guide",
+ "category": "guide",
+ "slug": "campaign-comprehensive-guide",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "(页面开头)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The first act of Nebulous Fleet Command’s campaign delivers players a series of tactical missions while telling the story of the Shelter Alliance’s (ANS) Task Force Alder’s attempt to help break the Bethel Blockade. You, the admiral of Task Force Alder, are charged in this campaign with keeping enough of your ships safe to reach the Bulwark system, the location of a major Outer Space Protectorate (OSP) shipyard. You are not the attacking force, but are behind enemy lines, trying to draw OSP ships away. However, while doing so, you will run into a mystery that changes the nature of the war."
+    },
+    {
+     "kind": "p",
+     "text": "This guide section has several sections, the front page offers generalist advice. There are however, in-depth mission-by-mission campaign guides for every area based on Moderate Difficulty, written in the style of the old Warcraft III guides. The area pages, however, do contain a breakdown of forces on all difficulties."
+    },
+    {
+     "kind": "p",
+     "text": "Naturally, there will be spoilers ahead. It is a requirement that you complete the basic tutorials first before embarking on this campaign for the smoothest experience."
+    },
+    {
+     "kind": "p",
+     "text": "If you truly wish to be spoiled as to your enemy’s composition without getting to the area outlines, there are pages at the end of the guide indicating the force disposition at each area."
+    }
+   ]
+  },
+  {
+   "heading": "General Campaign Truisms",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "If you lose your flagship Harsh Winds Blow you will lose the campaign"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Knowing how armored a ship you are confronting is and what weapons do well against it is a requirement. It is recommended for beginners to review the Armor page."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Cooperative play is fully integrated into the campaign, and so long as ships are available, each player can control a ship up to 10 players. This does mean if you are starting to play with friends, the maximum number of players that can join for the first mission is three."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Prioritize protecting ships over munitions. Expend the necessary missiles or bombers if you’re going to take significant damage. You cannot replace warships in this campaign. There will be opportunities to loot munitions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The campaign will autosave the start of the mission and the end once the objectives are complete."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "When practical, preserve high-capability missiles for large engagements"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Use the pause button liberally to plan, assess, and reconnoiter the area. The campaign is balanced around this fact"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "You can restore ships at stations using the Damage Control Board, which will draw restore components from the station"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Stations will partially restore your ship components without using restores, but they will not restore your armor."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Stations will generally have fuel, and you can revisit them, but note that revisiting a station will use up fuel for your entire fleet for a reverse trip."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "A knocked-out ship can be salvaged by docking a ship that has at least 4 Restores. The knocked-out ship will only have an engine and a CIC, but can still be moved until a shipyard is reached to repair it"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "You can launch Halberd Skiffs to check the ammunition loadout of a disabled enemy ship to see if there is any useful loot"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "You can board ships to loot them, and this can be rewarding, but warships can go nuclear during looting"
+    }
+   ]
+  },
+  {
+   "heading": "Cadet Hardly's Campaign Primer",
+   "blocks": []
+  },
+  {
+   "heading": "Cadet Hardly's Campaign Primer › Starting Fleet",
+   "blocks": []
+  },
+  {
+   "heading": "Cadet Hardly's Campaign Primer › Starting Fleet › CV-3 ANS Harsh Winds Blow \"Windy\"",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Worden-class converted Fleet Carrier"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "8x small craft pads - launch fighters to defend - Use the Katana's 15mm coilgun"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "4x large craft pads - launch bombers to strike"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "288 size 2 VLS tubes - flexible, quick response missiles - Simple ACT only Thunderheads are handy for assessing target defenses"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "5x Defender, 2x Sarissa PDTs - near and long-range CIWS-type defenses - best to ensure these never need to fire!"
+    }
+   ]
+  },
+  {
+   "heading": "Cadet Hardly's Campaign Primer › Starting Fleet › FFG-897 ANS Stout Coral + FFG-897 ANS Loom of Karina \"General-purpose Frigates\"",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "2x 120mm turrets - lightweight cannons, can use RPF ammo - proximity fuzed, great against fast unarmored targets"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Bullseye FCR - provides high quality radar locks - How to make friends with cruiser captains!"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Parallax search radar - can do a powerful \"BRN\" ping - good for scouting, can help see through jamming"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "24x size 2 VLS tubes - limited by useful missile load"
+    }
+   ]
+  },
+  {
+   "heading": "Cadet Hardly's Campaign Primer › General Tips and Hints",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Fuel - take advantage of opportunities to top up, else a ship may get left behind - pay attention to fuel warnings"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Map - use the info here to plan your path, especially watch for friendly ship beacons"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Tutorials - if something feels stuck, save your campaign and check the tutorials. They cover a lot of complex systems in detail"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Formation Orders - you can give orders to multiple ships at once, using the Shift-Right Click menu - to setup a formation, use Shift-F to then link to another ship to follow."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Scouting - early detection gives you time to react (and targets to shoot) - find out what's what before stuff starts hitting the wall"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Time Controls - Half-speed is great to help comprehend (and admire!) complex battles. - Accelerated speeds are handy for post-battle logistics"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Boarding - grab ammo and supplies where you can - skiffs can quickly check what's available - beware of damaged reactors - if you see X DANGER. Undock and RUN!"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Repairs - docking at a station uses that station's component repair limit, commonly 50% of maximum health. A station offering a 100% limit permits complete repairs; these percentages are limits, not additive bonuses"
+    }
+   ]
+  },
+  {
+   "heading": "Cadet Hardly's Campaign Primer › Anti-Ship Missiles",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Anti-Ship Missiles",
+       "Guidance",
+       "Range",
+       "Seeker",
+       "Note",
+       "Note 2"
+      ],
+      [
+       "SGM-333 \"Forgetfulness\"",
+       "Direct",
+       "4km",
+       "ACT/[CMD]",
+       "Standard Torpedo",
+       "Claymore's best friend"
+      ],
+      [
+       "SGM-222 \"Hurricane\"",
+       "Direct",
+       "15km",
+       "CMD",
+       "Extra punch for frigates",
+       "Needs to maintain track until impact"
+      ],
+      [
+       "SGM-204 \"Thunderhead\"",
+       "Cruise",
+       "15km",
+       "ACT",
+       "Cheap and plentiful, easy to decoy or jam",
+       "Great for probing attacks"
+      ],
+      [
+       "SGM-204 \"Thunderhead Block IV\"",
+       "Cruise",
+       "15km",
+       "ACT/[EO]",
+       "Much harder to deceive",
+       "Say \"NO\" to chaff"
+      ],
+      [
+       "SGM-210 \"Squall\"",
+       "Cruise",
+       "15km",
+       "ARAD",
+       "Seeks jammers and radars",
+       ""
+      ],
+      [
+       "SGM-H-288 \"Cyclone\" Block III",
+       "Cruise",
+       "20km",
+       "EO",
+       "ignores most jamming, sprint stage evades most defenses",
+       "For when you need it dead, RIGHT NOW, no excuses."
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Cadet Hardly's Campaign Primer › Anti-Craft and Defensive Missiles",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Anti-Craft and Defensive Missiles",
+       "Range",
+       "Seeker",
+       "Note",
+       "Note 2"
+      ],
+      [
+       "SGM-H-243 \"Tornado\"",
+       "15km",
+       "ACT/[CMD]",
+       "Ship-launched anti-craft interceptor missile",
+       "Great, but can be overenthusiastic. Switch from AREA > POINT, and use Z-key to queue manual launches if you need to."
+      ],
+      [
+       "SGM-112 \"Riposte\"",
+       "3.4km",
+       "CMD",
+       "Short-ranged anti-missile interceptor (AMM)",
+       "Move some from VLS to magazine to equip your fighters"
+      ],
+      [
+       "SGM-185 \"Remise\"",
+       "3.5km",
+       "ACT/[CMD]",
+       "Mid-range delux craft launched ACM",
+       "These are very good"
+      ],
+      [
+       "SGM-122 \"Bolt",
+       "2km",
+       "ACT",
+       "Short-range dogfighting missile",
+       "These can be salvaged from most enemy ships"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Cadet Hardly's Campaign Primer › Carrier's Craft Wing",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "12x B-86T Claymore bomber - Anti-ship heavy hitter - Claymores are your premium tool for SMASH!"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "46x PF-440V Tanto Interceptor - Workhorse void supremacy craft - Escort all the things. Limited fuel endurance, so plan ahead for rotating flights."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "3x E-44 Sundial SEWAC - Precious and Powerful Radar platform"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "4x RS-35 Halberd Skiff - Jack of all trades"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "10x PF-440C Katana Interceptor - Elite Tanto variant - Use to guard your ships from missiles"
+    }
+   ]
+  },
+  {
+   "heading": "Cadet Hardly's Campaign Primer › Ammo Selection Addendum",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This is a rough rule-of-thumb, but will let you fire something useful in most situations."
+    },
+    {
+     "kind": "p",
+     "text": "Key: X -> Y = “shoot X to damage, then finish with Y” X or Y = “use X, but Y has situational uses”. Lack of bolding indicates either works X :-( = “your best option, but alas, it won’t do much”"
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "ANS firing at...",
+       "120mm",
+       "250mm",
+       "450mm"
+      ],
+      [
+       "Shuttle/Ferryman",
+       "RPF-> HE",
+       "RPF -> HE",
+       "HE"
+      ],
+      [
+       "Tug/Draugr",
+       "RPF -> HE",
+       "RPF -> HE",
+       "HE"
+      ],
+      [
+       "MN Flathead (angle)",
+       "AP",
+       "HE",
+       "AP"
+      ],
+      [
+       "MN Flathead (flat)",
+       "AP",
+       "AP",
+       "HE -> AP"
+      ],
+      [
+       "CVL Journeyman",
+       "HE",
+       "HE",
+       "HE"
+      ],
+      [
+       "CC Ocello (bow)",
+       "AP",
+       "AP",
+       "AP"
+      ],
+      [
+       "CC Ocello (flat)",
+       "AP",
+       "HE",
+       "HE"
+      ],
+      [
+       "LN Marauder (bow)",
+       "AP or HE",
+       "HE or AP",
+       "HE or AP"
+      ],
+      [
+       "LN Marauder (flat)",
+       "HE or AP",
+       "HE",
+       "HE"
+      ],
+      [
+       "CLN Moorline",
+       "HE or AP",
+       "HE",
+       "HE"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ],
+      [
+       [],
+       [],
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Campaign Act 1 Map and Movement",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "You can access the campaign map using the top right-hand corner button. This will automatically pause the battle"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Every jump to another system will take 1 bar of fuel from every ship travelling."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The entire fleet must have fuel before jumping, and any ship without fuel will be left behind."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "When there are multiple exit points, the fleet will follow where the first ship has decided to go. For example, if you jump your flagship Lamplight and then move your frigate to the exit line for Crucible, the frigate will depart for Lamplight."
+    }
+   ]
+  },
+  {
+   "heading": "Act 1 Rooms",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The following are the \"rooms\" of Act 1 of the Campaign. Click into them for detailed breakdowns. Be warned, full spoilers ahead once you enter."
+    }
+   ]
+  },
+  {
+   "heading": "Act 1 Rooms › Labyrinth Gate",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The first mission of the campaign"
+    }
+   ]
+  },
+  {
+   "heading": "Act 1 Rooms › Crucible",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Your fleet is put through its crucible of fire."
+    }
+   ]
+  },
+  {
+   "heading": "Act 1 Rooms › Lamplight",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Your fleet arrives at a mining station."
+    }
+   ]
+  },
+  {
+   "heading": "Act 1 Rooms › Iron Spindle",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Task Force Alder goes for a Protectorate Factory Station."
+    }
+   ]
+  },
+  {
+   "heading": "Act 1 Rooms › Anacrusis",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Upon arriving at a mining site, Alder finds some new allies, and some new enemies."
+    }
+   ]
+  },
+  {
+   "heading": "Act 1 Rooms › Katabasis",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Alder arrives in an \"empty\" sector with a communications station."
+    }
+   ]
+  },
+  {
+   "heading": "Act 1 Rooms › Beggar's Hollow",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Alder arrives at a hollowed-out comet where they encounter a friend, and a deadly new enemy."
+    }
+   ]
+  },
+  {
+   "heading": "Act 1 Rooms › Caltrop",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Amidst a swirling passing comet, Task Force Alder finds perhaps the most important ship in the campaign and also a nasty surprise."
+    }
+   ]
+  },
+  {
+   "heading": "Beggar's Hallow Ambush",
+   "blocks": []
+  },
+  {
+   "heading": "Beggar's Hallow Ambush › Allied Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "None"
+    }
+   ]
+  },
+  {
+   "heading": "Beggar's Hallow Ambush › Enemy Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSPN Opportunity Cost (Bomber Jman) (Conditional Spawn - Arrival from Caltrop) - E/M/H"
+    },
+    {
+     "kind": "p",
+     "text": "Sturgeon Bombers"
+    }
+   ]
+  },
+  {
+   "heading": "Glimmer Reach",
+   "blocks": []
+  },
+  {
+   "heading": "Glimmer Reach › Allied Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "ANS Nomad Giant (450 CH)"
+    }
+   ]
+  },
+  {
+   "heading": "Glimmer Reach › Enemy Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSPN Abject Terror (450 LN) - E/M/H OSPN No Other Way (450 LN) - E/M/H OSPN Another Man's Demise (Fighter Jman) - M/H OSPN Fist Ever Ready (ruttle) - M/H OSPN All Up In Arms (ruttle) - M/H OSPN Night Run (jam shuttle) - H"
+    }
+   ]
+  },
+  {
+   "heading": "Blackwall",
+   "blocks": []
+  },
+  {
+   "heading": "Blackwall › Allied Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "None"
+    }
+   ]
+  },
+  {
+   "heading": "Blackwall › Enemy Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSPN Heave To (MMT) - E/M/H OSPN Come Closer (MMT) - E/M/H OSPN Heartbreak Hustler (100 LN) - E/M/H OSPN Make My Day (MMT) (Reinforcements) - E/M/H OSPN Blaze Of Glory (MMT) (Reinforcements) - E/M/H OSPN Staff and Flush (EWR tug) (Reinforcements) - E/M/H OSPN First Into Danger (450 LN) (Reinforcements) - E/M/H OSPN Us Or Them (600 MN) (Reinforcements) - M/H OSPN Valor Our Shield (450 LN) (Reinforcements) - M/H OSPN Just Walk Away (MDLN) (Reinforcements) - H"
+    }
+   ]
+  },
+  {
+   "heading": "Mirror Palace",
+   "blocks": []
+  },
+  {
+   "heading": "Mirror Palace › Allied Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "None"
+    }
+   ]
+  },
+  {
+   "heading": "Mirror Palace › Enemy Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSPN With One Hand Forward (CLN) - E/M/H OSPN Personal Touch (EWR Tug) - E/M/H OSPN Nothing To See Here (EWR Tug) - E/M/H OSPN Unfriendly Face (EWR Tug) - E/M/H"
+    }
+   ]
+  },
+  {
+   "heading": "Frostline",
+   "blocks": []
+  },
+  {
+   "heading": "Frostline › Allied Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "None"
+    }
+   ]
+  },
+  {
+   "heading": "Frostline › Enemy Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSPN Another Man's Treasure (Fighter Jman) - E OSPN Ambition And Constraint (ruttle) - E/M/H OSPN Stone Tyrant (600 MN) - E/M/H OSPN Tyrannical Gaze (EWR tug) - E/M/H OSPN Last Castaway (EWR tug) - E/M/H OSPN Final Orders (450 LN) - E/M/H OSPN Black Sands (Railcello) - E/M/H OSPN Maneuver Elements (ruttle) - M/H OSPN Signal To Noise (jam shuttle) - M/H OSPN Everything We Got (450 LN) - M/H OSPN One Fist Of Iron (100 LN) - M/H OSPN All Reaching All Taking (CVLN) - M/H OSPN The Other Of Steel (100 LN) - H OSPN Judgement Call (CLN) - H"
+    }
+   ]
+  },
+  {
+   "heading": "Bitter Meridian",
+   "blocks": []
+  },
+  {
+   "heading": "Bitter Meridian › Allied Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "None"
+    }
+   ]
+  },
+  {
+   "heading": "Bitter Meridian › Enemy Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSPN Times Are Changing (MMT) (Dead) - E/M/H"
+    }
+   ]
+  },
+  {
+   "heading": "Barrow",
+   "blocks": []
+  },
+  {
+   "heading": "Barrow › Allied Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "ANS Flooding Dark (450 CH)"
+    }
+   ]
+  },
+  {
+   "heading": "Barrow › Enemy Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSPN Rage Tempered By Wisdom (CVLN) - E/M/H OSPN Scheduled Service (100 shuttle) - E/M/H OSPN Bethel Ferry Service (100 shuttle) - E/M/H OSPN Little Rebellion (100 shuttle) - E/M/H OSPN Enigmatic Presence (ruttle) - E/M/H"
+    }
+   ]
+  },
+  {
+   "heading": "Navmag",
+   "blocks": []
+  },
+  {
+   "heading": "Navmag › Allied Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "None"
+    }
+   ]
+  },
+  {
+   "heading": "Navmag › Enemy Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSPN Borrowed 'til War's End (450 LN) - E/M/H OSPN Weight Of Fire (450 LN) - E/M/H OSPN Take A Number (600 MN) - H OSPN Will Be Of Service (600 MN) - H"
+    }
+   ]
+  },
+  {
+   "heading": "Faded Call",
+   "blocks": []
+  },
+  {
+   "heading": "Faded Call › Allied Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "None"
+    }
+   ]
+  },
+  {
+   "heading": "Faded Call › Enemy Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSPN No Time To Stick Around (CVLN) (Dead) - E/M/H OSPN Animosity In Bulk (CVLN) (Reinforcements) - E/M/H OSPN Feeling Lucky (EWR tug) (Reinforcements) - E/M/H OSPN Force Of Nature (MMT) (Reinforcements) - E/M/H OSPN All At Once (MMT) (Reinforcements) - E/M/H OSPN Just Walk Away (450 LN) (Reinforcements) - M/H OSPN Moral Hazard (MMT) (Reinforcements) - M/H OSPN Safety Hazard (MMT) (Reinforcements) - M/H OSPN Present Arms (450 LN) (Reinforcements) - H"
+    }
+   ]
+  },
+  {
+   "heading": "Seven Sisters",
+   "blocks": []
+  },
+  {
+   "heading": "Seven Sisters › Allied Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "ANS Swift Toxin (missile frig) (cutscene ship)"
+    }
+   ]
+  },
+  {
+   "heading": "Seven Sisters › Enemy Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "OSPN Emperor Reverse (450 LN) - E/M/H OSPN Watch Your Step (450 LN) - E/M/H OSPN Cold Command (Railcello) - E/M/H OSPN Do Unto Others (CVLN) - E/M/H OSPN The Up And Up (EWR tug) - E/M/H OSPN Get Cozy (EWR tug) - E/M/H OSPN Got 'Em Again (MMT) - E/M/H OSPN Make Your Day (MMT) - E/M/H OSPN One Too Many (600 MN) - E/M/H OSPN Salt Sower (600 MN) - E/M/H OSPN To The Weary (100 LN) - E/M/H OSPN Silver On The Table (100 LN) - E/M/H OSPN With Warm Regards (CLN) - M/H OSPN From Sea To Sea (100 LN) - M/H OSPN Engineered Enigma (100 LN) - M/H OSPN Forgiven Circumstances (450 LN) OSPN Just A Hunch (450 LN) - H OSPN Banging Pots (jam shuttle) - H OSPN Bump In The Night (ruttle) - H OSPN Priority Delivery (ruttle) - H"
+    }
+   ]
+  },
+  {
+   "heading": "Ship Fits",
+   "blocks": []
+  },
+  {
+   "heading": "Ship Fits › ANS Ships",
+   "blocks": []
+  },
+  {
+   "heading": "Ship Fits › Neutral Ships",
+   "blocks": []
+  },
+  {
+   "heading": "Ship Fits › OSPN Ships",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The following maps are spoilers and we should figure out how to spoiler them"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 13 November 2026, at 07:12."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

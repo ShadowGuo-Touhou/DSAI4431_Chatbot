@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fleet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Beam BB · Strong the roots Dick</Name>
+  <Version>3</Version>
+  <TotalPoints>2338</TotalPoints>
+  <FactionKey>Stock/Alliance</FactionKey>
+  <Description>样板船：Strong the roots Dick（beme），舰体 Solomon Battleship Class，原存档点数 2338。来自 beme.fleet，未做任何改动。</Description>
+  <Ships>
+    <Ship>
+      <Key>171dba65-916a-4e72-9886-708917ce2221</Key>
+      <Name>Strong the roots Dick</Name>
+      <Cost>2338</Cost>
+      <Callsign>&lt;BB-1&gt;</Callsign>
+      <Number>1096</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Stock/Solomon Battleship</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>vvpl_pV8B0W33ernrw31jg</Key>
+          <ComponentName>Stock/Mk610 Beam Turret</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>AznvpY2By0GiQxgeOTktww</Key>
+          <ComponentName>Stock/Mk65 Cannon</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>N5nMrtk4bkiSDzOffAmI1w</Key>
+          <ComponentName>Stock/Mk610 Beam Turret</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>HsGDhCR_T0KH1ddzUnSHmA</Key>
+          <ComponentName>Stock/Mk610 Beam Turret</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>oRZYmSFdsk2BFB03PqyS2w</Key>
+          <ComponentName>Stock/Mk20 'Defender' PDT</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>csaNZW85vkO8uIQ9XDe1iw</Key>
+          <ComponentName>Stock/Mk29 'Stonewall' PDT</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>eBG0UhrBiky4nUx81rPbLw</Key>
+          <ComponentName>Stock/Mk29 'Stonewall' PDT</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>M6NaSvLam06C-1DTggI99g</Key>
+          <ComponentName>Stock/Mk20 'Defender' PDT</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>3HKNGt305UC23fGT8OKcLw</Key>
+          <ComponentName>Stock/Mk20 'Defender' PDT</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>R_Y-LTCc0kydl6L8Sq5Dmw</Key>
+          <ComponentName>Stock/Mk29 'Stonewall' PDT</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>-gtO0aqGDEOH-Tm612wAoA</Key>
+          <ComponentName>Stock/Mk29 'Stonewall' PDT</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>37oZ894X7kG2Dq0E5mEKDQ</Key>
+          <ComponentName>Stock/Mk20 'Defender' PDT</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>ZjH6aPXnl0eOdklaPsRNAA</Key>
+          <ComponentName>Stock/RF101 'Bullseye' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>4dNKr5i87EeDGq9coaWYJg</Key>
+          <ComponentName>Stock/CR70 Antenna</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>XAbGPXPgDEuDieQDqbA9MQ</Key>
+          <ComponentName>Stock/Reinforced CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>SX-a4J4eek2nmJztXePU3Q</Key>
+          <ComponentName>Stock/Damage Control Central</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>4sUWwP0VukOFbXT1YAMa9g</Key>
+          <ComponentName>Stock/Small Workshop</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>09AenxIgokykwMTCMJz24w</Key>
+          <ComponentName>Stock/Plant Control Center</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>RtZe85sJUkO5b1xVdgPlqQ</Key>
+          <ComponentName>Stock/Large DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>8YQv6H5fN0SylDc4p2fT-w</Key>
+          <ComponentName>Stock/Large DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>6P8ohHGH_UaCAMEE5jFoRg</Key>
+          <ComponentName>Stock/Large DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>80T00-71i0Wz-uNk04dzvQ</Key>
+          <ComponentName>Stock/Plant Control Center</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>GbGNS6ZFo0qx-dxuEmZTbg</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>tkt9JPA2V0CWAO-Dfj8FHQ</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>QkO76Z2PAUq8iD4cuc_P4A</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>lp31cinWLE-ZGgtisuoaug</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>k6t3bPxD6ki7bp19-tc28A</MagazineKey>
+                <MunitionKey>Stock/20mm Slug</MunitionKey>
+                <Quantity>12000</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>T2zdREFqGkO_aqNRlvZXRw</MagazineKey>
+                <MunitionKey>Stock/250mm AP Shell</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>xDVCATDH4UyokdNDIsxT6Q</MagazineKey>
+                <MunitionKey>Stock/250mm HE-RPF Shell</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>Pm_y3GNdSEKWtTfLxle5DA</MagazineKey>
+                <MunitionKey>Stock/250mm HE Shell</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>6aDBFEcSekG-jtCfo1Ge9g</MagazineKey>
+                <MunitionKey>Stock/Flak Round</MunitionKey>
+                <Quantity>750</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>wbgVupdnzEGle6f8tezZYQ</Key>
+          <ComponentName>Stock/Large DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Jl5HmssP406Au7n4NHceQw</Key>
+          <ComponentName>Stock/Reinforced Magazine</ComponentName>
+          <ComponentData xsi:type="BulkMagazineData">
+            <Load>
+              <MagSaveData>
+                <MagazineKey>jt5eGj3X1kSDE9yIJJen9A</MagazineKey>
+                <MunitionKey>Stock/20mm Slug</MunitionKey>
+                <Quantity>12000</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>Y-vJ9Upa3USTrS6O0zyojw</MagazineKey>
+                <MunitionKey>Stock/250mm AP Shell</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>FYSu0zgFLUmHqzsNR4k--g</MagazineKey>
+                <MunitionKey>Stock/250mm HE-RPF Shell</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>3zm7yCdNBkOPQhhmxXh84A</MagazineKey>
+                <MunitionKey>Stock/250mm HE Shell</MunitionKey>
+                <Quantity>50</Quantity>
+              </MagSaveData>
+              <MagSaveData>
+                <MagazineKey>7OcBFIzLWUqDObUFE4RDAA</MagazineKey>
+                <MunitionKey>Stock/Flak Round</MunitionKey>
+                <Quantity>750</Quantity>
+              </MagSaveData>
+            </Load>
+          </ComponentData>
+        </HullSocket>
+        <HullSocket>
+          <Key>-wa5U_hdw0mHKI1PglDeGg</Key>
+          <ComponentName>Stock/Reinforced CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>97l_f_ktb0yoEquIa75icg</Key>
+          <ComponentName>Stock/Reinforced DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>Cz_cm8aRt0mRiYxdq26V7A</Key>
+          <ComponentName>Stock/FR4800 Reactor</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>eOvmJ625f0yGavYASYtYYQ</Key>
+          <ComponentName>Stock/FM240 'Dragonfly' Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>1I5WRAX0oU6zIv7yEvqfmQ</Key>
+          <ComponentName>Stock/FM530 'Whiplash' Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>98aZYYnrXUWKXheUXHoLLw</Key>
+          <ComponentName>Stock/FM530 'Whiplash' Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>cVsLdxme_kGSU2jWlYnXzg</Key>
+          <ComponentName>Stock/FR3300 Micro Reactor</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>rWWXZNnbKUi7djDPaKTttQ</Key>
+          <ComponentName>Stock/FR3300 Micro Reactor</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>tgWD8fbOBEWq4KfvYDN_BQ</Key>
+          <ComponentName>Stock/FR3300 Micro Reactor</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>4wfe6HbB9kCN7CDcF7_POQ</Key>
+          <ComponentName>Stock/FR3300 Micro Reactor</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>yAg2wUCkJ0a6Ef3m96WyYw</Key>
+          <ComponentName>Stock/Focused Particle Accelerator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>rTbYkycwWku-Ye1FCBJbvw</Key>
+          <ComponentName>Stock/Focused Particle Accelerator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>-ao2fBk-zkK3QTdVH4fqHA</Key>
+          <ComponentName>Stock/Focused Particle Accelerator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>5lOFQqLf-kOQq0zbIv0MKw</Key>
+          <ComponentName>Stock/RM50 'Parallax' Radar</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>PWWRnNTo60Cx9faCbUhx-g</Key>
+          <ComponentName>Stock/Mount Gyros</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>31ilgFi2f0ScvJbFia-Opg</Key>
+          <ComponentName>Stock/Small Energy Regulator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>MjJFzcmp2kCLRWmjC30TKA</Key>
+          <ComponentName>Stock/Mount Gyros</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups>
+        <WepGroup Name="Front">
+          <MemberKeys>
+            <string>vvpl_pV8B0W33ernrw31jg</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="Back">
+          <MemberKeys>
+            <string>N5nMrtk4bkiSDzOffAmI1w</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="Bottom">
+          <MemberKeys>
+            <string>HsGDhCR_T0KH1ddzUnSHmA</string>
+          </MemberKeys>
+        </WepGroup>
+        <WepGroup Name="250">
+          <MemberKeys>
+            <string>AznvpY2By0GiQxgeOTktww</string>
+          </MemberKeys>
+        </WepGroup>
+      </WeaponGroups>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+  </Ships>
+</Fleet>

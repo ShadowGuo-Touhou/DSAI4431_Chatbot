@@ -1,0 +1,1021 @@
+{
+ "page": "Radar - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Radar",
+ "category": "mechanics",
+ "slug": "radar",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "Mechanics",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The units are omitted here; use the values as you see them in-game, except divide the radar cross-section by [math]\\displaystyle{ 10 }[/math]. All units listed in dB should be taken at face value as linear units, as the code makes the necessary conversions; e.g. a sensitivity of -40 dBm should be plugged into the equations as just -40."
+    },
+    {
+     "kind": "p",
+     "text": "Radars have a few stats that affect their ability to see objects:"
+    },
+    {
+     "kind": "p",
+     "text": "- radiated power, [math]\\displaystyle{ P_t }[/math] - gain, [math]\\displaystyle{ G_t }[/math] - aperture size, [math]\\displaystyle{ A }[/math] - sensitivity, [math]\\displaystyle{ S }[/math] - noise filtering, [math]\\displaystyle{ \\nu }[/math] - and for fire control radars, minimum signal-to-noise, [math]\\displaystyle{ \\text{SNR}_\\text{min} }[/math]. The Bullseye and Pinpoint do not show this row; both use a hidden −10 dB. Only the Parallax shows Min. Lock SNR (3)."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Return Power Density",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Given the radar cross section (RCS) of an enemy ship[1] [math]\\displaystyle{ \\sigma }[/math] at a distance [math]\\displaystyle{ d }[/math], The returned power density, [math]\\displaystyle{ P_r }[/math] is calculated by[2]:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ P_r = \\frac{P_t\\,G_t^2 \\,\\sigma A}{16\\pi^2\\, d^4} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "On a burn-through sweep, [math]\\displaystyle{ P_t }[/math] is multiplied by the Burn-Through Power Mult. stat."
+    },
+    {
+     "kind": "p",
+     "text": "Return Power must be sufficiently high for the target to be detected, with the threshold depending on radar type (search radar or fire control radar), radar sensitivity, and presence of jamming. Sensors sweep for new contacts about once per second, and locks are acquired on that cycle. Integrated PD fire-control panels that are still seeking a lock re-check every physics frame. Unlocked tracks update on a 0.25 s cycle (spread across fixed frames); locked tracks update every physics frame."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Noise",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Against small ships, unjammed range is usually limited by return power (sensitivity, or the 1e-7 W floor) rather than the listed maximum. Against cruisers and larger, most search radars reach that maximum (plus signature radius). Once jamming is present, detection range is limited by the Signal to Noise Ratio (SNR). Noise is modeled in-game as the sum of ambient noise and jamming noise."
+    },
+    {
+     "kind": "p",
+     "text": "Ambient noise is fixed at [math]\\displaystyle{ N_a = 1 \\times 10^{-7} }[/math] for all radars. If jamming is present, the jamming noise will add to the ambient noise. See the EWAR page for the calculation of jamming noise power [math]\\displaystyle{ N_j }[/math]. The jamming noise power is the sum of the power from each individual jammer, weighted by diminishing returns. Then the total noise power is:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ N = (N_a + N_j)*10^{\\nu / 10} = (10^{-7} + N_j)*10^{\\nu / 10} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "Search radars have three checks:"
+    },
+    {
+     "kind": "p",
+     "text": "First, return power [math]\\displaystyle{ P_r }[/math] is compared against ambient background noise [math]\\displaystyle{ N_a }[/math]. If the Return Power is less than the background noise [math]\\displaystyle{ P_r < N_a }[/math], the target is not seen. Note that this check is unaffected by noise filtering, which means noise filtering cannot bring the overall noise below ambient background noise."
+    },
+    {
+     "kind": "p",
+     "text": "Second, return power is compared against the total noise power. If the SNR is below 1, that is, [math]\\displaystyle{ P_r < N }[/math], the target is not seen. Note that, unlike the first check, this check is affected by noise filtering."
+    },
+    {
+     "kind": "p",
+     "text": "Third, the return power is used to compute the Signal Loss [math]\\displaystyle{ S_L }[/math], then compared against the radar Sensitivity [math]\\displaystyle{ S }[/math]:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ S_L = 10\\log_{10}\\left(\\frac{P_r}{0.001}\\right) = 10\\log_{10}({P_r}) + 30 }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "If [math]\\displaystyle{ S_L < S }[/math], then the target is not seen[3]. This check is not affected by noise filtering, but is affected by sensitivity buffs."
+    },
+    {
+     "kind": "p",
+     "text": "If any of the three checks fail, the target is not seen. If all three checks succeed, then the target is seen."
+    },
+    {
+     "kind": "p",
+     "text": "The first and third checks are nearly redundant. If the radar sensitivity is greater than -40 dBm, then the third check will be more restrictive than the first check. If the radar sensitivity is less than -40 dBm, then the first check will be more restrictive. This means that search radars have no benefit to sensitivity less than -40 dBm[4]. In summary:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "When there is no jamming and radar sensitivity is greater than -40 dBm, the third check is the only one used: The target is spotted if [math]\\displaystyle{ 10\\log_{10}({P_r}) + 30 > S }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "When there is no jamming and radar sensitivity is less than -40 dBm, the first check is the only one used: The target is spotted if [math]\\displaystyle{ P_r > 10^{-7} }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "When there is jamming, the second check is almost always used: The target is spotted if [math]\\displaystyle{ P_r > N }[/math]. In the rare case that jamming power is very weak, this can theoretically fall back on the first or second check."
+    },
+    {
+     "kind": "p",
+     "text": "Turreted fire control radars (Bullseye, Pinpoint) have one power check: they lock if the SNR is greater than the minimum SNR required to lock (listed below), after a range, FOV and line-of-sight test. While unjammed, a held lock is not re-checked. The Parallax must also pass all three search-radar checks before that SNR test."
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ 10\\log_{10}\\left(\\frac{P_r}{N}\\right) > \\text{SNR}_\\text{min} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "Fire control radars are not restricted by the background noise floor, so noise filtering will reduce background noise for locking and will increase their effective range."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Detection Range",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "We can solve for [math]\\displaystyle{ d }[/math] in the above equations to give a formula for detection range for search radars."
+    },
+    {
+     "kind": "p",
+     "text": "If there is no jamming and the radar sensitivity is greater than -40 dB, we have:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{P_t \\, G_t^2 \\, \\sigma A}{16 \\pi^2 \\cdot 10^{-3 + S/10} }\\right)^{1/4} \\approx 1.586 \\cdot (P_t \\,G_t^2 \\,\\sigma A \\cdot 10^{S/10})^{1/4} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "If there is no jamming and the radar sensitivity is less than -40 dB, we have:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{P_t \\, G_t^2 \\, \\sigma A}{16 \\pi^2 \\cdot 10^{-7} }\\right)^{1/4} \\approx 15.863 \\cdot (P_t \\,G_t^2 \\,\\sigma A)^{1/4} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "The formula for jamming is complicated and cannot be easily solved for detection range in every case. See the Electronic Warfare page for a more detailed breakdown. The most common scenario is for a set of jammers at the same range as the target that are significantly stronger than the ambient noise, which can be solved for range as follows:"
+    },
+    {
+     "kind": "p",
+     "text": "Assume that we have [math]\\displaystyle{ N }[/math] identical jammers all at range [math]\\displaystyle{ d }[/math] each with radiated power [math]\\displaystyle{ P_j }[/math] and gain [math]\\displaystyle{ G_j }[/math]. The diminishing returns of multiple jammers give an effective multiplier of [math]\\displaystyle{ M = \\sum_{n=1}^{N} e^{-((n-1)/2.75)^2} }[/math]. The detection range is then[5]:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{P_t\\,G_t \\,\\sigma A}{4\\pi \\,P_j \\, G_j \\,M} \\right)^{1/2} \\cdot 10^{-\\nu/20} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "If desired, we can make a catch-all equation by computing all 3 detection ranges and taking the minimum. This exercise is left to the reader."
+    },
+    {
+     "kind": "p",
+     "text": "For fire control radars with weak or no jamming, lock range is given by:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{P_t \\, G_t^2 \\, \\sigma A}{16 \\pi^2 \\cdot 10^{\\textrm{SNR}_\\textrm{min}/10} } \\cdot 10^{\\nu/10}\\right)^{1/4} \\approx 0.282 \\cdot (P_t \\,G_t^2 \\,\\sigma A)^{1/4} \\cdot 10^{(- \\textrm{SNR}_\\textrm{min} -\\nu )/40} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "Except for the Parallax, unjammed fire control radars have this distance above the hard maximum range of the radar, so they are generally not limited by this calculation. For a fire control radar being jammed by it's target (with the same setup as the search radar case above), we get the lock range:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{P_t\\,G_t \\,\\sigma A}{4\\pi \\,P_j \\, G_j \\,M} \\right)^{1/2} \\cdot 10^{(- \\textrm{SNR}_\\textrm{min} -\\nu )/20} }[/math]"
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Fire Control Radars/Radar Locking",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Certain types of radars like Fire control radars and multifunction radars can lock targets. This usually gives a very precise track and changes the track to a special icon. Ships will also know when they have been successfully locked and will display it on their status panel."
+    },
+    {
+     "kind": "p",
+     "text": "Each ship can only lock one enemy ship at a time, even if equipped with multiple fire control radars. However, fire control radars can split their locks when automatically locking incoming missiles."
+    },
+    {
+     "kind": "p",
+     "text": "Locks otherwise function mostly like regular radar tracks, as listed above"
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Burn-through sweep",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Some radars can perform a Burn-Through Sweep, or more simply \"Burn sweep\"[6]. A burn sweep releases a single pulse with greatly increased radiated power (the normal radiated power multiplied by the Burn-Through Power Mult.), capable of detecting stealthy targets or penetrating through jamming."
+    },
+    {
+     "kind": "p",
+     "text": "Anything the burn sweep detects will me marked as a purple circle, which will be called a burn track. These burn tracks are similar to regular radar tracks, and carry both position and velocity data (velocity data is not displayed in game but attacks fired on the track will account for it). Note that burn tracks are only a single snapshot, and do not update unless another burn sweep is performed. This means that burn tracks will become progressively inaccurate if the target moves away."
+    },
+    {
+     "kind": "p",
+     "text": "These tracks serve to update the range memory of jamming LOBs."
+    },
+    {
+     "kind": "p",
+     "text": "Burn tracks last for 30 seconds. They will replace ELINT tracks, but are in turn replaced by regular radar or vis tracks"
+    },
+    {
+     "kind": "p",
+     "text": "Ships can detect when they are hit by a burn sweep, and will display an indicator when it happens."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Signature radius & bloom",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "[wip]"
+    },
+    {
+     "kind": "p",
+     "text": "Some signatures (such as ships), have a \"sig radius\" (calculated from half the max component of the signature's boxcollider) that can allow radars to detect the signature beyond the radar's nominal max range. Under normal conditions, this sig radius is a small value, ranging from 39.5m (sprinter) to 138m (solomon). This means that by default, every radar actually has slightly more range than their listed max range. Both search radars and fire control radars can take advantage of this (but radar guided missiles will not)"
+    },
+    {
+     "kind": "p",
+     "text": "Any modifier that increases signature size will \"bloom\" radar sig, multiplying the sig radius by the same amount. For example, a +1500% sig increase (for a total of 1600% signature) will increase the sig radius from 135m to 2160m, so search radars can potentially detect it ~2km farther than their max range."
+    },
+    {
+     "kind": "p",
+     "text": "Components that modify the ship's signature will also factor into this, such as masquerades, EWAR emitters, raider engines, etc, but the radius difference is usually too minor to notice except for very large sig increases from components like firing railguns or mass drivers."
+    },
+    {
+     "kind": "p",
+     "text": "Sig Radius is also affected by signature reductions (eg, prowler, radars off), which can be used to counteract sig bloom from other sources.[7]"
+    },
+    {
+     "kind": "p",
+     "text": "Note that sig radius only increases maximum range; radars still have to pass the noise and signal loss checks against the target's return power to detect a target, so radars may not always be able to make full use of the signature bloom if it can't detect the signature at max range."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Ship Signature Positioning Effect",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Ship Radar Cross Section (RCS, [math]\\displaystyle{ \\sigma }[/math]), also called \"radar signature,\" is the primary way that the target impacts radar detection. RCS depends on angle and has a unique shape for each ship, based roughly on how a radar wave would reflect off of the target and back to the radar."
+    },
+    {
+     "kind": "p",
+     "text": "As a general rule of thumb, the RCS of a ship is based on the physical cross section of the ship relative to the radar and how \"flat\" the ship is at that aspect. There's also an increased signature for the engine nozzles. The effect is that RCS is generally greatest directly up, to the sides, or from behind; and RCS is generally lowest at a 45 degree angle off of the front."
+    },
+    {
+     "kind": "p",
+     "text": "We are working on porting interactable graphics for each ship to this wiki. Until then, these can be viewed on the old wiki on the appropriate ship page. For example, the RCS by angle for a Vauxhalllooks like:"
+    },
+    {
+     "kind": "p",
+     "text": "From the above detection range equations, assuming that all other parameters in the equation are constant (the values that are crossed out and converted to the constant value C) and only the (RCS, [math]\\displaystyle{ \\sigma }[/math]) is changing, it can be shown that the change in detection distance is linearly changed by RCS value by the 4th root without jamming, and and the 2nd root with jamming."
+    },
+    {
+     "kind": "p",
+     "text": "A quick reference table is provided for the jammed and unjammed case. Remember that RCS should be divided by 10 for the formulas provided above."
+    },
+    {
+     "kind": "p",
+     "text": "The following images generate relative ratios RCS ratios when compared to the maximum signature facing (Top Red box) of each ship. The Maximum ship signature value as reported on the ship hull pages can then be used to determine the effect of the ship signature due to facing."
+    },
+    {
+     "kind": "p",
+     "text": "For a quick reference, the relative RCS ratio can be compared to the Radar Detection image to generate the Detection Distance Multiplier for the unjammed and Jammed Case and multiplier by the maximum detection range for each type of sensing radar shown the ship hull pages."
+    },
+    {
+     "kind": "p",
+     "text": "For example a Vauxhall at a 45° angle (between the bow and top surface) to the sensing ship will have the RCS of the ship reduce to a signature factor of 0.32. when compared with its top surface. The resulting unjammed Distance Multiplier when compared to the Radar Detection Range image above is around 0.71 for the unjammed case and the 0.5 for the jammed case. When compared to the Ithaca Bridgemaster Detection Range of 8.5km on the Vauxhall Ship page Radar Signature section."
+    },
+    {
+     "kind": "p",
+     "text": "The resulting distance for detection of an Ithaca Bridgemaster on the target that would normally detect the top surface of the Vauxhall at 8.5km, when at a 45 degree angle between the bow and the top would become 6.3km for the unjammed case and 4.25km for the jammed case."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Radar Illumination",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "See EWAR page for details on illuminator use for missiles, and see the counter-jamming section on this page for details on illuminator use for defeating jamming."
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Track Quality",
+   "blocks": [
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "Track Quality",
+       "Inaccuracy (m)"
+      ],
+      [
+       "TQ15",
+       "0.0 - 4.0"
+      ],
+      [
+       "TQ14",
+       "4.0 - 9.1"
+      ],
+      [
+       "TQ13",
+       "9.1 - 14.6"
+      ],
+      [
+       "TQ12",
+       "14.6 - 20.5"
+      ],
+      [
+       "TQ11",
+       "20.5 - 26.9"
+      ],
+      [
+       "TQ10",
+       "26.9 - 34.0"
+      ],
+      [
+       "TQ9",
+       "34.0 - 41.8"
+      ],
+      [
+       "TQ8",
+       "41.8 - 50.5"
+      ],
+      [
+       "TQ7",
+       "50.5 - 60.3"
+      ],
+      [
+       "TQ6",
+       "60.3 - 71.7"
+      ],
+      [
+       "TQ5",
+       "71.7 - 85.2"
+      ],
+      [
+       "TQ4",
+       "85.2 - 101.6"
+      ],
+      [
+       "TQ3",
+       "101.6 - 122.9"
+      ],
+      [
+       "TQ2",
+       "122.9 - 152.8"
+      ],
+      [
+       "TQ1",
+       "152.8+"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "In game, track quality is graded on a scale from TQ15 to TQ1, where TQ15 is a near perfect track, and TQ1 is nearly unusable. This is calculated by the formula:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ \\text{TQ}=\\lfloor 15^{1.02-0.005\\delta_R}\\rfloor }[/math], clamped between 1 and 15,"
+    },
+    {
+     "kind": "p",
+     "text": "where [math]\\displaystyle{ \\delta_R }[/math] is the position error of the track in meters."
+    },
+    {
+     "kind": "p",
+     "text": "This can be used to convert TQ into an approximate meters of inaccuracy"
+    }
+   ]
+  },
+  {
+   "heading": "Mechanics › Track Quality › Radar Accuracy and Error",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Each radar lists a position and velocity error stat, [math]\\displaystyle{ 10\\delta_r }[/math] and [math]\\displaystyle{ 10\\delta_v }[/math]. That is, divide the values you see in-game by 10 to use the formulas below, then take your final answer and multiply by 10 again to get back to meters."
+    },
+    {
+     "kind": "p",
+     "text": "Velocity inaccuracy scales with the target speed for search and multi-function radars. For speed [math]\\displaystyle{ |\\text{v}| }[/math], the error magnitude is [math]\\displaystyle{ 2\\,\\delta_v\\,|\\text{v}| }[/math], applied in a random direction. For example, a radar listed with 5 m/s velocity error has [math]\\displaystyle{ \\delta_v = 0.5 }[/math], so a track moving at 15 m/s may show any speed from 0 to 30 m/s (±15 m/s). Turreted fire-control radars use a range-scaled deviation curve instead."
+    },
+    {
+     "kind": "p",
+     "text": "Each radar has its own deviation curve which gives a deviation [math]\\displaystyle{ \\delta_d }[/math]. For search radars, this scales with SNR. For fire control radars, this scales with target range."
+    },
+    {
+     "kind": "p",
+     "text": "For search radars, the deviation curve has entries from 0 dB to 30 dB. SNR is calculated as [math]\\displaystyle{ \\textrm{SNR} = \\ln\\left(\\frac{P_r}{N_a + N_j}\\right) }[/math] and clamped between 0 to 30[8]. Notice that noise filtering does not apply. At 0 dB, [math]\\displaystyle{ \\delta_d }[/math] is always exactly [math]\\displaystyle{ \\delta_r }[/math]. At 30.0 dB, error hits a floor between roughly [math]\\displaystyle{ 0 }[/math] to [math]\\displaystyle{ 0.3\\delta_r }[/math] depending on the radar. See the component pages for each radar to see their curves (not implemented yet)."
+    },
+    {
+     "kind": "p",
+     "text": "For fire control radars, the deviation is based on the ratio of the target distance to the radar's max distance. See component pages for the curve."
+    },
+    {
+     "kind": "p",
+     "text": "Then the true position error is a random point in the sphere of radius [math]\\displaystyle{ 10\\cdot\\delta_d \\delta_r }[/math]. Notice this means at 0 dB, this radius is [math]\\displaystyle{ 10\\cdot\\delta_r^2 }[/math] and can be higher than the listed position accuracy for a listed position accuracy greater than 10 m. For a multifunction radar attempting to lock, this is also multiplied by the Lock Multiplier stat. Since this is a random point in a sphere, the expected lateral error is [math]\\displaystyle{ \\frac{3\\pi}{16}\\approx0.59 }[/math] times the sphere radius. Turreted fire-control radars instead pick a point uniformly in a cube whose side is the deviation-curve value times the raw position error (listed metres ÷ 10), so ± half that side on each axis, and the error is linear in listed error rather than quadratic."
+    },
+    {
+     "kind": "p",
+     "text": "For example, the Frontline radar shows 30 m inaccuracy for the position error. The maximum true error at 0 dB SNR would be 10(3*3) = 90 m. Until roughly 4.0 dB SNR, inaccuracy rapidly drops down to 30%, where a Frontline radar would have 90*0.3 = 27 m max error. This then slowly approaches 10% inaccuracy at 30.0 dB."
+    },
+    {
+     "kind": "p",
+     "text": "When multiple radars on the network see the same track, the game chooses the best (lowest) error for the track. This has the effect of improving your track quality, but note that multiple radars of the same type on one ship collapse to a single guess (for balance). Different types on the same ship are all evaluated, and the ship's track keeps the guess closest in 3D to the true position. For radars of the same type on multiple ships, the following table gives the combined average error in the plane facing your guns as a fraction of the maximum error [math]\\displaystyle{ \\delta_d\\delta_r }[/math]:"
+    },
+    {
+     "kind": "table",
+     "rows": [
+      [
+       "# of Radars",
+       "Average Error"
+      ],
+      [
+       "1",
+       "0.59"
+      ],
+      [
+       "2",
+       "0.505"
+      ],
+      [
+       "3",
+       "0.454"
+      ],
+      [
+       "4",
+       "0.419"
+      ],
+      [
+       "n",
+       "[math]\\displaystyle{ \\frac{\\pi}{4}\\Gamma\\left(\\frac{4}{3}\\right)\\frac{n!}{\\Gamma\\left(n+\\frac{4}{3}\\right)} }[/math]"
+      ]
+     ],
+     "imgs": [
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ],
+      [
+       [],
+       []
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "heading": "Radar Panel status",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The status of a ship's radar panels can be viewed at a glance by selecting a ship and looking at the dotted lines that point outward, representing the radar panels on the ship. Light blue means the panel is functioning, red means the panel is disabled or destroyed. The number of radar panels depends on the ship, and varies between 2 to 8. Each radar panel covers an equal arc, so more radar panels means each panel covers a smaller arc, and vice versa."
+    }
+   ]
+  },
+  {
+   "heading": "Radar Jamming and Counter Jamming",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "For more information on this section, please refer to EWAR."
+    },
+    {
+     "kind": "p",
+     "text": "The most common counter to radar jamming is illuminators. See the EWAR page for details on how return power is calculated. We use the same jamming setup as seen above in this page with [math]\\displaystyle{ N }[/math] jammers all at the same range as the target. We then also assume that there are [math]\\displaystyle{ N' }[/math] illuminators near the ship trying to get a track, with stats as follows:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Illuminator radiated power [math]\\displaystyle{ P_{i,n} }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Illuminator gain [math]\\displaystyle{ G_{i,n} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "We also assume that there is no edge falloff (which is automatically the case if you're track firing the illuminators). Recall that illuminators simply add return power without any diminishing returns. So the maximum detection range for a jamming target being illuminated paired with a search radar is:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{\\left(P_t\\,G_t + \\sum_{n=1}^{N'} P_{i,n}\\,G_{i,n}\\right)\\sigma A}{4\\pi\\, P_j \\,G_j \\,M}\\right)^{1/2}\\cdot 10^{-\\nu/20} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "And with a fire control radar:"
+    },
+    {
+     "kind": "p",
+     "text": "[math]\\displaystyle{ d < \\left(\\frac{\\left(P_t\\,G_t + \\sum_{n=1}^{N'} P_{i,n}\\,G_{i,n}\\right)\\sigma A}{4\\pi\\, P_j \\,G_j \\,M}\\right)^{1/2}\\cdot 10^{(-\\textrm{SNR}_\\textrm{max}-\\nu)/20} }[/math]"
+    },
+    {
+     "kind": "p",
+     "text": "The most common use-case is attempting to illuminate into jamming to maintain a lock with a fire control radar. We can simplify this by comparing [math]\\displaystyle{ P_t\\,G_t }[/math] to [math]\\displaystyle{ P_i\\,G_i }[/math]. Let's look at the relationships for the 3 common pairings:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The Floodlight and Bullseye are have approximately similar stats, so [math]\\displaystyle{ N' }[/math] Floodlights improves lock range by a factor of [math]\\displaystyle{ \\sqrt{N'+1} }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The Spotlight has roughly half the stats of the Bullseye, so they improve lock range by a factor of [math]\\displaystyle{ \\sqrt{N'/2 + 1} }[/math]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "The Lighthouse has exactly half the stats of the Pinpoint, so they improve lock range by a factor of [math]\\displaystyle{ \\sqrt{N'/2 + 1} }[/math]."
+    }
+   ]
+  },
+  {
+   "heading": "ELINT",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "ELINT detectors (such as the Pinard) allows a ship to passively detect enemy radar emissions, such as those from search radars or fire control radars, at up to 1.25x of that radar's max range. One ELINT-equipped ship shows a rough line of bearing toward the emitter. Two ships with ELINT produce a crossfix; two modules on the same ship stay a single bearing. ELINT will also be able to identify what type of radar it is (or more specifically, it can reveal the ELINT category of the radar) and will display it on the ELINT LOB or crossfix. If the ship is equipped with multiple types of radars, the track will display all detected types."
+    },
+    {
+     "kind": "p",
+     "text": "The categories are generally self explanatory, most internal search radars (spyglass, huntress, etc) are Search/Track. All turreted fire control radars (Bullseye, Pinpoint) are Fire Control. The Early Warning Radar is the only radar that will be specified as Early Warning. Parallax using the locking function will still classify as Search/Track. Bloodhound is classified as Long Range Tracking, a category of its own."
+    },
+    {
+     "kind": "p",
+     "text": "Most directional radars like FCRs also have sidelobe patterns, allowing ELINT to detect these radars at reduced range even if they're not pointed at the ELINT set. These sidelobe patterns can be viewed on their component page here: http://nebfltcom.wikidot.com/component:list."
+    },
+    {
+     "kind": "p",
+     "text": "ELINT is not able to detect jamming."
+    },
+    {
+     "kind": "p",
+     "text": "ELINT is not able to detect integrated FCRs on PD turrets"
+    },
+    {
+     "kind": "p",
+     "text": "ELINT is not able to detect illuminators."
+    },
+    {
+     "kind": "p",
+     "text": "ELINT is not masked by hull, and a ship with two ELINT detectors will not have a blindspot between the ELINT sets (as ELINT is measured from the center of the ship rather than from the set itself)."
+    }
+   ]
+  },
+  {
+   "heading": "External Links",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NotSoLoneWolf's Radar Calculator V8.3 - can simulate radar and comms jamming across a wide variety of parameters"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Marion's Illuminator vs Jammer Calculator - Shows maximum lock range for varying numbers of illuminators and jammers compared against ship RCS"
+    }
+   ]
+  },
+  {
+   "heading": "Notes",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ In battle, RCS interpolates between the hull box's minimum and maximum face areas depending on aspect. Wiki ship detection tables list a single number and are computed at maximum aspect unless stated otherwise; other aspects can reduce signal-limited detection range."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ There is actually an error in this equation compared to real life: in real life, gain should not be squared. Since Neb also uses gain in linear units rather than in dB (despite listing them in dB), this leads to the effect of gain being much different than might be expected from real life."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Both the logarithm and the +30 are simply a unit change to get [math]\\displaystyle{ P_r }[/math] from Watts to dB(milliwats) or dBm, which are the units for [math]\\displaystyle{ S }[/math]. That is, this equation really just asks that the return power is greater than sensitivity after correcting for units."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ The Bloodhound LRT radar has exactly -40 dBm and thus cannot have detection buffed (except against jamming). All other vanilla radars can be buffed once by an Adaptive Radar Receiver before passing -40 dBm, so 2 or more ARRs is redundant (except against jamming)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Notice that the exponent is now 1/2 instead of 1/4. This means that a jammed radar experiences significantly different scaling laws compared to an unjammed radar. See the EWAR page for more details."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ Another common abbreivation is simply calling it \"Burnthrough\", but that can be confused for the actual term used in real life to describe the range at which a given radar can see through jamming."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ This cannot reduce the sig radius below the default, but in practice this limit is irrelevant since default sig radius is very small, and ships with signature reductions are not likely to be detected at max range anyway, making sig radius irrelevant."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ This inexplicably uses the natural logarithm and therefore does not actually give SNR in dB. However, to maintain consistency with previous wiki pages, we'll still describe it as dB"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 7 October 2026, at 05:50."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

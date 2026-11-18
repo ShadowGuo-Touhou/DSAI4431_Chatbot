@@ -1,0 +1,13 @@
+{
+  "_note": "Civilian hull prices are NOT in the official wiki. These values are estimated from the 344 local .fleet files as median(declared - fitted parts - priced ammo). Use only as a fallback so the cost estimate is not wildly low.",
+  "source": "estimated from local fleet files",
+  "hulls": {
+    "Bulk Feeder": 206,
+    "Bulk Hauler": 532,
+    "Container Hauler": 3400,
+    "Container Hauler Refit": 2238,
+    "Ore Carrier": 1065,
+    "Shuttle": 82,
+    "Tugboat": 132
+  }
+}

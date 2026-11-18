@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fleet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>support tug · 不冲击</Name>
+  <Version>3</Version>
+  <TotalPoints>395</TotalPoints>
+  <FactionKey>Stock/Protectorate</FactionKey>
+  <Description>样板船：不冲击（大冲击），舰体 Draugr Clipper Class，原存档点数 395。来自 大冲击.fleet，未做任何改动。</Description>
+  <Ships>
+    <Ship>
+      <Key>33a8db31-519d-47d6-b092-d7bd129cbeaa</Key>
+      <Name>不冲击</Name>
+      <Cost>400</Cost>
+      <Callsign />
+      <Number>561</Number>
+      <SymbolOption>0</SymbolOption>
+      <HullType>Stock/Tugboat</HullType>
+      <SocketMap>
+        <HullSocket>
+          <Key>03vxralGq0CFx1XKxjOcBA</Key>
+          <ComponentName>Stock/L50 Laser Dazzler</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>cIGspM4oYU2etRfjIcuCCA</Key>
+          <ComponentName>Stock/J75 Jammer</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>0upOgm0H0UuZ-h2YvRjmBg</Key>
+          <ComponentName>Stock/J15 Jammer</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>KnFHQkb9uUe98IweLYf9wg</Key>
+          <ComponentName>Stock/E20 'Lighthouse' Illuminator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>5kd20hGcxUuTlY-6JYaudA</Key>
+          <ComponentName>Stock/E20 'Lighthouse' Illuminator</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>F6bmJdCO3EqzXK9SBJoXUw</Key>
+          <ComponentName>Stock/Basic CIC</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>-PqoLKimSUOZtKMLo5QHXg</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>DakKS2gy6UyM58u3YG-HfQ</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>peqaYrE39UupWCXPY_PgoA</Key>
+          <ComponentName>Stock/Small Workshop</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>6OieSH0A6kKFmquctn9_aQ</Key>
+          <ComponentName>Stock/Rapid DC Locker</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>NSAbhn9brE-aAirJFIYG-Q</Key>
+          <ComponentName>Stock/BW800 Drive</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>_qlP8rsUpUiJpkRc1tcjPQ</Key>
+          <ComponentName>Stock/Civilian Reactor</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>RMDTRlITGUm1ZgbIgWq1Xw</Key>
+          <ComponentName>Stock/Actively Cooled Amplifiers</ComponentName>
+        </HullSocket>
+        <HullSocket>
+          <Key>v7vnexI1xUemaSmSkn0QNA</Key>
+          <ComponentName>Stock/Actively Cooled Amplifiers</ComponentName>
+        </HullSocket>
+      </SocketMap>
+      <WeaponGroups />
+      <InitialFormation>
+        <GuideKey>33a8db31-519d-47d6-b092-d7bd129cbeaa</GuideKey>
+        <RelativePosition>
+          <x>0.06071472</x>
+          <y>-12.3564148</y>
+          <z>60.73319</z>
+        </RelativePosition>
+      </InitialFormation>
+      <TemplateMissileTypes />
+      <TemplateSpacecraftTypes />
+    </Ship>
+  </Ships>
+  <MissileTypes>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/dClo2cj1WUGv9SJBNbq4Ww</SaveKey>
+      <Designation>SGT-300</Designation>
+      <Nickname>大冲击</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_SEMIACTIVE_ABBREV(&lt;color=#3BC81E&gt;雷达&lt;/color&gt;)/[$MISSILESEEKER_MODE_ARAD_PULSED_ABBREV(&lt;color=#3BC81E&gt;雷达&lt;/color&gt;)] - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>&lt;noparse&gt;SGT-300 大冲击&lt;/noparse&gt; 是一种尺寸 3 的 直航制导 导弹。使用 SGT-3 弹体，属于 重型反舰鱼雷。该导弹将搭载 碰炸引信、高爆、破甲 弹头。使用 一个半主动式 雷达 导引头 向目标导引，并以 一个雷达 反辐射导引头 验证目标是否正确。
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_SEMIACTIVE_CAPS &lt;color=#3BC81E&gt;雷达&lt;/color&gt;
+$MISSILESTAT_VALIDATOR: 反辐射（仅脉冲&lt;color=#3BC81E&gt;雷达&lt;/color&gt;信号）
+
+$MISSILESTAT_SPEED: 185 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 6,132 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 1.2 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 1.2 $UNIT_GS
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_NONE|None|
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 114$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 4,320$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 160 
+$MISSILESTAT_WALLTHICKNESS: 0.25
+$MISSILESTAT_PROGTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>9</Cost>
+      <BodyKey>Stock/SGT-3 Body</BodyKey>
+      <TemplateKey>d9682974-f5c8-4159-aff5-224135bab85b</TemplateKey>
+      <BaseColor>
+        <r>0.2627451</r>
+        <g>0.2627451</g>
+        <b>0.2627451</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.8509804</r>
+        <g>0.3647059</g>
+        <b>0.180392161</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Fixed Semi-Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="PassiveARHSeekerSettings">
+            <ComponentKey>Stock/Fixed Anti-Radiation Seeker</ComponentKey>
+            <Mode>Validation</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <TargetType>SensorsOnly</TargetType>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>false</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>6</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>8</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0.07930863</A>
+              <B>0.9206914</B>
+              <C>0</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+    <MissileTemplate>
+      <SaveKey>$MODMIS$/UcegMLx7FU63tsCRCgLezQ</SaveKey>
+      <Designation>SGM-200</Designation>
+      <Nickname>大冲击</Nickname>
+      <Description>$MISSILEGUIDANCE_MODE_DIRECT - $MISSILESEEKER_MODE_SEMIACTIVE_ABBREV(&lt;color=#3BC81E&gt;雷达&lt;/color&gt;) - $MISSILEWARHEAD_SHORT_HEIMPACT</Description>
+      <LongDescription>&lt;noparse&gt;SGM-200 大冲击&lt;/noparse&gt; 是一种尺寸 2 的 直航制导 导弹。使用 SGM-2 弹体，属于 灵活型主力反舰导弹（搭载加力段）。该导弹将搭载 碰炸引信、高爆、破甲 弹头。使用 一个半主动式 雷达 导引头 向目标导引。
+
+$MISSILESTAT_CONTROLMETHOD: $MISSILEGUIDANCE_MODE_DIRECT
+$MISSILESTAT_TARGETINGMODE: &lt;b&gt;&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_POS&lt;/color&gt;	&lt;color=#3BC81E&gt;$MISSILESTAT_TARGETINGMODE_TRACK&lt;/color&gt;&lt;/b&gt;
+
+$MISSILESTAT_PRIMARYSEEKER: $MISSILESEEKER_MODE_SEMIACTIVE_CAPS &lt;color=#3BC81E&gt;雷达&lt;/color&gt;
+
+$MISSILESTAT_SPEED: 180 $UNIT_METERSPERSEC
+$MISSILESTAT_DISTANCE: 8,020 $UNIT_METERS
+$MISSILESTAT_TOPSPEEDTIME: 0.8 $UNIT_SECONDS
+$MISSILESTAT_TURNRATE: 3.9 $UNIT_GS
+$MISSILESTAT_TERMINALS: $MISSILESTAT_TERMINALS_NONE|None|
+
+$MISSILESTAT_WARHEAD: $MISSILEWARHEAD_DETAIL_HEIMPACT
+$MISSILESTAT_ARMORDAMAGE: 66$UNIT_CENTIMETERS
+$MISSILESTAT_COMPONENTDAMAGE: 1,440$UNIT_HP
+$MISSILESTAT_BLASTANGLE: 70 $UNIT_DEGREES
+$MISSILESTAT_DAMAGEPERFRAGMENT: 50.0
+
+$MISSILESTAT_HEALTH: 30 
+$MISSILESTAT_WALLTHICKNESS: 0.05
+$MISSILESTAT_PROGTIME: 8 $UNIT_SECONDS
+$MISSILESTAT_RADARSIG: 100 %
+$MISSILESTAT_BOOSTTIME: 3 $UNIT_SECONDS
+$MISSILESTAT_BOOSTSTRAFE: 100 %
+$MISSILESTAT_BOOSTTURN: 100 %
+$MISSILESTAT_FAILRATE: 0 %</LongDescription>
+      <Cost>13</Cost>
+      <BodyKey>Stock/SGM-2 Body</BodyKey>
+      <TemplateKey>30a0c751-7bbc-4e15-b7b6-c0910a02decd</TemplateKey>
+      <BaseColor>
+        <r>1</r>
+        <g>1</g>
+        <b>1</b>
+        <a>1</a>
+      </BaseColor>
+      <StripeColor>
+        <r>0.7058824</r>
+        <g>0.129411772</g>
+        <b>0.129411772</b>
+        <a>1</a>
+      </StripeColor>
+      <Sockets>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="ActiveSeekerSettings">
+            <ComponentKey>Stock/Fixed Semi-Active Radar Seeker</ComponentKey>
+            <Mode>Targeting</Mode>
+            <RejectUnvalidated>false</RejectUnvalidated>
+            <DetectPDTargets>false</DetectPDTargets>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/Decoy Launcher</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>1</Size>
+          <InstalledComponent xsi:type="DirectGuidanceSettings">
+            <ComponentKey>Stock/Direct Guidance</ComponentKey>
+            <Role>Offensive</Role>
+            <HotLaunch>false</HotLaunch>
+            <SelfDestructOnLost>false</SelfDestructOnLost>
+            <Maneuvers>None</Maneuvers>
+            <DefensiveDoctrine>
+              <Mode>Uniform</Mode>
+              <TargetSizeMask>12</TargetSizeMask>
+              <TargetType>All</TargetType>
+              <TargetSizeOrdering>Descending</TargetSizeOrdering>
+              <SalvoSize>0</SalvoSize>
+              <ConvSalvo>16843008</ConvSalvo>
+              <HybridSalvo>16843008</HybridSalvo>
+              <CraftSalvo>16843008</CraftSalvo>
+              <FarthestFirst>false</FarthestFirst>
+            </DefensiveDoctrine>
+            <ApproachAngleControl>true</ApproachAngleControl>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>6</Size>
+          <InstalledComponent>
+            <ComponentKey>Stock/HE Impact</ComponentKey>
+          </InstalledComponent>
+        </MissileSocket>
+        <MissileSocket>
+          <Size>4</Size>
+          <InstalledComponent xsi:type="MissileEngineSettings">
+            <ComponentKey />
+            <BalanceValues>
+              <A>0</A>
+              <B>0.4523597</B>
+              <C>0.5476403</C>
+            </BalanceValues>
+          </InstalledComponent>
+        </MissileSocket>
+      </Sockets>
+      <ModDependencies />
+    </MissileTemplate>
+  </MissileTypes>
+</Fleet>

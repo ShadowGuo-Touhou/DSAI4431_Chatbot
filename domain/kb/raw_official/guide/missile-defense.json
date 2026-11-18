@@ -1,0 +1,1032 @@
+{
+ "page": "Missile Defense - NEBULOUS_ Fleet Command Official Wiki",
+ "title": "Missile Defense",
+ "category": "guide",
+ "slug": "missile-defense",
+ "version": "0.6.2.6:260903-1430",
+ "source": "官方 wiki（wiki.hoodedhorse.com）",
+ "entities": [],
+ "tables": [],
+ "sections": [
+  {
+   "heading": "Introduction",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Newer players tend to fall into the trap of \"Hardkillmaxxing\" where they strap as many point defense turrets to their ships as possible to deter missile threats, or simply don't know the mechanics behind missiles themselves and get frustrated when they die to a more experienced players with complex missile seeker combos."
+    },
+    {
+     "kind": "p",
+     "text": "Newer players often have trouble understanding how to fully protect themselves from missiles, have trouble with APM and situational awareness that allows them to use softkill, or simply prefer to use hardkill because it looks cool."
+    },
+    {
+     "kind": "p",
+     "text": "This guide aims to educate players on the importance of missile defense (specifically, softkill defenses) and how to counter missiles."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › What Exactly IS Hardkill?",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "In most nebulous discussions about missile defense, you will commonly hear 2 terms thrown around to describe missile defense: Hardkill and Softkill."
+    },
+    {
+     "kind": "p",
+     "text": "Hardkill is what the name implies, it \"hard\" kills the threat targeting you. This usually involves the use of ship-board point defense turrets, duel-purpose guns, AMMs, and even craft-based weaponry to destroy targets physically before they can hit you. It is especially popular with newer players to slap everywhere on a ship."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › What Exactly IS Hardkill? › Point Defence",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Point defense turrets like Pavises, Defenders, and 20mm/35mm guns on craft serve as a more close-in option meant to deliver a high rate of shells, the side effect of having such high firerate means that 20/35mm has an eyewateringly high DPS which means that any momentary grazing shot will most likely end up with the missile being killed. Their main downfall comes from their thin spray of shells, they frequently find themselves unable to kill targets with terminal maneuvers or with a high speed, and are frequently overwhelmed by mass/decoys."
+    },
+    {
+     "kind": "p",
+     "text": "Point defense turrets like Stonewalls, Rebounds, and Bastions work to fire a large spread of time-fused fragmentation rounds to (In theory) kill large amounts of cheap/weaker missiles (Usually r2s, size 2 missiles, and bombs.). They work decently to kill their intended targets alongside shooting down decoys. The main downfall of flak is that the majority of threats have shifted to more tanky and thick-skinned missiles like containers or torpedos. Flak is easily distracted by decoys, Stonewalls have an abysmal turn rate, and the visual backup has a questionable track velocity error, which makes it inaccurate when jammed."
+    },
+    {
+     "kind": "p",
+     "text": "Energy-based point defense turrets like Auroras and Grazers are mainly used in an anti-hybrid (and in the auroras case, anti-light) defense work, being extremely accurate point defenses with a moderate to high amount of damage dealt to missiles over time (especially an aurora with BSHRT turned on.). Auroras especially are extremely good at shooting down r2s, hybrids, fighters, and even decoys where ANS frequently pairs them with defenders. Grazers have the disadvantage of not dealing well with large amounts of missiles and decoys, Auroras have the disadvantage of not dealing with high health targets quickly enough and being especially susceptible to radar jamming."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › What Exactly IS Hardkill? › Anti Missile Missiles",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Anti-Missile Missiles are able to dynamically and almost infinitely scale to any given incoming threat. As opposed to PD turrets which can only put out so much damage into incoming missiles per second, AMMs are launched per incoming missile, at a high enough rate that you can get enough out of the tube in order to defeat more or less arbitrarily large salvos.[1] This goes hand in hand with another advantage and that being mount density. Whereas PDT need numbers in order to scale up to shoot down more threatening salvos, AMMs are only constrained by mount count as to how many of them you can bring, with 1 or 2 per ship usually being more than adequate to bring as many AMMs as you’ll need. The final defining strength of AMMs is their ability to reliably roll to hit damage on basically any target. Unlike 20mm which is significantly less effective when terminals are in play or flak which just can’t put out enough DPS to effectively kill sprinting hybrids before they hit, AMMs are (as long as their seeker is not impeded) able to reliably hit any missile save for a handful of specific setups of hybrids in the terminal stage, the high launch rate and high damage per AMM also means you usually will be able to put enough damage into even the fastest targets before they hit."
+    },
+    {
+     "kind": "p",
+     "text": "AMMs, for all their strengths, do also have significant drawbacks. For one their numbers are generally pretty limited (mostly by cost) so it quickly becomes uneconomical to try and defeat cheap and numerous (e.g. S2 spam) targets or ones with very high HP, such as containers and torpedoes which need many AMMs to hit them in order to net a kill. Compounding this is that their warheads are either unreliable (BF) or less unreliable and the most expensive warhead in the game (BFEL).[2] So while AMMs are certainly able to defeat common threats, the amount you’d need to defend more than 1 or 2 volleys quickly becomes too expensive compared to softkill or using turret based pd which have ammo costs that are a couple magnitudes lower."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › What Exactly IS Hardkill? › Dual Purpose Guns",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Dual-purpose guns are a more longer-ranged supplemental type of point defense, firing long-ranged rounds with decent damage to wean and kill targets. Guns like 250mm with their HE-RFP/Bomb Shell rounds, 120mm with their HE-RPF rounds, and 100mm Grape rounds are great examples of these, being able to reliably kill threats at a longer ranged effectively weaning their numbers. They are weaker towards higher-health and maneuvering targets that \"Sarissa-weave\", or in other words pivot frequently side-to-side in flight to avoid such point defense."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › What Exactly IS Hardkill? › Sarissas",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Sarissas are a little bit of an odd-ball, they are an extremely accurate and long ranged point defense turret being able to fire high velocity rounds with a high level of accuracy. As good as they are, they fail to effectively kill off large numbers of missiles and craft. They are also extremely expensive and power-hungry. They are frequently countered by players by simply setting their craft and missile to evade manually, either through HBURN EVADE or by simply going in a zig-zag pattern."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › What Exactly IS Softkill?",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Conversely the alternative to \"Hardkill\" is \"Softkill\" this is the practice of using electronic warfare and deception to seduce the tracking systems of hostile missiles such that they will be unable to track your craft and miss it. Compared to the Hardkill above, this is far more difficult, complicated, and time sensitive compared to the hard kill systems that will automatically engage hostile inbound missiles."
+    },
+    {
+     "kind": "p",
+     "text": "Fear not, when done right and early enough Softkill can be 100% effective in seducing those pesky missiles away from your precious ships. In the next section you will learn about all of the different Softkill equipment that you will need combine in your fleet to defeat hostile missile threats."
+    },
+    {
+     "kind": "p",
+     "text": "One part of softkilling the CMD Family, or the “yellow seekers”, there are two jammers for each faction:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "E70 ‘Interruption’ Jammer for ANS and Ocello"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "J75 ‘Warbler’ Jammer for OSP."
+    },
+    {
+     "kind": "p",
+     "text": "You can also use the E71 ‘Hangup’ Jammer on ANS for this task but it is not recommended due to it being a cone and not omnidirectional as CMD seekers tend to track the ship anywhere it is in the world. It does have a niche of remotely jamming CMD missile strikes coming to friendlies."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "No, Home-On-Jam and ARAD Seekers do not track command jamming for balance reasons."
+    },
+    {
+     "kind": "p",
+     "text": "Player-made decoy type that can help softkill if not completely a large number of seeker combos. There are multiple variants of the killjoy with differing functions and niches but the default one is all you need to know for now:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Seekerless or WAKE Primary, No Warhead, Self-Screening Jammer support module."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "SGM-200 ‘Tempest’ and Container Missile Body"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "SGT-300 ‘Pilum’ body can be used, you just need to minimize its maneuverability since torps cost more for more maneuverability, should cost the same as the Tempest."
+    },
+    {
+     "kind": "p",
+     "text": "Set missile matrix to defensive but don’t give it valid targets and don’t set your PDMSL computer to all. Then uses the Z key which is the PD priority key on the incoming enemy missile for it to launch immediately and skip programming time. For MLS Killjoys just launch them in a direction."
+    },
+    {
+     "kind": "p",
+     "text": "(There will eventually be a separate guide for different killjoys variants and more details on using them)"
+    },
+    {
+     "kind": "p",
+     "text": "Conure (ANS only) and Container Decoy (OSP only) are used to defeat the ARAD Family or the “green seekers” and ACT/[WAKE] somewhat. They’re just big chaff, should be intuitive to use."
+    },
+    {
+     "kind": "p",
+     "text": "Conure fits in a VLS-2 is controlled by the DECOY computer. Container Decoy fits in container stack launchers and requires you to launch them manually."
+    },
+    {
+     "kind": "p",
+     "text": "EA12 Chaff, EA20 Flares, EA14 Chaff, fits in VLS-1, controlled by DECOY computer, should be intuitive to use."
+    },
+    {
+     "kind": "p",
+     "text": "It should be noted that some capital ship’s radar signatures are bigger than EA12’s radar signature, particularly: Axfords, Solomons, Ocellos, and Liners. For ANS, you may have Conure as a secondary decoy option and/or the ability to spam EA12. For OSP, you should upgrade to EA14 and/or have Liner Container Decoys as a secondary decoy option."
+    },
+    {
+     "kind": "p",
+     "text": "Using a E57 ‘Floodlight’ Illuminator and pointing it at your own chaff, this is to increase the radar signature of the chaff as well as softkilling SAH seekers."
+    },
+    {
+     "kind": "p",
+     "text": "The ANS has a unique seeker type called Electro Optical or \"EO.\" This seeker type is one of the most difficult seekers to softkill. Fortunately the OSP does have the L50 'Blackjack' Laser Dazzler that is able to blind and stun the seeker type effectively disabling it."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › What Exactly IS Softkill? › Summary",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "As appealing as hardkill is to a newer player looking for an easy and cool-looking way to defeat missiles, they are easily countered by higher-level play. Hardkill trades into a certain number of missiles at a time, and doesn't scale well into large missile attacks (not even flak). They are easily countered by decoys, terminal maneuvers, evasion tactics, ect."
+    },
+    {
+     "kind": "p",
+     "text": "The only reliable way of countering almost every guided missile in the game, with a near 100% effectiveness if you set it up right, is found in the 2nd type of missile defense: Softkill."
+    },
+    {
+     "kind": "p",
+     "text": "Softkill is the practice of countering a missile by seducing, disrupting, or otherwise causing a missiles seeker to not go towards your ship or see it. They have the major advantage of countering a missile not through health depletion, but rather directly causing the missile to intentionally miss your ship with more reliability than hardkill could ever dream of imagining. They aren't affected by penetration aids, missile type, speed, and salvo size: the only thing affecting softkill's effectivity is the seekers used and the tools you have on board. Unlike hardkill, softkill trades in better into missile salvoes by being able to counter entire salvoes at once, unlike hardkill which needs numerical advantage to kill a set number of missiles. Of course softkill isn't completely foolproof, you are unable to softkill unguided missiles and there's always a certain element of RNG involving missiles, meaning that to effectively defend yourself against missiles you need at least SOME point defense to fully protect yourself against all types of missiles. Generally, a full softkill suite + your choice of point defense covers almost all your bases."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Ok, so how EXACTLY do you counter these missile seekers?",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "We have finally arrived to the main meat of this guide: how to effectively softkill certain seeker types."
+    },
+    {
+     "kind": "p",
+     "text": "In nebulous you will commonly hear about the \"Softkill Checklist\" which is as follows:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Chaff + Flare + Active Decoy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "ALLSTOP / go backwards"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "EMCON"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "CMD jamming (Omnidirectional) + EO jammer"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Self illumination"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Killjoy jammer decoys"
+    },
+    {
+     "kind": "p",
+     "text": "This checklist is what is commonly accepted as the actions necessary to effectively softkill every type of seeker type. Of course there are other ways to softkill certain seekers, with some ways being more effective than others, but this is what you need to do in order to softkill EVERY seeker in the game (validated seekers included)."
+    },
+    {
+     "kind": "p",
+     "text": "Now for specific seekers, I will explain the mechanics behind them and the proper counters to them."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Ok, so how EXACTLY do you counter these missile seekers? › Softkilling Active Radar seekers (Fixed, Steerable, and Steerable Extended)",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Active Radar seekers work by actively searching for a radar signature within their search cone. Once a target has been acquired the seeker re-rolls every 0.5 seconds among visible radar signatures, weighted by return strength, with a 10x weight bonus for its current target. A larger signature is more likely to pull it away, not certain to. Within 2.5 seconds before impact at its current speed it stops rolling and keeps the locked signature (This is how TTGI ACT missiles work, by abusing the 2.5 second lock rule to effectively make the missile go immediately for the first thing it sees)."
+    },
+    {
+     "kind": "p",
+     "text": "For ACT seekers, the most basic way of softkilling is chaff, found on VLS-1 cells on both factions, chaff works by creating a large radar signature to seduce the active radar seeker away from your ship. This is the most straightforward seeker to seduce, with almost every ship in the game being able to access the VLS-1 mount at an incredibly cheap price."
+    },
+    {
+     "kind": "p",
+     "text": "There is a notable flaw with how chaff works, if chaff is in-line with your ship and the missile being decoyed, the missile often just slams into your ship anyway since its still going in a straight line toward your ship. This is more well-known as \"Chaff Geometry.\""
+    },
+    {
+     "kind": "p",
+     "text": "There are other ways of softkilling ACT as well. You can directly jam out the seeker on an ACT seeker with any type of radar jammer, or use a VLS-2 on ANS to mount the Conure Active Decoy which has an even larger radar signature than regular chaff, albeit at 8x the price of chaff. You can also use container decoys to the same effect."
+    },
+    {
+     "kind": "p",
+     "text": "Notably, active decoys have a much larger radar signature compared to regular chaff which is useful for large ships like the Solomon Battleship, although having an illuminator onboard your ship, and aiming the illuminator towards your chaff helps to bloom the radar signature of the chaff cloud (For more information, go towards the SAH section)."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Ok, so how EXACTLY do you counter these missile seekers? › Softkilling Semi-Active Radar Homing Seekers",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Semi Active Radar Homing seekers dont work by themselves, rather they rely on a craft or ship-based radar illuminator to paint a target for them, at which point they pick among illuminated targets with a weighted random roll. Brighter returns (illuminator power times radar cross-section) and targets nearer the missile's nose are more likely. The current target has a 10x weight bonus and is locked in 3 seconds before impact. Higher-skilled players will often purposefully micro their illuminators by position-firing their illuminators to purposefully avoid chaff which if illuminated will almost always guarantee the SAH seekers to go for the chaff."
+    },
+    {
+     "kind": "p",
+     "text": "The counter to SAH seeker painting is basically to take advantage of the high radar reflectivity of chaff, and illuminating it in a way that the SAH seekers can see the chaff and get attracted towards it instead of your ship. The best way of doing this is to have either a floodlight or craft-based illuminator illuminate the chaff your ship released. You might be asking to yourself, why a floodlight instead of a spotlight? Simply put, the floodlight is much stronger than a spotlight and illuminates targets much better than a spotlight. You can illuminate other ships and decoys as well, but not to as great as an effect."
+    },
+    {
+     "kind": "p",
+     "text": "You have to self-illuminate in a certain way for the SAH seeker to view it, as shown in the image provided you have to illuminate the \"front\" of the chaff cloud facing the SAH seeker in order for the SAH seeker to see the illuminated chaff cloud. Think of chaff as a mirror, your illuminator as a flashlight, and the SAH seeker as a camera. You want to bounce that flashlight light into the camera so that it sees it."
+    },
+    {
+     "kind": "p",
+     "text": "Alternatively, much like how a normal ACT missile can have its seeker jammed out, SAH can also have its seeker jammed out (albeit at different range bands and without the threat of SAH burning through the jamming as it closes). Killjoy jammer decoys work especially well into SAH missiles, which are often outfitted with a backup HOJ seeker."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Ok, so how EXACTLY do you counter these missile seekers? › Softkilling WAKE/THERM Homing Seekers",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Wake and its OSP exclusive variant, THERM, work in a similar fashion when used as a primary seeker: Both seekers are mainly attracted to the WAKE produced by the main forward thruster of a ship, at around a 120 degree angle around the ship in a cone emanating from the back is where WAKE and THERM as primaries are attracted to the WAKE of a ship, guiding itself towards the back-end of a ship usually in the drive."
+    },
+    {
+     "kind": "p",
+     "text": "Wake/Therm by itself can be flared or simply countered by ALLSTOP-ing your ship or simply not using your main forward thrusters, but the existing wake keeps validating for about 15 seconds and the trail lingers longer, so cut thrust early. Both act completely different as validators. When THERM is used as a validator (such as ACT/[THERM]), it can detect WAKE from all aspects of a ship at a certain THERM \"signature\" (Above a sig level 175, which can be achieved by a Keystone with a Raider drive going FLANK speed). THERM has no validator memory. It keeps validating for about 15 seconds after forward thrust stops (the wake fade). From aspects other than the rear it only validates while wake strength is still at least 175, which is less than those 15 seconds and depends on the ship and its drives, meaning an ACT seeker with THERM validation will not be pulled by chaff while you are burning or during the roughly 15 second wake fade. However it can still be jammed. THERM stores no memory, so after the wake fades chaff works again unless the ACT seeker has already reached its TTGI period. The only effective counter to such seeker is trying to avoid using your main thrusters when you notice a missile salvo going your way."
+    },
+    {
+     "kind": "p",
+     "text": "WAKE validation acts a little similarly, albeit only validating a target if its within the 120 degree cone mentioned, and uses the same fading wake (about 15 seconds after thrust is cut)."
+    },
+    {
+     "kind": "p",
+     "text": "Both WAKE and THERM cannot be decoyed by flares when acting as validators, as ship flares do not have an ACT sig and cannot mix with regular chaff. The only exception being craft countermeasures, which you can manually order craft to deploy using SHIFT-Z to seduce them."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Ok, so how EXACTLY do you counter these missile seekers? › Softkilling Anti Radiation Seekers",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "ARAD seekers (and their varying counterparts of PULSED and HOJ) all are attracted to one thing: emissions. Whether that be from the onboard radar of a ship, its jammers, its Fire Control Radars, ect. the PULSED version of ARAD chases down Fire Control Radars and shipboard radars, the HOJ or Home on Jam version of arad does what it says, it homes in on jamming emissions. Regular ARAD incorperates both of these aspects of the seeker making it a powerful seeker in combination with others as either a backup or a target discrimination device. Note that ARAD and pARAD are not attracted to point defense FCRs."
+    },
+    {
+     "kind": "p",
+     "text": "Note that Home On Jam only gravitates towards RADAR jamming, and not Comms jamming or EO jamming, which is a common misconception."
+    },
+    {
+     "kind": "p",
+     "text": "Both pARAD and ARAD seekers are countered by just pressing EMCON on a ship, which turns off all radar emissions. But this has the unfortunate side effect of making ARAD simply go in a straight line which can cause unwanted hits. There are a few ways to counter this, some involve the previously mentioned Conure Active Decoy and Container Decoys which emits ARAD seducing signals, along with Killjoy jammer decoys which seduced HOJ and ARAD seekers using its Self Screening Jammer bubble to drag missiles towards it."
+    },
+    {
+     "kind": "p",
+     "text": "ARAD prefers radar emissions: it homes on jamming only when it sees no emission stronger than the jamming it is receiving, so EMCON first when an ARAD is inbound."
+    },
+    {
+     "kind": "p",
+     "text": "ARAD as a validator has a 30 second memory on if a given track is valid or not, allowing it to track and hit you if you emcon after the seeker sees you. This can be overcome by resetting its memory by clearing the tracks it can see (via radar jamming)."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Ok, so how EXACTLY do you counter these missile seekers? › Softkilling CMD",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Command guidance is different from the other seekers in that it doesnt actively \"seek\" a target, rather it communicates with its mother ship (AND ONLY THE MOTHER SHIP) to guide itself towards a track. This is a very common direct seeker missile warhead, and the one most capital-killing salvoes come with as a primary. While CMD only communicated with its mother ship to seek towards a target, the mother ship can use tracks from communications with other ships to also guide in these missiles."
+    },
+    {
+     "kind": "p",
+     "text": "By itself CMD can simply be jammed out by... a command jammer. The command jammer can be either an OSP Warbler, or an ANS Interrupt/Hangup, although the INTERRUPT is far better defensively, so it is recommended."
+    },
+    {
+     "kind": "p",
+     "text": "CMD jammers work by \"emitting\" louder than its mothership which makes the CMD seeker veer-off in a random 4-degree cone, 1000 meters ahead, or 50000 meters if reject-unvalidated is set. You can also try and stop CMD by jamming out any tracking radars with a radar jammer, however this can risk pulling HOJ and ARAD seekers."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Ok, so how EXACTLY do you counter these missile seekers? › Softkilling Electroptical Seekers",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "This seeker is an ANS exclusive seeker which visually checks a target, meaning it cannot be discriminated by any type of decoy."
+    },
+    {
+     "kind": "p",
+     "text": "The most direct (and only) counter to an EO seeker is a blackjack dazzler, which is only available on OSP. This is probably one of the simplest types of seekers to counter, but requires a dedicated mount to do so. EO seekers in the jamming cone of a dazzler are blinded; EO seekers remain blind for 1 second after exiting the cone due to the Dazzler's \"Stun\" mechanic."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Validators Vs Backups",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "In missile nomenclature you often see missile seekers with brackets ([CMD]) and without brackets. But what is the difference in behavior in the two?"
+    },
+    {
+     "kind": "p",
+     "text": "Bracketed seekers are those that have been set to validate a primary seeker. Validation's main job is to discriminate between targets to avoid decoys. The validator inherits the range of the primary seeker, meaning range of the validator does not matter (As an example, an SEACT/[THERM] missile will be able to validate for the full 5km and not from the short THERM cone). Validators are great for missiles with ACT and SAH especially to discriminate between chaff and real ships. You can counter validators by decoying/jamming either the validator or the primary. For example, jamming out the EO seeker for ACT/[EO] will make the ACT chaffable, or simply jamming out ACT/[EO] will directly counter the primary since the validator relies on the primary in order to see."
+    },
+    {
+     "kind": "p",
+     "text": "Backup seekers are different and are mainly for jamming resistance. If a primary seeker does not see a target or if it is being actively jammed out, it will switch to its backup seeker to seek. This is an especially popular pick for missile setups like ARAD/SEACT, which uses the long range SEACT for staging before switching to ARAD once in range, or with CMD/BACKUP and SAH/BACKUP seeker setups to become more resistant to jamming. The only real way to defeat backup seekers is to do multiple softkill actions to cover your bases, or hoping that the primary seeker is decoyed by something."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Validators Vs Backups › What is a \"Straightrunner\" Missile?",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Now that we have covered over all seekers and their counters, its time to get more specific with softkill and the threats you will face. One of the deadliest and most common missile seeker setup you will encounter in matches is the \"Straightrunner\" missile."
+    },
+    {
+     "kind": "p",
+     "text": "Nearly every capital-kiilling missile salvo has some form of straightrunning technology. Ocellokillers, craft torpedoes, Torpcellos, S2Cellos, ect all use the same format of missile seeker combination. The most common straight runner missile combos you will encounter are those of CMD/backup, usually SAH, WAKE, and ARAD in all 3 of its forms, although some others exist in the form of ACT/[CMD] REJECT, ACT/EO REJECT, EO/backups, ect. They all follow the same pattern of intended behavior, if one of their seekers gets jammed out (usually the primary except for ACT/[CMD] where it relies on the CMD validator being jammed out) It will switch to its backup seeker. In practice this means that the primary seeker will first lead the missile towards where it thinks it will intercept a ship, and when it eventually gets jammed out the backup seeker will continue going in a straight line from where the primary last had the missile pointed at. The backup exhibits a similar behavior to a missile coming out of a waypoint, seeking in a straight line."
+    },
+    {
+     "kind": "p",
+     "text": "These seeker combos are some of the hardest to counter for a new player, as it requires multiple dedicated mounts and timing to do correctly. Self illumination, decoying, Killjoy jammer decoys, EMCON, Command Jamming, all need to be used to decoy these missiles fully and 4 of these alone need a dedicated mount or ship to preform. If not preformed correctly, the missile will simply slam into your ship regardless."
+    },
+    {
+     "kind": "p",
+     "text": "ACT/[CMD] REJECT and ACT/[EO] REJECT are a bit different, you need to jam out both seekers in order to fully softkill these straightrunner setups. In practice, simply jamming out the CMD/EO validator will make it not accept any ACT sigs, so its your main option. To completely defeat the missile you also have to jam out the radar, either with a shipboard/craft radar jammer or a Killjoy jammer decoy. The symbology used to indicated these straight-running validator missiles is inconsistent; ACT/[CMD] REJECT, ACTr/[CMD], ACT!/[CMD] are all in use and all mean the same thing."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Common tools for softkill",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "There are multiple different tools in your arsenal to softkill effectively. Using them and having them available on your ship is key to practicing softkill."
+    },
+    {
+     "kind": "p",
+     "text": "VLS-1"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Chaff (For ACT and SAH, creates a large radar signature)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Flares (For WAKE/THERM Primaries)"
+    },
+    {
+     "kind": "p",
+     "text": "VLS-2"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Conure Active Decoy (For ACT and ARAD, has a larger radar sig. than conventional chaff alongside releasing pARAD signatures."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Size 2 Defensive \"Killjoy jammer decoy\" Missile (Cruise or Direct) (For ACT, SAH, and ARAD. has a Self Screening Jammer which allows it to decoy and attract ARAD and jam out ACT and SAH)"
+    },
+    {
+     "kind": "p",
+     "text": "Container Launcher"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Container Decoy (For ACT and ARAD. The Line Ship container has a large radar return, about 32,000-80,000 m². The Clipper container is about 1,600-4,000 m², smaller than chaff. Both emit pARAD at strength 1,000, far below the Conure.)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Helljoy container missile (For ACT, SAH, and ARAD. has a Self Screening Jammer which allows it to decoy and attract ARAD and jam out ACT and SAH. Mainly fired at Claymore bombers in transit to attempt to also kill them.)"
+    },
+    {
+     "kind": "p",
+     "text": "Interrupt CMD Jammer/Hangup/Warbler"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Mainly for jamming out CMD missiles"
+    },
+    {
+     "kind": "p",
+     "text": "Floodlight/Lighthouse Illuminator"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Mainly for Self-Illuminating chaff clouds, can also counter radar jamming."
+    },
+    {
+     "kind": "p",
+     "text": "Radar jammer (Blanket, Bellbird, Lyrebird)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Mainly for jamming out ACT and SAH missiles, be wary of its ability to attract ARAD and HOJ."
+    },
+    {
+     "kind": "p",
+     "text": "Blackjack Dazzler"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Mainly for jamming out EO missiles."
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Common Missile Threats for Practice",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "I've basically covered everything you need to learn about softkill. To finish off, lets go over some common threat examples:"
+    },
+    {
+     "kind": "p",
+     "text": "OCELLOKILLER S3H SIZE 3/6 SALVO: CMD/ARAD, CMD/HOJ, CMD/SAH. You will most commonly see this playing against ANS as OSP. Fired at mainly at Ocellos, but can be fired at Flatheads and Marauders as well."
+    },
+    {
+     "kind": "p",
+     "text": "‎"
+    },
+    {
+     "kind": "p",
+     "text": "Continue Dismiss"
+    },
+    {
+     "kind": "p",
+     "text": "How to softkill:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Decoy with Chaff and Flares"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "EMCON (for ARAD, must be done first as it also turns off the Interrupt)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Interrupt CMD jammer activation (for CMD)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Turn on your illuminator, point it towards your chaff. (for SAH)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Fire a Killjoy jammer decoy or have an offset jammer ready. (for ARAD/HOJ)"
+    },
+    {
+     "kind": "p",
+     "text": "ACT/[WAKE] and ACT/[THERM] MISSILES How to softkill:"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Decoy with Chaff and Flares (for ACT)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "ALLSTOP if going forwards to avoid using forward thrusters, otherwise plot backwards with heading locked so the ship does not turn around. A plain move order faces the destination and burns the main drive. Braking a backward drift also emits wake. (for WAKE and THERM validation)."
+    },
+    {
+     "kind": "p",
+     "text": "CONTAINERS: CMD/SAH/HOJ, CMD/ACT/[THERM], CMD/WAKE/[HOJ]"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "ALLSTOP if going forwards to avoid using forward thrusters, otherwise plot backwards with heading locked so the ship does not turn around. A plain move order faces the destination and burns the main drive. Braking a backward drift also emits wake. (for WAKE and THERM validation)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Decoy with Chaff and Flares"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Interrupt CMD jammer activation (for CMD)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Turn on your illuminator, point it towards your chaff. (for SAH)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Fire a Killjoy jammer decoy or have an offset jammer ready. (for ARAD/HOJ)"
+    },
+    {
+     "kind": "p",
+     "text": "CONTAINERS: ACT/[ARAD]/HOJ, ACT/[WAKE]/HOJ, ECT."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "ALLSTOP if going forwards to avoid using forward thrusters, otherwise plot backwards with heading locked so the ship does not turn around. A plain move order faces the destination and burns the main drive. Braking a backward drift also emits wake. (for WAKE and THERM validation)."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "EMCON (for ARAD, must be done first as it also turns off the Interrupt)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Decoy with Chaff and Flares/One single Active Decoy per salvo"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Fire a Killjoy jammer decoy or have an offset jammer ready. (for ARAD/HOJ)"
+    },
+    {
+     "kind": "p",
+     "text": "SAH/[ARAD], SAH/HOJ"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "EMCON (for ARAD, must be done first as it also turns off the Interrupt)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Decoy with Chaff and Flares"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Turn on your illuminator, point it towards your chaff. (for SAH)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Fire a Killjoy jammer decoy or have an offset jammer ready. (for ARAD/HOJ)"
+    }
+   ]
+  },
+  {
+   "heading": "Introduction › Glossary",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "A"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "ACT - Short for Active Radar Homing"
+    },
+    {
+     "kind": "li",
+     "depth": 3,
+     "text": "EACT - Short for Extended ACT"
+    },
+    {
+     "kind": "li",
+     "depth": 3,
+     "text": "SEACT - Short for Steerable Extended ACT"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "Active Decoy - A size 2 defensive decoy found on ANS ships which emit both ARAD and ACT signatures."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "ALLSTOP - A movement command accessable to ships, which causes them to slow down to 0 m/s"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "ARAD - Anti-Radiation, a type of missile seeker that looks for radar emissions."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "B"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "Bellbird - OSP directional radar jammer."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "\"Ball\"\" - Community term for the E70 'Interruption' Jammer."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "C"
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "CCK - Ocello Killer, uses the abbreviation for \"Command Cruiser\" (CC) in the beginning. A family of missiles that are commonly made specifically to kill bow-on ocellos. Commonly comprised of salvoes of 3x HEKP S3H missiles using common straight-flying seeekers like CMD/Backup and ACT/[EO] Reject. Refers to a specific archetype of HEKP S3H missiles that are typically seen on double Vauxhall fleets such as TF Birch, VLS-3 backpack capitals, or sometimes off of yub fleets. CMD/Backup for direct, ACT/[EO]r, EO/HOJ and other blindfire cruise missile seeker combos for yub. They are commonly set up to support eachother by staging in a certain way where they converge and share damage taken from Auroras."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "Chaffbox - Common term for a VLS-1 launcher with chaff."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "CMD - Command Missile Seeker."
+    },
+    {
+     "kind": "li",
+     "depth": 2,
+     "text": "CMDball - See \"Ball\""
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ automatic launches are limited (about one per launcher per second on VLS-2 and per 0.25 seconds on VLS-1, and at most five new targets per missile group per defense pass)"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "↑ With a BF-EL warhead, AMMs usually damage a missile (about 65% in a crossing intercept and 85% head-on). Plain blast fragmentation is about 20% crossing and 50% head-on, and a failed roll does no damage to a missile."
+    }
+   ]
+  },
+  {
+   "heading": "Navigation",
+   "blocks": []
+  },
+  {
+   "heading": "Navigation › Navigation",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Main page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Recent changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Game news"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Random page"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Editing Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Help about MediaWiki"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Current Game Version:",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "0.6.2.6:260903-1430"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Game",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Factions"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ships"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Spacecraft"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Components"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Munitions & Missiles"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "List of Maps"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Modding"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Mechanics",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Armor"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Crew"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Component Damage"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Damage Control"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Electronic Warfare"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Intelligence"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Movement"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Radar"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Community Maintained Guides",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Beginner's Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Starter Fleet Guides"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Campaign Comprehensive Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ship Building Guide"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Missile Defense"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Other",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Ranks and XP"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Console Commands"
+    }
+   ]
+  },
+  {
+   "heading": "Navigation › Hooded Horse Games",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "All Games"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "NEBULOUS: Fleet Command"
+    }
+   ]
+  },
+  {
+   "heading": "Wiki tools",
+   "blocks": []
+  },
+  {
+   "heading": "Wiki tools › Wiki tools",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Special pages"
+    }
+   ]
+  },
+  {
+   "heading": "Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › Page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › User page tools",
+   "blocks": []
+  },
+  {
+   "heading": "Page tools › More",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "What links here"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Related changes"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Printable version"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Permanent link"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page information"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Page logs"
+    }
+   ]
+  },
+  {
+   "heading": "Socials",
+   "blocks": []
+  },
+  {
+   "heading": "Socials › Socials",
+   "blocks": [
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Official Discord"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Twitter"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Youtube"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "This page was last edited on 25 October 2026, at 04:18."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Content is available under Creative Commons Attribution-ShareAlike unless otherwise noted."
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Privacy policy"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "About NEBULOUS: Fleet Command Official Wiki"
+    },
+    {
+     "kind": "li",
+     "depth": 1,
+     "text": "Disclaimers"
+    }
+   ]
+  }
+ ]
+}

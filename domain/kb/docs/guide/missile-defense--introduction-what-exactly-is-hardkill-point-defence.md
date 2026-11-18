@@ -1,0 +1,10 @@
+# Missile Defense › Introduction › What Exactly IS Hardkill? › Point Defence
+
+Source: Official wiki (wiki.hoodedhorse.com), game 0.6.2.6:260903-1430
+
+## Body
+Point defense turrets like Pavises, Defenders, and 20mm/35mm guns on craft serve as a more close-in option meant to deliver a high rate of shells, the side effect of having such high firerate means that 20/35mm has an eyewateringly high DPS which means that any momentary grazing shot will most likely end up with the missile being killed. Their main downfall comes from their thin spray of shells, they frequently find themselves unable to kill targets with terminal maneuvers or with a high speed, and are frequently overwhelmed by mass/decoys.
+
+Point defense turrets like Stonewalls, Rebounds, and Bastions work to fire a large spread of time-fused fragmentation rounds to (In theory) kill large amounts of cheap/weaker missiles (Usually r2s, size 2 missiles, and bombs.). They work decently to kill their intended targets alongside shooting down decoys. The main downfall of flak is that the majority of threats have shifted to more tanky and thick-skinned missiles like containers or torpedos. Flak is easily distracted by decoys, Stonewalls have an abysmal turn rate, and the visual backup has a questionable track velocity error, which makes it inaccurate when jammed.
+
+Energy-based point defense turrets like Auroras and Grazers are mainly used in an anti-hybrid (and in the auroras case, anti-light) defense work, being extremely accurate point defenses with a moderate to high amount of damage dealt to missiles over time (especially an aurora with BSHRT turned on.). Auroras especially are extremely good at shooting down r2s, hybrids, fighters, and even decoys where ANS frequently pairs them with defenders. Grazers have the disadvantage of not dealing well with large amounts of missiles and decoys, Auroras have the disadvantage of not dealing with high health targets quickly enough and being especially susceptible to radar jamming.
