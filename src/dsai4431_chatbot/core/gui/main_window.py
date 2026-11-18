@@ -1475,12 +1475,12 @@ class ChatColumn(QWidget):
         return bool(getattr(cfg, "rag_enabled", True))
 
     def _tools_for(self, cfg) -> list[dict] | None:
-        """开着知识库、且有索引时，把工具声明发给模型（唯一检索方式）。"""
+        """开着知识库、且有索引时，把工具声明发给模型（检索 + 生成舰队文件）。"""
         if not self._rag_on(cfg):
             return None
         if self.rag is None or self.rag.index() is None:
             return None
-        return [tool_router.TOOL_SPEC]
+        return [tool_router.TOOL_SPEC, tool_router.FLEET_TOOL_SPEC]
 
     def _start_request(self, cfg, messages: list[dict], model: str) -> None:
         self._req_messages = messages
@@ -1550,11 +1550,16 @@ class ChatColumn(QWidget):
 
         # 先画一行「正在检索」，让用户知道在干什么（此时还没结果）
         self._pending_note = None
+        wants_fleet = any(
+            str(call.get("name") or "") == tool_router.FLEET_TOOL_NAME for call in calls
+        )
         try:
             self._pending_note = self.messages.begin_message(
                 "reasoning", before=self._bubble
             )
-            self._pending_note.setText("🔍 正在检索知识库…")
+            self._pending_note.setText(
+                "🗂 正在拼舰队文件…" if wants_fleet else "🔍 正在检索知识库…"
+            )
             self.messages.scroll_to_end()
         except Exception as exc:              # noqa: BLE001
             print(f"[rag] 检索提示行没画出来：{exc}", flush=True)
@@ -1608,7 +1613,11 @@ class ChatColumn(QWidget):
                     self._session.id,
                     query=outcome.query,
                     hits=[] if not outcome.hits else [f"{outcome.hits} 段"],
-                    scores=[round(outcome.top_score, 4)] if outcome.hits else [],
+                    scores=(
+                        [round(outcome.top_score, 4)]
+                        if outcome.hits and outcome.kind == tool_router.TOOL_NAME
+                        else []
+                    ),
                     elapsed_ms=outcome.elapsed_ms,
                 )
         self._pending_note = None
@@ -1636,7 +1645,8 @@ class ChatColumn(QWidget):
         """在回答气泡上方写「🔍 检索…」。`reuse` 用来把「正在检索…」那行改写掉。"""
         try:
             note = reuse or self.messages.begin_message("reasoning", before=self._bubble)
-            note.setText(f"🔍 {outcome.summary()}")
+            icon = "🗂" if getattr(outcome, "kind", "") == tool_router.FLEET_TOOL_NAME else "🔍"
+            note.setText(f"{icon} {outcome.summary()}")
             if note not in self._tool_notes:
                 self._tool_notes.append(note)
             self.messages.scroll_to_end()

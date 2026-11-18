@@ -11,6 +11,10 @@ import time
 from dataclasses import dataclass
 
 TOOL_NAME = "search_knowledge"
+# 第二个工具：拼一条 `.fleet` 写盘。
+# 模型写不了这个文件（槽位 key 是 22 字符随机串，手写的 MT1/CMP1 会被游戏静默跳过），
+# 所以「给我个舰队文件」这类请求必须落到代码上：模型只挑船，序列化由 core.fleet.compose 做。
+FLEET_TOOL_NAME = "build_fleet_file"
 # 一次问答里最多来回几轮工具调用（防止模型无限查）。
 # 造舰/配队这类请求要连着查「舰级要求 → 槽位表 → 部件尺寸与点数」，3 轮根本走不完，
 # 于是一直停在「我还没查到槽位表」上；6 轮够走完三跳还留一次回查。
@@ -52,6 +56,44 @@ TOOL_SPEC = {
 }
 
 
+FLEET_TOOL_SPEC = {
+    "type": "function",
+    "function": {
+        "name": FLEET_TOOL_NAME,
+        "description": (
+            "把现成的样板船拼成一条可以直接载入游戏的舰队文件（`.fleet`），写到本地磁盘，"
+            "返回绝对路径、船数、点数、模板库数量和校验结果。\n"
+            "什么时候用：用户要「给我一条舰队」「造好发我」「生成 .fleet」「贴出来我复制」时，"
+            "**必须调用它**；不要在回答正文里手写 XML——槽位 key 是 22 字符的随机串，"
+            "手写的 `MT1`/`CMP1` 会被游戏当成无效 key 静默跳过，槽位全空。\n"
+            "samples 填样板船的文件名（`sample fleets/` 里那 61 条，形如 `gun MN - Excuse The Interruption`），"
+            "**留空就返回全部可选项**；重复写同一个名字 = 多带几艘。名字可以只写舰级或模糊关键词。\n"
+            "ship 阵营不能混：一条 `.fleet` 只有一个 `FactionKey`，混了会被拒绝。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "samples": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "样板船文件名或关键词，可重复；留空 = 列出全部可选项",
+                },
+                "name": {
+                    "type": "string",
+                    "description": "舰队名（也会当文件名），例如「3k 前线 Garnet」",
+                },
+                "renames": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "可选：按顺序给每艘船改的新名字",
+                },
+            },
+            "required": [],
+        },
+    },
+}
+
+
 @dataclass
 class ToolOutcome:
     """一次工具调用的结果（同时用于回灌模型和界面展示）。"""
@@ -64,9 +106,18 @@ class ToolOutcome:
     elapsed_ms: int = 0
     error: str = ""
     call_id: str = ""
+    kind: str = TOOL_NAME          # 哪个工具（界面提示行的图标与文案按它分）
+    path: str = ""                 # 生成文件时的落盘路径
+    ships: int = 0                 # 生成文件时的船数
 
     def summary(self) -> str:
         """界面上那一行小字用。"""
+        if self.kind == FLEET_TOOL_NAME:
+            if self.ok and self.path:
+                return f"已生成舰队文件 · {self.ships} 艘 · {self.path}"
+            if self.ok:
+                return f"样板船清单 · {self.hits} 条"
+            return f"生成舰队文件失败：{self.error or self.content[:60]}"
         if self.hits:
             return (
                 f"检索「{self.query}」· {self.hits} 段 · "
@@ -128,21 +179,32 @@ class ToolRouter:
         limit_chars = self.max_chars if max_chars is None else int(max_chars)
         call_id = str(call.get("id") or "")
         name = str(call.get("name") or "")
+        raw = call.get("arguments") or "{}"
+        args: dict = {}
+        try:
+            parsed = json.loads(raw) if isinstance(raw, str) else dict(raw)
+            if isinstance(parsed, dict):
+                args = parsed
+        except (ValueError, TypeError):
+            args = {}
+
+        if name == FLEET_TOOL_NAME:
+            return self._run_fleet(args, call_id=call_id)
         if name and name != TOOL_NAME:
             return ToolOutcome(
                 ok=False,
-                content=f"没有名为 {name} 的工具，只能调用 {TOOL_NAME}。",
+                content=f"没有名为 {name} 的工具，只能调用 {TOOL_NAME} 或 {FLEET_TOOL_NAME}。",
                 error=f"未知工具 {name}",
                 call_id=call_id,
             )
 
-        raw = call.get("arguments") or "{}"
         query = ""
         try:
-            args = json.loads(raw) if isinstance(raw, str) else dict(raw)
-            if isinstance(args, dict):
+            if args:
                 query = str(args.get("query") or args.get("q") or "").strip()
         except (ValueError, TypeError):
+            query = ""
+        if not query and not args:
             # 模型偶尔给出不合法 JSON：把原文当查询词兜一层
             query = str(raw).strip()[:200]
 
@@ -213,6 +275,75 @@ class ToolRouter:
             query=query,
             hits=len(strong),
             top_score=float(strong[0].score),
+            elapsed_ms=elapsed,
+            call_id=call_id,
+        )
+
+    # --- 生成舰队文件 ---------------------------------------------------
+    def _run_fleet(self, args: dict, *, call_id: str) -> ToolOutcome:
+        """`build_fleet_file`：挑样板船 → 写 `.fleet` → 校验 → 报路径。"""
+        from dsai4431_chatbot.core.fleet import compose
+
+        started = time.perf_counter()
+        raw_samples = args.get("samples") or []
+        if isinstance(raw_samples, str):
+            raw_samples = [raw_samples]
+        samples = [str(x).strip() for x in raw_samples if str(x).strip()]
+        name = str(args.get("name") or args.get("fleet_name") or "").strip()
+        renames = args.get("renames") or args.get("names") or []
+        if isinstance(renames, str):
+            renames = [renames]
+        renames = [str(x).strip() for x in renames]
+
+        try:
+            if not samples:
+                rows = compose.list_samples()
+                lines = [f"可选样板船 {len(rows)} 条（阵营 · 点数 · 文件名）："]
+                lines += [
+                    f"- {r['class']} · {r['points']:.0f} 点 · {r['faction'].split('/')[-1]} · {r['name']}"
+                    for r in rows
+                ]
+                lines.append(
+                    "挑好后带上 samples 再调一次；samples 留空只是列清单，不会生成文件。"
+                )
+                return ToolOutcome(
+                    ok=True,
+                    content="\n".join(lines),
+                    kind=FLEET_TOOL_NAME,
+                    hits=len(rows),
+                    elapsed_ms=int((time.perf_counter() - started) * 1000),
+                    call_id=call_id,
+                )
+            report = compose.compose(samples, name=name, renames=renames)
+        except Exception as exc:                  # noqa: BLE001 - 工具不能把异常抛给模型
+            return ToolOutcome(
+                ok=False,
+                content=f"生成舰队文件失败：{exc}",
+                error=str(exc),
+                kind=FLEET_TOOL_NAME,
+                elapsed_ms=int((time.perf_counter() - started) * 1000),
+                call_id=call_id,
+            )
+
+        elapsed = int((time.perf_counter() - started) * 1000)
+        if not report.get("ok"):
+            reason = report.get("error") or "；".join(report.get("problems") or [])
+            return ToolOutcome(
+                ok=False,
+                content=f"生成失败：{reason}",
+                error=reason,
+                kind=FLEET_TOOL_NAME,
+                elapsed_ms=elapsed,
+                call_id=call_id,
+            )
+        return ToolOutcome(
+            ok=True,
+            content=compose.summary_text(report),
+            query=" / ".join(samples),
+            hits=1,
+            kind=FLEET_TOOL_NAME,
+            path=str(report.get("path") or ""),
+            ships=int(report.get("ships") or 0),
             elapsed_ms=elapsed,
             call_id=call_id,
         )

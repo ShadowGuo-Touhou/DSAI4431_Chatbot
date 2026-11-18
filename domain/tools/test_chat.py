@@ -19,6 +19,9 @@ from PySide6.QtCore import QCoreApplication, QTimer                     # noqa: 
 from dsai4431_chatbot.core.gui import chat_config, chat_client, tool_router  # noqa: E402
 from dsai4431_chatbot.core.rag import paths, retriever, store            # noqa: E402
 
+# 与主程序 `_tools_for()` 保持一致：检索 + 生成舰队文件两个工具一起发
+TOOLS = [tool_router.TOOL_SPEC, tool_router.FLEET_TOOL_SPEC]
+
 
 class RagShim:
     """ToolRouter 只用到 rag.search(query)。"""
@@ -118,7 +121,7 @@ def main(argv: list[str]) -> int:
             chat_config.load(),
             messages,
             model=cfg.model,
-            tools=None if exhausted else [tool_router.TOOL_SPEC],
+            tools=None if exhausted else TOOLS,
         )
 
     def on_delta(text: str) -> None:
@@ -139,7 +142,7 @@ def main(argv: list[str]) -> int:
     client.finished_ok.connect(on_finish)
     client.failed.connect(on_fail)
 
-    if not client.send(cfg, messages, model=cfg.model, tools=[tool_router.TOOL_SPEC] if use_tools else None):
+    if not client.send(cfg, messages, model=cfg.model, tools=TOOLS if use_tools else None):
         print("发送失败")
         return 1
     QTimer.singleShot(120_000, app.quit)

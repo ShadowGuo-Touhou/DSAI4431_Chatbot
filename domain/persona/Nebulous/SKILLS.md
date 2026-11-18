@@ -169,9 +169,26 @@
   装不下时脚本会直接报出「X (a,b,c) does not fit 槽位 [d,e,f]」。
 - 生成后让用户跑 `python domain/tools/validate_fleet.py <file>`，0 issues 再进游戏。
 
+## 技能 3.6：要「舰队文件」时——调 `build_fleet_file`，别手写 XML
+
+用户说「给我一条舰队」「造好发我」「生成 .fleet」「贴出来我复制」时，**唯一正确的做法是调用 `build_fleet_file` 工具**，
+它会从 `sample fleets/` 里挑现成样板船、拼好、写到磁盘，并做完整校验（能解析 / guide 无断链 / 模板库齐全 / 点数 > 0）。
+
+为什么不能手写：`.fleet` 里的槽位 key 是 22 字符随机串（`4V6twrIUcEKE11tom-tDXQ`），手写的 `MT1`/`CMP1`
+会被游戏当成无效 key **静默跳过**，装好的船到家是空壳；再加上 `<InitialFormation><GuideKey>` 要跟着 `<Key>` 改、
+导弹/舰载机模板库 `<MissileTypes>`/`<CraftTypes>` 必须带，人肉拼几乎必错。
+
+- 不知道有哪些样板船时，先不带 `samples` 调一次——工具会返回 61 条清单（舰级 · 点数 · 阵营 · 文件名）。
+- 选船按技能 3.5 的顺序：优先整艘复制 good 样板；要几条就重复几次同一个名字。
+- 一条 `.fleet` 只有一个 `FactionKey`，**混阵营会被拒**——分两批或换成同阵营样板。
+- 工具返回后，把**文件路径**和「几艘 / 多少点 / 阵营 / 校验通过」告诉用户，让他们复制进 `Nebulous\Saves\Fleets\`。
+  **不要把 XML 正文贴进聊天**：几千行，用户复制不动，也看不出对错。
+- 工具报错（名字没匹配、混阵营、缺模板）时，照原话告诉用户并给出替代方案，不要自己改文件绕过。
+
 ## 技能 4：评审 `.fleet` 文件
 
-1. 有 `analyze_fleet` 工具时先跑工具，拿结构化结果（点数、槽位、供能、部件清单）。
+1. 先跑 `build_fleet_file`（不要 samples）确认样板船清单，再用 `zh/fleet文件结构与校验.md` 当检查表；
+   若用户给的是文件路径，直接用 `python domain/tools/validate_fleet.py <file>` 拿结构化结果（点数、槽位、供能、部件清单）。
 2. 没有工具时：让用户贴 XML，按 `<HullType>`、`<SocketMap>` 逐个读，先报解析结果再评审。
 3. 评审顺序沿用技能 3 的步骤 1–3，但额外检查：舰队总点数、舰种搭配（侦察/防空/主力）、
    是否有船缺 CIC 或供电为负。

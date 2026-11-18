@@ -12,8 +12,8 @@ python domain/tools/build_spec.py           # other info/Ship Builds.txt → 53 
 python domain/tools/classify_ships.py       # saves + 新手包 → 分类结果
 python domain/tools/build_layouts.py        # 槽位拟合、部件阵营
 python domain/tools/build_templates.py --write-kb
-python domain/tools/build_official.py       # → domain/kb/docs（910 篇）
-python domain/tools/index_kb.py             # → repo/asset/RAG 并建索引（2 567 块）
+python domain/tools/build_official.py       # → domain/kb/docs（911 篇）
+python domain/tools/index_kb.py             # → repo/asset/RAG 并建索引（2 574 块）
 ```
 
 `other info/`（131 MB 的 PDF、反编译源码、存档副本）**不进仓库**：脚本按 `仓库/other info` 读，工作区里
@@ -21,17 +21,46 @@ python domain/tools/index_kb.py             # → repo/asset/RAG 并建索引（
 
 ---
 
+## 0. 机器人现在能真的给你一个 `.fleet` 文件
+
+问题：问「推荐一条前线舰队」它会答，接着「那你帮我造一条，文件发我」——它只会给你一段 XML
+或者叫你「把上面复制到记事本另存为 .fleet」。两个原因：
+
+1. 工具列表里只有 `search_knowledge`，模型**没有写文件的能力**，只能想办法把内容贴在聊天里；
+2. `.fleet` 本来就不是能贴的东西：槽位 key 是 22 字符随机串，手写 `MT1`/`CMP1` 会被游戏**静默跳过**
+   （船变空壳），`<InitialFormation><GuideKey>` 要跟着 `<Key>` 改，`<MissileTypes>`/`<CraftTypes>`
+   模板库必须整包带上。
+
+修法：新增工具 `build_fleet_file` + `core/fleet/compose.py`。模型只做两件事——挑样板船、起名；
+序列化、重新分配 key、修 guide、搬模板库、写盘、回读校验全在代码里。
+
+```
+samples: ["450 CH - Moral Failing", "450 CH - Value Judgement"], name: "3k Two Axford"
+→ repo/fleet output/3k Two Axford.fleet   2 艘 · 3000 点 · Stock/Alliance · 0 issues
+```
+
+- 不填 `samples` 就返回 61 条样板船的清单（舰级 · 点数 · 阵营 · 文件名），模型据此挑船；
+- 名字容错（大小写、省略 `.fleet`、唯一包含匹配），同一条样板重复几次就是几艘；
+- 混阵营直接拒绝（一条 `.fleet` 只有一个 `FactionKey`）；
+- 名字撞车自动加序号，`renames` 可以逐条改名；
+- 产物落 `repo/fleet output/`（不进 git），界面提示行改用 🗂，并在回答里给绝对路径。
+
+配套：`zh/舰队文件怎么拿.md`（KB）、人设**技能 3.6**（要文件就调工具、别手写 XML、别把 XML 贴进聊天）、
+`domain/tools/test_chat.py` 与主程序一样同时发两个工具。
+
+---
+
 ## 1. 框架侧的三处改动（`src/`、`data/personality/`）
 
 | 文件 | 改动 | 原因 |
 | --- | --- | --- |
-| `core/gui/tool_router.py` | `MAX_ROUNDS 3 → 6`；`TOOL_SPEC` 描述改成「怎么写检索词、查几次、怎么接续」 | 造舰请求要连查「舰级要求 → 槽位表 → 部件尺寸/点数」三跳，3 轮永远停在「还没查到槽位表」；模型原来只会把整句问题丢进检索 |
+| `core/gui/tool_router.py` | `MAX_ROUNDS 3 → 6`；`TOOL_SPEC` 描述改成「怎么写检索词、查几次、怎么接续」；**新增第二个工具 `build_fleet_file`** | 造舰请求要连查「舰级要求 → 槽位表 → 部件尺寸/点数」三跳，3 轮永远停在「还没查到槽位表」；模型原来只会把整句问题丢进检索。第二个工具解决「要文件却交不出来」（见第 0 节） |
 | `core/gui/chat_config.py` | `DEFAULT_RAG_PROMPT` 从一句「你有知识库、先调用」扩成四句检索机制（分目录、关键词、英文名、文件名当下一跳、缺数就继续查），旧文案自动迁移 | 提示词只说了「存在」，没说「怎么查」；旧版本写死的两版文案通过 `_LEGACY_RAG_PROMPTS` 自动替换，用户自己改过的不动 |
 | `core/rag/query_terms.py` | 376 条中↔英术语映射（原 328） | 中文提问要能命中英文 wiki；新增阵营/CC 特权、脊髓炮、满套软杀、造舰技巧等 |
 | `data/personality/Nebulous/SKILLS.md` | 技能 3.3 坏舰级清单、3.4 价格偏离、3.5 造舰 SOP、「回答形态（硬性）」、「不要为凑参数而反问」；新增**技能 0.5 检索路由**（13 类问题 → 第一条查询 → 补查 → 目标目录） | 模型会拿「请给我四个参数」代替交付物；也常常查一条就下结论 |
 | `data/personality/Nebulous/CHECKLIST.md` | 「最多 2 次检索」改成「缺会改变答案的数就继续查，上限 6 次」；补「按类型选目录」与真实的 `sockets/<船名>.md` 路径 | 文档自我限制到 2 轮，和 `MAX_ROUNDS=6` 矛盾，模型按文档收手 |
 
-## 2. 新增的知识库（`domain/kb/`，910 篇 / 1.31 M 字符）
+## 2. 新增的知识库（`domain/kb/`，911 篇 / 1.31 M 字符）
 
 来源只有三个：官方 wiki（游戏 0.6.2.6）、`other info/Ship Builds.txt`、玩家存档与中文资料。
 
@@ -43,7 +72,7 @@ python domain/tools/index_kb.py             # → repo/asset/RAG 并建索引（
 | `builds/` | 120 | 53 个舰级的 Must/Should/Optional/Avoid + 65 篇**逐槽样板船** |
 | `guide/` `map/` `craft/` `hull/` | 98 / 43 / 33 / 22 | 官方指南、地图、舰载机、船体面板 |
 | `sockets/` | 47 | 每艘船的槽位表（尺寸、段、挂载号、常用部件与填充率） |
-| `zh/` | 31 | 中文手册：SOP、术语、装甲、弹库、编成、CC 特权、造舰技巧… |
+| `zh/` | 32 | 中文手册：SOP、术语、装甲、弹库、编成、CC 特权、造舰技巧、舰队文件怎么拿… |
 | `catalog/` `missile/` `faction/` `reference/` | 20 / 21 / 4 / 4 | 按口径/舰级/阵营的速查表 |
 
 新增的两类「数据页」是这个分支最有用的部分：

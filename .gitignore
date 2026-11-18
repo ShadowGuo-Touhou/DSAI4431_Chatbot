@@ -77,3 +77,6 @@ asset/RAG/
 other info/
 _wheels/
 domain/_archive_wikidot/
+
+# build_fleet_file 的产物（工具生成的舰队文件，用户自己往游戏目录里拷）
+fleet output/

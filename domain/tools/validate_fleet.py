@@ -19,7 +19,7 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 
-ROOT = pathlib.Path(Path(__file__).resolve().parents[2])
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "domain" / "tools"))
 
 import fleet_lib as fl  # noqa: E402
